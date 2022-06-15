@@ -1,9 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@300;400;500;600;700;800&display=swap");
 
-@tailwind base; 
-@tailwind components; 
-@tailwind utilities; 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
-  font-family: "Bitter", sans-serif; 
+  font-family: "Bitter", sans-serif;
+}
+
+body {
+  @apply bg-gradient-to-br from-sky-100 to-blue-100;
 }
