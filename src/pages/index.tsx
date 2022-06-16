@@ -2,6 +2,9 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Layout from "src/components/layout";
 import Image from "next/image";
+import Link from "next/link";
+import Head from "next/head";
+import Footer from "src/components/footer";
 
 const SemuaKota = dynamic(() => import("src/components/semuaKota"), {
   suspense: true,
@@ -23,19 +26,32 @@ export const getStaticProps = async () => {
 };
 
 const Home = ({ kota }: any) => {
+  const buttonClassName = `bg-teal-600 hover:bg-teal-700 duration-300 transition-all text-white font-bold text-xl px-4 py-3 rounded-md`;
   return (
-    <Layout>
-      <div className="flex justify-center items-center gap-3">
-        <h1 className="sm:text-4xl text-3xl font-bold">Jadwal Sholat</h1>
-        <Image src="/img/mosque.png" width="50px" height="50px" />
+    <>
+      <Head>
+        <title>Ngajiku</title>
+      </Head>
+      <div className="flex flex-col text-center h-screen px-4 justify-center items-center gap-3">
+        <h1 className="sm:text-4xl text-3xl font-bold">
+          Selamat Datang! Mau lihat apa?
+        </h1>
+        <p className="">
+          "Demi masa, sesungguhnya manusia itu benar-benar berada dalam
+          kerugian"
+        </p>
+
+        <div className="flex gap-4">
+          <Link href="/jadwal-sholat">
+            <button className={buttonClassName}>Jadwal Sholat</button>
+          </Link>
+          <Link href="/quran">
+            <button className={buttonClassName}>Baca Al-Qur'an</button>
+          </Link>
+        </div>
       </div>
-      <p className="font-medium text-xl">
-        Berikut daftar Kabupaten/Kota yang tersedia
-      </p>
-      <Suspense fallback={"Loading...."}>
-        <SemuaKota kota={kota} />
-      </Suspense>
-    </Layout>
+      <Footer />
+    </>
   );
 };
 

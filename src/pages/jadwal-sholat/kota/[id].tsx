@@ -13,8 +13,10 @@ let tanggal = date.getDay() + 12;
 
 export const getStaticPaths = async () => {
   try {
-    let response = await fetch(`https://api.myquran.com/v1/sholat/kota/semua`);
-    let data = await response.json();
+    const response = await fetch(
+      `https://api.myquran.com/v1/sholat/kota/semua`
+    );
+    const data = await response.json();
 
     const paths = data.map((city: any) => {
       return {

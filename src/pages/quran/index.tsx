@@ -2,14 +2,18 @@ import Layout from "src/components/layout";
 import ListSurah from "src/components/listSurah";
 
 export const getStaticProps = async () => {
-  const response = await fetch(`https://api.quran.sutanlab.id/surah`);
-  const data = await response.json();
+  try {
+    const response = await fetch(`https://api.quran.sutanlab.id/surah`);
+    const data = await response.json();
 
-  return {
-    props: {
-      surah: data.data,
-    },
-  };
+    return {
+      props: {
+        surah: data.data,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 interface surahProps {
