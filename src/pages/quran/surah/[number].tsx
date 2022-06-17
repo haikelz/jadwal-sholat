@@ -1,4 +1,5 @@
 import { suratProps } from "src/types";
+import { useState } from "react"; 
 import DetailSurah from "src/components/detailSurah";
 import Layout from "src/components/layout";
 import Button from "src/components/button";
@@ -42,6 +43,9 @@ export const getStaticProps = async (context: any) => {
 };
 
 const Surah = ({ surat }: suratProps) => {
+const [audio, setAudio] = useState(false);
+
+  const audioClick = () => setAudio(!audio);
   return (
     <Layout>
       <div>
@@ -51,9 +55,10 @@ const Surah = ({ surat }: suratProps) => {
             {surat.name.translation.id}. Surat ke-{surat.number}
           </p>
         </div>
+        <button onClick={audioClick}>Pencet</button>
       </div>
       <Button surat={surat} />
-      <DetailSurah surat={surat} />
+      <DetailSurah surat={surat} audio={audio}/>
       <Button surat={surat} />
     </Layout>
   );

@@ -37,4 +37,6 @@ export interface suratProps {
             }
         ];
     };
+
+    audio: boolean;
 }

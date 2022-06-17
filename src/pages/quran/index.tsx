@@ -17,15 +17,6 @@ export const getStaticProps = async () => {
   }
 };
 
-interface surahProps {
-  surah: {
-    number: string;
-    translation: {
-      id: string;
-    };
-  };
-}
-
 const Quran = ({ surah }: any) => {
   return (
     <Layout>

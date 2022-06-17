@@ -6,24 +6,25 @@ const Time = () => {
   useEffect(() => {
     setInterval(() => setDate(new Date()), 1000);
   }, []);
-  return (
+
+return (
     <div className="flex text-lg gap-1 font-bold">
-      <span>
+      <p>
         {date.toLocaleDateString("en-GB", {
           day: "numeric",
           month: "short",
           year: "numeric",
         })}
         ,
-      </span>
-      <span>
+      </p>
+      <p>
         {date.toLocaleString("en-US", {
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
           hour12: true,
         })}
-      </span>
+      </p>
     </div>
   );
 };

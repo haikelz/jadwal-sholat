@@ -1,9 +1,6 @@
 import { suratProps } from "src/types";
-import { useState } from "react";
-const DetailSurah = ({ surat }: suratProps) => {
-  const [audio, setAudio] = useState(false);
 
-  const audioClick = () => {};
+const DetailSurah = ({ surat, audio }: suratProps) => {
   return (
     <div className="grid grid-cols-1 gap-2 w-full text-end grid-rows-1">
       {surat.verses.map((ayat: any, index: number) => (
@@ -12,17 +9,19 @@ const DetailSurah = ({ surat }: suratProps) => {
           key={index + 1}
         >
           <div className="flex w-full items-center justify-between">
-            <div className="px-4 py-2 border-2 border-black flex justify-center items-center">
+            <div className={`${ayat.number.inSurah <= 9 ? "px-4 py-2" : ayat.number.inSurah <= 99 ? "px-3.5 py-2.5" : "px-3 py-3"} text-white font-bold border-black bg-teal-500 rounded-full flex justify-center items-center`}>
               <p className=" font-bold">{ayat.number.inSurah}</p>
             </div>
 
-            <p className="text-4xl">{ayat.text.arab}</p>
+            <p className="text-4xl leading-relaxed">{ayat.text.arab}</p>
           </div>
-          <div className="w-full">
-            <audio src={ayat.audio.primary} controls></audio>
-          </div>
+          {!audio ? "" : 
+            <div className="w-full mt-2.5">
+              <audio src={ayat.audio.primary} controls></audio>
+            </div>
+          }
           <div className="flex justify-start mt-4 w-full">
-            <p className="font-medium">{ayat.translation.id}</p>
+            <p className="font-medium text-md text-left tracking-wide leading-relaxed">{ayat.translation.id}</p>
           </div>
         </div>
       ))}
