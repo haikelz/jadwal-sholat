@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Layout from "src/components/layout";
 import Image from "next/image";
+import Loading from "src/components/loading";
 
 const SemuaKota = dynamic(() => import("src/components/semuaKota"), {
   suspense: true,
@@ -32,7 +33,7 @@ const JadwalSholat = ({ kota }: any) => {
       <p className="font-medium text-xl">
         Berikut daftar Kabupaten/Kota yang tersedia
       </p>
-      <Suspense fallback={"Loading...."}>
+      <Suspense fallback={<Loading />}>
         <SemuaKota kota={kota} />
       </Suspense>
     </Layout>

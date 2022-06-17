@@ -7,7 +7,3 @@
 * {
   font-family: "Bitter", sans-serif;
 }
-
-body {
-  @apply bg-gradient-to-br from-sky-100 to-blue-100;
-}

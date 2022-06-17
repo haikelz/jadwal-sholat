@@ -16,8 +16,10 @@ const DetailSurah = ({ surat }: suratProps) => {
               <p className=" font-bold">{ayat.number.inSurah}</p>
             </div>
 
-            <audio src={ayat.audio.primary} controls></audio>
             <p className="text-4xl">{ayat.text.arab}</p>
+          </div>
+          <div className="w-full">
+            <audio src={ayat.audio.primary} controls></audio>
           </div>
           <div className="flex justify-start mt-4 w-full">
             <p className="font-medium">{ayat.translation.id}</p>

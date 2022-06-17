@@ -61,7 +61,7 @@ const KotaId = ({ waktu }: any) => {
         PROVINSI {waktu.daerah}, {`${tahun}-${bulan}-${tanggal}`}
       </p>
 
-      <div className="text-center flex gap-7 overflow-x-auto w-full">
+      <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
         <TableJadwal waktu={waktu} />
       </div>
     </Layout>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import Footer from "src/components/footer";
+import Time from "src/components/date";
 
 export const getStaticProps = async () => {
   try {
@@ -28,11 +29,11 @@ const Home = ({ kota }: any) => {
         <h1 className="sm:text-4xl text-3xl font-bold">
           Selamat Datang! Mau lihat apa?
         </h1>
-        <p className="">
+        <p className="text-xl font-medium">
           "Demi masa, sesungguhnya manusia itu benar-benar berada dalam
           kerugian"
         </p>
-
+        <Time />
         <div className="flex gap-4">
           <Link href="/jadwal-sholat">
             <button className={buttonClassName}>Jadwal Sholat</button>
