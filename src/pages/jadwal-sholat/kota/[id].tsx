@@ -18,9 +18,9 @@ export const getStaticPaths = async () => {
     );
     const data = await response.json();
 
-    const paths = data.map((city: any) => {
+    const paths = data.map((waktu: any) => {
       return {
-        params: { id: city.id },
+        params: { id: waktu.id },
       };
     });
 
@@ -45,7 +45,7 @@ export const getStaticProps = async (context: any) => {
 
     return {
       props: {
-        city: data.data,
+        waktu: data.data,
       },
     };
   } catch (err) {
@@ -53,16 +53,16 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const KotaId = ({ city }: any) => {
+const KotaId = ({ waktu }: any) => {
   return (
-    <Layout title={city.lokasi}>
-      <h1 className="font-bold text-3xl">{city.lokasi}</h1>
+    <Layout title={waktu.lokasi}>
+      <h1 className="font-bold text-3xl">{waktu.lokasi}</h1>
       <p className="font-semibold text-lg">
-        PROVINSI {city.daerah}, {`${tahun}-${bulan}-${tanggal}`}
+        PROVINSI {waktu.daerah}, {`${tahun}-${bulan}-${tanggal}`}
       </p>
 
       <div className="text-center flex gap-7 overflow-x-auto w-full">
-        <TableJadwal city={city} />
+        <TableJadwal waktu={waktu} />
       </div>
     </Layout>
   );

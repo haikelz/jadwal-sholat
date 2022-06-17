@@ -1,12 +1,4 @@
-interface cityProps {
-  city: {
-    id: string;
-    lokasi: string;
-    date: string;
-    daerah: string;
-    jadwal: any;
-  };
-}
+import { waktuProps } from "src/types";
 
 let date = new Date();
 let tahun = date.getFullYear();
@@ -20,7 +12,7 @@ Logicnya: karena ada ketidaksesuaian lagi antara format bulan di bawaan JS denga
 */
 let formatDate = `${tahun}-${bulan < 10 ? `0${bulan}` : bulan}-${tanggal}`;
 
-const TableJadwal = ({ city }: cityProps) => {
+const TableJadwal = ({ waktu }: waktuProps) => {
   return (
     <table className="border-2 border-black table-fixed">
       <thead className="border-2 border-black">
@@ -37,7 +29,7 @@ const TableJadwal = ({ city }: cityProps) => {
         </tr>
       </thead>
       <tbody>
-        {city.jadwal.map((waktu: any, index: number) => (
+        {waktu.jadwal.map((waktu: any, index: number) => (
           <tr
             className={`border-b-black border-b-2 ${
               waktu.date == formatDate

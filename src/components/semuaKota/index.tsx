@@ -1,8 +1,5 @@
+import { kotaProps } from "src/types";
 import Link from "next/link";
-
-interface kotaProps {
-  kota: [id: string, lokasi: string];
-}
 
 const SemuaKota = ({ kota }: kotaProps) => {
   return (

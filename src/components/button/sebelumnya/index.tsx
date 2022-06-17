@@ -1,13 +1,13 @@
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 import Link from "next/link";
 
 const Sebelumnya = ({ surat }: any) => {
   return (
     <Link href={`/quran/surah/${surat.number - 1}`}>
       {surat.number > 1 ? (
-        <button className="px-4 py-2 flex items-center justify-center gap-2 bg-teal-400 hover:bg-teal-500 duration-300 transition-all rounded-md">
-          <FaArrowLeft />
-          <p>Sebelumnya</p>
+        <button className="px-3 py-1 flex items-center justify-center gap-2 border-2 border-black duration-300 transition-all rounded-md">
+          <FaArrowAltCircleLeft />
+          <p className="text-md font-semibold">Sebelumnya</p>
         </button>
       ) : (
         ""

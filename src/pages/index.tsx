@@ -1,14 +1,6 @@
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-import Layout from "src/components/layout";
-import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import Footer from "src/components/footer";
-
-const SemuaKota = dynamic(() => import("src/components/semuaKota"), {
-  suspense: true,
-});
 
 export const getStaticProps = async () => {
   try {

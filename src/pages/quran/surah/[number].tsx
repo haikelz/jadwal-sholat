@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Sebelumnya from "src/components/button/sebelumnya";
-import Selanjutnya from "src/components/button/selanjutnya";
+import { suratProps } from "src/types";
+import DetailSurah from "src/components/detailSurah";
 import Layout from "src/components/layout";
+import Button from "src/components/button";
 
 export const getStaticPaths = async () => {
   try {
@@ -41,26 +41,6 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-interface suratProps {
-  surat: {
-    number: number;
-    name: {
-      transliteration: {
-        id: string;
-      };
-      translation: {
-        id: string;
-      };
-    };
-    text: string;
-    verses: [
-      text: {
-        arab: string;
-      }
-    ];
-  };
-}
-
 const Surah = ({ surat }: suratProps) => {
   return (
     <Layout>
@@ -72,26 +52,9 @@ const Surah = ({ surat }: suratProps) => {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-2 text-end grid-rows-1">
-        {surat.verses.map((ayat: any, index: number) => (
-          <div
-            className="p-4 flex flex-col mb-4 justify-end items-end"
-            key={index + 1}
-          >
-            <div className="flex w-full items-center justify-between">
-              <p>{ayat.number.inSurah}</p>
-              <p className="text-4xl">{ayat.text.arab}</p>
-            </div>
-            <div className="flex justify-start mt-4 w-full">
-              <p>{ayat.translation.id}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="flex gap-3 w-full justify-between">
-        <Sebelumnya surat={surat} />
-        <Selanjutnya surat={surat} />
-      </div>
+      <Button surat={surat} />
+      <DetailSurah surat={surat} />
+      <Button surat={surat} />
     </Layout>
   );
 };
