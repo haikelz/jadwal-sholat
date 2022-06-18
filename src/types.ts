@@ -38,5 +38,15 @@ export interface suratProps {
         ];
     };
 
-    audio: boolean;
+    audio?: boolean;
+    terjemahan?: boolean;
+}
+
+export interface listSurahProps {
+    surah: {
+        number: string;
+        translation: {
+            id: string;
+        };
+    };
 }

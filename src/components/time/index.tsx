@@ -7,7 +7,7 @@ const Time = () => {
     setInterval(() => setDate(new Date()), 1000);
   }, []);
 
-return (
+  return (
     <div className="flex text-lg gap-1 font-bold">
       <p>
         {date.toLocaleDateString("en-GB", {
