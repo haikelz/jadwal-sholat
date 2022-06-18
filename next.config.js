@@ -5,7 +5,10 @@ const nextConfig = {
   images: {
     loader: 'akamai', 
     path: '',
-  }
+  }, 
+  typescript: {
+     ignoreBuildErrors: true,
+  },
 }
 
 module.exports = nextConfig, withPWA

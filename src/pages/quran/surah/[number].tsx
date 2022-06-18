@@ -52,9 +52,9 @@ const Surah = ({ surat }: suratProps) => {
   const terjemahanClick = () => setTerjemahan(!terjemahan);
 
   return (
-    <Layout title={`Surat`}>
+    <Layout title={`Surat ${surat.name.transliteration.id}`}>
       <div className="flex flex-col justify-center items-center">
-
+        <h1 className="font-bold text-3xl">{surat.name.transliteration.id}</h1>
         <div className="flex justify-center items-center">
           <p>
             {surat.name.translation.id}. Surat ke-{surat.number}
