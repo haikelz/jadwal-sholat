@@ -10,7 +10,7 @@ export const getStaticProps = async () => {
 
     return {
       props: {
-        surah: data,
+        surah: data.data,
       },
     };
   } catch (err) {

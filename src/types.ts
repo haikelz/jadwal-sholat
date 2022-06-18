@@ -34,6 +34,7 @@ export interface suratProps {
         verses: [
             text: {
                 arab: string;
+                transliteration: string; 
             }
         ];
     };

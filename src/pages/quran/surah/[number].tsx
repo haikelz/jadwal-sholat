@@ -44,7 +44,7 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const Surah = ({ surat }: any) => {
+const Surah = ({ surat }: suratProps) => {
   const [audio, setAudio] = useState(false);
   const [terjemahan, setTerjemahan] = useState(false);
 
@@ -52,9 +52,9 @@ const Surah = ({ surat }: any) => {
   const terjemahanClick = () => setTerjemahan(!terjemahan);
 
   return (
-    <Layout title={`Surat ${surat.name.transliteration.id}`}>
+    <Layout title={`Surat`}>
       <div className="flex flex-col justify-center items-center">
-        <h1 className="font-bold text-3xl">{surat.name.transliteration.id}</h1>
+
         <div className="flex justify-center items-center">
           <p>
             {surat.name.translation.id}. Surat ke-{surat.number}
