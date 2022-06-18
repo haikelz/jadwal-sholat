@@ -2,27 +2,15 @@ import Layout from "src/components/layout";
 import TableJadwal from "src/components/tableJadwal";
 
 /* 
-> Cara lama, tapi ga relevan karena malah muncul error pas build
-
 - Sengaja didefinisiin di global, karena bakal dipake lebih dari sekali
 - Oh ya kenapa tanggalnya saya tambah 12? Karena hasil tanggalnya itu sebenarnya 3, jadi untuk menyesuaikan, saya tambah jadi: 
   3 + 12 = 15(tanggal hari ini)
 */
 let date = new Date();
 
-// Ndak relevan, tapi tetep dipake buat nampilin waktu di bagian judul
 let tahun = date.getFullYear();
 let bulan = date.getMonth() + 1;
 let tanggal = date.getDay() + 12;
-
-/* > Cara yang benar dengan menggunakan toLocaleDate String, dan set timezone nya ke jepang(ja-jp) 
-Expected output: year/month 
-*/
-let showDate = date.toLocaleDateString("ja-jp", {
-  year: "numeric",
-  month: "numeric",
-});
-console.log(showDate);
 
 export const getStaticPaths = async () => {
   try {
@@ -33,7 +21,7 @@ export const getStaticPaths = async () => {
 
     const paths = data.map((waktu: any) => {
       return {
-        params: { id: waktu.id },
+        params: { id: waktu.id == "3212" ? (waktu.id = "3211") : waktu.id },
       };
     });
 
