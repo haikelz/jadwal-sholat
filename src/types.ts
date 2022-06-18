@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, PropsWithChildren } from "react";
 
 export interface childrenProps {
     children: ReactNode[] | JSX.Element;
@@ -50,3 +50,7 @@ export interface listSurahProps {
         };
     };
 }
+
+export type judulProps = PropsWithChildren<{
+    child?: ReactNode[] | JSX.Element;
+}>

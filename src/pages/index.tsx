@@ -8,13 +8,13 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Jadwal Sholat</title>
+        <title>Info Jadwal Sholat dan Baca Al-Qur&#39;an</title>
       </Head>
       <div className="flex flex-col text-center h-screen px-4 justify-center items-center gap-3">
         <h1 className="sm:text-4xl text-3xl font-bold">Selamat Datang!</h1>
         <p className="text-xl font-medium">
-          "Demi masa, sesungguhnya manusia itu benar-benar berada dalam
-          kerugian"
+          &#34;Demi masa, sesungguhnya manusia itu benar-benar berada dalam
+          kerugian&#34;
         </p>
         <Time />
         <div className="flex gap-4">
@@ -22,7 +22,7 @@ const Home = () => {
             <button className={buttonClassName}>Jadwal Sholat</button>
           </Link>
           <Link href="/quran">
-            <button className={buttonClassName}>Baca Al-Qur'an</button>
+            <button className={buttonClassName}>Baca Al-Qur&#39;an</button>
           </Link>
         </div>
       </div>

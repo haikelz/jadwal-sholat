@@ -19,7 +19,7 @@ const BottomNav = () => {
       <Link href="/quran">
         <div className="flex cursor-pointer flex-col px-4 justify-center items-center">
           <FiBook size="20px" />
-          <p className="text-sm font-semibold">Al-Qur'an</p>
+          <p className="text-sm font-semibold">Al-Qur&#39;an</p>
         </div>
       </Link>
     </div>

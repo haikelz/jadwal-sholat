@@ -26,14 +26,21 @@ export const getStaticProps = async () => {
 
 const JadwalSholat = ({ kota }: any) => {
   return (
-    <Layout>
-      <div className="flex justify-center items-center gap-3">
-        <h1 className="sm:text-4xl text-3xl font-bold">Jadwal Sholat</h1>
-        <Image src="/img/mosque.png" width="50px" height="50px" />
+    <Layout title="Jadwal Sholat">
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex justify-center items-center gap-3">
+          <h1 className="sm:text-4xl text-3xl font-bold">Jadwal Sholat</h1>
+          <Image
+            src="/img/mosque.png"
+            width="50px"
+            height="50px"
+            alt="Mosque"
+          />
+        </div>
+        <p className="font-medium mt-2 text-xl">
+          Berikut daftar Kabupaten/Kota yang tersedia
+        </p>
       </div>
-      <p className="font-medium text-xl">
-        Berikut daftar Kabupaten/Kota yang tersedia
-      </p>
       <SemuaKota kota={kota} />
     </Layout>
   );
