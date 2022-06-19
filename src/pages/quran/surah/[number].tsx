@@ -2,6 +2,7 @@ import { suratProps } from "src/types";
 import { useState } from "react";
 import { HiOutlineVolumeUp } from "react-icons/hi";
 import { IoLanguageSharp } from "react-icons/io5";
+import { GrInfo } from "react-icons/gr";
 import DetailSurah from "src/components/detailSurah";
 import Layout from "src/components/layout";
 import Button from "src/components/button";
@@ -47,9 +48,11 @@ export const getStaticProps = async (context: any) => {
 const Surah = ({ surat }: suratProps) => {
   const [audio, setAudio] = useState(false);
   const [terjemahan, setTerjemahan] = useState(false);
+  const [tafsir, setTafsir] = useState(false);
 
   const audioClick = () => setAudio(!audio);
   const terjemahanClick = () => setTerjemahan(!terjemahan);
+  const tafsirClick = () => setTafsir(!tafsir);
 
   return (
     <Layout title={`Surat ${surat.name.transliteration.id}`}>
@@ -69,10 +72,20 @@ const Surah = ({ surat }: suratProps) => {
             <IoLanguageSharp size="20px" />
             <p className="font-bold text-lg">Latin</p>
           </button>
+          <button className="flex gap-1 items-center" onClick={tafsirClick}>
+            <GrInfo size="20px" />
+            <p className="font-bold text-lg">Tafsir</p>
+          </button>
         </div>
+        {!tafsir ? "" : <p className="font-medium">{surat.tafsir.id}</p>}
       </div>
       <Button surat={surat} />
-      <DetailSurah surat={surat} audio={audio} terjemahan={terjemahan} />
+      <DetailSurah
+        surat={surat}
+        audio={audio}
+        terjemahan={terjemahan}
+        tafsir={tafsir}
+      />
       <Button surat={surat} />
     </Layout>
   );

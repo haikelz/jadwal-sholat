@@ -1,3 +1,4 @@
+import { kotaProps } from "src/types";
 import Layout from "src/components/layout";
 import SemuaKota from "src/components/semuaKota";
 import Image from "next/image";
@@ -17,7 +18,7 @@ export const getStaticProps = async () => {
   }
 };
 
-const JadwalSholat = ({ kota }: any) => {
+const JadwalSholat = ({ kota }: kotaProps) => {
   return (
     <Layout title="Jadwal Sholat">
       <div className="flex flex-col justify-center items-center">

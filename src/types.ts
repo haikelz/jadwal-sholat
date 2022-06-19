@@ -30,17 +30,27 @@ export interface suratProps {
                 id: string;
             };
         };
+        tafsir: {
+            id: string;
+        };
         text: string;
         verses: [
             text: {
                 arab: string;
-                transliteration: string; 
+                transliteration: string;
+            },
+            tafsir: {
+                id: {
+                    long: string;
+                }
             }
         ];
     };
 
     audio?: boolean;
     terjemahan?: boolean;
+    tafsir?: boolean;
+    tafsirClick?: any;
 }
 
 export interface listSurahProps {

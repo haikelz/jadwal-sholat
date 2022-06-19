@@ -1,3 +1,4 @@
+import { waktuProps } from "src/types";
 import Layout from "src/components/layout";
 import TableJadwal from "src/components/tableJadwal";
 
@@ -54,7 +55,7 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const KotaId = ({ waktu }: any) => {
+const KotaId = ({ waktu }: waktuProps) => {
   return (
     <Layout title={`Jadwal Sholat ${waktu.lokasi}`}>
       <div className="flex flex-col justify-center items-center">

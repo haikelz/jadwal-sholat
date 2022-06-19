@@ -1,14 +1,15 @@
 import { suratProps } from "src/types";
+import ModalTafsir from "./modalTafsir";
 
-const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
+const DetailSurah = ({ surat, audio, terjemahan, tafsir }: suratProps) => {
   return (
     <div className="grid grid-cols-1 gap-2 w-full text-end grid-rows-1">
       {surat.verses.map((ayat: any, index: number) => (
         <div
-          className="p-4 flex flex-col mb-4 justify-end items-end"
+          className="p-4 border-b-2 border-teal-200 flex flex-col mb-4 justify-end items-end"
           key={index + 1}
         >
-          <div className="flex w-full items-start justify-between">
+          <div className="flex w-full relative items-start justify-between">
             <div
               className={`${
                 ayat.number.inSurah <= 9
