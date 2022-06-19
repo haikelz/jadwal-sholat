@@ -1,4 +1,5 @@
 import { waktuProps } from "src/types";
+import { memo } from "react";
 import Layout from "src/components/layout";
 import TableJadwal from "src/components/tableJadwal";
 
@@ -9,9 +10,17 @@ import TableJadwal from "src/components/tableJadwal";
 */
 let date = new Date();
 
-let tahun = date.getFullYear();
-let bulan = date.getMonth() + 1;
-let tanggal = date.getDay() + 12;
+let tahun = date.toLocaleDateString("fr-ca", {
+  year: "numeric",
+});
+
+let bulan = date.toLocaleDateString("fr-ca", {
+  month: "numeric",
+});
+
+let tanggal = date.toLocaleDateString("fr-ca", {
+  day: "numeric",
+});
 
 export const getStaticPaths = async () => {
   try {
@@ -66,10 +75,15 @@ const KotaId = ({ waktu }: waktuProps) => {
       </div>
 
       <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
-        <TableJadwal waktu={waktu} />
+        <TableJadwal
+          tanggal={tanggal}
+          tahun={tahun}
+          bulan={bulan}
+          waktu={waktu}
+        />
       </div>
     </Layout>
   );
 };
 
-export default KotaId;
+export default memo(KotaId);

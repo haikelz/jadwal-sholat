@@ -1,7 +1,8 @@
+import { listSurahProps } from "src/types";
+import { memo } from "react";
 import Layout from "src/components/layout";
 import ListSurah from "src/components/listSurah";
 import Image from "next/image";
-import { listSurahProps } from "src/types";
 
 export const getStaticProps = async () => {
   try {
@@ -40,4 +41,4 @@ const Quran = ({ surah }: listSurahProps) => {
   );
 };
 
-export default Quran;
+export default memo(Quran);

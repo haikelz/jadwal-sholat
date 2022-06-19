@@ -1,4 +1,5 @@
 import { kotaProps } from "src/types";
+import { memo } from "react";
 import Layout from "src/components/layout";
 import SemuaKota from "src/components/semuaKota";
 import Image from "next/image";
@@ -40,4 +41,4 @@ const JadwalSholat = ({ kota }: kotaProps) => {
   );
 };
 
-export default JadwalSholat;
+export default memo(JadwalSholat);

@@ -1,5 +1,5 @@
 import { suratProps } from "src/types";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { HiOutlineVolumeUp } from "react-icons/hi";
 import { IoLanguageSharp } from "react-icons/io5";
 import { GrInfo } from "react-icons/gr";
@@ -91,4 +91,4 @@ const Surah = ({ surat }: suratProps) => {
   );
 };
 
-export default Surah;
+export default memo(Surah);

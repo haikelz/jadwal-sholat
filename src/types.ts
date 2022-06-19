@@ -17,6 +17,10 @@ export interface waktuProps {
         daerah: string;
         jadwal: any;
     };
+
+    tanggal: string;
+    bulan: string;
+    tahun: string;
 }
 
 export interface suratProps {

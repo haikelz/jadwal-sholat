@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Footer from "src/components/footer";
@@ -31,4 +32,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

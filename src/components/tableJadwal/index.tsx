@@ -1,18 +1,18 @@
 import { waktuProps } from "src/types";
 
-let date = new Date();
-let tahun = date.getFullYear();
-let bulan = date.getMonth() + 1;
-let tanggal = date.getDay() + 12;
+const TableJadwal = ({ waktu, tanggal, bulan, tahun }: waktuProps) => {
+  /* 
+  Karena datenya masih berupa string, kita ubah ke number 
+  biar kita bisa membandingkan dan mendapatkan jadwal hari ini
+  */
+  let numTahun = Number(tahun);
+  let numBulan = Number(bulan);
+  let numTanggal = Number(tanggal);
 
-/*
-Logicnya: karena ada ketidaksesuaian lagi antara format bulan di bawaan JS dengan yang ada di API, jadi saya buat seperti ini
-- Jika bulannya kurang dari 10, maka tambahkan 0 di depannya agar sesuai sama yang ada di API
-- Jika tidak, jangan tambahkan 0
-*/
-let formatDate = `${tahun}-${bulan < 10 ? `0${bulan}` : bulan}-${tanggal}`;
+  let formatDate = `${numTahun}-${
+    numBulan < 10 ? 0 + `${numBulan}` : numBulan
+  }-${numTanggal}`;
 
-const TableJadwal = ({ waktu }: waktuProps) => {
   return (
     <table className="border-2 border-black table-fixed">
       <thead className="border-2 border-black">
