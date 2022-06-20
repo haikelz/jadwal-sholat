@@ -77,7 +77,13 @@ const Surah = ({ surat }: suratProps) => {
             <p className="font-bold text-lg">Tafsir</p>
           </button>
         </div>
-        {!tafsir ? "" : <p className="font-medium">{surat.tafsir.id}</p>}
+        {!tafsir ? (
+          ""
+        ) : (
+          <div className="my-4">
+            <p className="font-medium leading-relaxed">{surat.tafsir.id}</p>
+          </div>
+        )}
       </div>
       <Button surat={surat} />
       <DetailSurah

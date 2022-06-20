@@ -1,7 +1,6 @@
 import { suratProps } from "src/types";
-import ModalTafsir from "./modalTafsir";
 
-const DetailSurah = ({ surat, audio, terjemahan, tafsir }: suratProps) => {
+const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
   return (
     <div className="grid grid-cols-1 gap-2 w-full text-end grid-rows-1">
       {surat.verses.map((ayat: any, index: number) => (
