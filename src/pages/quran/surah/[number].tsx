@@ -37,7 +37,7 @@ export const getStaticProps = async (context: any) => {
 
     return {
       props: {
-        surat: fsd,
+        surat: fsd.data,
       },
     };
   } catch (err) {
