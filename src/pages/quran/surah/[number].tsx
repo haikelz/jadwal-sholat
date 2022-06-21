@@ -45,7 +45,7 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const Surah = ({ surat }: suratProps) => {
+const Surah = ({ surat }: any) => {
   const [audio, setAudio] = useState(false);
   const [terjemahan, setTerjemahan] = useState(false);
   const [tafsir, setTafsir] = useState(false);
