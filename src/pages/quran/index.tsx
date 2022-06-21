@@ -27,12 +27,12 @@ const Quran = ({ surah }: listSurahProps) => {
           <h1 className="sm:text-4xl text-3xl font-bold">Baca Al-Qur&#39;an</h1>
           <Image
             src="/img/Quran.png"
-            width="50px"
-            height="50px"
+            width="40px"
+            height="40px"
             alt="Al-Qur'an Image"
           />
         </div>
-        <p className="font-medium text-xl mt-2">
+        <p className="font-medium text-lg mt-2">
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;
         </p>
       </div>

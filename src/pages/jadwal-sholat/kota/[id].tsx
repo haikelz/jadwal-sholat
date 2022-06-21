@@ -69,7 +69,7 @@ const KotaId = ({ waktu }: waktuProps) => {
     <Layout title={`Jadwal Sholat ${waktu.lokasi}`}>
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-bold text-3xl">{waktu.lokasi}</h1>
-        <p className="font-semibold text-lg">
+        <p className="font-medium text-lg">
           PROVINSI {waktu.daerah}, {`${tahun}-${bulan}-${tanggal}`}
         </p>
       </div>

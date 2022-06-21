@@ -27,12 +27,12 @@ const JadwalSholat = ({ kota }: kotaProps) => {
           <h1 className="sm:text-4xl text-3xl font-bold">Jadwal Sholat</h1>
           <Image
             src="/img/mosque.png"
-            width="50px"
-            height="50px"
+            width="40px"
+            height="40px"
             alt="Mosque"
           />
         </div>
-        <p className="font-medium mt-2 text-xl">
+        <p className="font-medium mt-2 text-lg">
           Berikut daftar Kabupaten/Kota yang tersedia
         </p>
       </div>
