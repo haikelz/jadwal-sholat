@@ -33,11 +33,11 @@ export const getStaticProps = async (context: any) => {
     const response = await fetch(
       `https://api.quran.sutanlab.id/surah/${number}`
     );
-    const data = await response.json();
+    const fsd = await response.json();
 
     return {
       props: {
-        surat: data.data,
+        surat: fsd,
       },
     };
   } catch (err) {
@@ -45,7 +45,7 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const Surah = ({ surat }: suratProps) => {
+const Surah = ({ surat }: any) => {
   const [audio, setAudio] = useState(false);
   const [terjemahan, setTerjemahan] = useState(false);
   const [tafsir, setTafsir] = useState(false);
