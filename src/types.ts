@@ -27,6 +27,7 @@ export interface suratProps {
     surat: {
         number: number;
         name: {
+            short: string;
             transliteration: {
                 id: string;
             };

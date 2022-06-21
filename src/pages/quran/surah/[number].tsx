@@ -33,11 +33,11 @@ export const getStaticProps = async (context: any) => {
     const response = await fetch(
       `https://api.quran.sutanlab.id/surah/${number}`
     );
-    const fsd = await response.json();
+    const data = await response.json();
 
     return {
       props: {
-        surat: fsd.data,
+        surat: data.data,
       },
     };
   } catch (err) {
@@ -45,7 +45,7 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const Surah = ({ surat }: any) => {
+const Surah = ({ surat }: suratProps) => {
   const [audio, setAudio] = useState(false);
   const [terjemahan, setTerjemahan] = useState(false);
   const [tafsir, setTafsir] = useState(false);
@@ -57,12 +57,7 @@ const Surah = ({ surat }: any) => {
   return (
     <Layout title={`Surat`}>
       <div className="flex flex-col justify-center items-center">
-        <h1 className="font-bold text-3xl">{surat.name.transliteration.id}</h1>
-        <div className="flex justify-center items-center">
-          <p>
-            {surat.name.translation.id}. Surat ke-{surat.number}
-          </p>
-        </div>
+        <div className="flex justify-center items-center"></div>
         <div className="flex gap-2 mt-1">
           <button className="flex gap-1 items-center" onClick={audioClick}>
             <HiOutlineVolumeUp size="20px" />
