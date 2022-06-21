@@ -11,8 +11,9 @@
   },
   "lint-staged": {
     "*.{js, jsx, ts, tsx}": "eslint --fix"
-  }, 
+  },
   "dependencies": {
+    "framer-motion": "^6.3.11",
     "next": "12.1.6",
     "next-pwa": "^5.5.4",
     "react": "18.2.0",

@@ -70,3 +70,8 @@ export interface listSurahProps {
 export type judulProps = PropsWithChildren<{
     child?: ReactNode[] | JSX.Element;
 }>
+
+export interface IKegiatan {
+    namaKegiatan: string;
+    deadline: string;
+}

@@ -2,6 +2,7 @@ import { waktuProps } from "src/types";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import TableJadwal from "src/components/tableJadwal";
+import Loading from "src/components/loading";
 
 /* 
 - Sengaja didefinisiin di global, karena bakal dipake lebih dari sekali

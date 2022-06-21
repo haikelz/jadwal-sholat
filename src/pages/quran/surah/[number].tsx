@@ -58,11 +58,9 @@ const Surah = ({ surat }: suratProps) => {
     <Layout title={`Surat`}>
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center">
-          <h1 className="font-bold text-3xl">
-            {surat.name.transliteration?.id}
-          </h1>
+          <h1 className="font-bold text-3xl">{surat.name.short}</h1>
           <p>
-            {surat.name.translation?.id}. Surat ke-{surat.number}
+            {surat.name.translation.id}. Surat ke-{surat.number}
           </p>
         </div>
         <div className="flex gap-2 mt-1">
