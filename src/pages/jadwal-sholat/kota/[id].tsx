@@ -74,7 +74,7 @@ const KotaId = ({ waktu }: waktuProps) => {
         </p>
       </div>
 
-      <div className="text-center mt-4 flex gap-7 xl:justify-center overflow-x-auto w-full">
+      <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
         <TableJadwal
           tanggal={tanggal}
           tahun={tahun}

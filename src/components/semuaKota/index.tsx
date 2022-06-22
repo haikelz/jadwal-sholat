@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const SemuaKota = ({ kota }: kotaProps) => {
   return (
-    <div className="grid xl:grid-cols-5 mt-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-center gap-5 grid-rows-1">
+    <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-center gap-5 grid-rows-1">
       {kota.map((loc: any, index: number) => (
         <Link
           href={`/jadwal-sholat/kota/${

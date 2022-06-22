@@ -58,8 +58,8 @@ const Surah = ({ surat }: suratProps) => {
     <Layout title={`Baca Al-Qur'an`}>
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center">
-          {/* TODO: Ngefix ini, dunno kenapa bisa undefined.... */}
-          
+          {/* -> TODO: Ngefix ini, dunno kenapa bisa undefined.... */}
+
           {/*<h1 className="font-bold text-3xl">{surat.name.short}</h1>*/}
           {/*<p className="font-medium tracking-wider">
             {surat.name.translation.id}. Surat ke-{surat.number}
