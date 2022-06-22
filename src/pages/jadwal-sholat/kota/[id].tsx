@@ -2,7 +2,6 @@ import { waktuProps } from "src/types";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import TableJadwal from "src/components/tableJadwal";
-import Loading from "src/components/loading";
 
 /* 
 - Sengaja didefinisiin di global, karena bakal dipake lebih dari sekali
@@ -75,7 +74,7 @@ const KotaId = ({ waktu }: waktuProps) => {
         </p>
       </div>
 
-      <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
+      <div className="text-center mt-4 flex gap-7 xl:justify-center overflow-x-auto w-full">
         <TableJadwal
           tanggal={tanggal}
           tahun={tahun}

@@ -2,6 +2,7 @@ import { memo } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Footer from "src/components/footer";
+import Time from "src/components/time";
 
 const Home = () => {
   const buttonClassName = `bg-teal-600 hover:bg-teal-700 duration-300 transition-all text-white font-bold text-md md:text-xl px-3 py-2 md:px-4 md:py-3 rounded-md`;
@@ -16,6 +17,7 @@ const Home = () => {
           &#34;Demi masa, sesungguhnya manusia itu benar-benar berada dalam
           kerugian&#34;
         </p>
+        <Time />
         <div className="flex gap-4">
           <Link href="/jadwal-sholat">
             <button className={buttonClassName}>Jadwal Sholat</button>

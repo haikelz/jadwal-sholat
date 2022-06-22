@@ -2,7 +2,7 @@ import { suratProps } from "src/types";
 
 const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
   return (
-    <div className="grid grid-cols-1 gap-2 w-full text-end grid-rows-1">
+    <div className="grid grid-cols-1 mt-6 gap-2 w-full text-end grid-rows-1">
       {surat.verses?.map((ayat: any, index: number) => (
         <div
           className="p-4 border-b-2 border-teal-200 flex flex-col mb-4 justify-end items-end"

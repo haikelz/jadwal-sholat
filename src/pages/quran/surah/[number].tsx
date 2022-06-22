@@ -55,13 +55,15 @@ const Surah = ({ surat }: suratProps) => {
   const tafsirClick = () => setTafsir(!tafsir);
 
   return (
-    <Layout title={`Surat`}>
+    <Layout title={`Baca Al-Qur'an`}>
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center">
-          <h1 className="font-bold text-3xl">{surat.name.short}</h1>
-          <p>
+          {/* TODO: Ngefix ini, dunno kenapa bisa undefined.... */}
+          
+          {/*<h1 className="font-bold text-3xl">{surat.name.short}</h1>*/}
+          {/*<p className="font-medium tracking-wider">
             {surat.name.translation.id}. Surat ke-{surat.number}
-          </p>
+          </p>*/}
         </div>
         <div className="flex gap-2 mt-1">
           <button className="flex gap-1 items-center" onClick={audioClick}>
