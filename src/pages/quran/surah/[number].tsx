@@ -38,7 +38,6 @@ export const getStaticProps = async (context: any) => {
     return {
       props: {
         surat: data.data,
-        nameSurat: data.data.name.transliteration, 
       },
     };
   } catch (err) {
@@ -46,7 +45,7 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const Surah = ({ surat, nameSurat }: any) => {
+const Surah = ({ surat }: suratProps) => {
   const [audio, setAudio] = useState(false);
   const [terjemahan, setTerjemahan] = useState(false);
   const [tafsir, setTafsir] = useState(false);
@@ -61,10 +60,12 @@ const Surah = ({ surat, nameSurat }: any) => {
         <div className="flex flex-col justify-center items-center">
           {/* -> TODO: Ngefix ini, dunno kenapa bisa undefined.... */}
 
-          <h1 className="font-bold text-3xl">{nameSurat.id}</h1>
+          {/*<h1 className="font-bold text-3xl">
+            {surat.name.transliteration.id}
+          </h1>
           <p className="font-medium tracking-wider">
             {surat.name.translation.id}. Surat ke-{surat.number}
-          </p>
+          </p>*/}
         </div>
         <div className="flex gap-2 mt-1">
           <button className="flex gap-1 items-center" onClick={audioClick}>
