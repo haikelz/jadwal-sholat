@@ -9,7 +9,7 @@ import Button from "src/components/button";
 
 export const getStaticPaths = async () => {
   try {
-    const response = await fetch(`https://api.quran.sutanlab.id/surah`);
+    const response = await fetch(`https://api-quran-haikelz.vercel.app/surah`);
     const data = await response.json();
 
     const paths = data.data.map((surat: any) => {

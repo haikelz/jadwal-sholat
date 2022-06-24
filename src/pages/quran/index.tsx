@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch(`https://api.quran.sutanlab.id/surah`);
+    const response = await fetch(`https://api-quran-haikelz.vercel.app/surah`);
     const data = await response.json();
 
     return {
