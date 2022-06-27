@@ -1,41 +1,41 @@
-import { suratProps } from "src/types";
+import { suratProps } from "src/props";
 
-const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
+const DetailSurah = ({ surat, audio, terjemahan }: any) => {
   return (
     <div className="grid grid-cols-1 mt-6 gap-2 w-full text-end grid-rows-1">
-      {surat.verses?.map((ayat: any, index: number) => (
+      {surat.ayahs.map((ayat: any, index: number) => (
         <div
-          className="p-4 border-b-2 border-teal-200 flex flex-col mb-4 justify-end items-end"
+          className="p-4 border-b-2 border-teal-300 flex flex-col mb-4 justify-end items-end"
           key={index + 1}
         >
           <div className="flex w-full relative items-start justify-between">
             <div
               className={`${
-                ayat.number.inSurah <= 9
+                ayat.number.insurah <= 9
                   ? "px-4 py-2"
-                  : ayat.number.inSurah <= 99
+                  : ayat.number.insurah <= 99
                   ? "px-3.5 py-2.5"
                   : "px-3 py-3"
               } text-white font-bold border-black bg-teal-500 rounded-full flex justify-center items-center`}
             >
-              <p className=" font-bold">{ayat.number.inSurah}</p>
+              <p className=" font-bold">{ayat.number.insurah}</p>
             </div>
 
-            <p className="text-4xl leading-relaxed">{ayat.text.arab}</p>
+            <p className="text-4xl leading-relaxed">{ayat.text.ar}</p>
           </div>
           <div className="flex flex-col w-full items-start justify-start">
             {!audio ? (
               ""
             ) : (
               <div className="w-full mt-2.5">
-                <audio src={ayat.audio.primary} controls></audio>
+                <audio src={ayat.audio.url} controls></audio>
               </div>
             )}
             {!terjemahan ? (
               ""
             ) : (
               <p className="italic mt-1 text-left text-teal-700">
-                {ayat.text.transliteration.en}
+                {ayat.text.read}
               </p>
             )}
             <p className="font-medium mt-2 text-md text-left tracking-wide leading-relaxed">

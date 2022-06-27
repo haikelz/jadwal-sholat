@@ -1,4 +1,4 @@
-import { suratProps } from "src/types";
+import { suratProps } from "src/props";
 import { memo, useState } from "react";
 import { HiOutlineVolumeUp } from "react-icons/hi";
 import { IoLanguageSharp } from "react-icons/io5";
@@ -9,7 +9,7 @@ import Button from "src/components/button";
 
 export const getStaticPaths = async () => {
   try {
-    const response = await fetch(`https://api-quran-haikelz.vercel.app/surah`);
+    const response = await fetch(`https://quran-endpoint.vercel.app/quran`);
     const data = await response.json();
 
     const paths = data.data.map((surat: any) => {
@@ -31,10 +31,10 @@ export const getStaticProps = async (context: any) => {
   try {
     const number = context.params.number;
     const response = await fetch(
-      `https://api.quran.sutanlab.id/surah/${number}`
+      `https://quran-endpoint.vercel.app/quran/${number}?imamId=7`
     );
     const data = await response.json();
-
+    console.log(data);
     return {
       props: {
         surat: data.data,
@@ -45,7 +45,7 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const Surah = ({ surat }: suratProps) => {
+const Surah = ({ surat }: any) => {
   const [audio, setAudio] = useState(false);
   const [terjemahan, setTerjemahan] = useState(false);
   const [tafsir, setTafsir] = useState(false);
@@ -58,14 +58,10 @@ const Surah = ({ surat }: suratProps) => {
     <Layout title={`Baca Al-Qur'an`}>
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center">
-          {/* -> TODO: Ngefix ini, dunno kenapa bisa undefined.... */}
-
-          {/*<h1 className="font-bold text-3xl">
-            {surat.name.transliteration.id}
-          </h1>
+          <h1 className="font-bold text-3xl">{surat.asma.id.short}</h1>
           <p className="font-medium tracking-wider">
-            {surat.name.translation.id}. Surat ke-{surat.number}
-          </p>*/}
+            {surat.asma.translation.id}. Surat ke-{surat.number}
+          </p>
         </div>
         <div className="flex gap-2 mt-1">
           <button className="flex gap-1 items-center" onClick={audioClick}>

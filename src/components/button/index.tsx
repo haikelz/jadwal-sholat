@@ -1,4 +1,4 @@
-import { suratProps } from "src/types";
+import { suratProps } from "src/props";
 import Sebelumnya from "./sebelumnya";
 import Selanjutnya from "./selanjutnya";
 

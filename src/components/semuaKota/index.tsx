@@ -1,4 +1,4 @@
-import { kotaProps } from "src/types";
+import { kotaProps } from "src/props";
 import Link from "next/link";
 
 const SemuaKota = ({ kota }: kotaProps) => {
@@ -11,7 +11,7 @@ const SemuaKota = ({ kota }: kotaProps) => {
           }`}
           key={index + 1}
         >
-          <div className="cursor-pointer hover:bg-teal-500 duration-300 transition-all rounded-md overflow-hidden bg-teal-400 py-6 px-10 border-[2.5px] border-black flex justify-center items-center">
+          <div className="cursor-pointer hover:bg-teal-500 hover:shadow-cards border-2 border-black duration-200 transition-all overflow-hidden bg-teal-400 py-6 px-10 flex justify-center items-center">
             <a className="font-semibold text-xl">{loc.lokasi}</a>
           </div>
         </Link>

@@ -1,4 +1,4 @@
-import { waktuProps } from "src/types";
+import { waktuProps } from "src/props";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import TableJadwal from "src/components/tableJadwal";

@@ -1,4 +1,4 @@
-import { kotaProps } from "src/types";
+import { kotaProps } from "src/props";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import SemuaKota from "src/components/semuaKota";

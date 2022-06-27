@@ -1,4 +1,4 @@
-import { listSurahProps } from "src/types";
+import { listSurahProps } from "src/props";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import ListSurah from "src/components/listSurah";
@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch(`https://api-quran-haikelz.vercel.app/surah`);
+    const response = await fetch(`https://quran-endpoint.vercel.app/quran`);
     const data = await response.json();
 
     return {

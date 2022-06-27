@@ -26,30 +26,16 @@ export interface waktuProps {
 export interface suratProps {
     surat: {
         number: number;
-        name: {
-            short: string;
-            transliteration: {
-                id: string;
-            };
-            translation: {
-                id: string;
-            };
-        };
-        tafsir: {
-            id: string;
-        };
-        text: string;
-        verses: [
-            text: {
-                arab: string;
-                transliteration: string;
-            },
-            tafsir: {
-                id: {
-                    long: string;
-                }
+        name: string;
+        translation: string;
+        bismillah: {
+            arab: string;
+            translation: string;
+            audio: {
+                alafasy: string;
             }
-        ];
+        }
+        description: string;
     };
 
     audio?: boolean;

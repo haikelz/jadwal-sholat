@@ -5,11 +5,11 @@ const ListSurah = ({ surah }: any) => {
     <div className="grid lg:grid-cols-4 grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
       {surah.map((surat: any, index: number) => (
         <Link href={`/quran/surah/${surat.number}`} key={index + 1}>
-          <div className="flex flex-col text-left hover:scale-110 duration-300 cursor-pointer transition-all rounded-md p-4 bg-teal-300">
+          <div className="flex flex-col text-left hover:shadow-cards border-2 border-black duration-200 cursor-pointer transition-all p-4 bg-teal-300">
             <h1 className="font-bold text-xl">{surat.number}</h1>
-            <p className="font-bold text-lg">{surat.name.transliteration.id}</p>
-            <p className="font-medium">{surat.name.translation.id}</p>
-            <p>Jumlah: {surat.numberOfVerses} ayat</p>
+            <p className="font-bold text-lg">{surat.asma.id.short}</p>
+            <p className="font-medium">{surat.asma.translation.id}</p>
+            <p>Jumlah: {surat.ayahCount} ayat</p>
           </div>
         </Link>
       ))}
