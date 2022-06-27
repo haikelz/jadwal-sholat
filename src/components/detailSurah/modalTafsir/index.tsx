@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { GrClose } from "react-icons/gr";
-import { suratProps } from "src/types";
+import { suratProps } from "src/props";
 
-const ModalTafsir = ({ surat, tafsir }: suratProps) => {
+/*const ModalTafsir = ({ surat, tafsir }: suratProps) => {
   const [close, setClose] = useState(false);
 
   const closeClick = () => setClose(!close);
@@ -62,3 +62,4 @@ const ModalTafsir = ({ surat, tafsir }: suratProps) => {
 };
 
 export default ModalTafsir;
+*/
