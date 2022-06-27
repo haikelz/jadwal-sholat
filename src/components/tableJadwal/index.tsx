@@ -1,4 +1,4 @@
-import { waktuProps } from "src/types";
+import { waktuProps } from "src/props";
 
 const TableJadwal = ({ waktu, tanggal, bulan, tahun }: waktuProps) => {
   /* 

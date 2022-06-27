@@ -1,4 +1,4 @@
-import { childrenProps } from "src/types";
+import { childrenProps } from "src/props";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import BottomNav from "./bottomNav";
