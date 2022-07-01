@@ -1,6 +1,6 @@
 # Jadwal Sholat
 
-Yep, as the name of this repo. This is a website to get Pray schedule. Made with **NextJS** and **TailwindCSS**. 
+Yep, as the name of this repo. This is a website to get Pray schedule. Made with **NextJS** and **TailwindCSS**.
 
 Still WIP!!
 
@@ -8,6 +8,7 @@ Still WIP!!
 
 1. Buat list kegiatan(TODO List)
 2. Bagusin tampilan
+3. Ngurusin dark mode
 
 # Preview
 
