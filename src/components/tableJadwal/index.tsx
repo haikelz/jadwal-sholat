@@ -29,7 +29,7 @@ const TableJadwal = ({ waktu, tanggal, bulan, tahun }: waktuProps) => {
         </tr>
       </thead>
       <tbody>
-        {waktu.jadwal.map((waktu: any, index: number) => (
+        {waktu.jadwal.map((waktu, index: number) => (
           <tr
             className={`border-b-black border-b-2 ${
               waktu.date == formatDate

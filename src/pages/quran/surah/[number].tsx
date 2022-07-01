@@ -1,11 +1,11 @@
 import { suratProps } from "src/props";
 import { memo, useState } from "react";
-import { HiOutlineVolumeUp } from "react-icons/hi";
 import { IoLanguageSharp } from "react-icons/io5";
-import { GrInfo } from "react-icons/gr";
+import { MdInsertComment, MdVolumeUp } from "react-icons/md";
 import DetailSurah from "src/components/detailSurah";
 import Layout from "src/components/layout";
 import Button from "src/components/button";
+import ModalTafsir from "src/components/detailSurah/modalTafsir";
 
 export const getStaticPaths = async () => {
   try {
@@ -34,7 +34,7 @@ export const getStaticProps = async (context: any) => {
       `https://quran-endpoint.vercel.app/quran/${number}?imamId=7`
     );
     const data = await response.json();
-    console.log(data);
+
     return {
       props: {
         surat: data.data,
@@ -45,7 +45,7 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-const Surah = ({ surat }: any) => {
+const Surah = ({ surat }: suratProps) => {
   const [audio, setAudio] = useState(false);
   const [terjemahan, setTerjemahan] = useState(false);
   const [tafsir, setTafsir] = useState(false);
@@ -65,7 +65,7 @@ const Surah = ({ surat }: any) => {
         </div>
         <div className="flex gap-2 mt-1">
           <button className="flex gap-1 items-center" onClick={audioClick}>
-            <HiOutlineVolumeUp size="20px" />
+            <MdVolumeUp size="20px" />
             <p className="font-bold text-lg">Audio</p>
           </button>
           <button className="flex gap-1 items-center" onClick={terjemahanClick}>
@@ -73,16 +73,17 @@ const Surah = ({ surat }: any) => {
             <p className="font-bold text-lg">Latin</p>
           </button>
           <button className="flex gap-1 items-center" onClick={tafsirClick}>
-            <GrInfo size="20px" />
+            <MdInsertComment size="20px" />
             <p className="font-bold text-lg">Tafsir</p>
           </button>
         </div>
         {!tafsir ? (
           ""
         ) : (
-          <div className="my-4">
+          /*<div className="my-4">
             <p className="font-medium leading-relaxed">{surat.tafsir.id}</p>
-          </div>
+          </div>*/
+          <ModalTafsir surat={surat} tafsir={tafsir} />
         )}
       </div>
       <Button surat={surat} />

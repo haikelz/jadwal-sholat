@@ -1,9 +1,9 @@
 import { suratProps } from "src/props";
 
-const DetailSurah = ({ surat, audio, terjemahan }: any) => {
+const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
   return (
     <div className="grid grid-cols-1 mt-6 gap-2 w-full text-end grid-rows-1">
-      {surat.ayahs.map((ayat: any, index: number) => (
+      {surat.ayahs.map((ayat, index: number) => (
         <div
           className="p-4 border-b-2 border-teal-300 flex flex-col mb-4 justify-end items-end"
           key={index + 1}
@@ -34,7 +34,7 @@ const DetailSurah = ({ surat, audio, terjemahan }: any) => {
             {!terjemahan ? (
               ""
             ) : (
-              <p className="italic mt-1 text-left text-teal-700">
+              <p className="italic mt-1 text-left text-teal-700 dark:text-teal-300">
                 {ayat.text.read}
               </p>
             )}

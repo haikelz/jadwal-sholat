@@ -6,7 +6,12 @@ export interface childrenProps {
 }
 
 export interface kotaProps {
-    kota: [id: string, lokasi: string];
+    kota: [
+        loc: {
+            id: string; 
+            lokasi: string; 
+        } 
+    ];
 }
 
 export interface waktuProps {
@@ -15,8 +20,21 @@ export interface waktuProps {
         lokasi: string;
         date: string;
         daerah: string;
-        jadwal: any;
-    };
+        jadwal: [
+            waktu: {
+                date: string;
+                tanggal: string;
+                imsak: string; 
+                subuh: string;
+                terbit: string;
+                dhuha: string; 
+                dzuhur: string; 
+                ashar: string; 
+                maghrib: string;
+                isya: string; 
+            } 
+        ]
+    }; 
 
     tanggal: string;
     bulan: string;
@@ -35,7 +53,38 @@ export interface suratProps {
                 alafasy: string;
             }
         }
+        asma: {
+            translation: {
+                id: string;
+            }
+            id: {
+                short: string;
+            }
+        }
         description: string;
+        tafsir: {
+            id: string;
+        }
+        ayahs: [
+            ayat: {
+                number: {
+                    insurah: number; 
+                }
+
+                text: {
+                    ar: string;
+                    read: string; 
+                }
+
+                audio: {
+                    url: string; 
+                }
+
+                translation: {
+                    id: string; 
+                }
+            }
+        ]
     };
 
     audio?: boolean;
@@ -45,12 +94,22 @@ export interface suratProps {
 }
 
 export interface listSurahProps {
-    surah: {
-        number: string;
-        translation: {
-            id: string;
-        };
-    };
+    surah: [
+        surat: {
+            number: string;
+            asma: {
+                id: {
+                    short: string; 
+                }
+
+                translation: {
+                    id: string; 
+                }
+            }
+
+            ayahCount: string; 
+        }
+    ]
 }
 
 export type judulProps = PropsWithChildren<{
@@ -60,4 +119,4 @@ export type judulProps = PropsWithChildren<{
 export interface IKegiatan {
     namaKegiatan: string;
     deadline: string;
-}
+} 
