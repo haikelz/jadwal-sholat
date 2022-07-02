@@ -21,28 +21,29 @@ const BottomNav = () => {
   if (!mounted) {
     return null;
   }
+
   return (
-    <div className="fixed pt-3 py-1 gap-4 bg-teal-600 text-white w-full bottom-0 grid grid-cols-4 grid-rows-1">
+    <div className="fixed pt-3 py-1 gap-4 bg-teal-600 dark:bg-gray-800 dark:border-t-[1px] dark:border-gray-600 text-white w-full bottom-0 grid grid-cols-4 grid-rows-1">
       <Link href="/">
-        <div className="flex cursor-pointer flex-col px-4 justify-center items-center">
+        <div className="flex cursor-pointer flex-col px-4 text-white dark:text-gray-400 dark:hover:text-white justify-center items-center">
           <MdHomeFilled size="20px" />
           <p className="text-sm font-semibold">Home</p>
         </div>
       </Link>
       <Link href="/jadwal-sholat">
-        <div className="flex cursor-pointer flex-col px-2 justify-center items-center">
+        <div className="flex cursor-pointer dark:text-gray-400 text-white dark:hover:text-white flex-col px-2 justify-center items-center">
           <MdOutlineAccessTime size="20px" />
           <p className="text-sm font-semibold">Sholat</p>
         </div>
       </Link>
       <Link href="/quran">
-        <div className="flex cursor-pointer flex-col px-4 justify-center items-center">
+        <div className="flex cursor-pointer flex-col px-4 text-white dark:text-gray-400 dark:hover:text-white justify-center items-center">
           <MdBook size="20px" />
-          <p className="text-sm font-semibold">Al-Qur&#39;an</p>
+          <p className="text-sm font-semibold">Qur&#39;an</p>
         </div>
       </Link>
       <button
-        className="flex cursor-pointer flex-col px-4 justify-center items-center"
+        className="flex cursor-pointer flex-col px-4 text-white dark:text-gray-400 dark:hover:text-white justify-center items-center"
         onClick={changeTheme}
       >
         {theme === "light" ? (

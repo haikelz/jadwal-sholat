@@ -47,38 +47,38 @@ const TableJadwal = ({ waktu, tanggal, bulan, tahun }: waktuProps) => {
       <tbody>
         {waktu.jadwal.map((waktu, index: number) => (
           <tr
-            className={`border-b-black border-b-2 ${
+            className={`border-black dark:border-white border-b-2 ${
               waktu.date == formatDate
                 ? "bg-teal-600 text-white font-bold"
-                : "odd:bg-teal-300"
+                : "dark:odd:bg-[#2A2A37] odd:bg-teal-300"
             }`}
             key={index + 1}
           >
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-r-white px-4 text-xl">
               {waktu.tanggal}
             </td>
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-r-white px-4 text-xl">
               {waktu.imsak}
             </td>
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-white px-4 text-xl">
               {waktu.subuh}
             </td>
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-white px-4 text-xl">
               {waktu.terbit}
             </td>
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-white px-4 text-xl">
               {waktu.dhuha}
             </td>
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-white px-4 text-xl">
               {waktu.dzuhur}
             </td>
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-white px-4 text-xl">
               {waktu.ashar}
             </td>
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-white px-4 text-xl">
               {waktu.maghrib}
             </td>
-            <td className="border-r-2 font-medium border-r-black dark:border-r-white px-4 text-xl">
+            <td className="border-r-2 font-medium border-black dark:border-white px-4 text-xl">
               {waktu.isya}
             </td>
           </tr>
