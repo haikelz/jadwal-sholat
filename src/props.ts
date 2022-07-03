@@ -1,5 +1,9 @@
 import { ReactNode, PropsWithChildren } from "react";
 
+export type judulProps = PropsWithChildren<{
+    child?: ReactNode[] | JSX.Element;
+}>
+
 export interface childrenProps {
     children: ReactNode[] | JSX.Element;
     title?: string;
@@ -8,9 +12,9 @@ export interface childrenProps {
 export interface kotaProps {
     kota: [
         loc: {
-            id: string; 
-            lokasi: string; 
-        } 
+            id: string;
+            lokasi: string;
+        }
     ];
 }
 
@@ -24,17 +28,17 @@ export interface waktuProps {
             waktu: {
                 date: string;
                 tanggal: string;
-                imsak: string; 
+                imsak: string;
                 subuh: string;
                 terbit: string;
-                dhuha: string; 
-                dzuhur: string; 
-                ashar: string; 
+                dhuha: string;
+                dzuhur: string;
+                ashar: string;
                 maghrib: string;
-                isya: string; 
-            } 
+                isya: string;
+            }
         ]
-    }; 
+    };
 
     tanggal: string;
     bulan: string;
@@ -68,20 +72,20 @@ export interface suratProps {
         ayahs: [
             ayat: {
                 number: {
-                    insurah: number; 
+                    insurah: number;
                 }
 
                 text: {
                     ar: string;
-                    read: string; 
+                    read: string;
                 }
 
                 audio: {
-                    url: string; 
+                    url: string;
                 }
 
                 translation: {
-                    id: string; 
+                    id: string;
                 }
             }
         ]
@@ -99,22 +103,18 @@ export interface listSurahProps {
             number: string;
             asma: {
                 id: {
-                    short: string; 
+                    short: string;
                 }
 
                 translation: {
-                    id: string; 
+                    id: string;
                 }
             }
 
-            ayahCount: string; 
+            ayahCount: string;
         }
     ]
 }
-
-export type judulProps = PropsWithChildren<{
-    child?: ReactNode[] | JSX.Element;
-}>
 
 export interface IKegiatan {
     namaKegiatan: string;

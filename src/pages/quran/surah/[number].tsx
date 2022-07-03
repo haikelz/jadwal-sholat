@@ -77,14 +77,7 @@ const Surah = ({ surat }: suratProps) => {
             <p className="font-bold text-lg">Tafsir</p>
           </button>
         </div>
-        {!tafsir ? (
-          ""
-        ) : (
-          /*<div className="my-4">
-            <p className="font-medium leading-relaxed">{surat.tafsir.id}</p>
-          </div>*/
-          <ModalTafsir surat={surat} tafsir={tafsir} />
-        )}
+        {!tafsir ? "" : <ModalTafsir surat={surat} tafsir={tafsir} />}
       </div>
       <Button surat={surat} />
       <DetailSurah

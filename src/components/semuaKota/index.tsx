@@ -11,7 +11,7 @@ const SemuaKota = ({ kota }: kotaProps) => {
           }`}
           key={index + 1}
         >
-          <div className="cursor-pointer hover:shadow-cards border-2 dark:bg-[#2A2A37] dark:hover:shadow-dark dark:border-white border-black duration-200 transition-all overflow-hidden bg-teal-300 py-6 px-10 flex justify-center items-center">
+          <div className="cursor-pointer  border-2 dark:bg-[#2A2A37] dark:border-white border-black overflow-hidden bg-teal-300 py-6 px-10 flex justify-center items-center">
             <a className="font-semibold text-xl">{loc.lokasi}</a>
           </div>
         </Link>

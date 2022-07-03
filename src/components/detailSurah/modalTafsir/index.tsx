@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GrClose } from "react-icons/gr";
+import { MdClose } from "react-icons/md";
 import { suratProps } from "src/props";
 
 const ModalTafsir = ({ surat }: suratProps) => {
@@ -18,16 +19,16 @@ const ModalTafsir = ({ surat }: suratProps) => {
           className=" overflow-y-auto flex justify-center text-black items-center backdrop-blur-[3px] overflow-x-hidden top-0 fixed z-50 w-full md:inset-0  md:h-full"
         >
           <div className="relative p-4 w-full max-w-2xl h-full md:h-auto">
-            <div className="relative bg-white rounded-lg shadow">
+            <div className="relative bg-white dark:bg-gray-800 dark:text-white rounded-lg shadow">
               <div className="flex justify-between items-start p-4 rounded-t border-b">
                 <h3 className="text-xl font-semibold">Tafsir</h3>
                 <button
                   type="button"
-                  className="text-gray-400 bg-transparent hover:bg-gray-200  rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
+                  className="text-gray-400 dark:text-white dark:hover:text-black bg-transparent hover:bg-gray-200  rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
                   data-modal-toggle="defaultModal"
                   onClick={closeClick}
                 >
-                  <GrClose />
+                  <MdClose />
                 </button>
               </div>
               <div className="p-6 space-y-6">
