@@ -3,11 +3,6 @@ import { memo } from "react";
 import Layout from "src/components/layout";
 import TableJadwal from "src/components/tableJadwal";
 
-/* 
-- Sengaja didefinisiin di global, karena bakal dipake lebih dari sekali
-- Oh ya kenapa tanggalnya saya tambah 12? Karena hasil tanggalnya itu sebenarnya 3, jadi untuk menyesuaikan, saya tambah jadi: 
-  3 + 12 = 15(tanggal hari ini)
-*/
 let date = new Date();
 
 let tahun = date.toLocaleDateString("fr-ca", {
@@ -73,7 +68,6 @@ const KotaId = ({ waktu }: waktuProps) => {
           PROVINSI {waktu.daerah}, {`${tahun}-${bulan}-${tanggal}`}
         </p>
       </div>
-
       <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
         <TableJadwal
           tanggal={tanggal}

@@ -17,4 +17,5 @@ audio {
   filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
   width: 300px;
   height: 25px;
+  @apply dark:fill-neutral-300;
 }

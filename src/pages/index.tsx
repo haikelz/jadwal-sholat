@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import Footer from "src/components/footer";
 import Time from "src/components/time";
+import Layout from "src/components/layout";
 
 const Home = () => {
   const buttonClassName = `bg-teal-600 hover:bg-teal-700 duration-300 transition-all text-white font-bold text-md md:text-xl px-3 py-2 md:px-4 md:py-3 rounded-md`;
@@ -10,11 +11,8 @@ const Home = () => {
   const hours = date.getHours();
 
   return (
-    <>
-      <Head>
-        <title>Info Jadwal Sholat dan Baca Al-Qur&#39;an</title>
-      </Head>
-      <div className="flex flex-col text-center h-screen px-4 justify-center items-center gap-3">
+    <Layout title="Info Jadwal Sholat dan Baca Al-Qur&#39;an">
+      <div className="flex flex-col text-center h-screen justify-center items-center gap-3">
         {/* Sedikit catatan 
            -> buat nampilin waktu pagi, siang, sore, dan malam
                 jika hours >= 12 dan hours < 15, maka yang ditampilkan siang
@@ -38,17 +36,8 @@ const Home = () => {
           </p>
           <Time />
         </div>
-        <div className="flex gap-4">
-          <Link href="/jadwal-sholat">
-            <button className={buttonClassName}>Jadwal Sholat</button>
-          </Link>
-          <Link href="/quran">
-            <button className={buttonClassName}>Baca Al-Qur&#39;an</button>
-          </Link>
-        </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 
