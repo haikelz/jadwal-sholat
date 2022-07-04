@@ -10,7 +10,7 @@
 }
 
 body {
-  @apply dark:bg-[#1F1F28];
+  @apply dark:bg-gray-900;
 }
 
 audio {

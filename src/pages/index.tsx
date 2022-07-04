@@ -1,12 +1,8 @@
 import { memo } from "react";
-import Link from "next/link";
-import Head from "next/head";
-import Footer from "src/components/footer";
 import Time from "src/components/time";
 import Layout from "src/components/layout";
 
 const Home = () => {
-  const buttonClassName = `bg-teal-600 hover:bg-teal-700 duration-300 transition-all text-white font-bold text-md md:text-xl px-3 py-2 md:px-4 md:py-3 rounded-md`;
   const date = new Date();
   const hours = date.getHours();
 

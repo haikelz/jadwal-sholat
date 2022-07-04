@@ -49,8 +49,8 @@ const TableJadwal = ({ waktu, tanggal, bulan, tahun }: waktuProps) => {
           <tr
             className={`border-black dark:border-white border-b-2 ${
               waktu.date == formatDate
-                ? "bg-teal-600 text-white font-bold"
-                : "dark:odd:bg-[#2A2A37] odd:bg-teal-300"
+                ? "dark:bg-teal-700 bg-teal-600 text-white font-bold"
+                : "dark:odd:bg-gray-700 odd:bg-teal-300"
             }`}
             key={index + 1}
           >
