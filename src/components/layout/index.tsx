@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Head from "next/head";
 import BottomNav from "./bottomNav";
 import Loading from "../loading";
-import Footer from "../footer";
 
 const Layout = ({ children, title }: childrenProps) => {
   const [loading, setLoading] = useState(false);
