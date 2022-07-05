@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Jadwalku",
-    "short_name": "jadwalku",
+    "name": "Jadwal Sholat",
+    "short_name": "jadwal-sholat",
     "description": "Website info jadwal sholat dan baca Al-Qur'an",
     "icons": [
         {
