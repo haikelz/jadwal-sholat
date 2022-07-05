@@ -8,7 +8,7 @@ const Time = () => {
   }, []);
 
   return (
-    <div className="flex text-lg gap-1 font-bold">
+    <div className="flex text-xl gap-1 font-bold">
       <p>
         {date.toLocaleDateString("en-GB", {
           day: "numeric",

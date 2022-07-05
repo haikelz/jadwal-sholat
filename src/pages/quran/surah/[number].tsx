@@ -1,7 +1,10 @@
 import { suratProps } from "src/props";
 import { memo, useState } from "react";
-import { IoLanguageSharp } from "react-icons/io5";
-import { MdInsertComment, MdVolumeUp } from "react-icons/md";
+import {
+  MdInsertComment,
+  MdVolumeUp,
+  MdOutlineTranslate,
+} from "react-icons/md";
 import DetailSurah from "src/components/detailSurah";
 import Layout from "src/components/layout";
 import Button from "src/components/button";
@@ -63,13 +66,13 @@ const Surah = ({ surat }: suratProps) => {
             {surat.asma.translation.id}. Surat ke-{surat.number}
           </p>
         </div>
-        <div className="flex gap-2 mt-1">
+        <div className="flex gap-4 mt-1">
           <button className="flex gap-1 items-center" onClick={audioClick}>
             <MdVolumeUp size="20px" />
             <p className="font-bold text-lg">Audio</p>
           </button>
           <button className="flex gap-1 items-center" onClick={terjemahanClick}>
-            <IoLanguageSharp size="20px" />
+            <MdOutlineTranslate size="20px" />
             <p className="font-bold text-lg">Latin</p>
           </button>
           <button className="flex gap-1 items-center" onClick={tafsirClick}>
@@ -77,7 +80,15 @@ const Surah = ({ surat }: suratProps) => {
             <p className="font-bold text-lg">Tafsir</p>
           </button>
         </div>
-        {!tafsir ? "" : <ModalTafsir surat={surat} tafsir={tafsir} />}
+        {!tafsir ? (
+          ""
+        ) : (
+          <ModalTafsir
+            surat={surat}
+            tafsirClick={tafsirClick}
+            tafsir={tafsir}
+          />
+        )}
       </div>
       <Button surat={surat} />
       <DetailSurah
