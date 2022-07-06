@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import BottomNav from "./bottomNav";
-import Loading from "../loading";
 
 const Layout = ({ children, title }: childrenProps) => {
   const [loading, setLoading] = useState(false);
@@ -23,7 +22,7 @@ const Layout = ({ children, title }: childrenProps) => {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
         >
-          {!loading ? <Loading /> : children}
+          {children}
         </motion.main>
         <BottomNav />
       </section>

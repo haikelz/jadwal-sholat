@@ -1,5 +1,5 @@
 import { kotaProps } from "src/props";
-import { useState } from "react";
+import { memo, useState } from "react";
 import Link from "next/link";
 import SearchFilter from "../searchFilter";
 
@@ -37,4 +37,4 @@ const SemuaKota = ({ kota }: kotaProps) => {
   );
 };
 
-export default SemuaKota;
+export default memo(SemuaKota);
