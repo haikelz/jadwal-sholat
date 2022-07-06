@@ -2,10 +2,16 @@ import { useEffect, useState } from "react";
 
 const Time = () => {
   const [date, setDate] = useState(new Date());
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setInterval(() => setDate(new Date()), 1000);
+    setMounted(true);
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="flex text-xl gap-1 font-bold">
