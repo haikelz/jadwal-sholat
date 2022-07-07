@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { MdOutlinePlayArrow } from "react-icons/md";
+import { suratProps } from "src/props";
+import Link from "next/link";
 
-const Selanjutnya = ({ surat }: any) => {
+const Selanjutnya = ({ surat }: suratProps) => {
   return (
     <Link href={`/quran/surah/${surat.number + 1}`}>
       {surat.number < 114 ? (

@@ -1,7 +1,6 @@
 import { listSurahProps } from "src/props";
 import { memo, useState } from "react";
 import Link from "next/link";
-import SearchSurahFilter from "../searchFilter";
 import SearchFilter from "../searchFilter";
 
 const ListSurah = ({ surah }: listSurahProps) => {
