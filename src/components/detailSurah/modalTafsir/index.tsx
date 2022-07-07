@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { MdClose } from "react-icons/md";
 import { suratProps } from "src/props";
 

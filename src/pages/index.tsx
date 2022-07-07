@@ -32,12 +32,12 @@ const Home = () => {
           <div className="mt-3 flex flex-col justify-center items-center text-center">
             <h1 className="sm:text-4xl text-3xl font-bold">{`Selamat ${
               hours >= 12 && hours < 15
-                ? "siang"
+                ? "Siang"
                 : hours >= 15 && hours < 18
-                ? "sore"
+                ? "Sore"
                 : hours >= 18 && hours < 24
-                ? "malam"
-                : "pagi"
+                ? "Malam"
+                : "Pagi"
             }`}</h1>
             <p className="text-lg md:text-xl font-medium">
               &#34;Demi masa, sesungguhnya manusia itu benar-benar berada dalam

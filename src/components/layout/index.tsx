@@ -1,15 +1,9 @@
 import { childrenProps } from "src/props";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import BottomNav from "./bottomNav";
 
 const Layout = ({ children, title }: childrenProps) => {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-  }, []);
   return (
     <>
       <Head>
