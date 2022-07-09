@@ -1,5 +1,7 @@
 import { contextProps, suratProps } from "src/props";
-import { memo, useState } from "react";
+import { memo } from "react";
+import { useAtom } from "jotai";
+import { audioAtom, tafsirAtom, terjemahanAtom } from "src/store";
 import {
   MdInsertComment,
   MdVolumeUp,
@@ -49,9 +51,9 @@ export const getStaticProps = async (context: contextProps) => {
 };
 
 const Surah = ({ surat }: suratProps) => {
-  const [audio, setAudio] = useState(false);
-  const [terjemahan, setTerjemahan] = useState(false);
-  const [tafsir, setTafsir] = useState(false);
+  const [audio, setAudio] = useAtom(audioAtom);
+  const [terjemahan, setTerjemahan] = useAtom(terjemahanAtom);
+  const [tafsir, setTafsir] = useAtom(tafsirAtom);
 
   const audioClick = () => setAudio(!audio);
   const terjemahanClick = () => setTerjemahan(!terjemahan);
