@@ -1,4 +1,6 @@
-const SearchFilter = ({ setSearchTerm }: any) => {
+import { searchFilterProps } from "src/props";
+
+const SearchFilter = ({ setSearchTerm }: searchFilterProps) => {
   return (
     <input
       className="font-semibold px-3 py-1 rounded-md bg-gray-50 dark:bg-gray-700 border-2 focus:border-4 border-blue-500"

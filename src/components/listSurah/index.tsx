@@ -24,7 +24,7 @@ const ListSurah = ({ surah }: listSurahProps) => {
           })
           .map((surat, index: number) => (
             <Link href={`/quran/surah/${surat.number}`} key={index + 1}>
-              <div className="flex flex-col text-left border-2 border-black cursor-pointer p-4 bg-teal-300 dark:bg-[#2A2A37] dark:border-white">
+              <div className="flex flex-col text-left border-2 border-black cursor-pointer p-4 rounded-sm bg-teal-300 dark:bg-[#2A2A37] dark:border-white">
                 <h1 className="font-bold text-xl">{surat.number}</h1>
                 <p className="font-bold text-lg">{surat.asma.id.short}</p>
                 <p className="font-medium">{surat.asma.translation.id}</p>

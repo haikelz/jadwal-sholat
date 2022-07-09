@@ -28,7 +28,12 @@ const Home = () => {
                 - jika hours >= 18 dan hours < 0, maka yang ditampilkan malam
                 - setelah itu atau selain itu, akan menampilkan pagi
         */}
-          <Image src="/img/home.png" width="100px" height="100px" />
+          <Image
+            src="/img/home.png"
+            width="100px"
+            height="100px"
+            alt="Home Page"
+          />
           <div className="mt-3 flex flex-col justify-center items-center text-center">
             <h1 className="sm:text-4xl text-3xl font-bold">{`Selamat ${
               hours >= 12 && hours < 15

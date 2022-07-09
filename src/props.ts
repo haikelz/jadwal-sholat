@@ -9,6 +9,10 @@ export interface childrenProps {
     title?: string;
 }
 
+export interface searchFilterProps {
+    setSearchTerm: (value: string) => void;
+}
+
 export interface kotaProps {
     kota: [
         loc: {
