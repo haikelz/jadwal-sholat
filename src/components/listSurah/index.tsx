@@ -1,12 +1,10 @@
 import { listSurahProps } from "src/props";
-import { memo } from "react";
-import { useAtom } from "jotai";
-import { searchSurahAtom } from "src/store";
+import { memo, useState } from "react";
 import Link from "next/link";
 import SearchFilter from "../searchFilter";
 
 const ListSurah = ({ surah }: listSurahProps) => {
-  const [searchTerm, setSearchTerm] = useAtom(searchSurahAtom);
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <>

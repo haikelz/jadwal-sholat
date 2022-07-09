@@ -1,12 +1,10 @@
 import { kotaProps } from "src/props";
-import { memo } from "react";
-import { useAtom } from "jotai";
-import { searchKotaAtom } from "src/store";
+import { memo, useState } from "react";
 import Link from "next/link";
 import SearchFilter from "../searchFilter";
 
 const SemuaKota = ({ kota }: kotaProps) => {
-  const [searchTerm, setSearchTerm] = useAtom(searchKotaAtom);
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <>
