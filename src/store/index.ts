@@ -4,5 +4,6 @@ export const audioAtom = atom(false);
 export const terjemahanAtom = atom(false);
 export const tafsirAtom = atom(false);
 export const mountedAtom = atom(false);
-export const searchAtom = atom("");
+export const searchSurahAtom = atom("");
+export const searchKotaAtom = atom("");
 export const dateAtom = atom(new Date()); 
