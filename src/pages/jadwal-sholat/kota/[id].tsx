@@ -1,4 +1,4 @@
-import { waktuProps } from "src/props";
+import { contextProps, waktuProps, pathsProps } from "src/props";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import TableJadwal from "src/components/tableJadwal";
@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
     );
     const data = await response.json();
 
-    const paths = data.map((waktu: any) => {
+    const paths = data.map((waktu: pathsProps) => {
       return {
         params: { id: waktu.id == "3212" ? (waktu.id = "3211") : waktu.id },
       };
@@ -39,7 +39,7 @@ export const getStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async (context: any) => {
+export const getStaticProps = async (context: contextProps) => {
   try {
     let formatDate = `${tahun}/${bulan}`;
 

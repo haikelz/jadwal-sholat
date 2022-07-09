@@ -101,6 +101,17 @@ export interface suratProps {
     tafsirClick?: any;
 }
 
+export interface contextProps {
+    params: {
+        number?: string;
+        id?: string;
+    }
+}
+
+export interface pathsProps {
+    id?: string;
+}
+
 export interface listSurahProps {
     surah: [
         surat: {

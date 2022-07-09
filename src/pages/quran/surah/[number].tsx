@@ -1,4 +1,4 @@
-import { suratProps } from "src/props";
+import { contextProps, suratProps } from "src/props";
 import { memo, useState } from "react";
 import {
   MdInsertComment,
@@ -30,7 +30,7 @@ export const getStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async (context: any) => {
+export const getStaticProps = async (context: contextProps) => {
   try {
     const number = context.params.number;
     const response = await fetch(
