@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { mountedAtom } from "src/store";
-import { ThemeProvider } from "next-themes";
+
 import { useEffect } from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
@@ -16,11 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return null;
   }
 
-  return (
-    <ThemeProvider attribute="class">
-      <Component {...pageProps} />
-    </ThemeProvider>
-  );
+  return <Component {...pageProps} />;
 }
 
 export default MyApp;
