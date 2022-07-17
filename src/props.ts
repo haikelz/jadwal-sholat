@@ -43,7 +43,6 @@ export interface waktuProps {
             }
         ]
     };
-
     tanggal: string;
     bulan: string;
     tahun: string;
@@ -94,7 +93,6 @@ export interface suratProps {
             }
         ]
     };
-
     audio?: boolean;
     terjemahan?: boolean;
     tafsir?: boolean;
@@ -108,8 +106,12 @@ export interface contextProps {
     }
 }
 
-export interface pathsProps {
-    id?: string;
+export interface kotaPathsProps {
+    id: string;
+}
+
+export interface suratPathsProps {
+    number: number;
 }
 
 export interface listSurahProps {
@@ -125,13 +127,7 @@ export interface listSurahProps {
                     id: string;
                 }
             }
-
             ayahCount: string;
         }
     ]
 }
-
-export interface IKegiatan {
-    namaKegiatan: string;
-    deadline: string;
-} 

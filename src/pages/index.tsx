@@ -14,7 +14,7 @@ const Home = () => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="flex flex-col text-center h-screen justify-center items-center gap-3 px-6">
+      <div className="flex flex-col text-center min-h-screen justify-center items-center gap-3 px-6">
         <motion.div
           className="flex justify-center items-center flex-col"
           transition={{ duration: 0.5 }}

@@ -1,15 +1,11 @@
 # Jadwal Sholat
 
-Yep, as the name of this repo. This is a website to get Pray schedule and read Al-Qur'an. Made with **NextJS** and **TailwindCSS**.
+Adalah sebuah Website untuk mendapatkan jadwal sholat dan baca Al-Qur'an.
 
-Still WIP!!
+Beberapa hal yang digunakan untuk membangun Website ini:
 
-# TODO
+- NextJS
+- Tailwindcss
+- Jotai
 
-1. Buat list kegiatan(TODO List)
-2. Bagusin tampilan
-3. Ngurusin dark mode
-
-# Preview
-
-![Preview](public/preview.png)
+Jika ada yang kurang atau salah, feel free to contribute yak :)

@@ -1,4 +1,4 @@
-import { contextProps, suratProps } from "src/props";
+import { contextProps, suratPathsProps, suratProps } from "src/props";
 import { memo } from "react";
 import { useAtom } from "jotai";
 import { audioAtom, tafsirAtom, terjemahanAtom } from "src/store";
@@ -17,7 +17,7 @@ export const getStaticPaths = async () => {
     const response = await fetch(`https://quran-endpoint.vercel.app/quran`);
     const data = await response.json();
 
-    const paths = data.data.map((surat: any) => {
+    const paths = data.data.map((surat: suratPathsProps) => {
       return {
         params: { number: surat.number.toString() },
       };

@@ -6,8 +6,10 @@ import Image from "next/image";
 
 export const getStaticProps = async () => {
   try {
-    let response = await fetch(`https://api.myquran.com/v1/sholat/kota/semua`);
-    let data = await response.json();
+    const response = await fetch(
+      `https://api.myquran.com/v1/sholat/kota/semua`
+    );
+    const data = await response.json();
 
     return {
       props: {
