@@ -16,11 +16,10 @@ const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
                   : ayat.number.insurah <= 99
                   ? "px-3.5 py-2.5"
                   : "px-3 py-3"
-              } text-white font-bold border-black bg-teal-500 dark:bg-blue-500 rounded-full flex justify-center items-center`}
+              } text-white font-bold border-black bg-teal-500 dark:bg-rose-500 rounded-full flex justify-center items-center`}
             >
               <p className=" font-bold">{ayat.number.insurah}</p>
             </div>
-
             <p className="text-4xl leading-relaxed">{ayat.text.ar}</p>
           </div>
           <div className="flex flex-col w-full items-start justify-start">

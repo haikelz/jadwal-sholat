@@ -13,3 +13,7 @@ audio {
   width: 300px;
   height: 25px;
 }
+
+audio::-webkit-media-controls-panel {
+  @apply dark:bg-cyan-400;
+}
