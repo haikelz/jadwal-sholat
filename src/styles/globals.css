@@ -9,15 +9,7 @@
   outline: none;
 }
 
-body {
-  @apply dark:bg-gray-900;
-}
-
 audio {
   width: 300px;
   height: 25px;
-}
-
-audio::-webkit-media-controls-panel {
-  @apply dark:bg-gray-700;
 }
