@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <div className="dark:bg-gray-900 dark:text-white">
+    <div className="dark:bg-gray-900 min-h-screen dark:text-white">
       <Component {...pageProps} />
     </div>
   );
