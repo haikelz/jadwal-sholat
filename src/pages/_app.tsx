@@ -1,6 +1,5 @@
 import { useAtom } from "jotai";
 import { mountedAtom } from "src/store";
-
 import { useEffect } from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
@@ -16,7 +15,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     return null;
   }
 
-  return <Component {...pageProps} />;
+  return (
+    <div className="dark:bg-gray-900 dark:text-white">
+      <Component {...pageProps} />
+    </div>
+  );
 }
 
 export default MyApp;

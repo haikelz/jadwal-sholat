@@ -16,7 +16,7 @@ const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
                   : ayat.number.insurah <= 99
                   ? "px-3.5 py-2.5"
                   : "px-3 py-3"
-              } text-white font-bold border-black bg-teal-500 dark:bg-rose-500 rounded-full flex justify-center items-center`}
+              } text-white font-bold border-black bg-teal-500 dark:bg-teal-600 rounded-full flex justify-center items-center`}
             >
               <p className=" font-bold">{ayat.number.insurah}</p>
             </div>
