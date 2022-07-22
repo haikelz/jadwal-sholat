@@ -17,6 +17,7 @@ let currentDate = date.toLocaleDateString("id-ID", {
     month: "long",
     day: "numeric",
 })
+
 /* 
   Karena datenya masih berupa string, kita ubah ke number 
   biar kita bisa membandingkan dan mendapatkan jadwal hari ini

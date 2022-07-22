@@ -31,8 +31,8 @@ const PuasaSunnah = ({ puasa }: puasaProps) => {
           </h1>
           <Image
             src="/img/fasting.png"
-            width="40px"
-            height="40px"
+            width="35px"
+            height="35px"
             alt="Fasting"
           />
         </div>

@@ -1,7 +1,5 @@
 import { memo } from "react";
-import { motion } from "framer-motion";
 import Time from "src/components/time";
-import BottomNav from "src/components/layout/bottomNav";
 import Head from "next/head";
 import Image from "next/image";
 
@@ -15,12 +13,7 @@ const Home = () => {
         <title>Home</title>
       </Head>
       <div className="flex flex-col text-center min-h-screen justify-center items-center gap-3 px-6">
-        <motion.div
-          className="flex justify-center items-center flex-col"
-          transition={{ duration: 0.5 }}
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-        >
+        <div className="flex justify-center items-center flex-col">
           {/* Sedikit catatan 
            -> buat nampilin waktu pagi, siang, sore, dan malam
                 - jika hours >= 12 dan hours < 15, maka yang ditampilkan siang
@@ -50,8 +43,7 @@ const Home = () => {
             </p>
             <Time />
           </div>
-        </motion.div>
-        <BottomNav />
+        </div>
       </div>
     </>
   );

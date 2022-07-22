@@ -9,6 +9,10 @@
   outline: none;
 }
 
+:root {
+  @apply dark:bg-gray-900 min-h-screen dark:text-white;
+}
+
 audio {
   width: 300px;
   height: 25px;
