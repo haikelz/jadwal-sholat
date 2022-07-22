@@ -131,3 +131,15 @@ export interface listSurahProps {
         }
     ]
 }
+
+export interface puasaProps {
+    puasa: [
+        fasting: {
+            month: number;
+            date: string;
+            type: {
+                name: string;
+            }
+        }
+    ]
+}

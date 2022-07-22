@@ -1,18 +1,7 @@
 import { waktuProps } from "src/props";
+import { matchDate } from "src/utils/date";
 
-const TableJadwal = ({ waktu, tanggal, bulan, tahun }: waktuProps) => {
-  /* 
-  Karena datenya masih berupa string, kita ubah ke number 
-  biar kita bisa membandingkan dan mendapatkan jadwal hari ini
-  */
-  let numTahun = Number(tahun);
-  let numBulan = Number(bulan);
-  let numTanggal = Number(tanggal);
-
-  let formatDate = `${numTahun}-${
-    numBulan < 10 ? 0 + `${numBulan}` : numBulan
-  }-${numTanggal < 10 ? 0 + `${numTanggal}` : numTanggal}`;
-
+const TableJadwalSholat = ({ waktu }: waktuProps) => {
   return (
     <table className="border-2 border-black  dark:border-none table-fixed">
       <thead className="border-2 border-black dark:border-none ">
@@ -48,7 +37,7 @@ const TableJadwal = ({ waktu, tanggal, bulan, tahun }: waktuProps) => {
         {waktu.jadwal.map((waktu, index: number) => (
           <tr
             className={`border-black dark:border-none border-b-2 ${
-              waktu.date == formatDate
+              waktu.date == matchDate
                 ? "dark:bg-teal-700 bg-teal-600 text-white font-bold"
                 : "dark:odd:bg-gray-800 odd:bg-teal-300"
             }`}
@@ -88,4 +77,4 @@ const TableJadwal = ({ waktu, tanggal, bulan, tahun }: waktuProps) => {
   );
 };
 
-export default TableJadwal;
+export default TableJadwalSholat;

@@ -1,21 +1,8 @@
 import { contextProps, waktuProps, kotaPathsProps } from "src/props";
 import { memo } from "react";
+import { tanggal, tahun, bulan, currentDate } from "src/utils/date";
 import Layout from "src/components/layout";
-import TableJadwal from "src/components/tableJadwal";
-
-let date = new Date();
-
-let tahun = date.toLocaleDateString("fr-ca", {
-  year: "numeric",
-});
-
-let bulan = date.toLocaleDateString("fr-ca", {
-  month: "numeric",
-});
-
-let tanggal = date.toLocaleDateString("fr-ca", {
-  day: "numeric",
-});
+import TableJadwalSholat from "src/components/tableJadwalSholat";
 
 export const getStaticPaths = async () => {
   try {
@@ -65,11 +52,11 @@ const KotaId = ({ waktu }: waktuProps) => {
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-bold text-3xl">{waktu.lokasi}</h1>
         <p className="font-medium text-lg">
-          PROVINSI {waktu.daerah}, {`${tahun}-${bulan}-${tanggal}`}
+          PROVINSI {waktu.daerah}, {currentDate.toUpperCase()}
         </p>
       </div>
       <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
-        <TableJadwal
+        <TableJadwalSholat
           tanggal={tanggal}
           tahun={tahun}
           bulan={bulan}

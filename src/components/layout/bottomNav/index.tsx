@@ -1,5 +1,6 @@
 import {
   MdBook,
+  MdToday,
   MdDarkMode,
   MdHomeFilled,
   MdLightMode,
@@ -16,7 +17,7 @@ const BottomNav = () => {
     "flex cursor-pointer flex-col px-4 dark:hover:text-white dark:text-gray-400 text-gray-200 hover:text-white justify-center items-center";
 
   return (
-    <div className="fixed pt-3 py-1 gap-4 bg-teal-600 dark:bg-gray-800 dark:border-t-[1px] dark:border-gray-600 text-white w-full bottom-0 grid grid-cols-4 grid-rows-1">
+    <div className="fixed pt-3 py-1 gap-4 bg-teal-600 dark:bg-gray-800 dark:border-t-[1px] dark:border-gray-600 text-white w-full bottom-0 grid grid-cols-5 grid-rows-1">
       <div className="w-full flex justify-center items-center">
         <Link href="/">
           <button className={button}>
@@ -30,6 +31,14 @@ const BottomNav = () => {
           <button className={button}>
             <MdOutlineAccessTime size="20px" />
             <p className="text-sm font-semibold">Sholat</p>
+          </button>
+        </Link>
+      </div>
+      <div className="w-full flex justify-center items-center">
+        <Link href="/puasa-sunnah">
+          <button className={button}>
+            <MdToday size="20px" />
+            <p className="text-sm font-semibold">Puasa</p>
           </button>
         </Link>
       </div>

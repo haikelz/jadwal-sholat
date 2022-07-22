@@ -12,15 +12,15 @@ const Time = () => {
   return (
     <div className="flex text-xl gap-1 font-bold">
       <p>
-        {date.toLocaleDateString("en-GB", {
+        {date.toLocaleDateString("id-ID", {
           day: "numeric",
-          month: "short",
+          month: "long",
           year: "numeric",
         })}
         ,
       </p>
       <p>
-        {date.toLocaleString("en-US", {
+        {date.toLocaleString("id-ID", {
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
