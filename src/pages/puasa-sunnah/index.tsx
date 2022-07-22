@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { puasaProps } from "src/props";
 import Layout from "src/components/layout";
-import TableJadwalPuasaSunnah from "src/tableJadwalPuasaSunnah";
+import TableJadwalPuasaSunnah from "src/components/tableJadwalPuasaSunnah";
 import Image from "next/image";
 
 export const getStaticProps = async () => {
