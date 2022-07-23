@@ -23,7 +23,7 @@ export const getStaticProps = async () => {
 
 const PuasaSunnah = ({ puasa }: puasaProps) => {
   return (
-    <Layout title="Puasa sunnah bulanan">
+    <Layout title="Jadwal Puasa Sunnah">
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-center items-center gap-3">
           <h1 className="sm:text-4xl text-3xl font-bold">

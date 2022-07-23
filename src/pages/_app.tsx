@@ -2,6 +2,7 @@ import { useAtom } from "jotai";
 import { mountedAtom } from "src/store";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { appAnimation } from "src/utils/animation";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import BottomNav from "src/components/layout/bottomNav";
@@ -23,10 +24,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <motion.div
           key={router.route}
           className="min-h-screen"
-          transition={{ duration: 0.5 }}
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
+          {...appAnimation}
         >
           <Component {...pageProps} />
         </motion.div>
