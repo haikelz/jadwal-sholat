@@ -11,8 +11,8 @@ import Link from "next/link";
 
 const BottomNav = () => {
   const [theme, setTheme] = useTheme();
-  const changeTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
+  const changeTheme = () => setTheme(theme === "dark" ? "light" : "dark");
   const button =
     "flex cursor-pointer flex-col px-4 dark:hover:text-white dark:text-gray-400 text-gray-200 hover:text-white justify-center items-center";
 
