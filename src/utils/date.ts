@@ -29,4 +29,4 @@ let numTanggal = Number(tanggal);
 let matchDate = `${numTahun}-${numBulan < 10 ? 0 + `${numBulan}` : numBulan
     }-${numTanggal < 10 ? 0 + `${numTanggal}` : numTanggal}`;
 
-export { currentDate, matchDate, numBulan, numTahun, numTanggal, bulan, tahun, tanggal }
+export { currentDate, matchDate, numBulan, numTahun, numTanggal, bulan, tahun, tanggal };

@@ -2,10 +2,10 @@
 
 Adalah sebuah Website untuk mendapatkan jadwal sholat dan baca Al-Qur'an.
 
-Beberapa hal yang digunakan untuk membangun Website ini:
+Fitur:
 
-- NextJS
-- Tailwindcss
-- Jotai
+- Jadwal sholat
+- Baca Al-Qur'an(dengan audio, terjemahan, juga bahasa latin)
+- Jadwal puasa sunnah
 
 Jika ada yang kurang atau salah, feel free to contribute yak :)

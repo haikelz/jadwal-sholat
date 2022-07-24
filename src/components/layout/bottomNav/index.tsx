@@ -36,6 +36,7 @@ const BottomNav = () => {
         <Link href="/jadwal-sholat" passHref>
           <button
             className={`flex cursor-pointer flex-col px-4 justify-center items-center ${
+              router.asPath.includes("/jadwal-sholat/kota") ||
               router.asPath === "/jadwal-sholat"
                 ? "text-white"
                 : "text-gray-200 dark:text-gray-400"

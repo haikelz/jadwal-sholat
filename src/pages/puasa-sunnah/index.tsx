@@ -40,7 +40,9 @@ const PuasaSunnah = ({ puasa }: puasaProps) => {
           Berikut jadwal puasa sunnah bulan ini
         </p>
       </div>
-      <TableJadwalPuasaSunnah puasa={puasa} />
+      <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
+        <TableJadwalPuasaSunnah puasa={puasa} />
+      </div>
     </Layout>
   );
 };
