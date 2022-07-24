@@ -1,12 +1,12 @@
-import { contextProps, suratPathsProps, suratProps } from "src/props";
-import { memo } from "react";
-import { useAtom } from "jotai";
-import { audioAtom, tafsirAtom, terjemahanAtom } from "src/store";
 import {
   MdInsertComment,
   MdVolumeUp,
   MdOutlineTranslate,
 } from "react-icons/md";
+import { contextProps, suratPathsProps, suratProps } from "src/props";
+import { memo } from "react";
+import { useAtom } from "jotai";
+import { audioAtom, tafsirAtom, terjemahanAtom } from "src/store";
 import DetailSurah from "src/components/detailSurah";
 import Layout from "src/components/layout";
 import Button from "src/components/button";
@@ -14,7 +14,9 @@ import ModalTafsir from "src/components/detailSurah/modalTafsir";
 
 export const getStaticPaths = async () => {
   try {
-    const response = await fetch(`https://quran-endpoint.vercel.app/quran`);
+    const response: Response = await fetch(
+      `https://quran-endpoint.vercel.app/quran`
+    );
     const data = await response.json();
 
     const paths = data.data.map((surat: suratPathsProps) => {
@@ -34,8 +36,8 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: contextProps) => {
   try {
-    const number = context.params.number;
-    const response = await fetch(
+    const number: string | undefined = context.params.number;
+    const response: Response = await fetch(
       `https://quran-endpoint.vercel.app/quran/${number}?imamId=7`
     );
     const data = await response.json();
@@ -82,9 +84,7 @@ const Surah = ({ surat }: suratProps) => {
             <p className="font-bold text-lg">Tafsir</p>
           </button>
         </div>
-        {!tafsir ? (
-          ""
-        ) : (
+        {tafsir && (
           <ModalTafsir
             surat={surat}
             tafsirClick={tafsirClick}

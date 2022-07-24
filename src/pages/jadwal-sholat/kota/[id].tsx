@@ -6,7 +6,7 @@ import TableJadwalSholat from "src/components/tableJadwalSholat";
 
 export const getStaticPaths = async () => {
   try {
-    const response = await fetch(
+    const response: Response = await fetch(
       `https://api.myquran.com/v1/sholat/kota/semua`
     );
     const data = await response.json();
@@ -28,10 +28,10 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: contextProps) => {
   try {
-    let formatDate = `${tahun}/${bulan}`;
+    let formatDate: string = `${tahun}/${bulan}`;
 
-    const id = context.params.id;
-    const response = await fetch(
+    const id: string | undefined = context.params.id;
+    const response: Response = await fetch(
       `https://api.myquran.com/v1/sholat/jadwal/${id}/${formatDate}`
     );
     const data = await response.json();

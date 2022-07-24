@@ -16,11 +16,11 @@ const Home = () => {
         <div className="flex justify-center items-center flex-col">
           {/* Sedikit catatan 
            -> buat nampilin waktu pagi, siang, sore, dan malam
-                - jika hours >= 12 dan hours < 15, maka yang ditampilkan siang
-                - jika hours >= 15 dan hours < 18, maka yang ditampilkan sore
-                - jika hours >= 18 dan hours < 0, maka yang ditampilkan malam
-                - setelah itu atau selain itu, akan menampilkan pagi
-        */}
+              - jika hours >= 12 dan hours < 15, maka yang ditampilkan siang
+              - jika hours >= 15 dan hours < 18, maka yang ditampilkan sore
+              - jika hours >= 18 dan hours < 0, maka yang ditampilkan malam
+              - setelah itu atau selain itu, akan menampilkan pagi
+          */}
           <Image
             src="/img/home.png"
             width="100px"

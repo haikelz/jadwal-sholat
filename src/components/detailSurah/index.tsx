@@ -23,16 +23,12 @@ const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
             <p className="text-4xl leading-relaxed">{ayat.text.ar}</p>
           </div>
           <div className="flex flex-col w-full items-start justify-start">
-            {!audio ? (
-              ""
-            ) : (
+            {audio && (
               <div className="w-full mt-2.5">
                 <audio src={ayat.audio.url} controls></audio>
               </div>
             )}
-            {!terjemahan ? (
-              ""
-            ) : (
+            {terjemahan && (
               <p className="italic mt-1 text-left text-teal-700 dark:text-teal-300">
                 {ayat.text.read}
               </p>

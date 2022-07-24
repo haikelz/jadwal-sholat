@@ -4,11 +4,8 @@ import { suratProps } from "src/props";
 const ModalTafsir = ({ surat, tafsir, tafsirClick }: suratProps) => {
   return (
     <>
-      {!tafsir ? (
-        ""
-      ) : (
+      {tafsir && (
         <div
-          id="defaultModal"
           tabIndex={-1}
           aria-hidden="true"
           className="overflow-y-auto flex justify-center text-black items-center backdrop-blur-[3px] overflow-x-hidden top-0 fixed z-50 w-full md:inset-0  md:h-full"

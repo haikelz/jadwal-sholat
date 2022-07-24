@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch(
+    const response: Response = await fetch(
       "https://api.puasa-sunnah.granitebps.com/api/v1/fastings"
     );
     const data = await response.json();
