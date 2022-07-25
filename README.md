@@ -1,8 +1,8 @@
 <div align="center">
   <h1>Jadwal Sholat</h1>
+ 
+  <p>Adalah sebuah Website untuk mendapatkan jadwal sholat dan baca Al-Qur'an.</p>
 </div>
-
-Adalah sebuah Website untuk mendapatkan jadwal sholat dan baca Al-Qur'an.
 
 ## Fitur:
 
