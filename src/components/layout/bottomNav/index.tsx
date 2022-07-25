@@ -17,7 +17,7 @@ const BottomNav = () => {
   const changeTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
-    <div className="fixed pt-3 py-1 gap-4 bg-teal-600 dark:bg-gray-800 dark:border-t-[1px] dark:border-gray-600 text-white w-full bottom-0 grid grid-cols-5 grid-rows-1">
+    <div className="fixed pt-3 py-1 gap-4 bg-teal-600 dark:bg-gray-800 dark:border-t-[1px] dark:border-gray-600 text-white w-full bottom-0 grid grid-cols-4 grid-rows-1">
       <div className="w-full flex justify-center items-center">
         <Link href="/" passHref>
           <button
@@ -47,6 +47,7 @@ const BottomNav = () => {
           </button>
         </Link>
       </div>
+      {/*
       <div className="w-full flex justify-center items-center">
         <Link href="/puasa-sunnah" passHref>
           <button
@@ -61,6 +62,7 @@ const BottomNav = () => {
           </button>
         </Link>
       </div>
+      */}
       <div className="w-full flex justify-center items-center">
         <Link href="/quran" passHref>
           <button

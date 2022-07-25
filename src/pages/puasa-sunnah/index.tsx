@@ -4,6 +4,9 @@ import Layout from "src/components/layout";
 import TableJadwalPuasaSunnah from "src/components/tableJadwalPuasaSunnah";
 import Image from "next/image";
 
+/*
+> API nya lagi error, jadi saya disable dulu jadwal puasa sunnahnya
+
 export const getStaticProps = async () => {
   try {
     const response: Response = await fetch(
@@ -42,6 +45,32 @@ const PuasaSunnah = ({ puasa }: puasaProps) => {
       </div>
       <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
         <TableJadwalPuasaSunnah puasa={puasa} />
+      </div>
+    </Layout>
+  );
+};
+
+export default memo(PuasaSunnah);
+*/
+
+const PuasaSunnah = () => {
+  return (
+    <Layout title="Jadwal Puasa Sunnah">
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex justify-center items-center gap-3">
+          <h1 className="sm:text-4xl text-3xl font-bold">
+            Jadwal Puasa Sunnah
+          </h1>
+          <Image
+            src="/img/fasting.png"
+            width="35px"
+            height="35px"
+            alt="Fasting"
+          />
+        </div>
+        <p className="font-medium mt-2 text-lg">
+          Maaf yak sementara belum ada, API nya lagi Error
+        </p>
       </div>
     </Layout>
   );
