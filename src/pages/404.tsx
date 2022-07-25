@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { useEffect } from "react";
 import Image from "next/image";
 
 const ErrorPage = () => {
-  const Router = useRouter();
+  const Router: NextRouter = useRouter();
 
   useEffect(() => {
     setTimeout(() => {
