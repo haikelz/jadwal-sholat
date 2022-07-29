@@ -12,7 +12,6 @@ import Link from "next/link";
 
 const BottomNav = () => {
   const [theme, setTheme] = useTheme();
-
   const router: NextRouter = useRouter();
   const changeTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 

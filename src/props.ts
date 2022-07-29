@@ -1,19 +1,19 @@
 import { ReactNode, PropsWithChildren } from "react";
 
-export type judulProps = PropsWithChildren<{
+export type Judul = PropsWithChildren<{
     child?: ReactNode[] | JSX.Element;
 }>
 
-export interface childrenProps {
+export interface Children {
     children: ReactNode[] | JSX.Element;
     title?: string;
 }
 
-export interface searchFilterProps {
+export interface SearchFilter {
     setSearchTerm: (value: string) => void;
 }
 
-export interface kotaProps {
+export interface Kota {
     kota: [
         loc: {
             id: string;
@@ -22,7 +22,7 @@ export interface kotaProps {
     ];
 }
 
-export interface waktuProps {
+export interface Waktu {
     waktu: {
         id: string;
         lokasi: string;
@@ -48,7 +48,7 @@ export interface waktuProps {
     tahun: string;
 }
 
-export interface suratProps {
+export interface Surat {
     surat: {
         number: number;
         name: string;
@@ -99,22 +99,22 @@ export interface suratProps {
     tafsirClick?: any;
 }
 
-export interface contextProps {
+export interface Context {
     params: {
         number?: string;
         id?: string;
     }
 }
 
-export interface kotaPathsProps {
+export interface KotaPaths {
     id: string;
 }
 
-export interface suratPathsProps {
+export interface SuratPaths {
     number: number;
 }
 
-export interface listSurahProps {
+export interface DaftarSurah {
     surah: [
         surat: {
             number: string;
@@ -132,7 +132,7 @@ export interface listSurahProps {
     ]
 }
 
-export interface puasaProps {
+export interface Puasa {
     puasa: [
         fasting: {
             month: number;

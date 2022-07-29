@@ -1,8 +1,8 @@
-import { suratProps } from "src/props";
+import { Surat } from "src/props";
 import Sebelumnya from "./sebelumnya";
 import Selanjutnya from "./selanjutnya";
 
-const Button = ({ surat }: suratProps) => {
+const Button = ({ surat }: Surat) => {
   return (
     <div
       className={`flex gap-3 w-full ${

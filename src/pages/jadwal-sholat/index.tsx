@@ -1,4 +1,4 @@
-import { kotaProps } from "src/props";
+import { Kota } from "src/props";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import SemuaKota from "src/components/semuaKota";
@@ -21,7 +21,7 @@ export const getStaticProps = async () => {
   }
 };
 
-const JadwalSholat = ({ kota }: kotaProps) => {
+const JadwalSholat = ({ kota }: Kota) => {
   return (
     <Layout title="Jadwal Sholat">
       <div className="flex flex-col justify-center items-center">

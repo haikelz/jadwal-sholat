@@ -1,6 +1,6 @@
-import { suratProps } from "src/props";
+import { Surat } from "src/props";
 
-const DetailSurah = ({ surat, audio, terjemahan }: suratProps) => {
+const DetailSurah = ({ surat, audio, terjemahan }: Surat) => {
   return (
     <div className="grid grid-cols-1 mt-6 gap-2 w-full text-end grid-rows-1">
       {surat.ayahs.map((ayat, index: number) => (

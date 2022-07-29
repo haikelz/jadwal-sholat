@@ -1,7 +1,7 @@
 import { MdClose } from "react-icons/md";
-import { suratProps } from "src/props";
+import { Surat } from "src/props";
 
-const ModalTafsir = ({ surat, tafsir, tafsirClick }: suratProps) => {
+const ModalTafsir = ({ surat, tafsir, tafsirClick }: Surat) => {
   return (
     <>
       {tafsir && (

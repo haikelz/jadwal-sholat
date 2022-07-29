@@ -1,8 +1,8 @@
 import { memo } from "react";
-import { puasaProps } from "src/props";
 import Layout from "src/components/layout";
-import TableJadwalPuasaSunnah from "src/components/tableJadwalPuasaSunnah";
 import Image from "next/image";
+// import { Puasa } from "src/props";
+// import TableJadwalPuasaSunnah from "src/components/tableJadwalPuasaSunnah";
 
 /*
 > API nya lagi error, jadi saya disable dulu jadwal puasa sunnahnya

@@ -1,8 +1,8 @@
 import { MdPlayArrow } from "react-icons/md";
-import { suratProps } from "src/props";
+import { Surat } from "src/props";
 import Link from "next/link";
 
-const Sebelumnya = ({ surat }: suratProps) => {
+const Sebelumnya = ({ surat }: Surat) => {
   return (
     <>
       {surat.number > 1 && (

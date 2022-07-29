@@ -13,8 +13,8 @@ const ErrorPage = () => {
 
   return (
     <div className="flex justify-center text-center min-h-screen items-center flex-col">
-      <Image src="/img/404.png" width="150px" height="130px" alt="404 Image" />
-      <h1 className="font-bold text-xl">
+      <Image src="/img/void.svg" width="290px" height="270px" alt="404 Image" />
+      <h1 className="font-bold mt-3 text-xl">
         Maaf, halaman yang anda tuju tidak ditemukan
       </h1>
     </div>

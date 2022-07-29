@@ -1,4 +1,5 @@
 let date = new Date();
+let hours = date.getHours();
 
 let tahun = date.toLocaleDateString("en-CA", {
     year: "numeric",
@@ -29,4 +30,4 @@ let numTanggal = Number(tanggal);
 let matchDate = `${numTahun}-${numBulan < 10 ? 0 + `${numBulan}` : numBulan
     }-${numTanggal < 10 ? 0 + `${numTanggal}` : numTanggal}`;
 
-export { currentDate, matchDate, numBulan, numTahun, numTanggal, bulan, tahun, tanggal };
+export { date, hours, currentDate, matchDate, numBulan, numTahun, numTanggal, bulan, tahun, tanggal };

@@ -1,4 +1,4 @@
-import { contextProps, waktuProps, kotaPathsProps } from "src/props";
+import { Context, Waktu, KotaPaths } from "src/props";
 import { memo } from "react";
 import { tanggal, tahun, bulan, currentDate } from "src/utils/date";
 import Layout from "src/components/layout";
@@ -11,7 +11,7 @@ export const getStaticPaths = async () => {
     );
     const data = await response.json();
 
-    const paths = data.map((waktu: kotaPathsProps) => {
+    const paths = data.map((waktu: KotaPaths) => {
       return {
         params: { id: waktu.id == "3212" ? (waktu.id = "3211") : waktu.id },
       };
@@ -26,7 +26,7 @@ export const getStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async (context: contextProps) => {
+export const getStaticProps = async (context: Context) => {
   try {
     let formatDate: string = `${tahun}/${bulan}`;
 
@@ -46,7 +46,7 @@ export const getStaticProps = async (context: contextProps) => {
   }
 };
 
-const KotaId = ({ waktu }: waktuProps) => {
+const KotaId = ({ waktu }: Waktu) => {
   return (
     <Layout title={`Jadwal Sholat ${waktu.lokasi}`}>
       <div className="flex flex-col justify-center items-center">

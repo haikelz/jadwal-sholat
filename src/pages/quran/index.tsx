@@ -1,4 +1,4 @@
-import { listSurahProps } from "src/props";
+import { DaftarSurah } from "src/props";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import ListSurah from "src/components/listSurah";
@@ -21,7 +21,7 @@ export const getStaticProps = async () => {
   }
 };
 
-const Quran = ({ surah }: listSurahProps) => {
+const Quran = ({ surah }: DaftarSurah) => {
   return (
     <Layout title="Baca Al-Qur'an">
       <div className="flex flex-col justify-center items-center">

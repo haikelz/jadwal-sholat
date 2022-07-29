@@ -3,7 +3,7 @@ import {
   MdVolumeUp,
   MdOutlineTranslate,
 } from "react-icons/md";
-import { contextProps, suratPathsProps, suratProps } from "src/props";
+import { Context, SuratPaths, Surat } from "src/props";
 import { memo } from "react";
 import { useAtom } from "jotai";
 import { audioAtom, tafsirAtom, terjemahanAtom } from "src/store";
@@ -19,7 +19,7 @@ export const getStaticPaths = async () => {
     );
     const data = await response.json();
 
-    const paths = data.data.map((surat: suratPathsProps) => {
+    const paths = data.data.map((surat: SuratPaths) => {
       return {
         params: { number: surat.number.toString() },
       };
@@ -34,7 +34,7 @@ export const getStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async (context: contextProps) => {
+export const getStaticProps = async (context: Context) => {
   try {
     const number: string | undefined = context.params.number;
     const response: Response = await fetch(
@@ -52,7 +52,7 @@ export const getStaticProps = async (context: contextProps) => {
   }
 };
 
-const Surah = ({ surat }: suratProps) => {
+const Surah = ({ surat }: Surat) => {
   const [audio, setAudio] = useAtom(audioAtom);
   const [terjemahan, setTerjemahan] = useAtom(terjemahanAtom);
   const [tafsir, setTafsir] = useAtom(tafsirAtom);

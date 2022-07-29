@@ -1,12 +1,10 @@
 import { memo } from "react";
+import { hours } from "src/utils/date";
 import Time from "src/components/time";
 import Head from "next/head";
 import Image from "next/image";
 
 const Home = () => {
-  const date = new Date();
-  const hours = date.getHours();
-
   return (
     <>
       <Head>

@@ -1,7 +1,7 @@
-import { childrenProps } from "src/props";
+import { Children } from "src/props";
 import Head from "next/head";
 
-const Layout = ({ children, title }: childrenProps) => {
+const Layout = ({ children, title }: Children) => {
   return (
     <>
       <Head>

@@ -1,7 +1,7 @@
-import { waktuProps } from "src/props";
+import { Waktu } from "src/props";
 import { matchDate } from "src/utils/date";
 
-const TableJadwalSholat = ({ waktu }: waktuProps) => {
+const TableJadwalSholat = ({ waktu }: Waktu) => {
   return (
     <table className="border-2 border-black  dark:border-none table-fixed">
       <thead className="border-2 border-black dark:border-none ">

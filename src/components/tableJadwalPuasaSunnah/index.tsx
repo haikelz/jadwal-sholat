@@ -1,7 +1,7 @@
-import { puasaProps } from "src/props";
+import { Puasa } from "src/props";
 import { numBulan, matchDate } from "src/utils/date";
 
-const TableJadwalPuasaSunnah = ({ puasa }: puasaProps) => {
+const TableJadwalPuasaSunnah = ({ puasa }: Puasa) => {
   return (
     <table className="border-2 border-black  dark:border-none table-fixed">
       <thead className="border-2 border-black dark:border-none">

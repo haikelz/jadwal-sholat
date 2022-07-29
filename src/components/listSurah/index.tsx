@@ -1,9 +1,9 @@
-import { listSurahProps } from "src/props";
+import { DaftarSurah } from "src/props";
 import { memo, useState } from "react";
 import Link from "next/link";
 import SearchFilter from "../searchFilter";
 
-const ListSurah = ({ surah }: listSurahProps) => {
+const ListSurah = ({ surah }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
