@@ -1,4 +1,4 @@
-import { Surat } from "src/props";
+import { Surat } from "src/interfaces";
 import Sebelumnya from "./sebelumnya";
 import Selanjutnya from "./selanjutnya";
 

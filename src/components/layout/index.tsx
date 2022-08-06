@@ -1,4 +1,4 @@
-import { Children } from "src/props";
+import { Children } from "src/interfaces";
 import Head from "next/head";
 
 const Layout = ({ children, title }: Children) => {

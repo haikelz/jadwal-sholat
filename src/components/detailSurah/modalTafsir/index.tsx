@@ -1,5 +1,5 @@
 import { MdClose } from "react-icons/md";
-import { Surat } from "src/props";
+import { Surat } from "src/interfaces";
 
 const ModalTafsir = ({ surat, tafsir, tafsirClick }: Surat) => {
   return (

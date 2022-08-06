@@ -1,8 +1,4 @@
-import { ReactNode, PropsWithChildren } from "react";
-
-export type Judul = PropsWithChildren<{
-    child?: ReactNode[] | JSX.Element;
-}>
+import { ReactNode } from "react";
 
 export interface Children {
     children: ReactNode[] | JSX.Element;
@@ -132,8 +128,8 @@ export interface DaftarSurah {
     ]
 }
 
-export interface Puasa {
-    puasa: [
+export interface PuasaSunnah {
+    puasaSunnah: [
         fasting: {
             month: number;
             date: string;

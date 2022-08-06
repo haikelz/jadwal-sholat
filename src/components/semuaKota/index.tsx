@@ -1,4 +1,4 @@
-import { Kota } from "src/props";
+import { Kota } from "src/interfaces";
 import { memo, useState } from "react";
 import Link from "next/link";
 import SearchFilter from "../searchFilter";

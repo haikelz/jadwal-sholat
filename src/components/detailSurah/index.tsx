@@ -1,4 +1,4 @@
-import { Surat } from "src/props";
+import { Surat } from "src/interfaces";
 
 const DetailSurah = ({ surat, audio, terjemahan }: Surat) => {
   return (
@@ -8,7 +8,7 @@ const DetailSurah = ({ surat, audio, terjemahan }: Surat) => {
           className="p-4 border-b-2 border-teal-300 flex flex-col mb-4 justify-end items-end"
           key={index + 1}
         >
-          <div className="flex w-full relative items-start justify-between">
+          <div className="flex w-full relative items-start justify-between gap-2">
             <div
               className={`${
                 ayat.number.insurah <= 9

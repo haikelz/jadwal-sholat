@@ -1,4 +1,4 @@
-import { Waktu } from "src/props";
+import { Waktu } from "src/interfaces";
 import { matchDate } from "src/utils/date";
 
 const TableJadwalSholat = ({ waktu }: Waktu) => {

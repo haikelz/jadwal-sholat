@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { dateAtom } from "src/store";
 
 const Time = () => {
@@ -7,7 +7,7 @@ const Time = () => {
 
   useEffect(() => {
     setInterval(() => setDate(new Date()), 1000);
-  }, []);
+  }, [setDate]);
 
   return (
     <div className="flex text-xl gap-1 font-bold">
@@ -24,7 +24,6 @@ const Time = () => {
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
-          hour12: true,
         })}
       </p>
     </div>

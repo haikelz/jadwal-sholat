@@ -1,4 +1,4 @@
-import { DaftarSurah } from "src/props";
+import { DaftarSurah } from "src/interfaces";
 import { memo } from "react";
 import Layout from "src/components/layout";
 import ListSurah from "src/components/listSurah";

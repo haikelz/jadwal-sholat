@@ -1,7 +1,7 @@
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
 
-export type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark';
 
 const browser = typeof window !== 'undefined';
 const localValue = (browser ? localStorage.getItem('theme') : 'light') as Theme;

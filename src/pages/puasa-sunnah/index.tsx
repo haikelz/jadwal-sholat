@@ -1,11 +1,8 @@
 import { memo } from "react";
+import { PuasaSunnah } from "src/interfaces";
 import Layout from "src/components/layout";
 import Image from "next/image";
-// import { Puasa } from "src/props";
-// import TableJadwalPuasaSunnah from "src/components/tableJadwalPuasaSunnah";
-
-/*
-> API nya lagi error, jadi saya disable dulu jadwal puasa sunnahnya
+import TableJadwalPuasaSunnah from "src/components/tableJadwalPuasaSunnah";
 
 export const getStaticProps = async () => {
   try {
@@ -16,7 +13,7 @@ export const getStaticProps = async () => {
 
     return {
       props: {
-        puasa: data.data,
+        puasaSunnah: data.data,
       },
     };
   } catch (err) {
@@ -24,7 +21,7 @@ export const getStaticProps = async () => {
   }
 };
 
-const PuasaSunnah = ({ puasa }: puasaProps) => {
+const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
   return (
     <Layout title="Jadwal Puasa Sunnah">
       <div className="flex flex-col justify-center items-center">
@@ -43,17 +40,16 @@ const PuasaSunnah = ({ puasa }: puasaProps) => {
           Berikut jadwal puasa sunnah bulan ini
         </p>
       </div>
-      <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
-        <TableJadwalPuasaSunnah puasa={puasa} />
+      <div className="text-center flex gap-7 justify-center overflow-x-auto w-full">
+        <TableJadwalPuasaSunnah puasaSunnah={puasaSunnah} />
       </div>
     </Layout>
   );
 };
 
 export default memo(PuasaSunnah);
-*/
 
-const PuasaSunnah = () => {
+/*const PuasaSunnah = () => {
   return (
     <Layout title="Jadwal Puasa Sunnah">
       <div className="flex flex-col justify-center items-center">
@@ -77,3 +73,4 @@ const PuasaSunnah = () => {
 };
 
 export default memo(PuasaSunnah);
+*/

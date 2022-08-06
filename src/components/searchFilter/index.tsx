@@ -1,4 +1,4 @@
-import { SearchFilter } from "src/props";
+import { SearchFilter } from "src/interfaces";
 
 const SearchFilter = ({ setSearchTerm }: SearchFilter) => {
   return (

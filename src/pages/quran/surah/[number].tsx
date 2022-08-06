@@ -3,7 +3,7 @@ import {
   MdVolumeUp,
   MdOutlineTranslate,
 } from "react-icons/md";
-import { Context, SuratPaths, Surat } from "src/props";
+import { Context, SuratPaths, Surat } from "src/interfaces";
 import { memo } from "react";
 import { useAtom } from "jotai";
 import { audioAtom, tafsirAtom, terjemahanAtom } from "src/store";
@@ -34,9 +34,11 @@ export const getStaticPaths = async () => {
   }
 };
 
+type NumberSurah = string | undefined;
+
 export const getStaticProps = async (context: Context) => {
   try {
-    const number: string | undefined = context.params.number;
+    const number: NumberSurah = context.params.number;
     const response: Response = await fetch(
       `https://quran-endpoint.vercel.app/quran/${number}?imamId=7`
     );

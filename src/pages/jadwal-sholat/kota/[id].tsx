@@ -1,4 +1,4 @@
-import { Context, Waktu, KotaPaths } from "src/props";
+import { Context, Waktu, KotaPaths } from "src/interfaces";
 import { memo } from "react";
 import { tanggal, tahun, bulan, currentDate } from "src/utils/date";
 import Layout from "src/components/layout";
@@ -26,11 +26,12 @@ export const getStaticPaths = async () => {
   }
 };
 
+type Id = string | undefined;
+
 export const getStaticProps = async (context: Context) => {
   try {
     let formatDate: string = `${tahun}/${bulan}`;
-
-    const id: string | undefined = context.params.id;
+    const id: Id = context.params.id;
     const response: Response = await fetch(
       `https://api.myquran.com/v1/sholat/jadwal/${id}/${formatDate}`
     );

@@ -1,7 +1,7 @@
-import { Puasa } from "src/props";
+import { PuasaSunnah } from "src/interfaces";
 import { numBulan, matchDate } from "src/utils/date";
 
-const TableJadwalPuasaSunnah = ({ puasa }: Puasa) => {
+const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
   return (
     <table className="border-2 border-black  dark:border-none table-fixed">
       <thead className="border-2 border-black dark:border-none">
@@ -15,7 +15,7 @@ const TableJadwalPuasaSunnah = ({ puasa }: Puasa) => {
         </tr>
       </thead>
       <tbody>
-        {puasa.map(
+        {puasaSunnah.map(
           (fasting, index: number) =>
             /* Kita ingin mendapatkan hasil sesuai bulan saja, jadi kita cocokkan data month dari API dengan numBulan */
             fasting.month === numBulan && (

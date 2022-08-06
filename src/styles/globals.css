@@ -7,6 +7,7 @@
 * {
   font-family: "Bitter", sans-serif;
   outline: none;
+  scroll-behavior: smooth;
 }
 
 audio {

@@ -1,5 +1,5 @@
 import { MdPlayArrow } from "react-icons/md";
-import { Surat } from "src/props";
+import { Surat } from "src/interfaces";
 import Link from "next/link";
 
 const Sebelumnya = ({ surat }: Surat) => {

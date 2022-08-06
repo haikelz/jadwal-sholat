@@ -1,4 +1,4 @@
-import { DaftarSurah } from "src/props";
+import { DaftarSurah } from "src/interfaces";
 import { memo, useState } from "react";
 import Link from "next/link";
 import SearchFilter from "../searchFilter";
