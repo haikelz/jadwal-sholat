@@ -24,6 +24,7 @@ const Home = () => {
             width="100px"
             height="100px"
             alt="Home Page"
+            priority={true}
           />
           <div className="mt-3 flex flex-col justify-center items-center text-center">
             <h1 className="sm:text-4xl text-3xl font-bold">{`Selamat ${

@@ -34,6 +34,7 @@ const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
             width="35px"
             height="35px"
             alt="Fasting"
+            priority={true}
           />
         </div>
         <p className="font-medium mt-2 text-lg">

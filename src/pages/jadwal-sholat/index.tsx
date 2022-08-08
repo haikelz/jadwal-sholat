@@ -32,6 +32,7 @@ const JadwalSholat = ({ kota }: Kota) => {
             width="40px"
             height="40px"
             alt="Mosque"
+            priority={true}
           />
         </div>
         <p className="font-medium mt-2 text-lg">

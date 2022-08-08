@@ -32,6 +32,7 @@ const Quran = ({ surah }: DaftarSurah) => {
             width="40px"
             height="40px"
             alt="Al-Qur'an Image"
+            priority={true}
           />
         </div>
         <p className="font-medium text-lg mt-2">

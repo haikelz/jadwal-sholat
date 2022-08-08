@@ -25,7 +25,7 @@ const DetailSurah = ({ surat, audio, terjemahan }: Surat) => {
           <div className="flex flex-col w-full items-start justify-start">
             {audio && (
               <div className="w-full mt-2.5">
-                <audio src={ayat.audio.url} controls></audio>
+                <audio preload="auto" src={ayat.audio.url} controls></audio>
               </div>
             )}
             {terjemahan && (

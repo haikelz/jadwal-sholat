@@ -139,3 +139,9 @@ export interface PuasaSunnah {
         }
     ]
 }
+
+export interface HandleChange {
+    target: {
+        value: string
+    }
+}
