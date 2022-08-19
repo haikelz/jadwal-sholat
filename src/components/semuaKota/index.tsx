@@ -23,7 +23,7 @@ const SemuaKota = ({ kota }: Kota) => {
           .map((loc, index: number) => (
             <Link
               href={`/jadwal-sholat/kota/${
-                loc.id == "3212" ? (loc.id = "3211") : loc.id
+                loc.id === "3212" ? (loc.id = "3211") : loc.id
               }`}
               key={index + 1}
             >

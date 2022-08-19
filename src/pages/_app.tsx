@@ -6,7 +6,7 @@ import { appAnimation } from "src/utils/animation";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import BottomNav from "src/components/layout/bottomNav";
-import BackToTop from "src/components/backToTop";
+import BackToTop from "src/components/button/backToTop";
 
 const MyApp = ({ Component, pageProps, router }: AppProps) => {
   const [mounted, setMounted] = useAtom(mountedAtom);

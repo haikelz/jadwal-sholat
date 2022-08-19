@@ -1,5 +1,11 @@
 import { ReactNode } from "react";
 
+export interface State {
+    audio?: boolean,
+    terjemahan?: boolean,
+    tafsir?: boolean
+}
+
 export interface Children {
     children: ReactNode[] | JSX.Element;
     title?: string;
@@ -88,6 +94,9 @@ export interface Surat {
                 }
             }
         ]
+        type: {
+            id: string;
+        }
     };
     audio?: boolean;
     terjemahan?: boolean;
@@ -124,6 +133,9 @@ export interface DaftarSurah {
                 }
             }
             ayahCount: string;
+            type: {
+                id: string;
+            }
         }
     ]
 }

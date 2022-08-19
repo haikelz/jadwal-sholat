@@ -10,13 +10,15 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@babel/core": "^7.18.10",
     "framer-motion": "^6.3.11",
     "jotai": "^1.7.4",
     "next": "12.1.6",
-    "next-pwa": "^5.5.4",
+    "next-pwa": "5.5.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "webpack": "^5.74.0"
   },
   "devDependencies": {
     "@types/node": "17.0.43",

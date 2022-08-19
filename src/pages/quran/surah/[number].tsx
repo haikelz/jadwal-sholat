@@ -59,17 +59,26 @@ const Surah = ({ surat }: Surat) => {
   const [terjemahan, setTerjemahan] = useAtom(terjemahanAtom);
   const [tafsir, setTafsir] = useAtom(tafsirAtom);
 
-  const audioClick = () => setAudio(!audio);
-  const terjemahanClick = () => setTerjemahan(!terjemahan);
-  const tafsirClick = () => setTafsir(!tafsir);
+  const audioClick = () => {
+    setAudio(!audio);
+  };
+
+  const terjemahanClick = () => {
+    setTerjemahan(!terjemahan);
+  };
+
+  const tafsirClick = () => {
+    setTafsir(!tafsir);
+  };
 
   return (
-    <Layout title={`Baca Al-Qur'an`}>
+    <Layout title={surat.asma.id.short}>
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center">
           <h1 className="font-bold text-3xl">{surat.asma.id.short}</h1>
           <p className="font-medium tracking-wider">
-            {surat.asma.translation.id}. Surat ke-{surat.number}
+            {surat.asma.translation.id}. Surat ke-{surat.number}.{" "}
+            {surat.type.id}
           </p>
         </div>
         <div className="flex gap-4 mt-1">

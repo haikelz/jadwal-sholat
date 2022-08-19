@@ -21,7 +21,7 @@ const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
             fasting.month === numBulan && (
               <tr
                 className={`border-black dark:border-none border-b-2 ${
-                  fasting.date == matchDate
+                  fasting.date === matchDate
                     ? "dark:bg-teal-700 bg-teal-600 text-white font-bold"
                     : "dark:odd:bg-gray-800 odd:bg-teal-300"
                 }`}

@@ -3,7 +3,12 @@ module.exports = {
   mode: "jit",
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        body: "Bitter",
+        arab: "Noto Naskh Arabic",
+      },
+    },
   },
   plugins: [],
 };

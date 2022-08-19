@@ -1,12 +1,13 @@
 import { useCallback, useEffect } from "react";
-import { useAtom } from "jotai";
+import { SetStateAction, useAtom } from "jotai";
 import { useAtomCallback } from "jotai/utils";
 import { scrollAtom } from "src/store";
 
 type HandleScroll = () => void;
+type Scroll = [number, (update: SetStateAction<number>) => void];
 
 export const useScroll = () => {
-    const [scroll, setScroll] = useAtom(scrollAtom);
+    const [scroll, setScroll]: Scroll = useAtom(scrollAtom);
 
     // buat handle warning useEffect pas pengecekan
     const handleScroll: HandleScroll = useAtomCallback(
