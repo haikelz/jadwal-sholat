@@ -1,4 +1,4 @@
-import { useAtom } from "jotai";
+import { Provider, useAtom } from "jotai";
 import { mountedAtom } from "src/store";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -20,15 +20,17 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
   }
 
   return (
-    <div className="dark:bg-gray-900 min-h-screen dark:text-white">
-      <AnimatePresence exitBeforeEnter>
-        <motion.div key={router.route} {...appAnimation}>
-          <Component {...pageProps} />
-          <BackToTop />
-        </motion.div>
-      </AnimatePresence>
-      <BottomNav />
-    </div>
+    <Provider>
+      <div className="dark:bg-gray-900 min-h-screen dark:text-white">
+        <AnimatePresence exitBeforeEnter>
+          <motion.div key={router.route} {...appAnimation}>
+            <Component {...pageProps} />
+            <BackToTop />
+          </motion.div>
+        </AnimatePresence>
+        <BottomNav />
+      </div>
+    </Provider>
   );
 };
 

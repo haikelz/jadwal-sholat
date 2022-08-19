@@ -1,7 +1,7 @@
 import { Kota } from "src/interfaces";
 import { memo } from "react";
 import Layout from "src/components/layout";
-import SemuaKota from "src/components/semuaKota";
+import SemuaKota from "src/components/listKota";
 import Image from "next/image";
 
 export const getStaticProps = async () => {

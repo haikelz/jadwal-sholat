@@ -19,10 +19,11 @@ let currentDate = date.toLocaleDateString("id-ID", {
     day: "numeric",
 })
 
-/* 
-  Karena datenya masih berupa string, kita ubah ke number 
-  biar kita bisa membandingkan dan mendapatkan jadwal hari ini
-*/
+/**   
+ * Karena datenya masih berupa string, kita ubah ke number 
+ * biar kita bisa membandingkan dan mendapatkan jadwal hari ini
+ **/
+
 let numTahun = Number(tahun);
 let numBulan = Number(bulan);
 let numTanggal = Number(tanggal);

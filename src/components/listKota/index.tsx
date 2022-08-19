@@ -2,25 +2,25 @@ import { Kota } from "src/interfaces";
 import { memo, useState } from "react";
 import Link from "next/link";
 import SearchFilter from "../searchFilter";
+import TidakAda from "../tidakAda";
 
-const SemuaKota = ({ kota }: Kota) => {
+const ListKota = ({ kota }: Kota) => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredKota = kota.filter((value) => {
+    if (searchTerm === "") {
+      return value;
+    } else if (value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return value;
+    }
+  });
 
   return (
     <>
       <SearchFilter setSearchTerm={setSearchTerm} />
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-center gap-5 grid-rows-1">
-        {kota
-          .filter((value) => {
-            if (searchTerm === "") {
-              return value;
-            } else if (
-              value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())
-            ) {
-              return value;
-            }
-          })
-          .map((loc, index: number) => (
+      {filteredKota.length ? (
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-center gap-5 grid-rows-1">
+          {filteredKota.map((loc, index: number) => (
             <Link
               href={`/jadwal-sholat/kota/${
                 loc.id === "3212" ? (loc.id = "3211") : loc.id
@@ -32,9 +32,12 @@ const SemuaKota = ({ kota }: Kota) => {
               </div>
             </Link>
           ))}
-      </div>
+        </div>
+      ) : (
+        <TidakAda title="Kota" />
+      )}
     </>
   );
 };
 
-export default memo(SemuaKota);
+export default memo(ListKota);
