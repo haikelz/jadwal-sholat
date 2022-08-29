@@ -6,6 +6,7 @@ module.exports = withPWA({
   images: {
     loader: "akamai",
     path: "",
+    domains: ["raw.githubusercontent.com"],
   },
   pwa: {
     dest: "public",
