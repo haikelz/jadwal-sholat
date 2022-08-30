@@ -6,11 +6,12 @@ import TidakAda from "../tidakAda";
 
 const ListKota = ({ kota }: Kota) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const kotaRegex: RegExp = new RegExp(searchTerm, "gi");
 
   const filteredKota = kota.filter((value) => {
     if (searchTerm === "") {
       return value;
-    } else if (value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())) {
+    } else if (value.lokasi.toLowerCase().match(kotaRegex)) {
       return value;
     }
   });

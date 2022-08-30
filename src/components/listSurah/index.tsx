@@ -6,13 +6,12 @@ import TidakAda from "../tidakAda";
 
 const ListSurah = ({ surah }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const surahRegex: RegExp = new RegExp(searchTerm, "gi");
 
   const filteredSurah = surah.filter((value) => {
     if (searchTerm === "") {
       return value;
-    } else if (
-      value.asma.id.short.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
+    } else if (value.asma.id.short.toLowerCase().match(surahRegex)) {
       return value;
     }
   });
