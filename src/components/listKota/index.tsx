@@ -1,24 +1,24 @@
 import { Kota } from "src/interfaces";
 import { memo, useState } from "react";
 import Link from "next/link";
-import SearchFilter from "../searchFilter";
+import SearchBar from "../searchBar";
 import TidakAda from "../tidakAda";
 
 const ListKota = ({ kota }: Kota) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const kotaRegex: RegExp = new RegExp(searchTerm, "gi");
+  // const kotaRegex: RegExp = new RegExp(searchTerm, "gi");
 
   const filteredKota = kota.filter((value) => {
     if (searchTerm === "") {
       return value;
-    } else if (value.lokasi.toLowerCase().match(kotaRegex)) {
+    } else if (value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())) {
       return value;
     }
   });
 
   return (
     <>
-      <SearchFilter setSearchTerm={setSearchTerm} />
+      <SearchBar setSearchTerm={setSearchTerm} />
       {filteredKota.length ? (
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-center gap-5 grid-rows-1">
           {filteredKota.map((loc, index: number) => (

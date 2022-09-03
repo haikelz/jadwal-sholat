@@ -1,24 +1,26 @@
 import { DaftarSurah } from "src/interfaces";
 import { memo, useState } from "react";
 import Link from "next/link";
-import SearchFilter from "../searchFilter";
+import SearchBar from "../searchBar";
 import TidakAda from "../tidakAda";
 
 const ListSurah = ({ surah }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const surahRegex: RegExp = new RegExp(searchTerm, "gi");
+  // const surahRegex: RegExp = new RegExp(searchTerm, "gi");
 
   const filteredSurah = surah.filter((value) => {
     if (searchTerm === "") {
       return value;
-    } else if (value.asma.id.short.toLowerCase().match(surahRegex)) {
+    } else if (
+      value.asma.id.short.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
       return value;
     }
   });
 
   return (
     <>
-      <SearchFilter setSearchTerm={setSearchTerm} />
+      <SearchBar setSearchTerm={setSearchTerm} />
       {filteredSurah.length ? (
         <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 grid-rows-1 gap-4 w-full">
           {filteredSurah.map((surat, index: number) => (

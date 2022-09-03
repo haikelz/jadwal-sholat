@@ -1,5 +1,5 @@
 import { NextRouter, useRouter } from "next/router";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import Image from "next/image";
 
 const ErrorPage = () => {
@@ -20,10 +20,10 @@ const ErrorPage = () => {
         alt="404 Image"
       />
       <h1 className="font-bold mt-3 text-xl">
-        Maaf, halaman yang anda tuju tidak ditemukan
+        Maaf, halaman yang kamu tuju tidak ditemukan
       </h1>
     </div>
   );
 };
 
-export default ErrorPage;
+export default memo(ErrorPage);

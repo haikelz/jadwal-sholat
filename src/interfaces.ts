@@ -11,7 +11,7 @@ export interface Children {
     title?: string;
 }
 
-export interface SearchFilter {
+export interface SearchBar {
     setSearchTerm: (value: string) => void;
 }
 
@@ -70,25 +70,22 @@ export interface Surat {
                 short: string;
             }
         }
-        description: string;
         tafsir: {
             id: string;
         }
+        description: string;
         ayahs: [
             ayat: {
                 number: {
                     insurah: number;
                 }
-
                 text: {
                     ar: string;
                     read: string;
                 }
-
                 audio: {
                     url: string;
                 }
-
                 translation: {
                     id: string;
                 }
@@ -127,7 +124,6 @@ export interface DaftarSurah {
                 id: {
                     short: string;
                 }
-
                 translation: {
                     id: string;
                 }

@@ -1,6 +1,6 @@
-import { HandleChange, SearchFilter } from "src/interfaces";
+import { HandleChange, SearchBar } from "src/interfaces";
 
-const SearchFilter = ({ setSearchTerm }: SearchFilter) => {
+const SearchBar = ({ setSearchTerm }: SearchBar) => {
   const handleChange = (event: HandleChange) => {
     setSearchTerm(event.target.value);
   };
@@ -15,4 +15,4 @@ const SearchFilter = ({ setSearchTerm }: SearchFilter) => {
   );
 };
 
-export default SearchFilter;
+export default SearchBar;
