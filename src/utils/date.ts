@@ -1,19 +1,19 @@
-let date = new Date();
-let hours = date.getHours();
+let date: Date = new Date();
+let hours: number = date.getHours();
 
-let tahun = date.toLocaleDateString("en-CA", {
+let tahun: string = date.toLocaleDateString("en-CA", {
     year: "numeric",
 });
 
-let bulan = date.toLocaleDateString("en-CA", {
+let bulan: string = date.toLocaleDateString("en-CA", {
     month: "numeric",
 });
 
-let tanggal = date.toLocaleDateString("en-CA", {
+let tanggal: string = date.toLocaleDateString("en-CA", {
     day: "numeric",
 });
 
-let currentDate = date.toLocaleDateString("id-ID", {
+let currentDate: string = date.toLocaleDateString("id-ID", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -24,11 +24,11 @@ let currentDate = date.toLocaleDateString("id-ID", {
  * biar kita bisa membandingkan dan mendapatkan jadwal hari ini
  **/
 
-let numTahun = Number(tahun);
-let numBulan = Number(bulan);
-let numTanggal = Number(tanggal);
+let numTahun: number = Number(tahun);
+let numBulan: number = Number(bulan);
+let numTanggal: number = Number(tanggal);
 
-let matchDate = `${numTahun}-${numBulan < 10 ? 0 + `${numBulan}` : numBulan
+let matchDate: string = `${numTahun}-${numBulan < 10 ? 0 + `${numBulan}` : numBulan
     }-${numTanggal < 10 ? 0 + `${numTanggal}` : numTanggal}`;
 
 export { date, hours, currentDate, matchDate, numBulan, numTahun, numTanggal, bulan, tahun, tanggal };

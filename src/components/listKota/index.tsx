@@ -6,7 +6,6 @@ import TidakAda from "../tidakAda";
 
 const ListKota = ({ kota }: Kota) => {
   const [searchTerm, setSearchTerm] = useState("");
-  // const kotaRegex: RegExp = new RegExp(searchTerm, "gi");
 
   const filteredKota = kota.filter((value) => {
     if (searchTerm === "") {

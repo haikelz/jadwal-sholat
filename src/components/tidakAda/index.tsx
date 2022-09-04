@@ -5,7 +5,7 @@ type Title = {
 const TidakAda = ({ title }: Title) => {
   return (
     <p className="font-bold text-xl">
-      Input {title} yang anda masukkan kurang tepat!
+      Input {title} yang kamu masukkan kurang tepat!
     </p>
   );
 };
