@@ -1,4 +1,4 @@
-import { HandleChange, SearchBar } from "src/interfaces";
+import { HandleChange, SearchBar } from "@/src/interfaces";
 
 const SearchBar = ({ setSearchTerm }: SearchBar) => {
   const handleChange = (event: HandleChange) => {

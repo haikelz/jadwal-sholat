@@ -1,7 +1,6 @@
 <div align="center">
-  <h1>Jadwal Sholat</h1>
- 
-  <p>Adalah sebuah Website untuk mendapatkan jadwal sholat dan baca Al-Qur'an.</p>
+  <h1>Jadwal Sholat</h1> 
+  <p>Adalah sebuah Website untuk mendapatkan jadwal sholat dan baca Al-Qur'an</p>
 </div>
 
 ## Fitur:
@@ -11,7 +10,7 @@
 
 > ~~Sebenernya ada jadwal puasa sunnah nya juga, berhubung API nya lagi error, jadi didisable dulu~~ NVM, udah ada rupanya
 
-## Stack
+## Tech Stack
 
 - NextJS
 - TailwindCSS

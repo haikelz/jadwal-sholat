@@ -1,14 +1,13 @@
-import { Context, Waktu, KotaPaths } from "src/interfaces";
+import { JADWAL_SHOLAT_API } from "@/utils/api";
+import { Context, Waktu, KotaPaths } from "@/src/interfaces";
 import { memo } from "react";
-import { tanggal, tahun, bulan, currentDate } from "src/utils/date";
-import Layout from "src/components/layout";
-import TableJadwalSholat from "src/components/tableJadwalSholat";
+import { tanggal, tahun, bulan, currentDate } from "@/utils/date";
+import Layout from "@/components/template/layout";
+import TableJadwalSholat from "@/components/organisms/tableJadwalSholat";
 
 export const getStaticPaths = async () => {
   try {
-    const response: Response = await fetch(
-      `https://api.myquran.com/v1/sholat/kota/semua`
-    );
+    const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
     const data = await response.json();
 
     const paths = data.map((waktu: KotaPaths) => {
@@ -33,7 +32,7 @@ export const getStaticProps = async (context: Context) => {
     let formatDate: string = `${tahun}/${bulan}`;
     const id: Id = context.params.id;
     const response: Response = await fetch(
-      `https://api.myquran.com/v1/sholat/jadwal/${id}/${formatDate}`
+      `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
     );
     const data = await response.json();
 

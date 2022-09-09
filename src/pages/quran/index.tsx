@@ -1,14 +1,13 @@
-import { DaftarSurah } from "src/interfaces";
+import { DaftarSurah } from "@/src/interfaces";
 import { memo } from "react";
-import Layout from "src/components/layout";
-import ListSurah from "src/components/listSurah";
+import { QURAN_API } from "@/utils/api";
+import Layout from "@/components/template/layout";
+import ListSurah from "@/components/molecules/listSurah";
 import Image from "next/image";
 
 export const getStaticProps = async () => {
   try {
-    const response: Response = await fetch(
-      `https://quran-endpoint.vercel.app/quran`
-    );
+    const response: Response = await fetch(`${QURAN_API}/quran`);
     const data = await response.json();
 
     return {

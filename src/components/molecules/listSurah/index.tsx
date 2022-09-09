@@ -1,8 +1,8 @@
-import { DaftarSurah } from "src/interfaces";
+import { DaftarSurah } from "@/src/interfaces";
 import { memo, useState } from "react";
 import Link from "next/link";
-import SearchBar from "../searchBar";
-import TidakAda from "../tidakAda";
+import SearchBar from "../../atoms/searchBar";
+import TidakAda from "../../atoms/tidakAda";
 
 const ListSurah = ({ surah }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState("");

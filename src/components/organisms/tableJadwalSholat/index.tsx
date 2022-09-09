@@ -1,9 +1,9 @@
-import { Waktu } from "src/interfaces";
-import { matchDate } from "src/utils/date";
+import { Waktu } from "@/src/interfaces";
+import { matchDate } from "@/utils/date";
 
 const TableJadwalSholat = ({ waktu }: Waktu) => {
   return (
-    <table className="border-2 border-black  dark:border-none table-fixed">
+    <table className="border-2 border-black dark:border-none table-fixed">
       <thead className="border-2 border-black dark:border-none ">
         <tr className="border-2 border-black dark:border-none ">
           <th className="border-r-2 border-r-black dark:border-none text-xl px-4">

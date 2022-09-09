@@ -6,7 +6,7 @@ import {
   MdLightMode,
   MdOutlineAccessTime,
 } from "react-icons/md";
-import { useTheme } from "src/hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 import { NextRouter, useRouter } from "next/router";
 import Link from "next/link";
 

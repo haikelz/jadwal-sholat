@@ -1,5 +1,5 @@
 import { MdClose } from "react-icons/md";
-import { Surat } from "src/interfaces";
+import { Surat } from "@/src/interfaces";
 
 const ModalTafsir = ({ surat, tafsir, tafsirClick }: Surat) => {
   return (
@@ -19,7 +19,6 @@ const ModalTafsir = ({ surat, tafsir, tafsirClick }: Surat) => {
                 <button
                   type="button"
                   className="text-gray-400 dark:text-white dark:hover:text-black bg-transparent hover:bg-gray-200  rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
-                  data-modal-toggle="defaultModal"
                   onClick={tafsirClick}
                 >
                   <MdClose className="font-bold" size="20px" />

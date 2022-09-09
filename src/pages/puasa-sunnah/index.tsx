@@ -1,14 +1,13 @@
 import { memo } from "react";
-import { PuasaSunnah } from "src/interfaces";
-import Layout from "src/components/layout";
+import { PuasaSunnah } from "@/src/interfaces";
+import { PUASA_SUNNAH_API } from "@/utils/api";
+import Layout from "@/components/template/layout";
 import Image from "next/image";
-import TableJadwalPuasaSunnah from "src/components/tableJadwalPuasaSunnah";
+import TableJadwalPuasaSunnah from "@/components/organisms/tableJadwalPuasaSunnah";
 
 export const getStaticProps = async () => {
   try {
-    const response: Response = await fetch(
-      "https://api.puasa-sunnah.granitebps.com/api/v1/fastings"
-    );
+    const response: Response = await fetch(`${PUASA_SUNNAH_API}`);
     const data = await response.json();
 
     return {

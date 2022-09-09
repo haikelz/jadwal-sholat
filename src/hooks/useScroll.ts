@@ -1,29 +1,29 @@
 import { useCallback, useEffect } from "react";
 import { SetStateAction, useAtom } from "jotai";
 import { useAtomCallback } from "jotai/utils";
-import { scrollAtom } from "src/store";
+import { scrollAtom } from "@/store/index";
 
 type HandleScroll = () => void;
 type Scroll = [number, (update: SetStateAction<number>) => void];
 
 export const useScroll = () => {
-    const [scroll, setScroll]: Scroll = useAtom(scrollAtom);
+  const [scroll, setScroll]: Scroll = useAtom(scrollAtom);
 
-    // buat handle warning useEffect pas pengecekan
-    const handleScroll: HandleScroll = useAtomCallback(
-        useCallback(() => {
-            const position = window.pageYOffset;
-            setScroll(position);
-        }, [setScroll])
-    );
+  // buat handle warning useEffect pas pengecekan
+  const handleScroll: HandleScroll = useAtomCallback(
+    useCallback(() => {
+      const position = window.pageYOffset;
+      setScroll(position);
+    }, [setScroll])
+  );
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true });
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        }
-    }, [handleScroll]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
 
-    return [scroll, setScroll] as const;
+  return [scroll, setScroll] as const;
 };
