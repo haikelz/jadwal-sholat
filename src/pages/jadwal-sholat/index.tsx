@@ -1,14 +1,13 @@
-import { Kota } from "src/interfaces";
+import { Kota } from "@/src/interfaces";
 import { memo } from "react";
-import Layout from "src/components/layout";
-import SemuaKota from "src/components/listKota";
+import { JADWAL_SHOLAT_API } from "@/utils/api";
+import Layout from "@/components/template/layout";
+import SemuaKota from "@/components/molecules/listKota";
 import Image from "next/image";
 
 export const getStaticProps = async () => {
   try {
-    const response: Response = await fetch(
-      `https://api.myquran.com/v1/sholat/kota/semua`
-    );
+    const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
     const data = await response.json();
 
     return {

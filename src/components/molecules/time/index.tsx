@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { useEffect } from "react";
-import { dateAtom } from "src/store";
+import { dateAtom } from "@/store/index";
 
 const Time = () => {
   const [date, setDate] = useAtom(dateAtom);

@@ -1,6 +1,6 @@
 import { memo } from "react";
-import { hours } from "src/utils/date";
-import Time from "src/components/time";
+import { hours } from "@/utils/date";
+import Time from "@/components/molecules/time";
 import Head from "next/head";
 import Image from "next/image";
 
@@ -37,7 +37,7 @@ const Home = () => {
                 ? "Malam"
                 : "Pagi"
             }`}</h1>
-            <p className="text-lg md:text-xl font-medium">
+            <p className="text-lg mb-0.5 mt-2 md:text-xl font-medium">
               &#34;Demi masa, sesungguhnya manusia itu benar-benar berada dalam
               kerugian&#34;
             </p>

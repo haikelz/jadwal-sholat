@@ -1,8 +1,8 @@
-import { Kota } from "src/interfaces";
+import { Kota } from "@/src/interfaces";
 import { memo, useState } from "react";
 import Link from "next/link";
-import SearchBar from "../searchBar";
-import TidakAda from "../tidakAda";
+import SearchBar from "@/components/atoms/searchBar";
+import TidakAda from "@/components/atoms/tidakAda";
 
 const ListKota = ({ kota }: Kota) => {
   const [searchTerm, setSearchTerm] = useState("");

@@ -1,4 +1,4 @@
-import { Surat } from "src/interfaces";
+import { Surat } from "@/src/interfaces";
 
 const DetailSurah = ({ surat, audio, terjemahan }: Surat) => {
   return (
