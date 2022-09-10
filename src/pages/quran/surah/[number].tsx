@@ -9,7 +9,7 @@ import { useAtom } from "jotai";
 import { audioAtom, tafsirAtom, terjemahanAtom } from "@/store/index";
 import { QURAN_API } from "@/utils/api";
 import DetailSurah from "@/components/organisms/detailSurah";
-import Layout from "@/components/template/layout";
+import Layout from "@/components/templates/layout";
 import ModalTafsir from "@/components/atoms/modalTafsir";
 import Sebelumnya from "@/components/atoms/sebelumnya";
 import Selanjutnya from "@/components/atoms/selanjutnya";
@@ -21,7 +21,9 @@ export const getStaticPaths = async () => {
 
     const paths = data.data.map((surat: SuratPaths) => {
       return {
-        params: { number: surat.number.toString() },
+        params: {
+          number: surat.number.toString(),
+        },
       };
     });
 
@@ -71,7 +73,7 @@ const Surah = ({ surat }: Surat) => {
     setTafsir(!tafsir);
   };
 
-  const Button = () => {
+  const PreviousOrNextButton = () => {
     return (
       <div
         className={`flex gap-3 w-full ${
@@ -116,14 +118,14 @@ const Surah = ({ surat }: Surat) => {
           />
         )}
       </div>
-      <Button />
+      <PreviousOrNextButton />
       <DetailSurah
         surat={surat}
         audio={audio}
         terjemahan={terjemahan}
         tafsir={tafsir}
       />
-      <Button />
+      <PreviousOrNextButton />
     </Layout>
   );
 };

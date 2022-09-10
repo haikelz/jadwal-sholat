@@ -1,7 +1,7 @@
+import { JADWAL_SHOLAT_API } from "@/utils/api";
 import { Kota } from "@/src/interfaces";
 import { memo } from "react";
-import { JADWAL_SHOLAT_API } from "@/utils/api";
-import Layout from "@/components/template/layout";
+import Layout from "@/components/templates/layout";
 import SemuaKota from "@/components/molecules/listKota";
 import Image from "next/image";
 

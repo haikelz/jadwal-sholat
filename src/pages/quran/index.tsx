@@ -1,7 +1,7 @@
 import { DaftarSurah } from "@/src/interfaces";
 import { memo } from "react";
 import { QURAN_API } from "@/utils/api";
-import Layout from "@/components/template/layout";
+import Layout from "@/components/templates/layout";
 import ListSurah from "@/components/molecules/listSurah";
 import Image from "next/image";
 

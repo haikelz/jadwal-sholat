@@ -1,8 +1,9 @@
 import { DaftarSurah } from "@/src/interfaces";
 import { memo, useState } from "react";
 import Link from "next/link";
-import SearchBar from "../../atoms/searchBar";
-import TidakAda from "../../atoms/tidakAda";
+import SearchBar from "@/components/atoms/searchBar";
+import TidakAda from "@/components/atoms/tidakAda";
+import reactStringReplace from "react-string-replace";
 
 const ListSurah = ({ surah }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,7 +30,22 @@ const ListSurah = ({ surah }: DaftarSurah) => {
                   {surat.type.id}
                 </p>
                 <h1 className="font-bold text-xl">{surat.number}</h1>
-                <p className="font-bold text-lg">{surat.asma.id.short}</p>
+                <p className="font-bold text-lg">
+                  {searchTerm
+                    ? reactStringReplace(
+                        surat.asma.id.short,
+                        searchTerm,
+                        (match: string, index: number) => (
+                          <span
+                            key={index++}
+                            className="bg-lime-400 dark:bg-lime-600"
+                          >
+                            {match}
+                          </span>
+                        )
+                      )
+                    : surat.asma.id.short}
+                </p>
                 <p className="font-medium">{surat.asma.translation.id}</p>
                 <p>Jumlah: {surat.ayahCount} ayat</p>
               </div>

@@ -38,8 +38,8 @@ const Home = () => {
                 : "Pagi"
             }`}</h1>
             <p className="text-lg mb-0.5 mt-2 md:text-xl font-medium">
-              &#34;Demi masa, sesungguhnya manusia itu benar-benar berada dalam
-              kerugian&#34;
+              &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;
+              Ar-Rahman ayat 13
             </p>
             <Time />
           </div>

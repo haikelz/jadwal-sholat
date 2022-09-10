@@ -1,155 +1,155 @@
 import { ReactNode } from "react";
 
 export interface State {
-    audio?: boolean,
-    terjemahan?: boolean,
-    tafsir?: boolean
+  audio?: boolean;
+  terjemahan?: boolean;
+  tafsir?: boolean;
 }
 
 export interface Children {
-    children: ReactNode[] | JSX.Element;
-    title?: string;
+  children: ReactNode[] | JSX.Element;
+  title?: string;
 }
 
 export interface SearchBar {
-    setSearchTerm: (value: string) => void;
+  setSearchTerm: (value: string) => void;
 }
 
 export interface Kota {
-    kota: [
-        loc: {
-            id: string;
-            lokasi: string;
-        }
-    ];
+  kota: [
+    loc: {
+      id: string;
+      lokasi: string;
+    }
+  ];
 }
 
 export interface Waktu {
-    waktu: {
-        id: string;
-        lokasi: string;
+  waktu: {
+    id: string;
+    lokasi: string;
+    date: string;
+    daerah: string;
+    jadwal: [
+      waktu: {
         date: string;
-        daerah: string;
-        jadwal: [
-            waktu: {
-                date: string;
-                tanggal: string;
-                imsak: string;
-                subuh: string;
-                terbit: string;
-                dhuha: string;
-                dzuhur: string;
-                ashar: string;
-                maghrib: string;
-                isya: string;
-            }
-        ]
-    };
-    tanggal: string;
-    bulan: string;
-    tahun: string;
+        tanggal: string;
+        imsak: string;
+        subuh: string;
+        terbit: string;
+        dhuha: string;
+        dzuhur: string;
+        ashar: string;
+        maghrib: string;
+        isya: string;
+      }
+    ];
+  };
+  tanggal: string;
+  bulan: string;
+  tahun: string;
 }
 
 export interface Surat {
-    surat: {
-        number: number;
-        name: string;
-        translation: string;
-        bismillah: {
-            arab: string;
-            translation: string;
-            audio: {
-                alafasy: string;
-            }
-        }
-        asma: {
-            translation: {
-                id: string;
-            }
-            id: {
-                short: string;
-            }
-        }
-        tafsir: {
-            id: string;
-        }
-        description: string;
-        ayahs: [
-            ayat: {
-                number: {
-                    insurah: number;
-                }
-                text: {
-                    ar: string;
-                    read: string;
-                }
-                audio: {
-                    url: string;
-                }
-                translation: {
-                    id: string;
-                }
-            }
-        ]
-        type: {
-            id: string;
-        }
+  surat: {
+    number: number;
+    name: string;
+    translation: string;
+    bismillah: {
+      arab: string;
+      translation: string;
+      audio: {
+        alafasy: string;
+      };
     };
-    audio?: boolean;
-    terjemahan?: boolean;
-    tafsir?: boolean;
-    tafsirClick?: any;
+    asma: {
+      translation: {
+        id: string;
+      };
+      id: {
+        short: string;
+      };
+    };
+    tafsir: {
+      id: string;
+    };
+    description: string;
+    ayahs: [
+      ayat: {
+        number: {
+          insurah: number;
+        };
+        text: {
+          ar: string;
+          read: string;
+        };
+        audio: {
+          url: string;
+        };
+        translation: {
+          id: string;
+        };
+      }
+    ];
+    type: {
+      id: string;
+    };
+  };
+  audio?: boolean;
+  terjemahan?: boolean;
+  tafsir?: boolean;
+  tafsirClick?: any;
 }
 
 export interface Context {
-    params: {
-        number?: string;
-        id?: string;
-    }
+  params: {
+    number?: string;
+    id?: string;
+  };
 }
 
 export interface KotaPaths {
-    id: string;
+  id: string;
 }
 
 export interface SuratPaths {
-    number: number;
+  number: number;
 }
 
 export interface DaftarSurah {
-    surah: [
-        surat: {
-            number: string;
-            asma: {
-                id: {
-                    short: string;
-                }
-                translation: {
-                    id: string;
-                }
-            }
-            ayahCount: string;
-            type: {
-                id: string;
-            }
-        }
-    ]
+  surah: [
+    surat: {
+      number: string;
+      asma: {
+        id: {
+          short: string;
+        };
+        translation: {
+          id: string;
+        };
+      };
+      ayahCount: string;
+      type: {
+        id: string;
+      };
+    }
+  ];
 }
 
 export interface PuasaSunnah {
-    puasaSunnah: [
-        fasting: {
-            month: number;
-            date: string;
-            type: {
-                name: string;
-            }
-        }
-    ]
+  puasaSunnah: [
+    fasting: {
+      month: number;
+      date: string;
+      type: {
+        name: string;
+      };
+    }
+  ];
 }
 
 export interface HandleChange {
-    target: {
-        value: string
-    }
+  target: {
+    value: string;
+  };
 }
