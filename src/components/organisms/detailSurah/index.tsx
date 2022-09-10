@@ -29,7 +29,7 @@ const DetailSurah = ({ surat, audio, terjemahan }: Surat) => {
               </div>
             )}
             {terjemahan && (
-              <p className="italic mt-1 text-left text-teal-700 dark:text-teal-300">
+              <p className="italic mt-2 text-left text-teal-700 dark:text-teal-300">
                 {ayat.text.read}
               </p>
             )}

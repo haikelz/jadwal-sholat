@@ -1,7 +1,7 @@
-import { memo } from "react";
-import { PuasaSunnah } from "@/src/interfaces";
 import { PUASA_SUNNAH_API } from "@/utils/api";
-import Layout from "@/components/template/layout";
+import { PuasaSunnah } from "@/src/interfaces";
+import { memo } from "react";
+import Layout from "@/components/templates/layout";
 import Image from "next/image";
 import TableJadwalPuasaSunnah from "@/components/organisms/tableJadwalPuasaSunnah";
 

@@ -2,7 +2,7 @@ import { JADWAL_SHOLAT_API } from "@/utils/api";
 import { Context, Waktu, KotaPaths } from "@/src/interfaces";
 import { memo } from "react";
 import { tanggal, tahun, bulan, currentDate } from "@/utils/date";
-import Layout from "@/components/template/layout";
+import Layout from "@/components/templates/layout";
 import TableJadwalSholat from "@/components/organisms/tableJadwalSholat";
 
 export const getStaticPaths = async () => {
@@ -12,7 +12,9 @@ export const getStaticPaths = async () => {
 
     const paths = data.map((waktu: KotaPaths) => {
       return {
-        params: { id: waktu.id == "3212" ? (waktu.id = "3211") : waktu.id },
+        params: {
+          id: waktu.id === "3212" ? (waktu.id = "3211") : waktu.id,
+        },
       };
     });
 

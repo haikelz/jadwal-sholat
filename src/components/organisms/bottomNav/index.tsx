@@ -49,7 +49,6 @@ const BottomNav = () => {
           </button>
         </Link>
       </div>
-
       <div className="w-full flex justify-center items-center">
         <Link href="/puasa-sunnah" passHref>
           <button
@@ -64,7 +63,6 @@ const BottomNav = () => {
           </button>
         </Link>
       </div>
-
       <div className="w-full flex justify-center items-center">
         <Link href="/quran" passHref>
           <button
