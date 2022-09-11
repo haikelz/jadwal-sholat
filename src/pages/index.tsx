@@ -39,6 +39,7 @@ const Home = () => {
             }`}</h1>
             <p className="text-lg mb-0.5 mt-2 md:text-xl font-medium">
               &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;
+              <br />
               Ar-Rahman ayat 13
             </p>
             <Time />
