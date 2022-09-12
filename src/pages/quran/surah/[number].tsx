@@ -6,7 +6,7 @@ import {
 import { Context, SuratPaths, Surat } from "@/src/interfaces";
 import { memo } from "react";
 import { useAtom } from "jotai";
-import { audioAtom, tafsirAtom, terjemahanAtom } from "@/store/index";
+import { audioAtom, tafsirAtom, terjemahanAtom } from "@/src/store";
 import { QURAN_API } from "@/utils/api";
 import DetailSurah from "@/components/organisms/detailSurah";
 import Layout from "@/components/templates/layout";

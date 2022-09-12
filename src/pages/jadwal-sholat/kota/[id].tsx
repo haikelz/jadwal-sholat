@@ -57,7 +57,7 @@ const KotaId = ({ waktu }: Waktu) => {
           PROVINSI {waktu.daerah}, {currentDate.toUpperCase()}
         </p>
       </div>
-      <div className="text-center flex gap-7 xl:justify-center overflow-x-auto w-full">
+      <div className="text-center flex gap-7 lg:justify-center items-center overflow-x-auto w-full">
         <TableJadwalSholat
           tanggal={tanggal}
           tahun={tahun}
