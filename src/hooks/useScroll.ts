@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { SetStateAction, useAtom } from "jotai";
 import { useAtomCallback } from "jotai/utils";
-import { scrollAtom } from "@/store/index";
+import { scrollAtom } from "@/src/store";
 
 type HandleScroll = () => void;
 type Scroll = [number, (update: SetStateAction<number>) => void];

@@ -1,8 +1,8 @@
-import { DaftarSurah } from "@/src/interfaces";
 import { memo, useState } from "react";
-import Link from "next/link";
+import { DaftarSurah } from "@/src/interfaces";
 import SearchBar from "@/components/atoms/searchBar";
 import TidakAda from "@/components/atoms/tidakAda";
+import Link from "next/link";
 import reactStringReplace from "react-string-replace";
 
 const ListSurah = ({ surah }: DaftarSurah) => {
@@ -22,10 +22,10 @@ const ListSurah = ({ surah }: DaftarSurah) => {
     <>
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredSurah.length ? (
-        <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 grid-rows-1 gap-4 w-full">
-          {filteredSurah.map((surat, index: number) => (
-            <Link href={`/quran/surah/${surat.number}`} key={index + 1}>
-              <div className="flex flex-col text-left border-2 border-black cursor-pointer p-4 rounded-sm bg-teal-300 dark:bg-[#2A2A37] dark:border-white">
+        <div className="grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4 w-full">
+          {filteredSurah.map((surat) => (
+            <Link href={`/quran/surah/${surat.number}`} key={surat.number}>
+              <div className="flex flex-col text-left cursor-pointer p-4 rounded-sm bg-gray-100 dark:bg-[#2A2A37] border-2 border-black dark:border-white">
                 <p className="text-right font-semibold tracking-wide">
                   {surat.type.id}
                 </p>

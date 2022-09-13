@@ -21,7 +21,7 @@ const BackToTop = () => {
       {scroll > height && (
         <motion.div
           {...backToTopAnimation}
-          className="fixed bottom-20 right-6 hidden md:inline"
+          className="fixed bottom-[4.3rem] md:bottom-4 right-4"
         >
           <button
             className="bg-rose-400 hover:bg-rose-500 dark:bg-blue-500 dark:hover:bg-blue-600 duration-300 rounded-md transition p-2"

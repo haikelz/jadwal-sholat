@@ -98,7 +98,7 @@ export interface Surat {
   audio?: boolean;
   terjemahan?: boolean;
   tafsir?: boolean;
-  tafsirClick?: any;
+  tafsirClick?: () => void;
 }
 
 export interface Context {
