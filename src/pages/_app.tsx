@@ -21,7 +21,7 @@ const App = ({ Component, pageProps, router }: AppProps) => {
 
   return (
     <Provider>
-      <div className="bg-gray-50 dark:bg-gray-900 inset-0 md:flex dark:text-white">
+      <div className="bg-gray-50 dark:bg-gray-900 inset-0 md:flex dark:text-white min-h-screen">
         <BottomNav />
         <AnimatePresence exitBeforeEnter>
           <motion.div

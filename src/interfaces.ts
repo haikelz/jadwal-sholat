@@ -98,7 +98,7 @@ export interface Surat {
   audio?: boolean;
   terjemahan?: boolean;
   tafsir?: boolean;
-  tafsirClick?: () => void;
+  dispatchTafsir?: any;
 }
 
 export interface Context {
@@ -117,7 +117,7 @@ export interface SuratPaths {
 }
 
 export interface DaftarSurah {
-  surah: [
+  surat: [
     surat: {
       number: string;
       asma: {
