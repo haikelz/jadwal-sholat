@@ -5,10 +5,10 @@ import TidakAda from "@/components/atoms/tidakAda";
 import Link from "next/link";
 import reactStringReplace from "react-string-replace";
 
-const ListSurah = ({ surah }: DaftarSurah) => {
+const ListSurah = ({ surat }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredSurah = surah.filter((value) => {
+  const filteredSurah = surat.filter((value) => {
     if (searchTerm === "") {
       return value;
     } else if (

@@ -5,7 +5,7 @@ const DetailSurah = ({ surat, audio, terjemahan }: Surat) => {
     <div className="grid grid-cols-1 mt-6 gap-2 w-full text-end grid-rows-1">
       {surat.ayahs.map((ayat, index: number) => (
         <div
-          className="border-b-2 py-4 border-teal-300 flex flex-col mb-4 justify-end items-end"
+          className="border-b-2 py-4 border-gray-300 flex flex-col mb-4 justify-end items-end"
           key={index + 1}
         >
           <div className="flex w-full relative items-start justify-between gap-2">
@@ -16,7 +16,7 @@ const DetailSurah = ({ surat, audio, terjemahan }: Surat) => {
                   : ayat.number.insurah <= 99
                   ? "px-3.5 py-2.5"
                   : "px-3 py-3"
-              } text-white font-bold border-black bg-teal-500 dark:bg-teal-600 rounded-full flex justify-center items-center`}
+              } text-white font-bold border-black bg-gray-400 dark:bg-teal-600 rounded-full flex justify-center items-center`}
             >
               <p className="font-bold">{ayat.number.insurah}</p>
             </div>
