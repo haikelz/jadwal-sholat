@@ -6,7 +6,7 @@ import Link from "next/link";
 import reactStringReplace from "react-string-replace";
 
 const ListSurah = ({ surat }: DaftarSurah) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const filteredSurah = surat.filter((value) => {
     if (searchTerm === "") {
