@@ -6,7 +6,7 @@ import TidakAda from "@/components/atoms/tidakAda";
 import reactStringReplace from "react-string-replace";
 
 const ListKota = ({ kota }: Kota) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const filteredKota = kota.filter((value) => {
     if (searchTerm === "") {
