@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: "Bitter",
+        heading: "Bitter",
+        body: "Rubik",
         arab: "Noto Naskh Arabic",
       },
     },

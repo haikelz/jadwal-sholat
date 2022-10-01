@@ -1,26 +1,20 @@
-import { DaftarSurah } from "@/src/interfaces";
 import { memo } from "react";
-import { QURAN_API } from "@/utils/api";
-import Layout from "@/components/templates/layout";
+import { QURAN_API } from "@/src/utils/api";
+import { useFetch } from "@/src/hooks/useFetch";
+import Layout from "@/src/components/templates/layout";
 import ListSurah from "@/src/components/molecules/listSurah";
 import Image from "next/image";
+import LoadingText from "@/src/components/atoms/loadingText";
+import ErrorText from "@/src/components/atoms/errorText";
 
-export const getStaticProps = async () => {
-  try {
-    const response: Response = await fetch(`${QURAN_API}/quran`);
-    const data = await response.json();
+const Quran = () => {
+  const { data, isLoading, isError } = useFetch(`${QURAN_API}/quran`);
 
-    return {
-      props: {
-        surat: data.data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
+  if (isLoading) return <LoadingText />;
+  if (isError) return <ErrorText />;
 
-const Quran = ({ surat }: DaftarSurah) => {
+  const surat = data.data;
+
   return (
     <Layout title="Baca Al-Qur'an">
       <div className="flex flex-col justify-center items-center">

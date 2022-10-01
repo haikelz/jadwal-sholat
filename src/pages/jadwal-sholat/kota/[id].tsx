@@ -1,56 +1,29 @@
-import { JADWAL_SHOLAT_API } from "@/utils/api";
-import { Context, Waktu, KotaPaths } from "@/src/interfaces";
+import { JADWAL_SHOLAT_API } from "@/src/utils/api";
+import { useFetch } from "@/src/hooks/useFetch";
+import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
-import { tanggal, tahun, bulan, currentDate } from "@/utils/date";
-import Layout from "@/components/templates/layout";
-import TableJadwalSholat from "@/components/organisms/tableJadwalSholat";
+import { tanggal, tahun, bulan, currentDate } from "@/src/utils/date";
+import Layout from "@/src/components/templates/layout";
+import TableJadwalSholat from "@/src/components/organisms/tableJadwalSholat";
+import LoadingText from "@/src/components/atoms/loadingText";
+import ErrorText from "@/src/components/atoms/errorText";
 
-export const getStaticPaths = async () => {
-  try {
-    const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
-    const data = await response.json();
+const KotaId = () => {
+  const router: NextRouter = useRouter();
+  const id: string | string[] | undefined = router.query.id;
+  let formatDate: string = `${tahun}/${bulan}`;
 
-    const paths = data.map((waktu: KotaPaths) => {
-      return {
-        params: {
-          id: waktu.id === "3212" ? (waktu.id = "3211") : waktu.id,
-        },
-      };
-    });
+  const { data, isLoading, isError } = useFetch(
+    `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
+  );
 
-    return {
-      paths,
-      fallback: false,
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
+  if (isLoading) return <LoadingText />;
+  if (isError) return <ErrorText />;
 
-type Id = string | undefined;
+  const waktu = data.data;
 
-export const getStaticProps = async (context: Context) => {
-  try {
-    let formatDate: string = `${tahun}/${bulan}`;
-    const id: Id = context.params.id;
-    const response: Response = await fetch(
-      `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
-    );
-    const data = await response.json();
-
-    return {
-      props: {
-        waktu: data.data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const KotaId = ({ waktu }: Waktu) => {
   return (
-    <Layout title={`Jadwal Sholat ${waktu.lokasi}`}>
+    <Layout title={waktu.lokasi}>
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-bold text-3xl">{waktu.lokasi}</h1>
         <p className="font-medium text-lg">

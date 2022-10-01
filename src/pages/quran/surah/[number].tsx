@@ -3,85 +3,53 @@ import {
   MdOutlineTranslate,
   MdVolumeUp,
 } from "react-icons/md";
-import { Context, Surat, SuratPaths } from "@/src/interfaces";
+import { useFetch } from "@/src/hooks/useFetch";
 import { audioAtom, tafsirAtom, terjemahanAtom } from "@/src/store";
-import { QURAN_API } from "@/utils/api";
+import { QURAN_API } from "@/src/utils/api";
 import { useReducerAtom } from "jotai/utils";
+import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
-import ModalTafsir from "@/components/atoms/modalTafsir";
-import Sebelumnya from "@/components/atoms/sebelumnya";
-import Selanjutnya from "@/components/atoms/selanjutnya";
+import ErrorText from "@/src/components/atoms/errorText";
+import LoadingText from "@/src/components/atoms/loadingText";
+import ModalTafsir from "@/src/components/atoms/modalTafsir";
+import Sebelumnya from "@/src/components/atoms/sebelumnya";
+import Selanjutnya from "@/src/components/atoms/selanjutnya";
+import Layout from "@/src/components/templates/layout";
 import DetailSurah from "@/src/components/organisms/detailSurah";
-import Layout from "@/components/templates/layout";
-
-export const getStaticPaths = async () => {
-  try {
-    const response: Response = await fetch(`${QURAN_API}/quran`);
-    const data = await response.json();
-
-    const paths = data.data.map((surat: SuratPaths) => {
-      return {
-        params: {
-          number: surat.number.toString(),
-        },
-      };
-    });
-
-    return {
-      paths,
-      fallback: false,
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-type NumberSurah = string | undefined;
-
-export const getStaticProps = async (context: Context) => {
-  try {
-    const number: NumberSurah = context.params.number;
-    const response: Response = await fetch(
-      `${QURAN_API}/quran/${number}?imamId=7`
-    );
-    const data = await response.json();
-
-    return {
-      props: {
-        surat: data.data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 type ReducerType = {
   type: string;
 };
 
-const audioReducer = (prev: boolean, action: ReducerType) => {
-  if (action.type === "audio") return !prev;
+const reducer = (prev: boolean, action: ReducerType) => {
+  if (
+    action.type === "terjemahan" ||
+    action.type === "audio" ||
+    action.type === "tafsir"
+  )
+    return !prev;
   throw new Error("Unknown action type");
 };
 
-const terjemahanReducer = (prev: boolean, action: ReducerType) => {
-  if (action.type === "terjemahan") return !prev;
-  throw new Error("Unknown action type");
-};
-
-const tafsirReducer = (prev: boolean, action: ReducerType) => {
-  if (action.type === "tafsir") return !prev;
-  throw new Error("Unknown action type");
-};
-
-const Surah = ({ surat }: Surat) => {
-  const [audio, dispatchAudio] = useReducerAtom(audioAtom, audioReducer);
+const Surah = () => {
+  const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);
   const [terjemahan, dispatchTerjemahan] = useReducerAtom(
     terjemahanAtom,
-    terjemahanReducer
+    reducer
   );
-  const [tafsir, dispatchTafsir] = useReducerAtom(tafsirAtom, tafsirReducer);
+  const [tafsir, dispatchTafsir] = useReducerAtom(tafsirAtom, reducer);
+
+  const router: NextRouter = useRouter();
+  const number: string | string[] | undefined = router.query.number;
+
+  const { data, isLoading, isError } = useFetch(
+    `${QURAN_API}/quran/${number}?imamId=7`
+  );
+
+  if (isLoading) return <LoadingText />;
+  if (isError) return <ErrorText />;
+
+  const surat = data.data;
 
   const PreviousOrNextButton = () => {
     return (

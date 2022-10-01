@@ -1,26 +1,20 @@
-import { PUASA_SUNNAH_API } from "@/utils/api";
-import { PuasaSunnah } from "@/src/interfaces";
+import { PUASA_SUNNAH_API } from "@/src/utils/api";
 import { memo } from "react";
-import Layout from "@/components/templates/layout";
+import { useFetch } from "@/src/hooks/useFetch";
+import Layout from "@/src/components/templates/layout";
 import Image from "next/image";
-import TableJadwalPuasaSunnah from "@/components/organisms/tableJadwalPuasaSunnah";
+import TableJadwalPuasaSunnah from "@/src/components/organisms/tableJadwalPuasaSunnah";
+import LoadingText from "@/src/components/atoms/loadingText";
+import ErrorText from "@/src/components/atoms/errorText";
 
-export const getStaticProps = async () => {
-  try {
-    const response: Response = await fetch(`${PUASA_SUNNAH_API}`);
-    const data = await response.json();
+const PuasaSunnah = () => {
+  const { data, isLoading, isError } = useFetch(`${PUASA_SUNNAH_API}`);
 
-    return {
-      props: {
-        puasaSunnah: data.data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
+  if (isLoading) return <LoadingText />;
+  if (isError) return <ErrorText />;
 
-const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
+  const puasaSunnah = data.data;
+
   return (
     <Layout title="Jadwal Puasa Sunnah">
       <div className="flex flex-col justify-center items-center">
