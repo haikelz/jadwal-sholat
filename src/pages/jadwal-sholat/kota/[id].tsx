@@ -1,29 +1,56 @@
 import { JADWAL_SHOLAT_API } from "@/src/utils/api";
-import { useFetch } from "@/src/hooks/useFetch";
-import { NextRouter, useRouter } from "next/router";
+import { Context, Waktu, KotaPaths } from "@/src/interfaces";
 import { memo } from "react";
 import { tanggal, tahun, bulan, currentDate } from "@/src/utils/date";
 import Layout from "@/src/components/templates/layout";
 import TableJadwalSholat from "@/src/components/organisms/tableJadwalSholat";
-import LoadingText from "@/src/components/atoms/loadingText";
-import ErrorText from "@/src/components/atoms/errorText";
 
-const KotaId = () => {
-  const router: NextRouter = useRouter();
-  const id: string | string[] | undefined = router.query.id;
-  let formatDate: string = `${tahun}/${bulan}`;
+export const getStaticPaths = async () => {
+  try {
+    const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
+    const data = await response.json();
 
-  const { data, isLoading, isError } = useFetch(
-    `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
-  );
+    const paths = data.map((waktu: KotaPaths) => {
+      return {
+        params: {
+          id: waktu.id === "3212" ? (waktu.id = "3211") : waktu.id,
+        },
+      };
+    });
 
-  if (isLoading) return <LoadingText />;
-  if (isError) return <ErrorText />;
+    return {
+      paths,
+      fallback: false,
+    };
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-  const waktu = data.data;
+type Id = string | undefined;
 
+export const getStaticProps = async (context: Context) => {
+  try {
+    let formatDate: string = `${tahun}/${bulan}`;
+    const id: Id = context.params.id;
+    const response: Response = await fetch(
+      `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
+    );
+    const data = await response.json();
+
+    return {
+      props: {
+        waktu: data.data,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const KotaId = ({ waktu }: Waktu) => {
   return (
-    <Layout title={waktu.lokasi}>
+    <Layout title={`Jadwal Sholat ${waktu.lokasi}`}>
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-bold text-3xl">{waktu.lokasi}</h1>
         <p className="font-medium text-lg">
