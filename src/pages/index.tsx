@@ -1,6 +1,6 @@
 import { memo } from "react";
-import { hours } from "@/utils/date";
-import Time from "@/components/molecules/time";
+import { hours } from "@/src/utils/date";
+import Time from "@/src/components/molecules/time";
 import Head from "next/head";
 import Image from "next/image";
 
@@ -24,7 +24,7 @@ const Home = () => {
             src="/img/home.png"
             width="100px"
             height="100px"
-            alt="Home Page"
+            alt="Home Image"
             priority={true}
           />
           <div className="mt-3 flex flex-col justify-center items-center text-center">

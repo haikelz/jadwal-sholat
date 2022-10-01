@@ -2,11 +2,11 @@ import { Provider, useAtom } from "jotai";
 import { mountedAtom } from "@/src/store";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { appAnimation } from "@/utils/animation";
-import "@/styles/globals.css";
+import { appAnimation } from "@/src/utils/animation";
+import "../styles/index.scss";
 import type { AppProps } from "next/app";
-import BottomNav from "@/components/organisms/navbar";
-import BackToTop from "@/components/atoms/backToTop";
+import BottomNav from "@/src/components/organisms/navbar";
+import BackToTop from "@/src/components/atoms/backToTop";
 
 const App = ({ Component, pageProps, router }: AppProps) => {
   const [mounted, setMounted] = useAtom(mountedAtom);

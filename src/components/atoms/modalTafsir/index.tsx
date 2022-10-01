@@ -7,7 +7,7 @@ const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: Surat) => {
       {tafsir && (
         <div
           tabIndex={-1}
-          aria-hidden="true"
+          aria-hidden={true}
           className="overflow-y-auto flex justify-center text-black items-center backdrop-blur-[3px] overflow-x-hidden top-0 fixed z-50 w-full md:inset-0 md:h-full"
         >
           <div className="relative p-4 w-full max-w-2xl h-screen md:h-auto">

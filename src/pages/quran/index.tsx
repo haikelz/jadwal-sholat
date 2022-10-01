@@ -1,8 +1,8 @@
 import { DaftarSurah } from "@/src/interfaces";
+import { QURAN_API } from "@/src/utils/api";
 import { memo } from "react";
-import { QURAN_API } from "@/utils/api";
-import Layout from "@/components/templates/layout";
 import ListSurah from "@/src/components/molecules/listSurah";
+import Layout from "@/src/components/templates/layout";
 import Image from "next/image";
 
 export const getStaticProps = async () => {

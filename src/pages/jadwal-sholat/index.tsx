@@ -1,8 +1,8 @@
-import { JADWAL_SHOLAT_API } from "@/utils/api";
+import { JADWAL_SHOLAT_API } from "@/src/utils/api";
 import { Kota } from "@/src/interfaces";
 import { memo } from "react";
-import Layout from "@/components/templates/layout";
-import SemuaKota from "@/components/molecules/listKota";
+import Layout from "@/src/components/templates/layout";
+import SemuaKota from "@/src/components/molecules/listKota";
 import Image from "next/image";
 
 export const getStaticProps = async () => {

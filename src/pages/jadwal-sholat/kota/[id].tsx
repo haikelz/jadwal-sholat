@@ -1,9 +1,9 @@
-import { JADWAL_SHOLAT_API } from "@/utils/api";
+import { JADWAL_SHOLAT_API } from "@/src/utils/api";
 import { Context, Waktu, KotaPaths } from "@/src/interfaces";
 import { memo } from "react";
-import { tanggal, tahun, bulan, currentDate } from "@/utils/date";
-import Layout from "@/components/templates/layout";
-import TableJadwalSholat from "@/components/organisms/tableJadwalSholat";
+import { tanggal, tahun, bulan, currentDate } from "@/src/utils/date";
+import Layout from "@/src/components/templates/layout";
+import TableJadwalSholat from "@/src/components/organisms/tableJadwalSholat";
 
 export const getStaticPaths = async () => {
   try {

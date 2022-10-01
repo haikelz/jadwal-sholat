@@ -5,14 +5,16 @@ import {
 } from "react-icons/md";
 import { Context, Surat, SuratPaths } from "@/src/interfaces";
 import { audioAtom, tafsirAtom, terjemahanAtom } from "@/src/store";
-import { QURAN_API } from "@/utils/api";
+import { QURAN_API } from "@/src/utils/api";
 import { useReducerAtom } from "jotai/utils";
 import { memo } from "react";
-import ModalTafsir from "@/components/atoms/modalTafsir";
-import Sebelumnya from "@/components/atoms/sebelumnya";
-import Selanjutnya from "@/components/atoms/selanjutnya";
+import ModalTafsir from "@/src/components/atoms/modalTafsir";
+import Sebelumnya from "@/src/components/atoms/sebelumnya";
+import Selanjutnya from "@/src/components/atoms/selanjutnya";
 import DetailSurah from "@/src/components/organisms/detailSurah";
-import Layout from "@/components/templates/layout";
+import Layout from "@/src/components/templates/layout";
+
+type NumberSurah = string | undefined;
 
 export const getStaticPaths = async () => {
   try {
@@ -36,8 +38,6 @@ export const getStaticPaths = async () => {
   }
 };
 
-type NumberSurah = string | undefined;
-
 export const getStaticProps = async (context: Context) => {
   try {
     const number: NumberSurah = context.params.number;
@@ -60,28 +60,23 @@ type ReducerType = {
   type: string;
 };
 
-const audioReducer = (prev: boolean, action: ReducerType) => {
-  if (action.type === "audio") return !prev;
-  throw new Error("Unknown action type");
-};
-
-const terjemahanReducer = (prev: boolean, action: ReducerType) => {
-  if (action.type === "terjemahan") return !prev;
-  throw new Error("Unknown action type");
-};
-
-const tafsirReducer = (prev: boolean, action: ReducerType) => {
-  if (action.type === "tafsir") return !prev;
+const reducer = (prev: boolean, action: ReducerType) => {
+  if (
+    action.type === "terjemahan" ||
+    action.type === "audio" ||
+    action.type === "tafsir"
+  )
+    return !prev;
   throw new Error("Unknown action type");
 };
 
 const Surah = ({ surat }: Surat) => {
-  const [audio, dispatchAudio] = useReducerAtom(audioAtom, audioReducer);
+  const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);
   const [terjemahan, dispatchTerjemahan] = useReducerAtom(
     terjemahanAtom,
-    terjemahanReducer
+    reducer
   );
-  const [tafsir, dispatchTafsir] = useReducerAtom(tafsirAtom, tafsirReducer);
+  const [tafsir, dispatchTafsir] = useReducerAtom(tafsirAtom, reducer);
 
   const PreviousOrNextButton = () => {
     return (

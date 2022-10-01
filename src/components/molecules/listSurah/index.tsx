@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import { DaftarSurah } from "@/src/interfaces";
-import SearchBar from "@/components/atoms/searchBar";
-import TidakAda from "@/components/atoms/tidakAda";
+import SearchBar from "@/src/components/atoms/searchBar";
+import TidakAda from "@/src/components/atoms/tidakAda";
 import Link from "next/link";
 import reactStringReplace from "react-string-replace";
 

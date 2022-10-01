@@ -1,9 +1,9 @@
-import { PUASA_SUNNAH_API } from "@/utils/api";
+import { PUASA_SUNNAH_API } from "@/src/utils/api";
 import { PuasaSunnah } from "@/src/interfaces";
 import { memo } from "react";
-import Layout from "@/components/templates/layout";
+import Layout from "@/src/components/templates/layout";
 import Image from "next/image";
-import TableJadwalPuasaSunnah from "@/components/organisms/tableJadwalPuasaSunnah";
+import TableJadwalPuasaSunnah from "@/src/components/organisms/tableJadwalPuasaSunnah";
 
 export const getStaticProps = async () => {
   try {
