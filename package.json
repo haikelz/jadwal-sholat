@@ -18,8 +18,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-string-replace": "^1.1.0",
-    "sass": "^1.55.0",
-    "swr": "2.0.0-beta.1"
+    "sass": "^1.55.0"
   },
   "devDependencies": {
     "@types/node": "17.0.43",
