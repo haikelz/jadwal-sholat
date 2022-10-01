@@ -7,7 +7,6 @@ import "../styles/index.scss";
 import type { AppProps } from "next/app";
 import BottomNav from "@/src/components/organisms/navbar";
 import BackToTop from "@/src/components/atoms/backToTop";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const App = ({ Component, pageProps, router }: AppProps) => {
   const [mounted, setMounted] = useAtom(mountedAtom);
@@ -20,26 +19,22 @@ const App = ({ Component, pageProps, router }: AppProps) => {
     return null;
   }
 
-  const newClient = new QueryClient();
-
   return (
-    <QueryClientProvider client={newClient}>
-      <Provider>
-        <div className="bg-gray-50 dark:bg-gray-900 inset-0 md:flex dark:text-white min-h-screen">
-          <BottomNav />
-          <AnimatePresence exitBeforeEnter>
-            <motion.div
-              className="flex w-full justify-center items-center"
-              key={router.route}
-              {...appAnimation}
-            >
-              <Component {...pageProps} />
-              <BackToTop />
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </Provider>
-    </QueryClientProvider>
+    <Provider>
+      <div className="bg-gray-50 dark:bg-gray-900 inset-0 md:flex dark:text-white min-h-screen">
+        <BottomNav />
+        <AnimatePresence exitBeforeEnter>
+          <motion.div
+            className="flex w-full justify-center items-center"
+            key={router.route}
+            {...appAnimation}
+          >
+            <Component {...pageProps} />
+            <BackToTop />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </Provider>
   );
 };
 
