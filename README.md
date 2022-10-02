@@ -7,8 +7,7 @@
 
 - Jadwal sholat
 - Baca Al-Qur'an(dengan audio, terjemahan, juga bahasa latin)
-
-> ~~Sebenernya ada jadwal puasa sunnah nya juga, berhubung API nya lagi error, jadi didisable dulu~~ NVM, udah ada rupanya
+- Puasa Sunnah
 
 ## Tech Stack
 

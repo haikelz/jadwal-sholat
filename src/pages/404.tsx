@@ -3,13 +3,13 @@ import { memo, useEffect } from "react";
 import Image from "next/image";
 
 const ErrorPage = () => {
-  const Router: NextRouter = useRouter();
+  const router: NextRouter = useRouter();
 
   useEffect(() => {
     setTimeout(() => {
-      Router.push("/");
+      router.push("/");
     }, 5000);
-  }, [Router]);
+  }, [router]);
 
   return (
     <div className="flex justify-center text-center min-h-screen items-center flex-col">

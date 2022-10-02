@@ -3,7 +3,8 @@ import {
   MdOutlineTranslate,
   MdVolumeUp,
 } from "react-icons/md";
-import { Context, Surat, SuratPaths } from "@/src/interfaces";
+import { Surat, SuratPaths } from "@/src/interfaces";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { audioAtom, tafsirAtom, terjemahanAtom } from "@/src/store";
 import { QURAN_API } from "@/src/utils/api";
 import { useReducerAtom } from "jotai/utils";
@@ -14,46 +15,36 @@ import Selanjutnya from "@/src/components/atoms/selanjutnya";
 import DetailSurah from "@/src/components/organisms/detailSurah";
 import Layout from "@/src/components/templates/layout";
 
-type NumberSurah = string | undefined;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response: Response = await fetch(`${QURAN_API}/quran`);
+  const data = await response.json();
 
-export const getStaticPaths = async () => {
-  try {
-    const response: Response = await fetch(`${QURAN_API}/quran`);
-    const data = await response.json();
-
-    const paths = data.data.map((surat: SuratPaths) => {
-      return {
-        params: {
-          number: surat.number.toString(),
-        },
-      };
-    });
-
+  const paths = data.data.map((surat: SuratPaths) => {
     return {
-      paths,
-      fallback: false,
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getStaticProps = async (context: Context) => {
-  try {
-    const number: NumberSurah = context.params.number;
-    const response: Response = await fetch(
-      `${QURAN_API}/quran/${number}?imamId=7`
-    );
-    const data = await response.json();
-
-    return {
-      props: {
-        surat: data.data,
+      params: {
+        number: surat.number.toString(),
       },
     };
-  } catch (err) {
-    console.log(err);
-  }
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { number } = params as { number: string };
+  const response: Response = await fetch(
+    `${QURAN_API}/quran/${number}?imamId=7`
+  );
+  const data = await response.json();
+
+  return {
+    props: {
+      surat: data.data,
+    },
+  };
 };
 
 type ReducerType = {
