@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import { JADWAL_SHOLAT_API } from "@/src/utils/api";
 import { Kota } from "@/src/interfaces";
 import { memo } from "react";
@@ -5,19 +6,15 @@ import Layout from "@/src/components/templates/layout";
 import SemuaKota from "@/src/components/molecules/listKota";
 import Image from "next/image";
 
-export const getStaticProps = async () => {
-  try {
-    const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
-    const data = await response.json();
+export const getStaticProps: GetStaticProps = async () => {
+  const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
+  const data = await response.json();
 
-    return {
-      props: {
-        kota: data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
+  return {
+    props: {
+      kota: data,
+    },
+  };
 };
 
 const JadwalSholat = ({ kota }: Kota) => {

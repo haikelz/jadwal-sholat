@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import { PUASA_SUNNAH_API } from "@/src/utils/api";
 import { PuasaSunnah } from "@/src/interfaces";
 import { memo } from "react";
@@ -5,19 +6,15 @@ import Layout from "@/src/components/templates/layout";
 import Image from "next/image";
 import TableJadwalPuasaSunnah from "@/src/components/organisms/tableJadwalPuasaSunnah";
 
-export const getStaticProps = async () => {
-  try {
-    const response: Response = await fetch(`${PUASA_SUNNAH_API}`);
-    const data = await response.json();
+export const getStaticProps: GetStaticProps = async () => {
+  const response: Response = await fetch(`${PUASA_SUNNAH_API}`);
+  const data = await response.json();
 
-    return {
-      props: {
-        puasaSunnah: data.data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
+  return {
+    props: {
+      puasaSunnah: data.data,
+    },
+  };
 };
 
 const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
