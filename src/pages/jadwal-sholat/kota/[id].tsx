@@ -1,51 +1,43 @@
+import { KotaPaths, Waktu } from "@/src/interfaces";
 import { JADWAL_SHOLAT_API } from "@/src/utils/api";
-import { Context, Waktu, KotaPaths } from "@/src/interfaces";
+import { bulan, currentDate, tahun, tanggal } from "@/src/utils/date";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { memo } from "react";
-import { tanggal, tahun, bulan, currentDate } from "@/src/utils/date";
-import Layout from "@/src/components/templates/layout";
 import TableJadwalSholat from "@/src/components/organisms/tableJadwalSholat";
+import Layout from "@/src/components/templates/layout";
 
-export const getStaticPaths = async () => {
-  try {
-    const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
-    const data = await response.json();
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
+  const data = await response.json();
 
-    const paths = data.map((waktu: KotaPaths) => {
-      return {
-        params: {
-          id: waktu.id === "3212" ? (waktu.id = "3211") : waktu.id,
-        },
-      };
-    });
-
+  const paths = data.map((waktu: KotaPaths) => {
     return {
-      paths,
-      fallback: false,
-    };
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-type Id = string | undefined;
-
-export const getStaticProps = async (context: Context) => {
-  try {
-    let formatDate: string = `${tahun}/${bulan}`;
-    const id: Id = context.params.id;
-    const response: Response = await fetch(
-      `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
-    );
-    const data = await response.json();
-
-    return {
-      props: {
-        waktu: data.data,
+      params: {
+        id: waktu.id === "3212" ? (waktu.id = "3211") : waktu.id,
       },
     };
-  } catch (err) {
-    console.log(err);
-  }
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  let formatDate: string = `${tahun}/${bulan}`;
+
+  const { id } = params as { id: string };
+  const response: Response = await fetch(
+    `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
+  );
+  const data = await response.json();
+
+  return {
+    props: {
+      waktu: data.data,
+    },
+  };
 };
 
 const KotaId = ({ waktu }: Waktu) => {

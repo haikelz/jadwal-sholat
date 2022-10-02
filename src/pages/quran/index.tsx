@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import { DaftarSurah } from "@/src/interfaces";
 import { QURAN_API } from "@/src/utils/api";
 import { memo } from "react";
@@ -5,19 +6,15 @@ import ListSurah from "@/src/components/molecules/listSurah";
 import Layout from "@/src/components/templates/layout";
 import Image from "next/image";
 
-export const getStaticProps = async () => {
-  try {
-    const response: Response = await fetch(`${QURAN_API}/quran`);
-    const data = await response.json();
+export const getStaticProps: GetStaticProps = async () => {
+  const response: Response = await fetch(`${QURAN_API}/quran`);
+  const data = await response.json();
 
-    return {
-      props: {
-        surat: data.data,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-  }
+  return {
+    props: {
+      surat: data.data,
+    },
+  };
 };
 
 const Quran = ({ surat }: DaftarSurah) => {
