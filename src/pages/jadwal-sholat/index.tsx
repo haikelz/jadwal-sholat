@@ -1,23 +1,22 @@
-import { GetStaticProps } from "next";
-import { JADWAL_SHOLAT_API } from "@/src/utils/api";
-import { Kota } from "@/src/interfaces";
 import { memo } from "react";
+import { useFetch } from "@/src/hooks/useFetch";
+import { JADWAL_SHOLAT_API } from "@/src/utils/api";
 import Layout from "@/src/components/templates/layout";
 import SemuaKota from "@/src/components/molecules/listKota";
 import Image from "next/image";
+import Loading from "@/src/components/atoms/loading";
+import ErrorWhenFetch from "@/src/components/atoms/errorwhenFetch";
 
-export const getStaticProps: GetStaticProps = async () => {
-  const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
-  const data = await response.json();
+const JadwalSholat = () => {
+  const { data, isLoading, isError } = useFetch(
+    `${JADWAL_SHOLAT_API}/kota/semua`
+  );
 
-  return {
-    props: {
-      kota: data,
-    },
-  };
-};
+  if (isLoading) return <Loading />;
+  if (isError) return <ErrorWhenFetch />;
 
-const JadwalSholat = ({ kota }: Kota) => {
+  const kota = data;
+
   return (
     <Layout title="Jadwal Sholat">
       <div className="flex flex-col justify-center items-center">
