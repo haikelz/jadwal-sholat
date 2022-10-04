@@ -7,7 +7,7 @@ import Layout from "@/src/components/templates/layout";
 import Image from "next/image";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response: Response = await fetch(`${PUASA_SUNNAH_API}`);
+  const response: Response = await fetch(PUASA_SUNNAH_API);
   const data = await response.json();
 
   return {

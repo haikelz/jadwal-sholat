@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-    <div className="flex gap-3">
+    <div className="flex justify-center items-center min-h-screen gap-3">
       <p className="text-2xl font-bold">Loading</p>
       <div role="status">
         <svg
