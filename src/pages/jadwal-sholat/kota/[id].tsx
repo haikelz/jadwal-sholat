@@ -1,46 +1,26 @@
-import { KotaPaths, Waktu } from "@/src/interfaces";
+import { useFetch } from "@/src/hooks/useFetch";
 import { JADWAL_SHOLAT_API } from "@/src/utils/api";
 import { bulan, currentDate, tahun, tanggal } from "@/src/utils/date";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import TableJadwalSholat from "@/src/components/organisms/tableJadwalSholat";
 import Layout from "@/src/components/templates/layout";
+import Loading from "@/src/components/atoms/loading";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const response: Response = await fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
-  const data = await response.json();
-
-  const paths = data.map((waktu: KotaPaths) => {
-    return {
-      params: {
-        id: waktu.id === "3212" ? (waktu.id = "3211") : waktu.id,
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+const KotaId = () => {
+  const router: NextRouter = useRouter();
+  const { id } = router.query;
   let formatDate: string = `${tahun}/${bulan}`;
 
-  const { id } = params as { id: string };
-  const response: Response = await fetch(
-    `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
+  const { data, isLoading, isError } = useFetch(
+    id ? `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : null
   );
-  const data = await response.json();
 
-  return {
-    props: {
-      waktu: data.data,
-    },
-  };
-};
+  if (isLoading) return <Loading />;
+  if (isError) return <p>Error!</p>;
 
-const KotaId = ({ waktu }: Waktu) => {
+  const waktu = data.data;
+
   return (
     <Layout title={`Jadwal Sholat ${waktu.lokasi}`}>
       <div className="flex flex-col justify-center items-center">
