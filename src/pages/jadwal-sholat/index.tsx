@@ -19,9 +19,9 @@ const JadwalSholat = () => {
 
   return (
     <Layout title="Jadwal Sholat">
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex justify-center items-center gap-3">
-          <h1 className="sm:text-4xl text-3xl font-bold">Jadwal Sholat</h1>
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex items-center justify-center gap-3">
+          <h1>Jadwal Sholat</h1>
           <Image
             src="/img/mosque.png"
             width="40px"
@@ -30,7 +30,7 @@ const JadwalSholat = () => {
             priority={true}
           />
         </div>
-        <p className="font-medium mt-2 text-lg">
+        <p className="mt-2 text-lg font-medium">
           Berikut daftar Kabupaten/Kota yang tersedia
         </p>
       </div>

@@ -21,11 +21,11 @@ const App = ({ Component, pageProps, router }: AppProps) => {
 
   return (
     <Provider>
-      <div className="bg-gray-50 dark:bg-gray-900 inset-0 md:flex dark:text-white min-h-screen">
+      <div className="inset-0 min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white md:flex">
         <BottomNav />
         <AnimatePresence exitBeforeEnter>
           <motion.div
-            className="flex w-full justify-center items-center"
+            className="flex w-full items-center justify-center"
             key={router.route}
             {...appAnimation}
           >

@@ -20,11 +20,9 @@ export const getStaticProps: GetStaticProps = async () => {
 const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
   return (
     <Layout title="Jadwal Puasa Sunnah">
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex justify-center items-center gap-3">
-          <h1 className="sm:text-4xl text-3xl font-bold">
-            Jadwal Puasa Sunnah
-          </h1>
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex items-center justify-center gap-3">
+          <h1>Jadwal Puasa Sunnah</h1>
           <Image
             src="/img/fasting.png"
             width="35px"
@@ -33,11 +31,11 @@ const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
             priority={true}
           />
         </div>
-        <p className="font-medium mt-2 text-lg">
+        <p className="mt-2 text-lg font-medium">
           Berikut jadwal puasa sunnah bulan ini
         </p>
       </div>
-      <div className="text-center flex gap-7 justify-center overflow-x-auto w-full">
+      <div className="flex w-full justify-center gap-7 overflow-x-auto text-center">
         <TableJadwalPuasaSunnah puasaSunnah={puasaSunnah} />
       </div>
     </Layout>

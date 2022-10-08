@@ -3,13 +3,13 @@ import { numBulan, matchDate } from "@/src/utils/date";
 
 const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
   return (
-    <table className="border-2 border-black dark:border-none table-fixed">
+    <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">
         <tr className="border-2 border-black dark:border-none">
-          <th className="border-r-2 border-r-black dark:border-none text-xl px-2 lg:px-4">
+          <th className="border-r-2 border-r-black px-2 text-xl dark:border-none lg:px-4">
             Tanggal
           </th>
-          <th className="border-r-2 border-r-black dark:border-none text-xl px-2 lg:px-4">
+          <th className="border-r-2 border-r-black px-2 text-xl dark:border-none lg:px-4">
             Jenis Puasa
           </th>
         </tr>
@@ -23,17 +23,17 @@ const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
              */
             fasting.month === numBulan && (
               <tr
-                className={`border-black dark:border-none border-b-2 ${
+                className={`border-b-2 border-black dark:border-none ${
                   fasting.date === matchDate
-                    ? "dark:bg-teal-700 bg-teal-600 text-white"
-                    : "dark:odd:bg-gray-800 odd:bg-teal-300"
+                    ? "bg-teal-600 text-white dark:bg-teal-700"
+                    : "odd:bg-teal-300 dark:odd:bg-gray-800"
                 }`}
                 key={index + 1}
               >
-                <td className="border-r-2 font-medium border-black dark:border-none px-2 lg:px-4 text-xl">
+                <td className="border-r-2 border-black px-2 text-xl font-medium dark:border-none lg:px-4">
                   {fasting.date}
                 </td>
-                <td className="border-r-2 font-medium border-black dark:border-none px-2 lg:px-4 text-xl">
+                <td className="border-r-2 border-black px-2 text-xl font-medium dark:border-none lg:px-4">
                   {fasting.type.name}
                 </td>
               </tr>

@@ -7,8 +7,8 @@ const Layout = ({ children, title }: Children) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <section className="flex justify-center text-center items-center max-w-full w-full px-5 md:px-8 pt-8 pb-24 flex-col bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-full w-full flex justify-center gap-7 items-center flex-col">
+      <section className="flex w-full max-w-full flex-col items-center justify-center bg-gray-50 px-5 pt-8 pb-24 text-center dark:bg-gray-900 md:px-8">
+        <div className="flex w-full max-w-full flex-col items-center justify-center gap-7">
           {children}
         </div>
       </section>

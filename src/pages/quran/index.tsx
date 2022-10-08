@@ -17,9 +17,9 @@ const Quran = () => {
 
   return (
     <Layout title="Baca Al-Qur'an">
-      <div className="flex flex-col justify-center items-center">
-        <div className="flex justify-center items-center gap-3">
-          <h1 className="sm:text-4xl text-3xl font-bold">Baca Al-Qur&#39;an</h1>
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex items-center justify-center gap-3">
+          <h1>Baca Al-Qur&#39;an</h1>
           <Image
             src="/img/Quran.png"
             width="40px"
@@ -28,7 +28,7 @@ const Quran = () => {
             priority={true}
           />
         </div>
-        <p className="font-medium text-lg mt-2">
+        <p className="mt-2 text-lg font-medium">
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;
         </p>
       </div>

@@ -21,10 +21,10 @@ const BackToTop = () => {
       {scroll > height && (
         <motion.div
           {...backToTopAnimation}
-          className="fixed bottom-[4.3rem] md:bottom-4 right-4"
+          className="fixed bottom-[4.3rem] right-4 md:bottom-4"
         >
           <button
-            className="bg-rose-400 hover:bg-rose-500 dark:bg-blue-500 dark:hover:bg-blue-600 duration-300 rounded-md transition p-1.5"
+            className="rounded-md bg-rose-400 p-1.5 transition duration-300 hover:bg-rose-500 dark:bg-blue-500 dark:hover:bg-blue-600"
             onClick={handleClick}
           >
             <MdKeyboardArrowUp className="text-white" size="32" />

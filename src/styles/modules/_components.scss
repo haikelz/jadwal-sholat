@@ -1,0 +1,21 @@
+@layer components {
+  .underline-animation {
+    @apply relative inline-block cursor-pointer;
+  }
+
+  .underline-animation:after {
+    @apply absolute bottom-0 left-0 h-[2px] w-full origin-bottom-right bg-red-500 dark:bg-blue-500;
+    content: "";
+    transform: scaleX(0);
+    transition: transform 0.25s ease-out;
+  }
+
+  .underline-animation:hover:after {
+    @apply origin-bottom-left;
+    transform: scaleX(1);
+  }
+
+  .hover-animation {
+    @apply transition-all duration-200 ease-in-out;
+  }
+}

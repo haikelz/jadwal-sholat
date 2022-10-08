@@ -10,7 +10,7 @@ const Time = () => {
   }, [setDate]);
 
   return (
-    <div className="flex text-xl gap-1 font-bold">
+    <div className="flex gap-1 text-xl font-bold">
       <p>
         {date.toLocaleDateString("id-ID", {
           day: "numeric",

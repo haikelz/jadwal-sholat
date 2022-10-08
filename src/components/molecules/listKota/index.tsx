@@ -20,7 +20,7 @@ const ListKota = ({ kota }: Kota) => {
     <>
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredKota.length ? (
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-center gap-5 grid-rows-1 w-full">
+        <div className="grid w-full grid-cols-1 grid-rows-1 gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredKota.map((loc, index: number) => (
             <Link
               href={`/jadwal-sholat/kota/${
@@ -28,8 +28,8 @@ const ListKota = ({ kota }: Kota) => {
               }`}
               key={index + 1}
             >
-              <div className="cursor-pointer border-2 dark:bg-[#2A2A37] dark:border-white rounded-sm border-black overflow-hidden bg-gray-100 py-6 px-10 flex justify-center items-center">
-                <a className="font-semibold text-xl">
+              <div className="flex cursor-pointer items-center justify-center overflow-hidden rounded-sm border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]">
+                <a className="text-xl font-semibold">
                   {searchTerm
                     ? reactStringReplace(
                         loc.lokasi,
