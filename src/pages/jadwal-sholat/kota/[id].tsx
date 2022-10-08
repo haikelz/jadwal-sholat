@@ -30,12 +30,7 @@ const KotaId = () => {
         </p>
       </div>
       <div className="flex w-full items-center gap-7 overflow-x-auto text-center lg:justify-center">
-        <TableJadwalSholat
-          tanggal={tanggal}
-          tahun={tahun}
-          bulan={bulan}
-          waktu={waktu}
-        />
+        <TableJadwalSholat tanggal={tanggal} tahun={tahun} bulan={bulan} waktu={waktu} />
       </div>
     </Layout>
   );

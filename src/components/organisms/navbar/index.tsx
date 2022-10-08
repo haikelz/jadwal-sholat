@@ -5,13 +5,9 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { IconType } from "react-icons/lib";
 import Link from "next/link";
 
-type ChangeTheme = () => void;
-
 const BottomNav = () => {
   const [theme, setTheme] = useTheme();
   const router: NextRouter = useRouter();
-  const changeTheme: ChangeTheme = () =>
-    setTheme(theme === "dark" ? "light" : "dark");
 
   return (
     <nav className="bg-gray-50 dark:bg-gray-800 md:border-r md:border-r-gray-300 md:dark:border-r-gray-600">
@@ -19,15 +15,11 @@ const BottomNav = () => {
         {navbarList.map((item, index) => {
           const Icon: IconType = item.icon;
           return (
-            <div
-              key={index + 1}
-              className="flex w-full items-center justify-center"
-            >
+            <div key={index + 1} className="flex w-full items-center justify-center">
               <Link href={item.href} passHref>
                 <button
                   className={`flex cursor-pointer flex-col items-center justify-center px-4 transition-all duration-200 ease-in-out md:p-2.5 ${
-                    router.asPath === item.path ||
-                    router.asPath.includes(item.path[1])
+                    router.asPath === item.path || router.asPath.includes(item.path[1])
                       ? "text-gray-600 dark:text-white"
                       : "text-gray-500 dark:text-gray-400"
                   }`}
@@ -42,16 +34,10 @@ const BottomNav = () => {
         <div className="flex w-full items-center justify-center">
           <button
             className="flex cursor-pointer flex-col items-center justify-center px-4 text-gray-500 dark:text-gray-400"
-            onClick={changeTheme}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
-            {theme === "light" ? (
-              <MdDarkMode size="20px" />
-            ) : (
-              <MdLightMode size="20px" />
-            )}
-            <p className="text-sm font-semibold">
-              {theme === "light" ? "Dark" : "Light"}
-            </p>
+            {theme === "light" ? <MdDarkMode size="20px" /> : <MdLightMode size="20px" />}
+            <p className="text-sm font-semibold">{theme === "light" ? "Dark" : "Light"}</p>
           </button>
         </div>
       </div>

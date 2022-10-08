@@ -13,9 +13,7 @@ const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: Surat) => {
           <div className="relative w-full max-w-2xl p-4 md:h-auto">
             <div className="relative rounded-lg bg-white shadow dark:bg-gray-800 dark:text-white">
               <div className="flex items-center justify-between rounded-t border-b p-4">
-                <h3 className="text-xl font-semibold">
-                  Tafsir Surat {surat.asma.id.short}
-                </h3>
+                <h3 className="text-xl font-semibold">Tafsir Surat {surat.asma.id.short}</h3>
                 <button
                   type="button"
                   className="ml-auto inline-flex items-center rounded-lg bg-transparent  p-1.5 text-sm text-gray-400 hover:bg-gray-200 dark:text-white dark:hover:text-black"

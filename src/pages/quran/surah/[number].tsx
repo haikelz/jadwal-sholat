@@ -1,15 +1,6 @@
-import {
-  MdInsertComment,
-  MdOutlineTranslate,
-  MdVolumeUp,
-} from "react-icons/md";
+import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 import { useFetch } from "@/src/hooks/useFetch";
-import {
-  audioAtom,
-  notificationAtom,
-  tafsirAtom,
-  terjemahanAtom,
-} from "@/src/store";
+import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "@/src/store";
 import { QURAN_API } from "@/src/utils/api";
 import { useReducerAtom } from "jotai/utils";
 import { NextRouter, useRouter } from "next/router";
@@ -40,15 +31,9 @@ const reducer = (prev: boolean, action: ReducerType) => {
 
 const Surah = () => {
   const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);
-  const [terjemahan, dispatchTerjemahan] = useReducerAtom(
-    terjemahanAtom,
-    reducer
-  );
+  const [terjemahan, dispatchTerjemahan] = useReducerAtom(terjemahanAtom, reducer);
   const [tafsir, dispatchTafsir] = useReducerAtom(tafsirAtom, reducer);
-  const [notification, dispatchNotification] = useReducerAtom(
-    notificationAtom,
-    reducer
-  );
+  const [notification, dispatchNotification] = useReducerAtom(notificationAtom, reducer);
 
   const router: NextRouter = useRouter();
   const { number } = router.query;
@@ -64,11 +49,7 @@ const Surah = () => {
 
   const PreviousOrNextButton = () => {
     return (
-      <div
-        className={`flex w-full gap-3 ${
-          surat.number > 1 ? "justify-between" : "justify-end"
-        }`}
-      >
+      <div className={`flex w-full gap-3 ${surat.number > 1 ? "justify-between" : "justify-end"}`}>
         <Sebelumnya surat={surat} />
         <Selanjutnya surat={surat} />
       </div>
@@ -107,13 +88,7 @@ const Surah = () => {
             <p className="text-lg font-bold">Tafsir</p>
           </button>
         </div>
-        {tafsir && (
-          <ModalTafsir
-            surat={surat}
-            dispatchTafsir={dispatchTafsir}
-            tafsir={tafsir}
-          />
-        )}
+        {tafsir && <ModalTafsir surat={surat} dispatchTafsir={dispatchTafsir} tafsir={tafsir} />}
       </div>
       <PreviousOrNextButton />
       <DetailSurah
@@ -124,9 +99,7 @@ const Surah = () => {
         dispatchNotification={dispatchNotification}
       />
       <PreviousOrNextButton />
-      {notification && (
-        <Notification dispatchNotification={dispatchNotification} />
-      )}
+      {notification && <Notification dispatchNotification={dispatchNotification} />}
     </Layout>
   );
 };

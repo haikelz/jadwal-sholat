@@ -1,40 +1,22 @@
 import { Waktu } from "@/src/interfaces";
+import { tableJadwalSholatList } from "@/src/utils/data";
 import { matchDate } from "@/src/utils/date";
 
 const TableJadwalSholat = ({ waktu }: Waktu) => {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">
-        <tr className="border-2 border-black dark:border-none ">
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-            Tanggal
-          </th>
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-            Imsak
-          </th>
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-            Subuh
-          </th>
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-            Terbit
-          </th>
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-            Dhuha
-          </th>
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-            Dzuhur
-          </th>
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-            Ashar
-          </th>
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-            Maghrib
-          </th>
+        <tr className="border-2 border-black dark:border-none">
+          {tableJadwalSholatList.map((item, index) => (
+            <th key={index + 1} className="border-r-2 border-r-black px-4 text-xl dark:border-none">
+              {item.name}
+            </th>
+          ))}
           <th className="text-xl">Isya</th>
         </tr>
       </thead>
       <tbody>
-        {waktu.jadwal.map((waktu, index: number) => (
+        {waktu.jadwal.map((waktu, index) => (
           <tr
             className={`border-b-2 border-black dark:border-none ${
               waktu.date === matchDate
