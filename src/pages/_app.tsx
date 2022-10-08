@@ -24,14 +24,14 @@ const App = ({ Component, pageProps, router }: AppProps) => {
       <div className="inset-0 min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white md:flex">
         <BottomNav />
         <AnimatePresence exitBeforeEnter>
-          <motion.div
+          <motion.main
             className="flex w-full items-center justify-center"
             key={router.route}
             {...appAnimation}
           >
             <Component {...pageProps} />
             <BackToTop />
-          </motion.div>
+          </motion.main>
         </AnimatePresence>
       </div>
     </Provider>

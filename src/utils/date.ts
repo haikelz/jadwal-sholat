@@ -28,9 +28,9 @@ let numTahun: number = Number(tahun);
 let numBulan: number = Number(bulan);
 let numTanggal: number = Number(tanggal);
 
-let matchDate: string = `${numTahun}-${
-  numBulan < 10 ? 0 + `${numBulan}` : numBulan
-}-${numTanggal < 10 ? 0 + `${numTanggal}` : numTanggal}`;
+let matchDate: string = `${numTahun}-${numBulan < 10 ? 0 + `${numBulan}` : numBulan}-${
+  numTanggal < 10 ? 0 + `${numTanggal}` : numTanggal
+}`;
 
 export {
   date,

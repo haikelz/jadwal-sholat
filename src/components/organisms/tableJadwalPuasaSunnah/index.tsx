@@ -16,7 +16,7 @@ const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
       </thead>
       <tbody>
         {puasaSunnah.map(
-          (fasting, index: number) =>
+          (fasting, index) =>
             /**
              * Kita ingin mendapatkan hasil sesuai bulan saja,
              * jadi kita cocokkan data month dari API dengan numBulan

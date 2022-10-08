@@ -19,10 +19,7 @@ const BackToTop = () => {
   return (
     <AnimatePresence key={height} exitBeforeEnter>
       {scroll > height && (
-        <motion.div
-          {...backToTopAnimation}
-          className="fixed bottom-[4.3rem] right-4 md:bottom-4"
-        >
+        <motion.div {...backToTopAnimation} className="fixed bottom-[4.3rem] right-4 md:bottom-4">
           <button
             className="rounded-md bg-rose-400 p-1.5 transition duration-300 hover:bg-rose-500 dark:bg-blue-500 dark:hover:bg-blue-600"
             onClick={handleClick}

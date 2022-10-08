@@ -3,12 +3,7 @@ import { lastReadAtom } from "@/src/store";
 import { useAtom } from "jotai";
 import { nanoid } from "nanoid";
 
-const DetailSurah = ({
-  surat,
-  audio,
-  terjemahan,
-  dispatchNotification,
-}: Surat) => {
+const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: Surat) => {
   const [, setLastRead] = useAtom(lastReadAtom);
 
   const saveData = <T,>(newData: T) => {
@@ -62,13 +57,7 @@ const DetailSurah = ({
           </div>
           <p
             className="hover-animation underline-animation mt-2 font-semibold hover:text-red-500  dark:hover:text-blue-500"
-            onClick={() =>
-              handleClick(
-                surat.asma.id.short,
-                ayat.number.insurah,
-                surat.number
-              )
-            }
+            onClick={() => handleClick(surat.asma.id.short, ayat.number.insurah, surat.number)}
           >
             Tandai ayat
           </p>
