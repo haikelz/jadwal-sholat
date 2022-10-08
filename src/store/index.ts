@@ -5,7 +5,8 @@ export const tafsirAtom = atom<boolean>(false);
 export const mountedAtom = atom<boolean>(false);
 export const isActiveAtom = atom<boolean>(false);
 export const terjemahanAtom = atom<boolean>(false);
-export const dataAtom = atom([]);
+export const notificationAtom = atom<boolean>(false);
 
 export const dateAtom = atom<Date>(new Date());
 export const scrollAtom = atom<number>(0);
+export const lastReadAtom = atom<any>(null);

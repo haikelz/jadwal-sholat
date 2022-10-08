@@ -1,4 +1,5 @@
-@use "./components.scss";
+@use "./modules/base";
+@use "./modules/components";
 @import url("https://fonts.googleapis.com/css2?family=Bitter:wght@400;500&family=Noto+Naskh+Arabic:wght@700&family=Rubik:wght@400;500;600;700&display=swap");
 
 @tailwind base;

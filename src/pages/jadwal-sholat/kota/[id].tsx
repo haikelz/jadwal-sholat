@@ -23,13 +23,13 @@ const KotaId = () => {
 
   return (
     <Layout title={`Jadwal Sholat ${waktu.lokasi}`}>
-      <div className="flex flex-col justify-center items-center">
-        <h1 className="font-bold text-3xl">{waktu.lokasi}</h1>
-        <p className="font-medium text-lg">
+      <div className="flex flex-col items-center justify-center">
+        <h1>{waktu.lokasi}</h1>
+        <p className="text-lg font-medium">
           PROVINSI {waktu.daerah}, {currentDate.toUpperCase()}
         </p>
       </div>
-      <div className="text-center flex gap-7 lg:justify-center items-center overflow-x-auto w-full">
+      <div className="flex w-full items-center gap-7 overflow-x-auto text-center lg:justify-center">
         <TableJadwalSholat
           tanggal={tanggal}
           tahun={tahun}

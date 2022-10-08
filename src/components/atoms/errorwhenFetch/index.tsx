@@ -1,8 +1,15 @@
+import Head from "next/head";
+
 const ErrorWhenFetch = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <p className="font-bold text-2xl">Error!</p>;
-    </div>
+    <>
+      <Head>
+        <title>Error when fetch!</title>
+      </Head>
+      <div className="flex min-h-screen items-center justify-center p-8 text-center">
+        <p className="text-2xl font-bold">Error! Pastikan koneksimu lancar</p>
+      </div>
+    </>
   );
 };
 

@@ -10,8 +10,8 @@ const Home = () => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="flex flex-col text-center min-h-screen justify-center items-center gap-3 px-6">
-        <div className="flex justify-center items-center flex-col">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-3 px-6 text-center">
+        <div className="flex flex-col items-center justify-center">
           {/**
            * Sedikit catatan
            * buat nampilin waktu pagi, siang, sore, dan malam
@@ -27,8 +27,8 @@ const Home = () => {
             alt="Home Image"
             priority={true}
           />
-          <div className="mt-3 flex flex-col justify-center items-center text-center">
-            <h1 className="sm:text-4xl text-3xl font-bold">{`Selamat ${
+          <div className="mt-3 flex flex-col items-center justify-center text-center">
+            <h1>{`Selamat ${
               hours >= 12 && hours < 15
                 ? "Siang"
                 : hours >= 15 && hours < 18
@@ -37,7 +37,7 @@ const Home = () => {
                 ? "Malam"
                 : "Pagi"
             }`}</h1>
-            <p className="text-lg mb-0.5 mt-2 md:text-xl font-medium">
+            <p className="mb-0.5 mt-2 text-lg font-medium md:text-xl">
               &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;
               <br />
               Ar-Rahman ayat 13

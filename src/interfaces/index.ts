@@ -99,6 +99,11 @@ export interface Surat {
   terjemahan?: boolean;
   tafsir?: boolean;
   dispatchTafsir?: any;
+  dispatchNotification?: any;
+}
+
+export interface Notification {
+  dispatchNotification: any;
 }
 
 export interface Context {
