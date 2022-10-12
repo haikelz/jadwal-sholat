@@ -16,21 +16,28 @@ const ListKota = ({ kota }: Kota) => {
     }
   });
 
+  /**
+   * Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
+   * Hal ini menjadi masalah karena hanya satu id yang valid, yakni 3211.
+   * Untuk 3212 tidak valid, karena sebenarnya itu tidak ada.
+   * Nah makanya disini kita coba me-remove id 3212 nya dengan mengkombinasikan findIndex() juga splice().
+   */
+  const sameKota: number = filteredKota.findIndex((obj) => obj.id === "3212");
+
+  filteredKota.splice(sameKota, 1);
+
   return (
     <>
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredKota.length ? (
         <div className="grid w-full grid-cols-1 grid-rows-1 gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredKota.map((loc, index) => (
-            <Link
-              href={`/jadwal-sholat/kota/${loc.id === "3212" ? (loc.id = "3211") : loc.id}`}
-              key={index + 1}
-            >
+            <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
               <div className="flex cursor-pointer items-center justify-center overflow-hidden rounded-sm border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]">
                 <a className="text-xl font-semibold">
                   {searchTerm
                     ? reactStringReplace(loc.lokasi, searchTerm, (match: string, index: number) => (
-                        <span key={index++} className="bg-lime-400 dark:bg-lime-600">
+                        <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
                           {match}
                         </span>
                       ))

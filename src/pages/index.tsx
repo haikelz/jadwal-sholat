@@ -19,7 +19,7 @@ const Home = () => {
            * jika hours >= 15 dan hours < 18, maka yang ditampilkan sore
            * jika hours >= 18 dan hours < 0, maka yang ditampilkan malam
            * setelah itu atau selain itu, akan menampilkan pagi
-           **/}
+           */}
           <Image
             src="/img/home.png"
             width="100px"

@@ -1,46 +1,19 @@
-let date: Date = new Date();
-let hours: number = date.getHours();
+import { format } from "date-fns";
 
-let tahun: string = date.toLocaleDateString("en-CA", {
-  year: "numeric",
-});
-
-let bulan: string = date.toLocaleDateString("en-CA", {
-  month: "numeric",
-});
-
-let tanggal: string = date.toLocaleDateString("en-CA", {
-  day: "numeric",
-});
-
-let currentDate: string = date.toLocaleDateString("id-ID", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
+export const date: Date = new Date();
+export const tahun: string = format(date, "yyyy");
+export const bulan: string = format(date, "MM");
+export const hari: string = format(date, "dd");
+export const hours: number = date.getHours();
+export const currentDate: string = format(date, "dd MMMM yyyy");
 
 /**
- * Karena datenya masih berupa string, kita ubah ke number
- * biar kita bisa membandingkan dan mendapatkan jadwal hari ini
- **/
+ * Karena waktunya masih berupa string, kita ubah ke number.
+ * Biar kita bisa membandingkan dan mendapatkan jadwal hari ini
+ */
 
-let numTahun: number = Number(tahun);
-let numBulan: number = Number(bulan);
-let numTanggal: number = Number(tanggal);
+export const numTahun: number = Number(tahun);
+export const numBulan: number = Number(bulan);
+export const numTanggal: number = Number(hari);
 
-let matchDate: string = `${numTahun}-${numBulan < 10 ? 0 + `${numBulan}` : numBulan}-${
-  numTanggal < 10 ? 0 + `${numTanggal}` : numTanggal
-}`;
-
-export {
-  date,
-  hours,
-  currentDate,
-  matchDate,
-  numBulan,
-  numTahun,
-  numTanggal,
-  bulan,
-  tahun,
-  tanggal,
-};
+export const matchDate: string = format(date, "yyyy-MM-dd");
