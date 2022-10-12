@@ -1,6 +1,6 @@
 import { useFetch } from "@/src/hooks/useFetch";
 import { JADWAL_SHOLAT_API } from "@/src/utils/api";
-import { bulan, currentDate, tahun, tanggal } from "@/src/utils/date";
+import { bulan, currentDate, tahun, hari } from "@/src/utils/date";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import TableJadwalSholat from "@/src/components/organisms/tableJadwalSholat";
@@ -10,7 +10,7 @@ import Loading from "@/src/components/atoms/loading";
 const KotaId = () => {
   const router: NextRouter = useRouter();
   const { id } = router.query;
-  let formatDate: string = `${tahun}/${bulan}`;
+  const formatDate: string = `${tahun}/${bulan}`;
 
   const { data, isLoading, isError } = useFetch(
     id ? `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : null
@@ -30,7 +30,7 @@ const KotaId = () => {
         </p>
       </div>
       <div className="flex w-full items-center gap-7 overflow-x-auto text-center lg:justify-center">
-        <TableJadwalSholat tanggal={tanggal} tahun={tahun} bulan={bulan} waktu={waktu} />
+        <TableJadwalSholat tanggal={hari} tahun={tahun} bulan={bulan} waktu={waktu} />
       </div>
     </Layout>
   );

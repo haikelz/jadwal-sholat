@@ -10,7 +10,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "framer-motion": "^6.3.11",
+    "date-fns": "^2.29.3",
+    "framer-motion": "^7.5.3",
     "jotai": "^1.7.4",
     "nanoid": "^4.0.0",
     "next": "12.1.6",

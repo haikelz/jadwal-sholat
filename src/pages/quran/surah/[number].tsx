@@ -62,7 +62,7 @@ const Surah = () => {
         <div className="flex flex-col items-center justify-center">
           <h1>{surat.asma.id.short}</h1>
           <p className="font-medium tracking-wider">
-            {surat.asma.translation.id}. Surat ke-{surat.number}.{surat.type.id}
+            {surat.asma.translation.id}. Surat ke-{surat.number}. {surat.type.id}
           </p>
         </div>
         <div className="mt-1 flex gap-4">

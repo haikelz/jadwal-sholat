@@ -1,8 +1,10 @@
 import { useTheme } from "@/src/hooks/useTheme";
 import { navbarList } from "@/src/utils/data";
+import { domAnimation, LazyMotion, m } from "framer-motion";
 import { NextRouter, useRouter } from "next/router";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { IconType } from "react-icons/lib";
+import { MoonIcon } from "@/src/components/atoms/moonIcon";
+import { SunIcon } from "@/src/components/atoms/sunIcon";
 import Link from "next/link";
 
 const BottomNav = () => {
@@ -31,15 +33,17 @@ const BottomNav = () => {
             </div>
           );
         })}
-        <div className="flex w-full items-center justify-center">
-          <button
-            className="flex cursor-pointer flex-col items-center justify-center px-4 text-gray-500 dark:text-gray-400"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            {theme === "light" ? <MdDarkMode size="20px" /> : <MdLightMode size="20px" />}
-            <p className="text-sm font-semibold">{theme === "light" ? "Dark" : "Light"}</p>
-          </button>
-        </div>
+        <LazyMotion features={domAnimation}>
+          <m.div className="flex w-full items-center justify-center">
+            <m.button
+              className="flex cursor-pointer flex-col items-center justify-center px-4 text-gray-500 dark:text-gray-400"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "light" ? <MoonIcon /> : <SunIcon />}
+              <m.p className="text-sm font-semibold">{theme === "light" ? "Dark" : "Light"}</m.p>
+            </m.button>
+          </m.div>
+        </LazyMotion>
       </div>
     </nav>
   );

@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useFetch } from "@/src/hooks/useFetch";
 import { JADWAL_SHOLAT_API } from "@/src/utils/api";
 import Layout from "@/src/components/templates/layout";
-import SemuaKota from "@/src/components/molecules/listKota";
+import ListKota from "@/src/components/molecules/listKota";
 import Image from "next/image";
 import Loading from "@/src/components/atoms/loading";
 import ErrorWhenFetch from "@/src/components/atoms/errorwhenFetch";
@@ -24,7 +24,7 @@ const JadwalSholat = () => {
         </div>
         <p className="mt-2 text-lg font-medium">Berikut daftar Kabupaten/Kota yang tersedia</p>
       </div>
-      <SemuaKota kota={kota} />
+      <ListKota kota={kota} />
     </Layout>
   );
 };

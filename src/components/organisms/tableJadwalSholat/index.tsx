@@ -16,44 +16,38 @@ const TableJadwalSholat = ({ waktu }: Waktu) => {
         </tr>
       </thead>
       <tbody>
-        {waktu.jadwal.map((waktu, index) => (
-          <tr
-            className={`border-b-2 border-black dark:border-none ${
-              waktu.date === matchDate
-                ? "bg-teal-600 font-bold text-white dark:bg-teal-700"
-                : "odd:bg-teal-300 dark:odd:bg-gray-800"
-            }`}
-            key={index + 1}
-          >
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.tanggal}
-            </td>
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.imsak}
-            </td>
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.subuh}
-            </td>
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.terbit}
-            </td>
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.dhuha}
-            </td>
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.dzuhur}
-            </td>
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.ashar}
-            </td>
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.maghrib}
-            </td>
-            <td className="border-r-2 border-black px-4 text-xl font-medium dark:border-none">
-              {waktu.isya}
-            </td>
-          </tr>
-        ))}
+        {waktu.jadwal.map((waktu, index) => {
+          const dataTable = [
+            { waktu: waktu.tanggal },
+            { waktu: waktu.imsak },
+            { waktu: waktu.subuh },
+            { waktu: waktu.terbit },
+            { waktu: waktu.dhuha },
+            { waktu: waktu.dzuhur },
+            { waktu: waktu.ashar },
+            { waktu: waktu.maghrib },
+            { waktu: waktu.isya },
+          ];
+          return (
+            <tr
+              className={`border-b-2 border-black dark:border-none ${
+                waktu.date === matchDate
+                  ? "bg-teal-600 font-bold text-white dark:bg-teal-700"
+                  : "odd:bg-teal-300 dark:odd:bg-gray-800"
+              }`}
+              key={index + 1}
+            >
+              {dataTable.map((item, index) => (
+                <td
+                  key={index + 1}
+                  className="border-r-2 border-black px-4 text-xl font-medium dark:border-none"
+                >
+                  {item.waktu}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
