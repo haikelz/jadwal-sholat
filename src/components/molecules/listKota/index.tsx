@@ -8,23 +8,19 @@ import reactStringReplace from "react-string-replace";
 const ListKota = ({ kota }: Kota) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const filteredKota = kota.filter((value) => {
-    if (searchTerm === "") {
-      return value;
-    } else if (value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())) {
-      return value;
-    }
-  });
-
   /**
    * Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
    * Hal ini menjadi masalah karena hanya satu id yang valid, yakni 3211.
    * Untuk 3212 tidak valid, karena sebenarnya itu tidak ada.
-   * Nah makanya disini kita coba me-remove id 3212 nya dengan mengkombinasikan findIndex() juga splice().
+   * Nah makanya disini kita coba memfilter id-nya agar kota yang memiliki id 3212 tidak ikutan masuk
    */
-  const sameKota: number = filteredKota.findIndex((obj) => obj.id === "3212");
-
-  filteredKota.splice(sameKota, 1);
+  const filteredKota = kota.filter((value) => {
+    if (searchTerm === "") {
+      return value.id !== "3212";
+    } else if (value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return value.id !== "3212";
+    }
+  });
 
   return (
     <>
