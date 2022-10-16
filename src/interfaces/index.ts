@@ -158,3 +158,8 @@ export interface HandleChange {
     value: string;
   };
 }
+
+export interface KeydownEvent {
+  shiftKey: boolean;
+  key: string;
+}
