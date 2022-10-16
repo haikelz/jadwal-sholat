@@ -1,15 +1,27 @@
 <div align="center">
   <h1>Jadwal Sholat</h1> 
-  <p>Adalah sebuah Website untuk mendapatkan jadwal sholat, puasa sunnah, dan baca Al-Qur'an</p>
+  <p>Adalah sebuah Website untuk mendapatkan jadwal sholat, puasa sunnah, juga membaca Al-Qur'an</p>
 </div>
 
-## 🗒️Notes ️
+## Fitur:
 
-- Ini adalah branch `dev`, dimana semua perubahan atau fitur baru bakal dites terlebih dahulu disini. Jika bekerja sesuai ekspektasi, maka bakal dibuat PR dan dimerge ke branch `master`.
-- Untuk penggunaan pencarian Surah dan Kota, kamu bisa memanfaatkan shortcut keyboard `Shift` + `Enter` untuk langsung focus ke search bar
-- Untuk menghilangkan focus dari search bar, cukup manfaatkan shortcut `Esc`
+- Jadwal sholat
+- Baca Al-Qur'an(dengan audio, terjemahan, juga bahasa latin)
+- Jadwal puasa sunnah
+- Udah PWA
 
-## ⚡TODO
+## Tech Stack
 
-- Detect kombinasi shortcut key buat search yang lebih cepet
-- Add kbd tag in search input
+- NextJS
+- SWR
+- TailwindCSS
+- Framer Motion
+- Jotai
+
+Jika ada yang kurang atau salah, feel free to contribute yak :)
+
+## Credits
+
+Terima kasih udah menginspirasi saya :D
+
+https://islamiah.vercel.app/
