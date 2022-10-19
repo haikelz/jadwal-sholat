@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { MutableRefObject, ReactNode } from "react";
 
 export interface State {
   audio?: boolean;
@@ -157,6 +157,13 @@ export interface HandleChange {
   target: {
     value: string;
   };
+}
+
+export interface Keydown {
+  ref: MutableRefObject<string | any>;
+  isShiftKey: boolean;
+  key1: string;
+  key2: string;
 }
 
 export interface KeydownEvent {

@@ -4,11 +4,12 @@ import { useRef } from "react";
 
 const SearchBar = ({ setSearchTerm }: SearchBar) => {
   const ref = useRef<string | any>("");
-  const keydown: void = useKeydown(ref, true, "Enter", "Escape");
 
   const handleChange = (event: HandleChange) => {
     setSearchTerm(event.target.value);
   };
+
+  useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });
 
   return (
     <div className="flex flex-col">

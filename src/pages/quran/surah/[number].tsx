@@ -5,6 +5,7 @@ import { QURAN_API } from "@/src/utils/api";
 import { useReducerAtom } from "jotai/utils";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
+import { reducer } from "@/src/helpers/reducer";
 import ModalTafsir from "@/src/components/molecules/modalTafsir";
 import Sebelumnya from "@/src/components/atoms/sebelumnya";
 import Selanjutnya from "@/src/components/atoms/selanjutnya";
@@ -13,21 +14,6 @@ import Layout from "@/src/components/templates/layout";
 import Loading from "@/src/components/atoms/loading";
 import ErrorWhenFetch from "@/src/components/atoms/errorwhenFetch";
 import Notification from "@/src/components/molecules/notification";
-
-type ReducerType = {
-  type: string;
-};
-
-const reducer = (prev: boolean, action: ReducerType) => {
-  if (
-    action.type === "terjemahan" ||
-    action.type === "audio" ||
-    action.type === "tafsir" ||
-    action.type === "notification"
-  )
-    return !prev;
-  throw new Error("Unknown action type");
-};
 
 const Surah = () => {
   const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);

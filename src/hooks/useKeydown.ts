@@ -1,19 +1,14 @@
-import { MutableRefObject, useCallback, useEffect } from "react";
-import { KeydownEvent } from "../interfaces";
+import { useCallback, useEffect } from "react";
+import { Keydown, KeydownEvent } from "../interfaces";
 
-export const useKeydown = <T extends MutableRefObject<string | any>>(
-  ref: T,
-  isShiftKey: boolean,
-  key1: string,
-  key2: string
-) => {
+export const useKeydown = <T extends Keydown>({ ref, isShiftKey, key1, key2 }: T) => {
   const handleKeydown = useCallback(<T extends KeydownEvent>(event: T) => {
-    // Jika user menekan kombinasi "Shift" dan "Enter", maka focus ke input
+    //Jika shift key ditekan dan key1 ditekan, maka input search bakal focus
     if (event.shiftKey === isShiftKey && event.key === key1) {
       ref.current?.focus();
     }
 
-    // Jika user menekan key "Escape" atau Esc, maka unfocus input
+    // Jika key2 ditekan, maka input akan blur alias kembali ke keadaan semula
     if (event.key === key2) {
       ref.current?.blur();
     }
@@ -23,4 +18,11 @@ export const useKeydown = <T extends MutableRefObject<string | any>>(
     document.addEventListener("keydown", handleKeydown, true);
     return () => document.removeEventListener("keydown", handleKeydown);
   }, []);
+
+  return {
+    ref: ref,
+    isShiftKey: isShiftKey,
+    key1: key1,
+    key2: key2,
+  };
 };
