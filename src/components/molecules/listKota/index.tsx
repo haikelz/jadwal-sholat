@@ -29,7 +29,7 @@ const ListKota = ({ kota }: Kota) => {
         <div className="grid w-full grid-cols-1 grid-rows-1 gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredKota.map((loc, index) => (
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
-              <div className="flex cursor-pointer items-center justify-center overflow-hidden rounded-sm border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]">
+              <div className="clicky flex items-center justify-center overflow-hidden rounded-sm border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]">
                 <a className="text-xl font-semibold">
                   {searchTerm
                     ? reactStringReplace(loc.lokasi, searchTerm, (match: string, index: number) => (

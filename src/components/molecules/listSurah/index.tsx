@@ -48,17 +48,17 @@ const ListSurah = ({ surat }: DaftarSurah) => {
             <Link key={surat.number} href={`/quran/surah/${surat.number}`}>
               <div
                 key={surat.number}
-                className="flex cursor-pointer flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left dark:border-white dark:bg-[#2A2A37]"
+                className="clicky flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left dark:border-white dark:bg-[#2A2A37]"
               >
                 <p className="text-right font-semibold tracking-wide">{surat.type.id}</p>
-                <h1 className="text-xl font-bold">{surat.number}</h1>
+                <h3 className="text-xl font-bold">{surat.number}</h3>
                 <p className="text-lg font-bold">
                   {searchTerm
                     ? reactStringReplace(
                         surat.asma.id.short,
                         searchTerm,
                         (match: string, index: number) => (
-                          <span key={index++} className="bg-lime-400 dark:bg-lime-600">
+                          <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
                             {match}
                           </span>
                         )
