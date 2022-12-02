@@ -1,6 +1,6 @@
 import { memo } from "react";
-import { hours } from "@/src/utils/date";
-import Time from "@/src/components/molecules/time";
+import { hours } from "@/utils/date";
+import Time from "@/components/molecules/time";
 import Head from "next/head";
 import Image from "next/image";
 

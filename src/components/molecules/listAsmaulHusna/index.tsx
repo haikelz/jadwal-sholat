@@ -1,7 +1,7 @@
-import { asmaulHusna } from "@/src/utils/data";
+import { asmaulHusna } from "@/utils/data";
 import { useState } from "react";
-import SearchBar from "@/src/components/atoms/searchBar";
-import TidakAda from "@/src/components/atoms/tidakAda";
+import { SearchBar } from "@/components/atoms/searchBar";
+import { TidakAda } from "@/components/atoms/tidakAda";
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,7 +22,7 @@ const ListAsmaulHusna = () => {
           {filteredAsmaulHusna.map((item) => (
             <div
               key={item.urutan}
-              className="clicky flex flex-col items-start justify-center overflow-hidden rounded-sm border-2 border-black bg-gray-100 p-4 text-start tracking-wide dark:border-white dark:bg-[#2A2A37]"
+              className="flex flex-col items-start justify-center overflow-hidden rounded-sm border-2 border-black bg-gray-100 p-4 text-start tracking-wide transition-all ease-in-out active:scale-95 dark:border-white dark:bg-[#2A2A37]"
             >
               <h3 className="text-xl font-bold">{item.urutan}</h3>
               <div className="my-3 w-full text-right">

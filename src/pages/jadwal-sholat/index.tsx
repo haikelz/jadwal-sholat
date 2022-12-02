@@ -1,11 +1,11 @@
 import { memo } from "react";
-import { useFetch } from "@/src/hooks/useFetch";
-import { JADWAL_SHOLAT_API } from "@/src/utils/api";
-import Layout from "@/src/components/templates/layout";
-import ListKota from "@/src/components/molecules/listKota";
+import { useFetch } from "@/hooks/useFetch";
+import { JADWAL_SHOLAT_API } from "@/utils/api";
+import Layout from "@/components/templates/layout";
+import ListKota from "@/components/molecules/listKota";
 import Image from "next/image";
-import Loading from "@/src/components/atoms/loading";
-import ErrorWhenFetch from "@/src/components/atoms/errorwhenFetch";
+import Loading from "@/components/atoms/loading";
+import ErrorWhenFetch from "@/components/atoms/errorwhenFetch";
 
 const JadwalSholat = () => {
   const { data, isLoading, isError } = useFetch(`${JADWAL_SHOLAT_API}/kota/semua`);

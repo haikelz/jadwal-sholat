@@ -1,19 +1,18 @@
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
-import { useFetch } from "@/src/hooks/useFetch";
-import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "@/src/store";
-import { QURAN_API } from "@/src/utils/api";
+import { useFetch } from "@/hooks/useFetch";
+import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "@/store";
+import { QURAN_API } from "@/utils/api";
 import { useReducerAtom } from "jotai/utils";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
-import { reducer } from "@/src/helpers/reducer";
-import ModalTafsir from "@/src/components/molecules/modalTafsir";
-import Sebelumnya from "@/src/components/atoms/sebelumnya";
-import Selanjutnya from "@/src/components/atoms/selanjutnya";
-import DetailSurah from "@/src/components/organisms/detailSurah";
-import Layout from "@/src/components/templates/layout";
-import Loading from "@/src/components/atoms/loading";
-import ErrorWhenFetch from "@/src/components/atoms/errorwhenFetch";
-import Notification from "@/src/components/molecules/notification";
+import { reducer } from "@/helpers/reducer";
+import ModalTafsir from "@/components/molecules/modalTafsir";
+import DetailSurah from "@/components/organisms/detailSurah";
+import Layout from "@/components/templates/layout";
+import Loading from "@/components/atoms/loading";
+import ErrorWhenFetch from "@/components/atoms/errorwhenFetch";
+import Notification from "@/components/molecules/notification";
+import PreviousOrNextButton from "@/components/molecules/previousOrNextButton";
 
 const Surah = () => {
   const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);
@@ -32,15 +31,6 @@ const Surah = () => {
   if (isError) return <ErrorWhenFetch />;
 
   const surat = data.data;
-
-  const PreviousOrNextButton = () => {
-    return (
-      <div className={`flex w-full gap-3 ${surat.number > 1 ? "justify-between" : "justify-end"}`}>
-        <Sebelumnya surat={surat} />
-        <Selanjutnya surat={surat} />
-      </div>
-    );
-  };
 
   return (
     <Layout title={surat.asma.id.short}>
@@ -76,7 +66,7 @@ const Surah = () => {
         </div>
         {tafsir && <ModalTafsir surat={surat} dispatchTafsir={dispatchTafsir} tafsir={tafsir} />}
       </div>
-      <PreviousOrNextButton />
+      <PreviousOrNextButton surat={surat} />
       <DetailSurah
         surat={surat}
         audio={audio}
@@ -84,7 +74,7 @@ const Surah = () => {
         tafsir={tafsir}
         dispatchNotification={dispatchNotification}
       />
-      <PreviousOrNextButton />
+      <PreviousOrNextButton surat={surat} />
       {notification && <Notification dispatchNotification={dispatchNotification} />}
     </Layout>
   );

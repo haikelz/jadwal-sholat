@@ -1,6 +1,6 @@
-import { Waktu } from "@/src/interfaces";
-import { tableJadwalSholatList } from "@/src/utils/data";
-import { matchDate } from "@/src/utils/date";
+import { Waktu } from "@/interfaces";
+import { tableJadwalSholatList } from "@/utils/data";
+import { matchDate } from "@/utils/date";
 
 const TableJadwalSholat = ({ waktu }: Waktu) => {
   return (

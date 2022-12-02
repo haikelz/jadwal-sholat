@@ -1,9 +1,9 @@
 import { memo, useEffect, useState } from "react";
-import { DaftarSurah } from "@/src/interfaces";
+import { DaftarSurah } from "@/interfaces";
 import { useAtom } from "jotai";
-import { lastReadAtom } from "@/src/store";
-import SearchBar from "@/src/components/atoms/searchBar";
-import TidakAda from "@/src/components/atoms/tidakAda";
+import { lastReadAtom } from "@/store";
+import { TidakAda } from "@/components/atoms/tidakAda";
+import { SearchBar } from "@/components/atoms/searchBar";
 import Link from "next/link";
 import reactStringReplace from "react-string-replace";
 

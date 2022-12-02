@@ -1,6 +1,6 @@
-import { Notification } from "@/src/interfaces";
+import { NotificationProps } from "@/interfaces";
 
-const Notification = ({ dispatchNotification }: Notification) => {
+const Notification = ({ dispatchNotification }: NotificationProps) => {
   return (
     <div
       tabIndex={-1}

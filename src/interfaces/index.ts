@@ -11,7 +11,7 @@ export interface Children {
   title?: string;
 }
 
-export interface SearchBar {
+export interface SearchBarProps {
   setSearchTerm: (value: string) => void;
 }
 
@@ -102,7 +102,7 @@ export interface Surat {
   dispatchNotification?: any;
 }
 
-export interface Notification {
+export interface NotificationProps {
   dispatchNotification: any;
 }
 
@@ -170,3 +170,5 @@ export interface KeydownEvent {
   shiftKey: boolean;
   key: string;
 }
+
+export interface PreviousOrNextButtonProps extends Surat {}

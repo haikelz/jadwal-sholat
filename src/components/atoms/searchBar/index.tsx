@@ -1,8 +1,8 @@
-import { useKeydown } from "@/src/hooks/useKeydown";
-import { HandleChange, SearchBar } from "@/src/interfaces";
+import { useKeydown } from "@/hooks/useKeydown";
+import { HandleChange, SearchBarProps } from "@/interfaces";
 import { useRef } from "react";
 
-const SearchBar = ({ setSearchTerm }: SearchBar) => {
+export const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
   const ref = useRef<string | any>("");
 
   const handleChange = (event: HandleChange) => {
@@ -32,5 +32,3 @@ const SearchBar = ({ setSearchTerm }: SearchBar) => {
     </div>
   );
 };
-
-export default SearchBar;

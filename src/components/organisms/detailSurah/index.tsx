@@ -1,5 +1,5 @@
-import { Surat } from "@/src/interfaces";
-import { lastReadAtom } from "@/src/store";
+import { Surat } from "@/interfaces";
+import { lastReadAtom } from "@/store";
 import { useAtom } from "jotai";
 import { nanoid } from "nanoid";
 

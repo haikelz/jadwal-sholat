@@ -1,15 +1,18 @@
-import { useTheme } from "@/src/hooks/useTheme";
-import { navbarList } from "@/src/utils/data";
-import { domAnimation, LazyMotion, m } from "framer-motion";
 import { NextRouter, useRouter } from "next/router";
 import { IconType } from "react-icons/lib";
-import { MoonIcon } from "@/src/components/atoms/moonIcon";
-import { SunIcon } from "@/src/components/atoms/sunIcon";
+import { MdHomeFilled, MdListAlt, MdOutlineMoreHoriz } from "react-icons/md";
+import { DarkModeIcon } from "@/components/atoms/darkModeIcon";
+import { useTheme } from "@/hooks/useTheme";
+import { navbarList } from "@/utils/data";
+import { atom, useAtom } from "jotai";
+import Others from "@/components/molecules/others";
 import Link from "next/link";
-import { MdHomeFilled } from "react-icons/md";
+
+const isMoreAtom = atom(false);
 
 const BottomNav = () => {
   const [theme, setTheme] = useTheme();
+  const [isMore, setIsMore] = useAtom(isMoreAtom);
   const router: NextRouter = useRouter();
 
   return (
@@ -48,17 +51,31 @@ const BottomNav = () => {
             </div>
           );
         })}
-        <LazyMotion features={domAnimation}>
-          <m.div className="flex w-full items-center justify-center">
-            <m.button
-              className="flex cursor-pointer flex-col items-center justify-center px-4 text-gray-500 dark:text-gray-400"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        <div className="hidden w-full items-center justify-center md:flex">
+          <Link href="/asmaul-husna" passHref>
+            <button
+              className={`flex cursor-pointer flex-col items-center justify-center px-4 transition-all duration-200 ease-in-out md:p-2.5 ${
+                router.pathname.includes("/asmaul-husna")
+                  ? "text-gray-600 dark:text-white"
+                  : "text-gray-500 dark:text-gray-400"
+              }`}
             >
-              {theme === "light" ? <MoonIcon /> : <SunIcon />}
-              <m.p className="text-sm font-semibold">{theme === "light" ? "Dark" : "Light"}</m.p>
-            </m.button>
-          </m.div>
-        </LazyMotion>
+              <MdListAlt />
+              <p className="text-sm font-semibold">Asma&#39;ul Husna</p>
+            </button>
+          </Link>
+        </div>
+        <DarkModeIcon flexDir="col" isHidden={true} justifyItems="center" isMarginLeft={false} />
+        <div className="flex w-full items-center justify-center md:hidden">
+          <button
+            className="flex cursor-pointer flex-col items-center justify-center px-4 text-gray-500 dark:text-gray-400"
+            onClick={() => setIsMore(!isMore)}
+          >
+            <MdOutlineMoreHoriz />
+            <p className="text-sm font-semibold">Others</p>
+          </button>
+        </div>
+        {isMore ? <Others /> : null}
       </div>
     </nav>
   );

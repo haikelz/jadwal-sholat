@@ -1,8 +1,8 @@
 import { MdPlayArrow } from "react-icons/md";
-import { Surat } from "@/src/interfaces";
+import { Surat } from "@/interfaces";
 import Link from "next/link";
 
-const Sebelumnya = ({ surat }: Surat) => {
+export const Sebelumnya = ({ surat }: Surat) => {
   return (
     <>
       {surat.number > 1 && (
@@ -16,5 +16,3 @@ const Sebelumnya = ({ surat }: Surat) => {
     </>
   );
 };
-
-export default Sebelumnya;

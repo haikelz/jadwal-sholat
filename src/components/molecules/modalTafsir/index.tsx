@@ -1,10 +1,10 @@
 import { MdClose } from "react-icons/md";
-import { Surat } from "@/src/interfaces";
+import { Surat } from "@/interfaces";
 
 const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: Surat) => {
   return (
     <>
-      {tafsir && (
+      {tafsir ? (
         <div
           tabIndex={-1}
           aria-hidden={true}
@@ -28,7 +28,7 @@ const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: Surat) => {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };
