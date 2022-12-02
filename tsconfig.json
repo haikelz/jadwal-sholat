@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ESNext",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "ESNext"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -23,9 +23,30 @@
       "@/public/*": [
         "public/*"
       ],
-      "@/src/*": [
-        "src/*"
+      "@/components/*": [
+        "src/components/*"
       ],
+      "@/helpers/*": [
+        "src/helpers/*"
+      ],
+      "@/hooks/*": [
+        "src/hooks/*"
+      ],
+      "@/interfaces": [
+        "src/interfaces"
+      ],
+      "@/store": [
+        "src/store"
+      ],
+      "@/styles/*": [
+        "src/styles/*"
+      ],
+      "@/utils/*": [
+        "src/utils/*"
+      ],
+      "@/pages/*": [
+        "src/pages/*"
+      ]
     }
   },
   "include": [
