@@ -1,6 +1,6 @@
 import { useFetch } from "@/hooks/useFetch";
 import { JADWAL_SHOLAT_API } from "@/utils/api";
-import { bulan, currentDate, tahun, hari } from "@/utils/date";
+import { bulan, currentDate, tahun, hari } from "@/helpers/formatDate";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import TableJadwalSholat from "@/components/organisms/tableJadwalSholat";

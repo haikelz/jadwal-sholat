@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { DaftarSurah } from "@/interfaces";
 import { useAtom } from "jotai";
 import { lastReadAtom } from "@/store";
@@ -11,13 +11,17 @@ const ListSurah = ({ surat }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [lastRead, setLastRead] = useAtom(lastReadAtom);
 
-  const filteredSurah = surat.filter((value) => {
-    if (searchTerm === "") {
-      return value;
-    } else if (value.asma.id.short.toLowerCase().includes(searchTerm.toLowerCase())) {
-      return value;
-    }
-  });
+  const filteredSurah = useMemo(
+    () =>
+      surat.filter((value) => {
+        if (searchTerm === "") {
+          return value;
+        } else if (value.asma.id.short.toLowerCase().includes(searchTerm.toLowerCase())) {
+          return value;
+        }
+      }),
+    [surat, searchTerm]
+  );
 
   useEffect(() => {
     if (localStorage.getItem("surah")) {

@@ -1,26 +1,30 @@
 import { Kota } from "@/interfaces";
-import { memo, useState } from "react";
-import Link from "next/link";
+import { memo, useMemo, useState } from "react";
 import { SearchBar } from "@/components/atoms/searchBar";
 import { TidakAda } from "@/components/atoms/tidakAda";
+import Link from "next/link";
 import reactStringReplace from "react-string-replace";
 
 const ListKota = ({ kota }: Kota) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   /**
-   * Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
-   * Hal ini menjadi masalah karena hanya satu id yang valid, yakni 3211.
-   * Untuk 3212 tidak valid, karena sebenarnya itu tidak ada.
-   * Nah makanya disini kita coba memfilter id-nya agar kota yang memiliki id 3212 tidak ikutan masuk
+   * - Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
+   * - Hal ini menjadi masalah karena hanya satu id yang valid, yakni 3211.
+   * - Untuk 3212 tidak valid, karena sebenarnya itu tidak ada.
+   * - Nah makanya disini kita coba memfilter id-nya agar kota yang memiliki id 3212 tidak ikutan masuk
    */
-  const filteredKota = kota.filter((value) => {
-    if (searchTerm === "") {
-      return value.id !== "3212";
-    } else if (value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())) {
-      return value.id !== "3212";
-    }
-  });
+  const filteredKota = useMemo(
+    () =>
+      kota.filter((value) => {
+        if (searchTerm === "") {
+          return value.id !== "3212";
+        } else if (value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())) {
+          return value.id !== "3212";
+        }
+      }),
+    [kota, searchTerm]
+  );
 
   return (
     <>

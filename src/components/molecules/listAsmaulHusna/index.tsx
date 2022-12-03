@@ -1,18 +1,23 @@
 import { asmaulHusna } from "@/utils/data";
-import { useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { SearchBar } from "@/components/atoms/searchBar";
 import { TidakAda } from "@/components/atoms/tidakAda";
+import reactStringReplace from "react-string-replace";
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredAsmaulHusna = asmaulHusna.filter((value) => {
-    if (searchTerm === "") {
-      return value;
-    } else if (value.latin.toLowerCase().includes(searchTerm.toLowerCase())) {
-      return value;
-    }
-  });
+  const filteredAsmaulHusna = useMemo(
+    () =>
+      asmaulHusna.filter((value) => {
+        if (searchTerm === "") {
+          return value;
+        } else if (value.latin.toLowerCase().includes(searchTerm.toLowerCase())) {
+          return value;
+        }
+      }),
+    [asmaulHusna, searchTerm]
+  );
 
   return (
     <>
@@ -28,7 +33,15 @@ const ListAsmaulHusna = () => {
               <div className="my-3 w-full text-right">
                 <p className="font-arab text-3xl font-bold">{item.arab}</p>
               </div>
-              <p className="font-medium">{item.latin}</p>
+              <p className="text-lg font-medium">
+                {searchTerm
+                  ? reactStringReplace(item.latin, searchTerm, (match: string, index: number) => (
+                      <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
+                        {match}
+                      </span>
+                    ))
+                  : item.latin}
+              </p>
               <p>{item.arti}</p>
             </div>
           ))}
@@ -40,4 +53,4 @@ const ListAsmaulHusna = () => {
   );
 };
 
-export default ListAsmaulHusna;
+export default memo(ListAsmaulHusna);
