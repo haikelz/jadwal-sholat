@@ -16,7 +16,7 @@ const ListAsmaulHusna = () => {
           return value;
         }
       }),
-    [asmaulHusna, searchTerm]
+    [searchTerm]
   );
 
   return (
