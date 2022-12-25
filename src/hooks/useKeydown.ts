@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { Keydown, KeydownEvent } from "../interfaces";
+import { Keydown, KeydownEvent } from "@/interfaces";
 
 export const useKeydown = <T extends Keydown>({ ref, isShiftKey, key1, key2 }: T) => {
   const handleKeydown = useCallback(<T extends KeydownEvent>(event: T) => {

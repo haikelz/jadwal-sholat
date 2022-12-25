@@ -1,8 +1,12 @@
 import { asmaulHusna } from "@/utils/data";
 import { memo, useMemo, useState } from "react";
-import { SearchBar } from "@/components/atoms/searchBar";
 import { TidakAda } from "@/components/atoms/tidakAda";
 import reactStringReplace from "react-string-replace";
+import dynamic from "next/dynamic";
+
+const SearchBar = dynamic(() =>
+  import("@/components/atoms/searchBar").then((item) => item.SearchBar)
+);
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState("");
