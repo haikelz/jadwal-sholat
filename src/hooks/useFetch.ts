@@ -8,7 +8,13 @@ const getData = async (link: string) => {
 };
 
 export const useFetch = (link: string | null) => {
-  const { data, error } = useSWR(link, getData);
+  const { data, error } = useSWR(link, getData, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    revalidateOnMount: true,
+    keepPreviousData: true,
+  });
 
   return {
     data: data,
