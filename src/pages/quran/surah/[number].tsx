@@ -1,17 +1,16 @@
-import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
-import { useFetch } from "@/hooks/useFetch";
-import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "@/store";
-import { QURAN_API } from "@/utils/api";
-import { useReducerAtom } from "jotai/utils";
-import { NextRouter, useRouter } from "next/router";
-import { memo } from "react";
-import { reducer } from "@/helpers/reducer";
-import Layout from "@/templates/layout";
-import Loading from "@/atoms/loading";
 import ErrorWhenFetch from "@/atoms/errorwhenFetch";
-import dynamic from "next/dynamic";
+import Loading from "@/atoms/loading";
+import { reducer } from "@/helpers/reducer";
+import { useFetch } from "@/hooks/useFetch";
 import PreviousOrNextButton from "@/molecules/previousOrNextButton";
 import DetailSurah from "@/organisms/detailSurah";
+import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "@/store";
+import Layout from "@/templates/layout";
+import { QURAN_API } from "@/utils/api";
+import { useReducerAtom } from "jotai/utils";
+import dynamic from "next/dynamic";
+import { NextRouter, useRouter } from "next/router";
+import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 
 const ModalTafsir = dynamic(() => import("@/molecules/modalTafsir"));
 const Notification = dynamic(() => import("@/molecules/notification"));
@@ -25,10 +24,10 @@ const Surah = () => {
   const router: NextRouter = useRouter();
   const { number } = router.query;
 
-  const { data, isLoading, isError } = useFetch(`${QURAN_API}/quran/${number}?imamId=7`);
+  const { data, isLoading, error } = useFetch(`${QURAN_API}/quran/${number}?imamId=7`);
 
   if (isLoading) return <Loading />;
-  if (isError) return <ErrorWhenFetch />;
+  if (error) return <ErrorWhenFetch />;
 
   const surat = data.data;
 
@@ -80,4 +79,4 @@ const Surah = () => {
   );
 };
 
-export default memo(Surah);
+export default Surah;

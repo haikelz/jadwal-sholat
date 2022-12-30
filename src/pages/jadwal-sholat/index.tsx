@@ -1,20 +1,18 @@
-import { memo } from "react";
-import { useFetch } from "@/hooks/useFetch";
-import { JADWAL_SHOLAT_API } from "@/utils/api";
-import Layout from "@/templates/layout";
-import ListKota from "@/molecules/listKota";
-import Image from "next/image";
-import Loading from "@/atoms/loading";
 import ErrorWhenFetch from "@/atoms/errorwhenFetch";
+import Loading from "@/atoms/loading";
+import { useFetch } from "@/hooks/useFetch";
+import ListKota from "@/molecules/listKota";
+import Layout from "@/templates/layout";
+import { JADWAL_SHOLAT_API } from "@/utils/api";
 import dynamic from "next/dynamic";
 
 const LazyLoadImage = dynamic(() => import("@/atoms/lazyLoadImage"));
 
 const JadwalSholat = () => {
-  const { data, isLoading, isError } = useFetch(`${JADWAL_SHOLAT_API}/kota/semua`);
+  const { data, isLoading, error } = useFetch(`${JADWAL_SHOLAT_API}/kota/semua`);
 
   if (isLoading) return <Loading />;
-  if (isError) return <ErrorWhenFetch />;
+  if (error) return <ErrorWhenFetch />;
 
   const kota = data;
 
@@ -32,4 +30,4 @@ const JadwalSholat = () => {
   );
 };
 
-export default memo(JadwalSholat);
+export default JadwalSholat;

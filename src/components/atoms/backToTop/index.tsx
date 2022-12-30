@@ -1,7 +1,7 @@
 import { useScroll } from "@/hooks/useScroll";
+import { backToTopAnimation } from "@/utils/animation";
 import { AnimatePresence, motion } from "framer-motion";
 import { MdKeyboardArrowUp } from "react-icons/md";
-import { backToTopAnimation } from "@/utils/animation";
 
 export const BackToTop = () => {
   const [scroll] = useScroll();

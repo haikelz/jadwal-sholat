@@ -30,9 +30,13 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 ## Screenshots
 
 ![home](/public/docs/home.png)
+
 ![jadwal sholat](/public/docs/jadwal-sholat.png)
+
 ![puasa sunnah](/public/docs/puasa-sunnah.png)
+
 ![quran](/public/docs/quran.png)
+
 ![asmaul husna](/public/docs/asmaul-husna.png)
 
 ## 🗒️Credits
