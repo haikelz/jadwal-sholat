@@ -1,13 +1,9 @@
+import SearchBar from "@/atoms/searchBar";
+import { TidakAda } from "@/atoms/tidakAda";
 import { Kota } from "@/interfaces";
-import { memo, useMemo, useState } from "react";
-import { TidakAda } from "@/components/atoms/tidakAda";
 import Link from "next/link";
+import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import dynamic from "next/dynamic";
-
-const SearchBar = dynamic(() =>
-  import("@/components/atoms/searchBar").then((item) => item.SearchBar)
-);
 
 const ListKota = ({ kota }: Kota) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -38,7 +34,7 @@ const ListKota = ({ kota }: Kota) => {
           {filteredKota.map((loc, index) => (
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
               <div className="clicky flex items-center justify-center overflow-hidden rounded-sm border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]">
-                <a className="text-xl font-semibold">
+                <p className="text-xl font-semibold">
                   {searchTerm
                     ? reactStringReplace(loc.lokasi, searchTerm, (match: string, index: number) => (
                         <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
@@ -46,7 +42,7 @@ const ListKota = ({ kota }: Kota) => {
                         </span>
                       ))
                     : loc.lokasi}
-                </a>
+                </p>
               </div>
             </Link>
           ))}

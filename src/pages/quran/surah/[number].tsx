@@ -6,15 +6,15 @@ import { useReducerAtom } from "jotai/utils";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import { reducer } from "@/helpers/reducer";
-import Layout from "@/components/templates/layout";
-import Loading from "@/components/atoms/loading";
-import ErrorWhenFetch from "@/components/atoms/errorwhenFetch";
+import Layout from "@/templates/layout";
+import Loading from "@/atoms/loading";
+import ErrorWhenFetch from "@/atoms/errorwhenFetch";
 import dynamic from "next/dynamic";
-import PreviousOrNextButton from "@/components/molecules/previousOrNextButton";
-import DetailSurah from "@/components/organisms/detailSurah";
+import PreviousOrNextButton from "@/molecules/previousOrNextButton";
+import DetailSurah from "@/organisms/detailSurah";
 
-const ModalTafsir = dynamic(() => import("@/components/molecules/modalTafsir"));
-const Notification = dynamic(() => import("@/components/molecules/notification"));
+const ModalTafsir = dynamic(() => import("@/molecules/modalTafsir"));
+const Notification = dynamic(() => import("@/molecules/notification"));
 
 const Surah = () => {
   const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);

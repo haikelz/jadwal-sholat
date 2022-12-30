@@ -172,3 +172,11 @@ export interface KeydownEvent {
 }
 
 export interface PreviousOrNextButtonProps extends Surat {}
+
+export interface LazyLoadImageProps {
+  className?: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}

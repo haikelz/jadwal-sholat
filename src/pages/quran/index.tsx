@@ -1,11 +1,13 @@
-import { memo } from "react";
+import ErrorWhenFetch from "@/atoms/errorwhenFetch";
+import Loading from "@/atoms/loading";
 import { useFetch } from "@/hooks/useFetch";
+import ListSurah from "@/molecules/listSurah";
+import Layout from "@/templates/layout";
 import { QURAN_API } from "@/utils/api";
-import ListSurah from "@/components/molecules/listSurah";
-import Layout from "@/components/templates/layout";
-import Image from "next/image";
-import Loading from "@/components/atoms/loading";
-import ErrorWhenFetch from "@/components/atoms/errorwhenFetch";
+import dynamic from "next/dynamic";
+import { memo } from "react";
+
+const LazyLoadImage = dynamic(() => import("@/atoms/lazyLoadImage"));
 
 const Quran = () => {
   const { data, isLoading, isError } = useFetch(`${QURAN_API}/quran`);
@@ -20,13 +22,7 @@ const Quran = () => {
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
           <h1>Baca Al-Qur&#39;an</h1>
-          <Image
-            src="/img/Quran.png"
-            width="40px"
-            height="40px"
-            alt="Al-Qur'an Image"
-            priority={true}
-          />
+          <LazyLoadImage src="/img/Quran.png" width={40} height={40} alt="Al-Qur'an Image" />
         </div>
         <p className="mt-2 text-lg font-medium">
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;

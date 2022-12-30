@@ -5,12 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { appAnimation } from "@/utils/animation";
 import "../styles/index.scss";
 import type { AppProps } from "next/app";
-import BottomNav from "@/components/organisms/navbar";
+import BottomNav from "@/organisms/navbar";
 import dynamic from "next/dynamic";
 
-const BackToTop = dynamic(() =>
-  import("@/components/atoms/backToTop").then((item) => item.BackToTop)
-);
+const BackToTop = dynamic(() => import("@/atoms/backToTop").then((item) => item.BackToTop));
 
 const App = ({ Component, pageProps, router }: AppProps) => {
   const [mounted, setMounted] = useAtom(mountedAtom);

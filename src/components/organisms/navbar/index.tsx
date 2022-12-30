@@ -1,17 +1,16 @@
+import { DarkModeIcon } from "@/atoms/darkModeIcon";
+import { isMoreAtom } from "@/store";
+import { navbarList } from "@/utils/data";
+import { useAtom } from "jotai";
+import dynamic from "next/dynamic";
+import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { IconType } from "react-icons/lib";
 import { MdHomeFilled, MdListAlt, MdOutlineMoreHoriz } from "react-icons/md";
-import { DarkModeIcon } from "@/components/atoms/darkModeIcon";
-import { useTheme } from "@/hooks/useTheme";
-import { navbarList } from "@/utils/data";
-import { atom, useAtom } from "jotai";
-import Others from "@/components/molecules/others";
-import Link from "next/link";
 
-const isMoreAtom = atom(false);
+const Others = dynamic(() => import("@/molecules/others"));
 
 const BottomNav = () => {
-  const [theme, setTheme] = useTheme();
   const [isMore, setIsMore] = useAtom(isMoreAtom);
   const router: NextRouter = useRouter();
 

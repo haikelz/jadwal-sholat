@@ -1,15 +1,11 @@
-import { memo, useEffect, useMemo, useState } from "react";
+import SearchBar from "@/atoms/searchBar";
+import { TidakAda } from "@/atoms/tidakAda";
 import { DaftarSurah } from "@/interfaces";
-import { useAtom } from "jotai";
 import { lastReadAtom } from "@/store";
-import { TidakAda } from "@/components/atoms/tidakAda";
+import { useAtom } from "jotai";
 import Link from "next/link";
+import { memo, useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import dynamic from "next/dynamic";
-
-const SearchBar = dynamic(() =>
-  import("@/components/atoms/searchBar").then((item) => item.SearchBar)
-);
 
 const ListSurah = ({ surat }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState<string>("");

@@ -1,6 +1,6 @@
 import { PreviousOrNextButtonProps, Surat } from "@/interfaces";
-import { Sebelumnya } from "@/components/atoms/sebelumnya";
-import { Selanjutnya } from "@/components/atoms/selanjutnya";
+import { Sebelumnya } from "@/atoms/sebelumnya";
+import { Selanjutnya } from "@/atoms/selanjutnya";
 
 const PreviousOrNextButton = ({ surat }: PreviousOrNextButtonProps) => {
   return (

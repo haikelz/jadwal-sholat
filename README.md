@@ -32,3 +32,7 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 Terima kasih udah menginspirasi saya :D
 
 https://islamiah.vercel.app/
+
+## TODO
+
+- Accessibility audio in detailSurah

@@ -1,8 +1,10 @@
-import { memo } from "react";
 import { hours } from "@/helpers/formatDate";
-import Time from "@/components/molecules/time";
+import Time from "@/molecules/time";
+import dynamic from "next/dynamic";
 import Head from "next/head";
-import Image from "next/image";
+import { memo } from "react";
+
+const LazyLoadImage = dynamic(() => import("@/atoms/lazyLoadImage"));
 
 const Home = () => {
   return (
@@ -20,7 +22,7 @@ const Home = () => {
            * jika hours >= 18 dan hours < 0, maka yang ditampilkan malam
            * setelah itu atau selain itu, akan menampilkan pagi
            */}
-          <Image src="/img/home.png" width="100px" height="100px" alt="Home" priority={true} />
+          <LazyLoadImage src="/img/home.png" width={100} height={100} alt="Home" />
           <div className="mt-3 flex flex-col items-center justify-center text-center">
             <h1>{`Selamat ${
               hours >= 12 && hours < 15
