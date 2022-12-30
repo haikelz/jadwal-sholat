@@ -24,10 +24,12 @@ const Surah = () => {
   const router: NextRouter = useRouter();
   const { number } = router.query;
 
-  const { data, isLoading, error } = useFetch(`${QURAN_API}/quran/${number}?imamId=7`);
+  const { data, isLoading, isError } = useFetch(
+    number ? `${QURAN_API}/quran/${number}?imamId=7` : ""
+  );
 
   if (isLoading) return <Loading />;
-  if (error) return <ErrorWhenFetch />;
+  if (isError) return <ErrorWhenFetch />;
 
   const surat = data.data;
 
