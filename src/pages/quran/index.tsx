@@ -5,15 +5,14 @@ import ListSurah from "@/molecules/listSurah";
 import Layout from "@/templates/layout";
 import { QURAN_API } from "@/utils/api";
 import dynamic from "next/dynamic";
-import { memo } from "react";
 
 const LazyLoadImage = dynamic(() => import("@/atoms/lazyLoadImage"));
 
 const Quran = () => {
-  const { data, isLoading, isError } = useFetch(`${QURAN_API}/quran`);
+  const { data, isLoading, error } = useFetch(`${QURAN_API}/quran`);
 
   if (isLoading) return <Loading />;
-  if (isError) return <ErrorWhenFetch />;
+  if (error) return <ErrorWhenFetch />;
 
   const surat = data.data;
 
@@ -33,4 +32,4 @@ const Quran = () => {
   );
 };
 
-export default memo(Quran);
+export default Quran;

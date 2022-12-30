@@ -1,23 +1,20 @@
+import Loading from "@/atoms/loading";
+import { bulan, currentDate, hari, tahun } from "@/helpers/formatDate";
 import { useFetch } from "@/hooks/useFetch";
-import { JADWAL_SHOLAT_API } from "@/utils/api";
-import { bulan, currentDate, tahun, hari } from "@/helpers/formatDate";
-import { NextRouter, useRouter } from "next/router";
-import { memo } from "react";
 import TableJadwalSholat from "@/organisms/tableJadwalSholat";
 import Layout from "@/templates/layout";
-import Loading from "@/atoms/loading";
+import { JADWAL_SHOLAT_API } from "@/utils/api";
+import { NextRouter, useRouter } from "next/router";
 
 const KotaId = () => {
   const router: NextRouter = useRouter();
   const { id } = router.query;
   const formatDate: string = `${tahun}/${bulan}`;
 
-  const { data, isLoading, isError } = useFetch(
-    id ? `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : null
-  );
+  const { data, isLoading, error } = useFetch(`${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`);
 
   if (isLoading) return <Loading />;
-  if (isError) return <p>Error!</p>;
+  if (error) return <p>Error!</p>;
 
   const waktu = data.data;
 
@@ -36,4 +33,4 @@ const KotaId = () => {
   );
 };
 
-export default memo(KotaId);
+export default KotaId;

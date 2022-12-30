@@ -1,7 +1,7 @@
 import { useScroll } from "@/hooks/useScroll";
+import { backToTopAnimation } from "@/utils/animation";
 import { AnimatePresence, motion } from "framer-motion";
 import { MdKeyboardArrowUp } from "react-icons/md";
-import { backToTopAnimation } from "@/utils/animation";
 
 export const BackToTop = () => {
   const [scroll] = useScroll();
@@ -18,7 +18,7 @@ export const BackToTop = () => {
 
   return (
     <AnimatePresence key={height} mode="wait">
-      {scroll > height && (
+      {scroll > height ? (
         <motion.div
           {...backToTopAnimation}
           className="fixed bottom-16 right-2.5 md:right-4 md:bottom-4"
@@ -30,7 +30,7 @@ export const BackToTop = () => {
             <MdKeyboardArrowUp className="text-white" size="32" />
           </button>
         </motion.div>
-      )}
+      ) : null}
     </AnimatePresence>
   );
 };

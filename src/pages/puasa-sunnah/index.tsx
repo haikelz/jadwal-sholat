@@ -4,7 +4,6 @@ import Layout from "@/templates/layout";
 import { PUASA_SUNNAH_API } from "@/utils/api";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
-import { memo } from "react";
 
 const LazyLoadImage = dynamic(() => import("@/atoms/lazyLoadImage"));
 
@@ -36,4 +35,4 @@ const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
   );
 };
 
-export default memo(PuasaSunnah);
+export default PuasaSunnah;

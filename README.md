@@ -27,12 +27,20 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 - Install dependencies dengan perintah `yarn install`. Jika kamu memakai Package Manager yang lain, silahkan menyesuaikan dan jangan lupa untuk menghapus file `yarn.lock`.
 - Selanjutnya, ketikkan perintah `yarn run dev` dan lihat hasilnya di browser => `http://localhost:3000`
 
+## Screenshots
+
+![home](/public/docs/home.png)
+
+![jadwal sholat](/public/docs/jadwal-sholat.png)
+
+![puasa sunnah](/public/docs/puasa-sunnah.png)
+
+![quran](/public/docs/quran.png)
+
+![asmaul husna](/public/docs/asmaul-husna.png)
+
 ## 🗒️Credits
 
 Terima kasih udah menginspirasi saya :D
 
 https://islamiah.vercel.app/
-
-## TODO
-
-- Accessibility audio in detailSurah

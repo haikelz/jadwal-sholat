@@ -1,6 +1,6 @@
-import { MdPlayArrow } from "react-icons/md";
 import { Surat } from "@/interfaces";
 import Link from "next/link";
+import { MdPlayArrow } from "react-icons/md";
 
 export const Sebelumnya = ({ surat }: Surat) => {
   return (

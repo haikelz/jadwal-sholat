@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import { useQuery } from "@tanstack/react-query";
 
 const getData = async (link: string) => {
   const response: Response = await fetch(link);
@@ -7,12 +7,9 @@ const getData = async (link: string) => {
   return data;
 };
 
-export const useFetch = (link: string | null) => {
-  const { data, error } = useSWR(link, getData);
-
-  return {
-    data: data,
-    isLoading: !data && !error,
-    isError: error,
-  };
+export const useFetch = (link: string) => {
+  return useQuery(["get data", link], () => getData(link), {
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
 };

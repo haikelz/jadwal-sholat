@@ -1,5 +1,5 @@
-import Layout from "@/templates/layout";
 import ListAsmaulHusna from "@/molecules/listAsmaulHusna";
+import Layout from "@/templates/layout";
 
 const AsmaulHusna = () => {
   return (

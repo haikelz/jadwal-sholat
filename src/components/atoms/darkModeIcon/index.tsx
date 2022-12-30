@@ -1,6 +1,6 @@
 import { useTheme } from "@/hooks/useTheme";
 import { darkModeIconAnimation, whileTap } from "@/utils/animation";
-import { domAnimation, m, LazyMotion } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 
 export const DarkModeIcon = ({
   flexDir,
