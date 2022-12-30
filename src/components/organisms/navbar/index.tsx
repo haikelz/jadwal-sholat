@@ -10,7 +10,7 @@ import { MdHomeFilled, MdListAlt, MdOutlineMoreHoriz } from "react-icons/md";
 
 const Others = dynamic(() => import("@/molecules/others"));
 
-const BottomNav = () => {
+const Navbar = () => {
   const [isMore, setIsMore] = useAtom(isMoreAtom);
   const router: NextRouter = useRouter();
 
@@ -80,4 +80,4 @@ const BottomNav = () => {
   );
 };
 
-export default BottomNav;
+export default Navbar;

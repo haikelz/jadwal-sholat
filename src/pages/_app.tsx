@@ -1,4 +1,4 @@
-import BottomNav from "@/organisms/navbar";
+import Navbar from "@/organisms/navbar";
 import { mountedAtom } from "@/store";
 import { appAnimation } from "@/utils/animation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -27,7 +27,7 @@ const App = ({ Component, pageProps, router }: AppProps) => {
     <Provider>
       <QueryClientProvider client={queryClient}>
         <div className="inset-0 bg-gray-50 dark:bg-gray-900 dark:text-white md:flex">
-          <BottomNav />
+          <Navbar />
           <AnimatePresence mode="wait">
             <motion.main
               className="flex w-full justify-center"
