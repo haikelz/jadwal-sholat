@@ -1,4 +1,5 @@
 import { NotificationProps } from "@/interfaces";
+import { memo } from "react";
 
 const Notification = ({ dispatchNotification }: NotificationProps) => {
   return (
@@ -24,4 +25,4 @@ const Notification = ({ dispatchNotification }: NotificationProps) => {
   );
 };
 
-export default Notification;
+export default memo(Notification);

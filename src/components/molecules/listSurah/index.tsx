@@ -1,23 +1,27 @@
-import { memo, useEffect, useState } from "react";
+import SearchBar from "@/atoms/searchBar";
+import { TidakAda } from "@/atoms/tidakAda";
 import { DaftarSurah } from "@/interfaces";
-import { useAtom } from "jotai";
 import { lastReadAtom } from "@/store";
-import { TidakAda } from "@/components/atoms/tidakAda";
-import { SearchBar } from "@/components/atoms/searchBar";
+import { useAtom } from "jotai";
 import Link from "next/link";
+import { memo, useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 
 const ListSurah = ({ surat }: DaftarSurah) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [lastRead, setLastRead] = useAtom(lastReadAtom);
 
-  const filteredSurah = surat.filter((value) => {
-    if (searchTerm === "") {
-      return value;
-    } else if (value.asma.id.short.toLowerCase().includes(searchTerm.toLowerCase())) {
-      return value;
-    }
-  });
+  const filteredSurah = useMemo(
+    () =>
+      surat.filter((value) => {
+        if (searchTerm === "") {
+          return value;
+        } else if (value.asma.id.short.toLowerCase().includes(searchTerm.toLowerCase())) {
+          return value;
+        }
+      }),
+    [surat, searchTerm]
+  );
 
   useEffect(() => {
     if (localStorage.getItem("surah")) {

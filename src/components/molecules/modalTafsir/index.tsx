@@ -1,5 +1,6 @@
 import { MdClose } from "react-icons/md";
 import { Surat } from "@/interfaces";
+import { memo } from "react";
 
 const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: Surat) => {
   return (
@@ -33,4 +34,4 @@ const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: Surat) => {
   );
 };
 
-export default ModalTafsir;
+export default memo(ModalTafsir);

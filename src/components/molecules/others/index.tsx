@@ -1,7 +1,8 @@
-import { DarkModeIcon } from "@/components/atoms/darkModeIcon";
+import { DarkModeIcon } from "@/atoms/darkModeIcon";
 import { NextRouter, useRouter } from "next/router";
 import { MdListAlt } from "react-icons/md";
 import Link from "next/link";
+import { memo } from "react";
 
 const Others = () => {
   const router: NextRouter = useRouter();
@@ -29,4 +30,4 @@ const Others = () => {
   );
 };
 
-export default Others;
+export default memo(Others);

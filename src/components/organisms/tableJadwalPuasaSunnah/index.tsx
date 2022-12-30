@@ -1,5 +1,5 @@
 import { PuasaSunnah } from "@/interfaces";
-import { numBulan, matchDate } from "@/utils/date";
+import { numBulan, matchDate } from "@/helpers/formatDate";
 
 const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
   return (

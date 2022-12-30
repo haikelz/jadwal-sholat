@@ -19,10 +19,7 @@ export const useScroll = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
   return [scroll] as const;

@@ -1,8 +1,8 @@
 import { useKeydown } from "@/hooks/useKeydown";
 import { HandleChange, SearchBarProps } from "@/interfaces";
-import { useRef } from "react";
+import { memo, useRef } from "react";
 
-export const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
+const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
   const ref = useRef<string | any>("");
 
   const handleChange = (event: HandleChange) => {
@@ -32,3 +32,5 @@ export const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
     </div>
   );
 };
+
+export default memo(SearchBar);

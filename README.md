@@ -21,7 +21,7 @@
 
 ## Setup
 
-Jika kamu ingin melihat dan mengetes project ini lebih detail: 
+Jika kamu ingin melihat dan mengetes project ini lebih detail:
 
 - Clone project ini `git clone https://github.com/haikelz/jadwal-sholat.git`
 - Install dependencies dengan perintah `yarn install`. Jika kamu memakai Package Manager yang lain, silahkan menyesuaikan dan jangan lupa untuk menghapus file `yarn.lock`.
@@ -32,3 +32,7 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 Terima kasih udah menginspirasi saya :D
 
 https://islamiah.vercel.app/
+
+## TODO
+
+- Accessibility audio in detailSurah

@@ -41,26 +41,28 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: Surat) 
             <p className="font-arab text-4xl leading-relaxed">{ayat.text.ar}</p>
           </div>
           <div className="flex w-full flex-col items-start justify-start">
-            {audio && (
+            {audio ? (
               <div className="mt-2.5 w-full">
-                <audio preload="auto" src={ayat.audio.url} controls></audio>
+                <audio preload="auto" src={ayat.audio.url} controls>
+                  <track default kind="captions" />
+                </audio>
               </div>
-            )}
-            {terjemahan && (
+            ) : null}
+            {terjemahan ? (
               <p className="mt-2 text-left italic text-teal-700 dark:text-teal-300">
                 {ayat.text.read}
               </p>
-            )}
+            ) : null}
             <p className="text-md mt-2 text-left font-medium leading-relaxed tracking-wide">
               {ayat.translation.id}
             </p>
           </div>
-          <p
+          <button
             className="hover-animation underline-animation mt-2 font-semibold hover:text-red-500  dark:hover:text-blue-500"
             onClick={() => handleClick(surat.asma.id.short, ayat.number.insurah, surat.number)}
           >
             Tandai ayat
-          </p>
+          </button>
         </div>
       ))}
     </div>
