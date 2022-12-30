@@ -2,22 +2,25 @@ import { useCallback, useEffect } from "react";
 import { Keydown, KeydownEvent } from "@/interfaces";
 
 export const useKeydown = <T extends Keydown>({ ref, isShiftKey, key1, key2 }: T) => {
-  const handleKeydown = useCallback(<T extends KeydownEvent>(event: T) => {
-    //Jika shift key ditekan dan key1 ditekan, maka input search bakal focus
-    if (event.shiftKey === isShiftKey && event.key === key1) {
-      ref.current?.focus();
-    }
+  const handleKeydown = useCallback(
+    <T extends KeydownEvent>(event: T) => {
+      //Jika shift key ditekan dan key1 ditekan, maka input search bakal focus
+      if (event.shiftKey === isShiftKey && event.key === key1) {
+        ref.current?.focus();
+      }
 
-    // Jika key2 ditekan, maka input akan blur alias kembali ke keadaan semula
-    if (event.key === key2) {
-      ref.current?.blur();
-    }
-  }, []);
+      // Jika key2 ditekan, maka input akan blur alias kembali ke keadaan semula
+      if (event.key === key2) {
+        ref.current?.blur();
+      }
+    },
+    [isShiftKey, key1, key2, ref]
+  );
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeydown, true);
     return () => document.removeEventListener("keydown", handleKeydown);
-  }, []);
+  }, [handleKeydown]);
 
   return {
     ref: ref,
