@@ -10,6 +10,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.20.4",
     "date-fns": "^2.29.3",
     "framer-motion": "^7.6.5",
     "jotai": "^1.9.2",
@@ -20,8 +21,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
     "react-string-replace": "^1.1.0",
-    "sass": "^1.56.1",
-    "swr": "^2.0.0"
+    "sass": "^1.56.1"
   },
   "devDependencies": {
     "@types/node": "18.11.9",

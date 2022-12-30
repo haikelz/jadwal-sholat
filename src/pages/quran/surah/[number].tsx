@@ -26,7 +26,7 @@ const Surah = () => {
   const { number } = router.query;
 
   const { data, isLoading, isError } = useFetch(
-    number ? `${QURAN_API}/quran/${number}?imamId=7` : null
+    number ? `${QURAN_API}/quran/${number}?imamId=7` : ""
   );
 
   if (isLoading) return <Loading />;
