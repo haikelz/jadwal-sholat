@@ -1,8 +1,8 @@
 import { matchDate } from "@/helpers/formatDate";
-import { Waktu } from "@/interfaces";
+import { WaktuProps } from "@/types";
 import { tableJadwalSholatList } from "@/utils/data";
 
-const TableJadwalSholat = ({ waktu }: Waktu) => {
+const TableJadwalSholat = ({ waktu }: WaktuProps) => {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">

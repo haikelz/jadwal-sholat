@@ -41,8 +41,8 @@
       "@/hooks/*": [
         "hooks/*"
       ],
-      "@/interfaces": [
-        "interfaces"
+      "@/types": [
+        "types"
       ],
       "@/store": [
         "store"

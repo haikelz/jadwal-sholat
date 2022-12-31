@@ -1,10 +1,10 @@
-import { Surat } from "@/interfaces";
+import { SuratProps } from "@/types";
 import { lastReadAtom } from "@/store";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import { nanoid } from "nanoid";
 
-const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: Surat) => {
+const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratProps) => {
   const [, setLastRead] = useAtom(lastReadAtom);
 
   const saveData = <T,>(newData: T) => {

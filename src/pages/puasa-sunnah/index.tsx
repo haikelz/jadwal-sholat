@@ -1,12 +1,10 @@
-import { PuasaSunnah } from "@/interfaces";
+import PriorityImage from "@/atoms/priorityImage";
 import TableJadwalPuasaSunnah from "@/organisms/tableJadwalPuasaSunnah";
 import Layout from "@/templates/layout";
+import { PuasaSunnahProps } from "@/types";
 import { PUASA_SUNNAH_API } from "@/utils/api";
 import { GetStaticProps } from "next";
-import dynamic from "next/dynamic";
 import { memo } from "react";
-
-const LazyLoadImage = dynamic(() => import("@/atoms/lazyLoadImage"));
 
 // kalo pake useFetch, malah kena CORS
 export const getStaticProps: GetStaticProps = async () => {
@@ -20,13 +18,13 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
+const PuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
   return (
     <Layout title="Jadwal Puasa Sunnah">
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
           <h1>Jadwal Puasa Sunnah</h1>
-          <LazyLoadImage src="/img/fasting.webp" width={35} height={35} alt="Fasting" />
+          <PriorityImage src="/img/fasting.webp" width={35} height={35} alt="Fasting" />
         </div>
         <p className="mt-2 text-lg font-medium">Berikut jadwal puasa sunnah bulan ini</p>
       </div>

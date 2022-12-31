@@ -1,9 +1,9 @@
-import { Surat } from "@/interfaces";
 import clsx from "clsx";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
+import { SuratProps } from "@/types";
 
-const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: Surat) => {
+const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
   return (
     <>
       {tafsir ? (

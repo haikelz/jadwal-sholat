@@ -1,4 +1,4 @@
-import { NotificationProps } from "@/interfaces";
+import { NotificationProps } from "@/types";
 import clsx from "clsx";
 import { memo } from "react";
 
