@@ -33,13 +33,8 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
             <div
               id={ayat.number.insurah.toString()}
               className={clsx(
-                "flex items-center justify-center rounded-full",
-                "border-black bg-gray-400 font-bold text-white dark:bg-teal-600",
-                ayat.number.insurah <= 9
-                  ? "px-4 py-2"
-                  : ayat.number.insurah <= 99
-                  ? "px-3.5 py-2.5"
-                  : "px-3 py-3"
+                "flex h-12 w-12 items-center justify-center rounded-full p-4",
+                "border-black bg-gray-400 font-bold text-white dark:bg-teal-600"
               )}
             >
               <p className="font-bold">{ayat.number.insurah}</p>
