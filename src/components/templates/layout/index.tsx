@@ -1,8 +1,8 @@
-import { Children } from "@/interfaces";
 import clsx from "clsx";
 import Head from "next/head";
+import { ChildrenProps } from "@/types";
 
-const Layout = ({ children, title }: Children) => {
+const Layout = ({ children, title }: ChildrenProps) => {
   return (
     <>
       <Head>

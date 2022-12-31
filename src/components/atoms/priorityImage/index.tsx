@@ -1,4 +1,4 @@
-import { LazyLoadImageProps } from "@/interfaces";
+import { LazyLoadImageProps } from "@/types";
 import Image from "next/image";
 import { memo } from "react";
 
@@ -10,9 +10,7 @@ const LazyLoadImage = ({ className, src, alt, width, height, ...props }: LazyLoa
       alt={alt}
       width={width}
       height={height}
-      loading="lazy"
-      blurDataURL={src}
-      placeholder="blur"
+      priority
       {...props}
     />
   );

@@ -1,30 +1,20 @@
 import { MutableRefObject, ReactNode } from "react";
 
-export interface State {
-  audio?: boolean;
-  terjemahan?: boolean;
-  tafsir?: boolean;
-}
-
-export interface Children {
+export type ChildrenProps = {
   children: ReactNode[] | JSX.Element;
   title?: string;
-}
+};
 
-export interface SearchBarProps {
-  setSearchTerm: (value: string) => void;
-}
-
-export interface Kota {
+export type KotaProps = {
   kota: [
     loc: {
       id: string;
       lokasi: string;
     }
   ];
-}
+};
 
-export interface Waktu {
+export type WaktuProps = {
   waktu: {
     id: string;
     lokasi: string;
@@ -48,9 +38,9 @@ export interface Waktu {
   tanggal: string;
   bulan: string;
   tahun: string;
-}
+};
 
-export interface Surat {
+export type SuratProps = {
   surat: {
     number: number;
     name: string;
@@ -100,28 +90,28 @@ export interface Surat {
   tafsir?: boolean;
   dispatchTafsir?: any;
   dispatchNotification?: any;
-}
+};
 
-export interface NotificationProps {
+export type NotificationProps = {
   dispatchNotification: any;
-}
+};
 
-export interface Context {
+export type ContextProps = {
   params: {
     number?: string;
     id?: string;
   };
-}
+};
 
-export interface KotaPaths {
+export type KotaPathsProps = {
   id: string;
-}
+};
 
-export interface SuratPaths {
+export type SuratPathsProps = {
   number: number;
-}
+};
 
-export interface DaftarSurah {
+export type DaftarSurahProps = {
   surat: [
     surat: {
       number: string;
@@ -139,9 +129,9 @@ export interface DaftarSurah {
       };
     }
   ];
-}
+};
 
-export interface PuasaSunnah {
+export type PuasaSunnahProps = {
   puasaSunnah: [
     fasting: {
       month: number;
@@ -151,32 +141,36 @@ export interface PuasaSunnah {
       };
     }
   ];
-}
+};
 
-export interface HandleChange {
-  target: {
-    value: string;
-  };
-}
-
-export interface Keydown {
-  ref: MutableRefObject<string | any>;
-  isShiftKey: boolean;
-  key1: string;
-  key2: string;
-}
-
-export interface KeydownEvent {
-  shiftKey: boolean;
-  key: string;
-}
-
-export interface PreviousOrNextButtonProps extends Surat {}
-
-export interface LazyLoadImageProps {
+export type LazyLoadImageProps = {
   className?: string;
   src: string;
   alt: string;
   width: number;
   height: number;
-}
+};
+
+export type KeydownProps = {
+  ref: MutableRefObject<string | any>;
+  isShiftKey: boolean;
+  key1: string;
+  key2: string;
+};
+
+export type KeydownEventProps = {
+  shiftKey: boolean;
+  key: string;
+};
+
+export type SearchBarProps = {
+  setSearchTerm: (value: string) => void;
+};
+
+export type HandleChangeProps = {
+  target: {
+    value: string;
+  };
+};
+
+export type PreviousOrNextButtonProps = SuratProps & {};

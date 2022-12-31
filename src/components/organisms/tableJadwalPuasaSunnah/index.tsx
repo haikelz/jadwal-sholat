@@ -1,7 +1,7 @@
-import { PuasaSunnah } from "@/interfaces";
+import { PuasaSunnahProps } from "@/types";
 import { numBulan, matchDate } from "@/helpers/formatDate";
 
-const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
+const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">

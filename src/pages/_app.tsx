@@ -1,5 +1,6 @@
 import Navbar from "@/organisms/navbar";
 import { mountedAtom } from "@/store";
+import Template from "@/templates/index";
 import { appAnimation } from "@/utils/animation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
@@ -26,7 +27,7 @@ const App = ({ Component, pageProps, router }: AppProps) => {
   return (
     <Provider>
       <QueryClientProvider client={queryClient}>
-        <div className="inset-0 bg-gray-50 dark:bg-gray-900 dark:text-white md:flex">
+        <Template>
           <Navbar />
           <AnimatePresence mode="wait">
             <motion.main
@@ -38,7 +39,7 @@ const App = ({ Component, pageProps, router }: AppProps) => {
               <BackToTop />
             </motion.main>
           </AnimatePresence>
-        </div>
+        </Template>
       </QueryClientProvider>
     </Provider>
   );

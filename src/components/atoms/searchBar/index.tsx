@@ -1,12 +1,12 @@
 import { useKeydown } from "@/hooks/useKeydown";
-import { HandleChange, SearchBarProps } from "@/interfaces";
+import { HandleChangeProps, SearchBarProps } from "@/types";
 import clsx from "clsx";
 import { memo, useRef } from "react";
 
 const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
   const ref = useRef<string | any>("");
 
-  const handleChange = (event: HandleChange) => {
+  const handleChange = (event: HandleChangeProps) => {
     setSearchTerm(event.target.value);
   };
 

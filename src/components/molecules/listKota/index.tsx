@@ -1,12 +1,12 @@
 import SearchBar from "@/atoms/searchBar";
 import TidakAda from "@/atoms/tidakAda";
-import { Kota } from "@/interfaces";
 import clsx from "clsx";
 import Link from "next/link";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
+import { KotaProps } from "@/types";
 
-const ListKota = ({ kota }: Kota) => {
+const ListKota = ({ kota }: KotaProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   /**

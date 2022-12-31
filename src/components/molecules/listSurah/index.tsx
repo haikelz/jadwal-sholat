@@ -1,14 +1,14 @@
 import SearchBar from "@/atoms/searchBar";
 import TidakAda from "@/atoms/tidakAda";
-import { DaftarSurah } from "@/interfaces";
 import { lastReadAtom } from "@/store";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { memo, useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
+import { DaftarSurahProps } from "@/types";
 
-const ListSurah = ({ surat }: DaftarSurah) => {
+const ListSurah = ({ surat }: DaftarSurahProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [lastRead, setLastRead] = useAtom(lastReadAtom);
 

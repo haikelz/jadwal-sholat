@@ -1,9 +1,9 @@
-import { Surat } from "@/interfaces";
 import clsx from "clsx";
 import Link from "next/link";
 import { MdPlayArrow } from "react-icons/md";
+import { SuratProps } from "@/types";
 
-const Selanjutnya = ({ surat }: Surat) => {
+const Selanjutnya = ({ surat }: SuratProps) => {
   return (
     <>
       {surat.number < 114 ? (

@@ -1,7 +1,7 @@
 import Sebelumnya from "@/atoms/sebelumnya";
 import Selanjutnya from "@/atoms/selanjutnya";
-import { PreviousOrNextButtonProps } from "@/interfaces";
 import clsx from "clsx";
+import { PreviousOrNextButtonProps } from "@/types";
 
 const PreviousOrNextButton = ({ surat }: PreviousOrNextButtonProps) => {
   return (
