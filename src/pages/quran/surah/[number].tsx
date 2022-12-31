@@ -10,6 +10,7 @@ import { QURAN_API } from "@/utils/api";
 import { useReducerAtom } from "jotai/utils";
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
+import { memo } from "react";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 
 const ModalTafsir = dynamic(() => import("@/molecules/modalTafsir"));
@@ -81,4 +82,4 @@ const Surah = () => {
   );
 };
 
-export default Surah;
+export default memo(Surah);

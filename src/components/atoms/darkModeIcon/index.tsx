@@ -1,8 +1,9 @@
 import { useTheme } from "@/hooks/useTheme";
 import { darkModeIconAnimation, whileTap } from "@/utils/animation";
+import clsx from "clsx";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 
-export const DarkModeIcon = ({
+const DarkModeIcon = ({
   flexDir,
   isHidden,
   justifyItems,
@@ -23,7 +24,10 @@ export const DarkModeIcon = ({
         } w-full items-center justify-${justifyItems}`}
       >
         <m.button
-          className={`flex flex-${flexDir} cursor-pointer items-center justify-center px-4 text-gray-500 dark:text-gray-400`}
+          className={clsx(
+            `flex flex-${flexDir} cursor-pointer items-center justify-center`,
+            "px-4 text-gray-500 dark:text-gray-400"
+          )}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           {theme === "light" ? (
@@ -69,3 +73,5 @@ export const DarkModeIcon = ({
     </LazyMotion>
   );
 };
+
+export default DarkModeIcon;

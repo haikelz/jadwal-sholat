@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.20.4",
+    "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "framer-motion": "^8.0.2",
     "jotai": "^1.12.1",

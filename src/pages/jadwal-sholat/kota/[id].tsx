@@ -5,6 +5,7 @@ import TableJadwalSholat from "@/organisms/tableJadwalSholat";
 import Layout from "@/templates/layout";
 import { JADWAL_SHOLAT_API } from "@/utils/api";
 import { NextRouter, useRouter } from "next/router";
+import { memo } from "react";
 
 const KotaId = () => {
   const router: NextRouter = useRouter();
@@ -35,4 +36,4 @@ const KotaId = () => {
   );
 };
 
-export default KotaId;
+export default memo(KotaId);

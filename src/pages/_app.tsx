@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import "../styles/index.scss";
 
-const BackToTop = dynamic(() => import("@/atoms/backToTop").then((item) => item.BackToTop));
+const BackToTop = dynamic(() => import("@/atoms/backToTop"));
 
 const App = ({ Component, pageProps, router }: AppProps) => {
   const [mounted, setMounted] = useAtom(mountedAtom);
