@@ -4,9 +4,11 @@ import Layout from "@/templates/layout";
 import { PUASA_SUNNAH_API } from "@/utils/api";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
+import { memo } from "react";
 
 const LazyLoadImage = dynamic(() => import("@/atoms/lazyLoadImage"));
 
+// kalo pake useFetch, malah kena CORS
 export const getStaticProps: GetStaticProps = async () => {
   const response: Response = await fetch(PUASA_SUNNAH_API);
   const data = await response.json();
@@ -24,7 +26,7 @@ const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
           <h1>Jadwal Puasa Sunnah</h1>
-          <LazyLoadImage src="/img/fasting.png" width={35} height={35} alt="Fasting" />
+          <LazyLoadImage src="/img/fasting.webp" width={35} height={35} alt="Fasting" />
         </div>
         <p className="mt-2 text-lg font-medium">Berikut jadwal puasa sunnah bulan ini</p>
       </div>
@@ -35,4 +37,4 @@ const PuasaSunnah = ({ puasaSunnah }: PuasaSunnah) => {
   );
 };
 
-export default PuasaSunnah;
+export default memo(PuasaSunnah);

@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { memo } from "react";
 
 const LazyLoadImage = dynamic(() => import("@/atoms/lazyLoadImage"));
 
@@ -12,4 +11,4 @@ const NotFoundPage = () => {
   );
 };
 
-export default memo(NotFoundPage);
+export default NotFoundPage;

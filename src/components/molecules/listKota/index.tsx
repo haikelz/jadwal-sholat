@@ -1,6 +1,7 @@
 import SearchBar from "@/atoms/searchBar";
-import { TidakAda } from "@/atoms/tidakAda";
+import TidakAda from "@/atoms/tidakAda";
 import { Kota } from "@/interfaces";
+import clsx from "clsx";
 import Link from "next/link";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
@@ -30,10 +31,20 @@ const ListKota = ({ kota }: Kota) => {
     <>
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredKota.length ? (
-        <div className="grid w-full grid-cols-1 grid-rows-1 gap-5 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div
+          className={clsx(
+            "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center",
+            "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          )}
+        >
           {filteredKota.map((loc, index) => (
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
-              <div className="clicky flex items-center justify-center overflow-hidden rounded-sm border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]">
+              <div
+                className={clsx(
+                  "clicky flex h-full items-center justify-center overflow-hidden rounded-sm",
+                  "border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]"
+                )}
+              >
                 <p className="text-xl font-semibold">
                   {searchTerm
                     ? reactStringReplace(loc.lokasi, searchTerm, (match: string, index: number) => (

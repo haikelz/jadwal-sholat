@@ -14,7 +14,7 @@
 ## ⚡Tech Stack
 
 - NextJS
-- SWR
+- React Query
 - TailwindCSS
 - Framer Motion
 - Jotai

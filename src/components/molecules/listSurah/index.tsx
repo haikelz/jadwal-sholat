@@ -1,7 +1,8 @@
 import SearchBar from "@/atoms/searchBar";
-import { TidakAda } from "@/atoms/tidakAda";
+import TidakAda from "@/atoms/tidakAda";
 import { DaftarSurah } from "@/interfaces";
 import { lastReadAtom } from "@/store";
+import clsx from "clsx";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { memo, useEffect, useMemo, useState } from "react";
@@ -37,7 +38,12 @@ const ListSurah = ({ surat }: DaftarSurah) => {
           Terakhir dibaca:{" "}
           {lastRead !== null ? (
             <Link href={`/quran/surah/${lastRead.number}`}>
-              <span className="hover-animation underline-animation hover:text-red-500 dark:hover:text-blue-500">
+              <span
+                className={clsx(
+                  "hover-animation underline-animation",
+                  "hover:text-red-500 dark:hover:text-blue-500"
+                )}
+              >
                 Surah {lastRead.name} ayat {lastRead.ayat}
               </span>
             </Link>
@@ -47,12 +53,19 @@ const ListSurah = ({ surat }: DaftarSurah) => {
         </p>
       </div>
       {filteredSurah.length ? (
-        <div className="grid w-full grid-cols-1 grid-rows-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div
+          className={clsx(
+            "grid w-full grid-cols-1 grid-rows-1 gap-4",
+            "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          )}
+        >
           {filteredSurah.map((surat) => (
             <Link key={surat.number} href={`/quran/surah/${surat.number}`}>
               <div
-                key={surat.number}
-                className="clicky flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left dark:border-white dark:bg-[#2A2A37]"
+                className={clsx(
+                  "clicky flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left",
+                  "dark:border-white dark:bg-[#2A2A37]"
+                )}
               >
                 <p className="text-right font-semibold tracking-wide">{surat.type.id}</p>
                 <h3 className="text-xl font-bold">{surat.number}</h3>
