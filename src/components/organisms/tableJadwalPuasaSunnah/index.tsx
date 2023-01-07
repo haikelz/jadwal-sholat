@@ -1,5 +1,5 @@
+import { matchDate, numBulan } from "@/helpers/formatDate";
 import { PuasaSunnahProps } from "@/types";
-import { numBulan, matchDate } from "@/helpers/formatDate";
 
 const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
   return (
@@ -31,7 +31,10 @@ const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
                 key={index + 1}
               >
                 <td className="border-r-2 border-black px-2 text-xl font-medium dark:border-none lg:px-4">
-                  {fasting.date}
+                  {`${
+                    fasting.date.substring(0, fasting.date.length - 2) +
+                    (Number(fasting.date.substring(fasting.date.length - 2)) - 1)
+                  }`}
                 </td>
                 <td className="border-r-2 border-black px-2 text-xl font-medium dark:border-none lg:px-4">
                   {fasting.type.name}

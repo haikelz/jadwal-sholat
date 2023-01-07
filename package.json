@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.20.4",
-    "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "framer-motion": "^8.0.2",
     "jotai": "^1.12.1",
@@ -22,7 +21,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-string-replace": "^1.1.0",
-    "sass": "^1.57.1"
+    "sass": "^1.57.1",
+    "tailwind-merge": "^1.8.1"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

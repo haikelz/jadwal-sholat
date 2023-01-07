@@ -36,4 +36,4 @@ const KotaId = () => {
   );
 };
 
-export default memo(KotaId);
+export default KotaId;

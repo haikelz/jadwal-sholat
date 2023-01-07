@@ -1,12 +1,12 @@
 import SearchBar from "@/atoms/searchBar";
 import TidakAda from "@/atoms/tidakAda";
 import { lastReadAtom } from "@/store";
-import clsx from "clsx";
+import { DaftarSurahProps } from "@/types";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { memo, useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { DaftarSurahProps } from "@/types";
+import { twJoin } from "tailwind-merge";
 
 const ListSurah = ({ surat }: DaftarSurahProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -39,7 +39,7 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
           {lastRead !== null ? (
             <Link href={`/quran/surah/${lastRead.number}`}>
               <span
-                className={clsx(
+                className={twJoin(
                   "hover-animation underline-animation",
                   "hover:text-red-500 dark:hover:text-blue-500"
                 )}
@@ -54,7 +54,7 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
       </div>
       {filteredSurah.length ? (
         <div
-          className={clsx(
+          className={twJoin(
             "grid w-full grid-cols-1 grid-rows-1 gap-4",
             "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           )}
@@ -62,7 +62,7 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
           {filteredSurah.map((surat) => (
             <Link key={surat.number} href={`/quran/surah/${surat.number}`}>
               <div
-                className={clsx(
+                className={twJoin(
                   "clicky flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left",
                   "dark:border-white dark:bg-[#2A2A37]"
                 )}

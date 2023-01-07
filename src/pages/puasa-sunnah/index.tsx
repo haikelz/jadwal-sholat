@@ -4,9 +4,8 @@ import Layout from "@/templates/layout";
 import { PuasaSunnahProps } from "@/types";
 import { PUASA_SUNNAH_API } from "@/utils/api";
 import { GetStaticProps } from "next";
-import { memo } from "react";
 
-// kalo pake useFetch, malah kena CORS
+// kalo pake useFetch, malah kena CORS. Instead, we use getStaticProps
 export const getStaticProps: GetStaticProps = async () => {
   const response: Response = await fetch(PUASA_SUNNAH_API);
   const data = await response.json();
@@ -35,4 +34,4 @@ const PuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
   );
 };
 
-export default memo(PuasaSunnah);
+export default PuasaSunnah;

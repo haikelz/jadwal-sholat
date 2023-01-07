@@ -1,10 +1,10 @@
 import SearchBar from "@/atoms/searchBar";
 import TidakAda from "@/atoms/tidakAda";
-import clsx from "clsx";
+import { KotaProps } from "@/types";
 import Link from "next/link";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { KotaProps } from "@/types";
+import { twJoin } from "tailwind-merge";
 
 const ListKota = ({ kota }: KotaProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -32,7 +32,7 @@ const ListKota = ({ kota }: KotaProps) => {
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredKota.length ? (
         <div
-          className={clsx(
+          className={twJoin(
             "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center",
             "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           )}
@@ -40,7 +40,7 @@ const ListKota = ({ kota }: KotaProps) => {
           {filteredKota.map((loc, index) => (
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
               <div
-                className={clsx(
+                className={twJoin(
                   "clicky flex h-full items-center justify-center overflow-hidden rounded-sm",
                   "border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]"
                 )}
