@@ -1,9 +1,9 @@
 import SearchBar from "@/atoms/searchBar";
 import TidakAda from "@/atoms/tidakAda";
 import { asmaulHusna } from "@/utils/data";
-import clsx from "clsx";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
+import { twJoin } from "tailwind-merge";
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,7 +25,7 @@ const ListAsmaulHusna = () => {
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredAsmaulHusna.length ? (
         <div
-          className={clsx(
+          className={twJoin(
             "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center",
             "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           )}
@@ -33,7 +33,7 @@ const ListAsmaulHusna = () => {
           {filteredAsmaulHusna.map((item) => (
             <div
               key={item.urutan}
-              className={clsx(
+              className={twJoin(
                 "flex flex-col items-start justify-center overflow-hidden rounded-sm",
                 "border-2 border-black bg-gray-100 p-4 text-start tracking-wide transition-all ease-in-out",
                 "active:scale-95 dark:border-white dark:bg-[#2A2A37]"

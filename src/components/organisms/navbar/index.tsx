@@ -1,13 +1,14 @@
 import DarkModeIcon from "@/atoms/darkModeIcon";
 import { isMoreAtom } from "@/store";
 import { navbarList } from "@/utils/data";
-import clsx from "clsx";
 import { useAtom } from "jotai";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
+import { memo } from "react";
 import { IconType } from "react-icons/lib";
 import { MdHomeFilled, MdListAlt, MdOutlineMoreHoriz } from "react-icons/md";
+import { twJoin } from "tailwind-merge";
 
 const Others = dynamic(() => import("@/molecules/others"));
 
@@ -17,13 +18,13 @@ const Navbar = () => {
 
   return (
     <nav
-      className={clsx(
+      className={twJoin(
         "bg-gray-50 dark:bg-gray-800",
         "md:border-r md:border-r-gray-300 md:dark:border-r-gray-600"
       )}
     >
       <div
-        className={clsx(
+        className={twJoin(
           "fixed bottom-0 z-50 grid w-full grid-cols-5 grid-rows-1 gap-4",
           "border-t border-t-gray-300 bg-gray-50 py-1 pt-3 text-white",
           "dark:border-t-[1px] dark:border-t-gray-600 dark:bg-gray-800",
@@ -35,7 +36,7 @@ const Navbar = () => {
         <div className="flex w-full items-center justify-center">
           <Link href="/" passHref>
             <button
-              className={clsx(
+              className={twJoin(
                 "flex cursor-pointer flex-col items-center justify-center px-4",
                 "transition-all duration-200 ease-in-out md:p-2.5",
                 router.pathname === "/"
@@ -54,7 +55,7 @@ const Navbar = () => {
             <div key={index + 1} className="flex w-full items-center justify-center">
               <Link href={item.href} passHref>
                 <button
-                  className={clsx(
+                  className={twJoin(
                     "flex cursor-pointer flex-col items-center justify-center px-4",
                     "transition-all duration-200 ease-in-out md:p-2.5",
                     router.pathname.includes(item.path)
@@ -72,7 +73,7 @@ const Navbar = () => {
         <div className="hidden w-full items-center justify-center md:flex">
           <Link href="/asmaul-husna" passHref>
             <button
-              className={clsx(
+              className={twJoin(
                 "flex cursor-pointer flex-col items-center justify-center px-4",
                 "transition-all duration-200 ease-in-out md:p-2.5",
                 router.pathname.includes("/asmaul-husna")
@@ -88,7 +89,7 @@ const Navbar = () => {
         <DarkModeIcon flexDir="col" isHidden={true} justifyItems="center" isMarginLeft={false} />
         <div className="flex w-full items-center justify-center md:hidden">
           <button
-            className={clsx(
+            className={twJoin(
               "flex cursor-pointer flex-col items-center justify-center px-4",
               "text-gray-500 dark:text-gray-400"
             )}
@@ -104,4 +105,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

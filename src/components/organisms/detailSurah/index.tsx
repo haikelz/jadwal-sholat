@@ -1,8 +1,8 @@
-import { SuratProps } from "@/types";
 import { lastReadAtom } from "@/store";
-import clsx from "clsx";
+import { SuratProps } from "@/types";
 import { useAtom } from "jotai";
 import { nanoid } from "nanoid";
+import { twJoin } from "tailwind-merge";
 
 const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratProps) => {
   const [, setLastRead] = useAtom(lastReadAtom);
@@ -23,7 +23,7 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
     <div className="mt-6 grid w-full grid-cols-1 grid-rows-1 gap-2 text-end">
       {surat.ayahs.map((ayat, index) => (
         <div
-          className={clsx(
+          className={twJoin(
             "mb-4 flex flex-col items-end justify-end",
             "border-b-2 border-gray-300 py-4"
           )}
@@ -32,7 +32,7 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
           <div className="relative flex w-full items-start justify-between gap-2">
             <div
               id={ayat.number.insurah.toString()}
-              className={clsx(
+              className={twJoin(
                 "flex h-12 w-12 items-center justify-center rounded-full p-4",
                 "border-black bg-gray-400 font-bold text-white dark:bg-teal-600"
               )}
@@ -59,7 +59,7 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
             </p>
           </div>
           <button
-            className={clsx(
+            className={twJoin(
               "hover-animation underline-animation mt-2 font-semibold",
               "hover:text-red-500  dark:hover:text-blue-500"
             )}

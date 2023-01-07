@@ -1,7 +1,7 @@
 import { useKeydown } from "@/hooks/useKeydown";
 import { HandleChangeProps, SearchBarProps } from "@/types";
-import clsx from "clsx";
 import { memo, useRef } from "react";
+import { twJoin } from "tailwind-merge";
 
 const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
   const ref = useRef<string | any>("");
@@ -16,7 +16,7 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
     <div className="flex flex-col">
       <input
         ref={ref}
-        className={clsx(
+        className={twJoin(
           "w-[250px] rounded-md border-2 border-solid border-gray-400 bg-gray-50 bg-clip-padding",
           "px-3 py-1 font-semibold transition ease-in-out",
           "focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600",
@@ -28,7 +28,7 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
       />
       <span className="mt-1.5 hidden md:inline-block">
         <kbd
-          className={clsx(
+          className={twJoin(
             "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
             "shadow-sm dark:bg-blue-500 dark:text-black"
           )}
@@ -37,7 +37,7 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
         </kbd>{" "}
         <b>+</b>{" "}
         <kbd
-          className={clsx(
+          className={twJoin(
             "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
             "shadow-sm dark:bg-blue-500 dark:text-black"
           )}

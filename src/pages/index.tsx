@@ -2,7 +2,6 @@ import PriorityImage from "@/atoms/priorityImage";
 import { hours } from "@/helpers/formatDate";
 import Time from "@/molecules/time";
 import Head from "next/head";
-import { memo } from "react";
 
 const Home = () => {
   return (
@@ -44,4 +43,4 @@ const Home = () => {
   );
 };
 
-export default memo(Home);
+export default Home;

@@ -10,7 +10,7 @@ const LazyLoadImage = ({ className, src, alt, width, height, ...props }: LazyLoa
       alt={alt}
       width={width}
       height={height}
-      priority
+      priority={true}
       {...props}
     />
   );

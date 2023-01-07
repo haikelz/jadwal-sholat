@@ -1,7 +1,7 @@
-import clsx from "clsx";
+import { SuratProps } from "@/types";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
-import { SuratProps } from "@/types";
+import { twJoin } from "tailwind-merge";
 
 const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
   return (
@@ -10,7 +10,7 @@ const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
         <div
           tabIndex={-1}
           aria-hidden={true}
-          className={clsx(
+          className={twJoin(
             "fixed inset-0 top-0 z-50 flex min-h-screen w-full items-center justify-center",
             "overflow-y-auto overflow-x-hidden text-black backdrop-blur-[3px]"
           )}
@@ -21,7 +21,7 @@ const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
                 <h3 className="text-xl font-semibold">Tafsir Surat {surat.asma.id.short}</h3>
                 <button
                   type="button"
-                  className={clsx(
+                  className={twJoin(
                     "ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400",
                     "hover:bg-gray-200 dark:text-white dark:hover:text-black"
                   )}

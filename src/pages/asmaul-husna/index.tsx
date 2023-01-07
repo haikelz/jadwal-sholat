@@ -1,6 +1,5 @@
 import ListAsmaulHusna from "@/molecules/listAsmaulHusna";
 import Layout from "@/templates/layout";
-import { memo } from "react";
 
 const AsmaulHusna = () => {
   return (
@@ -16,4 +15,4 @@ const AsmaulHusna = () => {
   );
 };
 
-export default memo(AsmaulHusna);
+export default AsmaulHusna;

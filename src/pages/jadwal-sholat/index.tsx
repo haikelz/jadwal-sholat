@@ -5,7 +5,6 @@ import { useFetch } from "@/hooks/useFetch";
 import ListKota from "@/molecules/listKota";
 import Layout from "@/templates/layout";
 import { JADWAL_SHOLAT_API } from "@/utils/api";
-import { memo } from "react";
 
 const JadwalSholat = () => {
   const { data, isLoading, error } = useFetch(`${JADWAL_SHOLAT_API}/kota/semua`);
@@ -29,4 +28,4 @@ const JadwalSholat = () => {
   );
 };
 
-export default memo(JadwalSholat);
+export default JadwalSholat;

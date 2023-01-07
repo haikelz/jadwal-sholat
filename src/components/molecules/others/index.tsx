@@ -1,16 +1,16 @@
 import DarkModeIcon from "@/atoms/darkModeIcon";
-import clsx from "clsx";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import { MdListAlt } from "react-icons/md";
+import { twJoin } from "tailwind-merge";
 
 const Others = () => {
   const router: NextRouter = useRouter();
 
   return (
     <div
-      className={clsx(
+      className={twJoin(
         "fixed right-2.5 bottom-16 rounded-md bg-gray-200 p-4 shadow-md",
         "dark:bg-gray-800 md:hidden"
       )}
@@ -20,7 +20,7 @@ const Others = () => {
         <div className="mt-2 flex w-full items-center justify-start">
           <Link href="/asmaul-husna" passHref>
             <button
-              className={clsx(
+              className={twJoin(
                 "flex cursor-pointer items-center justify-center px-4 transition-all duration-200 ease-in-out",
                 "md:p-2.5",
                 router.pathname.includes("/asmaul-husna")
