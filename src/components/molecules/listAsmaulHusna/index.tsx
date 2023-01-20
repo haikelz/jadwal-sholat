@@ -1,6 +1,6 @@
 import SearchBar from "@/atoms/searchBar";
 import TidakAda from "@/atoms/tidakAda";
-import { asmaulHusna } from "@/utils/data";
+import { asmaulHusna } from "@/lib/utils/data";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { twJoin } from "tailwind-merge";

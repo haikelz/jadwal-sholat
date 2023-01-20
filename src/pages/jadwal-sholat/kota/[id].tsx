@@ -1,11 +1,10 @@
 import Loading from "@/atoms/loading";
-import { bulan, currentDate, hari, tahun } from "@/helpers/formatDate";
+import { bulan, currentDate, hari, tahun } from "@/lib/helpers/formatDate";
 import { useFetch } from "@/hooks/useFetch";
 import TableJadwalSholat from "@/organisms/tableJadwalSholat";
 import Layout from "@/templates/layout";
-import { JADWAL_SHOLAT_API } from "@/utils/api";
+import { JADWAL_SHOLAT_API } from "@/lib/utils/api";
 import { NextRouter, useRouter } from "next/router";
-import { memo } from "react";
 
 const KotaId = () => {
   const router: NextRouter = useRouter();

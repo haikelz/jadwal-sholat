@@ -4,7 +4,7 @@ import PriorityImage from "@/atoms/priorityImage";
 import { useFetch } from "@/hooks/useFetch";
 import ListSurah from "@/molecules/listSurah";
 import Layout from "@/templates/layout";
-import { QURAN_API } from "@/utils/api";
+import { QURAN_API } from "@/lib/utils/api";
 
 const Quran = () => {
   const { data, isLoading, error } = useFetch(`${QURAN_API}/quran`);

@@ -1,12 +1,12 @@
 import ErrorWhenFetch from "@/atoms/errorwhenFetch";
 import Loading from "@/atoms/loading";
-import { reducer } from "@/helpers/reducer";
+import { reducer } from "@/lib/helpers/reducer";
 import { useFetch } from "@/hooks/useFetch";
 import PreviousOrNextButton from "@/molecules/previousOrNextButton";
 import DetailSurah from "@/organisms/detailSurah";
 import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "@/store";
 import Layout from "@/templates/layout";
-import { QURAN_API } from "@/utils/api";
+import { QURAN_API } from "@/lib/utils/api";
 import { useReducerAtom } from "jotai/utils";
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";

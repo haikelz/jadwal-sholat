@@ -1,19 +1,19 @@
 import DarkModeIcon from "@/atoms/darkModeIcon";
-import { isMoreAtom } from "@/store";
-import { navbarList } from "@/utils/data";
-import { useAtom } from "jotai";
-import dynamic from "next/dynamic";
+// import { isMoreAtom } from "@/store";
+import { navbarList } from "@/lib/utils/data";
+// import { useAtom } from "jotai";
+// import dynamic from "next/dynamic";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import { IconType } from "react-icons/lib";
-import { MdHomeFilled, MdListAlt, MdOutlineMoreHoriz } from "react-icons/md";
+import { MdHomeFilled /*, MdListAlt, MdOutlineMoreHoriz*/ } from "react-icons/md";
 import { twJoin } from "tailwind-merge";
 
-const Others = dynamic(() => import("@/molecules/others"));
+// const Others = dynamic(() => import("@/molecules/others"));
 
 const Navbar = () => {
-  const [isMore, setIsMore] = useAtom(isMoreAtom);
+  // const [isMore, setIsMore] = useAtom(isMoreAtom);
   const router: NextRouter = useRouter();
 
   return (
@@ -70,7 +70,7 @@ const Navbar = () => {
             </div>
           );
         })}
-        <div className="hidden w-full items-center justify-center md:flex">
+        {/*<div className="hidden w-full items-center justify-center md:flex">
           <Link href="/asmaul-husna" passHref>
             <button
               className={twJoin(
@@ -86,7 +86,10 @@ const Navbar = () => {
             </button>
           </Link>
         </div>
-        <DarkModeIcon flexDir="col" isHidden={true} justifyItems="center" isMarginLeft={false} />
+        
+      */}
+        <DarkModeIcon flexDir="col" justifyItems="center" isMarginLeft={false} />
+        {/*
         <div className="flex w-full items-center justify-center md:hidden">
           <button
             className={twJoin(
@@ -99,7 +102,7 @@ const Navbar = () => {
             <p className="text-sm font-semibold">Others</p>
           </button>
         </div>
-        {isMore ? <Others /> : null}
+            {isMore ? <Others /> : null}*/}
       </div>
     </nav>
   );

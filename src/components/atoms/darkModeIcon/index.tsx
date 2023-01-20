@@ -8,7 +8,7 @@ const DarkModeIcon = ({
   isMarginLeft,
 }: {
   flexDir: string;
-  isHidden: boolean;
+  isHidden?: boolean;
   justifyItems: string;
   isMarginLeft: boolean;
 }) => {

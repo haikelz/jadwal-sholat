@@ -1,5 +1,5 @@
 import PriorityImage from "@/atoms/priorityImage";
-import { hours } from "@/helpers/formatDate";
+import { hours } from "@/lib/helpers/formatDate";
 import Time from "@/molecules/time";
 import Head from "next/head";
 
@@ -19,7 +19,7 @@ const Home = () => {
            * jika hours >= 18 dan hours < 0, maka yang ditampilkan malam
            * setelah itu atau selain itu, akan menampilkan pagi
            */}
-          <PriorityImage src="/img/home.webp" width={100} height={100} alt="Home" />
+          <PriorityImage src="/img/home.webp" width={100} height={100} alt="Al-Quran" />
           <div className="mt-3 flex flex-col items-center justify-center text-center">
             <h1>{`Selamat ${
               hours >= 12 && hours < 15

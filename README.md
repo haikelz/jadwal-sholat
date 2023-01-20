@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Jadwal Sholat</h1> 
-  <p>Adalah sebuah Website untuk mendapatkan jadwal sholat, puasa sunnah, Asma'ul Husna, juga membaca Al-Qur'an</p>
+  <p>Adalah sebuah Website untuk mendapatkan jadwal sholat, Asma'ul Husna, juga membaca Al-Qur'an</p>
 </div>
 
 ## 🗒Fitur:
@@ -8,7 +8,7 @@
 - Jadwal sholat
 - Baca Al-Qur'an(dengan audio, terjemahan, juga bahasa latin)
 - Asma'ul Husna
-- Jadwal puasa sunnah
+- ~~Jadwal puasa sunnah~~ Dari API nya udah ga valid lagi, soalnya jadwalnya untuk 2022 saja. Untuk detail bagian puasa sunnah aslinya, bisa lihat di bagian **Screenshots**
 - Udah PWA
 
 ## ⚡Tech Stack

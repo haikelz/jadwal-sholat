@@ -1,4 +1,4 @@
-import { MdBook, MdOutlineAccessTime, MdToday } from "react-icons/md";
+import { MdBook, MdListAlt, MdOutlineAccessTime /*, MdToday*/ } from "react-icons/md";
 
 export const navbarList = [
   {
@@ -7,11 +7,17 @@ export const navbarList = [
     title: "Sholat",
     icon: MdOutlineAccessTime,
   },
-  {
+  /*{
     href: "/puasa-sunnah",
     path: "/puasa-sunnah",
     title: "Puasa",
     icon: MdToday,
+  },*/
+  {
+    href: "/asmaul-husna",
+    path: "/asmaul-husna",
+    title: "Asma'ul Husna",
+    icon: MdListAlt,
   },
   {
     href: "/quran",

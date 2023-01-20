@@ -2,7 +2,7 @@ import PriorityImage from "@/atoms/priorityImage";
 import TableJadwalPuasaSunnah from "@/organisms/tableJadwalPuasaSunnah";
 import Layout from "@/templates/layout";
 import { PuasaSunnahProps } from "@/types";
-import { PUASA_SUNNAH_API } from "@/utils/api";
+import { PUASA_SUNNAH_API } from "@/lib/utils/api";
 import { GetStaticProps } from "next";
 
 // kalo pake useFetch, malah kena CORS. Instead, we use getStaticProps

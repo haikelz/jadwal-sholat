@@ -1,6 +1,6 @@
-import { matchDate } from "@/helpers/formatDate";
+import { matchDate } from "@/lib/helpers/formatDate";
 import { WaktuProps } from "@/types";
-import { tableJadwalSholatList } from "@/utils/data";
+import { tableJadwalSholatList } from "@/lib/utils/data";
 
 const TableJadwalSholat = ({ waktu }: WaktuProps) => {
   return (

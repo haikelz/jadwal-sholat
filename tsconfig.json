@@ -35,8 +35,8 @@
       "@/templates/*": [
         "components/templates/*"
       ],
-      "@/helpers/*": [
-        "helpers/*"
+      "@/lib/*": [
+        "lib/*"
       ],
       "@/hooks/*": [
         "hooks/*"
@@ -49,9 +49,6 @@
       ],
       "@/styles/*": [
         "styles/*"
-      ],
-      "@/utils/*": [
-        "utils/*"
       ],
       "@/pages/*": [
         "pages/*"

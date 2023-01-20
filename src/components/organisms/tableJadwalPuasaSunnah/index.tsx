@@ -1,4 +1,4 @@
-import { matchDate, numBulan } from "@/helpers/formatDate";
+import { matchDate, numBulan } from "@/lib/helpers/formatDate";
 import { PuasaSunnahProps } from "@/types";
 
 const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {

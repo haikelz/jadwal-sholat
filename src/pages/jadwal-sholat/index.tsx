@@ -4,7 +4,7 @@ import PriorityImage from "@/atoms/priorityImage";
 import { useFetch } from "@/hooks/useFetch";
 import ListKota from "@/molecules/listKota";
 import Layout from "@/templates/layout";
-import { JADWAL_SHOLAT_API } from "@/utils/api";
+import { JADWAL_SHOLAT_API } from "@/lib/utils/api";
 
 const JadwalSholat = () => {
   const { data, isLoading, error } = useFetch(`${JADWAL_SHOLAT_API}/kota/semua`);
