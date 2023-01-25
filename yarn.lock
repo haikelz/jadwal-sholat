@@ -1441,6 +1441,11 @@
   dependencies:
     glob "7.1.7"
 
+"@next/font@^13.1.5":
+  version "13.1.5"
+  resolved "https://registry.yarnpkg.com/@next/font/-/font-13.1.5.tgz#9e47e5986173ffab2c3300ac1c63bc39887dfe64"
+  integrity sha512-6M5R6yC3JkdJiqo/YJxDp6+0vDn0smXOAzl8uHt4qmDS2u53ji/19K0HM51d+5kg8xntDi+N2hw7YjaU9inkNA==
+
 "@next/swc-android-arm-eabi@13.1.1":
   version "13.1.1"
   resolved "https://registry.yarnpkg.com/@next/swc-android-arm-eabi/-/swc-android-arm-eabi-13.1.1.tgz#b5c3cd1f79d5c7e6a3b3562785d4e5ac3555b9e1"
@@ -5035,11 +5040,6 @@ next-pwa@5.6.0:
     terser-webpack-plugin "^5.3.3"
     workbox-webpack-plugin "^6.5.4"
     workbox-window "^6.5.4"
-
-next-router-mock@^0.9.1-beta.0:
-  version "0.9.1-beta.0"
-  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.9.1-beta.0.tgz#035e973ab469e76f2e2c9825db2f4d362bd01a92"
-  integrity sha512-qwAJ0UmUndvmv0ePgmks4WeSNkuOnC9Kzx0ckGnlk9IxHoPKI2uCkcuyluXhZFLInHSPYwBEcNj0DQzJHYd4Aw==
 
 next@13.1.1:
   version "13.1.1"

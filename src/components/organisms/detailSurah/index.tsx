@@ -1,8 +1,9 @@
+import { arab } from "@/lib/utils/fonts";
 import { lastReadAtom } from "@/store";
 import { SuratProps } from "@/types";
 import { useAtom } from "jotai";
 import { nanoid } from "nanoid";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 
 const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratProps) => {
   const [, setLastRead] = useAtom(lastReadAtom);
@@ -29,17 +30,19 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
           )}
           key={index + 1}
         >
-          <div className="relative flex w-full items-start justify-between gap-2">
+          <div className="relative flex w-full items-start justify-between">
             <div
               id={ayat.number.insurah.toString()}
               className={twJoin(
-                "flex h-12 w-12 items-center justify-center rounded-full p-4",
+                "mr-2 flex h-12 w-12 items-center justify-center rounded-full p-4",
                 "border-black bg-gray-400 font-bold text-white dark:bg-teal-600"
               )}
             >
               <p className="font-bold">{ayat.number.insurah}</p>
             </div>
-            <p className="font-arab text-4xl leading-relaxed">{ayat.text.ar}</p>
+            <p className={twMerge("text-4xl font-medium leading-relaxed", arab.className)}>
+              {ayat.text.ar}
+            </p>
           </div>
           <div className="flex w-full flex-col items-start justify-start">
             {audio ? (

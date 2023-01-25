@@ -2,7 +2,7 @@ import { LazyLoadImageProps } from "@/types";
 import Image from "next/image";
 import { memo } from "react";
 
-const LazyLoadImage = ({ className, src, alt, width, height, ...props }: LazyLoadImageProps) => {
+const LazyLoadImage = ({ className, src, alt, width, height }: LazyLoadImageProps) => {
   return (
     <Image
       className={className}
@@ -11,7 +11,6 @@ const LazyLoadImage = ({ className, src, alt, width, height, ...props }: LazyLoa
       width={width}
       height={height}
       priority={true}
-      {...props}
     />
   );
 };

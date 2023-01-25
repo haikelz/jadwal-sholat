@@ -30,7 +30,7 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
         <kbd
           className={twJoin(
             "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
-            "shadow-sm dark:bg-blue-500 dark:text-black"
+            "text-black shadow-sm dark:bg-blue-500"
           )}
         >
           Shift
@@ -39,7 +39,7 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
         <kbd
           className={twJoin(
             "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
-            "shadow-sm dark:bg-blue-500 dark:text-black"
+            "text-black shadow-sm dark:bg-blue-500"
           )}
         >
           Enter

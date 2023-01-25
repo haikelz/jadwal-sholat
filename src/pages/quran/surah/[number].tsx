@@ -1,4 +1,4 @@
-import ErrorWhenFetch from "@/atoms/errorwhenFetch";
+import ErrorWhenFetch from "@/atoms/errorWhenFetch";
 import Loading from "@/atoms/loading";
 import { reducer } from "@/lib/helpers/reducer";
 import { useFetch } from "@/hooks/useFetch";
@@ -14,7 +14,7 @@ import { memo } from "react";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 
 const ModalTafsir = dynamic(() => import("@/molecules/modalTafsir"));
-const Notification = dynamic(() => import("@/molecules/notification"));
+const ModalNotification = dynamic(() => import("@/molecules/modalNotification"));
 
 const Surah = () => {
   const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);
@@ -43,23 +43,23 @@ const Surah = () => {
             {surat.asma.translation.id}. Surat ke-{surat.number}. {surat.type.id}
           </p>
         </div>
-        <div className="mt-1 flex gap-4">
+        <div className="mt-1 flex space-x-4">
           <button
-            className="flex items-center gap-1"
+            className="flex items-center space-x-1"
             onClick={() => dispatchAudio({ type: "audio" })}
           >
             <MdVolumeUp size="20px" />
             <p className="text-lg font-bold">Audio</p>
           </button>
           <button
-            className="flex items-center gap-1"
+            className="flex items-center space-x-1"
             onClick={() => dispatchTerjemahan({ type: "terjemahan" })}
           >
             <MdOutlineTranslate size="20px" />
             <p className="text-lg font-bold">Latin</p>
           </button>
           <button
-            className="flex items-center gap-1"
+            className="flex items-center space-x-1"
             onClick={() => dispatchTafsir({ type: "tafsir" })}
           >
             <MdInsertComment size="20px" />
@@ -79,7 +79,7 @@ const Surah = () => {
         dispatchNotification={dispatchNotification}
       />
       <PreviousOrNextButton surat={surat} />
-      {notification ? <Notification dispatchNotification={dispatchNotification} /> : null}
+      {notification ? <ModalNotification dispatchNotification={dispatchNotification} /> : null}
     </Layout>
   );
 };

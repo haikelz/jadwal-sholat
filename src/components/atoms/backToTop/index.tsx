@@ -27,7 +27,7 @@ const BackToTop = () => {
         >
           <button
             className={twJoin(
-              "rounded-md bg-rose-400 p-1.5 transition duration-300",
+              "rounded-md bg-rose-400 p-1.5 transition ease-in-out",
               "hover:bg-rose-500 dark:bg-blue-500 dark:hover:bg-blue-600"
             )}
             onClick={handleClick}

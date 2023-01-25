@@ -21,7 +21,7 @@ const Others = () => {
           <Link href="/asmaul-husna" passHref>
             <button
               className={twJoin(
-                "flex cursor-pointer items-center justify-center px-4 transition-all duration-200 ease-in-out",
+                "flex cursor-pointer items-center justify-center px-4 transition-all ease-in-out",
                 "md:p-2.5",
                 router.pathname.includes("/asmaul-husna")
                   ? "text-gray-600 dark:text-white"

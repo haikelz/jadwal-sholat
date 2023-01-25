@@ -13,6 +13,7 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
+    "@next/font": "^13.1.5",
     "@tanstack/react-query": "^4.20.4",
     "date-fns": "^2.29.3",
     "framer-motion": "^8.0.2",

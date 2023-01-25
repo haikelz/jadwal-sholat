@@ -1,4 +1,4 @@
-import ErrorWhenFetch from "@/atoms/errorwhenFetch";
+import ErrorWhenFetch from "@/atoms/errorWhenFetch";
 import Loading from "@/atoms/loading";
 import PriorityImage from "@/atoms/priorityImage";
 import { useFetch } from "@/hooks/useFetch";

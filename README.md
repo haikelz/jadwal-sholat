@@ -3,7 +3,7 @@
   <p>Adalah sebuah Website untuk mendapatkan jadwal sholat, Asma'ul Husna, juga membaca Al-Qur'an</p>
 </div>
 
-## 🗒Fitur:
+## 🗒Fitur
 
 - Jadwal sholat
 - Baca Al-Qur'an(dengan audio, terjemahan, juga bahasa latin)

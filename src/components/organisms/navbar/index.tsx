@@ -1,19 +1,13 @@
 import DarkModeIcon from "@/atoms/darkModeIcon";
-// import { isMoreAtom } from "@/store";
 import { navbarList } from "@/lib/utils/data";
-// import { useAtom } from "jotai";
-// import dynamic from "next/dynamic";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import { IconType } from "react-icons/lib";
-import { MdHomeFilled /*, MdListAlt, MdOutlineMoreHoriz*/ } from "react-icons/md";
+import { MdHomeFilled } from "react-icons/md";
 import { twJoin } from "tailwind-merge";
 
-// const Others = dynamic(() => import("@/molecules/others"));
-
 const Navbar = () => {
-  // const [isMore, setIsMore] = useAtom(isMoreAtom);
   const router: NextRouter = useRouter();
 
   return (
@@ -26,7 +20,7 @@ const Navbar = () => {
       <div
         className={twJoin(
           "fixed bottom-0 z-50 grid w-full grid-cols-5 grid-rows-1 gap-4",
-          "border-t border-t-gray-300 bg-gray-50 py-1 pt-3 text-white",
+          "border-t border-t-gray-300 bg-gray-50 py-4 text-white",
           "dark:border-t-[1px] dark:border-t-gray-600 dark:bg-gray-800",
           "md:sticky md:top-0 md:left-0 md:flex md:max-h-screen md:min-h-screen",
           "md:max-w-[80px] md:flex-col md:items-center md:justify-center md:gap-10",
@@ -38,14 +32,14 @@ const Navbar = () => {
             <button
               className={twJoin(
                 "flex cursor-pointer flex-col items-center justify-center px-4",
-                "transition-all duration-200 ease-in-out md:p-2.5",
+                "transition-all ease-in-out md:p-2.5",
                 router.pathname === "/"
                   ? "text-gray-600 dark:text-white"
                   : "text-gray-500 dark:text-gray-400"
               )}
             >
-              <MdHomeFilled />
-              <p className="text-sm font-semibold">Home</p>
+              <MdHomeFilled size={24} />
+              <p className="hidden text-sm font-semibold md:block">Home</p>
             </button>
           </Link>
         </div>
@@ -63,46 +57,14 @@ const Navbar = () => {
                       : "text-gray-500 dark:text-gray-400"
                   )}
                 >
-                  <Icon />
-                  <p className="text-sm font-semibold">{item.title}</p>
+                  <Icon size={24} />
+                  <p className="hidden text-sm font-semibold md:block">{item.title}</p>
                 </button>
               </Link>
             </div>
           );
         })}
-        {/*<div className="hidden w-full items-center justify-center md:flex">
-          <Link href="/asmaul-husna" passHref>
-            <button
-              className={twJoin(
-                "flex cursor-pointer flex-col items-center justify-center px-4",
-                "transition-all duration-200 ease-in-out md:p-2.5",
-                router.pathname.includes("/asmaul-husna")
-                  ? "text-gray-600 dark:text-white"
-                  : "text-gray-500 dark:text-gray-400"
-              )}
-            >
-              <MdListAlt />
-              <p className="text-sm font-semibold">Asma&#39;ul Husna</p>
-            </button>
-          </Link>
-        </div>
-        
-      */}
         <DarkModeIcon flexDir="col" justifyItems="center" isMarginLeft={false} />
-        {/*
-        <div className="flex w-full items-center justify-center md:hidden">
-          <button
-            className={twJoin(
-              "flex cursor-pointer flex-col items-center justify-center px-4",
-              "text-gray-500 dark:text-gray-400"
-            )}
-            onClick={() => setIsMore(!isMore)}
-          >
-            <MdOutlineMoreHoriz />
-            <p className="text-sm font-semibold">Others</p>
-          </button>
-        </div>
-            {isMore ? <Others /> : null}*/}
       </div>
     </nav>
   );

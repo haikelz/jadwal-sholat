@@ -12,6 +12,12 @@ export const backToTopAnimation = {
   exit: { y: 40, opacity: 0 },
 };
 
+export const modalAnimation = {
+  initial: { opacity: 0, scale: 0.75 },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.2, ease: "easeOut" } },
+  exit: { opacity: 0, transition: { duration: 0.2, ease: "easeIn" } },
+};
+
 export const whileTap = {
   scale: 0.95,
   rotate: 15,

@@ -1,9 +1,10 @@
 import SearchBar from "@/atoms/searchBar";
 import TidakAda from "@/atoms/tidakAda";
 import { asmaulHusna } from "@/lib/utils/data";
+import { arab } from "@/lib/utils/fonts";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -35,13 +36,14 @@ const ListAsmaulHusna = () => {
               key={item.urutan}
               className={twJoin(
                 "flex flex-col items-start justify-center overflow-hidden rounded-sm",
-                "border-2 border-black bg-gray-100 p-4 text-start tracking-wide transition-all ease-in-out",
+                "border-2 border-black bg-gray-100 p-4 text-start tracking-wide",
+                "cursor-pointer transition-all ease-in-out",
                 "active:scale-95 dark:border-white dark:bg-[#2A2A37]"
               )}
             >
               <h3 className="text-xl font-bold">{item.urutan}</h3>
               <div className="my-3 w-full text-right">
-                <p className="font-arab text-3xl font-bold">{item.arab}</p>
+                <p className={twMerge("text-3xl font-medium", arab.className)}>{item.arab}</p>
               </div>
               <p className="text-lg font-medium">
                 {searchTerm
