@@ -32,6 +32,14 @@ export const tableJadwalSholatList = [
   { name: "Maghrib" },
 ];
 
+export const metadata = {
+  url: "https://info-jadwal-sholat.vercel.app/",
+  type: "website",
+  title: "Jadwal Sholat",
+  description: "Aplikasi Web untuk menampilkan jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
+  image: "/favicon.ico",
+};
+
 export const asmaulHusna = [
   {
     urutan: 1,

@@ -66,9 +66,7 @@ const Surah = () => {
             <p className="text-lg font-bold">Tafsir</p>
           </button>
         </div>
-        {tafsir ? (
-          <ModalTafsir surat={surat} dispatchTafsir={dispatchTafsir} tafsir={tafsir} />
-        ) : null}
+        <ModalTafsir surat={surat} dispatchTafsir={dispatchTafsir} tafsir={tafsir} />
       </div>
       <PreviousOrNextButton surat={surat} />
       <DetailSurah
@@ -79,7 +77,7 @@ const Surah = () => {
         dispatchNotification={dispatchNotification}
       />
       <PreviousOrNextButton surat={surat} />
-      {notification ? <ModalNotification dispatchNotification={dispatchNotification} /> : null}
+      <ModalNotification notification={notification} dispatchNotification={dispatchNotification} />
     </Layout>
   );
 };

@@ -8,7 +8,7 @@ import { modalAnimation } from "@/lib/utils/animation";
 const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence key={dispatchTafsir} mode="wait">
         {tafsir ? (
           <m.div
             {...modalAnimation}
@@ -19,7 +19,12 @@ const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
             )}
           >
             <div className="relative w-full max-w-2xl p-4 md:h-auto">
-              <div className="relative rounded-lg bg-white shadow dark:bg-gray-800 dark:text-white">
+              <div
+                className={twJoin(
+                  "relative rounded-lg bg-white shadow",
+                  "dark:bg-gray-800 dark:text-white"
+                )}
+              >
                 <div className="flex items-center justify-between rounded-t border-b p-4">
                   <h3 className="text-xl font-semibold">Tafsir Surat {surat.asma.id.short}</h3>
                   <button

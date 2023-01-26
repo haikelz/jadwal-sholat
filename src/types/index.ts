@@ -93,6 +93,7 @@ export type SuratProps = {
 };
 
 export type NotificationProps = {
+  notification: boolean;
   dispatchNotification: any;
 };
 

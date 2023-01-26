@@ -14,18 +14,12 @@ export const backToTopAnimation = {
 
 export const modalAnimation = {
   initial: { opacity: 0, scale: 0.75 },
-  animate: { opacity: 1, scale: 1, transition: { duration: 0.2, ease: "easeOut" } },
-  exit: { opacity: 0, transition: { duration: 0.2, ease: "easeIn" } },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.2, animation: "ease-out" } },
+  exit: { opacity: 0, scale: 0, transition: { duration: 0.2, animation: "ease-in" } },
 };
 
-export const whileTap = {
-  scale: 0.95,
-  rotate: 15,
-};
-
-export const darkModeIconAnimation = {
-  transition: { type: "spring", stiffness: 200, damping: 10 },
-  initial: { opacity: 0.6, rotate: 90 },
-  animate: { opacity: 1, rotate: 0 },
-  whileTap: whileTap,
+export const opacityAnimation = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2, animation: "ease-out" } },
+  exit: { opacity: 0, transition: { duration: 0.2, animation: "ease-in" } },
 };

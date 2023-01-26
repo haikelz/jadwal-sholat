@@ -1,6 +1,8 @@
+import { opacityAnimation } from "@/lib/utils/animation";
 import { arab } from "@/lib/utils/fonts";
 import { lastReadAtom } from "@/store";
 import { SuratProps } from "@/types";
+import { AnimatePresence, m } from "framer-motion";
 import { useAtom } from "jotai";
 import { nanoid } from "nanoid";
 import { twJoin, twMerge } from "tailwind-merge";
@@ -45,18 +47,25 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
             </p>
           </div>
           <div className="flex w-full flex-col items-start justify-start">
-            {audio ? (
-              <div className="mt-2.5 w-full">
-                <audio preload="auto" src={ayat.audio.url} controls>
-                  <track default kind="captions" />
-                </audio>
-              </div>
-            ) : null}
-            {terjemahan ? (
-              <p className="mt-2 text-left italic text-teal-700 dark:text-teal-300">
-                {ayat.text.read}
-              </p>
-            ) : null}
+            <AnimatePresence mode="wait">
+              {audio ? (
+                <m.div {...opacityAnimation} className="mt-2.5 w-full">
+                  <audio preload="auto" src={ayat.audio.url} controls>
+                    <track default kind="captions" />
+                  </audio>
+                </m.div>
+              ) : null}
+            </AnimatePresence>
+            <AnimatePresence mode="wait">
+              {terjemahan ? (
+                <m.p
+                  {...opacityAnimation}
+                  className="mt-2 text-left italic text-teal-700 dark:text-teal-300"
+                >
+                  {ayat.text.read}
+                </m.p>
+              ) : null}
+            </AnimatePresence>
             <p className="text-md mt-2 text-left font-medium leading-relaxed tracking-wide">
               {ayat.translation.id}
             </p>
