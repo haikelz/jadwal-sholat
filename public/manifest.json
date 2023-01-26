@@ -6,7 +6,7 @@
   "start_url": "/",
   "name": "Jadwal Sholat",
   "short_name": "jadwal-sholat",
-  "description": "Aplikasi Web untuk menampilkan jadwal sholat, puasa sunnah, dan baca Al-Qur'an",
+  "description": "Aplikasi Web untuk menampilkan jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
   "icons": [
     {
       "src": "/img/icon-192x192.png",
