@@ -1,11 +1,13 @@
-import DarkModeIcon from "@/atoms/darkModeIcon";
-import { navbarList } from "@/lib/utils/data";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import { IconType } from "react-icons/lib";
 import { MdHomeFilled } from "react-icons/md";
 import { twJoin } from "tailwind-merge";
+import { navbarList } from "~lib/utils/data";
+
+const DarkModeIcon = dynamic(() => import("~atoms/DarkModeIcon"), { ssr: false });
 
 const Navbar = () => {
   const router: NextRouter = useRouter();

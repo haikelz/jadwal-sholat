@@ -1,4 +1,4 @@
-import { ChildrenProps } from "@/types";
+import { ChildrenProps } from "~types";
 import Head from "next/head";
 import { twJoin } from "tailwind-merge";
 

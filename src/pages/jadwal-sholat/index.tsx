@@ -1,11 +1,10 @@
-import ErrorWhenFetch from "@/atoms/errorWhenFetch";
-import Loading from "@/atoms/loading";
-import PriorityImage from "@/atoms/priorityImage";
-import { useFetch } from "@/hooks/useFetch";
-import ListKota from "@/molecules/listKota";
-import Layout from "@/templates/layout";
-import { JADWAL_SHOLAT_API } from "@/lib/utils/api";
-import { bitter } from "@/lib/utils/fonts";
+import ErrorWhenFetch from "~atoms/ErrorWhenFetch";
+import Loading from "~atoms/Loading";
+import PriorityImage from "~atoms/PriorityImage";
+import { useFetch } from "~hooks/useFetch";
+import { JADWAL_SHOLAT_API } from "~lib/utils/api";
+import ListKota from "~molecules/ListKota";
+import Layout from "~templates/Layout";
 
 const JadwalSholat = () => {
   const { data, isLoading, error } = useFetch(`${JADWAL_SHOLAT_API}/kota/semua`);

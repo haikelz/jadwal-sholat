@@ -1,20 +1,20 @@
-import ErrorWhenFetch from "@/atoms/errorWhenFetch";
-import Loading from "@/atoms/loading";
-import { reducer } from "@/lib/helpers/reducer";
-import { useFetch } from "@/hooks/useFetch";
-import PreviousOrNextButton from "@/molecules/previousOrNextButton";
-import DetailSurah from "@/organisms/detailSurah";
-import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "@/store";
-import Layout from "@/templates/layout";
-import { QURAN_API } from "@/lib/utils/api";
 import { useReducerAtom } from "jotai/utils";
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
+import ErrorWhenFetch from "~atoms/ErrorWhenFetch";
+import Loading from "~atoms/Loading";
+import { useFetch } from "~hooks/useFetch";
+import { reducer } from "~lib/helpers/reducer";
+import { QURAN_API } from "~lib/utils/api";
+import PreviousOrNextButton from "~molecules/PreviousOrNextButton";
+import DetailSurah from "~organisms/DetailSurah";
+import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "~store";
+import Layout from "~templates/Layout";
 
-const ModalTafsir = dynamic(() => import("@/molecules/modalTafsir"));
-const ModalNotification = dynamic(() => import("@/molecules/modalNotification"));
+const ModalTafsir = dynamic(() => import("~molecules/ModalTafsir"));
+const ModalNotification = dynamic(() => import("~molecules/ModalNotification"));
 
 const Surah = () => {
   const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);

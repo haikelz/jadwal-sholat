@@ -1,8 +1,8 @@
-import { modalAnimation } from "@/lib/utils/animation";
-import { NotificationProps } from "@/types";
 import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { twJoin } from "tailwind-merge";
+import { modalAnimation } from "~lib/utils/animation";
+import { NotificationProps } from "~types";
 
 const ModalNotification = ({ notification, dispatchNotification }: NotificationProps) => {
   return (

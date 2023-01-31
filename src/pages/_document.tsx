@@ -1,4 +1,4 @@
-import { metadata } from "@/lib/utils/data";
+import { metadata } from "~lib/utils/data";
 import { Head, Html, Main, NextScript } from "next/document";
 
 const { url, type, title, description, image } = metadata;

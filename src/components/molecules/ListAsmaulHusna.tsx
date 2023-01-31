@@ -1,10 +1,10 @@
-import SearchBar from "@/atoms/searchBar";
-import TidakAda from "@/atoms/tidakAda";
-import { asmaulHusna } from "@/lib/utils/data";
-import { arab } from "@/lib/utils/fonts";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { twJoin, twMerge } from "tailwind-merge";
+import SearchBar from "~atoms/SearchBar";
+import TidakAda from "~atoms/TidakAda";
+import { asmaulHusna } from "~lib/utils/data";
+import { arab } from "~lib/utils/fonts";
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState("");

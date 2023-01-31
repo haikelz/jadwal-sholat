@@ -1,9 +1,9 @@
-import { SuratProps } from "@/types";
+import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
 import { twJoin } from "tailwind-merge";
-import { AnimatePresence, m } from "framer-motion";
-import { modalAnimation } from "@/lib/utils/animation";
+import { modalAnimation } from "~lib/utils/animation";
+import { SuratProps } from "~types";
 
 const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
   return (

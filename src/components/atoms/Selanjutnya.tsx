@@ -1,4 +1,4 @@
-import { SuratProps } from "@/types";
+import { SuratProps } from "~types";
 import Link from "next/link";
 import { MdPlayArrow } from "react-icons/md";
 import { twJoin } from "tailwind-merge";

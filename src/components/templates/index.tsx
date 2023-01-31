@@ -1,5 +1,5 @@
-import { bitter, rubik } from "@/lib/utils/fonts";
-import { ChildrenProps } from "@/types";
+import { bitter, rubik } from "~lib/utils/fonts";
+import { ChildrenProps } from "~types";
 import { twMerge } from "tailwind-merge";
 
 const Template = ({ children }: ChildrenProps) => {

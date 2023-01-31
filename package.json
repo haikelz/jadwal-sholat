@@ -46,6 +46,7 @@
     "husky": "^8.0.2",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
+    "lint-staged": "^13.1.0",
     "postcss": "^8.4.20",
     "prettier": "2.8.1",
     "prettier-plugin-tailwindcss": "^0.2.1",
@@ -61,5 +62,14 @@
     "hooks": {
       "prepare-commit-msg": "exec < /dev/tty && yarn cz --hook || true"
     }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --config ./.prettierrc.json --write"
+    ],
+    "**/*.{css,scss,md,html,json}": [
+      "prettier --config ./.prettierrc.json --write"
+    ]
   }
 }

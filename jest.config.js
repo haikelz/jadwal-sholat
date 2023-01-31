@@ -11,14 +11,14 @@ const customJestConfig = {
 
   // absolute import
   moduleNameMapper: {
-    "^@/atoms/(.*)$": "src/components/atoms/$1",
-    "^@/molecules/(.*)$": "src/components/molecules/$1",
-    "^@/organisms/(.*)$": "src/components/organisms/$1",
-    "^@/templates/(.*)$": "src/components/templates/$1",
-    "^@/pages/(.*)$": "src/pages/$1",
-    "^@/lib/(.*)$": "src/lib/$1",
-    "^@/hooks/(.*)$": "src/hooks/$1",
-    "^@/store$": "src/store",
+    "^~atoms/(.*)$": "src/components/atoms/$1",
+    "^~molecules/(.*)$": "src/components/molecules/$1",
+    "^~organisms/(.*)$": "src/components/organisms/$1",
+    "^~templates/(.*)$": "src/components/templates/$1",
+    "^~pages/(.*)$": "src/pages/$1",
+    "^~lib/(.*)$": "src/lib/$1",
+    "^~hooks/(.*)$": "src/hooks/$1",
+    "^~store$": "src/store",
   },
 };
 

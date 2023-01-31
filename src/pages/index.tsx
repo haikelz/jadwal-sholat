@@ -1,7 +1,9 @@
-import PriorityImage from "@/atoms/priorityImage";
-import { hours } from "@/lib/helpers/formatDate";
-import Time from "@/molecules/time";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+import PriorityImage from "~atoms/PriorityImage";
+import { hours } from "~lib/helpers/formatDate";
+
+const Time = dynamic(() => import("~molecules/Time"), { ssr: false });
 
 const Home = () => {
   return (

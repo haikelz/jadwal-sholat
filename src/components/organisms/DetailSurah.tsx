@@ -1,7 +1,7 @@
-import { opacityAnimation } from "@/lib/utils/animation";
-import { arab } from "@/lib/utils/fonts";
-import { lastReadAtom } from "@/store";
-import { SuratProps } from "@/types";
+import { opacityAnimation } from "~lib/utils/animation";
+import { arab } from "~lib/utils/fonts";
+import { lastReadAtom } from "~store";
+import { SuratProps } from "~types";
 import { AnimatePresence, m } from "framer-motion";
 import { useAtom } from "jotai";
 import { nanoid } from "nanoid";

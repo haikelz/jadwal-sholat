@@ -1,11 +1,11 @@
-import { hours } from "@/lib/helpers/formatDate";
-import AsmaulHusna from "@/pages/asmaul-husna";
-import Home from "@/pages/index";
-import JadwalSholat from "@/pages/jadwal-sholat";
-import Quran from "@/pages/quran";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import { hours } from "~lib/helpers/formatDate";
+import AsmaulHusna from "~pages/asmaul-husna";
+import Home from "~pages/index";
+import JadwalSholat from "~pages/jadwal-sholat";
+import Quran from "~pages/quran";
 
 jest.mock("next/router", () => require("next-router-mock"));
 jest.mock("next/dist/client/router", () => require("next-router-mock"));

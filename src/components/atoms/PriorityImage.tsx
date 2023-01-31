@@ -1,4 +1,4 @@
-import { LazyLoadImageProps } from "@/types";
+import { LazyLoadImageProps } from "~types";
 import Image from "next/image";
 import { memo } from "react";
 

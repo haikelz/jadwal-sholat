@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "ESNext"
-    ],
+    "lib": ["dom", "dom.iterable", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,47 +16,19 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths": {
-      "@/public/*": [
-        "public/*"
-      ],
-      "@/atoms/*": [
-        "components/atoms/*"
-      ],
-      "@/molecules/*": [
-        "components/molecules/*"
-      ],
-      "@/organisms/*": [
-        "components/organisms/*"
-      ],
-      "@/templates/*": [
-        "components/templates/*"
-      ],
-      "@/lib/*": [
-        "lib/*"
-      ],
-      "@/hooks/*": [
-        "hooks/*"
-      ],
-      "@/types": [
-        "types"
-      ],
-      "@/store": [
-        "store"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/pages/*": [
-        "pages/*"
-      ]
+      "~public/*": ["public/*"],
+      "~atoms/*": ["components/atoms/*"],
+      "~molecules/*": ["components/molecules/*"],
+      "~organisms/*": ["components/organisms/*"],
+      "~templates/*": ["components/templates/*"],
+      "~lib/*": ["lib/*"],
+      "~hooks/*": ["hooks/*"],
+      "~types": ["types"],
+      "~store": ["store"],
+      "~styles/*": ["styles/*"],
+      "~pages/*": ["pages/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

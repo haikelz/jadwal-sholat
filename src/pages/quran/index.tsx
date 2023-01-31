@@ -1,10 +1,10 @@
-import ErrorWhenFetch from "@/atoms/errorWhenFetch";
-import Loading from "@/atoms/loading";
-import PriorityImage from "@/atoms/priorityImage";
-import { useFetch } from "@/hooks/useFetch";
-import ListSurah from "@/molecules/listSurah";
-import Layout from "@/templates/layout";
-import { QURAN_API } from "@/lib/utils/api";
+import ErrorWhenFetch from "~atoms/ErrorWhenFetch";
+import Loading from "~atoms/Loading";
+import PriorityImage from "~atoms/PriorityImage";
+import { useFetch } from "~hooks/useFetch";
+import { QURAN_API } from "~lib/utils/api";
+import ListSurah from "~molecules/ListSurah";
+import Layout from "~templates/Layout";
 
 const Quran = () => {
   const { data, isLoading, error } = useFetch(`${QURAN_API}/quran`);

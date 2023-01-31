@@ -1,4 +1,4 @@
-import { useTheme } from "@/hooks/useTheme";
+import { useTheme } from "~hooks/useTheme";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { twJoin } from "tailwind-merge";
 

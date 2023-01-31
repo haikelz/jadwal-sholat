@@ -1,10 +1,10 @@
-import SearchBar from "@/atoms/searchBar";
-import TidakAda from "@/atoms/tidakAda";
-import { KotaProps } from "@/types";
 import Link from "next/link";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { twJoin } from "tailwind-merge";
+import SearchBar from "~atoms/SearchBar";
+import TidakAda from "~atoms/TidakAda";
+import { KotaProps } from "~types";
 
 const ListKota = ({ kota }: KotaProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");

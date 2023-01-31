@@ -1,6 +1,6 @@
-import SearchBar from "@/atoms/searchBar";
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
+import SearchBar from "~atoms/SearchBar";
 
 describe("Search Bar", () => {
   it("Should update on change", () => {

@@ -1,5 +1,5 @@
-import { useKeydown } from "@/hooks/useKeydown";
-import { HandleChangeProps, SearchBarProps } from "@/types";
+import { useKeydown } from "~hooks/useKeydown";
+import { HandleChangeProps, SearchBarProps } from "~types";
 import { memo, useRef } from "react";
 import { twJoin } from "tailwind-merge";
 

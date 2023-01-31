@@ -1,4 +1,4 @@
-import PriorityImage from "@/atoms/priorityImage";
+import PriorityImage from "~atoms/PriorityImage";
 
 const ErrorPage = () => {
   return (

@@ -1,5 +1,5 @@
-import ListAsmaulHusna from "@/molecules/listAsmaulHusna";
-import Layout from "@/templates/layout";
+import ListAsmaulHusna from "~molecules/ListAsmaulHusna";
+import Layout from "~templates/Layout";
 
 const AsmaulHusna = () => {
   return (

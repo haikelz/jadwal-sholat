@@ -1,9 +1,9 @@
-import DarkModeIcon from "@/atoms/darkModeIcon";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { memo } from "react";
 import { MdListAlt } from "react-icons/md";
 import { twJoin } from "tailwind-merge";
+import DarkModeIcon from "~atoms/DarkModeIcon";
 
 const Others = () => {
   const router: NextRouter = useRouter();

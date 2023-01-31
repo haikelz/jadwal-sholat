@@ -1,12 +1,12 @@
-import SearchBar from "@/atoms/searchBar";
-import TidakAda from "@/atoms/tidakAda";
-import { lastReadAtom } from "@/store";
-import { DaftarSurahProps } from "@/types";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { memo, useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { twJoin } from "tailwind-merge";
+import SearchBar from "~atoms/SearchBar";
+import TidakAda from "~atoms/TidakAda";
+import { lastReadAtom } from "~store";
+import { DaftarSurahProps } from "~types";
 
 const ListSurah = ({ surat }: DaftarSurahProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
