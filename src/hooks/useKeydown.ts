@@ -1,5 +1,16 @@
-import { useCallback, useEffect } from "react";
-import { KeydownEventProps, KeydownProps } from "~types";
+import { MutableRefObject, useCallback, useEffect } from "react";
+
+type KeydownProps = {
+  ref: MutableRefObject<string | any>;
+  isShiftKey: boolean;
+  key1: string;
+  key2: string;
+};
+
+type KeydownEventProps = {
+  shiftKey: boolean;
+  key: string;
+};
 
 export const useKeydown = <T extends KeydownProps>({ ref, isShiftKey, key1, key2 }: T) => {
   const handleKeydown = useCallback(

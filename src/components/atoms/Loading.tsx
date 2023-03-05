@@ -7,7 +7,7 @@ const Loading = () => {
       <Head>
         <title>Loading....</title>
       </Head>
-      <div className="flex min-h-screen items-center justify-center gap-3 p-8 text-center">
+      <div className="flex min-h-screen items-center justify-center space-x-3 p-8 text-center">
         <p className="text-2xl font-bold">Loading</p>
         <div role="status">
           <svg

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import fetch from "isomorphic-fetch";
 
 const getData = async (link: string) => {
   const response: Response = await fetch(link);

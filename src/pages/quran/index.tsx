@@ -19,7 +19,7 @@ const Quran = () => {
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
           <h1>Baca Al-Qur&#39;an</h1>
-          <PriorityImage src="/img/Quran.webp" width={40} height={40} alt="Al-Qur'an Image" />
+          <PriorityImage src="/img/Quran.webp" width={40} height={40} alt="Al-Qur'an" />
         </div>
         <p className="mt-2 text-lg font-medium">
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;

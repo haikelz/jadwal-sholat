@@ -1,2 +1,0 @@
-- Folder ini berisi fitur yang sebenarnya dulunya valid dan bisa dipakai, tapi jadi tidak bisa dipakai karena suatu dan lain hal.
-- Fitur tersebut akan ditambahkan kembali ke jika memang sudah bekerja/valid lagi

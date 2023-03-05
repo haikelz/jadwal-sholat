@@ -1,7 +1,16 @@
 import { useKeydown } from "~hooks/useKeydown";
-import { HandleChangeProps, SearchBarProps } from "~types";
 import { memo, useRef } from "react";
 import { twJoin } from "tailwind-merge";
+
+type SearchBarProps = {
+  setSearchTerm: (value: string) => void;
+};
+
+type HandleChangeProps = {
+  target: {
+    value: string;
+  };
+};
 
 const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
   const ref = useRef<string | any>("");

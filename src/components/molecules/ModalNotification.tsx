@@ -2,7 +2,11 @@ import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { twJoin } from "tailwind-merge";
 import { modalAnimation } from "~lib/utils/animation";
-import { NotificationProps } from "~types";
+
+type NotificationProps = {
+  notification: boolean;
+  dispatchNotification: any;
+};
 
 const ModalNotification = ({ notification, dispatchNotification }: NotificationProps) => {
   return (
@@ -22,8 +26,9 @@ const ModalNotification = ({ notification, dispatchNotification }: NotificationP
                 <div className="flex flex-col items-center justify-between rounded-t p-4">
                   <p className="text-2xl font-bold">Sudah ditandai!</p>
                   <button
+                    type="button"
                     className={twJoin(
-                      "mt-2 inline-flex items-center rounded-md bg-transparent bg-blue-500 py-1.5 px-4",
+                      "mt-2 inline-flex items-center rounded-md bg-blue-500 py-1.5 px-4",
                       "font-semibold text-white shadow-md transition-all ease-in-out",
                       "hover:bg-gray-200 hover:text-black dark:hover:text-black"
                     )}

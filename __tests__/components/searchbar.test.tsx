@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render } from "@testing-library/react";
 import SearchBar from "~atoms/SearchBar";
 
 describe("Search Bar", () => {

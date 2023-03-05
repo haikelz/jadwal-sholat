@@ -1,4 +1,4 @@
-import { Bitter, Noto_Naskh_Arabic, Rubik } from "@next/font/google";
+import { Bitter, Noto_Naskh_Arabic, Rubik } from "next/font/google";
 
 export const bitter = Bitter({
   style: ["normal"],

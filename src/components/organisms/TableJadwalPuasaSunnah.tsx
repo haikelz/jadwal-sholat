@@ -1,5 +1,16 @@
 import { matchDate, numBulan } from "~lib/helpers/formatDate";
-import { PuasaSunnahProps } from "~types";
+
+type PuasaSunnahProps = {
+  puasaSunnah: [
+    fasting: {
+      month: number;
+      date: string;
+      type: {
+        name: string;
+      };
+    }
+  ];
+};
 
 const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
   return (
@@ -18,8 +29,9 @@ const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
         {puasaSunnah.map(
           (fasting, index) =>
             /**
-             * Kita ingin mendapatkan hasil sesuai bulan saja,
-             * jadi kita cocokkan data month dari API dengan numBulan
+             * Kita ingin mendapatkan hasil sesuai bulan saja
+             * @param fasting
+             * Jadi kita cocokkan data month dari API dengan numBulan
              */
             fasting.month === numBulan && (
               <tr

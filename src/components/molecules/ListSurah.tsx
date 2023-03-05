@@ -6,7 +6,26 @@ import { twJoin } from "tailwind-merge";
 import SearchBar from "~atoms/SearchBar";
 import TidakAda from "~atoms/TidakAda";
 import { lastReadAtom } from "~store";
-import { DaftarSurahProps } from "~types";
+
+type DaftarSurahProps = {
+  surat: [
+    surat: {
+      number: string;
+      asma: {
+        id: {
+          short: string;
+        };
+        translation: {
+          id: string;
+        };
+      };
+      ayahCount: string;
+      type: {
+        id: string;
+      };
+    }
+  ];
+};
 
 const ListSurah = ({ surat }: DaftarSurahProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");

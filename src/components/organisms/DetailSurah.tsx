@@ -36,7 +36,7 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
             <div
               id={ayat.number.insurah.toString()}
               className={twJoin(
-                "mr-2 flex h-12 w-12 items-center justify-center rounded-full p-4",
+                "mr-2 flex h-12 w-12 items-center justify-center rounded-full p-6",
                 "border-black bg-gray-400 font-bold text-white dark:bg-teal-600"
               )}
             >
@@ -46,7 +46,7 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
               {ayat.text.ar}
             </p>
           </div>
-          <div className="flex w-full flex-col items-start justify-start">
+          <div className="mb-6 flex w-full flex-col items-start justify-start">
             <AnimatePresence mode="wait">
               {audio ? (
                 <m.div {...opacityAnimation} className="mt-2.5 w-full">
@@ -66,7 +66,7 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
                 </m.p>
               ) : null}
             </AnimatePresence>
-            <p className="text-md mt-2 text-left font-medium leading-relaxed tracking-wide">
+            <p className="mt-6 text-left font-normal leading-relaxed tracking-wide">
               {ayat.translation.id}
             </p>
           </div>

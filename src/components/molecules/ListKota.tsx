@@ -4,7 +4,15 @@ import reactStringReplace from "react-string-replace";
 import { twJoin } from "tailwind-merge";
 import SearchBar from "~atoms/SearchBar";
 import TidakAda from "~atoms/TidakAda";
-import { KotaProps } from "~types";
+
+type KotaProps = {
+  kota: [
+    loc: {
+      id: string;
+      lokasi: string;
+    }
+  ];
+};
 
 const ListKota = ({ kota }: KotaProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");

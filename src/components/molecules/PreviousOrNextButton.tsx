@@ -1,7 +1,9 @@
 import { twJoin } from "tailwind-merge";
 import Sebelumnya from "~atoms/Sebelumnya";
 import Selanjutnya from "~atoms/Selanjutnya";
-import { PreviousOrNextButtonProps } from "~types";
+import { SuratProps } from "~types";
+
+type PreviousOrNextButtonProps = SuratProps & {};
 
 const PreviousOrNextButton = ({ surat }: PreviousOrNextButtonProps) => {
   return (

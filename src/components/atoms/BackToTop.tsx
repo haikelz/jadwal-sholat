@@ -1,9 +1,9 @@
-import { useScroll } from "~hooks/useScroll";
 import { backToTopAnimation } from "~lib/utils/animation";
 import { AnimatePresence, motion } from "framer-motion";
 import { memo } from "react";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { twJoin } from "tailwind-merge";
+import { useScroll } from "~hooks/useScroll";
 
 const BackToTop = () => {
   const [scroll] = useScroll();
