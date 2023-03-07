@@ -73,11 +73,15 @@ const Surah = () => {
         surat={surat}
         audio={audio}
         terjemahan={terjemahan}
-        tafsir={tafsir}
         dispatchNotification={dispatchNotification}
+        tafsir={tafsir}
       />
       <PreviousOrNextButton surat={surat} />
-      <ModalNotification notification={notification} dispatchNotification={dispatchNotification} />
+      <ModalNotification
+        notification={notification}
+        dispatchNotification={dispatchNotification}
+        description="Sudah Ditandai!"
+      />
     </Layout>
   );
 };

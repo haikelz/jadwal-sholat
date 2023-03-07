@@ -6,9 +6,14 @@ import { modalAnimation } from "~lib/utils/animation";
 type NotificationProps = {
   notification: boolean;
   dispatchNotification: any;
+  description: string;
 };
 
-const ModalNotification = ({ notification, dispatchNotification }: NotificationProps) => {
+const ModalNotification = ({
+  notification,
+  dispatchNotification,
+  description,
+}: NotificationProps) => {
   return (
     <>
       <AnimatePresence key={dispatchNotification} mode="wait">
@@ -24,7 +29,7 @@ const ModalNotification = ({ notification, dispatchNotification }: NotificationP
             <div className="relative md:h-auto">
               <div className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 dark:text-white">
                 <div className="flex flex-col items-center justify-between rounded-t p-4">
-                  <p className="text-2xl font-bold">Sudah ditandai!</p>
+                  <p className="text-2xl font-bold">{description}</p>
                   <button
                     type="button"
                     className={twJoin(

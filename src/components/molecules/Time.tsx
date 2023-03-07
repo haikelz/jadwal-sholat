@@ -1,19 +1,11 @@
 import { format } from "date-fns";
-import { useAtom } from "jotai";
-import { useEffect } from "react";
-import { dateAtom } from "~store";
+import { getDate } from "~lib/helpers/getDate";
 
 const Time = () => {
-  const [date, setDate] = useAtom(dateAtom);
-  const formattedDate: string = format(date, `dd MMMM yyyy, kk.mm.ss`);
-
-  useEffect(() => {
-    const interval: NodeJS.Timer = setInterval(() => setDate(new Date()), 1000);
-    return () => clearInterval(interval);
-  }, [setDate]);
+  const formattedDate: string = format(getDate(), `dd MMMM yyyy, kk.mm.ss`);
 
   return (
-    <div className="flex gap-1">
+    <div className="flex space-x-1">
       <p className="text-xl font-bold">{formattedDate}</p>
     </div>
   );

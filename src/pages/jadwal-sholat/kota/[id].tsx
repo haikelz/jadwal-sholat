@@ -9,6 +9,7 @@ import Layout from "~templates/Layout";
 const KotaId = () => {
   const router: NextRouter = useRouter();
   const { id } = router.query;
+
   const formatDate: string = `${tahun}/${bulan}`;
 
   const { data, isLoading, isError } = useFetch(

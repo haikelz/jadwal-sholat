@@ -11,3 +11,4 @@ export const dateAtom = atom<Date>(new Date());
 export const scrollAtom = atom<number>(0);
 export const lastReadAtom = atom<any>(null);
 export const isMoreAtom = atom<boolean>(false);
+export const isAutoPlayAtom = atom<boolean>(false);
