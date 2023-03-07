@@ -1,8 +1,8 @@
 import { format } from "date-fns";
-import { getDate } from "~lib/helpers/getDate";
+import { useDate } from "~hooks/useDate";
 
 const Time = () => {
-  const formattedDate: string = format(getDate(), `dd MMMM yyyy, kk.mm.ss`);
+  const formattedDate: string = format(useDate(), `dd MMMM yyyy, kk.mm.ss`);
 
   return (
     <div className="flex space-x-1">
