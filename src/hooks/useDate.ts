@@ -6,9 +6,9 @@ export const useDate = () => {
   const [date, setDate] = useAtom(dateAtom);
 
   useEffect(() => {
-    const interval = setInterval(() => setDate(date), 1000);
+    const interval = setInterval(() => setDate(() => new Date()), 1000);
     return () => clearInterval(interval);
-  }, [date, setDate]);
+  }, [setDate]);
 
   return date;
 };

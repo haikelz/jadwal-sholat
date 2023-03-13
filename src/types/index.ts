@@ -1,4 +1,4 @@
-import { MutableRefObject, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export type ChildrenProps = {
   children: ReactNode[] | JSX.Element;
