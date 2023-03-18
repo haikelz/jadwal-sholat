@@ -1,12 +1,18 @@
-import { backToTopAnimation } from "~lib/utils/animation";
 import { AnimatePresence, motion } from "framer-motion";
 import { memo } from "react";
 import { MdKeyboardArrowUp } from "react-icons/md";
-import { twJoin } from "tailwind-merge";
+import { clsx } from "clsx";
 import { useScroll } from "~hooks/useScroll";
 
+const backToTopAnimation = {
+  transition: { duration: 0.3 },
+  initial: { y: 40, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  exit: { y: 40, opacity: 0 },
+};
+
 const BackToTop = () => {
-  const [scroll] = useScroll();
+  const scroll: number = useScroll();
 
   const handleClick: () => void = () => {
     window.scrollTo({
@@ -17,7 +23,6 @@ const BackToTop = () => {
   };
 
   const height: number = 150;
-
   return (
     <AnimatePresence key={height} mode="wait">
       {scroll >= height ? (
@@ -26,7 +31,8 @@ const BackToTop = () => {
           className="fixed bottom-16 right-2.5 md:right-4 md:bottom-4"
         >
           <button
-            className={twJoin(
+            type="button"
+            className={clsx(
               "rounded-md bg-rose-400 p-1.5 transition ease-in-out",
               "hover:bg-rose-500 dark:bg-blue-500 dark:hover:bg-blue-600"
             )}

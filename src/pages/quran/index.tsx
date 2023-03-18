@@ -2,7 +2,7 @@ import ErrorWhenFetch from "~atoms/ErrorWhenFetch";
 import Loading from "~atoms/Loading";
 import PriorityImage from "~atoms/PriorityImage";
 import { useFetch } from "~hooks/useFetch";
-import { QURAN_API } from "~lib/utils/api";
+import { QURAN_API } from "~lib/utils/constants";
 import ListSurah from "~molecules/ListSurah";
 import Layout from "~templates/Layout";
 

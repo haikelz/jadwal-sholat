@@ -1,7 +1,7 @@
-import { MutableRefObject, useCallback, useEffect } from "react";
+import { RefObject, useCallback, useEffect } from "react";
 
 type KeydownProps = {
-  ref: MutableRefObject<string | any>;
+  ref: RefObject<HTMLInputElement>;
   isShiftKey: boolean;
   key1: string;
   key2: string;

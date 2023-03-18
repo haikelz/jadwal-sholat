@@ -1,6 +1,6 @@
 import { ChildrenProps } from "~types";
 import Head from "next/head";
-import { twJoin } from "tailwind-merge";
+import { clsx } from "clsx";
 
 const Layout = ({ children, title }: ChildrenProps) => {
   return (
@@ -9,7 +9,7 @@ const Layout = ({ children, title }: ChildrenProps) => {
         <title>{title}</title>
       </Head>
       <section
-        className={twJoin(
+        className={clsx(
           "flex min-h-screen w-full max-w-full flex-col items-center",
           "bg-gray-50 px-5 pt-8 pb-24 text-center dark:bg-gray-900 md:px-8"
         )}

@@ -1,11 +1,16 @@
-import { opacityAnimation } from "~lib/utils/animation";
-import { arab } from "~lib/utils/fonts";
-import { lastReadAtom } from "~store";
-import { SuratProps } from "~types";
 import { AnimatePresence, m } from "framer-motion";
 import { useAtom } from "jotai";
 import { nanoid } from "nanoid";
-import { twJoin, twMerge } from "tailwind-merge";
+import { clsx } from "clsx";
+import { arab } from "~lib/utils/constants";
+import { lastReadAtom } from "~store";
+import { SuratProps } from "~types";
+
+const opacityAnimation = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.2, animation: "ease-out" } },
+  exit: { opacity: 0, transition: { duration: 0.2, animation: "ease-in" } },
+};
 
 const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratProps) => {
   const [, setLastRead] = useAtom(lastReadAtom);
@@ -26,23 +31,24 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
     <div className="mt-6 grid w-full grid-cols-1 grid-rows-1 gap-2 text-end">
       {surat.ayahs.map((ayat, index) => (
         <div
-          className={twJoin(
+          className={clsx(
             "mb-4 flex flex-col items-end justify-end",
-            "border-b-2 border-gray-300 py-4"
+            "border-b-2 border-gray-300 py-4",
+            "text-black dark:text-white"
           )}
           key={index + 1}
         >
           <div className="relative flex w-full items-start justify-between">
             <div
               id={ayat.number.insurah.toString()}
-              className={twJoin(
+              className={clsx(
                 "mr-2 flex h-12 w-12 items-center justify-center rounded-full p-6",
                 "border-black bg-gray-400 font-bold text-white dark:bg-teal-600"
               )}
             >
               <p className="font-bold">{ayat.number.insurah}</p>
             </div>
-            <p className={twMerge("text-4xl font-medium leading-relaxed", arab.className)}>
+            <p className={clsx("text-right text-4xl font-medium leading-relaxed", arab.className)}>
               {ayat.text.ar}
             </p>
           </div>
@@ -71,7 +77,9 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
             </p>
           </div>
           <button
-            className={twJoin(
+            type="button"
+            aria-label="tandai ayat"
+            className={clsx(
               "hover-animation underline-animation mt-2 font-semibold",
               "hover:text-red-500  dark:hover:text-blue-500"
             )}

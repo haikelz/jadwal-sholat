@@ -1,6 +1,7 @@
-import { useTheme } from "~hooks/useTheme";
+import { memo } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { twJoin } from "tailwind-merge";
+import { clsx } from "clsx";
+import { useTheme } from "~hooks/useTheme";
 
 const DarkModeIcon = ({
   flexDir,
@@ -17,20 +18,20 @@ const DarkModeIcon = ({
 
   return (
     <div
-      className={twJoin(
+      className={clsx(
         `w-full items-center justify-${justifyItems}`,
         isHidden ? "hidden md:flex" : "flex"
       )}
     >
       <button
-        className={twJoin(
+        className={clsx(
           `flex flex-${flexDir} cursor-pointer items-center justify-center`,
           "px-4 text-gray-500 dark:text-gray-400"
         )}
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
         {theme === "light" ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}
-        <p className={twJoin("hidden text-sm font-semibold md:block", isMarginLeft ? "ml-2" : "")}>
+        <p className={clsx("hidden text-sm font-semibold md:block", isMarginLeft ? "ml-2" : "")}>
           {theme === "light" ? "Dark" : "Light"}
         </p>
       </button>
@@ -38,4 +39,4 @@ const DarkModeIcon = ({
   );
 };
 
-export default DarkModeIcon;
+export default memo(DarkModeIcon);

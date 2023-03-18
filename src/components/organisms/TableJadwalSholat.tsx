@@ -2,10 +2,9 @@ import { format } from "date-fns";
 import { useAtom } from "jotai";
 import { useDate } from "~hooks/useDate";
 import { matchDate } from "~lib/helpers/formatDate";
-import { tableJadwalSholatList } from "~lib/utils/data";
 import { isAutoPlayAtom } from "~store";
 
-export type WaktuProps = {
+type WaktuProps = {
   waktu: {
     id: string;
     lokasi: string;
@@ -30,6 +29,17 @@ export type WaktuProps = {
   bulan: string;
   tahun: string;
 };
+
+const tableJadwalSholatList = [
+  { name: "Tanggal" },
+  { name: "Imsak" },
+  { name: "Subuh" },
+  { name: "Terbit" },
+  { name: "Dhuha" },
+  { name: "Dzuhur" },
+  { name: "Ashar" },
+  { name: "Maghrib" },
+];
 
 const TableJadwalSholat = ({ waktu }: WaktuProps) => {
   const [isAutoPlay, setIsAutoPlay] = useAtom(isAutoPlayAtom);

@@ -1,13 +1,12 @@
+import { clsx } from "clsx";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { twJoin, twMerge } from "tailwind-merge";
 import SearchBar from "~atoms/SearchBar";
 import TidakAda from "~atoms/TidakAda";
-import { asmaulHusna } from "~lib/utils/data";
-import { arab } from "~lib/utils/fonts";
+import { arab, asmaulHusna } from "~lib/utils/constants";
 
 const ListAsmaulHusna = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const filteredAsmaulHusna = useMemo(
     () =>
@@ -26,7 +25,7 @@ const ListAsmaulHusna = () => {
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredAsmaulHusna.length ? (
         <div
-          className={twJoin(
+          className={clsx(
             "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center",
             "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           )}
@@ -34,8 +33,8 @@ const ListAsmaulHusna = () => {
           {filteredAsmaulHusna.map((item) => (
             <div
               key={item.urutan}
-              className={twJoin(
-                "flex flex-col items-start justify-center overflow-hidden rounded-sm",
+              className={clsx(
+                "flex flex-col items-start justify-center overflow-hidden rounded-sm text-left",
                 "border-2 border-black bg-gray-100 p-4 text-start tracking-wide",
                 "cursor-pointer transition-all ease-in-out",
                 "active:scale-95 dark:border-white dark:bg-[#2A2A37]"
@@ -43,7 +42,7 @@ const ListAsmaulHusna = () => {
             >
               <h3 className="text-xl font-bold">{item.urutan}</h3>
               <div className="my-3 w-full text-right">
-                <p className={twMerge("text-3xl font-medium", arab.className)}>{item.arab}</p>
+                <p className={clsx("text-3xl font-medium", arab.className)}>{item.arab}</p>
               </div>
               <p className="text-lg font-medium">
                 {searchTerm

@@ -15,7 +15,7 @@
 
 - NextJS
 - React Query
-- TailwindCSS
+- Windi CSS
 - Framer Motion
 - Jotai
 

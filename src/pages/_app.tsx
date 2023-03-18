@@ -1,14 +1,21 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 import { Provider } from "jotai";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import { appAnimation } from "~lib/utils/animation";
 import Navbar from "~organisms/Navbar";
+import "windi.css";
 import "~styles/index.scss";
 import Template from "~templates/index";
 
 const BackToTop = dynamic(() => import("~atoms/BackToTop"));
+
+const appAnimation = {
+  transition: { duration: 0.3 },
+  initial: { y: 30, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  exit: { y: 30, opacity: 0 },
+};
 
 const App = ({ Component, pageProps, router }: AppProps) => {
   const queryClient = new QueryClient();

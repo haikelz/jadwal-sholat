@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { twJoin } from "tailwind-merge";
+import { clsx } from "clsx";
 import SearchBar from "~atoms/SearchBar";
 import TidakAda from "~atoms/TidakAda";
 
@@ -40,17 +40,20 @@ const ListKota = ({ kota }: KotaProps) => {
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredKota.length ? (
         <div
-          className={twJoin(
+          className={clsx(
             "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center",
-            "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            "sm:grid-cols-2",
+            "lg:grid-cols-3",
+            "xl:grid-cols-4"
           )}
         >
           {filteredKota.map((loc, index) => (
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
               <div
-                className={twJoin(
-                  "clicky flex h-full items-center justify-center overflow-hidden rounded-sm",
-                  "border-2 border-black bg-gray-100 py-6 px-10 dark:border-white dark:bg-[#2A2A37]"
+                className={clsx(
+                  "clicky flex h-full items-center justify-center overflow-hidden rounded-sm text-black",
+                  "border-2 border-black bg-gray-100 py-6 px-10",
+                  "dark:border-white dark:bg-[#2A2A37] dark:text-white"
                 )}
               >
                 <p className="text-xl font-semibold">

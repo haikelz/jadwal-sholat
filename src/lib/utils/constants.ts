@@ -1,45 +1,32 @@
-import { MdBook, MdListAlt, MdOutlineAccessTime } from "react-icons/md";
+import { Bitter, Noto_Naskh_Arabic, Rubik } from "next/font/google";
 
-export const navbarList = [
-  {
-    href: "/jadwal-sholat",
-    path: "/jadwal-sholat",
-    title: "Sholat",
-    icon: MdOutlineAccessTime,
-  },
-  {
-    href: "/asmaul-husna",
-    path: "/asmaul-husna",
-    title: "Asma'ul Husna",
-    icon: MdListAlt,
-  },
-  {
-    href: "/quran",
-    path: "/quran",
-    title: "Qur'an",
-    icon: MdBook,
-  },
-];
+// API
+export const QURAN_API = "https://quran-endpoint.vercel.app";
+export const PUASA_SUNNAH_API = "https://api.puasa-sunnah.granitebps.com/api/v1/fastings";
+export const JADWAL_SHOLAT_API = "https://api.myquran.com/v1/sholat";
 
-export const tableJadwalSholatList = [
-  { name: "Tanggal" },
-  { name: "Imsak" },
-  { name: "Subuh" },
-  { name: "Terbit" },
-  { name: "Dhuha" },
-  { name: "Dzuhur" },
-  { name: "Ashar" },
-  { name: "Maghrib" },
-];
+// Fonts
+export const bitter = Bitter({
+  style: ["normal"],
+  weight: ["700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
-export const metadata = {
-  url: "https://info-jadwal-sholat.vercel.app/",
-  type: "website",
-  title: "Jadwal Sholat",
-  description: "Aplikasi Web untuk menampilkan jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
-  image: "/favicon.ico",
-};
+export const rubik = Rubik({
+  style: ["normal"],
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
+export const arab = Noto_Naskh_Arabic({
+  style: ["normal"],
+  subsets: ["arabic"],
+  display: "swap",
+});
+
+// Asma'ul Husna
 export const asmaulHusna = [
   {
     urutan: 1,

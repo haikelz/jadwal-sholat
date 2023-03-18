@@ -1,13 +1,12 @@
 import { useReducerAtom } from "jotai/utils";
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
-import { memo } from "react";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 import ErrorWhenFetch from "~atoms/ErrorWhenFetch";
 import Loading from "~atoms/Loading";
 import { useFetch } from "~hooks/useFetch";
 import { reducer } from "~lib/helpers/reducer";
-import { QURAN_API } from "~lib/utils/api";
+import { QURAN_API } from "~lib/utils/constants";
 import PreviousOrNextButton from "~molecules/PreviousOrNextButton";
 import DetailSurah from "~organisms/DetailSurah";
 import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "~store";
@@ -86,4 +85,4 @@ const Surah = () => {
   );
 };
 
-export default memo(Surah);
+export default Surah;

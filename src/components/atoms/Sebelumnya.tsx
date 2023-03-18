@@ -1,20 +1,21 @@
-import { SuratProps } from "~types";
+import { clsx } from "clsx";
 import Link from "next/link";
-import { MdPlayArrow } from "react-icons/md";
-import { twJoin } from "tailwind-merge";
+import { MdOutlineArrowBack } from "react-icons/md";
+import { SuratProps } from "~types";
 
 const Sebelumnya = ({ surat }: SuratProps) => {
   return (
     <>
       {surat.number > 1 ? (
-        <Link href={`/quran/surah/${surat.number - 1}`} passHref>
+        <Link href={`/quran/surah/${surat.number - 1}`}>
           <button
-            className={twJoin(
+            className={clsx(
               "flex items-center justify-center gap-1 rounded-md",
-              "border-2 border-black px-2 py-1 dark:border-white"
+              "border-2 border-black px-2 py-1 text-black",
+              "dark:border-white dark:text-white"
             )}
           >
-            <MdPlayArrow className="rotate-180" size="25px" />
+            <MdOutlineArrowBack size={25} />
             <p className="text-md font-semibold">Sebelumnya</p>
           </button>
         </Link>

@@ -1,9 +1,16 @@
-import { metadata } from "~lib/utils/data";
 import { Head, Html, Main, NextScript } from "next/document";
 
-const { url, type, title, description, image } = metadata;
+const metadata = {
+  url: "https://info-jadwal-sholat.vercel.app/",
+  type: "website",
+  title: "Jadwal Sholat",
+  description: "Aplikasi Web untuk menampilkan jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
+  image: "/favicon.ico",
+};
 
 const Document = () => {
+  const { url, type, title, description, image } = metadata;
+
   return (
     <Html lang="en">
       <Head>

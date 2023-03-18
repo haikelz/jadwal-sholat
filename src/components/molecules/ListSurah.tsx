@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import Link from "next/link";
 import { memo, useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { twJoin } from "tailwind-merge";
+import { clsx } from "clsx";
 import SearchBar from "~atoms/SearchBar";
 import TidakAda from "~atoms/TidakAda";
 import { lastReadAtom } from "~store";
@@ -51,16 +51,17 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center text-center">
+      <div className="flex flex-col items-center justify-center text-center text-black dark:text-white">
         <SearchBar setSearchTerm={setSearchTerm} />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
           {lastRead !== null ? (
             <Link href={`/quran/surah/${lastRead.number}`}>
               <span
-                className={twJoin(
-                  "hover-animation underline-animation",
-                  "hover:text-red-500 dark:hover:text-blue-500"
+                className={clsx(
+                  "hover-animation underline-animation text-black",
+                  "hover:text-red-500 dark:hover:text-blue-500",
+                  "dark:text-white"
                 )}
               >
                 Surah {lastRead.name} ayat {lastRead.ayat}
@@ -73,7 +74,7 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
       </div>
       {filteredSurah.length ? (
         <div
-          className={twJoin(
+          className={clsx(
             "grid w-full grid-cols-1 grid-rows-1 gap-4",
             "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           )}
@@ -81,13 +82,13 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
           {filteredSurah.map((surat) => (
             <Link key={surat.number} href={`/quran/surah/${surat.number}`}>
               <div
-                className={twJoin(
-                  "clicky flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left",
+                className={clsx(
+                  "clicky flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left text-black dark:text-white",
                   "dark:border-white dark:bg-[#2A2A37]"
                 )}
               >
                 <p className="text-right font-semibold tracking-wide">{surat.type.id}</p>
-                <h3 className="text-xl font-bold">{surat.number}</h3>
+                <span className="text-xl font-bold">{surat.number}</span>
                 <p className="text-lg font-bold">
                   {searchTerm
                     ? reactStringReplace(

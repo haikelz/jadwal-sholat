@@ -2,7 +2,7 @@ import ErrorWhenFetch from "~atoms/ErrorWhenFetch";
 import Loading from "~atoms/Loading";
 import PriorityImage from "~atoms/PriorityImage";
 import { useFetch } from "~hooks/useFetch";
-import { JADWAL_SHOLAT_API } from "~lib/utils/api";
+import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
 import ListKota from "~molecules/ListKota";
 import Layout from "~templates/Layout";
 

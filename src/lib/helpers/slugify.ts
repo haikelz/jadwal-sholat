@@ -1,0 +1,13 @@
+/**
+ * A helper function for slugify a string
+ * Example: Jadwal Sholat => /jadwal-sholat
+ */
+export const slugify = (name: string) => {
+  const matchName: string | undefined = name
+    .toLowerCase()
+    .match(/[A-Za-z0-9 ]/gi)
+    ?.join("")
+    .replace(" ", "-");
+
+  return matchName === "sholat" ? "/jadwal-sholat" : "/" + matchName;
+};

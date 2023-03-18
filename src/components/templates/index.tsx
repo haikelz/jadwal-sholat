@@ -1,6 +1,6 @@
-import { bitter, rubik } from "~lib/utils/fonts";
 import { ChildrenProps } from "~types";
-import { twMerge } from "tailwind-merge";
+import { clsx } from "clsx";
+import { bitter, rubik } from "~lib/utils/constants";
 
 const Template = ({ children }: ChildrenProps) => {
   return (
@@ -13,7 +13,7 @@ const Template = ({ children }: ChildrenProps) => {
         `}
       </style>
       <div
-        className={twMerge(
+        className={clsx(
           "inset-0 bg-gray-50",
           "dark:bg-gray-900 dark:text-white md:flex",
           rubik.className

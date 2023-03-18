@@ -1,12 +1,17 @@
 import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
-import { twJoin } from "tailwind-merge";
-import { modalAnimation } from "~lib/utils/animation";
+import { clsx } from "clsx";
 
 type NotificationProps = {
   notification: boolean;
   dispatchNotification: any;
   description: string;
+};
+
+const modalAnimation = {
+  initial: { opacity: 0, scale: 0.75 },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.2, animation: "ease-out" } },
+  exit: { opacity: 0, scale: 0, transition: { duration: 0.2, animation: "ease-in" } },
 };
 
 const ModalNotification = ({
@@ -21,8 +26,8 @@ const ModalNotification = ({
           <m.div
             {...modalAnimation}
             aria-modal="true"
-            className={twJoin(
-              "fixed inset-0 top-0 z-50 flex min-h-screen w-full items-center justify-center",
+            className={clsx(
+              "modal-blur fixed inset-0 top-0 z-50 flex min-h-screen w-full items-center justify-center",
               "overflow-y-auto overflow-x-hidden text-black backdrop-blur-[3px]"
             )}
           >
@@ -32,7 +37,7 @@ const ModalNotification = ({
                   <p className="text-2xl font-bold">{description}</p>
                   <button
                     type="button"
-                    className={twJoin(
+                    className={clsx(
                       "mt-2 inline-flex items-center rounded-md bg-blue-500 py-1.5 px-4",
                       "font-semibold text-white shadow-md transition-all ease-in-out",
                       "hover:bg-gray-200 hover:text-black dark:hover:text-black"
