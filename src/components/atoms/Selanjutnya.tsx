@@ -1,9 +1,9 @@
-import { SuratProps } from "~types";
-import Link from "next/link";
-import { MdOutlineArrowForward, MdPlayArrow } from "react-icons/md";
 import { clsx } from "clsx";
+import Link from "next/link";
+import { MdOutlineArrowForward } from "react-icons/md";
+import { SuratProps } from "~types";
 
-const Selanjutnya = ({ surat }: SuratProps) => {
+export const Selanjutnya = ({ surat }: SuratProps) => {
   return (
     <>
       {surat.number < 114 ? (
@@ -23,5 +23,3 @@ const Selanjutnya = ({ surat }: SuratProps) => {
     </>
   );
 };
-
-export default Selanjutnya;

@@ -1,10 +1,10 @@
+import { clsx } from "clsx";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { memo, useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { clsx } from "clsx";
-import SearchBar from "~atoms/SearchBar";
-import TidakAda from "~atoms/TidakAda";
+import { TidakAda } from "~atoms";
+import SearchBar from "~molecules/SearchBar";
 import { lastReadAtom } from "~store";
 
 type DaftarSurahProps = {

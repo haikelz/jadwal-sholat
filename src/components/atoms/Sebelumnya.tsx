@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MdOutlineArrowBack } from "react-icons/md";
 import { SuratProps } from "~types";
 
-const Sebelumnya = ({ surat }: SuratProps) => {
+export const Sebelumnya = ({ surat }: SuratProps) => {
   return (
     <>
       {surat.number > 1 ? (
@@ -23,5 +23,3 @@ const Sebelumnya = ({ surat }: SuratProps) => {
     </>
   );
 };
-
-export default Sebelumnya;

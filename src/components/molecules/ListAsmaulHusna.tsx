@@ -1,9 +1,9 @@
 import { clsx } from "clsx";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import SearchBar from "~atoms/SearchBar";
-import TidakAda from "~atoms/TidakAda";
+import { TidakAda } from "~atoms";
 import { arab, asmaulHusna } from "~lib/utils/constants";
+import SearchBar from "~molecules/SearchBar";
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");

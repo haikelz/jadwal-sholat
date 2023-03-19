@@ -18,7 +18,7 @@
     "paths": {
       "~*": ["src/*"],
       "~public/*": ["public/*"],
-      "~atoms/*": ["src/components/atoms/*"],
+      "~atoms": ["src/components/atoms"],
       "~molecules/*": ["src/components/molecules/*"],
       "~organisms/*": ["src/components/organisms/*"],
       "~templates/*": ["src/components/templates/*"]

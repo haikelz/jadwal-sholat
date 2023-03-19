@@ -1,7 +1,9 @@
+import { clsx } from "clsx";
 import { AnimatePresence, m } from "framer-motion";
+import { useAtom } from "jotai";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
-import { clsx } from "clsx";
+import { tafsirAtom } from "~store";
 import { SuratProps } from "~types";
 
 const modalAnimation = {
@@ -10,10 +12,12 @@ const modalAnimation = {
   exit: { opacity: 0, scale: 0, transition: { duration: 0.2, animation: "ease-in" } },
 };
 
-const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
+const ModalTafsir = ({ surat }: SuratProps) => {
+  const [tafsir, setTafsir] = useAtom(tafsirAtom);
+
   return (
     <>
-      <AnimatePresence key={dispatchTafsir} mode="wait">
+      <AnimatePresence mode="wait">
         {tafsir ? (
           <m.div
             {...modalAnimation}
@@ -39,7 +43,7 @@ const ModalTafsir = ({ surat, tafsir, dispatchTafsir }: SuratProps) => {
                       "bg-transparent p-1.5 text-sm text-gray-400 transition-all ease-in-out",
                       "hover:bg-gray-200 dark:text-white dark:hover:text-black"
                     )}
-                    onClick={() => dispatchTafsir({ type: "tafsir" })}
+                    onClick={() => setTafsir(!tafsir)}
                   >
                     <MdClose className="font-bold" size={24} />
                   </button>

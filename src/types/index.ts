@@ -53,6 +53,4 @@ export type SuratProps = {
   audio?: boolean;
   terjemahan?: boolean;
   tafsir?: boolean;
-  dispatchTafsir?: any;
-  dispatchNotification?: any;
 };

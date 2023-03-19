@@ -1,5 +1,6 @@
 import { NextRouter, useRouter } from "next/router";
-import Loading from "~atoms/Loading";
+import ErrorWhenFetch from "~molecules/ErrorWhenFetch";
+import Loading from "~molecules/Loading";
 import { useFetch } from "~hooks/useFetch";
 import { bulan, currentDate, hari, tahun } from "~lib/helpers/formatDate";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
@@ -17,7 +18,7 @@ const KotaId = () => {
   );
 
   if (isLoading) return <Loading />;
-  if (isError) return <p>Error!</p>;
+  if (isError) return <ErrorWhenFetch />;
 
   const waktu = data.data;
 

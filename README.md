@@ -24,8 +24,8 @@
 Jika kamu ingin melihat dan mengetes project ini lebih detail:
 
 - Clone project ini `git clone https://github.com/haikelz/jadwal-sholat.git`
-- Install dependencies dengan perintah `yarn install`. Jika kamu memakai Package Manager yang lain, silahkan menyesuaikan dan jangan lupa untuk menghapus file `yarn.lock`.
-- Selanjutnya, ketikkan perintah `yarn run dev` dan lihat hasilnya di browser => `http://localhost:3000`
+- Install dependencies dengan perintah `pnpm install`. Jika kamu memakai Package Manager yang lain, silahkan menyesuaikan dan jangan lupa untuk menghapus file `pnpm-lock.yaml`.
+- Selanjutnya, ketikkan perintah `pnpm run dev` dan lihat hasilnya di browser => `http://localhost:3000`
 
 ## Screenshots
 

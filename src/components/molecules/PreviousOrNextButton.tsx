@@ -1,6 +1,5 @@
 import { clsx } from "clsx";
-import Sebelumnya from "~atoms/Sebelumnya";
-import Selanjutnya from "~atoms/Selanjutnya";
+import { Sebelumnya, Selanjutnya } from "~atoms";
 import { SuratProps } from "~types";
 
 type PreviousOrNextButtonProps = SuratProps & {};

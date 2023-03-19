@@ -1,12 +1,8 @@
-import { AnimatePresence, m } from "framer-motion";
-import { memo } from "react";
 import { clsx } from "clsx";
-
-type NotificationProps = {
-  notification: boolean;
-  dispatchNotification: any;
-  description: string;
-};
+import { AnimatePresence, m } from "framer-motion";
+import { useAtom } from "jotai";
+import { memo } from "react";
+import { notificationAtom } from "~store";
 
 const modalAnimation = {
   initial: { opacity: 0, scale: 0.75 },
@@ -14,14 +10,12 @@ const modalAnimation = {
   exit: { opacity: 0, scale: 0, transition: { duration: 0.2, animation: "ease-in" } },
 };
 
-const ModalNotification = ({
-  notification,
-  dispatchNotification,
-  description,
-}: NotificationProps) => {
+const ModalNotification = ({ description }: { description: string }) => {
+  const [notification, setNotification] = useAtom(notificationAtom);
+
   return (
     <>
-      <AnimatePresence key={dispatchNotification} mode="wait">
+      <AnimatePresence mode="wait">
         {notification ? (
           <m.div
             {...modalAnimation}
@@ -42,7 +36,7 @@ const ModalNotification = ({
                       "font-semibold text-white shadow-md transition-all ease-in-out",
                       "hover:bg-gray-200 hover:text-black dark:hover:text-black"
                     )}
-                    onClick={() => dispatchNotification({ type: "notification" })}
+                    onClick={() => setNotification(!notification)}
                   >
                     Got it!
                   </button>

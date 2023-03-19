@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { act, fireEvent, render } from "@testing-library/react";
-import SearchBar from "~atoms/SearchBar";
+import SearchBar from "~molecules/SearchBar";
 
 describe("Search Bar", () => {
   it("Should update on change", () => {

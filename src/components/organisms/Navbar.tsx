@@ -7,7 +7,9 @@ import { MdBook, MdHomeFilled, MdListAlt, MdOutlineAccessTime } from "react-icon
 import { clsx } from "clsx";
 import { slugify } from "~lib/helpers/slugify";
 
-const DarkModeIcon = dynamic(() => import("~atoms/DarkModeIcon"), { ssr: false });
+const DarkModeIcon = dynamic(() => import("~atoms").then((obj) => obj.DarkModeIcon), {
+  ssr: false,
+});
 
 const navbarList = [
   {

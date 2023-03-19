@@ -2,8 +2,8 @@ import Link from "next/link";
 import { memo, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { clsx } from "clsx";
-import SearchBar from "~atoms/SearchBar";
-import TidakAda from "~atoms/TidakAda";
+import SearchBar from "~molecules/SearchBar";
+import { TidakAda } from "~atoms";
 
 type KotaProps = {
   kota: [

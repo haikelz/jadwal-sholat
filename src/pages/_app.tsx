@@ -3,12 +3,12 @@ import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 import { Provider } from "jotai";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import Navbar from "~organisms/Navbar";
 import "windi.css";
+import Navbar from "~organisms/Navbar";
 import "~styles/index.scss";
 import Template from "~templates/index";
 
-const BackToTop = dynamic(() => import("~atoms/BackToTop"));
+const BackToTop = dynamic(() => import("~atoms").then((obj) => obj.BackToTop));
 
 const appAnimation = {
   transition: { duration: 0.3 },

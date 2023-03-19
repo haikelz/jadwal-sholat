@@ -3,7 +3,7 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { clsx } from "clsx";
 import { useTheme } from "~hooks/useTheme";
 
-const DarkModeIcon = ({
+export const DarkModeIcon = ({
   flexDir,
   isHidden,
   justifyItems,
@@ -39,4 +39,4 @@ const DarkModeIcon = ({
   );
 };
 
-export default memo(DarkModeIcon);
+memo(DarkModeIcon);

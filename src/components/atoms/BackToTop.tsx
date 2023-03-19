@@ -1,7 +1,7 @@
+import { clsx } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { memo } from "react";
 import { MdKeyboardArrowUp } from "react-icons/md";
-import { clsx } from "clsx";
 import { useScroll } from "~hooks/useScroll";
 
 const backToTopAnimation = {
@@ -11,8 +11,9 @@ const backToTopAnimation = {
   exit: { y: 40, opacity: 0 },
 };
 
-const BackToTop = () => {
+export const BackToTop = () => {
   const scroll: number = useScroll();
+  const height: number = 150;
 
   const handleClick: () => void = () => {
     window.scrollTo({
@@ -22,7 +23,6 @@ const BackToTop = () => {
     });
   };
 
-  const height: number = 150;
   return (
     <AnimatePresence key={height} mode="wait">
       {scroll >= height ? (
@@ -46,4 +46,4 @@ const BackToTop = () => {
   );
 };
 
-export default memo(BackToTop);
+memo(BackToTop);

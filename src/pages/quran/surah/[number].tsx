@@ -1,11 +1,10 @@
-import { useReducerAtom } from "jotai/utils";
+import { useAtom } from "jotai";
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
-import ErrorWhenFetch from "~atoms/ErrorWhenFetch";
-import Loading from "~atoms/Loading";
+import ErrorWhenFetch from "~molecules/ErrorWhenFetch";
+import Loading from "~molecules/Loading";
 import { useFetch } from "~hooks/useFetch";
-import { reducer } from "~lib/helpers/reducer";
 import { QURAN_API } from "~lib/utils/constants";
 import PreviousOrNextButton from "~molecules/PreviousOrNextButton";
 import DetailSurah from "~organisms/DetailSurah";
@@ -16,10 +15,10 @@ const ModalTafsir = dynamic(() => import("~molecules/ModalTafsir"));
 const ModalNotification = dynamic(() => import("~molecules/ModalNotification"));
 
 const Surah = () => {
-  const [audio, dispatchAudio] = useReducerAtom(audioAtom, reducer);
-  const [terjemahan, dispatchTerjemahan] = useReducerAtom(terjemahanAtom, reducer);
-  const [tafsir, dispatchTafsir] = useReducerAtom(tafsirAtom, reducer);
-  const [notification, dispatchNotification] = useReducerAtom(notificationAtom, reducer);
+  const [audio, setAudio] = useAtom(audioAtom);
+  const [terjemahan, setTerjemahan] = useAtom(terjemahanAtom);
+  const [tafsir, setTafsir] = useAtom(tafsirAtom);
+  const [notification, setNotification] = useAtom(notificationAtom);
 
   const router: NextRouter = useRouter();
   const { number } = router.query;
@@ -43,44 +42,28 @@ const Surah = () => {
           </p>
         </div>
         <div className="mt-1 flex space-x-4">
-          <button
-            className="flex items-center space-x-1"
-            onClick={() => dispatchAudio({ type: "audio" })}
-          >
+          <button className="flex items-center space-x-1" onClick={() => setAudio(!audio)}>
             <MdVolumeUp size="20px" />
             <p className="text-lg font-bold">Audio</p>
           </button>
           <button
             className="flex items-center space-x-1"
-            onClick={() => dispatchTerjemahan({ type: "terjemahan" })}
+            onClick={() => setTerjemahan(!terjemahan)}
           >
             <MdOutlineTranslate size="20px" />
             <p className="text-lg font-bold">Latin</p>
           </button>
-          <button
-            className="flex items-center space-x-1"
-            onClick={() => dispatchTafsir({ type: "tafsir" })}
-          >
+          <button className="flex items-center space-x-1" onClick={() => setTafsir(!tafsir)}>
             <MdInsertComment size="20px" />
             <p className="text-lg font-bold">Tafsir</p>
           </button>
         </div>
-        <ModalTafsir surat={surat} dispatchTafsir={dispatchTafsir} tafsir={tafsir} />
+        <ModalTafsir surat={surat} />
       </div>
       <PreviousOrNextButton surat={surat} />
-      <DetailSurah
-        surat={surat}
-        audio={audio}
-        terjemahan={terjemahan}
-        dispatchNotification={dispatchNotification}
-        tafsir={tafsir}
-      />
+      <DetailSurah surat={surat} />
       <PreviousOrNextButton surat={surat} />
-      <ModalNotification
-        notification={notification}
-        dispatchNotification={dispatchNotification}
-        description="Sudah Ditandai!"
-      />
+      <ModalNotification description="Sudah Ditandai!" />
     </Layout>
   );
 };

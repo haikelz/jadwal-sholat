@@ -43,7 +43,6 @@ const tableJadwalSholatList = [
 
 const TableJadwalSholat = ({ waktu }: WaktuProps) => {
   const [isAutoPlay, setIsAutoPlay] = useAtom(isAutoPlayAtom);
-
   const time: string = format(useDate(), `kk.mm`);
 
   return (

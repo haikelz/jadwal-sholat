@@ -1,9 +1,9 @@
-import { AnimatePresence, m } from "framer-motion";
-import { useAtom } from "jotai";
-import { nanoid } from "nanoid";
 import { clsx } from "clsx";
+import { AnimatePresence, m } from "framer-motion";
+import { useAtomValue, useSetAtom } from "jotai";
+import { nanoid } from "nanoid";
 import { arab } from "~lib/utils/constants";
-import { lastReadAtom } from "~store";
+import { audioAtom, lastReadAtom, notificationAtom, terjemahanAtom } from "~store";
 import { SuratProps } from "~types";
 
 const opacityAnimation = {
@@ -12,8 +12,12 @@ const opacityAnimation = {
   exit: { opacity: 0, transition: { duration: 0.2, animation: "ease-in" } },
 };
 
-const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratProps) => {
-  const [, setLastRead] = useAtom(lastReadAtom);
+const DetailSurah = ({ surat }: SuratProps) => {
+  const setNotification = useSetAtom(notificationAtom);
+  const setLastRead = useSetAtom(lastReadAtom);
+
+  const terjemahan = useAtomValue<boolean>(terjemahanAtom);
+  const audio = useAtomValue<boolean>(audioAtom);
 
   const saveData = <T,>(newData: T) => {
     localStorage.setItem("surah", JSON.stringify(newData));
@@ -21,9 +25,9 @@ const DetailSurah = ({ surat, audio, terjemahan, dispatchNotification }: SuratPr
 
   const handleClick = (name: string, ayat: number, number: number) => {
     const data = { id: nanoid(), name: name, ayat: ayat, number: number };
-    setLastRead(data);
 
-    dispatchNotification({ type: "notification" });
+    setNotification(true);
+    setLastRead(data);
     saveData(data);
   };
 
