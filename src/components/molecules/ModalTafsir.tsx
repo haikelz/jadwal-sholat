@@ -3,14 +3,9 @@ import { AnimatePresence, m } from "framer-motion";
 import { useAtom } from "jotai";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
+import { modalAnimation } from "~lib/utils/constants";
 import { tafsirAtom } from "~store";
 import { SuratProps } from "~types";
-
-const modalAnimation = {
-  initial: { opacity: 0, scale: 0.75 },
-  animate: { opacity: 1, scale: 1, transition: { duration: 0.2, animation: "ease-out" } },
-  exit: { opacity: 0, scale: 0, transition: { duration: 0.2, animation: "ease-in" } },
-};
 
 const ModalTafsir = ({ surat }: SuratProps) => {
   const [tafsir, setTafsir] = useAtom(tafsirAtom);

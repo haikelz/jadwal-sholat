@@ -26,12 +26,13 @@ export const DarkModeIcon = ({
       <button
         className={clsx(
           `flex flex-${flexDir} cursor-pointer items-center justify-center`,
-          "px-4 text-gray-500 dark:text-gray-400"
+          "px-4 text-gray-500",
+          "dark:text-gray-400"
         )}
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
         {theme === "light" ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}
-        <p className={clsx("hidden text-sm font-semibold md:block", isMarginLeft ? "ml-2" : "")}>
+        <p className={clsx("hidden text-sm font-semibold", "md:block", isMarginLeft ? "ml-2" : "")}>
           {theme === "light" ? "Dark" : "Light"}
         </p>
       </button>

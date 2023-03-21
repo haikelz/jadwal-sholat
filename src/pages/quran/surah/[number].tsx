@@ -2,13 +2,13 @@ import { useAtom } from "jotai";
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
-import ErrorWhenFetch from "~molecules/ErrorWhenFetch";
-import Loading from "~molecules/Loading";
 import { useFetch } from "~hooks/useFetch";
 import { QURAN_API } from "~lib/utils/constants";
+import ErrorWhenFetch from "~molecules/ErrorWhenFetch";
+import Loading from "~molecules/Loading";
 import PreviousOrNextButton from "~molecules/PreviousOrNextButton";
 import DetailSurah from "~organisms/DetailSurah";
-import { audioAtom, notificationAtom, tafsirAtom, terjemahanAtom } from "~store";
+import { audioAtom, tafsirAtom, terjemahanAtom } from "~store";
 import Layout from "~templates/Layout";
 
 const ModalTafsir = dynamic(() => import("~molecules/ModalTafsir"));
@@ -18,7 +18,6 @@ const Surah = () => {
   const [audio, setAudio] = useAtom(audioAtom);
   const [terjemahan, setTerjemahan] = useAtom(terjemahanAtom);
   const [tafsir, setTafsir] = useAtom(tafsirAtom);
-  const [notification, setNotification] = useAtom(notificationAtom);
 
   const router: NextRouter = useRouter();
   const { number } = router.query;
@@ -42,18 +41,30 @@ const Surah = () => {
           </p>
         </div>
         <div className="mt-1 flex space-x-4">
-          <button className="flex items-center space-x-1" onClick={() => setAudio(!audio)}>
+          <button
+            type="button"
+            aria-label="show audio"
+            className="flex items-center space-x-1"
+            onClick={() => setAudio(!audio)}
+          >
             <MdVolumeUp size="20px" />
             <p className="text-lg font-bold">Audio</p>
           </button>
           <button
+            type="button"
+            aria-label="show terjemahan"
             className="flex items-center space-x-1"
             onClick={() => setTerjemahan(!terjemahan)}
           >
             <MdOutlineTranslate size="20px" />
             <p className="text-lg font-bold">Latin</p>
           </button>
-          <button className="flex items-center space-x-1" onClick={() => setTafsir(!tafsir)}>
+          <button
+            type="button"
+            aria-label="show tafsir"
+            className="flex items-center space-x-1"
+            onClick={() => setTafsir(!tafsir)}
+          >
             <MdInsertComment size="20px" />
             <p className="text-lg font-bold">Tafsir</p>
           </button>

@@ -1,9 +1,10 @@
 import { clsx } from "clsx";
-import { memo, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
-import { arab, asmaulHusna } from "~lib/utils/constants";
+import { arab, asmaulHusna, clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
+import { m } from "framer-motion";
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -31,13 +32,14 @@ const ListAsmaulHusna = () => {
           )}
         >
           {filteredAsmaulHusna.map((item) => (
-            <div
+            <m.div
+              {...clickAnimation}
               key={item.urutan}
               className={clsx(
                 "flex flex-col items-start justify-center overflow-hidden rounded-sm text-left",
                 "border-2 border-black bg-gray-100 p-4 text-start tracking-wide",
-                "cursor-pointer transition-all ease-in-out",
-                "active:scale-95 dark:border-white dark:bg-[#2A2A37]"
+                "cursor-pointer",
+                "dark:border-white dark:bg-[#2A2A37]"
               )}
             >
               <h3 className="text-xl font-bold">{item.urutan}</h3>
@@ -54,7 +56,7 @@ const ListAsmaulHusna = () => {
                   : item.latin}
               </p>
               <p>{item.arti}</p>
-            </div>
+            </m.div>
           ))}
         </div>
       ) : (
@@ -64,4 +66,4 @@ const ListAsmaulHusna = () => {
   );
 };
 
-export default memo(ListAsmaulHusna);
+export default ListAsmaulHusna;

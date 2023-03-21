@@ -9,6 +9,8 @@ export const Sebelumnya = ({ surat }: SuratProps) => {
       {surat.number > 1 ? (
         <Link href={`/quran/surah/${surat.number - 1}`}>
           <button
+            type="button"
+            aria-label="sebelumnya"
             className={clsx(
               "flex items-center justify-center gap-1 rounded-md",
               "border-2 border-black px-2 py-1 text-black",

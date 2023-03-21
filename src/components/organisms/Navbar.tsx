@@ -1,10 +1,9 @@
+import { clsx } from "clsx";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
-import { memo } from "react";
 import { IconType } from "react-icons/lib";
 import { MdBook, MdHomeFilled, MdListAlt, MdOutlineAccessTime } from "react-icons/md";
-import { clsx } from "clsx";
 import { slugify } from "~lib/helpers/slugify";
 
 const DarkModeIcon = dynamic(() => import("~atoms").then((obj) => obj.DarkModeIcon), {
@@ -89,4 +88,4 @@ const Navbar = () => {
   );
 };
 
-export default memo(Navbar);
+export default Navbar;

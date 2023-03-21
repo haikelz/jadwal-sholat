@@ -2,13 +2,8 @@ import { clsx } from "clsx";
 import { AnimatePresence, m } from "framer-motion";
 import { useAtom } from "jotai";
 import { memo } from "react";
+import { modalAnimation } from "~lib/utils/constants";
 import { notificationAtom } from "~store";
-
-const modalAnimation = {
-  initial: { opacity: 0, scale: 0.75 },
-  animate: { opacity: 1, scale: 1, transition: { duration: 0.2, animation: "ease-out" } },
-  exit: { opacity: 0, scale: 0, transition: { duration: 0.2, animation: "ease-in" } },
-};
 
 const ModalNotification = ({ description }: { description: string }) => {
   const [notification, setNotification] = useAtom(notificationAtom);
@@ -34,7 +29,8 @@ const ModalNotification = ({ description }: { description: string }) => {
                     className={clsx(
                       "mt-2 inline-flex items-center rounded-md bg-blue-500 py-1.5 px-4",
                       "font-semibold text-white shadow-md transition-all ease-in-out",
-                      "hover:bg-gray-200 hover:text-black dark:hover:text-black"
+                      "hover:bg-gray-200 hover:text-black",
+                      "dark:hover:text-black"
                     )}
                     onClick={() => setNotification(!notification)}
                   >

@@ -2,22 +2,16 @@ import { clsx } from "clsx";
 import { AnimatePresence, m } from "framer-motion";
 import { useAtomValue, useSetAtom } from "jotai";
 import { nanoid } from "nanoid";
-import { arab } from "~lib/utils/constants";
+import { arab, opacityAnimation } from "~lib/utils/constants";
 import { audioAtom, lastReadAtom, notificationAtom, terjemahanAtom } from "~store";
 import { SuratProps } from "~types";
-
-const opacityAnimation = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.2, animation: "ease-out" } },
-  exit: { opacity: 0, transition: { duration: 0.2, animation: "ease-in" } },
-};
 
 const DetailSurah = ({ surat }: SuratProps) => {
   const setNotification = useSetAtom(notificationAtom);
   const setLastRead = useSetAtom(lastReadAtom);
 
-  const terjemahan = useAtomValue<boolean>(terjemahanAtom);
-  const audio = useAtomValue<boolean>(audioAtom);
+  const terjemahan = useAtomValue(terjemahanAtom);
+  const audio = useAtomValue(audioAtom);
 
   const saveData = <T,>(newData: T) => {
     localStorage.setItem("surah", JSON.stringify(newData));
@@ -37,8 +31,8 @@ const DetailSurah = ({ surat }: SuratProps) => {
         <div
           className={clsx(
             "mb-4 flex flex-col items-end justify-end",
-            "border-b-2 border-gray-300 py-4",
-            "text-black dark:text-white"
+            "border-b-2 border-gray-300 py-4 text-black",
+            "dark:text-white"
           )}
           key={index + 1}
         >
@@ -47,7 +41,8 @@ const DetailSurah = ({ surat }: SuratProps) => {
               id={ayat.number.insurah.toString()}
               className={clsx(
                 "mr-2 flex h-12 w-12 items-center justify-center rounded-full p-6",
-                "border-black bg-gray-400 font-bold text-white dark:bg-teal-600"
+                "border-black bg-gray-400 font-bold text-white",
+                "dark:bg-teal-600"
               )}
             >
               <p className="font-bold">{ayat.number.insurah}</p>
@@ -85,7 +80,8 @@ const DetailSurah = ({ surat }: SuratProps) => {
             aria-label="tandai ayat"
             className={clsx(
               "hover-animation underline-animation mt-2 font-semibold",
-              "hover:text-red-500  dark:hover:text-blue-500"
+              "hover:text-red-500",
+              "dark:hover:text-blue-500"
             )}
             onClick={() => handleClick(surat.asma.id.short, ayat.number.insurah, surat.number)}
           >

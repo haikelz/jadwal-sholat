@@ -1,9 +1,11 @@
-import Link from "next/link";
-import { memo, useMemo, useState } from "react";
-import reactStringReplace from "react-string-replace";
 import { clsx } from "clsx";
-import SearchBar from "~molecules/SearchBar";
+import { m } from "framer-motion";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
+import { clickAnimation } from "~lib/utils/constants";
+import SearchBar from "~molecules/SearchBar";
 
 type KotaProps = {
   kota: [
@@ -49,9 +51,10 @@ const ListKota = ({ kota }: KotaProps) => {
         >
           {filteredKota.map((loc, index) => (
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
-              <div
+              <m.div
+                {...clickAnimation}
                 className={clsx(
-                  "clicky flex h-full items-center justify-center overflow-hidden rounded-sm text-black",
+                  "flex h-full items-center justify-center overflow-hidden rounded-sm text-black",
                   "border-2 border-black bg-gray-100 py-6 px-10",
                   "dark:border-white dark:bg-[#2A2A37] dark:text-white"
                 )}
@@ -65,7 +68,7 @@ const ListKota = ({ kota }: KotaProps) => {
                       ))
                     : loc.lokasi}
                 </p>
-              </div>
+              </m.div>
             </Link>
           ))}
         </div>
@@ -76,4 +79,4 @@ const ListKota = ({ kota }: KotaProps) => {
   );
 };
 
-export default memo(ListKota);
+export default ListKota;

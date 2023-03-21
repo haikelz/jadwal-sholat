@@ -14,8 +14,9 @@ const Template = ({ children }: ChildrenProps) => {
       </style>
       <div
         className={clsx(
-          "inset-0 bg-gray-50",
-          "dark:bg-gray-900 dark:text-white md:flex",
+          "bg-gray-50",
+          "md:flex",
+          "dark:bg-gray-900 dark:text-white",
           rubik.className
         )}
       >

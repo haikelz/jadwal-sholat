@@ -1,9 +1,11 @@
 import { clsx } from "clsx";
+import { m } from "framer-motion";
 import { useAtom } from "jotai";
 import Link from "next/link";
-import { memo, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
+import { clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
 import { lastReadAtom } from "~store";
 
@@ -60,8 +62,8 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
               <span
                 className={clsx(
                   "hover-animation underline-animation text-black",
-                  "hover:text-red-500 dark:hover:text-blue-500",
-                  "dark:text-white"
+                  "hover:text-red-500",
+                  "dark:text-white dark:hover:text-blue-500"
                 )}
               >
                 Surah {lastRead.name} ayat {lastRead.ayat}
@@ -76,15 +78,18 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
         <div
           className={clsx(
             "grid w-full grid-cols-1 grid-rows-1 gap-4",
-            "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            "sm:grid-cols-2",
+            "lg:grid-cols-3",
+            "xl:grid-cols-4"
           )}
         >
           {filteredSurah.map((surat) => (
             <Link key={surat.number} href={`/quran/surah/${surat.number}`}>
-              <div
+              <m.div
+                {...clickAnimation}
                 className={clsx(
-                  "clicky flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left text-black dark:text-white",
-                  "dark:border-white dark:bg-[#2A2A37]"
+                  "flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left text-black",
+                  "dark:border-white dark:bg-[#2A2A37] dark:text-white"
                 )}
               >
                 <p className="text-right font-semibold tracking-wide">{surat.type.id}</p>
@@ -104,7 +109,7 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
                 </p>
                 <p className="font-medium">{surat.asma.translation.id}</p>
                 <p>Jumlah: {surat.ayahCount} ayat</p>
-              </div>
+              </m.div>
             </Link>
           ))}
         </div>
@@ -115,4 +120,4 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
   );
 };
 
-export default memo(ListSurah);
+export default ListSurah;

@@ -1,11 +1,12 @@
 import { format } from "date-fns";
+import id from "date-fns/locale/id";
 
 export const date: Date = new Date();
 export const tahun: string = format(date, "yyyy");
 export const bulan: string = format(date, "MM");
 export const hari: string = format(date, "dd");
 export const hours: number = date.getHours();
-export const currentDate: string = format(date, "dd MMMM yyyy");
+export const currentDate: string = format(date, "dd MMMM yyyy", { locale: id });
 
 /**
  * Karena waktunya masih berupa string, kita ubah ke number.
