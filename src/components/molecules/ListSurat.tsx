@@ -1,15 +1,14 @@
 import { clsx } from "clsx";
 import { m } from "framer-motion";
-import { useAtom } from "jotai";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
 import { clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
-import { lastReadAtom } from "~store";
+import useAppStore from "~store";
 
-type DaftarSurahProps = {
+type ListSuratProps = {
   surat: [
     surat: {
       number: string;
@@ -29,11 +28,12 @@ type DaftarSurahProps = {
   ];
 };
 
-const ListSurah = ({ surat }: DaftarSurahProps) => {
+const ListSurat = ({ surat }: ListSuratProps) => {
+  const { lastRead, setLastRead } = useAppStore((state) => state);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [lastRead, setLastRead] = useAtom(lastReadAtom);
+  // const [lastRead, setLastRead] = useAtom(lastReadAtom);
 
-  const filteredSurah = useMemo(
+  const filteredsurat = useMemo(
     () =>
       surat.filter((value) => {
         if (searchTerm === "") {
@@ -46,8 +46,8 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
   );
 
   useEffect(() => {
-    if (localStorage.getItem("surah")) {
-      setLastRead(JSON.parse(localStorage.getItem("surah") || ""));
+    if (localStorage.getItem("surat")) {
+      setLastRead(JSON.parse(localStorage.getItem("surat") || ""));
     }
   }, [setLastRead]);
 
@@ -58,7 +58,7 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
           {lastRead !== null ? (
-            <Link href={`/quran/surah/${lastRead.number}`}>
+            <Link href={`/quran/surat/${lastRead.number}`}>
               <span
                 className={clsx(
                   "hover-animation underline-animation text-black",
@@ -66,7 +66,7 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
                   "dark:text-white dark:hover:text-blue-500"
                 )}
               >
-                Surah {lastRead.name} ayat {lastRead.ayat}
+                surat {lastRead.name} ayat {lastRead.ayat}
               </span>
             </Link>
           ) : (
@@ -74,7 +74,7 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
           )}
         </p>
       </div>
-      {filteredSurah.length ? (
+      {filteredsurat.length ? (
         <div
           className={clsx(
             "grid w-full grid-cols-1 grid-rows-1 gap-4",
@@ -83,8 +83,8 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
             "xl:grid-cols-4"
           )}
         >
-          {filteredSurah.map((surat) => (
-            <Link key={surat.number} href={`/quran/surah/${surat.number}`}>
+          {filteredsurat.map((surat) => (
+            <Link key={surat.number} href={`/quran/surat/${surat.number}`}>
               <m.div
                 {...clickAnimation}
                 className={clsx(
@@ -114,10 +114,10 @@ const ListSurah = ({ surat }: DaftarSurahProps) => {
           ))}
         </div>
       ) : (
-        <TidakAda title="Surah" />
+        <TidakAda title="surat" />
       )}
     </>
   );
 };
 
-export default ListSurah;
+export default ListSurat;

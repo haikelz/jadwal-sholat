@@ -1,15 +1,12 @@
-import { useAtom } from "jotai";
-import { atomWithStorage } from "jotai/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const browser = typeof window !== "undefined";
-const themeAtom = atomWithStorage(
-  "theme",
-  browser && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-);
+const localValue = browser ? localStorage.getItem("theme") : "light";
+const systemTheme =
+  browser && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
 export const useTheme = () => {
-  const [theme, setTheme] = useAtom(themeAtom);
+  const [theme, setTheme] = useState<string>(localValue || systemTheme);
 
   useEffect(() => {
     if (!browser) return;

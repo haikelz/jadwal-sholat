@@ -7,7 +7,7 @@ export const Sebelumnya = ({ surat }: SuratProps) => {
   return (
     <>
       {surat.number > 1 ? (
-        <Link href={`/quran/surah/${surat.number - 1}`}>
+        <Link href={`/quran/surat/${surat.number - 1}`}>
           <button
             type="button"
             aria-label="sebelumnya"

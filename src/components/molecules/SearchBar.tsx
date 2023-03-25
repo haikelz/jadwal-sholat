@@ -25,7 +25,7 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
         <input
           ref={ref}
           className={clsx(
-            "block w-[250px] rounded-md border-2 border-solid border-gray-400 bg-gray-50 bg-clip-padding",
+            "block w-[300px] rounded-md border-2 border-solid border-gray-400 bg-gray-50 bg-clip-padding",
             "px-3 py-1 pl-10 font-semibold transition ease-in-out",
             "placeholder:ml-6",
             "focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600",
@@ -36,7 +36,7 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
           onChange={handleChange}
         />
       </div>
-      <span className="mt-1.5 hidden md:inline-block">
+      <div className="mt-1.5 hidden md:inline-block">
         <kbd
           className={clsx(
             "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
@@ -56,7 +56,7 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
         >
           Enter
         </kbd>
-      </span>
+      </div>
     </div>
   );
 };

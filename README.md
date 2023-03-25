@@ -14,10 +14,10 @@
 ## ⚡Tech Stack
 
 - NextJS
-- React Query
+- SWR
 - Windi CSS
 - Framer Motion
-- Jotai
+- Zustand
 
 ## Setup
 

@@ -1,16 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import fetch from "isomorphic-fetch";
+import _fetch from "isomorphic-fetch";
+
+import useSWR from "swr";
 
 const getData = async (link: string) => {
-  const response: Response = await fetch(link);
+  const response: Response = await _fetch(link);
   const data = await response.json();
-
   return data;
 };
 
 export const useFetch = (link: string) => {
-  return useQuery(["get data", link], () => getData(link), {
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-  });
+  const { data, isLoading, error } = useSWR(link, getData, { keepPreviousData: true });
+
+  return {
+    data,
+    isLoading,
+    isError: error,
+  };
 };

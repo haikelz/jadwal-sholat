@@ -1,10 +1,10 @@
 import { clsx } from "clsx";
+import { m } from "framer-motion";
 import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
 import { arab, asmaulHusna, clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
-import { m } from "framer-motion";
 
 const ListAsmaulHusna = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -18,7 +18,7 @@ const ListAsmaulHusna = () => {
           return value;
         }
       }),
-    [searchTerm]
+    [asmaulHusna, searchTerm]
   );
 
   return (

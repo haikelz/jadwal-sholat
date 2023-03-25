@@ -1,23 +1,22 @@
-import { useAtom } from "jotai";
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 import { useFetch } from "~hooks/useFetch";
 import { QURAN_API } from "~lib/utils/constants";
-import ErrorWhenFetch from "~molecules/ErrorWhenFetch";
-import Loading from "~molecules/Loading";
 import PreviousOrNextButton from "~molecules/PreviousOrNextButton";
-import DetailSurah from "~organisms/DetailSurah";
-import { audioAtom, tafsirAtom, terjemahanAtom } from "~store";
+import DetailSurat from "~organisms/DetailSurat";
+import useAppStore from "~store";
 import Layout from "~templates/Layout";
 
 const ModalTafsir = dynamic(() => import("~molecules/ModalTafsir"));
 const ModalNotification = dynamic(() => import("~molecules/ModalNotification"));
+const Loading = dynamic(() => import("~molecules/Loading"));
+const ErrorWhenFetch = dynamic(() => import("~molecules/ErrorWhenFetch"));
 
-const Surah = () => {
-  const [audio, setAudio] = useAtom(audioAtom);
-  const [terjemahan, setTerjemahan] = useAtom(terjemahanAtom);
-  const [tafsir, setTafsir] = useAtom(tafsirAtom);
+const Surat = () => {
+  const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir } = useAppStore(
+    (state) => state
+  );
 
   const router: NextRouter = useRouter();
   const { number } = router.query;
@@ -26,7 +25,7 @@ const Surah = () => {
     number ? `${QURAN_API}/quran/${number}?imamId=7` : ""
   );
 
-  if (isLoading) return <Loading />;
+  if ((!data && !isError) || isLoading) return <Loading />;
   if (isError) return <ErrorWhenFetch />;
 
   const surat = data.data;
@@ -72,11 +71,11 @@ const Surah = () => {
         <ModalTafsir surat={surat} />
       </div>
       <PreviousOrNextButton surat={surat} />
-      <DetailSurah surat={surat} />
+      <DetailSurat surat={surat} />
       <PreviousOrNextButton surat={surat} />
       <ModalNotification description="Sudah Ditandai!" />
     </Layout>
   );
 };
 
-export default Surah;
+export default Surat;

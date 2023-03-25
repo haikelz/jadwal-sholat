@@ -1,6 +1,6 @@
+import { clsx } from "clsx";
 import { memo } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { clsx } from "clsx";
 import { useTheme } from "~hooks/useTheme";
 
 export const DarkModeIcon = ({
@@ -29,7 +29,7 @@ export const DarkModeIcon = ({
           "px-4 text-gray-500",
           "dark:text-gray-400"
         )}
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        onClick={() => setTheme(() => (theme === "dark" ? "light" : "dark"))}
       >
         {theme === "light" ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}
         <p className={clsx("hidden text-sm font-semibold", "md:block", isMarginLeft ? "ml-2" : "")}>

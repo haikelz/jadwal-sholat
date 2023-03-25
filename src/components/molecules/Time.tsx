@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import id from "date-fns/locale/id";
+import { memo } from "react";
 import { useDate } from "~hooks/useDate";
 
 const Time = () => {
@@ -12,4 +13,4 @@ const Time = () => {
   );
 };
 
-export default Time;
+export default memo(Time);

@@ -1,10 +1,12 @@
-import { ChildrenProps } from "~types";
 import { clsx } from "clsx";
+import NextNProgress from "nextjs-progressbar";
 import { bitter, rubik } from "~lib/utils/constants";
+import { ChildrenProps } from "~types";
 
 const Template = ({ children }: ChildrenProps) => {
   return (
     <>
+      <NextNProgress color="#3B82f6" options={{ showSpinner: false }} />
       <style global jsx>
         {`
           h1 {

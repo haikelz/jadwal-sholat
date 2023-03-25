@@ -1,25 +1,25 @@
 import { clsx } from "clsx";
 import { AnimatePresence, m } from "framer-motion";
-import { useAtomValue, useSetAtom } from "jotai";
 import { nanoid } from "nanoid";
+import { memo } from "react";
 import { arab, opacityAnimation } from "~lib/utils/constants";
-import { audioAtom, lastReadAtom, notificationAtom, terjemahanAtom } from "~store";
+import useAppStore from "~store";
 import { SuratProps } from "~types";
 
-const DetailSurah = ({ surat }: SuratProps) => {
-  const setNotification = useSetAtom(notificationAtom);
-  const setLastRead = useSetAtom(lastReadAtom);
-
-  const terjemahan = useAtomValue(terjemahanAtom);
-  const audio = useAtomValue(audioAtom);
+const DetailSurat = ({ surat }: SuratProps) => {
+  const { setLastRead, setNotification, terjemahan, audio } = useAppStore((state) => state);
 
   const saveData = <T,>(newData: T) => {
-    localStorage.setItem("surah", JSON.stringify(newData));
+    localStorage.setItem("surat", JSON.stringify(newData));
   };
 
   const handleClick = (name: string, ayat: number, number: number) => {
-    const data = { id: nanoid(), name: name, ayat: ayat, number: number };
-
+    const data = {
+      id: nanoid(),
+      name: name,
+      ayat: ayat,
+      number: number,
+    };
     setNotification(true);
     setLastRead(data);
     saveData(data);
@@ -93,4 +93,4 @@ const DetailSurah = ({ surat }: SuratProps) => {
   );
 };
 
-export default DetailSurah;
+export default memo(DetailSurat);

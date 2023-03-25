@@ -6,17 +6,9 @@ import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
 import { clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
+import { ListKotaProps } from "~types";
 
-type KotaProps = {
-  kota: [
-    loc: {
-      id: string;
-      lokasi: string;
-    }
-  ];
-};
-
-const ListKota = ({ kota }: KotaProps) => {
+const ListKota = ({ kota }: ListKotaProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   /**

@@ -1,14 +1,67 @@
-import { atom } from "jotai";
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 
-export const audioAtom = atom<boolean>(false);
-export const tafsirAtom = atom<boolean>(false);
-export const mountedAtom = atom<boolean>(false);
-export const isActiveAtom = atom<boolean>(false);
-export const terjemahanAtom = atom<boolean>(false);
-export const notificationAtom = atom<boolean>(false);
+type LastReadProps = {
+  id: string;
+  name: string;
+  ayat: number;
+  number: number;
+};
 
-export const scrollAtom = atom<number>(0);
-export const lastReadAtom = atom<any>(null);
-export const isMoreAtom = atom<boolean>(false);
-export const dateAtom = atom<Date>(new Date());
-export const isAutoPlayAtom = atom<boolean>(false);
+type AppStoreProps = {
+  audio: boolean;
+  tafsir: boolean;
+  terjemahan: boolean;
+  notification: boolean;
+  isMore: boolean;
+  date: Date;
+  isAutoPlay: boolean;
+  lastRead: LastReadProps;
+  setDate: (func: Function) => void;
+  setIsAutoPlay: (autoPlayLogic: boolean) => void;
+  setNotification: (status: boolean) => void;
+  setAudio: (status: boolean) => void;
+  setTerjemahan: (status: boolean) => void;
+  setLastRead: (lastRead: LastReadProps) => void;
+  setTafsir: (status: boolean) => void;
+};
+
+const useAppStore = create<AppStoreProps>()(
+  devtools((set) => ({
+    audio: false,
+    isMore: false,
+    tafsir: false,
+    isAutoPlay: false,
+    terjemahan: false,
+    notification: false,
+    date: new Date(),
+    lastRead: { id: "", name: "", ayat: 0, number: 0 },
+    setTafsir: (status) => set(() => ({ tafsir: status })),
+    setNotification: (status) =>
+      set(() => ({
+        notification: status,
+      })),
+    setLastRead: (lastRead: LastReadProps) =>
+      set(() => ({
+        lastRead: lastRead,
+      })),
+    setTerjemahan: (status) =>
+      set(() => ({
+        terjemahan: status,
+      })),
+    setAudio: (status) =>
+      set(() => ({
+        audio: status,
+      })),
+    setDate: (func) =>
+      set(() => ({
+        date: func(),
+      })),
+    setIsAutoPlay: (autoPlayLogic) =>
+      set(() => ({
+        isAutoPlay: autoPlayLogic,
+      })),
+  }))
+);
+
+export default useAppStore;

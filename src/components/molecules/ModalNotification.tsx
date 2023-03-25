@@ -1,12 +1,11 @@
 import { clsx } from "clsx";
 import { AnimatePresence, m } from "framer-motion";
-import { useAtom } from "jotai";
 import { memo } from "react";
 import { modalAnimation } from "~lib/utils/constants";
-import { notificationAtom } from "~store";
+import useAppStore from "~store";
 
 const ModalNotification = ({ description }: { description: string }) => {
-  const [notification, setNotification] = useAtom(notificationAtom);
+  const { notification, setNotification } = useAppStore((state) => state);
 
   return (
     <>
@@ -32,7 +31,7 @@ const ModalNotification = ({ description }: { description: string }) => {
                       "hover:bg-gray-200 hover:text-black",
                       "dark:hover:text-black"
                     )}
-                    onClick={() => setNotification(!notification)}
+                    onClick={() => setNotification(false)}
                   >
                     Got it!
                   </button>

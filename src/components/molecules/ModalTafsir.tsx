@@ -1,14 +1,13 @@
 import { clsx } from "clsx";
 import { AnimatePresence, m } from "framer-motion";
-import { useAtom } from "jotai";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
 import { modalAnimation } from "~lib/utils/constants";
-import { tafsirAtom } from "~store";
+import useAppStore from "~store";
 import { SuratProps } from "~types";
 
 const ModalTafsir = ({ surat }: SuratProps) => {
-  const [tafsir, setTafsir] = useAtom(tafsirAtom);
+  const { tafsir, setTafsir } = useAppStore((state) => state);
 
   return (
     <>

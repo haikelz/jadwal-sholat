@@ -1,8 +1,7 @@
 import { format } from "date-fns";
-import { useAtom } from "jotai";
 import { useDate } from "~hooks/useDate";
 import { matchDate } from "~lib/helpers/formatDate";
-import { isAutoPlayAtom } from "~store";
+import useAppStore from "~store";
 
 type WaktuProps = {
   waktu: {
@@ -42,12 +41,12 @@ const tableJadwalSholatList = [
 ];
 
 const TableJadwalSholat = ({ waktu }: WaktuProps) => {
-  const [isAutoPlay, setIsAutoPlay] = useAtom(isAutoPlayAtom);
+  // const { isAutoPlay, setIsAutoPlay } = useAppStore((state) => state);
   const time: string = format(useDate(), `kk.mm`);
 
   return (
     <>
-      <audio className="hidden" id="adzan" src="/sound/adzan.mp3" controls autoPlay={isAutoPlay}>
+      <audio className="hidden" id="adzan" src="/sound/adzan.mp3" controls>
         <track default kind="captions" />
       </audio>
       <table className="table-fixed border-2 border-black dark:border-none">
@@ -88,7 +87,6 @@ const TableJadwalSholat = ({ waktu }: WaktuProps) => {
               time === waktu.maghrib ||
               time === waktu.isya;
 
-            setIsAutoPlay(autoplayLogic);
             return (
               <tr
                 className={`border-b-2 border-black dark:border-none ${

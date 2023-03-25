@@ -1,9 +1,8 @@
-import { useAtom } from "jotai";
 import { useEffect } from "react";
-import { dateAtom } from "~store";
+import useAppStore from "~store";
 
 export const useDate = () => {
-  const [date, setDate] = useAtom(dateAtom);
+  const { date, setDate } = useAppStore((state) => state);
 
   useEffect(() => {
     const interval = setInterval(() => setDate(() => new Date()), 1000);

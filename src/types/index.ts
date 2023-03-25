@@ -5,6 +5,26 @@ export type ChildrenProps = {
   title?: string;
 };
 
+export type ListSuratProps = {
+  surat: [
+    surat: {
+      number: string;
+      asma: {
+        id: {
+          short: string;
+        };
+        translation: {
+          id: string;
+        };
+      };
+      ayahCount: string;
+      type: {
+        id: string;
+      };
+    }
+  ];
+};
+
 export type SuratProps = {
   surat: {
     number: number;
@@ -53,4 +73,13 @@ export type SuratProps = {
   audio?: boolean;
   terjemahan?: boolean;
   tafsir?: boolean;
+};
+
+export type ListKotaProps = {
+  kota: [
+    loc: {
+      id: string;
+      lokasi: string;
+    }
+  ];
 };

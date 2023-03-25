@@ -1,19 +1,23 @@
+import _fetch from "isomorphic-fetch";
+import type { GetStaticProps } from "next";
 import Image from "next/image";
-import { useFetch } from "~hooks/useFetch";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
-import ErrorWhenFetch from "~molecules/ErrorWhenFetch";
 import ListKota from "~molecules/ListKota";
-import Loading from "~molecules/Loading";
 import Layout from "~templates/Layout";
+import { ListKotaProps } from "~types";
 
-const JadwalSholat = () => {
-  const { data, isLoading, error } = useFetch(`${JADWAL_SHOLAT_API}/kota/semua`);
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await _fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
+  const data = await response.json();
 
-  if (isLoading) return <Loading />;
-  if (error) return <ErrorWhenFetch />;
+  return {
+    props: {
+      kota: data,
+    },
+  };
+};
 
-  const kota = data;
-
+const JadwalSholat = ({ kota }: ListKotaProps) => {
   return (
     <Layout title="Jadwal Sholat">
       <div className="flex flex-col items-center justify-center">

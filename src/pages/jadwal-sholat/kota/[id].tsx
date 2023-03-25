@@ -1,11 +1,13 @@
+import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
-import ErrorWhenFetch from "~molecules/ErrorWhenFetch";
-import Loading from "~molecules/Loading";
 import { useFetch } from "~hooks/useFetch";
 import { bulan, currentDate, hari, tahun } from "~lib/helpers/formatDate";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
 import TableJadwalSholat from "~organisms/TableJadwalSholat";
 import Layout from "~templates/Layout";
+
+const Loading = dynamic(() => import("~molecules/Loading"));
+const ErrorWhenFetch = dynamic(() => import("~molecules/ErrorWhenFetch"));
 
 const KotaId = () => {
   const router: NextRouter = useRouter();
@@ -17,7 +19,7 @@ const KotaId = () => {
     id ? `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : ""
   );
 
-  if (isLoading) return <Loading />;
+  if ((!data && !isError) || isLoading) return <Loading />;
   if (isError) return <ErrorWhenFetch />;
 
   const waktu = data.data;
@@ -30,7 +32,7 @@ const KotaId = () => {
           PROVINSI {waktu.daerah}, {currentDate.toUpperCase()}
         </p>
       </div>
-      <div className="flex w-full items-center gap-7 overflow-x-auto text-center lg:justify-center">
+      <div className="flex w-full items-center space-y-7 overflow-x-auto text-center lg:justify-center">
         <TableJadwalSholat tanggal={hari} tahun={tahun} bulan={bulan} waktu={waktu} />
       </div>
     </Layout>

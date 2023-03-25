@@ -1,19 +1,23 @@
+import _fetch from "isomorphic-fetch";
+import type { GetStaticProps } from "next";
 import Image from "next/image";
-import ErrorWhenFetch from "~molecules/ErrorWhenFetch";
-import Loading from "~molecules/Loading";
-import { useFetch } from "~hooks/useFetch";
 import { QURAN_API } from "~lib/utils/constants";
-import ListSurah from "~molecules/ListSurah";
+import ListSurat from "~molecules/ListSurat";
 import Layout from "~templates/Layout";
+import { ListSuratProps } from "~types";
 
-const Quran = () => {
-  const { data, isLoading, error } = useFetch(`${QURAN_API}/quran`);
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await _fetch(`${QURAN_API}/quran`);
+  const data = await response.json();
 
-  if (isLoading) return <Loading />;
-  if (error) return <ErrorWhenFetch />;
+  return {
+    props: {
+      surat: data.data,
+    },
+  };
+};
 
-  const surat = data.data;
-
+const Quran = ({ surat }: ListSuratProps) => {
   return (
     <Layout title="Baca Al-Qur'an">
       <div className="flex flex-col items-center justify-center">
@@ -25,7 +29,7 @@ const Quran = () => {
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;
         </p>
       </div>
-      <ListSurah surat={surat} />
+      <ListSurat surat={surat} />
     </Layout>
   );
 };
