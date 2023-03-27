@@ -25,7 +25,7 @@ const navbarList = [
   },
 ];
 
-const Navbar = () => {
+export default function Navbar() {
   const router: NextRouter = useRouter();
 
   return (
@@ -86,6 +86,4 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}

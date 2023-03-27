@@ -1,7 +1,7 @@
 import ListAsmaulHusna from "~molecules/ListAsmaulHusna";
 import Layout from "~templates/Layout";
 
-const AsmaulHusna = () => {
+export default function AsmaulHusna() {
   return (
     <Layout title="Asma'ul Husna">
       <div className="flex flex-col items-center justify-center">
@@ -13,6 +13,4 @@ const AsmaulHusna = () => {
       <ListAsmaulHusna />
     </Layout>
   );
-};
-
-export default AsmaulHusna;
+}

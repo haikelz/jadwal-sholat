@@ -5,7 +5,7 @@ import { hours } from "~lib/helpers/formatDate";
 
 const Time = dynamic(() => import("~molecules/Time"), { ssr: false });
 
-const Home = () => {
+export default function Home() {
   return (
     <>
       <Head>
@@ -43,6 +43,4 @@ const Home = () => {
       </div>
     </>
   );
-};
-
-export default Home;
+}

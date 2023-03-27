@@ -4,7 +4,7 @@ import { memo } from "react";
 import { modalAnimation } from "~lib/utils/constants";
 import useAppStore from "~store";
 
-const ModalNotification = ({ description }: { description: string }) => {
+export default function ModalNotification({ description }: { description: string }) {
   const { notification, setNotification } = useAppStore((state) => state);
 
   return (
@@ -43,6 +43,6 @@ const ModalNotification = ({ description }: { description: string }) => {
       </AnimatePresence>
     </>
   );
-};
+}
 
-export default memo(ModalNotification);
+memo(ModalNotification);

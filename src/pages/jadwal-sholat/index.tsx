@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const JadwalSholat = ({ kota }: ListKotaProps) => {
+export default function JadwalSholat({ kota }: ListKotaProps) {
   return (
     <Layout title="Jadwal Sholat">
       <div className="flex flex-col items-center justify-center">
@@ -30,6 +30,4 @@ const JadwalSholat = ({ kota }: ListKotaProps) => {
       <ListKota kota={kota} />
     </Layout>
   );
-};
-
-export default JadwalSholat;
+}

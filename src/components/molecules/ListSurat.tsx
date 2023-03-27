@@ -28,10 +28,9 @@ type ListSuratProps = {
   ];
 };
 
-const ListSurat = ({ surat }: ListSuratProps) => {
+export default function ListSurat({ surat }: ListSuratProps) {
   const { lastRead, setLastRead } = useAppStore((state) => state);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  // const [lastRead, setLastRead] = useAtom(lastReadAtom);
 
   const filteredsurat = useMemo(
     () =>
@@ -57,7 +56,7 @@ const ListSurat = ({ surat }: ListSuratProps) => {
         <SearchBar setSearchTerm={setSearchTerm} />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
-          {lastRead !== null ? (
+          {lastRead.ayat || lastRead.number !== null ? (
             <Link href={`/quran/surat/${lastRead.number}`}>
               <span
                 className={clsx(
@@ -66,7 +65,7 @@ const ListSurat = ({ surat }: ListSuratProps) => {
                   "dark:text-white dark:hover:text-blue-500"
                 )}
               >
-                surat {lastRead.name} ayat {lastRead.ayat}
+                Surat {lastRead.name} ayat {lastRead.ayat}
               </span>
             </Link>
           ) : (
@@ -118,6 +117,4 @@ const ListSurat = ({ surat }: ListSuratProps) => {
       )}
     </>
   );
-};
-
-export default ListSurat;
+}

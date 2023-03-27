@@ -17,11 +17,11 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Quran = ({ surat }: ListSuratProps) => {
+export default function Quran({ surat }: ListSuratProps) {
   return (
     <Layout title="Baca Al-Qur'an">
       <div className="flex flex-col items-center justify-center">
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center space-x-3">
           <h1>Baca Al-Qur&#39;an</h1>
           <Image src="/img/Quran.webp" width={40} height={40} alt="Al-Qur'an" />
         </div>
@@ -32,6 +32,4 @@ const Quran = ({ surat }: ListSuratProps) => {
       <ListSurat surat={surat} />
     </Layout>
   );
-};
-
-export default Quran;
+}

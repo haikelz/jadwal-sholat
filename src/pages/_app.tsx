@@ -7,9 +7,9 @@ import Navbar from "~organisms/Navbar";
 import "~styles/index.scss";
 import Template from "~templates/index";
 
-const BackToTop = dynamic(() => import("~atoms").then((obj) => obj.BackToTop));
+const BackToTop = dynamic(() => import("~atoms").then((button) => button.BackToTop));
 
-const App = ({ Component, pageProps, router }: AppProps) => {
+function App({ Component, pageProps, router }: AppProps) {
   return (
     <Template>
       <Navbar />
@@ -23,6 +23,6 @@ const App = ({ Component, pageProps, router }: AppProps) => {
       </LazyMotion>
     </Template>
   );
-};
+}
 
 export default App;

@@ -3,7 +3,7 @@ import NextNProgress from "nextjs-progressbar";
 import { bitter, rubik } from "~lib/utils/constants";
 import { ChildrenProps } from "~types";
 
-const Template = ({ children }: ChildrenProps) => {
+export default function Template({ children }: ChildrenProps) {
   return (
     <>
       <NextNProgress color="#3B82f6" options={{ showSpinner: false }} />
@@ -26,6 +26,4 @@ const Template = ({ children }: ChildrenProps) => {
       </div>
     </>
   );
-};
-
-export default Template;
+}

@@ -6,7 +6,7 @@ import { arab, opacityAnimation } from "~lib/utils/constants";
 import useAppStore from "~store";
 import { SuratProps } from "~types";
 
-const DetailSurat = ({ surat }: SuratProps) => {
+export default function DetailSurat({ surat }: SuratProps) {
   const { setLastRead, setNotification, terjemahan, audio } = useAppStore((state) => state);
 
   const saveData = <T,>(newData: T) => {
@@ -91,6 +91,6 @@ const DetailSurat = ({ surat }: SuratProps) => {
       ))}
     </div>
   );
-};
+}
 
-export default memo(DetailSurat);
+memo(DetailSurat);

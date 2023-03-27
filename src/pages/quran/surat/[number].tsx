@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
-import { useFetch } from "~hooks/useFetch";
+import { useFetch } from "~hooks";
 import { QURAN_API } from "~lib/utils/constants";
 import PreviousOrNextButton from "~molecules/PreviousOrNextButton";
 import DetailSurat from "~organisms/DetailSurat";
@@ -13,7 +13,7 @@ const ModalNotification = dynamic(() => import("~molecules/ModalNotification"));
 const Loading = dynamic(() => import("~molecules/Loading"));
 const ErrorWhenFetch = dynamic(() => import("~molecules/ErrorWhenFetch"));
 
-const Surat = () => {
+export default function Surat() {
   const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir } = useAppStore(
     (state) => state
   );
@@ -26,7 +26,7 @@ const Surat = () => {
   );
 
   if ((!data && !isError) || isLoading) return <Loading />;
-  if (isError) return <ErrorWhenFetch />;
+  if (isError || typeof data.data === "undefined") return <ErrorWhenFetch />;
 
   const surat = data.data;
 
@@ -76,6 +76,4 @@ const Surat = () => {
       <ModalNotification description="Sudah Ditandai!" />
     </Layout>
   );
-};
-
-export default Surat;
+}

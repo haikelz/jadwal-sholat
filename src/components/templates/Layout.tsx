@@ -2,7 +2,7 @@ import { ChildrenProps } from "~types";
 import Head from "next/head";
 import { clsx } from "clsx";
 
-const Layout = ({ children, title }: ChildrenProps) => {
+export default function Layout({ children, title }: ChildrenProps) {
   return (
     <>
       <Head>
@@ -22,6 +22,4 @@ const Layout = ({ children, title }: ChildrenProps) => {
       </section>
     </>
   );
-};
-
-export default Layout;
+}

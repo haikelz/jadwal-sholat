@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MdOutlineArrowForward } from "react-icons/md";
 import { SuratProps } from "~types";
 
-export const Selanjutnya = ({ surat }: SuratProps) => {
+export function Selanjutnya({ surat }: SuratProps) {
   return (
     <>
       {surat.number < 114 ? (
@@ -24,4 +24,4 @@ export const Selanjutnya = ({ surat }: SuratProps) => {
       ) : null}
     </>
   );
-};
+}

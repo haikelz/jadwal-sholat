@@ -17,7 +17,7 @@ const customJestConfig = {
     "^~templates/(.*)$": "src/components/templates/$1",
     "^~pages/(.*)$": "src/pages/$1",
     "^~lib/(.*)$": "src/lib/$1",
-    "^~hooks/(.*)$": "src/hooks/$1",
+    "^~hooks$": "src/hooks",
     "^~store$": "src/store",
   },
 };

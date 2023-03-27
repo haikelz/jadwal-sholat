@@ -4,7 +4,7 @@ import { SuratProps } from "~types";
 
 type PreviousOrNextButtonProps = SuratProps & {};
 
-const PreviousOrNextButton = ({ surat }: PreviousOrNextButtonProps) => {
+export default function PreviousOrNextButton({ surat }: PreviousOrNextButtonProps) {
   return (
     <div
       className={clsx("flex w-full gap-3", surat.number > 1 ? "justify-between" : "justify-end")}
@@ -13,6 +13,4 @@ const PreviousOrNextButton = ({ surat }: PreviousOrNextButtonProps) => {
       <Selanjutnya surat={surat} />
     </div>
   );
-};
-
-export default PreviousOrNextButton;
+}

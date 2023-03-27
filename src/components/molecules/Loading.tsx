@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const Loading = () => {
+export default function Loading() {
   return (
     <>
       <Head>
@@ -29,6 +29,4 @@ const Loading = () => {
       </div>
     </>
   );
-};
-
-export default Loading;
+}

@@ -1,7 +1,4 @@
-import { format } from "date-fns";
-import { useDate } from "~hooks/useDate";
 import { matchDate } from "~lib/helpers/formatDate";
-import useAppStore from "~store";
 
 type WaktuProps = {
   waktu: {
@@ -40,10 +37,7 @@ const tableJadwalSholatList = [
   { name: "Maghrib" },
 ];
 
-const TableJadwalSholat = ({ waktu }: WaktuProps) => {
-  // const { isAutoPlay, setIsAutoPlay } = useAppStore((state) => state);
-  const time: string = format(useDate(), `kk.mm`);
-
+export default function TableJadwalSholat({ waktu }: WaktuProps) {
   return (
     <>
       <audio className="hidden" id="adzan" src="/sound/adzan.mp3" controls>
@@ -76,17 +70,6 @@ const TableJadwalSholat = ({ waktu }: WaktuProps) => {
               { waktu: waktu.maghrib },
               { waktu: waktu.isya },
             ];
-            /**
-             * Autoplay audio logic
-             * @default autoplayLogic = false
-             */
-            const autoplayLogic: boolean =
-              time === waktu.subuh ||
-              time === waktu.dzuhur ||
-              time === waktu.ashar ||
-              time === waktu.maghrib ||
-              time === waktu.isya;
-
             return (
               <tr
                 className={`border-b-2 border-black dark:border-none ${
@@ -111,6 +94,4 @@ const TableJadwalSholat = ({ waktu }: WaktuProps) => {
       </table>
     </>
   );
-};
-
-export default TableJadwalSholat;
+}

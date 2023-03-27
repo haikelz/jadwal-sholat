@@ -12,7 +12,7 @@ type PuasaSunnahProps = {
   ];
 };
 
-const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
+export default function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps) {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">
@@ -57,6 +57,4 @@ const TableJadwalPuasaSunnah = ({ puasaSunnah }: PuasaSunnahProps) => {
       </tbody>
     </table>
   );
-};
-
-export default TableJadwalPuasaSunnah;
+}

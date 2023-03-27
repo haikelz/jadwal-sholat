@@ -6,7 +6,7 @@ import { modalAnimation } from "~lib/utils/constants";
 import useAppStore from "~store";
 import { SuratProps } from "~types";
 
-const ModalTafsir = ({ surat }: SuratProps) => {
+export default function ModalTafsir({ surat }: SuratProps) {
   const { tafsir, setTafsir } = useAppStore((state) => state);
 
   return (
@@ -52,6 +52,6 @@ const ModalTafsir = ({ surat }: SuratProps) => {
       </AnimatePresence>
     </>
   );
-};
+}
 
-export default memo(ModalTafsir);
+memo(ModalTafsir);

@@ -6,7 +6,7 @@ import { TidakAda } from "~atoms";
 import { arab, asmaulHusna, clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
 
-const ListAsmaulHusna = () => {
+export default function ListAsmaulHusna() {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const filteredAsmaulHusna = useMemo(
@@ -64,6 +64,4 @@ const ListAsmaulHusna = () => {
       )}
     </>
   );
-};
-
-export default ListAsmaulHusna;
+}

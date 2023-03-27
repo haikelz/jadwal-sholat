@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
-import { useFetch } from "~hooks/useFetch";
+import { useFetch } from "~hooks";
 import { bulan, currentDate, hari, tahun } from "~lib/helpers/formatDate";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
 import TableJadwalSholat from "~organisms/TableJadwalSholat";
@@ -9,7 +9,7 @@ import Layout from "~templates/Layout";
 const Loading = dynamic(() => import("~molecules/Loading"));
 const ErrorWhenFetch = dynamic(() => import("~molecules/ErrorWhenFetch"));
 
-const KotaId = () => {
+export default function KotaId() {
   const router: NextRouter = useRouter();
   const { id } = router.query;
 
@@ -20,7 +20,7 @@ const KotaId = () => {
   );
 
   if ((!data && !isError) || isLoading) return <Loading />;
-  if (isError) return <ErrorWhenFetch />;
+  if (isError || typeof data.data === "undefined") return <ErrorWhenFetch />;
 
   const waktu = data.data;
 
@@ -32,11 +32,9 @@ const KotaId = () => {
           PROVINSI {waktu.daerah}, {currentDate.toUpperCase()}
         </p>
       </div>
-      <div className="flex w-full items-center space-y-7 overflow-x-auto text-center lg:justify-center">
+      <div className="flex w-full items-center overflow-x-auto text-center lg:justify-center">
         <TableJadwalSholat tanggal={hari} tahun={tahun} bulan={bulan} waktu={waktu} />
       </div>
     </Layout>
   );
-};
-
-export default KotaId;
+}

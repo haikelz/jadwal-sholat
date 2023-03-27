@@ -1,13 +1,13 @@
 import { clsx } from "clsx";
 import { ChangeEventHandler, Dispatch, memo, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";
-import { useKeydown } from "~hooks/useKeydown";
+import { useKeydown } from "~hooks";
 
 type SearchBarProps = {
   setSearchTerm: Dispatch<SetStateAction<string>>;
 };
 
-const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
+export default function SearchBar({ setSearchTerm }: SearchBarProps) {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -59,6 +59,6 @@ const SearchBar = ({ setSearchTerm }: SearchBarProps) => {
       </div>
     </div>
   );
-};
+}
 
-export default memo(SearchBar);
+memo(SearchBar);

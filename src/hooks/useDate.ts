@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useAppStore from "~store";
 
-export const useDate = () => {
+export function useDate() {
   const { date, setDate } = useAppStore((state) => state);
 
   useEffect(() => {
@@ -10,4 +10,4 @@ export const useDate = () => {
   }, [setDate]);
 
   return date;
-};
+}

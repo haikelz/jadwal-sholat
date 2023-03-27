@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const useScroll = () => {
+export function useScroll() {
   const [scroll, setScroll] = useState<number>(0);
 
   // buat handle warning useEffect pas pengecekan
@@ -15,4 +15,4 @@ export const useScroll = () => {
   }, [handleScroll]);
 
   return scroll;
-};
+}

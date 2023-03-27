@@ -8,7 +8,7 @@ import { clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
 import { ListKotaProps } from "~types";
 
-const ListKota = ({ kota }: ListKotaProps) => {
+export default function ListKota({ kota }: ListKotaProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   /**
@@ -69,6 +69,4 @@ const ListKota = ({ kota }: ListKotaProps) => {
       )}
     </>
   );
-};
-
-export default ListKota;
+}

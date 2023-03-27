@@ -1,9 +1,9 @@
 import { clsx } from "clsx";
 import { memo } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { useTheme } from "~hooks/useTheme";
+import { useTheme } from "~hooks";
 
-export const DarkModeIcon = ({
+export function DarkModeIcon({
   flexDir,
   isHidden,
   justifyItems,
@@ -13,7 +13,7 @@ export const DarkModeIcon = ({
   isHidden?: boolean;
   justifyItems: string;
   isMarginLeft: boolean;
-}) => {
+}) {
   const [theme, setTheme] = useTheme();
 
   return (
@@ -38,6 +38,6 @@ export const DarkModeIcon = ({
       </button>
     </div>
   );
-};
+}
 
 memo(DarkModeIcon);

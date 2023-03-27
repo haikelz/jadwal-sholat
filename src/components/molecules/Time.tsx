@@ -1,9 +1,9 @@
 import { format } from "date-fns";
 import id from "date-fns/locale/id";
 import { memo } from "react";
-import { useDate } from "~hooks/useDate";
+import { useDate } from "~hooks";
 
-const Time = () => {
+export default function Time() {
   const formattedDate: string = format(useDate(), `dd MMMM yyyy, kk.mm.ss`, { locale: id });
 
   return (
@@ -11,6 +11,6 @@ const Time = () => {
       <p className="text-xl font-bold">{formattedDate}</p>
     </div>
   );
-};
+}
 
-export default memo(Time);
+memo(Time);

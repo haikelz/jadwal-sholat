@@ -2,10 +2,10 @@ import { clsx } from "clsx";
 import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { MdKeyboardArrowUp } from "react-icons/md";
-import { useScroll } from "~hooks/useScroll";
+import { useScroll } from "~hooks";
 import { backToTopAnimation } from "~lib/utils/constants";
 
-export const BackToTop = () => {
+export function BackToTop() {
   const scroll = useScroll();
   const height = 150;
 
@@ -40,6 +40,6 @@ export const BackToTop = () => {
       ) : null}
     </AnimatePresence>
   );
-};
+}
 
 memo(BackToTop);

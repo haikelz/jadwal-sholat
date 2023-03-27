@@ -4,8 +4,8 @@ import { devtools } from "zustand/middleware";
 type LastReadProps = {
   id: string;
   name: string;
-  ayat: number;
-  number: number;
+  ayat: number | null;
+  number: number | null;
 };
 
 type AppStoreProps = {
@@ -35,7 +35,7 @@ const useAppStore = create<AppStoreProps>()(
     terjemahan: false,
     notification: false,
     date: new Date(),
-    lastRead: { id: "", name: "", ayat: 0, number: 0 },
+    lastRead: { id: "", name: "", ayat: null, number: null },
     setTafsir: (status) => set(() => ({ tafsir: status })),
     setNotification: (status) =>
       set(() => ({
