@@ -8,7 +8,7 @@ const metadata = {
   image: "/favicon.ico",
 };
 
-const Document = () => {
+export default function Document() {
   const { url, type, title, description, image } = metadata;
 
   return (
@@ -36,6 +36,4 @@ const Document = () => {
       </body>
     </Html>
   );
-};
-
-export default Document;
+}

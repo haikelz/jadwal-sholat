@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cx } from "classix";
 import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { MdKeyboardArrowUp } from "react-icons/md";
@@ -9,13 +9,13 @@ export function BackToTop() {
   const scroll = useScroll();
   const height = 150;
 
-  const handleClick = () => {
+  function handleClick() {
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: "smooth",
     });
-  };
+  }
 
   return (
     <AnimatePresence mode="wait">
@@ -28,7 +28,7 @@ export function BackToTop() {
           <button
             type="button"
             aria-label="back to top"
-            className={clsx(
+            className={cx(
               "rounded-md bg-rose-400 p-1.5 transition ease-in-out",
               "hover:bg-rose-500 dark:bg-blue-500 dark:hover:bg-blue-600"
             )}

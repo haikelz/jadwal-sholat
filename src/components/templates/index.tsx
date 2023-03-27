@@ -1,7 +1,7 @@
-import { clsx } from "clsx";
+import { cx } from "classix";
 import NextNProgress from "nextjs-progressbar";
 import { bitter, rubik } from "~lib/utils/constants";
-import { ChildrenProps } from "~types";
+import { ChildrenProps } from "~models";
 
 export default function Template({ children }: ChildrenProps) {
   return (
@@ -15,12 +15,7 @@ export default function Template({ children }: ChildrenProps) {
         `}
       </style>
       <div
-        className={clsx(
-          "bg-gray-50",
-          "md:flex",
-          "dark:bg-gray-900 dark:text-white",
-          rubik.className
-        )}
+        className={cx("bg-gray-50", "md:flex", "dark:bg-gray-900 dark:text-white", rubik.className)}
       >
         {children}
       </div>

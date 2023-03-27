@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cx } from "classix";
 import { m } from "framer-motion";
 import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
@@ -18,7 +18,7 @@ export default function ListAsmaulHusna() {
           return value;
         }
       }),
-    [asmaulHusna, searchTerm]
+    [searchTerm]
   );
 
   return (
@@ -26,7 +26,7 @@ export default function ListAsmaulHusna() {
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredAsmaulHusna.length ? (
         <div
-          className={clsx(
+          className={cx(
             "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center",
             "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           )}
@@ -35,7 +35,7 @@ export default function ListAsmaulHusna() {
             <m.div
               {...clickAnimation}
               key={item.urutan}
-              className={clsx(
+              className={cx(
                 "flex flex-col items-start justify-center overflow-hidden rounded-sm text-left",
                 "border-2 border-black bg-gray-100 p-4 text-start tracking-wide",
                 "cursor-pointer",
@@ -44,7 +44,7 @@ export default function ListAsmaulHusna() {
             >
               <h3 className="text-xl font-bold">{item.urutan}</h3>
               <div className="my-3 w-full text-right">
-                <p className={clsx("text-3xl font-medium", arab.className)}>{item.arab}</p>
+                <p className={cx("text-3xl font-medium", arab.className)}>{item.arab}</p>
               </div>
               <p className="text-lg font-medium">
                 {searchTerm

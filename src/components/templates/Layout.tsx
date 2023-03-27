@@ -1,6 +1,6 @@
-import { ChildrenProps } from "~types";
+import { ChildrenProps } from "~models";
 import Head from "next/head";
-import { clsx } from "clsx";
+import { cx } from "classix";
 
 export default function Layout({ children, title }: ChildrenProps) {
   return (
@@ -9,7 +9,7 @@ export default function Layout({ children, title }: ChildrenProps) {
         <title>{title}</title>
       </Head>
       <section
-        className={clsx(
+        className={cx(
           "flex min-h-screen w-full max-w-full flex-col items-center",
           "bg-gray-50 px-5 pt-8 pb-24 text-center",
           "md:px-8",

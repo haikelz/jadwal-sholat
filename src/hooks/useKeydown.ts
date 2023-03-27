@@ -1,16 +1,16 @@
 import { RefObject, useCallback, useEffect } from "react";
 
-type KeydownProps = {
+interface KeydownProps {
   ref: RefObject<HTMLInputElement>;
   isShiftKey: boolean;
   key1: string;
   key2: string;
-};
+}
 
-type KeydownEventProps = {
+interface KeydownEventProps {
   shiftKey: boolean;
   key: string;
-};
+}
 
 export function useKeydown<T extends KeydownProps>({ ref, isShiftKey, key1, key2 }: T) {
   const handleKeydown = useCallback(

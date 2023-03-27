@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cx } from "classix";
 import { m } from "framer-motion";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -6,7 +6,7 @@ import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
 import { clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
-import { ListKotaProps } from "~types";
+import { ListKotaProps } from "~models";
 
 export default function ListKota({ kota }: ListKotaProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -34,7 +34,7 @@ export default function ListKota({ kota }: ListKotaProps) {
       <SearchBar setSearchTerm={setSearchTerm} />
       {filteredKota.length ? (
         <div
-          className={clsx(
+          className={cx(
             "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center",
             "sm:grid-cols-2",
             "lg:grid-cols-3",
@@ -45,7 +45,7 @@ export default function ListKota({ kota }: ListKotaProps) {
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
               <m.div
                 {...clickAnimation}
-                className={clsx(
+                className={cx(
                   "flex h-full items-center justify-center overflow-hidden rounded-sm text-black",
                   "border-2 border-black bg-gray-100 py-6 px-10",
                   "dark:border-white dark:bg-[#2A2A37] dark:text-white"

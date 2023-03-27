@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
-export type ChildrenProps = {
+export interface ChildrenProps {
   children: ReactNode[] | JSX.Element;
   title?: string;
-};
+}
 
-export type ListSuratProps = {
+export interface ListSuratProps {
   surat: [
     surat: {
       number: string;
@@ -23,9 +23,9 @@ export type ListSuratProps = {
       };
     }
   ];
-};
+}
 
-export type SuratProps = {
+export interface SuratProps {
   surat: {
     number: number;
     name: string;
@@ -73,18 +73,18 @@ export type SuratProps = {
   audio?: boolean;
   terjemahan?: boolean;
   tafsir?: boolean;
-};
+}
 
-export type ListKotaProps = {
+export interface ListKotaProps {
   kota: [
     loc: {
       id: string;
       lokasi: string;
     }
   ];
-};
+}
 
-export type WaktuProps = {
+export interface WaktuProps {
   waktu: {
     id: string;
     lokasi: string;
@@ -108,4 +108,16 @@ export type WaktuProps = {
   tanggal: string;
   bulan: string;
   tahun: string;
-};
+}
+
+export interface PuasaSunnahProps {
+  puasaSunnah: [
+    fasting: {
+      month: number;
+      date: string;
+      type: {
+        name: string;
+      };
+    }
+  ];
+}

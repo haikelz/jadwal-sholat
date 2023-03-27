@@ -1,16 +1,5 @@
 import { matchDate, numBulan } from "~lib/helpers/formatDate";
-
-type PuasaSunnahProps = {
-  puasaSunnah: [
-    fasting: {
-      month: number;
-      date: string;
-      type: {
-        name: string;
-      };
-    }
-  ];
-};
+import { PuasaSunnahProps } from "~models";
 
 export default function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps) {
   return (
@@ -30,7 +19,6 @@ export default function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps
           (fasting, index) =>
             /**
              * Kita ingin mendapatkan hasil sesuai bulan saja
-             * @param fasting
              * Jadi kita cocokkan data month dari API dengan numBulan
              */
             fasting.month === numBulan && (

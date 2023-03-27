@@ -1,18 +1,17 @@
-import _fetch from "isomorphic-fetch";
 import type { GetStaticProps } from "next";
 import Image from "next/image";
+import { ofetch } from "ofetch";
 import { QURAN_API } from "~lib/utils/constants";
 import ListSurat from "~molecules/ListSurat";
 import Layout from "~templates/Layout";
-import { ListSuratProps } from "~types";
+import { ListSuratProps } from "~models";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await _fetch(`${QURAN_API}/quran`);
-  const data = await response.json();
+  const response = await ofetch(`${QURAN_API}/quran`, { parseResponse: JSON.parse });
 
   return {
     props: {
-      surat: data.data,
+      surat: response.data,
     },
   };
 };

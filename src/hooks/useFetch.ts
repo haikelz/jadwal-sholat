@@ -1,10 +1,9 @@
-import _fetch from "isomorphic-fetch";
+import { ofetch } from "ofetch";
 import useSWR from "swr";
 
 async function getData(link: string) {
-  const response: Response = await _fetch(link);
-  const data = await response.json();
-  return data;
+  const response = await ofetch(link, { parseResponse: JSON.parse });
+  return response;
 }
 
 export function useFetch(link: string) {

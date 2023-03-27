@@ -1,37 +1,34 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-type LastReadProps = {
+interface LastReadProps {
   id: string;
   name: string;
   ayat: number | null;
   number: number | null;
-};
+}
 
-type AppStoreProps = {
+interface AppStoreProps {
   audio: boolean;
   tafsir: boolean;
   terjemahan: boolean;
   notification: boolean;
   isMore: boolean;
   date: Date;
-  isAutoPlay: boolean;
   lastRead: LastReadProps;
   setDate: (func: Function) => void;
-  setIsAutoPlay: (autoPlayLogic: boolean) => void;
   setNotification: (status: boolean) => void;
   setAudio: (status: boolean) => void;
   setTerjemahan: (status: boolean) => void;
   setLastRead: (lastRead: LastReadProps) => void;
   setTafsir: (status: boolean) => void;
-};
+}
 
 const useAppStore = create<AppStoreProps>()(
   devtools((set) => ({
     audio: false,
     isMore: false,
     tafsir: false,
-    isAutoPlay: false,
     terjemahan: false,
     notification: false,
     date: new Date(),
@@ -56,10 +53,6 @@ const useAppStore = create<AppStoreProps>()(
     setDate: (func) =>
       set(() => ({
         date: func(),
-      })),
-    setIsAutoPlay: (autoPlayLogic) =>
-      set(() => ({
-        isAutoPlay: autoPlayLogic,
       })),
   }))
 );

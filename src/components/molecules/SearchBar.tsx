@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cx } from "classix";
 import { ChangeEventHandler, Dispatch, memo, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { useKeydown } from "~hooks";
@@ -24,7 +24,7 @@ export default function SearchBar({ setSearchTerm }: SearchBarProps) {
         </div>
         <input
           ref={ref}
-          className={clsx(
+          className={cx(
             "block w-[300px] rounded-md border-2 border-solid border-gray-400 bg-gray-50 bg-clip-padding",
             "px-3 py-1 pl-10 font-semibold transition ease-in-out",
             "placeholder:ml-6",
@@ -38,7 +38,7 @@ export default function SearchBar({ setSearchTerm }: SearchBarProps) {
       </div>
       <div className="mt-1.5 hidden md:inline-block">
         <kbd
-          className={clsx(
+          className={cx(
             "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
             "text-black shadow-sm",
             "dark:bg-blue-500"
@@ -48,7 +48,7 @@ export default function SearchBar({ setSearchTerm }: SearchBarProps) {
         </kbd>{" "}
         <b>+</b>{" "}
         <kbd
-          className={clsx(
+          className={cx(
             "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
             "text-black shadow-sm",
             "dark:bg-blue-500"

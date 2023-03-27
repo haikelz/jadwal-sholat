@@ -8,6 +8,5 @@ export function slugify(name: string) {
     .match(/[A-Za-z0-9 ]/gi)
     ?.join("")
     .replace(" ", "-");
-
   return matchName === "sholat" ? "/jadwal-sholat" : "/" + matchName;
 }

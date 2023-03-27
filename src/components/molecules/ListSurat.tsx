@@ -1,32 +1,13 @@
-import { clsx } from "clsx";
+import { cx } from "classix";
 import { m } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
 import { clickAnimation } from "~lib/utils/constants";
+import { ListSuratProps } from "~models";
 import SearchBar from "~molecules/SearchBar";
 import useAppStore from "~store";
-
-type ListSuratProps = {
-  surat: [
-    surat: {
-      number: string;
-      asma: {
-        id: {
-          short: string;
-        };
-        translation: {
-          id: string;
-        };
-      };
-      ayahCount: string;
-      type: {
-        id: string;
-      };
-    }
-  ];
-};
 
 export default function ListSurat({ surat }: ListSuratProps) {
   const { lastRead, setLastRead } = useAppStore((state) => state);
@@ -59,7 +40,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
           {lastRead.ayat || lastRead.number !== null ? (
             <Link href={`/quran/surat/${lastRead.number}`}>
               <span
-                className={clsx(
+                className={cx(
                   "hover-animation underline-animation text-black",
                   "hover:text-red-500",
                   "dark:text-white dark:hover:text-blue-500"
@@ -75,7 +56,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
       </div>
       {filteredsurat.length ? (
         <div
-          className={clsx(
+          className={cx(
             "grid w-full grid-cols-1 grid-rows-1 gap-4",
             "sm:grid-cols-2",
             "lg:grid-cols-3",
@@ -86,7 +67,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
             <Link key={surat.number} href={`/quran/surat/${surat.number}`}>
               <m.div
                 {...clickAnimation}
-                className={clsx(
+                className={cx(
                   "flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left text-black",
                   "dark:border-white dark:bg-[#2A2A37] dark:text-white"
                 )}

@@ -1,7 +1,7 @@
-import { clsx } from "clsx";
+import { cx } from "classix";
 import Link from "next/link";
 import { MdOutlineArrowForward } from "react-icons/md";
-import { SuratProps } from "~types";
+import { SuratProps } from "~models";
 
 export function Selanjutnya({ surat }: SuratProps) {
   return (
@@ -11,7 +11,7 @@ export function Selanjutnya({ surat }: SuratProps) {
           <button
             type="button"
             aria-label="selanjutnya"
-            className={clsx(
+            className={cx(
               "flex items-center justify-center gap-1 rounded-md text-black",
               "border-2 border-black px-2 py-1",
               "dark:border-white dark:text-white"

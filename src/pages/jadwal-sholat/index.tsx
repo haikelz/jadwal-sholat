@@ -1,18 +1,17 @@
-import _fetch from "isomorphic-fetch";
 import type { GetStaticProps } from "next";
 import Image from "next/image";
+import { ofetch } from "ofetch";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
+import { ListKotaProps } from "~models";
 import ListKota from "~molecules/ListKota";
 import Layout from "~templates/Layout";
-import { ListKotaProps } from "~types";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await _fetch(`${JADWAL_SHOLAT_API}/kota/semua`);
-  const data = await response.json();
+  const response = await ofetch(`${JADWAL_SHOLAT_API}/kota/semua`, { parseResponse: JSON.parse });
 
   return {
     props: {
-      kota: data,
+      kota: response,
     },
   };
 };

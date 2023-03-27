@@ -9,7 +9,7 @@ import Template from "~templates/index";
 
 const BackToTop = dynamic(() => import("~atoms").then((button) => button.BackToTop));
 
-function App({ Component, pageProps, router }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <Template>
       <Navbar />
@@ -24,5 +24,3 @@ function App({ Component, pageProps, router }: AppProps) {
     </Template>
   );
 }
-
-export default App;

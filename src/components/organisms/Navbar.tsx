@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cx } from "classix";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
@@ -30,13 +30,13 @@ export default function Navbar() {
 
   return (
     <nav
-      className={clsx(
+      className={cx(
         "bg-gray-50 dark:bg-gray-800",
         "md:border-r md:border-r-gray-300 md:dark:border-r-gray-600"
       )}
     >
       <div
-        className={clsx(
+        className={cx(
           "fixed bottom-0 z-50 grid w-full grid-cols-5 grid-rows-1 gap-4",
           "border-t border-t-gray-300 bg-gray-50 py-4 text-white",
           "dark:border-t-[1px] dark:border-t-gray-600 dark:bg-gray-800",
@@ -48,7 +48,7 @@ export default function Navbar() {
         <div className="flex w-full items-center justify-center">
           <Link href="/" passHref>
             <button
-              className={clsx(
+              className={cx(
                 "flex cursor-pointer flex-col items-center justify-center px-4",
                 "transition-all ease-in-out md:p-2.5",
                 router.pathname === "/"
@@ -67,7 +67,7 @@ export default function Navbar() {
             <div key={index + 1} className="flex w-full items-center justify-center">
               <Link href={slugify(item.title)} passHref>
                 <button
-                  className={clsx(
+                  className={cx(
                     "flex cursor-pointer flex-col items-center justify-center px-4",
                     "transition-all duration-200 ease-in-out md:p-2.5",
                     router.pathname.includes(slugify(item.title) as string)
