@@ -4,8 +4,8 @@ import SearchBar from "~molecules/SearchBar";
 
 describe("Search Bar", () => {
   it("Should update on change", () => {
-    const setSearchTerm = jest.fn((value) => {});
-    const { queryByPlaceholderText } = render(<SearchBar setSearchTerm={setSearchTerm} />);
+    const setSearch = jest.fn((value) => {});
+    const { queryByPlaceholderText } = render(<SearchBar setSearch={setSearch} />);
 
     const searchInput = queryByPlaceholderText("Search....") as HTMLInputElement;
 

@@ -11,18 +11,18 @@ import useAppStore from "~store";
 
 export default function ListSurat({ surat }: ListSuratProps) {
   const { lastRead, setLastRead } = useAppStore((state) => state);
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
 
   const filteredsurat = useMemo(
     () =>
       surat.filter((value) => {
-        if (searchTerm === "") {
+        if (search === "") {
           return value;
-        } else if (value.asma.id.short.toLowerCase().includes(searchTerm.toLowerCase())) {
+        } else if (value.asma.id.short.toLowerCase().includes(search.toLowerCase())) {
           return value;
         }
       }),
-    [surat, searchTerm]
+    [surat, search]
   );
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
   return (
     <>
       <div className="flex flex-col items-center justify-center text-center text-black dark:text-white">
-        <SearchBar setSearchTerm={setSearchTerm} />
+        <SearchBar setSearch={setSearch} />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
           {lastRead.ayat || lastRead.number !== null ? (
@@ -75,10 +75,10 @@ export default function ListSurat({ surat }: ListSuratProps) {
                 <p className="text-right font-semibold tracking-wide">{surat.type.id}</p>
                 <span className="text-xl font-bold">{surat.number}</span>
                 <p className="text-lg font-bold">
-                  {searchTerm
+                  {search
                     ? reactStringReplace(
                         surat.asma.id.short,
-                        searchTerm,
+                        search,
                         (match: string, index: number) => (
                           <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
                             {match}

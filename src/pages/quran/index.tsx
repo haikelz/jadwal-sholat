@@ -2,9 +2,9 @@ import type { GetStaticProps } from "next";
 import Image from "next/image";
 import { ofetch } from "ofetch";
 import { QURAN_API } from "~lib/utils/constants";
+import { ListSuratProps } from "~models";
 import ListSurat from "~molecules/ListSurat";
 import Layout from "~templates/Layout";
-import { ListSuratProps } from "~models";
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await ofetch(`${QURAN_API}/quran`, { parseResponse: JSON.parse });

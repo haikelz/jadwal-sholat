@@ -7,23 +7,23 @@ import { arab, asmaulHusna, clickAnimation } from "~lib/utils/constants";
 import SearchBar from "~molecules/SearchBar";
 
 export default function ListAsmaulHusna() {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
 
   const filteredAsmaulHusna = useMemo(
     () =>
       asmaulHusna.filter((value) => {
-        if (searchTerm === "") {
+        if (search === "") {
           return value;
-        } else if (value.latin.toLowerCase().includes(searchTerm.toLowerCase())) {
+        } else if (value.latin.toLowerCase().includes(search.toLowerCase())) {
           return value;
         }
       }),
-    [searchTerm]
+    [search]
   );
 
   return (
     <>
-      <SearchBar setSearchTerm={setSearchTerm} />
+      <SearchBar setSearch={setSearch} />
       {filteredAsmaulHusna.length ? (
         <div
           className={cx(
@@ -33,8 +33,8 @@ export default function ListAsmaulHusna() {
         >
           {filteredAsmaulHusna.map((item) => (
             <m.div
-              {...clickAnimation}
               key={item.urutan}
+              {...clickAnimation}
               className={cx(
                 "flex flex-col items-start justify-center overflow-hidden rounded-sm text-left",
                 "border-2 border-black bg-gray-100 p-4 text-start tracking-wide",
@@ -47,8 +47,8 @@ export default function ListAsmaulHusna() {
                 <p className={cx("text-3xl font-medium", arab.className)}>{item.arab}</p>
               </div>
               <p className="text-lg font-medium">
-                {searchTerm
-                  ? reactStringReplace(item.latin, searchTerm, (match: string, index: number) => (
+                {search
+                  ? reactStringReplace(item.latin, search, (match: string, index: number) => (
                       <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
                         {match}
                       </span>

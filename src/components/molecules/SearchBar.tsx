@@ -4,14 +4,14 @@ import { MdSearch } from "react-icons/md";
 import { useKeydown } from "~hooks";
 
 type SearchBarProps = {
-  setSearchTerm: Dispatch<SetStateAction<string>>;
+  setSearch: Dispatch<SetStateAction<string>>;
 };
 
-export default function SearchBar({ setSearchTerm }: SearchBarProps) {
+export default function SearchBar({ setSearch }: SearchBarProps) {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setSearchTerm(event.target.value);
+    setSearch(event.target.value);
   };
 
   useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });

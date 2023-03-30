@@ -9,7 +9,7 @@ import SearchBar from "~molecules/SearchBar";
 import { ListKotaProps } from "~models";
 
 export default function ListKota({ kota }: ListKotaProps) {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
 
   /**
    * - Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
@@ -20,18 +20,18 @@ export default function ListKota({ kota }: ListKotaProps) {
   const filteredKota = useMemo(
     () =>
       kota.filter((value) => {
-        if (searchTerm === "") {
+        if (search === "") {
           return value.id !== "3212";
-        } else if (value.lokasi.toLowerCase().includes(searchTerm.toLowerCase())) {
+        } else if (value.lokasi.toLowerCase().includes(search.toLowerCase())) {
           return value.id !== "3212";
         }
       }),
-    [kota, searchTerm]
+    [kota, search]
   );
 
   return (
     <>
-      <SearchBar setSearchTerm={setSearchTerm} />
+      <SearchBar setSearch={setSearch} />
       {filteredKota.length ? (
         <div
           className={cx(
@@ -52,8 +52,8 @@ export default function ListKota({ kota }: ListKotaProps) {
                 )}
               >
                 <p className="text-xl font-semibold">
-                  {searchTerm
-                    ? reactStringReplace(loc.lokasi, searchTerm, (match: string, index: number) => (
+                  {search
+                    ? reactStringReplace(loc.lokasi, search, (match: string, index: number) => (
                         <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
                           {match}
                         </span>
