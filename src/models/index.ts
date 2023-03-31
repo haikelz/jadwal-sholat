@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface ChildrenProps {
-  children: ReactNode[] | JSX.Element;
+  children: ReactNode;
   title?: string;
 }
 
@@ -120,4 +120,40 @@ export interface PuasaSunnahProps {
       };
     }
   ];
+}
+
+export interface DateProps {
+  date: Date;
+  setDate: (func: Function) => void;
+}
+
+export interface LastReadProps {
+  lastRead: {
+    id: string;
+    name: string;
+    ayat: number | null;
+    number: number | null;
+  };
+  setLastRead: (lastRead: {
+    id: string;
+    name: string;
+    ayat: number | null;
+    number: number | null;
+  }) => void;
+}
+
+export interface OptionProps {
+  audio: boolean;
+  tafsir: boolean;
+  terjemahan: boolean;
+  notification: boolean;
+  isMore: boolean;
+  setNotification: (status: boolean) => void;
+  setAudio: (status: boolean) => void;
+  setTerjemahan: (status: boolean) => void;
+  setTafsir: (status: boolean) => void;
+}
+
+export interface DataProps {
+  getData: (link: string) => Promise<any>;
 }
