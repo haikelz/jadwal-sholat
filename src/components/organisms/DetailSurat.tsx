@@ -1,13 +1,15 @@
 import { cx } from "classix";
 import { AnimatePresence, m } from "framer-motion";
 import { nanoid } from "nanoid";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { arab, opacityAnimation } from "~lib/utils/constants";
 import { SuratProps } from "~models";
 import useAppStore from "~store";
 
 export default function DetailSurat({ surat }: SuratProps) {
-  const { setLastRead, setNotification, terjemahan, audio } = useAppStore((state) => state);
+  const { lastRead, setLastRead, setNotification, terjemahan, audio } = useAppStore(
+    (state) => state
+  );
 
   function saveData<T>(newData: T) {
     localStorage.setItem("surat", JSON.stringify(newData));
@@ -24,6 +26,11 @@ export default function DetailSurat({ surat }: SuratProps) {
     setLastRead(data);
     saveData(data);
   }
+
+  useEffect(() => {
+    const element = document.getElementById(lastRead.ayat?.toString() as string);
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  }, [lastRead]);
 
   return (
     <div className="mt-6 grid w-full grid-cols-1 grid-rows-1 gap-2 text-end">

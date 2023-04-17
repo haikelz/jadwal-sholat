@@ -14,7 +14,6 @@ export default function KotaId() {
   const { id } = router.query;
 
   const formatDate: string = `${tahun}/${bulan}`;
-
   const { data, isLoading, isError } = useFetch(
     id ? `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : ""
   );

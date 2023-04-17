@@ -3,8 +3,8 @@ import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
 import { modalAnimation } from "~lib/utils/constants";
-import useAppStore from "~store";
 import { SuratProps } from "~models";
+import useAppStore from "~store";
 
 export default function ModalTafsir({ surat }: SuratProps) {
   const { tafsir, setTafsir } = useAppStore((state) => state);
@@ -16,8 +16,8 @@ export default function ModalTafsir({ surat }: SuratProps) {
           {...modalAnimation}
           aria-modal="true"
           className={cx(
-            "modal-blur fixed inset-0 top-0 z-50 flex min-h-screen w-full",
-            "items-center justify-center blur-md",
+            "modal-blur fixed inset-0 top-0 z-50",
+            "flex min-h-screen w-full items-center justify-center blur-md",
             "overflow-y-auto overflow-x-hidden text-black"
           )}
         >

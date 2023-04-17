@@ -38,7 +38,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
           {lastRead.ayat || lastRead.number !== null ? (
-            <Link href={`/quran/surat/${lastRead.number}`}>
+            <Link href={`/quran/surat/${lastRead.number}#${lastRead.ayat}`}>
               <span
                 className={cx(
                   "hover-animation underline-animation text-black",
