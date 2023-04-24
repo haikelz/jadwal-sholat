@@ -1,9 +1,9 @@
 import { StateCreator } from "zustand";
-import { DateProps } from "~models";
+import { DateSliceProps } from "~models";
 
-const createDateSlice: StateCreator<DateProps, [], [], DateProps> = (set) => ({
+const dateSlice: StateCreator<DateSliceProps, [], [], DateSliceProps> = (set) => ({
   date: new Date(),
-  setDate: (func: Function) => set(() => ({ date: func() })),
+  setDate: (func: Function) => set({ date: func() }),
 });
 
-export default createDateSlice;
+export default dateSlice;

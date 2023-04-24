@@ -1,6 +1,6 @@
 import { cx } from "classix";
 import NextNProgress from "nextjs-progressbar";
-import { bitter, rubik } from "~lib/utils/constants";
+import { bitter, rubik } from "~lib/utils/fonts";
 import { ChildrenProps } from "~models";
 
 export default function Template({ children }: ChildrenProps) {

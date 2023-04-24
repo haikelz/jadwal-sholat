@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
-
-const browser = typeof window !== "undefined";
-const localValue = browser ? localStorage.getItem("theme") : "light";
-const systemTheme =
-  browser && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+import { useEffect } from "react";
+import { shallow } from "zustand/shallow";
+import { browser } from "~lib/utils/constants";
+import useAppStore from "~store";
 
 export function useTheme() {
-  const [theme, setTheme] = useState<string>(localValue || systemTheme);
+  const { theme, setTheme } = useAppStore(
+    (state) => ({
+      theme: state.theme,
+      setTheme: state.setTheme,
+    }),
+    shallow
+  );
 
   useEffect(() => {
     if (!browser) return;

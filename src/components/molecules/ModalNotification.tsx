@@ -1,11 +1,18 @@
 import { cx } from "classix";
 import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
-import { modalAnimation } from "~lib/utils/constants";
+import { shallow } from "zustand/shallow";
+import { modalAnimation } from "~lib/utils/animations";
 import useAppStore from "~store";
 
 export default function ModalNotification({ description }: { description: string }) {
-  const { notification, setNotification } = useAppStore((state) => state);
+  const { notification, setNotification } = useAppStore(
+    (state) => ({
+      notification: state.notification,
+      setNotification: state.setNotification,
+    }),
+    shallow
+  );
 
   return (
     <AnimatePresence mode="wait">

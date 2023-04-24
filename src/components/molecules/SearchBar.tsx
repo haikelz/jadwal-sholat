@@ -1,5 +1,5 @@
 import { cx } from "classix";
-import { ChangeEventHandler, Dispatch, memo, SetStateAction, useRef } from "react";
+import { ChangeEventHandler, Dispatch, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { useKeydown } from "~hooks";
 
@@ -60,5 +60,3 @@ export default function SearchBar({ setSearch }: SearchBarProps) {
     </div>
   );
 }
-
-memo(SearchBar);

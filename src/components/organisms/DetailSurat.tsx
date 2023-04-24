@@ -2,13 +2,22 @@ import { cx } from "classix";
 import { AnimatePresence, m } from "framer-motion";
 import { nanoid } from "nanoid";
 import { memo, useEffect } from "react";
-import { arab, opacityAnimation } from "~lib/utils/constants";
+import { shallow } from "zustand/shallow";
+import { opacityAnimation } from "~lib/utils/animations";
+import { arab } from "~lib/utils/fonts";
 import { SuratProps } from "~models";
 import useAppStore from "~store";
 
 export default function DetailSurat({ surat }: SuratProps) {
   const { lastRead, setLastRead, setNotification, terjemahan, audio } = useAppStore(
-    (state) => state
+    (state) => ({
+      lastRead: state.lastRead,
+      setLastRead: state.setLastRead,
+      setNotification: state.setNotification,
+      terjemahan: state.terjemahan,
+      audio: state.audio,
+    }),
+    shallow
   );
 
   function saveData<T>(newData: T) {
@@ -22,6 +31,7 @@ export default function DetailSurat({ surat }: SuratProps) {
       ayat: ayat,
       number: number,
     };
+
     setNotification(true);
     setLastRead(data);
     saveData(data);

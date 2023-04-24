@@ -1,14 +1,14 @@
 import { StateCreator } from "zustand";
-import { LastReadProps } from "~models";
+import { LastReadSliceProps } from "~models";
 
-const createLastReadSlice: StateCreator<LastReadProps, [], [], LastReadProps> = (set) => ({
+const lastReadSlice: StateCreator<LastReadSliceProps, [], [], LastReadSliceProps> = (set) => ({
   lastRead: {
     id: "",
     name: "",
     ayat: null,
     number: null,
   },
-  setLastRead: (lastRead) => set(() => ({ lastRead: lastRead })),
+  setLastRead: (lastRead) => set({ lastRead: lastRead }),
 });
 
-export default createLastReadSlice;
+export default lastReadSlice;

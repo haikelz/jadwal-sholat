@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
+import { shallow } from "zustand/shallow";
 import { useFetch } from "~hooks";
 import { QURAN_API } from "~lib/utils/constants";
 import PreviousOrNextButton from "~molecules/PreviousOrNextButton";
@@ -15,7 +16,15 @@ const ErrorWhenFetch = dynamic(() => import("~molecules/ErrorWhenFetch"));
 
 export default function Surat() {
   const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir } = useAppStore(
-    (state) => state
+    (state) => ({
+      audio: state.audio,
+      terjemahan: state.terjemahan,
+      setAudio: state.setAudio,
+      setTerjemahan: state.setTerjemahan,
+      tafsir: state.tafsir,
+      setTafsir: state.setTafsir,
+    }),
+    shallow
   );
 
   const router: NextRouter = useRouter();

@@ -2,12 +2,19 @@ import { cx } from "classix";
 import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
-import { modalAnimation } from "~lib/utils/constants";
+import { shallow } from "zustand/shallow";
+import { modalAnimation } from "~lib/utils/animations";
 import { SuratProps } from "~models";
 import useAppStore from "~store";
 
 export default function ModalTafsir({ surat }: SuratProps) {
-  const { tafsir, setTafsir } = useAppStore((state) => state);
+  const { tafsir, setTafsir } = useAppStore(
+    (state) => ({
+      tafsir: state.tafsir,
+      setTafsir: state.setTafsir,
+    }),
+    shallow
+  );
 
   return (
     <AnimatePresence mode="wait">

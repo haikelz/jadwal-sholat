@@ -2,7 +2,7 @@ import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import "windi.css";
-import { layoutAnimation } from "~lib/utils/constants";
+import { layoutAnimation } from "~lib/utils/animations";
 import Navbar from "~organisms/Navbar";
 import "~styles/index.scss";
 import Template from "~templates/index";

@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 export function useScroll() {
   const [scroll, setScroll] = useState<number>(0);
 
-  // buat handle warning useEffect pas pengecekan
   const handleScroll = useCallback(() => {
     const position = window.pageYOffset;
     setScroll(() => position);

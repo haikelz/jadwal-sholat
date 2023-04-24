@@ -122,12 +122,12 @@ export interface PuasaSunnahProps {
   ];
 }
 
-export interface DateProps {
+export interface DateSliceProps {
   date: Date;
   setDate: (func: Function) => void;
 }
 
-export interface LastReadProps {
+export interface LastReadSliceProps {
   lastRead: {
     id: string;
     name: string;
@@ -142,7 +142,7 @@ export interface LastReadProps {
   }) => void;
 }
 
-export interface OptionProps {
+export interface OptionSliceProps {
   audio: boolean;
   tafsir: boolean;
   terjemahan: boolean;
@@ -154,6 +154,11 @@ export interface OptionProps {
   setTafsir: (status: boolean) => void;
 }
 
-export interface DataProps {
+export interface GetDataSliceProps {
   getData: (link: string) => Promise<any>;
+}
+
+export interface ThemeSliceProps {
+  theme: string;
+  setTheme: (theme: string) => void;
 }

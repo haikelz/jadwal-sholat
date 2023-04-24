@@ -3,7 +3,9 @@ import { m } from "framer-motion";
 import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
-import { arab, asmaulHusna, clickAnimation } from "~lib/utils/constants";
+import { clickAnimation } from "~lib/utils/animations";
+import { asmaulHusna } from "~lib/utils/data";
+import { arab } from "~lib/utils/fonts";
 import SearchBar from "~molecules/SearchBar";
 
 export default function ListAsmaulHusna() {

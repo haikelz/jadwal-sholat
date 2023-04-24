@@ -3,15 +3,23 @@ import { m } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
+import { shallow } from "zustand/shallow";
 import { TidakAda } from "~atoms";
-import { clickAnimation } from "~lib/utils/constants";
+import { clickAnimation } from "~lib/utils/animations";
 import { ListSuratProps } from "~models";
 import SearchBar from "~molecules/SearchBar";
 import useAppStore from "~store";
 
 export default function ListSurat({ surat }: ListSuratProps) {
-  const { lastRead, setLastRead } = useAppStore((state) => state);
   const [search, setSearch] = useState<string>("");
+
+  const { lastRead, setLastRead } = useAppStore(
+    (state) => ({
+      lastRead: state.lastRead,
+      setLastRead: state.setLastRead,
+    }),
+    shallow
+  );
 
   const filteredsurat = useMemo(
     () =>

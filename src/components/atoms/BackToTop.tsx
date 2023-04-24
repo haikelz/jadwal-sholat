@@ -3,7 +3,7 @@ import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useScroll } from "~hooks";
-import { backToTopAnimation } from "~lib/utils/constants";
+import { backToTopAnimation } from "~lib/utils/animations";
 
 export function BackToTop() {
   const scroll = useScroll();

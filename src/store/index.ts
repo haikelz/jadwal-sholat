@@ -1,17 +1,27 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { DataProps, DateProps, LastReadProps, OptionProps } from "~models";
-import createDateSlice from "./slices/dateSlice";
-import createGetDataSlice from "./slices/getDataSlice";
-import createLastReadSlice from "./slices/lastReadSlice";
-import createOptionSlice from "./slices/optionSlice";
+import {
+  DateSliceProps,
+  GetDataSliceProps,
+  LastReadSliceProps,
+  OptionSliceProps,
+  ThemeSliceProps,
+} from "~models";
+import dateSlice from "./slices/dateSlice";
+import getDataSlice from "./slices/getDataSlice";
+import lastReadSlice from "./slices/lastReadSlice";
+import optionSlice from "./slices/optionSlice";
+import themeSlice from "./slices/themeSlice";
 
-const useAppStore = create<LastReadProps & DateProps & OptionProps & DataProps>()(
+const useAppStore = create<
+  LastReadSliceProps & DateSliceProps & OptionSliceProps & GetDataSliceProps & ThemeSliceProps
+>()(
   devtools((...set) => ({
-    ...createLastReadSlice(...set),
-    ...createDateSlice(...set),
-    ...createOptionSlice(...set),
-    ...createGetDataSlice(...set),
+    ...lastReadSlice(...set),
+    ...dateSlice(...set),
+    ...optionSlice(...set),
+    ...getDataSlice(...set),
+    ...themeSlice(...set),
   }))
 );
 

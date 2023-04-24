@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~atoms";
-import { clickAnimation } from "~lib/utils/constants";
-import SearchBar from "~molecules/SearchBar";
+import { clickAnimation } from "~lib/utils/animations";
 import { ListKotaProps } from "~models";
+import SearchBar from "~molecules/SearchBar";
 
 export default function ListKota({ kota }: ListKotaProps) {
   const [search, setSearch] = useState<string>("");

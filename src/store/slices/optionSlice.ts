@@ -1,22 +1,22 @@
 import { StateCreator } from "zustand";
-import { OptionProps } from "~models";
+import { OptionSliceProps } from "~models";
 
-const createOptionSlice: StateCreator<OptionProps, [], [], OptionProps> = (set) => ({
+const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (set) => ({
   audio: false,
   isMore: false,
   tafsir: false,
   terjemahan: false,
   notification: false,
-  setNotification: (status) => set(() => ({ notification: status })),
+  setNotification: (status) => set({ notification: status }),
   setAudio: (status) =>
-    set(() => ({
+    set({
       audio: status,
-    })),
+    }),
   setTerjemahan: (status) =>
     set(() => ({
       terjemahan: status,
     })),
-  setTafsir: (status) => set(() => ({ tafsir: status })),
+  setTafsir: (status) => set({ tafsir: status }),
 });
 
-export default createOptionSlice;
+export default optionSlice;

@@ -21,9 +21,7 @@ export function useKeydown<T extends KeydownProps>({ ref, isShiftKey, key1, key2
       }
 
       // Jika key2 ditekan, maka input akan blur alias kembali ke keadaan semula
-      if (event.key === key2) {
-        ref.current?.blur();
-      }
+      if (event.key === key2) ref.current?.blur();
     },
     [isShiftKey, key1, key2, ref]
   );
