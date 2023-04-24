@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
-import { TidakAda } from "~atoms";
+import { TidakAda } from "~components/atoms";
 import { clickAnimation } from "~lib/utils/animations";
 import { ListSuratProps } from "~models";
-import SearchBar from "~molecules/SearchBar";
+import SearchBar from "~components/molecules/SearchBar";
 import useAppStore from "~store";
 
 export default function ListSurat({ surat }: ListSuratProps) {
@@ -24,11 +24,8 @@ export default function ListSurat({ surat }: ListSuratProps) {
   const filteredsurat = useMemo(
     () =>
       surat.filter((value) => {
-        if (search === "") {
-          return value;
-        } else if (value.asma.id.short.toLowerCase().includes(search.toLowerCase())) {
-          return value;
-        }
+        if (search === "") return value;
+        else if (value.asma.id.short.toLowerCase().includes(search.toLowerCase())) return value;
       }),
     [surat, search]
   );

@@ -3,11 +3,11 @@ import { NextRouter, useRouter } from "next/router";
 import { useFetch } from "~hooks";
 import { bulan, currentDate, hari, tahun } from "~lib/helpers/formatDate";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
-import TableJadwalSholat from "~organisms/TableJadwalSholat";
-import Layout from "~templates/Layout";
+import TableJadwalSholat from "~components/organisms/TableJadwalSholat";
+import Layout from "~components/Layout";
 
-const Loading = dynamic(() => import("~molecules/Loading"));
-const ErrorWhenFetch = dynamic(() => import("~molecules/ErrorWhenFetch"));
+const Loading = dynamic(() => import("~components/molecules/Loading"));
+const ErrorWhenFetch = dynamic(() => import("~components/molecules/ErrorWhenFetch"));
 
 export default function KotaId() {
   const router: NextRouter = useRouter();

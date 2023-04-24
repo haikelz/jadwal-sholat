@@ -3,8 +3,8 @@ import Image from "next/image";
 import { ofetch } from "ofetch";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
 import { ListKotaProps } from "~models";
-import ListKota from "~molecules/ListKota";
-import Layout from "~templates/Layout";
+import ListKota from "~components/molecules/ListKota";
+import Layout from "~components/Layout";
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await ofetch(`${JADWAL_SHOLAT_API}/kota/semua`, { parseResponse: JSON.parse });

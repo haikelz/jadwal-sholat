@@ -3,10 +3,10 @@ import { m } from "framer-motion";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { TidakAda } from "~atoms";
+import { TidakAda } from "~components/atoms";
 import { clickAnimation } from "~lib/utils/animations";
 import { ListKotaProps } from "~models";
-import SearchBar from "~molecules/SearchBar";
+import SearchBar from "~components/molecules/SearchBar";
 
 export default function ListKota({ kota }: ListKotaProps) {
   const [search, setSearch] = useState<string>("");

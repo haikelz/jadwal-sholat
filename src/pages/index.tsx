@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { hours } from "~lib/helpers/formatDate";
 
-const Time = dynamic(() => import("~molecules/Time"), { ssr: false });
+const Time = dynamic(() => import("~components/molecules/Time"), { ssr: false });
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
 import { cx } from "classix";
-import { ChangeEventHandler, Dispatch, SetStateAction, useRef } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { useKeydown } from "~hooks";
 
@@ -10,9 +10,9 @@ type SearchBarProps = {
 export default function SearchBar({ setSearch }: SearchBarProps) {
   const ref = useRef<HTMLInputElement>(null);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value);
-  };
+  }
 
   useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });
 

@@ -2,12 +2,12 @@ import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import "windi.css";
+import Template from "~components/Template";
 import { layoutAnimation } from "~lib/utils/animations";
-import Navbar from "~organisms/Navbar";
+import Navbar from "~components/organisms/Navbar";
 import "~styles/index.scss";
-import Template from "~templates/index";
 
-const BackToTop = dynamic(() => import("~atoms").then((button) => button.BackToTop));
+const BackToTop = dynamic(() => import("~components/atoms").then((button) => button.BackToTop));
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (

@@ -4,15 +4,15 @@ import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md"
 import { shallow } from "zustand/shallow";
 import { useFetch } from "~hooks";
 import { QURAN_API } from "~lib/utils/constants";
-import PreviousOrNextButton from "~molecules/PreviousOrNextButton";
-import DetailSurat from "~organisms/DetailSurat";
+import PreviousOrNextButton from "~components/molecules/PreviousOrNextButton";
+import DetailSurat from "~components/organisms/DetailSurat";
 import useAppStore from "~store";
-import Layout from "~templates/Layout";
+import Layout from "~components/Layout";
 
-const ModalTafsir = dynamic(() => import("~molecules/ModalTafsir"));
-const ModalNotification = dynamic(() => import("~molecules/ModalNotification"));
-const Loading = dynamic(() => import("~molecules/Loading"));
-const ErrorWhenFetch = dynamic(() => import("~molecules/ErrorWhenFetch"));
+const ModalTafsir = dynamic(() => import("~components/molecules/ModalTafsir"));
+const ModalNotification = dynamic(() => import("~components/molecules/ModalNotification"));
+const Loading = dynamic(() => import("~components/molecules/Loading"));
+const ErrorWhenFetch = dynamic(() => import("~components/molecules/ErrorWhenFetch"));
 
 export default function Surat() {
   const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir } = useAppStore(

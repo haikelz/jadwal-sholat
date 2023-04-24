@@ -2,11 +2,11 @@ import { cx } from "classix";
 import { m } from "framer-motion";
 import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { TidakAda } from "~atoms";
+import { TidakAda } from "~components/atoms";
 import { clickAnimation } from "~lib/utils/animations";
 import { asmaulHusna } from "~lib/utils/data";
 import { arab } from "~lib/utils/fonts";
-import SearchBar from "~molecules/SearchBar";
+import SearchBar from "~components/molecules/SearchBar";
 
 export default function ListAsmaulHusna() {
   const [search, setSearch] = useState<string>("");
@@ -14,11 +14,8 @@ export default function ListAsmaulHusna() {
   const filteredAsmaulHusna = useMemo(
     () =>
       asmaulHusna.filter((value) => {
-        if (search === "") {
-          return value;
-        } else if (value.latin.toLowerCase().includes(search.toLowerCase())) {
-          return value;
-        }
+        if (search === "") return value;
+        else if (value.latin.toLowerCase().includes(search.toLowerCase())) return value;
       }),
     [search]
   );
