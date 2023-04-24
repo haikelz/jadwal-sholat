@@ -1,7 +1,7 @@
 import { cx } from "classix";
 import { AnimatePresence, m } from "framer-motion";
 import { nanoid } from "nanoid";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { shallow } from "zustand/shallow";
 import { opacityAnimation } from "~lib/utils/animations";
 import { arab } from "~lib/utils/fonts";
@@ -9,7 +9,7 @@ import { SuratProps } from "~models";
 import useAppStore from "~store";
 
 export default function DetailSurat({ surat }: SuratProps) {
-  const { lastRead, setLastRead, setNotification, terjemahan, audio } = useAppStore(
+  const { setLastRead, setNotification, terjemahan, audio } = useAppStore(
     (state) => ({
       lastRead: state.lastRead,
       setLastRead: state.setLastRead,
@@ -37,11 +37,6 @@ export default function DetailSurat({ surat }: SuratProps) {
     saveData(data);
   }
 
-  useEffect(() => {
-    const element = document.getElementById(lastRead.ayat?.toString() as string);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
-  }, [lastRead]);
-
   return (
     <div className="mt-6 grid w-full grid-cols-1 grid-rows-1 gap-2 text-end">
       {surat.ayahs.map((ayat, index) => (
@@ -55,7 +50,6 @@ export default function DetailSurat({ surat }: SuratProps) {
         >
           <div className="relative flex w-full items-start justify-between">
             <div
-              id={ayat.number.insurah.toString()}
               className={cx(
                 "mr-2 flex h-12 w-12 items-center justify-center rounded-full p-6",
                 "border-black bg-gray-400 font-bold text-white",
