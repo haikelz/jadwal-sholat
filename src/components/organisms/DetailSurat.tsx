@@ -1,12 +1,17 @@
 import { cx } from "classix";
-import { AnimatePresence, m } from "framer-motion";
+import { AnimatePresence, Variants, m } from "framer-motion";
 import { nanoid } from "nanoid";
 import { memo } from "react";
 import { shallow } from "zustand/shallow";
-import { opacityAnimation } from "~lib/utils/animations";
 import { arab } from "~lib/utils/fonts";
 import { SuratProps } from "~models";
 import useAppStore from "~store";
+
+const opacityAnimation: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.2, animation: "ease-out" } },
+  exit: { opacity: 0, transition: { duration: 0.2, animation: "ease-in" } },
+};
 
 export default function DetailSurat({ surat }: SuratProps) {
   const { setLastRead, setNotification, terjemahan, audio } = useAppStore(
@@ -65,7 +70,13 @@ export default function DetailSurat({ surat }: SuratProps) {
           <div className="mb-6 flex w-full flex-col items-start justify-start">
             <AnimatePresence mode="wait">
               {audio ? (
-                <m.div {...opacityAnimation} className="mt-2.5 w-full">
+                <m.div
+                  variants={opacityAnimation}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="mt-2.5 w-full"
+                >
                   <audio preload="auto" src={ayat.audio.url} controls>
                     <track default kind="captions" />
                   </audio>
@@ -75,7 +86,10 @@ export default function DetailSurat({ surat }: SuratProps) {
             <AnimatePresence mode="wait">
               {terjemahan ? (
                 <m.p
-                  {...opacityAnimation}
+                  variants={opacityAnimation}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
                   className="mt-2 text-left italic text-teal-700 dark:text-teal-300"
                 >
                   {ayat.text.read}

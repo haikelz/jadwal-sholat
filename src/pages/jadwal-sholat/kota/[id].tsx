@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { NextRouter, useRouter } from "next/router";
 import { useFetch } from "~hooks";
-import { bulan, currentDate, hari, tahun } from "~lib/helpers/formatDate";
+import { bulan, currentDate, hari, tahun } from "~lib/utils/constants";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
 import TableJadwalSholat from "~components/organisms/TableJadwalSholat";
 import Layout from "~components/Layout";

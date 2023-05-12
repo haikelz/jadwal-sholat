@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { hours } from "~lib/helpers/formatDate";
+import { hours } from "~lib/utils/constants";
 import AsmaulHusna from "~pages/asmaul-husna";
 import Home from "~pages/index";
 import KotaId from "~pages/jadwal-sholat/kota/[id]";

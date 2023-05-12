@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
-import { hours } from "~lib/helpers/formatDate";
+import { hours } from "~lib/utils/constants";
 
 const Time = dynamic(() => import("~components/molecules/Time"), { ssr: false });
 
@@ -13,15 +13,7 @@ export default function Home() {
       </Head>
       <div className="flex min-h-screen flex-col items-center justify-center gap-3 px-6 text-center">
         <div className="flex flex-col items-center justify-center">
-          {/**
-           * Sedikit catatan
-           * buat nampilin waktu pagi, siang, sore, dan malam
-           * jika hours >= 12 dan hours < 15, maka yang ditampilkan siang
-           * jika hours >= 15 dan hours < 18, maka yang ditampilkan sore
-           * jika hours >= 18 dan hours < 0, maka yang ditampilkan malam
-           * setelah itu atau selain itu, akan menampilkan pagi
-           */}
-          <Image src="/img/home.webp" width={100} height={100} alt="Al-Quran" priority />
+          <Image src="/img/home.webp" width={100} height={100} alt="Al-Quran" loading="eager" />
           <div className="mt-3 flex flex-col items-center justify-center text-center">
             <h1>{`Selamat ${
               hours >= 12 && hours < 15

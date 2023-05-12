@@ -1,7 +1,7 @@
 import { cx } from "classix";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { NextRouter, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { IconType } from "react-icons/lib";
 import { MdBook, MdHomeFilled, MdListAlt, MdOutlineAccessTime } from "react-icons/md";
 import { slugify } from "~lib/helpers/slugify";
@@ -26,7 +26,7 @@ const navbarList = [
 ];
 
 export default function Navbar() {
-  const router: NextRouter = useRouter();
+  const router = useRouter();
 
   return (
     <nav

@@ -16,9 +16,7 @@ export function useKeydown<T extends KeydownProps>({ ref, isShiftKey, key1, key2
   const handleKeydown = useCallback(
     <T extends KeydownEventProps>(event: T) => {
       //Jika shift key ditekan dan key1 ditekan, maka input search bakal focus
-      if (event.shiftKey === isShiftKey && event.key === key1) {
-        ref.current?.focus();
-      }
+      if (event.shiftKey === isShiftKey && event.key === key1) ref.current?.focus();
 
       // Jika key2 ditekan, maka input akan blur alias kembali ke keadaan semula
       if (event.key === key2) ref.current?.blur();

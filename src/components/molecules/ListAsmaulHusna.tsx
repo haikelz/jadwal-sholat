@@ -3,10 +3,10 @@ import { m } from "framer-motion";
 import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
+import SearchBar from "~components/molecules/SearchBar";
 import { clickAnimation } from "~lib/utils/animations";
 import { asmaulHusna } from "~lib/utils/data";
 import { arab } from "~lib/utils/fonts";
-import SearchBar from "~components/molecules/SearchBar";
 
 export default function ListAsmaulHusna() {
   const [search, setSearch] = useState<string>("");
@@ -33,7 +33,8 @@ export default function ListAsmaulHusna() {
           {filteredAsmaulHusna.map((item) => (
             <m.div
               key={item.urutan}
-              {...clickAnimation}
+              variants={clickAnimation}
+              whileTap="whileTap"
               className={cx(
                 "flex flex-col items-start justify-center overflow-hidden rounded-sm text-left",
                 "border-2 border-black bg-gray-100 p-4 text-start tracking-wide",

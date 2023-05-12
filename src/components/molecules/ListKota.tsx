@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
+import SearchBar from "~components/molecules/SearchBar";
 import { clickAnimation } from "~lib/utils/animations";
 import { ListKotaProps } from "~models";
-import SearchBar from "~components/molecules/SearchBar";
 
 export default function ListKota({ kota }: ListKotaProps) {
   const [search, setSearch] = useState<string>("");
@@ -44,7 +44,8 @@ export default function ListKota({ kota }: ListKotaProps) {
           {filteredKota.map((loc, index) => (
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
               <m.div
-                {...clickAnimation}
+                variants={clickAnimation}
+                whileTap="whileTap"
                 className={cx(
                   "flex h-full items-center justify-center overflow-hidden rounded-sm text-black",
                   "border-2 border-black bg-gray-100 py-6 px-10",

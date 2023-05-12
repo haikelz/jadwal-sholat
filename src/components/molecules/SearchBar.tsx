@@ -28,7 +28,7 @@ export default function SearchBar({ setSearch }: SearchBarProps) {
             "block w-[300px] rounded-md border-2 border-solid border-gray-400 bg-gray-50 bg-clip-padding",
             "px-3 py-1 pl-10 font-semibold transition ease-in-out",
             "placeholder:ml-6",
-            "focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600",
+            "focus:border-blue-600 focus:outline-none focus:ring focus:ring-blue-600",
             "dark:border-gray-600 dark:bg-gray-700 dark:placeholder-gray-400 dark:focus:border-blue-500"
           )}
           type="text"

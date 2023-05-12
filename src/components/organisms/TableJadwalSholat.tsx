@@ -1,4 +1,5 @@
-import { matchDate } from "~lib/helpers/formatDate";
+import { cx } from "classix";
+import { matchDate } from "~lib/utils/constants";
 import { WaktuProps } from "~models";
 
 const tableJadwalSholatList = [
@@ -40,11 +41,12 @@ export default function TableJadwalSholat({ waktu }: WaktuProps) {
           ];
           return (
             <tr
-              className={`border-b-2 border-black dark:border-none ${
+              className={cx(
+                "border-b-2 border-black dark:border-none",
                 waktu.date === matchDate
                   ? "bg-teal-600 font-bold text-white dark:bg-teal-700"
                   : "odd:bg-teal-300 dark:odd:bg-gray-800"
-              }`}
+              )}
               key={index + 1}
             >
               {dataTable.map((item, index) => (

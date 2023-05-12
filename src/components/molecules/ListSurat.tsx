@@ -5,9 +5,9 @@ import { useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
 import { TidakAda } from "~components/atoms";
+import SearchBar from "~components/molecules/SearchBar";
 import { clickAnimation } from "~lib/utils/animations";
 import { ListSuratProps } from "~models";
-import SearchBar from "~components/molecules/SearchBar";
 import useAppStore from "~store";
 
 export default function ListSurat({ surat }: ListSuratProps) {
@@ -32,7 +32,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
 
   useEffect(() => {
     if (localStorage.getItem("surat")) {
-      setLastRead(JSON.parse(localStorage.getItem("surat") || ""));
+      setLastRead(JSON.parse(localStorage.getItem("surat") as string));
     }
   }, [setLastRead]);
 
@@ -71,7 +71,8 @@ export default function ListSurat({ surat }: ListSuratProps) {
           {filteredsurat.map((surat) => (
             <Link key={surat.number} href={`/quran/surat/${surat.number}`}>
               <m.div
-                {...clickAnimation}
+                variants={clickAnimation}
+                whileTap="whileTap"
                 className={cx(
                   "flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left text-black",
                   "dark:border-white dark:bg-[#2A2A37] dark:text-white"

@@ -1,4 +1,4 @@
-import { matchDate, numBulan } from "~lib/helpers/formatDate";
+import { matchDate, numBulan } from "~lib/utils/constants";
 import { PuasaSunnahProps } from "~models";
 
 export default function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps) {

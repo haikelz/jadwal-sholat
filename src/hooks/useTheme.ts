@@ -14,8 +14,10 @@ export function useTheme() {
 
   useEffect(() => {
     if (!browser) return;
-    document.body.classList.remove("light", "dark");
-    document.body.classList.add(theme);
+    const body = document.body;
+
+    body.classList.remove("light", "dark");
+    body.classList.add(theme);
   }, [theme]);
 
   return [theme, setTheme] as const;
