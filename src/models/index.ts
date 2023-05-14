@@ -158,8 +158,3 @@ export interface ThemeSliceProps {
   theme: string;
   setTheme: (theme: string) => void;
 }
-
-export interface SelectedSuratProps {
-  selectedSurat: string;
-  setSelectedSurat: (selectedSurat: string) => void;
-}
