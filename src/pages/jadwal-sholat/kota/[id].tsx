@@ -1,16 +1,15 @@
 import dynamic from "next/dynamic";
-import { NextRouter, useRouter } from "next/router";
-import { useFetch } from "~hooks";
-import { bulan, currentDate, hari, tahun } from "~lib/utils/constants";
-import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
-import TableJadwalSholat from "~components/organisms/TableJadwalSholat";
+import { useRouter } from "next/router";
 import Layout from "~components/Layout";
+import TableJadwalSholat from "~components/organisms/TableJadwalSholat";
+import { useFetch } from "~hooks";
+import { JADWAL_SHOLAT_API, bulan, currentDate, hari, tahun } from "~lib/utils/constants";
 
 const Loading = dynamic(() => import("~components/molecules/Loading"));
 const ErrorWhenFetch = dynamic(() => import("~components/molecules/ErrorWhenFetch"));
 
 export default function KotaId() {
-  const router: NextRouter = useRouter();
+  const router = useRouter();
   const { id } = router.query;
 
   const formatDate: string = `${tahun}/${bulan}`;

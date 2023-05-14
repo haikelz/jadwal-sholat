@@ -32,7 +32,7 @@ export function BackToTop() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed bottom-16 right-2.5 md:right-4 md:bottom-4"
+          className={cx("fixed bottom-18 right-2.5", "md:right-4 md:bottom-4")}
         >
           <button
             type="button"

@@ -56,7 +56,7 @@ export default function Navbar() {
                   : "text-gray-500 dark:text-gray-400"
               )}
             >
-              <MdHomeFilled size={26} />
+              <MdHomeFilled size={28} />
               <p className="hidden text-sm font-semibold md:block">Home</p>
             </button>
           </Link>
@@ -75,7 +75,7 @@ export default function Navbar() {
                       : "text-gray-500 dark:text-gray-400"
                   )}
                 >
-                  <Icon size={26} />
+                  <Icon size={28} />
                   <p className="hidden text-sm font-semibold md:block">{item.title}</p>
                 </button>
               </Link>

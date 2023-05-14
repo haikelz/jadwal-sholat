@@ -13,7 +13,6 @@ export const currentDate: string = format(date, "dd MMMM yyyy", { locale: id });
  * Karena waktunya masih berupa string, kita ubah ke number.
  * Biar kita bisa membandingkan dan mendapatkan jadwal hari ini
  */
-
 export const numTahun: number = Number(tahun);
 export const numBulan: number = Number(bulan);
 export const numTanggal: number = Number(hari);

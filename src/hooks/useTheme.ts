@@ -16,6 +16,7 @@ export function useTheme() {
     if (!browser) return;
     const body = document.body;
 
+    localStorage.setItem("theme", theme);
     body.classList.remove("light", "dark");
     body.classList.add(theme);
   }, [theme]);

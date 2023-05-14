@@ -154,11 +154,12 @@ export interface OptionSliceProps {
   setTafsir: (status: boolean) => void;
 }
 
-export interface GetDataSliceProps {
-  getData: (link: string) => Promise<any>;
-}
-
 export interface ThemeSliceProps {
   theme: string;
   setTheme: (theme: string) => void;
+}
+
+export interface SelectedSuratProps {
+  selectedSurat: string;
+  setSelectedSurat: (selectedSurat: string) => void;
 }

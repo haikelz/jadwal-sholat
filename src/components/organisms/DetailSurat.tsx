@@ -1,7 +1,8 @@
 import { cx } from "classix";
 import { AnimatePresence, Variants, m } from "framer-motion";
 import { nanoid } from "nanoid";
-import { memo } from "react";
+import { memo, useEffect } from "react";
+import secureLocalStorage from "react-secure-storage";
 import { shallow } from "zustand/shallow";
 import { arab } from "~lib/utils/fonts";
 import { SuratProps } from "~models";
@@ -14,7 +15,7 @@ const opacityAnimation: Variants = {
 };
 
 export default function DetailSurat({ surat }: SuratProps) {
-  const { setLastRead, setNotification, terjemahan, audio } = useAppStore(
+  const { lastRead, setLastRead, setNotification, terjemahan, audio } = useAppStore(
     (state) => ({
       lastRead: state.lastRead,
       setLastRead: state.setLastRead,
@@ -26,7 +27,7 @@ export default function DetailSurat({ surat }: SuratProps) {
   );
 
   function saveData<T>(newData: T) {
-    localStorage.setItem("surat", JSON.stringify(newData));
+    secureLocalStorage.setItem("surat", JSON.stringify(newData));
   }
 
   function handleClick(name: string, ayat: number, number: number) {
@@ -42,6 +43,14 @@ export default function DetailSurat({ surat }: SuratProps) {
     saveData(data);
   }
 
+  useEffect(() => {
+    const element = document.getElementById(lastRead.ayat?.toString() as string);
+
+    if (element && lastRead.number === Number(secureLocalStorage.getItem("selected-surat"))) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [lastRead]);
+
   return (
     <div className="mt-6 grid w-full grid-cols-1 grid-rows-1 gap-2 text-end">
       {surat.ayahs.map((ayat, index) => (
@@ -55,6 +64,7 @@ export default function DetailSurat({ surat }: SuratProps) {
         >
           <div className="relative flex w-full items-start justify-between">
             <div
+              id={`${ayat.number.insurah}`}
               className={cx(
                 "mr-2 flex h-12 w-12 items-center justify-center rounded-full p-6",
                 "border-black bg-gray-400 font-bold text-white",

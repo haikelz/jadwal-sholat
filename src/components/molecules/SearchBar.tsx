@@ -1,5 +1,5 @@
 import { cx } from "classix";
-import { ChangeEvent, Dispatch, SetStateAction, useRef } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { useKeydown } from "~hooks";
 
@@ -9,10 +9,6 @@ type SearchBarProps = {
 
 export default function SearchBar({ setSearch }: SearchBarProps) {
   const ref = useRef<HTMLInputElement>(null);
-
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setSearch(event.target.value);
-  }
 
   useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });
 
@@ -28,12 +24,12 @@ export default function SearchBar({ setSearch }: SearchBarProps) {
             "block w-[300px] rounded-md border-2 border-solid border-gray-400 bg-gray-50 bg-clip-padding",
             "px-3 py-1 pl-10 font-semibold transition ease-in-out",
             "placeholder:ml-6",
-            "focus:border-blue-600 focus:outline-none focus:ring focus:ring-blue-600",
+            "focus:border-blue-600 focus:outline-none",
             "dark:border-gray-600 dark:bg-gray-700 dark:placeholder-gray-400 dark:focus:border-blue-500"
           )}
           type="text"
           placeholder="Search...."
-          onChange={handleChange}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       <div className="mt-1.5 hidden md:inline-block">

@@ -1,8 +1,11 @@
+import { ofetch } from "ofetch";
 import useSWR from "swr";
-import useAppStore from "~store";
 
 export function useFetch(link: string) {
-  const getData = useAppStore((state) => state.getData);
+  async function getData(link: string) {
+    const response = await ofetch(link, { parseResponse: JSON.parse });
+    return response;
+  }
 
   const { data, isLoading, error } = useSWR(link, getData, {
     keepPreviousData: true,

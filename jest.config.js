@@ -11,7 +11,7 @@ const customJestConfig = {
 
   // absolute import
   moduleNameMapper: {
-    "^components/(.*)$": "src/components/$1",
+    "^~components/(.*)$": "src/components/$1",
     "^~pages/(.*)$": "src/pages/$1",
     "^~lib/(.*)$": "src/lib/$1",
     "^~hooks$": "src/hooks",

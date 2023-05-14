@@ -1,6 +1,7 @@
 import { cx } from "classix";
 import Link from "next/link";
 import { MdOutlineArrowBack } from "react-icons/md";
+import { removeSelectedSurat } from "~lib/helpers/removeSelectedSurat";
 import { SuratProps } from "~models";
 
 export function Sebelumnya({ surat }: SuratProps) {
@@ -9,10 +10,11 @@ export function Sebelumnya({ surat }: SuratProps) {
       {surat.number > 1 ? (
         <Link href={`/quran/surat/${surat.number - 1}`}>
           <button
+            onClick={removeSelectedSurat}
             type="button"
             aria-label="sebelumnya"
             className={cx(
-              "flex items-center justify-center gap-1 rounded-md",
+              "flex items-center justify-center space-x-1 rounded-md",
               "border-2 border-black px-2 py-1 text-black",
               "dark:border-white dark:text-white"
             )}

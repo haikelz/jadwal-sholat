@@ -2,10 +2,12 @@ import { cx } from "classix";
 import { m } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
 import { TidakAda } from "~components/atoms";
 import SearchBar from "~components/molecules/SearchBar";
+import { removeSelectedSurat } from "~lib/helpers/removeSelectedSurat";
 import { clickAnimation } from "~lib/utils/animations";
 import { ListSuratProps } from "~models";
 import useAppStore from "~store";
@@ -21,7 +23,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
     shallow
   );
 
-  const filteredsurat = useMemo(
+  const filteredSurat = useMemo(
     () =>
       surat.filter((value) => {
         if (search === "") return value;
@@ -31,8 +33,8 @@ export default function ListSurat({ surat }: ListSuratProps) {
   );
 
   useEffect(() => {
-    if (localStorage.getItem("surat")) {
-      setLastRead(JSON.parse(localStorage.getItem("surat") as string));
+    if (secureLocalStorage.getItem("surat")) {
+      setLastRead(JSON.parse(secureLocalStorage.getItem("surat") as string));
     }
   }, [setLastRead]);
 
@@ -43,7 +45,12 @@ export default function ListSurat({ surat }: ListSuratProps) {
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
           {lastRead.ayat || lastRead.number !== null ? (
-            <Link href={`/quran/surat/${lastRead.number}`}>
+            <Link
+              href={`/quran/surat/${lastRead.number}`}
+              onClick={() =>
+                secureLocalStorage.setItem("selected-surat", lastRead.number?.toString() as string)
+              }
+            >
               <span
                 className={cx(
                   "hover-animation underline-animation text-black",
@@ -59,7 +66,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
           )}
         </p>
       </div>
-      {filteredsurat.length ? (
+      {filteredSurat.length ? (
         <div
           className={cx(
             "grid w-full grid-cols-1 grid-rows-1 gap-4",
@@ -68,8 +75,12 @@ export default function ListSurat({ surat }: ListSuratProps) {
             "xl:grid-cols-4"
           )}
         >
-          {filteredsurat.map((surat) => (
-            <Link key={surat.number} href={`/quran/surat/${surat.number}`}>
+          {filteredSurat.map((surat) => (
+            <Link
+              key={surat.number}
+              href={`/quran/surat/${surat.number}`}
+              onClick={removeSelectedSurat}
+            >
               <m.div
                 variants={clickAnimation}
                 whileTap="whileTap"

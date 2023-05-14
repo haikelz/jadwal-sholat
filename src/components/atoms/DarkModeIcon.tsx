@@ -31,7 +31,7 @@ export function DarkModeIcon({
         )}
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
-        {theme === "light" ? <MdDarkMode size={26} /> : <MdLightMode size={26} />}
+        {theme === "light" ? <MdDarkMode size={28} /> : <MdLightMode size={28} />}
         <p className={cx("hidden text-sm font-semibold", "md:block", isMarginLeft ? "ml-2" : "")}>
           {theme === "light" ? "Dark" : "Light"}
         </p>

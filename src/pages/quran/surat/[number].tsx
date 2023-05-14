@@ -1,13 +1,13 @@
 import dynamic from "next/dynamic";
-import { NextRouter, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 import { shallow } from "zustand/shallow";
-import { useFetch } from "~hooks";
-import { QURAN_API } from "~lib/utils/constants";
+import Layout from "~components/Layout";
 import PreviousOrNextButton from "~components/molecules/PreviousOrNextButton";
 import DetailSurat from "~components/organisms/DetailSurat";
+import { useFetch } from "~hooks";
+import { QURAN_API } from "~lib/utils/constants";
 import useAppStore from "~store";
-import Layout from "~components/Layout";
 
 const ModalTafsir = dynamic(() => import("~components/molecules/ModalTafsir"));
 const ModalNotification = dynamic(() => import("~components/molecules/ModalNotification"));
@@ -27,7 +27,7 @@ export default function Surat() {
     shallow
   );
 
-  const router: NextRouter = useRouter();
+  const router = useRouter();
   const { number } = router.query;
 
   const { data, isLoading, isError } = useFetch(
