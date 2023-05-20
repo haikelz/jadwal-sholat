@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { IconType } from "react-icons/lib";
 import { MdBook, MdHomeFilled, MdListAlt, MdOutlineAccessTime } from "react-icons/md";
-import { slugify } from "~lib/helpers/slugify";
+import { slugify } from "~lib/helpers";
 
 const DarkModeIcon = dynamic(() => import("~components/atoms").then((obj) => obj.DarkModeIcon), {
   ssr: false,
@@ -12,14 +12,17 @@ const DarkModeIcon = dynamic(() => import("~components/atoms").then((obj) => obj
 
 const navbarList = [
   {
+    id: 1,
     title: "Sholat",
     icon: MdOutlineAccessTime,
   },
   {
+    id: 2,
     title: "Asma'ul Husna",
     icon: MdListAlt,
   },
   {
+    id: 3,
     title: "Qur'an",
     icon: MdBook,
   },
@@ -46,7 +49,7 @@ export default function Navbar() {
         )}
       >
         <div className="flex w-full items-center justify-center">
-          <Link href="/" passHref>
+          <Link href="/">
             <button
               className={cx(
                 "flex cursor-pointer flex-col items-center justify-center px-4",
@@ -61,10 +64,10 @@ export default function Navbar() {
             </button>
           </Link>
         </div>
-        {navbarList.map((item, index) => {
+        {navbarList.map((item) => {
           const Icon: IconType = item.icon;
           return (
-            <div key={index + 1} className="flex w-full items-center justify-center">
+            <div key={item.id} className="flex w-full items-center justify-center">
               <Link href={slugify(item.title)} passHref>
                 <button
                   className={cx(

@@ -1,7 +1,7 @@
-// date
 import { format } from "date-fns";
 import id from "date-fns/locale/id";
 
+// date
 export const date: Date = new Date();
 export const tahun: string = format(date, "yyyy");
 export const bulan: string = format(date, "MM");
@@ -16,7 +16,6 @@ export const currentDate: string = format(date, "dd MMMM yyyy", { locale: id });
 export const numTahun: number = Number(tahun);
 export const numBulan: number = Number(bulan);
 export const numTanggal: number = Number(hari);
-
 export const matchDate: string = format(date, "yyyy-MM-dd");
 
 // API
@@ -26,3 +25,6 @@ export const JADWAL_SHOLAT_API = "https://api.myquran.com/v1/sholat";
 
 // Switch Theme
 export const browser = typeof window !== "undefined";
+
+// Password key for encrypt decrypt data
+export const SECRET_PASSWORD_KEY = process.env.NEXT_PUBLIC_SECRET_PASSWORD_KEY as string;

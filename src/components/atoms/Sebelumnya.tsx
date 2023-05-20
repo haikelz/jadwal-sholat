@@ -1,7 +1,7 @@
 import { cx } from "classix";
 import Link from "next/link";
 import { MdOutlineArrowBack } from "react-icons/md";
-import { removeSelectedSurat } from "~lib/helpers/removeSelectedSurat";
+import { removeSelectedSurat } from "~lib/helpers";
 import { SuratProps } from "~models";
 
 export function Sebelumnya({ surat }: SuratProps) {

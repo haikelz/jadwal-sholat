@@ -49,6 +49,7 @@ export default function ModalTafsir({ surat }: SuratProps) {
                     "hover:bg-gray-200 dark:text-white dark:hover:text-black"
                   )}
                   onClick={() => setTafsir(!tafsir)}
+                  aria-label="close modal tafsir"
                 >
                   <MdClose className="font-bold" size={24} />
                 </button>

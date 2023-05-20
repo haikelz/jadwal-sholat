@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^14.0.0
+  '@types/crypto-js': ^4.1.1
   '@types/jest': ^29.5.1
   '@types/node': 20.1.4
   '@types/react': 18.2.6
@@ -10,6 +11,7 @@ specifiers:
   '@types/testing-library__jest-dom': ^5.14.5
   classix: ^2.1.32
   commitizen: ^4.3.0
+  crypto-js: ^4.1.1
   cz-conventional-changelog: ^3.3.0
   date-fns: ^2.30.0
   eslint: 8.40.0
@@ -32,7 +34,6 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-icons: ^4.8.0
-  react-secure-storage: ^1.2.2
   react-string-replace: ^1.1.0
   sass: ^1.62.1
   swr: ^2.1.5
@@ -42,6 +43,7 @@ specifiers:
 
 dependencies:
   classix: 2.1.32
+  crypto-js: 4.1.1
   date-fns: 2.30.0
   framer-motion: 10.12.10_biqbaboplfbrettd7655fr4n2y
   nanoid: 4.0.2
@@ -52,7 +54,6 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-icons: 4.8.0_react@18.2.0
-  react-secure-storage: 1.2.2
   react-string-replace: 1.1.0
   sass: 1.62.1
   swr: 2.1.5_react@18.2.0
@@ -61,6 +62,7 @@ dependencies:
 devDependencies:
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
+  '@types/crypto-js': 4.1.1
   '@types/jest': 29.5.1
   '@types/node': 20.1.4
   '@types/react': 18.2.6
@@ -1975,6 +1977,10 @@ packages:
     resolution: {integrity: sha512-enCvTL8m/EHS/zIvJno9nE+ndYPh1/oNFzRYRmtUqJICG2VnCSBzMLW5VN2KCQU91f23tsNKR8v7VJJQMatl7Q==}
     dependencies:
       '@babel/types': 7.21.5
+    dev: true
+
+  /@types/crypto-js/4.1.1:
+    resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
     dev: true
 
   /@types/estree/0.0.39:
@@ -5414,10 +5420,6 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /murmurhash-js/1.0.0:
-    resolution: {integrity: sha512-TvmkNhkv8yct0SVBSy+o8wYzXjE4Zz3PCesbfs8HiCXXdcTuocApFv11UWlNFWKYsP2okqrhb7JNlSm9InBhIw==}
-    dev: false
-
   /mute-stream/0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
     dev: true
@@ -5970,13 +5972,6 @@ packages:
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: true
-
-  /react-secure-storage/1.2.2:
-    resolution: {integrity: sha512-lCKgQNaM9N8np6FG/gmRdfBO5ybqAkSej6vutSoYBSM4rxzskF8tJTf4HXiZHcR2IbT2I2KoLizh6z5EscbsXQ==}
-    dependencies:
-      crypto-js: 4.1.1
-      murmurhash-js: 1.0.0
-    dev: false
 
   /react-string-replace/1.1.0:
     resolution: {integrity: sha512-N6RalSDFGbOHs0IJi1H611WbZsvk3ZT47Jl2JEXFbiS3kTwsdCYij70Keo/tWtLy7sfhDsYm7CwNM/WmjXIaMw==}

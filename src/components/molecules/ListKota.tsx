@@ -41,8 +41,8 @@ export default function ListKota({ kota }: ListKotaProps) {
             "xl:grid-cols-4"
           )}
         >
-          {filteredKota.map((loc, index) => (
-            <Link href={`/jadwal-sholat/kota/${loc.id}`} key={index + 1}>
+          {filteredKota.map((loc) => (
+            <Link href={`/jadwal-sholat/kota/${loc.id}`} key={loc.id}>
               <m.div
                 variants={clickAnimation}
                 whileTap="whileTap"

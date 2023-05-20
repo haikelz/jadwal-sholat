@@ -5,7 +5,7 @@ import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import SearchBar from "~components/molecules/SearchBar";
 import { clickAnimation } from "~lib/utils/animations";
-import { asmaulHusna } from "~lib/utils/data";
+import { asmaulHusna } from "~lib/utils/asmaulHusna";
 import { arab } from "~lib/utils/fonts";
 
 export default function ListAsmaulHusna() {
@@ -13,9 +13,9 @@ export default function ListAsmaulHusna() {
 
   const filteredAsmaulHusna = useMemo(
     () =>
-      asmaulHusna.filter((value) => {
-        if (search === "") return value;
-        else if (value.latin.toLowerCase().includes(search.toLowerCase())) return value;
+      asmaulHusna.filter((item) => {
+        if (search === "") return item;
+        else if (item.latin.toLowerCase().includes(search.toLowerCase())) return item;
       }),
     [search]
   );

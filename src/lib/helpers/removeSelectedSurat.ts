@@ -1,7 +1,8 @@
-import secureLocalStorage from "react-secure-storage";
+import { decryptedDataToUtf8 } from "./decryptedDataToUtf8";
 
+// remove selected-surat item from localStorage
 export function removeSelectedSurat() {
-  if (secureLocalStorage.getItem("selected-surat")) {
-    secureLocalStorage.removeItem("selected-surat");
+  if (decryptedDataToUtf8(localStorage.getItem("selected-surat") as string)) {
+    localStorage.removeItem("selected-surat");
   }
 }

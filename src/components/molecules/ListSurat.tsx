@@ -2,12 +2,13 @@ import { cx } from "classix";
 import { m } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
 import { TidakAda } from "~components/atoms";
 import SearchBar from "~components/molecules/SearchBar";
-import { removeSelectedSurat } from "~lib/helpers/removeSelectedSurat";
+import { removeSelectedSurat } from "~lib/helpers";
+import { decryptedDataToUtf8 } from "~lib/helpers";
+import { encrypt } from "~lib/helpers";
 import { clickAnimation } from "~lib/utils/animations";
 import { ListSuratProps } from "~models";
 import useAppStore from "~store";
@@ -33,8 +34,8 @@ export default function ListSurat({ surat }: ListSuratProps) {
   );
 
   useEffect(() => {
-    if (secureLocalStorage.getItem("surat")) {
-      setLastRead(JSON.parse(secureLocalStorage.getItem("surat") as string));
+    if (decryptedDataToUtf8(localStorage.getItem("surat") as string)) {
+      setLastRead(JSON.parse(decryptedDataToUtf8(localStorage.getItem("surat") as string)));
     }
   }, [setLastRead]);
 
@@ -48,7 +49,10 @@ export default function ListSurat({ surat }: ListSuratProps) {
             <Link
               href={`/quran/surat/${lastRead.number}`}
               onClick={() =>
-                secureLocalStorage.setItem("selected-surat", lastRead.number?.toString() as string)
+                localStorage.setItem(
+                  "selected-surat",
+                  encrypt(lastRead.number?.toString() as string)
+                )
               }
             >
               <span
