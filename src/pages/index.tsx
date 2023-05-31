@@ -11,7 +11,7 @@ export default function Home() {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="flex min-h-screen flex-col items-center justify-center gap-3 px-6 text-center">
+      <div className="flex min-h-screen flex-col items-center justify-center space-y-3 px-6 text-center">
         <div className="flex flex-col items-center justify-center">
           <Image src="/img/home.webp" width={100} height={100} alt="Al-Quran" loading="eager" />
           <div className="mt-3 flex flex-col items-center justify-center text-center">

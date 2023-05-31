@@ -43,7 +43,7 @@ export default function ModalNotification({ description }: { description: string
                   type="button"
                   className={cx(
                     "mt-2 inline-flex items-center rounded-md bg-blue-500 py-1.5 px-4",
-                    "font-semibold text-white shadow-md transition-all ease-in-out",
+                    "font-semibold text-white shadow-md transition-all",
                     "hover:bg-gray-200 hover:text-black",
                     "dark:hover:text-black"
                   )}

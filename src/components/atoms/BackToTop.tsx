@@ -38,8 +38,9 @@ export function BackToTop() {
             type="button"
             aria-label="back to top"
             className={cx(
-              "rounded-md bg-rose-400 p-1.5 transition ease-in-out",
-              "hover:bg-rose-500 dark:bg-blue-500 dark:hover:bg-blue-600"
+              "rounded-md bg-rose-400 p-1.5 transition-all",
+              "hover:bg-rose-500",
+              "dark:bg-blue-500 dark:hover:bg-blue-600"
             )}
             onClick={handleClick}
           >

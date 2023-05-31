@@ -2,9 +2,8 @@ import { cx } from "classix";
 import { AnimatePresence, Variants, m } from "framer-motion";
 import { nanoid } from "nanoid";
 import { memo, useEffect } from "react";
+import secureLocalStorage from "react-secure-storage";
 import { shallow } from "zustand/shallow";
-import { decryptedDataToUtf8 } from "~lib/helpers";
-import { encrypt } from "~lib/helpers";
 import { arab } from "~lib/utils/fonts";
 import { SuratProps } from "~models";
 import useAppStore from "~store";
@@ -28,7 +27,7 @@ export default function DetailSurat({ surat }: SuratProps) {
   );
 
   function saveData<T>(newData: T) {
-    localStorage.setItem("surat", encrypt(JSON.stringify(newData)));
+    secureLocalStorage.setItem("surat", JSON.stringify(newData));
   }
 
   function handleClick(name: string, ayat: number, number: number) {
@@ -49,8 +48,7 @@ export default function DetailSurat({ surat }: SuratProps) {
 
     if (
       element &&
-      lastRead.number ===
-        Number(decryptedDataToUtf8(localStorage.getItem("selected-surat") as string))
+      lastRead.number === Number(secureLocalStorage.getItem("selected-surat") as string)
     ) {
       element.scrollIntoView({ behavior: "smooth" });
     }

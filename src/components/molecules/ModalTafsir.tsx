@@ -45,8 +45,9 @@ export default function ModalTafsir({ surat }: SuratProps) {
                   type="button"
                   className={cx(
                     "ml-auto inline-flex items-center rounded-lg",
-                    "bg-transparent p-1.5 text-sm text-gray-400 transition-all ease-in-out",
-                    "hover:bg-gray-200 dark:text-white dark:hover:text-black"
+                    "bg-transparent p-1.5 text-sm text-gray-400 transition-all",
+                    "hover:bg-gray-200",
+                    "dark:text-white dark:hover:text-black"
                   )}
                   onClick={() => setTafsir(!tafsir)}
                   aria-label="close modal tafsir"

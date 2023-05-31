@@ -2,13 +2,12 @@ import { cx } from "classix";
 import { m } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
 import { TidakAda } from "~components/atoms";
 import SearchBar from "~components/molecules/SearchBar";
 import { removeSelectedSurat } from "~lib/helpers";
-import { decryptedDataToUtf8 } from "~lib/helpers";
-import { encrypt } from "~lib/helpers";
 import { clickAnimation } from "~lib/utils/animations";
 import { ListSuratProps } from "~models";
 import useAppStore from "~store";
@@ -34,14 +33,20 @@ export default function ListSurat({ surat }: ListSuratProps) {
   );
 
   useEffect(() => {
-    if (decryptedDataToUtf8(localStorage.getItem("surat") as string)) {
-      setLastRead(JSON.parse(decryptedDataToUtf8(localStorage.getItem("surat") as string)));
+    if (secureLocalStorage.getItem("surat") as string) {
+      setLastRead(JSON.parse(secureLocalStorage.getItem("surat") as string));
     }
   }, [setLastRead]);
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center text-center text-black dark:text-white">
+      <div
+        className={cx(
+          "flex flex-col items-center justify-center",
+          "text-center text-black",
+          "dark:text-white"
+        )}
+      >
         <SearchBar setSearch={setSearch} />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
@@ -49,10 +54,7 @@ export default function ListSurat({ surat }: ListSuratProps) {
             <Link
               href={`/quran/surat/${lastRead.number}`}
               onClick={() =>
-                localStorage.setItem(
-                  "selected-surat",
-                  encrypt(lastRead.number?.toString() as string)
-                )
+                secureLocalStorage.setItem("selected-surat", lastRead.number?.toString() as string)
               }
             >
               <span
@@ -89,8 +91,10 @@ export default function ListSurat({ surat }: ListSuratProps) {
                 variants={clickAnimation}
                 whileTap="whileTap"
                 className={cx(
-                  "flex flex-col rounded-sm border-2 border-black bg-gray-100 p-4 text-left text-black",
-                  "dark:border-white dark:bg-[#2A2A37] dark:text-white"
+                  "flex flex-col rounded-sm",
+                  "border-2 border-black bg-gray-100",
+                  "p-4 text-left text-black",
+                  "dark:border-gray-200 dark:bg-[#2A2A37] dark:text-white"
                 )}
               >
                 <p className="text-right font-semibold tracking-wide">{surat.type.id}</p>

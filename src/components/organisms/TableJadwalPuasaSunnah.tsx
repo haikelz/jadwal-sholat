@@ -1,3 +1,4 @@
+import { cx } from "classix";
 import { matchDate, numBulan } from "~lib/utils/constants";
 import { PuasaSunnahProps } from "~models";
 
@@ -23,11 +24,13 @@ export default function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps
              */
             fasting.month === numBulan && (
               <tr
-                className={`border-b-2 border-black dark:border-none ${
+                className={cx(
+                  "border-b-2 border-black",
+                  "dark:border-none",
                   fasting.date === matchDate
                     ? "bg-teal-600 text-white dark:bg-teal-700"
                     : "odd:bg-teal-300 dark:odd:bg-gray-800"
-                }`}
+                )}
                 key={index + 1}
               >
                 <td className="border-r-2 border-black px-2 text-xl font-medium dark:border-none lg:px-4">
@@ -36,7 +39,11 @@ export default function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps
                     (Number(fasting.date.substring(fasting.date.length - 2)) - 1)
                   }`}
                 </td>
-                <td className="border-r-2 border-black px-2 text-xl font-medium dark:border-none lg:px-4">
+                <td
+                  className={cx(
+                    "border-r-2 border-black px-2 text-xl font-medium dark:border-none lg:px-4"
+                  )}
+                >
                   {fasting.type.name}
                 </td>
               </tr>

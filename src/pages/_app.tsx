@@ -2,7 +2,7 @@ import { cx } from "classix";
 import { AnimatePresence, domAnimation, LazyMotion, m, Variants } from "framer-motion";
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import NextNProgress from "nextjs-progressbar";
+import NextTopLoader from "nextjs-toploader";
 import "windi.css";
 import Navbar from "~components/organisms/Navbar";
 import { bitter, rubik } from "~lib/utils/fonts";
@@ -19,7 +19,7 @@ const BackToTop = dynamic(() => import("~components/atoms").then((button) => but
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
-      <NextNProgress color="#3B82f6" options={{ showSpinner: false }} />
+      <NextTopLoader color="#3B82f6" showSpinner={false} />
       <style global jsx>
         {`
           h1 {

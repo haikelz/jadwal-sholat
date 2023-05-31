@@ -36,7 +36,8 @@ export default function ListAsmaulHusna() {
               variants={clickAnimation}
               whileTap="whileTap"
               className={cx(
-                "flex flex-col items-start justify-center overflow-hidden rounded-sm text-left",
+                "flex flex-col items-start justify-center",
+                "overflow-hidden rounded-sm text-left",
                 "border-2 border-black bg-gray-100 p-4 text-start tracking-wide",
                 "cursor-pointer",
                 "dark:border-white dark:bg-[#2A2A37]"

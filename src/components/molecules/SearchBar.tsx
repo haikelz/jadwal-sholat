@@ -21,11 +21,14 @@ export default function SearchBar({ setSearch }: SearchBarProps) {
         <input
           ref={ref}
           className={cx(
-            "block w-[300px] rounded-md border-2 border-solid border-gray-400 bg-gray-50 bg-clip-padding",
+            "block w-[300px] rounded-md",
+            "border-2 border-solid border-gray-400",
+            "bg-gray-50 bg-clip-padding",
             "px-3 py-1 pl-10 font-semibold transition ease-in-out",
             "placeholder:ml-6",
             "focus:border-blue-600 focus:outline-none",
-            "dark:border-gray-600 dark:bg-gray-700 dark:placeholder-gray-400 dark:focus:border-blue-500"
+            "dark:border-gray-600 dark:bg-gray-700",
+            "dark:placeholder-gray-400 dark:focus:border-blue-500"
           )}
           type="text"
           placeholder="Search...."
@@ -35,7 +38,8 @@ export default function SearchBar({ setSearch }: SearchBarProps) {
       <div className="mt-1.5 hidden md:inline-block">
         <kbd
           className={cx(
-            "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
+            "rounded-sm bg-blue-400 px-1.5 py-0.5",
+            "text-sm font-semibold",
             "text-black shadow-sm",
             "dark:bg-blue-500"
           )}
@@ -45,7 +49,8 @@ export default function SearchBar({ setSearch }: SearchBarProps) {
         <b>+</b>{" "}
         <kbd
           className={cx(
-            "rounded-sm bg-blue-400 px-1.5 py-0.5 text-sm font-semibold",
+            "rounded-sm bg-blue-400 px-1.5 py-0.5",
+            "text-sm font-semibold",
             "text-black shadow-sm",
             "dark:bg-blue-500"
           )}

@@ -1,3 +1,4 @@
+import { cx } from "classix";
 import Head from "next/head";
 
 export default function Loading() {
@@ -6,12 +7,18 @@ export default function Loading() {
       <Head>
         <title>Loading....</title>
       </Head>
-      <div className="flex min-h-screen items-center justify-center space-x-3 p-8 text-center">
+      <div
+        className={cx("flex min-h-screen items-center justify-center", "space-x-3 p-8 text-center")}
+      >
         <p className="text-2xl font-bold">Loading</p>
         <div role="status">
           <svg
             aria-hidden="true"
-            className="mr-2 h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
+            className={cx(
+              "mr-2 h-8 w-8 animate-spin",
+              "fill-blue-600 text-gray-200",
+              "dark:text-gray-600"
+            )}
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

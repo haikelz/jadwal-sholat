@@ -19,7 +19,10 @@ export default function TableJadwalSholat({ waktu }: WaktuProps) {
       <thead className="border-2 border-black dark:border-none">
         <tr className="border-2 border-black dark:border-none">
           {tableJadwalSholatList.map((item) => (
-            <th key={item.id} className="border-r-2 border-r-black px-4 text-xl dark:border-none">
+            <th
+              key={item.id}
+              className={cx("border-r-2 border-r-black", "px-4 text-xl", "dark:border-none")}
+            >
               {item.name}
             </th>
           ))}

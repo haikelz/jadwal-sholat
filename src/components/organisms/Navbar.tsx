@@ -51,9 +51,11 @@ export default function Navbar() {
         <div className="flex w-full items-center justify-center">
           <Link href="/">
             <button
+              type="button"
+              aria-label="home"
               className={cx(
                 "flex cursor-pointer flex-col items-center justify-center px-4",
-                "transition-all ease-in-out md:p-2.5",
+                "transition-all md:p-2.5",
                 router.pathname === "/"
                   ? "text-gray-600 dark:text-white"
                   : "text-gray-500 dark:text-gray-400"
@@ -72,7 +74,7 @@ export default function Navbar() {
                 <button
                   className={cx(
                     "flex cursor-pointer flex-col items-center justify-center px-4",
-                    "transition-all duration-200 ease-in-out md:p-2.5",
+                    "transition-all md:p-2.5",
                     router.pathname.includes(slugify(item.title) as string)
                       ? "text-gray-600 dark:text-white"
                       : "text-gray-500 dark:text-gray-400"

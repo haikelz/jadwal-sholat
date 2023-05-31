@@ -13,6 +13,22 @@
         @apply dark:bg-cyan-400;
       }
     }
+
+    ::webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::webkit-scrollbar-track {
+      @apply bg-gray-300;
+    }
+
+    ::webkit-scrollbar-thumb {
+      @apply bg-red-500;
+    }
+
+    .dark::webkit-scrollbar-thumb {
+      @apply bg-blue-500;
+    }
   }
 
   .underline-animation {

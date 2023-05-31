@@ -1,15 +1,15 @@
 import { Head, Html, Main, NextScript } from "next/document";
 
-const metadata = {
+const og = {
   url: "https://info-jadwal-sholat.vercel.app/",
   type: "website",
   title: "Jadwal Sholat",
   description: "Aplikasi Web untuk menampilkan jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
-  image: "/favicon.ico",
+  image: "/icon-512x512.png",
 };
 
 export default function Document() {
-  const { url, type, title, description, image } = metadata;
+  const { url, type, title, description, image } = og;
 
   return (
     <Html lang="en">

@@ -14,8 +14,8 @@ export function Selanjutnya({ surat }: SuratProps) {
             type="button"
             aria-label="selanjutnya"
             className={cx(
-              "flex items-center justify-center space-x-1 rounded-md text-black",
-              "border-2 border-black px-2 py-1",
+              "flex items-center justify-center space-x-1 rounded-md",
+              "text-black border-2 border-black px-2 py-1",
               "dark:border-white dark:text-white"
             )}
           >

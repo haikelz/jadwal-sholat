@@ -47,7 +47,8 @@ export default function ListKota({ kota }: ListKotaProps) {
                 variants={clickAnimation}
                 whileTap="whileTap"
                 className={cx(
-                  "flex h-full items-center justify-center overflow-hidden rounded-sm text-black",
+                  "flex h-full items-center justify-center",
+                  "overflow-hidden rounded-sm text-black",
                   "border-2 border-black bg-gray-100 py-6 px-10",
                   "dark:border-white dark:bg-[#2A2A37] dark:text-white"
                 )}
