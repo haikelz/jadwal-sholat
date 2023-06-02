@@ -45,7 +45,7 @@ export default function Surat() {
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-col items-center justify-center">
             <h1>{surat.asma.id.short}</h1>
-            <p className="font-medium tracking-wider">
+            <p className="font-medium m-1 tracking-wider">
               {surat.asma.translation.id}. Surat ke-{surat.number}. {surat.type.id}
             </p>
           </div>

@@ -6,7 +6,7 @@ import NextTopLoader from "nextjs-toploader";
 import "windi.css";
 import Navbar from "~components/organisms/Navbar";
 import { bitter, rubik } from "~lib/utils/fonts";
-import "~styles/index.scss";
+import "~styles/index.css";
 
 export const layoutAnimation: Variants = {
   hidden: { y: 30, opacity: 0 },

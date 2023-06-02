@@ -1,0 +1,56 @@
+* {
+  @apply no-underline outline-none;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #f84b3e #d1d5db;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  @apply bg-gray-300;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-rose-400;
+}
+
+body.dark::-webkit-scrollbar-thumb {
+  @apply bg-blue-500;
+}
+
+h1 {
+  @apply text-3xl font-bold tracking-wide sm:text-4xl;
+}
+
+audio {
+  @apply h-[25px] w-[300px];
+}
+
+.underline-animation {
+  @apply relative inline-block cursor-pointer;
+}
+
+.underline-animation::after {
+  @apply absolute bottom-0 left-0 h-[2px] w-full origin-bottom-right bg-red-500 dark:bg-blue-500;
+  content: "";
+  transform: scaleX(0);
+  transition: transform 0.25s ease-out;
+}
+
+.underline-animation:hover::after {
+  @apply origin-bottom-left;
+  transform: scaleX(1);
+}
+
+.hover-animation {
+  @apply transition-all;
+}
+
+.modal-blur {
+  backdrop-filter: blur(5px);
+}

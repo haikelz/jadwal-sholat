@@ -1,6 +1,7 @@
 {
   "name": "jadwal-sholat",
   "version": "1.0.0",
+  "license": "MIT",
   "description": "Aplikasi Web untuk menampilkan jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
   "private": true,
   "scripts": {
@@ -28,14 +29,12 @@
     "react-icons": "^4.9.0",
     "react-secure-storage": "^1.2.2",
     "react-string-replace": "^1.1.0",
-    "sass": "^1.62.1",
     "swr": "^2.1.5",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@types/crypto-js": "^4.1.1",
     "@types/jest": "^29.5.2",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",

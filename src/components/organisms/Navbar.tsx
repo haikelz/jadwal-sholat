@@ -55,7 +55,8 @@ export default function Navbar() {
               aria-label="home"
               className={cx(
                 "flex cursor-pointer flex-col items-center justify-center px-4",
-                "transition-all md:p-2.5",
+                "transition-all",
+                "md:p-2.5",
                 router.pathname === "/"
                   ? "text-gray-600 dark:text-white"
                   : "text-gray-500 dark:text-gray-400"

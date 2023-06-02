@@ -1,9 +1,9 @@
-import { ofetch } from "ofetch";
 import useSWR from "swr";
+import { configuredOfetch } from "~lib/utils/configuredOfetch";
 
 export function useFetch(link: string) {
   async function getData(link: string) {
-    const response = await ofetch(link, { parseResponse: JSON.parse });
+    const response = await configuredOfetch(link);
     return response;
   }
 
