@@ -16,6 +16,7 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.0.1",
     "classix": "^2.1.32",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.12.16",

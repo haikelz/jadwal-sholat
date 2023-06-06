@@ -25,7 +25,7 @@ export function useKeydown<T extends KeydownProps>({ ref, isShiftKey, key1, key2
   );
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeydown, true);
+    document.addEventListener("keydown", handleKeydown, true);
     return () => document.removeEventListener("keydown", handleKeydown);
   }, [handleKeydown]);
 

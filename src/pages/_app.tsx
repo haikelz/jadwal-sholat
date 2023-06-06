@@ -1,6 +1,7 @@
+import { Analytics } from "@vercel/analytics/react";
 import { cx } from "classix";
 import { AnimatePresence, domAnimation, LazyMotion, m, Variants } from "framer-motion";
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import NextTopLoader from "nextjs-toploader";
 import "windi.css";
@@ -43,6 +44,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
               exit="exit"
             >
               <Component {...pageProps} />
+              <Analytics />
               <BackToTop />
             </m.main>
           </AnimatePresence>
