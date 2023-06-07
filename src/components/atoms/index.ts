@@ -3,3 +3,4 @@ export * from "./DarkModeIcon";
 export * from "./Sebelumnya";
 export * from "./Selanjutnya";
 export * from "./TidakAda";
+export * from "./BackToHome";

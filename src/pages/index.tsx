@@ -11,7 +11,7 @@ export default function Home() {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="flex min-h-screen flex-col items-center justify-center space-y-3 px-6 text-center">
+      <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
         <div className="flex flex-col items-center justify-center">
           <Image src="/img/home.webp" width={100} height={100} alt="Al-Quran" loading="eager" />
           <div className="mt-3 flex flex-col items-center justify-center text-center">
@@ -24,7 +24,7 @@ export default function Home() {
                 ? "Malam"
                 : "Pagi"
             }`}</h1>
-            <p className="mb-0.5 mt-2 text-lg font-medium md:text-xl">
+            <p className="mb-1 mt-2 text-lg font-medium md:text-xl">
               &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;
               <br />
               Ar-Rahman ayat 13

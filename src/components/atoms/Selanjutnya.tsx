@@ -19,7 +19,7 @@ export function Selanjutnya({ surat }: SuratProps) {
               "dark:border-white dark:text-white"
             )}
           >
-            <p className="text-md font-semibold">Selanjutnya</p>
+            <p className="text-base font-semibold">Selanjutnya</p>
             <MdOutlineArrowForward size={25} />
           </button>
         </Link>

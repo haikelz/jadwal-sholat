@@ -56,7 +56,7 @@ export default function Surat() {
               className="flex items-center space-x-1"
               onClick={() => setAudio(!audio)}
             >
-              <MdVolumeUp size="20px" />
+              <MdVolumeUp size={20} />
               <p className="text-lg font-bold">Audio</p>
             </button>
             <button
@@ -65,7 +65,7 @@ export default function Surat() {
               className="flex items-center space-x-1"
               onClick={() => setTerjemahan(!terjemahan)}
             >
-              <MdOutlineTranslate size="20px" />
+              <MdOutlineTranslate size={20} />
               <p className="text-lg font-bold">Latin</p>
             </button>
             <button
@@ -74,7 +74,7 @@ export default function Surat() {
               className="flex items-center space-x-1"
               onClick={() => setTafsir(!tafsir)}
             >
-              <MdInsertComment size="20px" />
+              <MdInsertComment size={20} />
               <p className="text-lg font-bold">Tafsir</p>
             </button>
           </div>

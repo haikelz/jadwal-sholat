@@ -1,5 +1,7 @@
 import { ofetch } from "ofetch";
 
-export function configuredOfetch(link: string) {
+function configuredOfetch(link: string) {
   return ofetch(link, { parseResponse: JSON.parse, responseType: "json" });
 }
+
+export { configuredOfetch as ofetch };

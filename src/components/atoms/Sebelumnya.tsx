@@ -20,7 +20,7 @@ export function Sebelumnya({ surat }: SuratProps) {
             )}
           >
             <MdOutlineArrowBack size={25} />
-            <p className="text-md font-semibold">Sebelumnya</p>
+            <p className="text-base font-semibold">Sebelumnya</p>
           </button>
         </Link>
       ) : null}
