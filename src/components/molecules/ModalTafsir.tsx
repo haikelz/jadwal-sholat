@@ -20,7 +20,7 @@ export default function ModalTafsir({ surat }: SuratProps) {
     <AnimatePresence mode="wait">
       {tafsir ? (
         <m.div
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           variants={modalAnimation}
           initial="hidden"
           animate="visible"

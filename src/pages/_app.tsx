@@ -1,4 +1,3 @@
-import { Analytics } from "@vercel/analytics/react";
 import { cx } from "classix";
 import { AnimatePresence, domAnimation, LazyMotion, m, Variants } from "framer-motion";
 import type { AppProps } from "next/app";
@@ -44,7 +43,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
               exit="exit"
             >
               <Component {...pageProps} />
-              <Analytics />
               <BackToTop />
             </m.main>
           </AnimatePresence>

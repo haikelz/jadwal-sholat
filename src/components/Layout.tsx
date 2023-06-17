@@ -18,7 +18,7 @@ export default function Layout({ children, title }: ChildrenProps) {
         <div
           className={cx(
             "flex min-h-screen w-full max-w-full",
-            "flex-col items-center justify-center",
+            "flex-col items-center justify-start",
             "space-y-7 pt-8 pb-24 md:pb-8"
           )}
         >

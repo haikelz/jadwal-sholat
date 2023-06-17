@@ -18,7 +18,7 @@ export default function ModalNotification({ description }: { description: string
     <AnimatePresence mode="wait">
       {notification ? (
         <m.div
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           variants={modalAnimation}
           initial="hidden"
           animate="visible"
