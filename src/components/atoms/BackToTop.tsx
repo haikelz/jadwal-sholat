@@ -1,14 +1,9 @@
 import { cx } from "classix";
-import { AnimatePresence, Variants, m } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { memo } from "react";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useScroll } from "~hooks";
-
-const backToTopAnimation: Variants = {
-  hidden: { y: 40, opacity: 0 },
-  visible: { y: 0, opacity: 1 },
-  exit: { y: 40, opacity: 0 },
-};
+import { backToTopAnimation } from "~lib/utils/animations";
 
 export function BackToTop() {
   const scroll = useScroll();

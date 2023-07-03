@@ -3,7 +3,9 @@ import Head from "next/head";
 import Image from "next/image";
 import { hours } from "~lib/utils/constants";
 
-const Time = dynamic(() => import("~components/molecules/Time"), { ssr: false });
+const Time = dynamic(() => import("~components/molecules").then((obj) => obj.Time), {
+  ssr: false,
+});
 
 export default function Home() {
   return (

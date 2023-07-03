@@ -24,6 +24,8 @@ export function DarkModeIcon({
       )}
     >
       <button
+        type="button"
+        aria-label="dark mode icon"
         className={cx(
           `flex flex-${flexDir} cursor-pointer items-center justify-center`,
           "px-4 text-gray-500",

@@ -28,7 +28,7 @@ const navbarList = [
   },
 ];
 
-export default function Navbar() {
+export function Navbar() {
   const router = useRouter();
 
   return (

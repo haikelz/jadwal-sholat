@@ -7,7 +7,7 @@ import { modalAnimation } from "~lib/utils/animations";
 import { SuratProps } from "~models";
 import useAppStore from "~store";
 
-export default function ModalTafsir({ surat }: SuratProps) {
+export function ModalTafsir({ surat }: SuratProps) {
   const { tafsir, setTafsir } = useAppStore(
     (state) => ({
       tafsir: state.tafsir,

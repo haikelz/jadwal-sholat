@@ -6,13 +6,13 @@ import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
 import { TidakAda } from "~components/atoms";
-import SearchBar from "~components/molecules/SearchBar";
+import { SearchBar } from "~components/molecules";
 import { removeSelectedSurat } from "~lib/helpers";
 import { clickAnimation } from "~lib/utils/animations";
 import { ListSuratProps } from "~models";
 import useAppStore from "~store";
 
-export default function ListSurat({ surat }: ListSuratProps) {
+export function ListSurat({ surat }: ListSuratProps) {
   const [search, setSearch] = useState<string>("");
 
   const { lastRead, setLastRead } = useAppStore(

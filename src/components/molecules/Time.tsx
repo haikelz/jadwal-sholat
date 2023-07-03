@@ -3,7 +3,7 @@ import id from "date-fns/locale/id";
 import { memo } from "react";
 import { useDate } from "~hooks";
 
-export default function Time() {
+export function Time() {
   const formattedDate: string = format(useDate(), `dd MMMM yyyy, kk.mm.ss`, { locale: id });
 
   return (

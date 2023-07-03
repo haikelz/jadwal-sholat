@@ -14,8 +14,9 @@
 ## ⚡Tech Stack
 
 - NextJS
-- SWR
+- Typescript
 - Windi CSS
+- SWR
 - Framer Motion
 - Zustand
 

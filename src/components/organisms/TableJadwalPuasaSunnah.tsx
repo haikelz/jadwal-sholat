@@ -2,7 +2,7 @@ import { cx } from "classix";
 import { matchDate, numBulan } from "~lib/utils/constants";
 import { PuasaSunnahProps } from "~models";
 
-export default function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps) {
+export function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps) {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">

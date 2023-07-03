@@ -1,7 +1,7 @@
 import { cx } from "classix";
 import Head from "next/head";
 
-export default function Loading() {
+export function Loading() {
   return (
     <>
       <Head>

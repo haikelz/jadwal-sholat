@@ -1,18 +1,13 @@
 import { cx } from "classix";
-import { AnimatePresence, domAnimation, LazyMotion, m, Variants } from "framer-motion";
+import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import NextTopLoader from "nextjs-toploader";
 import "windi.css";
-import Navbar from "~components/organisms/Navbar";
+import { Navbar } from "~components/organisms";
+import { layoutAnimation } from "~lib/utils/animations";
 import { bitter, rubik } from "~lib/utils/fonts";
 import "~styles/index.css";
-
-export const layoutAnimation: Variants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: { y: 0, opacity: 1 },
-  exit: { y: 30, opacity: 0 },
-};
 
 const BackToTop = dynamic(() => import("~components/atoms").then((button) => button.BackToTop));
 

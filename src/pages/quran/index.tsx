@@ -1,7 +1,7 @@
 import type { GetStaticProps } from "next";
 import Image from "next/image";
 import Layout from "~components/Layout";
-import ListSurat from "~components/molecules/ListSurat";
+import { ListSurat } from "~components/organisms";
 import { ofetch } from "~lib/utils/configuredOfetch";
 import { QURAN_API } from "~lib/utils/constants";
 import { ListSuratProps } from "~models";

@@ -5,7 +5,7 @@ import { shallow } from "zustand/shallow";
 import { modalAnimation } from "~lib/utils/animations";
 import useAppStore from "~store";
 
-export default function ModalNotification({ description }: { description: string }) {
+export function ModalNotification({ description }: { description: string }) {
   const { notification, setNotification } = useAppStore(
     (state) => ({
       notification: state.notification,

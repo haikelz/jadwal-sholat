@@ -1,5 +1,5 @@
-import ListAsmaulHusna from "~components/molecules/ListAsmaulHusna";
 import Layout from "~components/Layout";
+import { ListAsmaulHusna } from "~components/organisms";
 
 export default function AsmaulHusna() {
   return (

@@ -7,7 +7,7 @@ type SearchBarProps = {
   setSearch: Dispatch<SetStateAction<string>>;
 };
 
-export default function SearchBar({ setSearch }: SearchBarProps) {
+export function SearchBar({ setSearch }: SearchBarProps) {
   const ref = useRef<HTMLInputElement>(null);
 
   useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });

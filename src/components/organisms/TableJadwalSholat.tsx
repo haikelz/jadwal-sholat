@@ -13,7 +13,7 @@ const tableJadwalSholatList = [
   { id: 8, name: "Maghrib" },
 ];
 
-export default function TableJadwalSholat({ waktu }: WaktuProps) {
+export function TableJadwalSholat({ waktu }: WaktuProps) {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">

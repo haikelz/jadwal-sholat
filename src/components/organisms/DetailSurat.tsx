@@ -1,20 +1,15 @@
 import { cx } from "classix";
-import { AnimatePresence, Variants, m } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { nanoid } from "nanoid";
 import { memo, useEffect } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { shallow } from "zustand/shallow";
+import { opacityAnimation } from "~lib/utils/animations";
 import { arab } from "~lib/utils/fonts";
 import { SuratProps } from "~models";
 import useAppStore from "~store";
 
-const opacityAnimation: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.2, animation: "ease-out" } },
-  exit: { opacity: 0, transition: { duration: 0.2, animation: "ease-in" } },
-};
-
-export default function DetailSurat({ surat }: SuratProps) {
+export function DetailSurat({ surat }: SuratProps) {
   const { lastRead, setLastRead, setNotification, terjemahan, audio } = useAppStore(
     (state) => ({
       lastRead: state.lastRead,

@@ -1,7 +1,7 @@
 import type { GetStaticProps } from "next";
 import Image from "next/image";
 import Layout from "~components/Layout";
-import ListKota from "~components/molecules/ListKota";
+import { ListKota } from "~components/organisms";
 import { ofetch } from "~lib/utils/configuredOfetch";
 import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
 import { ListKotaProps } from "~models";
