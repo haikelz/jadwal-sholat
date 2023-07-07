@@ -2,12 +2,13 @@ import type { GetStaticProps } from "next";
 import Image from "next/image";
 import Layout from "~components/Layout";
 import { ListSurat } from "~components/organisms";
+import { env } from "~env.mjs";
 import { ofetch } from "~lib/utils/configuredOfetch";
-import { QURAN_API } from "~lib/utils/constants";
 import { ListSuratProps } from "~models";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await ofetch(`${QURAN_API}/quran`);
+  const { NEXT_PUBLIC_QURAN_API } = env;
+  const response = await ofetch(`${NEXT_PUBLIC_QURAN_API}/quran`);
 
   return {
     props: {

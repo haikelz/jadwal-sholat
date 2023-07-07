@@ -5,8 +5,8 @@ import { shallow } from "zustand/shallow";
 import Layout from "~components/Layout";
 import { PreviousOrNextButton } from "~components/molecules";
 import { DetailSurat } from "~components/organisms";
+import { env } from "~env.mjs";
 import { useFetch } from "~hooks";
-import { QURAN_API } from "~lib/utils/constants";
 import useAppStore from "~store";
 
 const ModalTafsir = dynamic(() =>
@@ -35,9 +35,10 @@ export default function Surat() {
 
   const router = useRouter();
   const { number } = router.query;
+  const { NEXT_PUBLIC_QURAN_API } = env;
 
   const { data, isLoading, isError } = useFetch(
-    number ? `${QURAN_API}/quran/${number}?imamId=7` : ""
+    number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=7` : ""
   );
 
   if ((!data && !isError) || isLoading) return <Loading />;

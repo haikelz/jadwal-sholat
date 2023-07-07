@@ -2,12 +2,14 @@ import type { GetStaticProps } from "next";
 import Image from "next/image";
 import Layout from "~components/Layout";
 import { ListKota } from "~components/organisms";
+import { env } from "~env.mjs";
 import { ofetch } from "~lib/utils/configuredOfetch";
-import { JADWAL_SHOLAT_API } from "~lib/utils/constants";
 import { ListKotaProps } from "~models";
 
+const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
+
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await ofetch(`${JADWAL_SHOLAT_API}/kota/semua`);
+  const response = await ofetch(`${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`);
 
   return {
     props: {

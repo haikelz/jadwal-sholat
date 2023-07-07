@@ -2,8 +2,9 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Layout from "~components/Layout";
 import { TableJadwalSholat } from "~components/organisms";
+import { env } from "~env.mjs";
 import { useFetch } from "~hooks";
-import { JADWAL_SHOLAT_API, bulan, currentDate, hari, tahun } from "~lib/utils/constants";
+import { bulan, currentDate, hari, tahun } from "~lib/utils/constants";
 
 const Loading = dynamic(() => import("~components/molecules").then((obj) => obj.Loading));
 const ErrorWhenFetch = dynamic(() =>
@@ -13,10 +14,11 @@ const ErrorWhenFetch = dynamic(() =>
 export default function KotaId() {
   const router = useRouter();
   const { id } = router.query;
+  const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
   const formatDate: string = `${tahun}/${bulan}`;
   const { data, isLoading, isError } = useFetch(
-    id ? `${JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : ""
+    id ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : ""
   );
 
   if ((!data && !isError) || isLoading) return <Loading />;
