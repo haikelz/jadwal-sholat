@@ -116,7 +116,9 @@ export function DetailSurat({ surat }: SuratProps) {
               "hover:text-red-500",
               "dark:hover:text-blue-500"
             )}
-            onClick={() => handleClick(surat.asma.id.short, ayat.number.insurah, surat.number)}
+            onClick={() =>
+              handleClick(surat.asma.id.short, ayat.number.insurah, surat.number as number)
+            }
           >
             Tandai ayat
           </button>

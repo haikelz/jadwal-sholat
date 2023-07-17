@@ -1,4 +1,4 @@
-export * from "./ErrorWhenFetch";
+export * from "./ErrorWhileFetch";
 export * from "./Loading";
 export * from "./ModalNotification";
 export * from "./ModalTafsir";

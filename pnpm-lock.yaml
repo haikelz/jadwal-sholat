@@ -31,7 +31,7 @@ specifiers:
   next-router-mock: ^0.9.7
   nextjs-toploader: ^1.4.2
   ofetch: ^1.1.1
-  prettier: 3.0.0
+  prettier: 2.8.8
   react: 18.2.0
   react-dom: 18.2.0
   react-icons: ^4.10.1
@@ -85,7 +85,7 @@ devDependencies:
   jest-environment-jsdom: 29.6.1
   lint-staged: 13.2.3
   next-router-mock: 0.9.7_next@13.4.9+react@18.2.0
-  prettier: 3.0.0
+  prettier: 2.8.8
   typescript: 5.1.6
   webpack: 5.88.1
   windicss-webpack-plugin: 1.7.8
@@ -6097,9 +6097,9 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/3.0.0:
-    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
-    engines: {node: '>=14'}
+  /prettier/2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
 

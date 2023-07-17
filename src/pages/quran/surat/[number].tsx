@@ -16,8 +16,8 @@ const ModalNotification = dynamic(() =>
   import("~components/molecules/ModalNotification").then((obj) => obj.ModalNotification)
 );
 const Loading = dynamic(() => import("~components/molecules/Loading").then((obj) => obj.Loading));
-const ErrorWhenFetch = dynamic(() =>
-  import("~components/molecules/ErrorWhenFetch").then((obj) => obj.ErrorWhenFetch)
+const ErrorWhileFetch = dynamic(() =>
+  import("~components/molecules/ErrorWhileFetch").then((obj) => obj.ErrorWhileFetch)
 );
 
 export default function Surat() {
@@ -42,7 +42,7 @@ export default function Surat() {
   );
 
   if ((!data && !isError) || isLoading) return <Loading />;
-  if (isError || typeof data.data === "undefined") return <ErrorWhenFetch />;
+  if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
 
   const surat = data.data;
 

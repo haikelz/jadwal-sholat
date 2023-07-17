@@ -1,6 +1,7 @@
 /**
  * A helper function for slugify a string
  * Example: Jadwal Sholat => /jadwal-sholat
+ * @param name
  */
 export function slugify(name: string) {
   const matchName: string | undefined = name

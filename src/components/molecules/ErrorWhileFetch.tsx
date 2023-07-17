@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export function ErrorWhenFetch() {
+export function ErrorWhileFetch() {
   return (
     <>
       <Head>

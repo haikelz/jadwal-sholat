@@ -7,8 +7,8 @@ import { useFetch } from "~hooks";
 import { bulan, currentDate, hari, tahun } from "~lib/utils/constants";
 
 const Loading = dynamic(() => import("~components/molecules").then((obj) => obj.Loading));
-const ErrorWhenFetch = dynamic(() =>
-  import("~components/molecules").then((obj) => obj.ErrorWhenFetch)
+const ErrorWhileFetch = dynamic(() =>
+  import("~components/molecules").then((obj) => obj.ErrorWhileFetch)
 );
 
 export default function KotaId() {
@@ -22,7 +22,7 @@ export default function KotaId() {
   );
 
   if ((!data && !isError) || isLoading) return <Loading />;
-  if (isError || typeof data.data === "undefined") return <ErrorWhenFetch />;
+  if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
 
   const waktu = data.data;
 
