@@ -158,3 +158,14 @@ export interface ThemeSliceProps {
   theme: string;
   setTheme: (theme: string) => void;
 }
+
+export interface AsmaulHusnaProps {
+  asmaulHusna: [
+    {
+      urutan: string;
+      latin: string;
+      arab: string;
+      arti: string;
+    }
+  ];
+}

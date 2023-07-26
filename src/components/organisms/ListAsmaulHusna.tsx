@@ -5,10 +5,10 @@ import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
 import { clickAnimation } from "~lib/utils/animations";
-import { asmaulHusna } from "~lib/utils/asmaulHusna";
 import { arab } from "~lib/utils/fonts";
+import { AsmaulHusnaProps } from "~models";
 
-export function ListAsmaulHusna() {
+export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
   const [search, setSearch] = useState<string>("");
 
   const filteredAsmaulHusna = useMemo(
