@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { DateSliceProps, LastReadSliceProps, OptionSliceProps, ThemeSliceProps } from "~models";
+
 import dateSlice from "./slices/dateSlice";
 import lastReadSlice from "./slices/lastReadSlice";
 import optionSlice from "./slices/optionSlice";

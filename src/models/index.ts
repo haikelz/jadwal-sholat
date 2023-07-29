@@ -2,84 +2,85 @@ import { ReactNode } from "react";
 
 export interface ChildrenProps {
   children: ReactNode;
-  title?: string;
 }
 
 export interface ListSuratProps {
-  surat: [
-    surat: {
-      number: string;
-      asma: {
-        id: {
-          short: string;
-        };
-        translation: {
-          id: string;
-        };
+  number: number;
+  asma: {
+    id: {
+      short: string;
+    };
+    translation: {
+      id: string;
+    };
+  };
+  ayahCount: string;
+  type: {
+    id: string;
+  };
+}
+
+export interface BaseSuratProps {
+  number: number;
+  name: string;
+  translation: string;
+  bismillah: {
+    arab: string;
+    translation: string;
+    audio: {
+      alafasy: string;
+    };
+  };
+  asma: {
+    translation: {
+      id: string;
+    };
+    id: {
+      short: string;
+    };
+  };
+  tafsir: {
+    id: string;
+  };
+  description: string;
+  ayahs: [
+    ayat: {
+      number: {
+        insurah: number;
       };
-      ayahCount: string;
-      type: {
+      text: {
+        ar: string;
+        read: string;
+      };
+      audio: {
+        url: string;
+      };
+      translation: {
         id: string;
       };
     }
   ];
-}
-
-export interface SuratProps {
-  surat: {
-    number: number;
-    name: string;
-    translation: string;
-    bismillah: {
-      arab: string;
-      translation: string;
-      audio: {
-        alafasy: string;
-      };
-    };
-    asma: {
-      translation: {
-        id: string;
-      };
-      id: {
-        short: string;
-      };
-    };
-    tafsir: {
-      id: string;
-    };
-    description: string;
-    ayahs: [
-      ayat: {
-        number: {
-          insurah: number;
-        };
-        text: {
-          ar: string;
-          read: string;
-        };
-        audio: {
-          url: string;
-        };
-        translation: {
-          id: string;
-        };
-      }
-    ];
-    type: {
-      id: string;
-    };
+  type: {
+    id: string;
   };
-  audio?: boolean;
-  terjemahan?: boolean;
-  tafsir?: boolean;
 }
 
-export interface ListKotaProps {
-  kota: [
-    loc: {
-      id: string;
-      lokasi: string;
+export interface KotaProps {
+  id: string;
+  lokasi: string;
+  daerah: string;
+  jadwal: [
+    {
+      tanggal: string;
+      imsak: string;
+      subuh: string;
+      terbit: string;
+      dhuha: string;
+      dzuhur: string;
+      ashar: string;
+      maghrib: string;
+      isya: string;
+      date: string;
     }
   ];
 }

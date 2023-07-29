@@ -1,18 +1,18 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
+import AsmaulHusna from "~app/asmaul-husna/page";
+import KotaId from "~app/jadwal-sholat/kota/[id]/page";
+import HomePage from "~app/page";
+import Surat from "~app/quran/surat/[number]/page";
 import { hours } from "~lib/utils/constants";
-import AsmaulHusna from "~pages/asmaul-husna";
-import Home from "~pages/index";
-import KotaId from "~pages/jadwal-sholat/kota/[id]";
-import Surat from "~pages/quran/surat/[number]";
 
 jest.mock("next/router", () => require("next-router-mock"));
 jest.mock("next/dist/client/router", () => require("next-router-mock"));
 
 describe("Home Page", () => {
   it("Should render home page properly", () => {
-    render(<Home />);
+    render(<HomePage />);
 
     const heading = screen.getByRole("heading");
     const headingText = `Selamat ${
