@@ -1,8 +1,8 @@
 import { cx } from "classix";
 import { Sebelumnya, Selanjutnya } from "~components/atoms";
-import { BaseSuratProps } from "~models";
+import { SuratProps } from "~models";
 
-export function PreviousOrNext({ surat }: { surat: BaseSuratProps }) {
+export function PreviousOrNext({ surat }: SuratProps) {
   return (
     <div
       className={cx("flex w-full space-x-3", surat.number > 1 ? "justify-between" : "justify-end")}

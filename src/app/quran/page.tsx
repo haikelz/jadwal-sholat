@@ -43,7 +43,7 @@ export const metadata = {
 
 async function getData() {
   const response = await ofetch(`${NEXT_PUBLIC_QURAN_API}/quran`);
-  return response.data;
+  return response;
 }
 
 export default async function Quran() {

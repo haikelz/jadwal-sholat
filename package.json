@@ -30,6 +30,7 @@
     "react-icons": "^4.10.1",
     "react-secure-storage": "^1.2.2",
     "react-string-replace": "^1.1.1",
+    "swr": "^2.2.0",
     "zod": "^3.21.4",
     "zustand": "^4.3.9"
   },

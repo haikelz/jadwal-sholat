@@ -4,10 +4,12 @@ import { cx } from "classix";
 import dynamic from "next/dynamic";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 import { shallow } from "zustand/shallow";
-import { PreviousOrNext } from "~components/molecules";
+import LoadingClient from "~components/loading-client";
+import { ErrorWhileFetch, PreviousOrNext } from "~components/molecules";
 import { DetailSurat } from "~components/organisms";
+import { env } from "~env.mjs";
+import { useFetch } from "~hooks";
 import { bitter } from "~lib/utils/fonts";
-import { BaseSuratProps } from "~models";
 import useAppStore from "~store";
 
 const ModalTafsir = dynamic(() =>
@@ -17,7 +19,7 @@ const ModalNotification = dynamic(() =>
   import("~components/molecules/modal-notification").then((obj) => obj.ModalNotification)
 );
 
-export default function Client({ surat }: { surat: BaseSuratProps }) {
+export default function Client({ number }: { number: string }) {
   const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir } = useAppStore(
     (state) => ({
       audio: state.audio,
@@ -29,6 +31,17 @@ export default function Client({ surat }: { surat: BaseSuratProps }) {
     }),
     shallow
   );
+
+  const { NEXT_PUBLIC_QURAN_API } = env;
+
+  const { data, isLoading, isError } = useFetch(
+    number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=7` : ""
+  );
+
+  if ((!data && !isError) || isLoading) return <LoadingClient />;
+  if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
+
+  const surat = data.data;
 
   return (
     <>

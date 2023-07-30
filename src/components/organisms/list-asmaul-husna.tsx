@@ -17,7 +17,7 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
         if (search === "") return item;
         else if (item.latin.toLowerCase().includes(search.toLowerCase())) return item;
       }),
-    [search]
+    [search, asmaulHusna]
   );
 
   return (

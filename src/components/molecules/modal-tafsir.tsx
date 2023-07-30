@@ -4,10 +4,10 @@ import { cx } from "classix";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
 import { shallow } from "zustand/shallow";
-import { BaseSuratProps } from "~models";
+import { SuratProps } from "~models";
 import useAppStore from "~store";
 
-export function ModalTafsir({ surat }: { surat: BaseSuratProps }) {
+export function ModalTafsir({ surat }: SuratProps) {
   const { tafsir, setTafsir } = useAppStore(
     (state) => ({
       tafsir: state.tafsir,

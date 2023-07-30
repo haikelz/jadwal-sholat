@@ -2,9 +2,9 @@ import { cx } from "classix";
 import Link from "next/link";
 import { MdOutlineArrowForward } from "react-icons/md";
 import { removeSelectedSurat } from "~lib/helpers";
-import { BaseSuratProps } from "~models";
+import { SuratProps } from "~models";
 
-export function Selanjutnya({ surat }: { surat: BaseSuratProps }) {
+export function Selanjutnya({ surat }: SuratProps) {
   return (
     <>
       {surat.number < 114 ? (

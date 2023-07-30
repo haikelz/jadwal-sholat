@@ -6,10 +6,10 @@ import { memo, useEffect } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { shallow } from "zustand/shallow";
 import { arab } from "~lib/utils/fonts";
-import { BaseSuratProps } from "~models";
+import { SuratProps } from "~models";
 import useAppStore from "~store";
 
-export function DetailSurat({ surat }: { surat: BaseSuratProps }) {
+export function DetailSurat({ surat }: SuratProps) {
   const { lastRead, setLastRead, setNotification, terjemahan, audio } = useAppStore(
     (state) => ({
       lastRead: state.lastRead,

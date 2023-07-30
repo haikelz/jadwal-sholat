@@ -1,8 +1,10 @@
 import { cx } from "classix";
 
-export default function Loading() {
+export default function LoadingClient() {
   return (
-    <div className={cx("flex min-h-screen items-center justify-center", "p-8 text-center")}>
+    <div
+      className={cx("flex min-h-screen items-center justify-center", "p-8 space-x-3 text-center")}
+    >
       <p className="text-2xl font-bold">Loading</p>
       <div role="status">
         <svg

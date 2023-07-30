@@ -12,7 +12,7 @@ import { removeSelectedSurat } from "~lib/helpers";
 import { ListSuratProps } from "~models";
 import useAppStore from "~store";
 
-export function ListSurat({ surat }: { surat: ListSuratProps[] }) {
+export function ListSurat({ surat }: { surat: ListSuratProps }) {
   const [search, setSearch] = useState<string>("");
 
   const { lastRead, setLastRead } = useAppStore(
@@ -25,7 +25,7 @@ export function ListSurat({ surat }: { surat: ListSuratProps[] }) {
 
   const filteredSurat = useMemo(
     () =>
-      surat.filter((value) => {
+      surat.data.filter((value) => {
         if (search === "") return value;
         else if (value.asma.id.short.toLowerCase().includes(search.toLowerCase())) return value;
       }),
