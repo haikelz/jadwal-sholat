@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconType } from "react-icons/lib";
 import { MdBook, MdHomeFilled, MdListAlt, MdOutlineAccessTime } from "react-icons/md";
-import { slugify } from "~lib/helpers";
+import { slugify } from "~lib/helpers/slugify";
 
 const DarkModeIcon = dynamic(() => import("~components/atoms").then((obj) => obj.DarkModeIcon), {
   ssr: false,

@@ -9,7 +9,7 @@ const Time = dynamic(() => import("~components/molecules/time"), {
 });
 
 const baseMetadata = {
-  title: "Home",
+  title: "Home | Jadwal Sholat",
   description: `"Maka nikmat Tuhanmu yang manakah yang kamu dustakan", Ar-Rahman ayat 13`,
   url: SITE_URL,
 };

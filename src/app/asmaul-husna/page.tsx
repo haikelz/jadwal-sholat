@@ -8,7 +8,7 @@ import { bitter } from "~lib/utils/fonts";
 const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 
 const baseMetadata = {
-  title: "Asma'ul Husna",
+  title: "Asma'ul Husna | Jadwal Sholat",
   description: "Berikut daftar Asma'ul Husna",
   url: SITE_URL,
 };

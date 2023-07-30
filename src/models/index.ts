@@ -63,6 +63,9 @@ export interface BaseSuratProps {
   type: {
     id: string;
   };
+  recitation: {
+    full: string;
+  };
 }
 
 export interface KotaProps {

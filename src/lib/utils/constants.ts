@@ -21,4 +21,4 @@ export const matchDate: string = format(date, "yyyy-MM-dd");
 export const browser = typeof window !== "undefined";
 
 export const SITE_URL = "https://info-jadwal-sholat.vercel.app";
-export const DEFAULT_OG_URL = "/icon-512x512.png";
+export const DEFAULT_OG_URL = "/img/opengraph.png";

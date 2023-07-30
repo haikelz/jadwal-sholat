@@ -2,7 +2,7 @@ import { cx } from "classix";
 import { Metadata } from "next";
 import { env } from "~env.mjs";
 import { ofetch } from "~lib/utils/configured-ofetch";
-import { SITE_URL } from "~lib/utils/constants";
+import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
 import { BaseSuratProps, ListSuratProps } from "~models";
 
 import Client from "./client";
@@ -14,7 +14,7 @@ export async function generateStaticParams(): Promise<{ number: string }[]> {
   return response.data.map((item) => ({ number: item.number.toString() }));
 }
 
-export async function generateMetaData({
+export async function generateMetadata({
   params,
 }: {
   params: { number: string };
@@ -26,7 +26,7 @@ export async function generateMetaData({
   const { asma } = response.data;
 
   return {
-    title: asma.id.short,
+    title: `${asma.id.short} | Jadwal Sholat`,
     description: asma.translation.id,
     openGraph: {
       type: "book",
@@ -36,7 +36,7 @@ export async function generateMetaData({
       siteName: "info-jadwal-sholat.vercel.app",
       images: [
         {
-          url: ``,
+          url: DEFAULT_OG_URL,
           alt: "OG Image",
         },
       ],

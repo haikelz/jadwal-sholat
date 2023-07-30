@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { TableJadwalSholat } from "~components/organisms";
 import { env } from "~env.mjs";
 import { ofetch } from "~lib/utils/configured-ofetch";
-import { bulan, currentDate, hari, tahun } from "~lib/utils/constants";
+import { DEFAULT_OG_URL, bulan, currentDate, hari, tahun } from "~lib/utils/constants";
 import { bitter } from "~lib/utils/fonts";
 import { KotaProps } from "~models";
 
@@ -17,7 +17,7 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
   }));
 }
 
-export async function generateMetaData({
+export async function generateMetadata({
   params,
 }: {
   params: { id: string };
@@ -26,27 +26,27 @@ export async function generateMetaData({
   const response: { data: KotaProps } = await ofetch(
     `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
   );
-  const { daerah, lokasi } = response.data;
+  const { lokasi } = response.data;
 
   return {
-    title: daerah,
-    description: lokasi,
+    title: `${lokasi} | Jadwal Sholat`,
+    description: `Jadwal Sholat di ${lokasi}`,
     openGraph: {
       type: "book",
       url: `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`,
-      title: daerah,
-      description: lokasi,
+      title: lokasi,
+      description: `Jadwal Sholat di ${lokasi}`,
       siteName: "info-jadwal-sholat.vercel.app",
       images: [
         {
-          url: ``,
+          url: DEFAULT_OG_URL,
           alt: "OG Image",
         },
       ],
     },
     twitter: {
-      title: daerah,
-      description: lokasi,
+      title: lokasi,
+      description: `Jadwal Sholat di ${lokasi}`,
       site: `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`,
       card: "summary_large_image",
     },

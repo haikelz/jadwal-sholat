@@ -9,7 +9,7 @@ import { bitter } from "~lib/utils/fonts";
 const { NEXT_PUBLIC_QURAN_API } = env;
 
 const baseMetadata = {
-  title: "Baca Al-Qur'an",
+  title: "Baca Al-Qur'an | Jadwal Sholat",
   description: "Berlomba-lombalah kamu dalam berbuat kebaikan",
   url: SITE_URL,
 };

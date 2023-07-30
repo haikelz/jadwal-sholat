@@ -70,6 +70,11 @@ export default function Client({ surat }: { surat: BaseSuratProps }) {
             <p className="text-lg font-bold">Tafsir</p>
           </button>
         </div>
+        {audio ? (
+          <audio className="mt-2" id="audio" preload="auto" src={surat.recitation.full} controls>
+            <track default kind="captions" />
+          </audio>
+        ) : null}
         <ModalTafsir surat={surat} />
       </div>
       <PreviousOrNext surat={surat} />

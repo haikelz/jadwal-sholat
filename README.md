@@ -13,11 +13,9 @@
 
 ## ⚡Tech Stack
 
-- NextJS
+- Next JS 13
 - Typescript
 - Windi CSS
-- SWR
-- Framer Motion
 - Zustand
 
 ## Setup
