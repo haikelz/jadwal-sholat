@@ -3,7 +3,7 @@
   <p>Adalah sebuah Website untuk mendapatkan jadwal sholat, Asma'ul Husna, juga membaca Al-Qur'an</p>
 </div>
 
-## 🗒Fitur
+## 📝Fitur
 
 - Jadwal sholat
 - Baca Al-Qur'an(dengan audio, terjemahan, juga bahasa latin)
@@ -16,9 +16,16 @@
 - Next JS 13
 - Typescript
 - Windi CSS
+- SWR
 - Zustand
 
 ## Setup
+
+Ada 3 branch yang ada di repositori ini:
+
+- `master` sebagai branch utama untuk production.
+- `dev` sebagai branch untuk pengembangan fitur.
+- `pagesDir` sebagai branch penyimpanan perubahan sebelum direfactor ke appDir.
 
 Jika kamu ingin melihat dan mengetes project ini lebih detail:
 

@@ -1,4 +1,5 @@
 import { cx } from "classix";
+import { ReadingProgress } from "~components/atoms";
 import { env } from "~env.mjs";
 import { ofetch } from "~lib/utils/configured-ofetch";
 import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
@@ -50,14 +51,17 @@ export default async function Surat({ params }: { params: { number: string } }) 
   const { number } = params;
 
   return (
-    <div
-      className={cx(
-        "flex w-full max-w-full",
-        "flex-col items-center justify-start",
-        "space-y-7 pt-8 pb-24 md:pb-8"
-      )}
-    >
-      <Client number={number} />
-    </div>
+    <>
+      <ReadingProgress />
+      <div
+        className={cx(
+          "flex w-full max-w-full",
+          "flex-col items-center justify-start",
+          "space-y-7 pt-8 pb-24 md:pb-8"
+        )}
+      >
+        <Client number={number} />
+      </div>
+    </>
   );
 }

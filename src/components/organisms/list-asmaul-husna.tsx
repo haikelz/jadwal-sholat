@@ -38,8 +38,10 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
               className={cx(
                 "flex flex-col items-start justify-center",
                 "overflow-hidden rounded-sm text-left",
-                "border-2 border-black bg-gray-100 p-4 text-start tracking-wide",
-                "cursor-pointer",
+                "border-2 border-black bg-gray-100 p-4",
+                "text-start tracking-wide cursor-pointer",
+                "transition-all",
+                "hover:bg-white",
                 "dark:border-white dark:bg-[#2A2A37]"
               )}
             >

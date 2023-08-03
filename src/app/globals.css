@@ -4,7 +4,6 @@
 
 body {
   scrollbar-width: thin;
-  scrollbar-color: #f84b3e #d1d5db;
 }
 
 body::-webkit-scrollbar {

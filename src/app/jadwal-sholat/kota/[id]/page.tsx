@@ -59,7 +59,7 @@ export default async function KotaId({ params }: { params: { id: string } }) {
         "space-y-7 pt-8 pb-24 md:pb-8"
       )}
     >
-      <Client id={id} />;
+      <Client id={id} />
     </div>
   );
 }
