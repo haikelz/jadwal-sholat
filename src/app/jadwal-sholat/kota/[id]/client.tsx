@@ -2,7 +2,7 @@
 
 import { cx } from "classix";
 import dynamic from "next/dynamic";
-import LoadingClient from "~components/loading-client";
+import { LoadingClient } from "~components/molecules";
 import { TableJadwalSholat } from "~components/organisms";
 import { env } from "~env.mjs";
 import { useFetch } from "~hooks";

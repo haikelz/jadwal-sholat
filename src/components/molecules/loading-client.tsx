@@ -1,6 +1,6 @@
 import { cx } from "classix";
 
-export default function LoadingClient() {
+export function LoadingClient() {
   return (
     <div
       className={cx("flex min-h-screen items-center justify-center", "p-8 space-x-3 text-center")}
