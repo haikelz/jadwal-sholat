@@ -5,8 +5,8 @@ import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
+import { AsmaulHusnaProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
-import { AsmaulHusnaProps } from "~models";
 
 export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
   const [search, setSearch] = useState<string>("");
@@ -40,8 +40,6 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
                 "overflow-hidden rounded-sm text-left",
                 "border-2 border-black bg-gray-100 p-4",
                 "text-start tracking-wide cursor-pointer",
-                "transition-all",
-                "hover:bg-white",
                 "dark:border-white dark:bg-[#2A2A37]"
               )}
             >

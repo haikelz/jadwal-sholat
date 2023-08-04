@@ -1,6 +1,6 @@
 import { cx } from "classix";
 import { Sebelumnya, Selanjutnya } from "~components/atoms";
-import { SuratProps } from "~models";
+import { SuratProps } from "~interfaces";
 
 export function PreviousOrNext({ surat }: SuratProps) {
   return (

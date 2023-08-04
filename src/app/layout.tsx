@@ -2,8 +2,8 @@ import { cx } from "classix";
 import "windi.css";
 import { BackToTop } from "~components/atoms";
 import { Navbar } from "~components/organisms";
+import { ChildrenProps } from "~interfaces";
 import { arab, bitter, rubik } from "~lib/utils/fonts";
-import { ChildrenProps } from "~models";
 
 import "./globals.css";
 

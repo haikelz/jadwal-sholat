@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { DateSliceProps } from "~models";
+import { DateSliceProps } from "~interfaces";
 
 const dateSlice: StateCreator<DateSliceProps, [], [], DateSliceProps> = (set) => ({
   date: new Date(),

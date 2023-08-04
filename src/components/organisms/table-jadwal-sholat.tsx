@@ -1,6 +1,6 @@
 import { cx } from "classix";
+import { WaktuProps } from "~interfaces";
 import { matchDate } from "~lib/utils/constants";
-import { WaktuProps } from "~models";
 
 const tableJadwalSholatList = [
   { id: 1, name: "Tanggal" },

@@ -18,6 +18,8 @@ const ModalNotification = dynamic(() =>
   import("~components/molecules/modal-notification").then((obj) => obj.ModalNotification)
 );
 
+const { NEXT_PUBLIC_QURAN_API } = env;
+
 export default function Client({ number }: { number: string }) {
   const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir } = useAppStore(
     (state) => ({
@@ -30,8 +32,6 @@ export default function Client({ number }: { number: string }) {
     }),
     shallow
   );
-
-  const { NEXT_PUBLIC_QURAN_API } = env;
 
   const { data, isLoading, isError } = useFetch(
     number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=7` : ""

@@ -5,8 +5,8 @@ import { nanoid } from "nanoid";
 import { memo, useEffect } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { shallow } from "zustand/shallow";
+import { SuratProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
-import { SuratProps } from "~models";
 import useAppStore from "~store";
 
 export function DetailSurat({ surat }: SuratProps) {

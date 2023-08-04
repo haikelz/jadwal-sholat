@@ -1,9 +1,10 @@
-import PWA from "next-pwa";
+import withPWAInit from "@ducanh2912/next-pwa";
 import WindiCSSWebpackPlugin from "windicss-webpack-plugin";
+
 import "./src/env.mjs";
 
 /** @type {import('next').NextConfig} */
-const withPWA = PWA({
+const withPWA = withPWAInit({
   dest: "public",
   register: true,
   skipWaiting: true,

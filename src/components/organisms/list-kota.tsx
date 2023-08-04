@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
-import { KotaProps } from "~models";
+import { KotaProps } from "~interfaces";
 
 export function ListKota({ kota }: { kota: KotaProps[] }) {
   const [search, setSearch] = useState<string>("");
@@ -50,8 +50,6 @@ export function ListKota({ kota }: { kota: KotaProps[] }) {
                   "flex h-full items-center justify-center",
                   "overflow-hidden rounded-sm text-black",
                   "border-2 border-black bg-gray-100 py-6 px-10",
-                  "transition-all",
-                  "hover:bg-white",
                   "dark:border-white dark:bg-[#2A2A37] dark:text-white"
                 )}
               >

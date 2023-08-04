@@ -4,7 +4,7 @@ import { cx } from "classix";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
 import { shallow } from "zustand/shallow";
-import { SuratProps } from "~models";
+import { SuratProps } from "~interfaces";
 import useAppStore from "~store";
 
 export function ModalTafsir({ surat }: SuratProps) {

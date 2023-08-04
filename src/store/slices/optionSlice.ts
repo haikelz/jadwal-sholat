@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { OptionSliceProps } from "~models";
+import { OptionSliceProps } from "~interfaces";
 
 const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (set) => ({
   audio: false,

@@ -1,6 +1,6 @@
 import { cx } from "classix";
+import { PuasaSunnahProps } from "~interfaces";
 import { matchDate, numBulan } from "~lib/utils/constants";
-import { PuasaSunnahProps } from "~models";
 
 export function TableJadwalPuasaSunnah({ puasaSunnah }: PuasaSunnahProps) {
   return (

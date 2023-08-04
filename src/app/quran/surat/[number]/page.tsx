@@ -1,9 +1,9 @@
 import { cx } from "classix";
 import { ReadingProgress } from "~components/atoms";
 import { env } from "~env.mjs";
+import { ListSuratProps } from "~interfaces";
 import { ofetch } from "~lib/utils/configured-ofetch";
 import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
-import { ListSuratProps } from "~models";
 
 import Client from "./client";
 

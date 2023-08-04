@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { LastReadSliceProps } from "~models";
+import { LastReadSliceProps } from "~interfaces";
 
 const lastReadSlice: StateCreator<LastReadSliceProps, [], [], LastReadSliceProps> = (set) => ({
   lastRead: {

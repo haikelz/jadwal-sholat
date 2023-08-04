@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
+import { ThemeSliceProps } from "~interfaces";
 import { browser } from "~lib/utils/constants";
-import { ThemeSliceProps } from "~models";
 
 const localValue = browser ? localStorage.getItem("theme") : "light";
 const systemTheme =

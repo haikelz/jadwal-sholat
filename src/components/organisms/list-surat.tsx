@@ -8,8 +8,8 @@ import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
 import { TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
+import { ListSuratProps } from "~interfaces";
 import { removeSelectedSurat } from "~lib/helpers";
-import { ListSuratProps } from "~models";
 import useAppStore from "~store";
 
 export function ListSurat({ surat }: { surat: ListSuratProps }) {
@@ -92,8 +92,6 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
                   "flex flex-col rounded-sm",
                   "border-2 border-black bg-gray-100",
                   "p-4 text-left text-black",
-                  "transition-all",
-                  "hover:bg-white",
                   "dark:border-gray-200 dark:bg-[#2A2A37] dark:text-white"
                 )}
               >
