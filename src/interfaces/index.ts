@@ -144,10 +144,12 @@ export interface OptionSliceProps {
   terjemahan: boolean;
   notification: boolean;
   isMore: boolean;
+  qori: number;
   setNotification: (status: boolean) => void;
   setAudio: (status: boolean) => void;
   setTerjemahan: (status: boolean) => void;
   setTafsir: (status: boolean) => void;
+  setQori: (id: number) => void;
 }
 
 export interface ThemeSliceProps {

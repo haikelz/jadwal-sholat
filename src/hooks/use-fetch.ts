@@ -9,7 +9,7 @@ export function useFetch(link: string) {
     return response;
   }
 
-  const { data, isLoading, error } = useSWR(link, getData, {
+  const { data, isLoading, error, mutate } = useSWR(link, getData, {
     keepPreviousData: true,
   });
 
@@ -17,5 +17,6 @@ export function useFetch(link: string) {
     data,
     isLoading,
     isError: error,
+    mutate,
   };
 }

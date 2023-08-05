@@ -49,3 +49,9 @@ audio {
 .modal-blur {
   backdrop-filter: blur(5px);
 }
+
+@media (max-width: 445px) {
+  .select-qori {
+    margin-top: 10px;
+  }
+}

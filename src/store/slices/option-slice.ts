@@ -7,6 +7,7 @@ const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (s
   tafsir: false,
   terjemahan: false,
   notification: false,
+  qori: 7,
   setNotification: (status) => set({ notification: status }),
   setAudio: (status) =>
     set({
@@ -17,6 +18,7 @@ const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (s
       terjemahan: status,
     })),
   setTafsir: (status) => set({ tafsir: status }),
+  setQori: (id) => set({ qori: id }),
 });
 
 export default optionSlice;

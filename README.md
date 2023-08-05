@@ -6,7 +6,7 @@
 ## 📝Fitur
 
 - Jadwal sholat
-- Baca Al-Qur'an(dengan audio, terjemahan, juga bahasa latin)
+- Baca Al-Qur'an(dengan audio yang bisa dipilih berdasarkan qori', terjemahan, juga bahasa latin)
 - Asma'ul Husna
 - ~~Jadwal puasa sunnah~~ Dari API nya udah ga valid lagi, soalnya jadwalnya untuk 2022 saja. Untuk detail bagian puasa sunnah aslinya, bisa lihat di bagian **Screenshots**
 - Udah PWA
