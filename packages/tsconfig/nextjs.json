@@ -4,17 +4,14 @@
   "extends": "./base.json",
   "compilerOptions": {
     "plugins": [{ "name": "next" }],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "ESNext"],
     "allowJs": true,
-    "declaration": false,
-    "declarationMap": false,
-    "incremental": true,
-    "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
     "noEmit": true,
+    "module": "esnext",
     "resolveJsonModule": true,
-    "strict": false,
-    "target": "es5"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": ["src", "next-env.d.ts"],
   "exclude": ["node_modules"]
