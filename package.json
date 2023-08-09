@@ -1,65 +1,23 @@
 {
-  "name": "jadwal-sholat",
-  "author": "Haikel Ilham Hakim",
-  "version": "1.0.0",
-  "license": "MIT",
-  "description": "Aplikasi Web untuk menampilkan jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "export": "next export",
-    "prepare": "husky install",
+    "build": "turbo run build",
     "commit": "cz",
-    "test": "jest",
-    "coverage": "jest --coverage"
-  },
-  "dependencies": {
-    "@ducanh2912/next-pwa": "^9.4.0",
-    "@t3-oss/env-nextjs": "^0.6.0",
-    "classix": "^2.1.34",
-    "date-fns": "^2.30.0",
-    "nanoid": "^4.0.2",
-    "next": "13.4.12",
-    "ofetch": "^1.1.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-icons": "^4.10.1",
-    "react-secure-storage": "^1.2.2",
-    "react-string-replace": "^1.1.1",
-    "swr": "^2.2.0",
-    "zod": "^3.21.4",
-    "zustand": "^4.3.9"
+    "dev": "turbo run dev --parallel",
+    "format": "prettier . --write",
+    "lint": "turbo run lint",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.9",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^14.0.0",
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
-    "@types/jest": "^29.5.3",
-    "@types/node": "20.4.5",
-    "@types/react": "18.2.17",
-    "@types/react-dom": "18.2.7",
-    "@types/testing-library__jest-dom": "^5.14.9",
-    "babel-loader": "^9.1.3",
+    "@turbo/gen": "^1.9.7",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "8.46.0",
-    "eslint-config-next": "13.4.12",
-    "eslint-config-prettier": "^8.9.0",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-react": "7.33.0",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
     "husky": "^8.0.3",
-    "jest": "^29.6.2",
-    "jest-environment-jsdom": "^29.6.2",
-    "lint-staged": "^13.2.3",
-    "next-router-mock": "^0.9.7",
-    "prettier": "2.8.8",
-    "typescript": "5.1.6",
-    "webpack": "^5.88.2",
-    "windicss-webpack-plugin": "^1.7.8"
+    "prettier": "^2.8.8",
+    "turbo": "latest"
   },
   "config": {
     "commitizen": {
@@ -79,5 +37,7 @@
     "**/*.{css,scss,md,html,json}": [
       "prettier --config ./.prettierrc.json --write"
     ]
-  }
+  },
+  "packageManager": "pnpm@8.6.10",
+  "name": "jadwal-sholat"
 }

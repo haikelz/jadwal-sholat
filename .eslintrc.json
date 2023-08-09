@@ -1,10 +1,13 @@
 {
+  "root": true,
   "extends": [
-    "next/core-web-vitals",
-    "prettier",
-    "plugin:jsx-a11y/recommended"
+    "custom"
   ],
-  "plugins": [
-    "jsx-a11y"
-  ]
+  "settings": {
+    "next": {
+      "rootDir": [
+        "apps/*/"
+      ]
+    }
+  }
 }

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "lint": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  },
+  "globalEnv": [
+    "NODE_ENV",
+    "NEXT_PUBLIC_QURAN_API",
+    "NEXT_PUBLIC_PUASA_SUNNAH_API",
+    "NEXT_PUBLIC_JADWAL_SHOLAT_API",
+    "NEXT_PUBLIC_ASMAUL_HUSNA_API"
+  ]
+}
