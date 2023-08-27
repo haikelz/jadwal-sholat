@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 import { shallow } from "zustand/shallow";
 import { browser } from "~lib/utils/constants";
-import useAppStore from "~store";
+import useGlobalStore from "~store";
 
 export function useTheme() {
-  const { theme, setTheme } = useAppStore(
+  const { theme, setTheme } = useGlobalStore(
     (state) => ({
       theme: state.theme,
       setTheme: state.setTheme,

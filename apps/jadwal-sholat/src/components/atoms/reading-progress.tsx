@@ -25,7 +25,7 @@ export function ReadingProgress() {
   return (
     <div
       style={{ width: width + "%" }}
-      className={cx("fixed z-10 h-1.5 bg-rose-400", "dark:bg-blue-500")}
+      className={cx("fixed z-10 h-1 bg-rose-400", "dark:bg-blue-500")}
     ></div>
   );
 }

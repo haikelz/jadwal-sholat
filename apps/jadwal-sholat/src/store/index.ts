@@ -7,7 +7,7 @@ import lastReadSlice from "./slices/last-read-slice";
 import optionSlice from "./slices/option-slice";
 import themeSlice from "./slices/theme-slice";
 
-const useAppStore = create<
+const useGlobalStore = create<
   LastReadSliceProps & DateSliceProps & OptionSliceProps & ThemeSliceProps
 >()(
   devtools((...set) => ({
@@ -18,4 +18,4 @@ const useAppStore = create<
   }))
 );
 
-export default useAppStore;
+export default useGlobalStore;

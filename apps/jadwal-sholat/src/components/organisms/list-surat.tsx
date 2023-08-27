@@ -10,12 +10,12 @@ import { TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
 import { ListSuratProps } from "~interfaces";
 import { removeSelectedSurat } from "~lib/helpers";
-import useAppStore from "~store";
+import useGlobalStore from "~store";
 
 export function ListSurat({ surat }: { surat: ListSuratProps }) {
   const [search, setSearch] = useState<string>("");
 
-  const { lastRead, setLastRead } = useAppStore(
+  const { lastRead, setLastRead } = useGlobalStore(
     (state) => ({
       lastRead: state.lastRead,
       setLastRead: state.setLastRead,

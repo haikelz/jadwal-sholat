@@ -3,6 +3,7 @@
 import { cx } from "classix";
 import dynamic from "next/dynamic";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
+import { useAudioPlayer } from "react-use-audio-player";
 import { shallow } from "zustand/shallow";
 import { ErrorWhileFetch, LoadingClient, PreviousOrNext } from "~components/molecules";
 import { DetailSurat } from "~components/organisms";
@@ -10,7 +11,7 @@ import { env } from "~env.mjs";
 import { useFetch } from "~hooks";
 import { bitter } from "~lib/utils/fonts";
 import { qoriOptions } from "~lib/utils/qori-options";
-import useAppStore from "~store";
+import useGlobalStore from "~store";
 
 const ModalTafsir = dynamic(() =>
   import("~components/molecules/modal-tafsir").then((obj) => obj.ModalTafsir)
@@ -23,7 +24,7 @@ const { NEXT_PUBLIC_QURAN_API } = env;
 
 export default function Client({ number }: { number: string }) {
   const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir, qori, setQori } =
-    useAppStore(
+    useGlobalStore(
       (state) => ({
         audio: state.audio,
         terjemahan: state.terjemahan,
@@ -36,6 +37,15 @@ export default function Client({ number }: { number: string }) {
       }),
       shallow
     );
+
+  const { stop } = useAudioPlayer();
+
+  function handleShowAudio() {
+    setAudio(!audio);
+
+    // stop sound(if it's still playing)
+    stop();
+  }
 
   const { data, isLoading, isError } = useFetch(
     number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : ""
@@ -62,7 +72,7 @@ export default function Client({ number }: { number: string }) {
             type="button"
             aria-label="show audio"
             className="flex items-center space-x-1"
-            onClick={() => setAudio(!audio)}
+            onClick={handleShowAudio}
           >
             <MdVolumeUp size={20} />
             <p className="text-lg font-bold">Audio</p>
@@ -103,11 +113,6 @@ export default function Client({ number }: { number: string }) {
             ))}
           </select>
         </div>
-        {audio ? (
-          <audio className="mt-2" id="audio" preload="auto" src={surat.recitation.full} controls>
-            <track default kind="captions" />
-          </audio>
-        ) : null}
         <ModalTafsir surat={surat} />
       </div>
       <PreviousOrNext surat={surat} />

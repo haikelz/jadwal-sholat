@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 import { shallow } from "zustand/shallow";
-import useAppStore from "~store";
+import useGlobalStore from "~store";
 
 export function useDate() {
-  const { date, setDate } = useAppStore(
+  const { date, setDate } = useGlobalStore(
     (state) => ({ date: state.date, setDate: state.setDate }),
     shallow
   );
