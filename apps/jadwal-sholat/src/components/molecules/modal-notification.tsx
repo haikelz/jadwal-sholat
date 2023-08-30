@@ -2,17 +2,13 @@
 
 import { cx } from "classix";
 import { memo } from "react";
-import { shallow } from "zustand/shallow";
 import useGlobalStore from "~store";
 
 export function ModalNotification({ description }: { description: string }) {
-  const { notification, setNotification } = useGlobalStore(
-    (state) => ({
-      notification: state.notification,
-      setNotification: state.setNotification,
-    }),
-    shallow
-  );
+  const { notification, setNotification } = useGlobalStore((state) => ({
+    notification: state.notification,
+    setNotification: state.setNotification,
+  }));
 
   return (
     <>

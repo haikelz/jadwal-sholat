@@ -6,23 +6,21 @@ export interface ChildrenProps {
 }
 
 export interface ListSuratProps {
-  data: [
-    {
-      number: string;
-      asma: {
-        id: {
-          short: string;
-        };
-        translation: {
-          id: string;
-        };
+  data: {
+    number: string;
+    asma: {
+      id: {
+        short: string;
       };
-      ayahCount: string;
-      type: {
+      translation: {
         id: string;
       };
-    }
-  ];
+    };
+    ayahCount: string;
+    type: {
+      id: string;
+    };
+  }[];
 }
 
 export interface SuratProps {
@@ -123,19 +121,16 @@ export interface DateSliceProps {
   setDate: (func: Function) => void;
 }
 
+interface LastReadProps {
+  id: string;
+  name: string;
+  ayat: number | null;
+  number: number | null;
+}
+
 export interface LastReadSliceProps {
-  lastRead: {
-    id: string;
-    name: string;
-    ayat: number | null;
-    number: number | null;
-  };
-  setLastRead: (lastRead: {
-    id: string;
-    name: string;
-    ayat: number | null;
-    number: number | null;
-  }) => void;
+  lastRead: LastReadProps;
+  setLastRead: (lastRead: LastReadProps) => void;
 }
 
 export interface OptionSliceProps {
@@ -158,12 +153,10 @@ export interface ThemeSliceProps {
 }
 
 export interface AsmaulHusnaProps {
-  asmaulHusna: [
-    {
-      urutan: string;
-      latin: string;
-      arab: string;
-      arti: string;
-    }
-  ];
+  asmaulHusna: {
+    urutan: string;
+    latin: string;
+    arab: string;
+    arti: string;
+  }[];
 }

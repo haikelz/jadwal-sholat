@@ -9,14 +9,6 @@ export function BackToTop() {
   const scroll = useScroll();
   const height = 150;
 
-  function handleClick() {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }
-
   return (
     <>
       {scroll >= height ? (
@@ -29,7 +21,13 @@ export function BackToTop() {
               "hover:bg-rose-500",
               "dark:bg-blue-500 dark:hover:bg-blue-600"
             )}
-            onClick={handleClick}
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              });
+            }}
           >
             <MdKeyboardArrowUp className="text-white" size="32" />
           </button>

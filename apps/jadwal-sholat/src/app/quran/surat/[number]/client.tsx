@@ -4,7 +4,6 @@ import { cx } from "classix";
 import dynamic from "next/dynamic";
 import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
 import { useAudioPlayer } from "react-use-audio-player";
-import { shallow } from "zustand/shallow";
 import { ErrorWhileFetch, LoadingClient, PreviousOrNext } from "~components/molecules";
 import { DetailSurat } from "~components/organisms";
 import { env } from "~env.mjs";
@@ -24,19 +23,16 @@ const { NEXT_PUBLIC_QURAN_API } = env;
 
 export default function Client({ number }: { number: string }) {
   const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir, qori, setQori } =
-    useGlobalStore(
-      (state) => ({
-        audio: state.audio,
-        terjemahan: state.terjemahan,
-        setAudio: state.setAudio,
-        setTerjemahan: state.setTerjemahan,
-        tafsir: state.tafsir,
-        setTafsir: state.setTafsir,
-        qori: state.qori,
-        setQori: state.setQori,
-      }),
-      shallow
-    );
+    useGlobalStore((state) => ({
+      audio: state.audio,
+      terjemahan: state.terjemahan,
+      setAudio: state.setAudio,
+      setTerjemahan: state.setTerjemahan,
+      tafsir: state.tafsir,
+      setTafsir: state.setTafsir,
+      qori: state.qori,
+      setQori: state.setQori,
+    }));
 
   const { stop } = useAudioPlayer();
 

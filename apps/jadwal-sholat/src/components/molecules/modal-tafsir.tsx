@@ -3,18 +3,14 @@
 import { cx } from "classix";
 import { memo } from "react";
 import { MdClose } from "react-icons/md";
-import { shallow } from "zustand/shallow";
 import { SuratProps } from "~interfaces";
 import useGlobalStore from "~store";
 
 export function ModalTafsir({ surat }: SuratProps) {
-  const { tafsir, setTafsir } = useGlobalStore(
-    (state) => ({
-      tafsir: state.tafsir,
-      setTafsir: state.setTafsir,
-    }),
-    shallow
-  );
+  const { tafsir, setTafsir } = useGlobalStore((state) => ({
+    tafsir: state.tafsir,
+    setTafsir: state.setTafsir,
+  }));
 
   return (
     <>

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
-import { shallow } from "zustand/shallow";
 import { TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
 import { ListSuratProps } from "~interfaces";
@@ -15,13 +14,10 @@ import useGlobalStore from "~store";
 export function ListSurat({ surat }: { surat: ListSuratProps }) {
   const [search, setSearch] = useState<string>("");
 
-  const { lastRead, setLastRead } = useGlobalStore(
-    (state) => ({
-      lastRead: state.lastRead,
-      setLastRead: state.setLastRead,
-    }),
-    shallow
-  );
+  const { lastRead, setLastRead } = useGlobalStore((state) => ({
+    lastRead: state.lastRead,
+    setLastRead: state.setLastRead,
+  }));
 
   const filteredSurat = useMemo(
     () =>

@@ -6,22 +6,18 @@ import { memo, useEffect, useState } from "react";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 import secureLocalStorage from "react-secure-storage";
 import { useAudioPlayer } from "react-use-audio-player";
-import { shallow } from "zustand/shallow";
 import { SuratProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
 
 export function DetailSurat({ surat }: SuratProps) {
-  const { lastRead, setLastRead, setNotification, terjemahan, audio } = useGlobalStore(
-    (state) => ({
-      lastRead: state.lastRead,
-      setLastRead: state.setLastRead,
-      setNotification: state.setNotification,
-      terjemahan: state.terjemahan,
-      audio: state.audio,
-    }),
-    shallow
-  );
+  const { lastRead, setLastRead, setNotification, terjemahan, audio } = useGlobalStore((state) => ({
+    lastRead: state.lastRead,
+    setLastRead: state.setLastRead,
+    setNotification: state.setNotification,
+    terjemahan: state.terjemahan,
+    audio: state.audio,
+  }));
 
   const [audioIndex, setAudioIndex] = useState<number>(0);
   const [isPlayAudio, setIsPlayAudio] = useState<boolean>(false);
@@ -87,13 +83,10 @@ export function DetailSurat({ surat }: SuratProps) {
   }, [load, audioIndex, setAudioIndex, isPlayAudio, setIsAudioEnded, setAyat]);
 
   useEffect(() => {
-    const lastReadId = document.getElementById(`ayat-${lastRead.ayat?.toString() as string}`);
+    const lastReadId = document.getElementById(`ayat-${lastRead.ayat?.toString()}`);
     const ayatId = document.getElementById(ayat);
 
-    if (
-      lastReadId &&
-      lastRead.number === Number(secureLocalStorage.getItem("selected-surat") as string)
-    ) {
+    if (lastReadId && lastRead.number === Number(secureLocalStorage.getItem("selected-surat"))) {
       lastReadId.scrollIntoView({ behavior: "smooth" });
     }
 

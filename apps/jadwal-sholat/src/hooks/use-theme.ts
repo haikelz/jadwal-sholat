@@ -1,18 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { shallow } from "zustand/shallow";
 import { browser } from "~lib/utils/constants";
 import useGlobalStore from "~store";
 
 export function useTheme() {
-  const { theme, setTheme } = useGlobalStore(
-    (state) => ({
-      theme: state.theme,
-      setTheme: state.setTheme,
-    }),
-    shallow
-  );
+  const { theme, setTheme } = useGlobalStore((state) => ({
+    theme: state.theme,
+    setTheme: state.setTheme,
+  }));
 
   useEffect(() => {
     if (!browser) return;
