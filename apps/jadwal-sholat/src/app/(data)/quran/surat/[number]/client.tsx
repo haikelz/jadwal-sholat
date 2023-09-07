@@ -43,12 +43,12 @@ export default function Client({ number }: { number: string }) {
     stop();
   }
 
-  const { data, isLoading, isError } = useFetch(
+  const { data, isLoading, error } = useFetch(
     number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : ""
   );
 
-  if ((!data && !isError) || isLoading) return <LoadingClient />;
-  if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
+  if ((!data && error) || isLoading) return <LoadingClient />;
+  if (error || typeof data.data === "undefined") return <ErrorWhileFetch />;
 
   const surat = data.data;
 

@@ -2,7 +2,7 @@ import { cx } from "classix";
 import { ReadingProgress } from "~components/atoms";
 import { env } from "~env.mjs";
 import { ListSuratProps } from "~interfaces";
-import { ofetch } from "~lib/utils/configured-ofetch";
+import { getData } from "~lib/utils/axios-config";
 import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
 
 import Client from "./client";
@@ -10,7 +10,7 @@ import Client from "./client";
 const { NEXT_PUBLIC_QURAN_API } = env;
 
 export async function generateStaticParams(): Promise<{ number: string }[]> {
-  const response: ListSuratProps = await ofetch(`${NEXT_PUBLIC_QURAN_API}/quran`);
+  const response: ListSuratProps = await getData(`${NEXT_PUBLIC_QURAN_API}/quran`);
   return response.data.map((item) => ({ number: item.number.toString() }));
 }
 

@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
-import AsmaulHusna from "~app/asmaul-husna/page";
-import KotaId from "~app/jadwal-sholat/kota/[id]/page";
+import AsmaulHusna from "~app/(data)/asmaul-husna/page";
+import KotaId from "~app/(data)/jadwal-sholat/kota/[id]/page";
+import Surat from "~app/(data)/quran/surat/[number]/page";
 import HomePage from "~app/page";
-import Surat from "~app/quran/surat/[number]/page";
 import { hours } from "~lib/utils/constants";
 
 jest.mock("next/router", () => require("next-router-mock"));

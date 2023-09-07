@@ -1,5 +1,5 @@
 import { cx } from "classix";
-import { Sebelumnya, Selanjutnya } from "~components/atoms";
+import { Next, Previous } from "~components/atoms";
 import { SuratProps } from "~interfaces";
 
 export function PreviousOrNext({ surat }: SuratProps) {
@@ -7,8 +7,8 @@ export function PreviousOrNext({ surat }: SuratProps) {
     <div
       className={cx("flex w-full space-x-3", surat.number > 1 ? "justify-between" : "justify-end")}
     >
-      <Sebelumnya surat={surat} />
-      <Selanjutnya surat={surat} />
+      <Previous surat={surat} />
+      <Next surat={surat} />
     </div>
   );
 }

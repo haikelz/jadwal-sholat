@@ -1,7 +1,7 @@
 import { cx } from "classix";
 import { ListAsmaulHusna } from "~components/organisms";
 import { env } from "~env.mjs";
-import { ofetch } from "~lib/utils/configured-ofetch";
+import { getData } from "~lib/utils/axios-config";
 import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
 import { bitter } from "~lib/utils/fonts";
 
@@ -40,13 +40,13 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-async function getData() {
-  const response = await ofetch(`${NEXT_PUBLIC_ASMAUL_HUSNA_API}/all`);
+async function getAsmaulHusna() {
+  const response = await getData(`${NEXT_PUBLIC_ASMAUL_HUSNA_API}/all`);
   return response.data;
 }
 
 export default async function AsmaulHusna() {
-  const asmaulHusna = await getData();
+  const asmaulHusna = await getAsmaulHusna();
 
   return (
     <div

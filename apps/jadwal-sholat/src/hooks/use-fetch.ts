@@ -1,22 +1,18 @@
 "use client";
 
-import useSWR from "swr";
-import { ofetch } from "~lib/utils/configured-ofetch";
+import useSWRImmutable from "swr/immutable";
+import { getData } from "~lib/utils/axios-config";
 
 export function useFetch(link: string) {
-  async function getData(link: string) {
-    const response = await ofetch(link);
+  async function fetcher(link: string) {
+    const response = await getData(link);
     return response;
   }
 
-  const { data, isLoading, error, mutate } = useSWR(link, getData, {
+  return useSWRImmutable(link, fetcher, {
     keepPreviousData: true,
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+    revalidateOnReconnect: false,
   });
-
-  return {
-    data,
-    isLoading,
-    isError: error,
-    mutate,
-  };
 }

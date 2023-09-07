@@ -1,3 +1,5 @@
+"use client";
+
 import { cx } from "classix";
 import { Dispatch, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";

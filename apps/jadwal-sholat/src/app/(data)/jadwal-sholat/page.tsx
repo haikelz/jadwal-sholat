@@ -1,16 +1,16 @@
 import { cx } from "classix";
 import Image from "next/image";
-import { ListSurat } from "~components/organisms";
+import { ListKota } from "~components/organisms";
 import { env } from "~env.mjs";
-import { ofetch } from "~lib/utils/configured-ofetch";
+import { getData } from "~lib/utils/axios-config";
 import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
 import { bitter } from "~lib/utils/fonts";
 
-const { NEXT_PUBLIC_QURAN_API } = env;
+const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
 const baseMetadata = {
-  title: "Baca Al-Qur'an | Jadwal Sholat",
-  description: "Berlomba-lombalah kamu dalam berbuat kebaikan",
+  title: "Jadwal Sholat",
+  description: "Berikut daftar Kabupaten/Kota yang tersedia",
   url: SITE_URL,
 };
 
@@ -41,13 +41,13 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-async function getData() {
-  const response = await ofetch(`${NEXT_PUBLIC_QURAN_API}/quran`);
+async function getJadwalSholat() {
+  const response = await getData(`${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`);
   return response;
 }
 
-export default async function Quran() {
-  const surat = await getData();
+export default async function JadwalSholat() {
+  const kota = await getJadwalSholat();
 
   return (
     <div
@@ -58,17 +58,22 @@ export default async function Quran() {
       )}
     >
       <div className="flex flex-col items-center justify-center">
-        <div className="flex items-center justify-center space-x-3">
+        <div className="flex items-center justify-center gap-3">
           <h1 className={cx("text-3xl font-bold tracking-wide sm:text-4xl", bitter.className)}>
-            Baca Al-Qur&#39;an
+            Jadwal Sholat
           </h1>
-          <Image src="/img/Quran.webp" width={40} height={40} alt="Al-Qur'an" />
+          <Image
+            src="/img/mosque.webp"
+            width={40}
+            height={40}
+            alt="Mosque"
+            priority
+            loading="eager"
+          />
         </div>
-        <p className="mt-2 text-lg font-medium">
-          &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;
-        </p>
+        <p className="mt-2 text-lg font-medium">Berikut daftar Kabupaten/Kota yang tersedia</p>
       </div>
-      <ListSurat surat={surat} />
+      <ListKota kota={kota} />
     </div>
   );
 }

@@ -31,7 +31,7 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 
 - Clone project ini `git clone https://github.com/haikelz/jadwal-sholat.git`
 - Install dependencies dengan perintah `pnpm install`. Jika kamu memakai Package Manager yang lain, silahkan menyesuaikan dan jangan lupa untuk menghapus file `pnpm-lock.yaml`.
-- Selanjutnya, ketikkan perintah `pnpm run dev` dan lihat hasilnya di browser => `http://localhost:3000`
+- Next, ketikkan perintah `pnpm run dev` dan lihat hasilnya di browser => `http://localhost:3000`
 
 ## Screenshots
 

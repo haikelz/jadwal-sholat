@@ -6,6 +6,7 @@ import { memo, useEffect, useState } from "react";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 import secureLocalStorage from "react-secure-storage";
 import { useAudioPlayer } from "react-use-audio-player";
+import useDeepCompareEffect from "use-deep-compare-effect";
 import { SuratProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
@@ -45,7 +46,7 @@ export function DetailSurat({ surat }: SuratProps) {
     saveData(data);
   }
 
-  function handlePlayAudio(index: number, ayat: number): void {
+  function handlePlayAudio(index: number, ayat: number) {
     setAudioIndex(() => {
       if (index > audioList.length - 1) return 0;
       return index;
@@ -57,13 +58,13 @@ export function DetailSurat({ surat }: SuratProps) {
     play();
   }
 
-  function handlePauseAudio(): void {
+  function handlePauseAudio() {
     setIsPlayAudio(false);
     pause();
   }
 
   // autoplay to next audio logic
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     isPlayAudio
       ? load(audioList[audioIndex], {
           autoplay: true,
@@ -80,7 +81,7 @@ export function DetailSurat({ surat }: SuratProps) {
           },
         })
       : null;
-  }, [load, audioIndex, setAudioIndex, isPlayAudio, setIsAudioEnded, setAyat]);
+  }, [load, audioIndex, setAudioIndex, isPlayAudio, setIsAudioEnded, setAyat, audioList]);
 
   useEffect(() => {
     const lastReadId = document.getElementById(`ayat-${lastRead.ayat?.toString()}`);

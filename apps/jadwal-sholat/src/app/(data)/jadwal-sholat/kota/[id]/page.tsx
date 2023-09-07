@@ -1,7 +1,7 @@
 import { cx } from "classix";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
-import { ofetch } from "~lib/utils/configured-ofetch";
+import { getData } from "~lib/utils/axios-config";
 import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
 
 import Client from "./client";
@@ -9,7 +9,7 @@ import Client from "./client";
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
-  const response: KotaProps[] = await ofetch(`${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`);
+  const response: KotaProps[] = await getData(`${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`);
   return response.map((item) => ({
     id: item.id,
   }));

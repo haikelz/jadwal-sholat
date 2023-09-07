@@ -4,7 +4,7 @@ import { MdOutlineArrowForward } from "react-icons/md";
 import { SuratProps } from "~interfaces";
 import { removeSelectedSurat } from "~lib/helpers";
 
-export function Selanjutnya({ surat }: SuratProps) {
+export function Next({ surat }: SuratProps) {
   return (
     <>
       {surat.number < 114 ? (
@@ -12,14 +12,14 @@ export function Selanjutnya({ surat }: SuratProps) {
           <button
             onClick={removeSelectedSurat}
             type="button"
-            aria-label="selanjutnya"
+            aria-label="Next"
             className={cx(
               "flex items-center justify-center space-x-1 rounded-md",
               "text-black border-2 border-black px-2 py-1",
               "dark:border-white dark:text-white"
             )}
           >
-            <p className="text-base font-semibold">Selanjutnya</p>
+            <p className="text-base font-semibold">Next</p>
             <MdOutlineArrowForward size={25} />
           </button>
         </Link>
