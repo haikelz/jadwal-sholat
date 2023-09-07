@@ -84,7 +84,7 @@ export function Navbar() {
                   )}
                 >
                   <Icon size={28} />
-                  <p className="hidden text-sm font-semibold md:block">{item.title}</p>
+                  <p className="hidden text-sm font-bold md:block">{item.title}</p>
                 </button>
               </Link>
             </div>

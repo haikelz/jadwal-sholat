@@ -37,7 +37,7 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
               key={item.urutan}
               className={cx(
                 "flex flex-col items-start justify-center",
-                "overflow-hidden rounded-sm text-left",
+                "overflow-hidden rounded-md text-left",
                 "border-2 border-black bg-gray-100 p-4",
                 "text-start tracking-wide cursor-pointer",
                 "dark:border-white dark:bg-[#2A2A37]"
@@ -47,7 +47,7 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
               <div className="my-3 w-full text-right">
                 <p className={cx("text-3xl font-medium", arab.className)}>{item.arab}</p>
               </div>
-              <p className="text-lg font-medium">
+              <p className="text-lg font-bold">
                 {search
                   ? reactStringReplace(item.latin, search, (match: string, index: number) => (
                       <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">

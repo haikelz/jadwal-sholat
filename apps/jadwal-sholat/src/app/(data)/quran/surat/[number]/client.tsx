@@ -43,12 +43,12 @@ export default function Client({ number }: { number: string }) {
     stop();
   }
 
-  const { data, isLoading, error } = useFetch(
+  const { data, isLoading, isError } = useFetch(
     number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : ""
   );
 
-  if ((!data && error) || isLoading) return <LoadingClient />;
-  if (error || typeof data.data === "undefined") return <ErrorWhileFetch />;
+  if ((!data && isError) || isLoading) return <LoadingClient />;
+  if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
 
   const surat = data.data;
 
@@ -59,7 +59,7 @@ export default function Client({ number }: { number: string }) {
           <h1 className={cx("text-3xl font-bold tracking-wide sm:text-4xl", bitter.className)}>
             {surat.asma.id.short}
           </h1>
-          <p className="font-medium m-1 tracking-wide">
+          <p className="font-semibold m-1 tracking-wide">
             {surat.asma.translation.id}. Surat ke-{surat.number}. {surat.type.id}
           </p>
         </div>
@@ -101,9 +101,9 @@ export default function Client({ number }: { number: string }) {
             )}
             onChange={(e) => setQori(Number(e.target.value))}
           >
-            <option>Pilih Qori&#39;</option>
+            <option className="font-medium">Pilih Qori&#39;</option>
             {qoriOptions.map((item) => (
-              <option key={item.id} value={item.id}>
+              <option className="font-medium" key={item.id} value={item.id}>
                 {item.id}. {item.name}
               </option>
             ))}

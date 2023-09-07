@@ -6,7 +6,7 @@ export default function NotFoundPage() {
       className={cx(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "space-y-7 pt-8 pb-24 md:pb-8"
+        "space-y-7 pt-8 pb-24 md:pb-8 border-2"
       )}
     >
       <section className="flex flex-col items-center justify-center text-center">

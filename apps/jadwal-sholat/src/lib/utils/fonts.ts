@@ -1,4 +1,4 @@
-import { Bitter, Noto_Naskh_Arabic, Rubik } from "next/font/google";
+import { Bitter, IBM_Plex_Sans, Noto_Naskh_Arabic } from "next/font/google";
 
 export const bitter = Bitter({
   style: ["normal"],
@@ -8,11 +8,11 @@ export const bitter = Bitter({
   display: "swap",
 });
 
-export const rubik = Rubik({
+export const ibmPlexSans = IBM_Plex_Sans({
   style: ["normal"],
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-rubik",
+  variable: "--font-ibmPlexSans",
   display: "swap",
 });
 

@@ -19,7 +19,7 @@ export function Next({ surat }: SuratProps) {
               "dark:border-white dark:text-white"
             )}
           >
-            <p className="text-base font-semibold">Next</p>
+            <p className="text-base font-bold">Next</p>
             <MdOutlineArrowForward size={25} />
           </button>
         </Link>

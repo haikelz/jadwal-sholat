@@ -55,7 +55,7 @@ export function TableJadwalSholat({ waktu }: WaktuProps) {
               {dataTable.map((item) => (
                 <td
                   key={item.id}
-                  className="border-r-2 border-black px-4 text-xl font-medium dark:border-none"
+                  className="border-r-2 border-black px-4 text-xl font-semibold dark:border-none"
                 >
                   {item.waktu}
                 </td>

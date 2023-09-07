@@ -20,7 +20,7 @@ export function Previous({ surat }: SuratProps) {
             )}
           >
             <MdOutlineArrowBack size={25} />
-            <p className="text-base font-semibold">Previous</p>
+            <p className="text-base font-bold">Previous</p>
           </button>
         </Link>
       ) : null}

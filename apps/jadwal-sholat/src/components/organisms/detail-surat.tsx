@@ -167,11 +167,11 @@ export function DetailSurat({ surat }: SuratProps) {
               </div>
             ) : null}
             {terjemahan ? (
-              <p className="mt-2 text-left italic text-teal-700 dark:text-teal-300">
+              <p className="mt-2 text-left italic font-medium text-teal-700 dark:text-teal-300">
                 {ayat.text.read}
               </p>
             ) : null}
-            <p className="mt-6 text-left font-normal leading-relaxed tracking-wide">
+            <p className="mt-6 text-left font-medium leading-relaxed tracking-wide">
               {ayat.translation.id}
             </p>
           </div>

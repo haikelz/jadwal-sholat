@@ -17,12 +17,12 @@ const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
 export default function Client({ id }: { id: string }) {
   const formatDate: string = `${tahun}/${bulan}`;
-  const { data, isLoading, error } = useFetch(
+  const { data, isLoading, isError } = useFetch(
     id ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : ""
   );
 
-  if ((!data && error) || isLoading) return <LoadingClient />;
-  if (error || typeof data.data === "undefined") return <ErrorWhileFetch />;
+  if ((!data && isError) || isLoading) return <LoadingClient />;
+  if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
 
   const waktu = data.data;
 

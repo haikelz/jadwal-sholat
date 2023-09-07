@@ -48,12 +48,12 @@ export function ListKota({ kota }: { kota: KotaProps[] }) {
               <div
                 className={cx(
                   "flex h-full items-center justify-center",
-                  "overflow-hidden rounded-sm text-black",
+                  "overflow-hidden rounded-md text-black",
                   "border-2 border-black bg-gray-100 py-6 px-10",
                   "dark:border-white dark:bg-[#2A2A37] dark:text-white"
                 )}
               >
-                <p className="text-xl font-semibold">
+                <p className="text-xl font-bold">
                   {search
                     ? reactStringReplace(loc.lokasi, search, (match: string, index: number) => (
                         <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
