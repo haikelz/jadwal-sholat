@@ -29,7 +29,7 @@ export function BackToTop() {
               });
             }}
           >
-            <MdKeyboardArrowUp className="text-white" size="32" />
+            <MdKeyboardArrowUp className="text-white" size={32} />
           </button>
         </div>
       ) : null}

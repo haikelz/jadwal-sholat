@@ -16,7 +16,7 @@
 - Next JS 13
 - Typescript
 - Windi CSS
-- SWR
+- React Query
 - Zustand
 
 ## Setup

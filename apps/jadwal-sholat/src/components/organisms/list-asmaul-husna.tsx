@@ -34,6 +34,7 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
         >
           {filteredAsmaulHusna.map((item) => (
             <div
+              id="card"
               key={item.urutan}
               className={cx(
                 "flex flex-col items-start justify-center",

@@ -62,7 +62,9 @@ export default async function AsmaulHusna() {
             Asma&#39;ul Husna
           </h1>
         </div>
-        <p className="mt-2 text-lg font-medium">Berikut daftar Asma&#39;ul Husna</p>
+        <p id="description" className="mt-2 text-lg font-medium">
+          Berikut daftar Asma&#39;ul Husna
+        </p>
       </div>
       <ListAsmaulHusna asmaulHusna={asmaulHusna} />
     </div>

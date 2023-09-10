@@ -71,7 +71,9 @@ export default async function JadwalSholat() {
             loading="eager"
           />
         </div>
-        <p className="mt-2 text-lg font-medium">Berikut daftar Kabupaten/Kota yang tersedia</p>
+        <p id="description" className="mt-2 text-lg font-medium">
+          Berikut daftar Kabupaten/Kota yang tersedia
+        </p>
       </div>
       <ListKota kota={kota} />
     </div>

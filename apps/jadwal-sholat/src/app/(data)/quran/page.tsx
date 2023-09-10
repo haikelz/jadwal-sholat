@@ -64,7 +64,7 @@ export default async function Quran() {
           </h1>
           <Image src="/img/Quran.webp" width={40} height={40} alt="Al-Qur'an" />
         </div>
-        <p className="mt-2 text-lg font-medium">
+        <p id="description" className="mt-2 text-lg font-medium">
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;
         </p>
       </div>
