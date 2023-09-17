@@ -7,7 +7,11 @@ import { useDate } from "~hooks";
 
 export default function Time() {
   const formattedDate: string = format(useDate(), `dd MMMM yyyy, kk.mm.ss`, { locale: id });
-  return <p className="text-xl font-bold">{formattedDate}</p>;
+  return (
+    <p className="text-xl font-bold" data-cy="time">
+      {formattedDate}
+    </p>
+  );
 }
 
 memo(Time);

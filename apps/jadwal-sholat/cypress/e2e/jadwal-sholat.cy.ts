@@ -11,16 +11,24 @@ describe("jadwal-sholat page", () => {
     // test the image
     cy.get("img").should("be.visible");
 
-    // test the description tag content
-    cy.get("#description").contains("Berikut daftar Kabupaten/Kota yang tersedia");
+    // test the description
+    cy.get(`[data-cy="description"]`).contains("Berikut daftar Kabupaten/Kota yang tersedia");
 
-    // test if input from user is not matched
-    cy.get("input")
+    // test shortcut key functionality(shift + enter)
+    cy.get("body")
+      .type("{shift}{enter}")
+
+      // test if input from user is not matched
       .type("Not matched kota or kabupaten", { delay: 100 })
-      .get("#not-found-text")
+      .get(`[data-cy="not-found-text"]`)
       .contains("Input Kota yang kamu masukkan tidak ditemukan!");
 
     // test if input from user is matched
-    cy.get("input").clear().type("Pangkal Pinang").get("#card").should("be.visible");
+    cy.get("input").clear().type("Pangkal Pinang").get(`[data-cy="card"]`).should("be.visible");
+
+    cy.get("input").clear();
+
+    // test shortcut key functionality(esc)
+    cy.get("body").type("{esc}");
   });
 });

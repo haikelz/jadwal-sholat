@@ -1,6 +1,6 @@
-export * from "./error-while-fetch";
-export * from "./loading-client";
-export * from "./modal-notification";
-export * from "./modal-tafsir";
-export * from "./previous-or-next";
-export * from "./search-bar";
+export { ErrorWhileFetch } from "./error-while-fetch";
+export { LoadingClient } from "./loading-client";
+export { ModalNotification } from "./modal-notification";
+export { ModalTafsir } from "./modal-tafsir";
+export { PreviousOrNext } from "./previous-or-next";
+export { SearchBar } from "./search-bar";

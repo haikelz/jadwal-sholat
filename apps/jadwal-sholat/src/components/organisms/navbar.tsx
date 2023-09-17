@@ -8,7 +8,7 @@ import { IconType } from "react-icons/lib";
 import { MdBook, MdHomeFilled, MdListAlt, MdOutlineAccessTime } from "react-icons/md";
 import { slugify } from "~lib/helpers";
 
-const DarkModeIcon = dynamic(() => import("~components/atoms").then((obj) => obj.DarkModeIcon), {
+const SwitchTheme = dynamic(() => import("~components/atoms").then((obj) => obj.SwitchTheme), {
   ssr: false,
 });
 
@@ -90,7 +90,7 @@ export function Navbar() {
             </div>
           );
         })}
-        <DarkModeIcon flexDir="col" justifyItems="center" isMarginLeft={false} />
+        <SwitchTheme flexDir="col" justifyItems="center" isMarginLeft={false} />
       </div>
     </nav>
   );

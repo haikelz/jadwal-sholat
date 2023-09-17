@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ListKota } from "~components/organisms";
 import { env } from "~env.mjs";
 import { getData } from "~lib/utils/axios-config";
-import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
+import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
@@ -11,7 +11,7 @@ const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 const baseMetadata = {
   title: "Jadwal Sholat",
   description: "Berikut daftar Kabupaten/Kota yang tersedia",
-  url: SITE_URL,
+  url: MetaUrl.Site_Url,
 };
 
 const { title, description, url } = baseMetadata;
@@ -26,7 +26,7 @@ export const metadata = {
     description,
     images: [
       {
-        url: DEFAULT_OG_URL,
+        url: MetaUrl.Default_Og_Url,
         alt: "OG Image",
       },
     ],
@@ -71,7 +71,7 @@ export default async function JadwalSholat() {
             loading="eager"
           />
         </div>
-        <p id="description" className="mt-2 text-lg font-medium">
+        <p data-cy="description" className="mt-2 text-lg font-medium">
           Berikut daftar Kabupaten/Kota yang tersedia
         </p>
       </div>

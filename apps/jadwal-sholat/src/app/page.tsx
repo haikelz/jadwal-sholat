@@ -1,7 +1,8 @@
 import { cx } from "classix";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { DEFAULT_OG_URL, SITE_URL, hours } from "~lib/utils/constants";
+import { hours } from "~lib/utils/constants";
+import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
 const Time = dynamic(() => import("~components/molecules/time"), {
@@ -11,7 +12,7 @@ const Time = dynamic(() => import("~components/molecules/time"), {
 const baseMetadata = {
   title: "Home | Jadwal Sholat",
   description: `"Maka nikmat Tuhanmu yang manakah yang kamu dustakan", Ar-Rahman ayat 13`,
-  url: SITE_URL,
+  url: MetaUrl.Site_Url,
 };
 
 const { title, description, url } = baseMetadata;
@@ -26,7 +27,7 @@ export const metadata = {
     description,
     images: [
       {
-        url: DEFAULT_OG_URL,
+        url: MetaUrl.Default_Og_Url,
         alt: "OG Image",
       },
     ],

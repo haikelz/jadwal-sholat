@@ -1,6 +1,6 @@
-export * from "./back-to-top";
-export * from "./dark-mode-icon";
-export * from "./reading-progress";
-export * from "./previous";
-export * from "./next";
-export * from "./tidak-ada";
+export { BackToTop } from "./back-to-top";
+export { SwitchTheme } from "./switch-theme";
+export { ReadingProgress } from "./reading-progress";
+export { Previous } from "./previous";
+export { Next } from "./next";
+export { TidakAda } from "./tidak-ada";

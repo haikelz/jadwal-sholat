@@ -2,7 +2,7 @@ import { cx } from "classix";
 import { ListAsmaulHusna } from "~components/organisms";
 import { env } from "~env.mjs";
 import { getData } from "~lib/utils/axios-config";
-import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
+import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
 const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
@@ -10,7 +10,7 @@ const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 const baseMetadata = {
   title: "Asma'ul Husna | Jadwal Sholat",
   description: "Berikut daftar Asma'ul Husna",
-  url: SITE_URL,
+  url: MetaUrl.Site_Url,
 };
 
 const { title, description, url } = baseMetadata;
@@ -25,7 +25,7 @@ export const metadata = {
     description,
     images: [
       {
-        url: DEFAULT_OG_URL,
+        url: MetaUrl.Default_Og_Url,
         alt: "OG Image",
       },
     ],
@@ -62,7 +62,7 @@ export default async function AsmaulHusna() {
             Asma&#39;ul Husna
           </h1>
         </div>
-        <p id="description" className="mt-2 text-lg font-medium">
+        <p data-cy="description" className="mt-2 text-lg font-medium">
           Berikut daftar Asma&#39;ul Husna
         </p>
       </div>

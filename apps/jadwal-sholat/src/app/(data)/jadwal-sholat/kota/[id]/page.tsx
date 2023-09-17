@@ -2,7 +2,7 @@ import { cx } from "classix";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
-import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
+import { MetaUrl } from "~lib/utils/enums";
 
 import Client from "./client";
 
@@ -18,7 +18,7 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
 const baseMetadata = {
   title: "Jadwal Sholat",
   description: "Berikut daftar Kabupaten/Kota yang tersedia",
-  url: SITE_URL,
+  url: MetaUrl.Site_Url,
 };
 
 const { title, description, url } = baseMetadata;
@@ -33,7 +33,7 @@ export const metadata = {
     description,
     images: [
       {
-        url: DEFAULT_OG_URL,
+        url: MetaUrl.Default_Og_Url,
         alt: "OG Image",
       },
     ],

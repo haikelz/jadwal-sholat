@@ -1,26 +1,10 @@
 "use client";
 
 import { cx } from "classix";
-import { useCallback, useEffect, useState } from "react";
+import { useWidth } from "~hooks/use-width";
 
 export function ReadingProgress() {
-  const [width, setWidth] = useState<number>(0);
-
-  const handleScroll = useCallback(() => {
-    const el = document.documentElement;
-
-    const scrollTop = el.scrollTop || document.body.scrollTop;
-    const scrollHeight = el.scrollHeight || document.body.scrollHeight;
-
-    const percent = (scrollTop / (scrollHeight - el.clientHeight)) * 100;
-
-    setWidth(percent);
-  }, [setWidth]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  const width = useWidth();
 
   return (
     <div

@@ -3,7 +3,7 @@ import { ReadingProgress } from "~components/atoms";
 import { env } from "~env.mjs";
 import { ListSuratProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
-import { DEFAULT_OG_URL, SITE_URL } from "~lib/utils/constants";
+import { MetaUrl } from "~lib/utils/enums";
 
 import Client from "./client";
 
@@ -17,7 +17,7 @@ export async function generateStaticParams(): Promise<{ number: string }[]> {
 const baseMetadata = {
   title: "Baca Al-Qur'an | Jadwal Sholat",
   description: "Berlomba-lombalah kamu dalam berbuat kebaikan",
-  url: SITE_URL,
+  url: MetaUrl.Site_Url,
 };
 
 const { title, description, url } = baseMetadata;
@@ -32,7 +32,7 @@ export const metadata = {
     description,
     images: [
       {
-        url: DEFAULT_OG_URL,
+        url: MetaUrl.Default_Og_Url,
         alt: "OG Image",
       },
     ],

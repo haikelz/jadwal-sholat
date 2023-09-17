@@ -121,7 +121,7 @@ export interface DateSliceProps {
   setDate: (func: Function) => void;
 }
 
-interface LastReadProps {
+export interface LastReadProps {
   id: string;
   name: string;
   ayat: number | null;

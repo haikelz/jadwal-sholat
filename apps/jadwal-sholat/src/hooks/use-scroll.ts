@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-export function useScroll() {
+export function useScroll(): number {
   const [scroll, setScroll] = useState<number>(0);
 
   const handleScroll = useCallback(() => {

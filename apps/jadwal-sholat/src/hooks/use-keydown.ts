@@ -14,14 +14,19 @@ interface KeydownEventProps {
   key: string;
 }
 
-export function useKeydown<T extends KeydownProps>({ ref, isShiftKey, key1, key2 }: T) {
+export function useKeydown<T extends KeydownProps>({
+  ref,
+  isShiftKey,
+  key1,
+  key2,
+}: T): KeydownProps {
   const handleKeydown = useCallback(
-    <T extends KeydownEventProps>(event: T) => {
+    <T extends KeydownEventProps>(e: T) => {
       //Jika shift key ditekan dan key1 ditekan, maka input search bakal focus
-      if (event.shiftKey === isShiftKey && event.key === key1) ref.current?.focus();
+      if (e.shiftKey === isShiftKey && e.key === key1) ref.current?.focus();
 
       // Jika key2 ditekan, maka input akan blur alias kembali ke keadaan semula
-      if (event.key === key2) ref.current?.blur();
+      if (e.key === key2) ref.current?.blur();
     },
     [isShiftKey, key1, key2, ref]
   );

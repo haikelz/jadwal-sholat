@@ -3,7 +3,7 @@ import { memo } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useTheme } from "~hooks";
 
-export function DarkModeIcon({
+export function SwitchTheme({
   flexDir,
   isHidden,
   justifyItems,
@@ -25,7 +25,7 @@ export function DarkModeIcon({
     >
       <button
         type="button"
-        aria-label="dark mode icon"
+        aria-label="switch theme"
         className={cx(
           `flex flex-${flexDir} cursor-pointer items-center justify-center`,
           "px-4 text-gray-500",
@@ -42,4 +42,4 @@ export function DarkModeIcon({
   );
 }
 
-memo(DarkModeIcon);
+memo(SwitchTheme);

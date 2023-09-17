@@ -1,17 +1,12 @@
 "use client";
 
 import { cx } from "classix";
-import dynamic from "next/dynamic";
-import { LoadingClient } from "~components/molecules";
+import { ErrorWhileFetch, LoadingClient } from "~components/molecules";
 import { TableJadwalSholat } from "~components/organisms";
 import { env } from "~env.mjs";
 import { useFetch } from "~hooks";
 import { bulan, currentDate, hari, tahun } from "~lib/utils/constants";
 import { bitter } from "~lib/utils/fonts";
-
-const ErrorWhileFetch = dynamic(() =>
-  import("~components/molecules").then((obj) => obj.ErrorWhileFetch)
-);
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 

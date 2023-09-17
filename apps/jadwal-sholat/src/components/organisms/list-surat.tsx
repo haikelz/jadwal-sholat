@@ -111,7 +111,7 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
               onClick={removeSelectedSurat}
             >
               <div
-                id="card"
+                data-cy="card"
                 className={cx(
                   "flex flex-col rounded-md",
                   "border-2 border-black bg-gray-100",

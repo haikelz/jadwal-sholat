@@ -9,15 +9,25 @@ describe("asmaul-husna page", () => {
     cy.get("nav").should("be.visible");
 
     // test the description tag content
-    cy.get("#description").contains("Berikut daftar Asma'ul Husna");
+    cy.get(`[data-cy="description"]`).contains("Berikut daftar Asma'ul Husna");
 
-    // test if input from user is not matched
-    cy.get("input")
+    // test shortcut key functionality(shift + enter)
+
+    cy.get("body")
+      .type("{shift}{enter}")
+
+      // test if input from user is not matched
+
       .type("Not matched asmaul husna", { delay: 100 })
-      .get("#not-found-text")
+      .get(`[data-cy="not-found-text"]`)
       .contains("Input Asma'ul Husna yang kamu masukkan tidak ditemukan!");
 
     // test if input from user is matched
-    cy.get("input").clear().type("Ar Rahman").get("#card").should("be.visible");
+    cy.get("input").clear().type("Ar Rahman").get(`[data-cy="card"]`).should("be.visible");
+
+    cy.get("input").clear();
+
+    // test shortcuty key functionality(esc)
+    cy.get("body").type("{esc}");
   });
 });

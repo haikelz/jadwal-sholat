@@ -46,7 +46,7 @@ export function ListKota({ kota }: { kota: KotaProps[] }) {
           {filteredKota.map((loc) => (
             <Link href={`/jadwal-sholat/kota/${loc.id}`} key={loc.id}>
               <div
-                id="card"
+                data-cy="card"
                 className={cx(
                   "flex h-full items-center justify-center",
                   "overflow-hidden rounded-md text-black",

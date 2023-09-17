@@ -1,2 +1,2 @@
-export * from "./remove-selected-surat";
-export * from "./slugify";
+export { removeSelectedSurat } from "./remove-selected-surat";
+export { slugify } from "./slugify";
