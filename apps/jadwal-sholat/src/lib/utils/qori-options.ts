@@ -1,4 +1,4 @@
-export const qoriOptions = [
+export const qoriOptions: Array<{ id: number; name: string }> = [
   {
     id: 1,
     name: "Abdul Basit Murattal",

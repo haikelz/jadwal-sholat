@@ -2,16 +2,16 @@ import Axios, { AxiosError } from "axios";
 
 const axios = Axios.create({
   responseType: "json",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
 });
 
 export async function getData(url: string): Promise<any> {
   try {
     const response = await axios.get(url, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
     });
 
     return response.data;

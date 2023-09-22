@@ -51,7 +51,6 @@ export default function Client({ number }: { number: string }) {
   if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
 
   const surat = data.data;
-
   return (
     <>
       <div className="flex flex-col w-full items-center justify-center">
