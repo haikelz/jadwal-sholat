@@ -108,12 +108,12 @@ export default function Client({ number }: { number: string }) {
             ))}
           </select>
         </div>
-        <ModalTafsir surat={surat} />
       </div>
-      <PreviousOrNext surat={surat} />
-      <DetailSurat surat={surat} />
-      <PreviousOrNext surat={surat} />
-      <ModalNotification description="Sudah Ditandai!" />
+      <div className="my-7 w-full">
+        <PreviousOrNext surat={surat} />
+        <DetailSurat surat={surat} />
+        <PreviousOrNext surat={surat} />
+      </div>
     </>
   );
 }

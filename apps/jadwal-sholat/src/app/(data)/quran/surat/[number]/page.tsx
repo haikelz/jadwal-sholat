@@ -53,13 +53,7 @@ export default async function Surat({ params }: { params: { number: string } }) 
   return (
     <>
       <ReadingProgress />
-      <div
-        className={cx(
-          "flex w-full max-w-full",
-          "flex-col items-center justify-start",
-          "space-y-7 pt-8 pb-24 md:pb-8"
-        )}
-      >
+      <div className={cx("flex w-full max-w-full", "flex-col items-center justify-start", "py-8")}>
         <Client number={number} />
       </div>
     </>
