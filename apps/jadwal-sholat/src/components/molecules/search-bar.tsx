@@ -12,7 +12,7 @@ interface SearchBarProps {
 export function SearchBar({ setSearch }: SearchBarProps) {
   const ref = useRef<HTMLInputElement>(null);
 
-  useKeydown({ ref: ref, isShiftKey: true, key1: "Shift", key2: "Enter" });
+  useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });
 
   return (
     <div className="flex flex-col">
