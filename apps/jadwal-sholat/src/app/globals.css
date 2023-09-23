@@ -1,3 +1,6 @@
+@import "@unocss/reset/tailwind.css";
+@unocss all;
+
 * {
   @apply no-underline outline-none;
 }

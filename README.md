@@ -15,7 +15,7 @@
 
 - Next JS 13
 - Typescript
-- Windi CSS
+- Uno CSS
 - React Query
 - Zustand
 

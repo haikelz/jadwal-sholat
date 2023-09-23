@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 
 export interface ChildrenProps {
   children: ReactNode;
-  title?: string;
 }
 
 export interface ListSuratProps {
@@ -105,15 +104,11 @@ export interface WaktuProps {
 }
 
 export interface PuasaSunnahProps {
-  puasaSunnah: [
-    fasting: {
-      month: number;
-      date: string;
-      type: {
-        name: string;
-      };
-    }
-  ];
+  month: number;
+  date: string;
+  type: {
+    name: string;
+  };
 }
 
 export interface DateSliceProps {

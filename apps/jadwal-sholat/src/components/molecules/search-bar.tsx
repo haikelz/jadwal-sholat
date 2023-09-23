@@ -5,14 +5,14 @@ import { Dispatch, SetStateAction, useRef } from "react";
 import { MdSearch } from "react-icons/md";
 import { useKeydown } from "~hooks";
 
-type SearchBarProps = {
+interface SearchBarProps {
   setSearch: Dispatch<SetStateAction<string>>;
-};
+}
 
 export function SearchBar({ setSearch }: SearchBarProps) {
   const ref = useRef<HTMLInputElement>(null);
 
-  useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });
+  useKeydown({ ref: ref, isShiftKey: true, key1: "Shift", key2: "Enter" });
 
   return (
     <div className="flex flex-col">

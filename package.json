@@ -11,6 +11,8 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@turbo/gen": "^1.9.7",
+    "@unocss/postcss": "^0.56.1",
+    "@unocss/preset-wind": "^0.56.1",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.32.0",
@@ -18,7 +20,8 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
     "prettier": "^2.8.8",
-    "turbo": "latest"
+    "turbo": "latest",
+    "unocss": "^0.56.1"
   },
   "config": {
     "commitizen": {

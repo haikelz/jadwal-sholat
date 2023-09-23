@@ -37,16 +37,12 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.20",
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
-    "babel-loader": "^9.1.3",
     "cypress": "^13.2.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
-    "typescript": "5.2.2",
-    "webpack": "^5.88.2",
-    "windicss-webpack-plugin": "^1.8.0"
+    "typescript": "5.2.2"
   }
 }
