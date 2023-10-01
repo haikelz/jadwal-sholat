@@ -50,3 +50,12 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 Terima kasih udah menginspirasi saya :D
 
 https://islamiah.vercel.app/
+
+## 🤝Supports
+
+- [Github Sponsor](https://github.com/sponsors/haikelz)
+- [Trakteer](https://trakteer.id/haikelz/tip)
+
+## License
+
+MIT

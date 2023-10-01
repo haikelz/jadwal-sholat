@@ -2,7 +2,7 @@
 
 import { cx } from "classix";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
 import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
@@ -16,6 +16,8 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
   const [search, setSearch] = useState<string>("");
   const [isAscending, setIsAscending] = useState<boolean>(true);
 
+  const deferredSearch = useDeferredValue(search);
+
   const { lastRead, setLastRead } = useGlobalStore((state) => ({
     lastRead: state.lastRead,
     setLastRead: state.setLastRead,
@@ -25,15 +27,16 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
     () =>
       surat.data
         .filter((value) => {
-          if (search === "") return value;
-          else if (value.asma.id.short.toLowerCase().includes(search.toLowerCase())) return value;
+          if (deferredSearch === "") return value;
+          else if (value.asma.id.short.toLowerCase().includes(deferredSearch.toLowerCase()))
+            return value;
         })
         .sort(() => {
           if (isAscending) return 1;
           if (!isAscending) return -1;
           return 0;
         }),
-    [surat, search, isAscending]
+    [surat, deferredSearch, isAscending]
   );
 
   useEffect(() => {
@@ -51,7 +54,7 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
           "dark:text-white"
         )}
       >
-        <SearchBar setSearch={setSearch} />
+        <SearchBar search={search} setSearch={setSearch} />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
           {lastRead.ayat || lastRead.number !== null ? (
@@ -122,10 +125,10 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
                 <p className="text-right font-semibold tracking-wide">{surat.type.id}</p>
                 <span className="text-xl font-bold">{surat.number}</span>
                 <p className="text-lg font-bold">
-                  {search
+                  {deferredSearch
                     ? reactStringReplace(
                         surat.asma.id.short,
-                        search,
+                        deferredSearch,
                         (match: string, index: number) => (
                           <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
                             {match}

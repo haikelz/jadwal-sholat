@@ -1,7 +1,7 @@
 "use client";
 
 import { cx } from "classix";
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
@@ -11,19 +11,21 @@ import { arab } from "~lib/utils/fonts";
 export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
   const [search, setSearch] = useState<string>("");
 
+  const deferredSarch = useDeferredValue(search);
+
   const filteredAsmaulHusna = useMemo(
     () =>
       asmaulHusna.filter((item) => {
-        if (search === "") return item;
-        else if (item.latin.toLowerCase().includes(search.toLowerCase())) return item;
+        if (deferredSarch === "") return item;
+        else if (item.latin.toLowerCase().includes(deferredSarch.toLowerCase())) return item;
       }),
-    [search, asmaulHusna]
+    [deferredSarch, asmaulHusna]
   );
 
   return (
     <>
       <div className={cx("flex flex-col items-center justify-center")}>
-        <SearchBar setSearch={setSearch} />
+        <SearchBar search={search} setSearch={setSearch} />
       </div>
       {filteredAsmaulHusna.length ? (
         <div
@@ -49,12 +51,16 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
                 <p className={cx("text-3xl font-medium", arab.className)}>{item.arab}</p>
               </div>
               <p className="text-lg font-bold">
-                {search
-                  ? reactStringReplace(item.latin, search, (match: string, index: number) => (
-                      <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
-                        {match}
-                      </span>
-                    ))
+                {deferredSarch
+                  ? reactStringReplace(
+                      item.latin,
+                      deferredSarch,
+                      (match: string, index: number) => (
+                        <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
+                          {match}
+                        </span>
+                      )
+                    )
                   : item.latin}
               </p>
               <p>{item.arti}</p>

@@ -2,7 +2,7 @@
 
 import { cx } from "classix";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
@@ -10,6 +10,8 @@ import { KotaProps } from "~interfaces";
 
 export function ListKota({ kota }: { kota: KotaProps[] }) {
   const [search, setSearch] = useState<string>("");
+
+  const deferredSearch = useDeferredValue(search);
 
   /**
    * - Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
@@ -20,19 +22,19 @@ export function ListKota({ kota }: { kota: KotaProps[] }) {
   const filteredKota = useMemo(
     () =>
       kota.filter((value) => {
-        if (search === "") {
+        if (deferredSearch === "") {
           return value.id !== "3212";
-        } else if (value.lokasi.toLowerCase().includes(search.toLowerCase())) {
+        } else if (value.lokasi.toLowerCase().includes(deferredSearch.toLowerCase())) {
           return value.id !== "3212";
         }
       }),
-    [kota, search]
+    [kota, deferredSearch]
   );
 
   return (
     <>
       <div className={cx("flex flex-col items-center justify-center")}>
-        <SearchBar setSearch={setSearch} />
+        <SearchBar search={search} setSearch={setSearch} />
       </div>
       {filteredKota.length ? (
         <div
@@ -55,12 +57,16 @@ export function ListKota({ kota }: { kota: KotaProps[] }) {
                 )}
               >
                 <p className="text-xl font-bold">
-                  {search
-                    ? reactStringReplace(loc.lokasi, search, (match: string, index: number) => (
-                        <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
-                          {match}
-                        </span>
-                      ))
+                  {deferredSearch
+                    ? reactStringReplace(
+                        loc.lokasi,
+                        deferredSearch,
+                        (match: string, index: number) => (
+                          <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
+                            {match}
+                          </span>
+                        )
+                      )
                     : loc.lokasi}
                 </p>
               </div>
