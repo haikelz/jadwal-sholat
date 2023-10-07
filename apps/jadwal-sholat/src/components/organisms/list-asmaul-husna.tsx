@@ -1,25 +1,32 @@
 "use client";
 
 import { cx } from "classix";
-import { useDeferredValue, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { TidakAda } from "~components/atoms";
+import { SortByOrder, TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
+import { useAscending } from "~hooks";
 import { AsmaulHusnaProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
 
 export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
   const [search, setSearch] = useState<string>("");
 
-  const deferredSarch = useDeferredValue(search);
+  const { isAscending, setIsAscending, deferredSearch } = useAscending(search);
 
   const filteredAsmaulHusna = useMemo(
     () =>
-      asmaulHusna.filter((item) => {
-        if (deferredSarch === "") return item;
-        else if (item.latin.toLowerCase().includes(deferredSarch.toLowerCase())) return item;
-      }),
-    [deferredSarch, asmaulHusna]
+      asmaulHusna
+        .filter((item) => {
+          if (deferredSearch === "") return item;
+          else if (item.latin.toLowerCase().includes(deferredSearch.toLowerCase())) return item;
+        })
+        .sort(() => {
+          if (isAscending) return 1;
+          if (!isAscending) return -1;
+          return 0;
+        }),
+    [deferredSearch, asmaulHusna, isAscending]
   );
 
   return (
@@ -27,6 +34,7 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
       <div className={cx("flex flex-col items-center justify-center")}>
         <SearchBar search={search} setSearch={setSearch} />
       </div>
+      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredAsmaulHusna.length ? (
         <div
           className={cx(
@@ -51,10 +59,10 @@ export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
                 <p className={cx("text-3xl font-medium", arab.className)}>{item.arab}</p>
               </div>
               <p className="text-lg font-bold">
-                {deferredSarch
+                {deferredSearch
                   ? reactStringReplace(
                       item.latin,
-                      deferredSarch,
+                      deferredSearch,
                       (match: string, index: number) => (
                         <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
                           {match}

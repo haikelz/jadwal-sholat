@@ -142,11 +142,6 @@ export interface OptionSliceProps {
   setQori: (id: number) => void;
 }
 
-export interface ThemeSliceProps {
-  theme: string;
-  setTheme: (theme: string) => void;
-}
-
 export interface AsmaulHusnaProps {
   asmaulHusna: {
     urutan: string;

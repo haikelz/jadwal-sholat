@@ -20,7 +20,7 @@ export function ModalTafsir({ surat }: SuratProps) {
           className={cx(
             "modal-blur fixed inset-0 top-0 z-50",
             "flex min-h-screen w-full items-center justify-center",
-            "overflow-x-hidden text-black backdrop-blur-[3px]"
+            "overflow-x-hidden  backdrop-blur-[3px]"
           )}
         >
           <div className="relative w-full max-w-2xl p-4 md:h-auto">
@@ -38,7 +38,7 @@ export function ModalTafsir({ surat }: SuratProps) {
                     "ml-auto inline-flex items-center rounded-lg",
                     "bg-transparent p-1.5 text-sm text-gray-400 transition-all",
                     "hover:bg-gray-200",
-                    "dark:text-white dark:hover:text-black"
+                    "dark:text-white dark:hover:"
                   )}
                   onClick={() => setTafsir(!tafsir)}
                   aria-label="close modal tafsir"

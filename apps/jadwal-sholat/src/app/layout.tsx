@@ -9,10 +9,16 @@ import Wrapper from "./wrapper";
 
 export default function Layout({ children }: ChildrenProps) {
   return (
-    <html lang="en" className={cx(ibmPlexSans.variable, arab.variable, bitter.variable)}>
+    <html
+      lang="en"
+      className={cx(ibmPlexSans.variable, arab.variable, bitter.variable)}
+      suppressHydrationWarning
+    >
       <body className={cx(ibmPlexSans.className)}>
         <Wrapper>
-          <div className={cx("bg-gray-50", "md:flex", "dark:bg-gray-900 dark:text-white")}>
+          <div
+            className={cx("bg-gray-50 text-black", "md:flex", "dark:bg-gray-900 dark:text-white")}
+          >
             <Navbar />
             <main className="flex w-full justify-center">
               <section

@@ -78,7 +78,7 @@ export function DetailSurat({ surat }: SuratProps) {
           <div
             className={cx(
               "flex flex-col items-end justify-end",
-              "border-b-2 border-gray-300 py-4 text-black",
+              "border-b-2 border-gray-300 py-4 ",
               "dark:text-white"
             )}
             key={index + 1}

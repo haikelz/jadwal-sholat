@@ -2,21 +2,20 @@
 
 import { cx } from "classix";
 import Link from "next/link";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
+import { useEffect, useMemo, useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
-import { TidakAda } from "~components/atoms";
+import { SortByOrder, TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
+import { useAscending } from "~hooks";
 import { ListSuratProps } from "~interfaces";
 import { removeSelectedSurat } from "~lib/helpers";
 import useGlobalStore from "~store";
 
 export function ListSurat({ surat }: { surat: ListSuratProps }) {
   const [search, setSearch] = useState<string>("");
-  const [isAscending, setIsAscending] = useState<boolean>(true);
 
-  const deferredSearch = useDeferredValue(search);
+  const { isAscending, setIsAscending, deferredSearch } = useAscending(search);
 
   const { lastRead, setLastRead } = useGlobalStore((state) => ({
     lastRead: state.lastRead,
@@ -50,7 +49,7 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
       <div
         className={cx(
           "flex flex-col items-center justify-center",
-          "text-center text-black",
+          "text-center ",
           "dark:text-white"
         )}
       >
@@ -66,7 +65,7 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
             >
               <span
                 className={cx(
-                  "hover-animation underline-animation text-black font-bold",
+                  "hover-animation underline-animation  font-bold",
                   "hover:text-red-500",
                   "dark:text-white dark:hover:text-blue-500"
                 )}
@@ -79,25 +78,7 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
           )}
         </p>
       </div>
-      <div className="w-full flex justify-end items-center">
-        <div
-          className={cx(
-            "flex px-2 py-1 justify-center text-black rounded-md",
-            "dark:text-white items-center bg-gray-200 dark:bg-gray-800"
-          )}
-        >
-          <span className="font-normal">Sort By: </span>
-          <button
-            type="button"
-            aria-label="sort"
-            onClick={() => setIsAscending(!isAscending)}
-            className="flex space-x-1 ml-2 justify-center items-center"
-          >
-            <span className="font-semibold">{isAscending ? "Ascending" : "Descending"}</span>
-            {isAscending ? <MdArrowUpward /> : <MdArrowDownward />}
-          </button>
-        </div>
-      </div>
+      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredSurat.length ? (
         <div
           className={cx(
@@ -118,7 +99,7 @@ export function ListSurat({ surat }: { surat: ListSuratProps }) {
                 className={cx(
                   "flex flex-col rounded-md",
                   "border-2 border-black bg-gray-100",
-                  "p-4 text-left text-black",
+                  "p-4 text-left ",
                   "dark:border-gray-200 dark:bg-[#2A2A37] dark:text-white"
                 )}
               >

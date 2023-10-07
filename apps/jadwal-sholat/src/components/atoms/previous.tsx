@@ -15,7 +15,7 @@ export function Previous({ surat }: SuratProps) {
             aria-label="Previous"
             className={cx(
               "flex items-center justify-center space-x-1 rounded-md",
-              "border-2 border-black px-2 py-1 text-black",
+              "border-2 border-black px-2 py-1 ",
               "dark:border-white dark:text-white"
             )}
           >

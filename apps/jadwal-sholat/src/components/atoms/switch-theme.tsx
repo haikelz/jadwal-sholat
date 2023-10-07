@@ -1,7 +1,9 @@
+"use client";
+
 import { cx } from "classix";
+import { useTheme } from "next-themes";
 import { memo } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { useTheme } from "~hooks";
 
 export function SwitchTheme({
   flexDir,
@@ -14,7 +16,7 @@ export function SwitchTheme({
   justifyItems: string;
   isMarginLeft: boolean;
 }) {
-  const [theme, setTheme] = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <div

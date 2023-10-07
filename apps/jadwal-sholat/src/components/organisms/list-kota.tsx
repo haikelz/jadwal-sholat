@@ -2,16 +2,17 @@
 
 import { cx } from "classix";
 import Link from "next/link";
-import { useDeferredValue, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { TidakAda } from "~components/atoms";
+import { SortByOrder, TidakAda } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
+import { useAscending } from "~hooks";
 import { KotaProps } from "~interfaces";
 
 export function ListKota({ kota }: { kota: KotaProps[] }) {
   const [search, setSearch] = useState<string>("");
 
-  const deferredSearch = useDeferredValue(search);
+  const { isAscending, setIsAscending, deferredSearch } = useAscending(search);
 
   /**
    * - Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
@@ -21,14 +22,20 @@ export function ListKota({ kota }: { kota: KotaProps[] }) {
    */
   const filteredKota = useMemo(
     () =>
-      kota.filter((value) => {
-        if (deferredSearch === "") {
-          return value.id !== "3212";
-        } else if (value.lokasi.toLowerCase().includes(deferredSearch.toLowerCase())) {
-          return value.id !== "3212";
-        }
-      }),
-    [kota, deferredSearch]
+      kota
+        .filter((value) => {
+          if (deferredSearch === "") {
+            return value.id !== "3212";
+          } else if (value.lokasi.toLowerCase().includes(deferredSearch.toLowerCase())) {
+            return value.id !== "3212";
+          }
+        })
+        .sort(() => {
+          if (isAscending) return 1;
+          if (!isAscending) return -1;
+          return 0;
+        }),
+    [kota, deferredSearch, isAscending]
   );
 
   return (
@@ -36,6 +43,7 @@ export function ListKota({ kota }: { kota: KotaProps[] }) {
       <div className={cx("flex flex-col items-center justify-center")}>
         <SearchBar search={search} setSearch={setSearch} />
       </div>
+      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredKota.length ? (
         <div
           className={cx(
@@ -51,7 +59,7 @@ export function ListKota({ kota }: { kota: KotaProps[] }) {
                 data-cy="card"
                 className={cx(
                   "flex h-full items-center justify-center",
-                  "overflow-hidden rounded-md text-black",
+                  "overflow-hidden rounded-md ",
                   "border-2 border-black bg-gray-100 py-6 px-10",
                   "dark:border-white dark:bg-[#2A2A37] dark:text-white"
                 )}

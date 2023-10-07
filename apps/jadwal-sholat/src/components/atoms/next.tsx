@@ -15,7 +15,7 @@ export function Next({ surat }: SuratProps) {
             aria-label="Next"
             className={cx(
               "flex items-center justify-center space-x-1 rounded-md",
-              "text-black border-2 border-black px-2 py-1",
+              " border-2 border-black px-2 py-1",
               "dark:border-white dark:text-white"
             )}
           >
