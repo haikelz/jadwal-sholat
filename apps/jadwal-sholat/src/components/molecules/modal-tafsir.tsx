@@ -1,8 +1,9 @@
 "use client";
 
 import { cx } from "classix";
-import { memo } from "react";
+import { memo, useRef } from "react";
 import { MdClose } from "react-icons/md";
+import { useClickOutside } from "~hooks";
 import { SuratProps } from "~interfaces";
 import useGlobalStore from "~store";
 
@@ -11,6 +12,10 @@ export function ModalTafsir({ surat }: SuratProps) {
     tafsir: state.tafsir,
     setTafsir: state.setTafsir,
   }));
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(setTafsir, modalRef);
 
   return (
     <>
@@ -25,6 +30,7 @@ export function ModalTafsir({ surat }: SuratProps) {
         >
           <div className="relative w-full max-w-2xl p-4 md:h-auto">
             <div
+              ref={modalRef}
               className={cx(
                 "relative rounded-lg bg-white shadow",
                 "dark:bg-gray-800 dark:text-white"

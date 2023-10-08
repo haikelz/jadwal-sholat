@@ -11,6 +11,10 @@ interface ScrollAyatProps {
   setIsAudioEnded: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * A custom hook for manage scroll to ayat feature
+ * @param {ScrollAyatProps} scrollAyat - scrollAyat object
+ */
 export function useScrollAyat({ lastRead, ayat, isAudioEnded, setIsAudioEnded }: ScrollAyatProps) {
   useEffect(() => {
     const lastReadId = document.getElementById(`ayat-${lastRead.ayat?.toString()}`);

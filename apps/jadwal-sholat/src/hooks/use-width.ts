@@ -2,6 +2,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+/**
+ * A custom hook to get width in percent, on user's scroll
+ * @returns {number} width value
+ */
 export function useWidth(): number {
   const [width, setWidth] = useState<number>(0);
 

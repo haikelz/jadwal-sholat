@@ -10,18 +10,18 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
-    "@turbo/gen": "^1.9.7",
-    "@unocss/postcss": "^0.56.1",
-    "@unocss/preset-wind": "^0.56.1",
+    "@turbo/gen": "^1.10.15",
+    "@unocss/postcss": "^0.56.5",
+    "@unocss/preset-wind": "^0.56.5",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.51.0",
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "prettier": "^2.8.8",
-    "turbo": "latest",
-    "unocss": "^0.56.1"
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "turbo": "^1.10.15",
+    "unocss": "^0.56.5"
   },
   "config": {
     "commitizen": {

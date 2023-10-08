@@ -2,6 +2,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+/**
+ * A custom hook to get height value, based on user's scroll
+ * @returns {number} scroll value
+ */
 export function useScroll(): number {
   const [scroll, setScroll] = useState<number>(0);
 

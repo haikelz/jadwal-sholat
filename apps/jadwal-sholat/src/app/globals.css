@@ -18,11 +18,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  @apply bg-rose-400;
-}
-
-body.dark::-webkit-scrollbar-thumb {
-  @apply bg-blue-500;
+  @apply bg-rose-400 dark:bg-blue-500;
 }
 
 audio {

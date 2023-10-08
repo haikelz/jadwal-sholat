@@ -14,14 +14,14 @@ interface KeydownEventProps {
   key: string;
 }
 
-export function useKeydown<T extends KeydownProps>({
-  ref,
-  isShiftKey,
-  key1,
-  key2,
-}: T): KeydownProps {
+/**
+ * A custom hook to detect user's key input
+ * @param {KeydownProps} keydown - keydown object
+ * @returns {KeydownProps} keydown
+ */
+export function useKeydown({ ref, isShiftKey, key1, key2 }: KeydownProps): KeydownProps {
   const handleKeydown = useCallback(
-    <T extends KeydownEventProps>(e: T) => {
+    (e: KeydownEventProps) => {
       //Jika shift key ditekan dan key1 ditekan, maka input search bakal focus
       if (e.shiftKey === isShiftKey && e.key === key1) ref.current?.focus();
 

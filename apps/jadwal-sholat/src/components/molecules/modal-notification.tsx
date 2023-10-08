@@ -1,7 +1,8 @@
 "use client";
 
 import { cx } from "classix";
-import { memo } from "react";
+import { memo, useRef } from "react";
+import { useClickOutside } from "~hooks";
 import useGlobalStore from "~store";
 
 export function ModalNotification({ description }: { description: string }) {
@@ -9,6 +10,10 @@ export function ModalNotification({ description }: { description: string }) {
     notification: state.notification,
     setNotification: state.setNotification,
   }));
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(setNotification, modalRef);
 
   return (
     <>
@@ -23,6 +28,7 @@ export function ModalNotification({ description }: { description: string }) {
         >
           <div className="relative md:h-auto">
             <div
+              ref={modalRef}
               className={cx(
                 "relative rounded-lg bg-white p-4 shadow",
                 "dark:bg-gray-800 dark:text-white"

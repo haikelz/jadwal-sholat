@@ -1,14 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import { useAudioPlayer } from "react-use-audio-player";
+import { Dispatch, SetStateAction, useState } from "react";
+import { AudioLoadOptions, useAudioPlayer } from "react-use-audio-player";
 import useDeepCompareEffect from "use-deep-compare-effect";
 
+interface UsePlayNextAudioProps {
+  audioIndex: number;
+  setAudioIndex: Dispatch<SetStateAction<number>>;
+  isPlayAudio: boolean;
+  setIsPlayAudio: Dispatch<SetStateAction<boolean>>;
+  isAudioEnded: boolean;
+  setIsAudioEnded: Dispatch<SetStateAction<boolean>>;
+  pause: () => void;
+  play: () => void;
+  playing: boolean;
+  ayat: string;
+  load: (src: string, options?: AudioLoadOptions | undefined) => void;
+  setAyat: Dispatch<SetStateAction<string>>;
+}
+
 /**
- * A custom hook for manage autoplay to next audio
- * @param {string[]} audioList
+ * A custom hook for manage autoplay to next audio feature
+ * @param {string[]} audioList - audiolist
  */
-export function usePlayNextAudio(audioList: string[]) {
+export function usePlayNextAudio(audioList: string[]): UsePlayNextAudioProps {
   const [ayat, setAyat] = useState<string>("ayat-1");
   const [audioIndex, setAudioIndex] = useState<number>(0);
   const [isPlayAudio, setIsPlayAudio] = useState<boolean>(false);

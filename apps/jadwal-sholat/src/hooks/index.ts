@@ -1,5 +1,5 @@
 export { useAscending } from "./use-ascending";
-export { useDate } from "./use-date";
+export { useClickOutside } from "./use-click-outside";
 export { useFetch } from "./use-fetch";
 export { useKeydown } from "./use-keydown";
 export { usePlayNextAudio } from "./use-play-next-audio";
