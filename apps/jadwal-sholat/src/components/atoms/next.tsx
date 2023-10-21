@@ -1,10 +1,10 @@
 import { cx } from "classix";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { MdOutlineArrowForward } from "react-icons/md";
 import { SuratProps } from "~interfaces";
 import { removeSelectedSurat } from "~lib/helpers";
 
-export function Next({ surat }: SuratProps) {
+export function Next({ surat }: SuratProps): JSX.Element {
   return (
     <>
       {surat.number < 114 ? (
@@ -20,7 +20,7 @@ export function Next({ surat }: SuratProps) {
             )}
           >
             <p className="text-base font-bold">Next</p>
-            <MdOutlineArrowForward size={25} />
+            <ArrowRight size={20} />
           </button>
         </Link>
       ) : null}

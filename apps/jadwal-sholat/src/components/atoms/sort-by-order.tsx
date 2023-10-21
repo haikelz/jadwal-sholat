@@ -1,13 +1,13 @@
 import { cx } from "classix";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
-import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
 
 interface SortByOrderProps {
   isAscending: boolean;
   setIsAscending: Dispatch<SetStateAction<boolean>>;
 }
 
-export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps) {
+export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps): JSX.Element {
   return (
     <div className="w-full flex justify-end items-center">
       <div
@@ -24,7 +24,7 @@ export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps) {
           className="flex space-x-1 ml-2 justify-center items-center"
         >
           <span className="font-semibold">{isAscending ? "Ascending" : "Descending"}</span>
-          {isAscending ? <MdArrowUpward /> : <MdArrowDownward />}
+          {isAscending ? <ArrowUp size={20} /> : <ArrowDown size={20} />}
         </button>
       </div>
     </div>

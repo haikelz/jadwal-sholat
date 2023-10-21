@@ -61,7 +61,7 @@ export interface SuratProps {
         translation: {
           id: string;
         };
-      }
+      },
     ];
     type: {
       id: string;
@@ -95,7 +95,7 @@ export interface WaktuProps {
         ashar: string;
         maghrib: string;
         isya: string;
-      }
+      },
     ];
   };
   tanggal: string;
@@ -143,10 +143,8 @@ export interface OptionSliceProps {
 }
 
 export interface AsmaulHusnaProps {
-  asmaulHusna: {
-    urutan: string;
-    latin: string;
-    arab: string;
-    arti: string;
-  }[];
+  urutan: string;
+  latin: string;
+  arab: string;
+  arti: string;
 }

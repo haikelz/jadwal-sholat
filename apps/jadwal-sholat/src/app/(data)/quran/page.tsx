@@ -1,7 +1,9 @@
 import { cx } from "classix";
+import { Metadata } from "next";
 import Image from "next/image";
 import { ListSurat } from "~components/organisms";
 import { env } from "~env.mjs";
+import { ListSuratProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
@@ -16,7 +18,7 @@ const baseMetadata = {
 
 const { title, description, url } = baseMetadata;
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   openGraph: {
@@ -41,12 +43,12 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-async function getSurat() {
-  const response = await getData(`${NEXT_PUBLIC_QURAN_API}/quran`);
+async function getSurat(): Promise<ListSuratProps> {
+  const response: ListSuratProps = await getData(`${NEXT_PUBLIC_QURAN_API}/quran`);
   return response;
 }
 
-export default async function Quran() {
+export default async function Quran(): Promise<JSX.Element> {
   const surat = await getSurat();
 
   return (

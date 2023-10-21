@@ -2,7 +2,7 @@
 
 import { cx } from "classix";
 
-export default function ErrorPage() {
+export default function ErrorPage(): JSX.Element {
   return (
     <div
       className={cx(

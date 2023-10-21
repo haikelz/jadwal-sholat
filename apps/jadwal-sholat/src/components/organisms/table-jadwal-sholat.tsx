@@ -13,7 +13,7 @@ const tableJadwalSholatList = [
   { id: 8, name: "Maghrib" },
 ];
 
-export function TableJadwalSholat({ waktu }: WaktuProps) {
+export function TableJadwalSholat({ waktu }: WaktuProps): JSX.Element {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">
@@ -21,7 +21,7 @@ export function TableJadwalSholat({ waktu }: WaktuProps) {
           {tableJadwalSholatList.map((item) => (
             <th
               key={item.id}
-              className={cx("border-r-2 border-r-black", "px-4 text-xl", "dark:border-none")}
+              className={cx("border-r-2 border-r-black px-4", "px-4 text-xl", "dark:border-none")}
             >
               {item.name}
             </th>

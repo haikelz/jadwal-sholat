@@ -1,0 +1,12 @@
+Dockerfile*
+.dockerignore
+.git
+.github
+README.md
+build
+node_modules
+cypress
+.husky
+.vscode
+.turbo
+.next

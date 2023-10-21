@@ -1,4 +1,5 @@
 import { cx } from "classix";
+import { Metadata } from "next";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
@@ -23,7 +24,7 @@ const baseMetadata = {
 
 const { title, description, url } = baseMetadata;
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   openGraph: {
@@ -48,7 +49,7 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-export default async function KotaId({ params }: { params: { id: string } }) {
+export default async function KotaId({ params }: { params: { id: string } }): Promise<JSX.Element> {
   const { id } = params;
 
   return (

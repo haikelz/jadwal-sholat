@@ -1,11 +1,11 @@
 "use client";
 
 import { cx } from "classix";
+import { ArrowUp } from "lucide-react";
 import { memo } from "react";
-import { MdKeyboardArrowUp } from "react-icons/md";
 import { useScroll } from "~hooks";
 
-export function BackToTop() {
+export function BackToTop(): JSX.Element {
   const scroll = useScroll();
   const height = 150;
 
@@ -29,7 +29,7 @@ export function BackToTop() {
               });
             }}
           >
-            <MdKeyboardArrowUp className="text-white" size={32} />
+            <ArrowUp className="text-white" />
           </button>
         </div>
       ) : null}

@@ -10,8 +10,9 @@ import { bitter } from "~lib/utils/fonts";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
-export default function Client({ id }: { id: string }) {
+export default function Client({ id }: { id: string }): JSX.Element {
   const formatDate: string = `${tahun}/${bulan}`;
+
   const { data, isLoading, isError } = useFetch(
     id ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : ""
   );

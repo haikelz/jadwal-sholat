@@ -9,7 +9,7 @@ import { SearchBar } from "~components/molecules";
 import { useAscending } from "~hooks";
 import { KotaProps } from "~interfaces";
 
-export function ListKota({ kota }: { kota: KotaProps[] }) {
+export function ListKota({ kota }: { kota: KotaProps[] }): JSX.Element {
   const [search, setSearch] = useState<string>("");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(search);

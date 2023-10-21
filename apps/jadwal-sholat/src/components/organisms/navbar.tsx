@@ -1,11 +1,10 @@
 "use client";
 
 import { cx } from "classix";
+import { BookMarked, Clock4, Home, List, LucideIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconType } from "react-icons/lib";
-import { MdBook, MdHomeFilled, MdListAlt, MdOutlineAccessTime } from "react-icons/md";
 import { slugify } from "~lib/helpers";
 
 const SwitchTheme = dynamic(() => import("~components/atoms").then((obj) => obj.SwitchTheme), {
@@ -16,21 +15,21 @@ const navbarList = [
   {
     id: 1,
     title: "Sholat",
-    icon: MdOutlineAccessTime,
+    icon: Clock4,
   },
   {
     id: 2,
     title: "Asma'ul Husna",
-    icon: MdListAlt,
+    icon: List,
   },
   {
     id: 3,
     title: "Qur'an",
-    icon: MdBook,
+    icon: BookMarked,
   },
 ];
 
-export function Navbar() {
+export function Navbar(): JSX.Element {
   const pathname = usePathname();
 
   return (
@@ -64,13 +63,13 @@ export function Navbar() {
                   : "text-gray-500 dark:text-gray-400"
               )}
             >
-              <MdHomeFilled size={28} />
+              <Home size={24} />
               <p className="hidden text-sm font-semibold md:block">Home</p>
             </button>
           </Link>
         </div>
         {navbarList.map((item) => {
-          const Icon: IconType = item.icon;
+          const Icon: LucideIcon = item.icon;
           return (
             <div key={item.id} className="flex w-full items-center justify-center">
               <Link href={slugify(item.title)} passHref>
@@ -83,7 +82,7 @@ export function Navbar() {
                       : "text-gray-500 dark:text-gray-400"
                   )}
                 >
-                  <Icon size={28} />
+                  <Icon size={24} />
                   <p className="hidden text-sm font-bold md:block">{item.title}</p>
                 </button>
               </Link>

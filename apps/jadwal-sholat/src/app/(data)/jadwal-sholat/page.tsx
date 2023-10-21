@@ -1,7 +1,9 @@
 import { cx } from "classix";
+import { Metadata } from "next";
 import Image from "next/image";
 import { ListKota } from "~components/organisms";
 import { env } from "~env.mjs";
+import { KotaProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
@@ -16,7 +18,7 @@ const baseMetadata = {
 
 const { title, description, url } = baseMetadata;
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   openGraph: {
@@ -41,12 +43,12 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-async function getJadwalSholat() {
-  const response = await getData(`${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`);
+async function getJadwalSholat(): Promise<KotaProps[]> {
+  const response: KotaProps[] = await getData(`${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`);
   return response;
 }
 
-export default async function JadwalSholat() {
+export default async function JadwalSholat(): Promise<JSX.Element> {
   const kota = await getJadwalSholat();
 
   return (

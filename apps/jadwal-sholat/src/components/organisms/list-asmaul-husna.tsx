@@ -9,7 +9,7 @@ import { useAscending } from "~hooks";
 import { AsmaulHusnaProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
 
-export function ListAsmaulHusna({ asmaulHusna }: AsmaulHusnaProps) {
+export function ListAsmaulHusna({ asmaulHusna }: { asmaulHusna: AsmaulHusnaProps[] }): JSX.Element {
   const [search, setSearch] = useState<string>("");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(search);

@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
-    "@turbo/gen": "^1.10.15",
+    "@turbo/gen": "^1.10.16",
     "@unocss/postcss": "^0.56.5",
     "@unocss/preset-wind": "^0.56.5",
     "commitizen": "^4.3.0",
@@ -18,9 +18,9 @@
     "eslint": "^8.51.0",
     "eslint-config-custom": "workspace:*",
     "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
+    "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
-    "turbo": "^1.10.15",
+    "turbo": "^1.10.16",
     "unocss": "^0.56.5"
   },
   "config": {

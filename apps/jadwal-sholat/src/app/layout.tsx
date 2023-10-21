@@ -1,11 +1,56 @@
 import { cx } from "classix";
+import { Metadata } from "next";
 import { BackToTop } from "~components/atoms";
 import { Navbar } from "~components/organisms";
 import { ChildrenProps } from "~interfaces";
+import { MetaUrl } from "~lib/utils/enums";
 import { arab, bitter, ibmPlexSans } from "~lib/utils/fonts";
 
 import "./globals.css";
 import Wrapper from "./wrapper";
+
+const baseMetadata = {
+  title: "Jadwal Sholat",
+  description: "🕌 Website Jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
+  url: MetaUrl.Site_Url,
+};
+
+const { title, description, url } = baseMetadata;
+
+export const metadata: Metadata = {
+  title,
+  description,
+  manifest: "/manifest.json",
+  themeColor: "#FFFFFF",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title,
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    url,
+    title,
+    description,
+    images: [
+      {
+        url: MetaUrl.Default_Og_Url,
+        alt: "OG Image",
+      },
+    ],
+    siteName: "info-jadwal-sholat.vercel.app",
+  },
+  twitter: {
+    title,
+    description,
+    site: url,
+    card: "summary_large_image",
+  },
+  metadataBase: new URL(url),
+};
 
 export default function Layout({ children }: ChildrenProps) {
   return (

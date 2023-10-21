@@ -1,9 +1,9 @@
 "use client";
 
 import { cx } from "classix";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { memo } from "react";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 export function SwitchTheme({
   flexDir,
@@ -15,7 +15,7 @@ export function SwitchTheme({
   isHidden?: boolean;
   justifyItems: string;
   isMarginLeft: boolean;
-}) {
+}): JSX.Element {
   const { theme, setTheme } = useTheme();
 
   return (
@@ -35,8 +35,8 @@ export function SwitchTheme({
         )}
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
-        {theme === "light" ? <MdDarkMode size={28} /> : <MdLightMode size={28} />}
-        <p className={cx("hidden text-sm font-semibold", "md:block", isMarginLeft ? "ml-2" : "")}>
+        {theme === "light" ? <Moon size={24} /> : <Sun size={24} />}
+        <p className={cx("hidden text-sm font-bold", "md:block", isMarginLeft ? "ml-2" : "")}>
           {theme === "light" ? "Dark" : "Light"}
         </p>
       </button>

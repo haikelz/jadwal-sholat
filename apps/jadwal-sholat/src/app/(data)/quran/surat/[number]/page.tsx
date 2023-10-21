@@ -1,4 +1,5 @@
 import { cx } from "classix";
+import { Metadata } from "next";
 import { ReadingProgress } from "~components/atoms";
 import { env } from "~env.mjs";
 import { ListSuratProps } from "~interfaces";
@@ -22,7 +23,7 @@ const baseMetadata = {
 
 const { title, description, url } = baseMetadata;
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   openGraph: {
@@ -47,7 +48,11 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-export default async function Surat({ params }: { params: { number: string } }) {
+export default async function Surat({
+  params,
+}: {
+  params: { number: string };
+}): Promise<JSX.Element> {
   const { number } = params;
 
   return (

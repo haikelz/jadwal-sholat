@@ -1,4 +1,5 @@
 import { cx } from "classix";
+import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { hours } from "~lib/utils/constants";
@@ -17,7 +18,7 @@ const baseMetadata = {
 
 const { title, description, url } = baseMetadata;
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   openGraph: {
@@ -42,7 +43,7 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-export default function HomePage() {
+export default function HomePage(): JSX.Element {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center text-center">
       <Image src="/img/home.webp" width={100} height={100} alt="Al-Quran" loading="eager" />

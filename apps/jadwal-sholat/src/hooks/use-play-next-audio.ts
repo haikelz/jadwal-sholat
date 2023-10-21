@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 import { AudioLoadOptions, useAudioPlayer } from "react-use-audio-player";
-import useDeepCompareEffect from "use-deep-compare-effect";
+import { useDeepCompareEffect } from "use-deep-compare";
 
 interface UsePlayNextAudioProps {
   audioIndex: number;

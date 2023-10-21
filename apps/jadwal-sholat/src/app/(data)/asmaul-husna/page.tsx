@@ -1,6 +1,7 @@
 import { cx } from "classix";
 import { ListAsmaulHusna } from "~components/organisms";
 import { env } from "~env.mjs";
+import { AsmaulHusnaProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
@@ -40,12 +41,16 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-async function getAsmaulHusna() {
-  const response = await getData(`${NEXT_PUBLIC_ASMAUL_HUSNA_API}/all`);
+interface GetAsmaulHusnaProps {
+  data: AsmaulHusnaProps[];
+}
+
+async function getAsmaulHusna(): Promise<AsmaulHusnaProps[]> {
+  const response: GetAsmaulHusnaProps = await getData(`${NEXT_PUBLIC_ASMAUL_HUSNA_API}/all`);
   return response.data;
 }
 
-export default async function AsmaulHusna() {
+export default async function AsmaulHusna(): Promise<JSX.Element> {
   const asmaulHusna = await getAsmaulHusna();
 
   return (

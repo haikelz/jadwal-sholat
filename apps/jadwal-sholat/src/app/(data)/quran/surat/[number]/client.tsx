@@ -1,8 +1,7 @@
 "use client";
 
 import { cx } from "classix";
-import dynamic from "next/dynamic";
-import { MdInsertComment, MdOutlineTranslate, MdVolumeUp } from "react-icons/md";
+import { Languages, MessageSquare, Volume2 } from "lucide-react";
 import { useAudioPlayer } from "react-use-audio-player";
 import { ErrorWhileFetch, LoadingClient, PreviousOrNext } from "~components/molecules";
 import { DetailSurat } from "~components/organisms";
@@ -12,16 +11,9 @@ import { bitter } from "~lib/utils/fonts";
 import { qoriOptions } from "~lib/utils/qori-options";
 import useGlobalStore from "~store";
 
-const ModalTafsir = dynamic(() =>
-  import("~components/molecules/modal-tafsir").then((obj) => obj.ModalTafsir)
-);
-const ModalNotification = dynamic(() =>
-  import("~components/molecules/modal-notification").then((obj) => obj.ModalNotification)
-);
-
 const { NEXT_PUBLIC_QURAN_API } = env;
 
-export default function Client({ number }: { number: string }) {
+export default function Client({ number }: { number: string }): JSX.Element {
   const { audio, terjemahan, setAudio, setTerjemahan, tafsir, setTafsir, qori, setQori } =
     useGlobalStore((state) => ({
       audio: state.audio,
@@ -51,6 +43,7 @@ export default function Client({ number }: { number: string }) {
   if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
 
   const surat = data.data;
+
   return (
     <>
       <div className="flex flex-col w-full items-center justify-center">
@@ -69,7 +62,7 @@ export default function Client({ number }: { number: string }) {
             className="flex items-center space-x-1"
             onClick={handleShowAudio}
           >
-            <MdVolumeUp size={20} />
+            <Volume2 size={20} />
             <p className="text-lg font-bold">Audio</p>
           </button>
           <button
@@ -78,7 +71,7 @@ export default function Client({ number }: { number: string }) {
             className="flex items-center space-x-1"
             onClick={() => setTerjemahan(!terjemahan)}
           >
-            <MdOutlineTranslate size={20} />
+            <Languages size={20} />
             <p className="text-lg font-bold">Latin</p>
           </button>
           <button
@@ -87,7 +80,7 @@ export default function Client({ number }: { number: string }) {
             className="flex items-center space-x-1"
             onClick={() => setTafsir(!tafsir)}
           >
-            <MdInsertComment size={20} />
+            <MessageSquare size={20} />
             <p className="text-lg font-bold">Tafsir</p>
           </button>
           <select

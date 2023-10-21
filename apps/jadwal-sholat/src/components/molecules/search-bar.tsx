@@ -1,8 +1,8 @@
 "use client";
 
 import { cx } from "classix";
+import { Search } from "lucide-react";
 import { Dispatch, SetStateAction, useRef } from "react";
-import { MdSearch } from "react-icons/md";
 import { useKeydown } from "~hooks";
 
 interface SearchBarProps {
@@ -10,7 +10,7 @@ interface SearchBarProps {
   setSearch: Dispatch<SetStateAction<string>>;
 }
 
-export function SearchBar({ search, setSearch }: SearchBarProps) {
+export function SearchBar({ search, setSearch }: SearchBarProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
 
   useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });
@@ -19,7 +19,7 @@ export function SearchBar({ search, setSearch }: SearchBarProps) {
     <div className="flex flex-col">
       <div className="relative flex items-center justify-center">
         <div className="absolute left-0 pl-3">
-          <MdSearch size={23} className="text-gray-400" />
+          <Search size={20} />
         </div>
         <input
           ref={ref}

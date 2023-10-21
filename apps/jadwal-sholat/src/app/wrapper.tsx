@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { ChildrenProps } from "~interfaces";
 
-export default function Wrapper({ children }: ChildrenProps) {
+export default function Wrapper({ children }: ChildrenProps): JSX.Element {
   const queryClient: QueryClient = new QueryClient();
 
   return (

@@ -1,9 +1,9 @@
 "use client";
 
 import { cx } from "classix";
+import { Pause, Play } from "lucide-react";
 import { nanoid } from "nanoid";
 import { memo } from "react";
-import { MdPause, MdPlayArrow } from "react-icons/md";
 import secureLocalStorage from "react-secure-storage";
 import { ModalNotification, ModalTafsir } from "~components/molecules";
 import { usePlayNextAudio, useScrollAyat } from "~hooks";
@@ -11,7 +11,7 @@ import { SuratProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
 
-export function DetailSurat({ surat }: SuratProps) {
+export function DetailSurat({ surat }: SuratProps): JSX.Element {
   const { lastRead, setLastRead, setNotification, terjemahan, audio } = useGlobalStore((state) => ({
     lastRead: state.lastRead,
     setLastRead: state.setLastRead,
@@ -121,7 +121,7 @@ export function DetailSurat({ surat }: SuratProps) {
                         )}
                         onClick={handlePauseAudio}
                       >
-                        <MdPause size={20} />
+                        <Pause size={20} />
                         <span className="font-medium">Pause</span>
                       </button>
                     ) : (
@@ -135,7 +135,7 @@ export function DetailSurat({ surat }: SuratProps) {
                         )}
                         onClick={() => handlePlayAudio(index, ayat.number.insurah)}
                       >
-                        <MdPlayArrow size={20} />
+                        <Play size={20} />
                         <span className="font-medium">Play</span>
                       </button>
                     )}

@@ -12,7 +12,7 @@ import { ListSuratProps } from "~interfaces";
 import { removeSelectedSurat } from "~lib/helpers";
 import useGlobalStore from "~store";
 
-export function ListSurat({ surat }: { surat: ListSuratProps }) {
+export function ListSurat({ surat }: { surat: ListSuratProps }): JSX.Element {
   const [search, setSearch] = useState<string>("");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(search);

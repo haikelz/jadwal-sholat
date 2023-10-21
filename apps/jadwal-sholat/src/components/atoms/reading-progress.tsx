@@ -3,7 +3,7 @@
 import { cx } from "classix";
 import { useWidth } from "~hooks/use-width";
 
-export function ReadingProgress() {
+export function ReadingProgress(): JSX.Element {
   const width = useWidth();
 
   return (

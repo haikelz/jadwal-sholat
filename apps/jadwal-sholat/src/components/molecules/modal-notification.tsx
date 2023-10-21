@@ -5,7 +5,7 @@ import { memo, useRef } from "react";
 import { useClickOutside } from "~hooks";
 import useGlobalStore from "~store";
 
-export function ModalNotification({ description }: { description: string }) {
+export function ModalNotification({ description }: { description: string }): JSX.Element {
   const { notification, setNotification } = useGlobalStore((state) => ({
     notification: state.notification,
     setNotification: state.setNotification,

@@ -1,13 +1,13 @@
 "use client";
 
 import { cx } from "classix";
+import { X } from "lucide-react";
 import { memo, useRef } from "react";
-import { MdClose } from "react-icons/md";
 import { useClickOutside } from "~hooks";
 import { SuratProps } from "~interfaces";
 import useGlobalStore from "~store";
 
-export function ModalTafsir({ surat }: SuratProps) {
+export function ModalTafsir({ surat }: SuratProps): JSX.Element {
   const { tafsir, setTafsir } = useGlobalStore((state) => ({
     tafsir: state.tafsir,
     setTafsir: state.setTafsir,
@@ -44,12 +44,12 @@ export function ModalTafsir({ surat }: SuratProps) {
                     "ml-auto inline-flex items-center rounded-lg",
                     "bg-transparent p-1.5 text-sm text-gray-400 transition-all",
                     "hover:bg-gray-200",
-                    "dark:text-white dark:hover:"
+                    "dark:text-white dark:hover:text-gray-900"
                   )}
                   onClick={() => setTafsir(!tafsir)}
                   aria-label="close modal tafsir"
                 >
-                  <MdClose className="font-bold" size={24} />
+                  <X size={20} />
                 </button>
               </div>
               <div className="space-y-6 p-6">

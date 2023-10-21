@@ -9,7 +9,6 @@
 - Baca Al-Qur'an(dengan audio yang bisa dipilih berdasarkan qori', terjemahan, juga bahasa latin)
 - Asma'ul Husna
 - ~~Jadwal puasa sunnah~~ Dari API nya udah ga valid lagi, soalnya jadwalnya untuk 2022 saja. Untuk detail bagian puasa sunnah aslinya, bisa lihat di bagian **Screenshots**
-- Udah PWA
 
 ## ⚡Tech Stack
 
@@ -19,7 +18,7 @@
 - React Query
 - Zustand
 
-## Setup
+## Getting Started
 
 Ada 3 branch yang ada di repositori ini:
 
@@ -29,25 +28,29 @@ Ada 3 branch yang ada di repositori ini:
 
 Jika kamu ingin melihat dan mengetes project ini lebih detail:
 
-- Clone project ini `git clone https://github.com/haikelz/jadwal-sholat.git`
+- Clone project ini `git clone https://github.com/haikelz/jadwal-sholat.git`.
 - Install dependencies dengan perintah `pnpm install`. Jika kamu memakai Package Manager yang lain, silahkan menyesuaikan dan jangan lupa untuk menghapus file `pnpm-lock.yaml`.
-- Next, ketikkan perintah `pnpm run dev` dan lihat hasilnya di browser => `http://localhost:3000`
+- Project ini menggunakan **turborepo**. Jadi jika ingin me-run project ini dengan turbo, maka pastikan untuk menginstall turbonya terlebih dahulu secara global dengan perintah `pnpm install -g turbo`. Setelah terinstall, maka ketik `turbo run dev` dan lihat hasilnya di browser => `http://localhost:3000`.
 
 ## Screenshots
 
-![home](/apps/jadwal-sholat/public/docs/home.png)
+![ss 1](/apps/jadwal-sholat/public/docs/ss-desktop-1.png)
 
-![jadwal sholat](/apps/jadwal-sholat/public/docs/jadwal-sholat.png)
+![ss 2](/apps/jadwal-sholat/public/docs/ss-desktop-2.png)
 
-![puasa sunnah](/apps/jadwal-sholat/public/docs/puasa-sunnah.png)
+![ss 3](/apps/jadwal-sholat/public/docs/ss-desktop-3.png)
 
-![quran](/apps/jadwal-sholat/public/docs/quran.png)
+![ss 4](/apps/jadwal-sholat/public/docs/ss-desktop-4.png)
 
-![asmaul husna](/apps/jadwal-sholat/public/docs/asmaul-husna.png)
+![ss 5](/apps/jadwal-sholat/public/docs/ss-desktop-5.png)
+
+![ss 8](/apps/jadwal-sholat/public/docs/ss-desktop-8.png)
+
+![ss 9](/apps/jadwal-sholat/public/docs/ss-desktop-9.png)
 
 ## 🗒️Credits
 
-Terima kasih udah menginspirasi saya :D
+Terima kasih telah menginspirasi saya
 
 https://islamiah.vercel.app/
 

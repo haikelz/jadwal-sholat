@@ -1,21 +1,19 @@
-import Axios, { AxiosError } from "axios";
+import Axios, { AxiosRequestConfig } from "axios";
 
-const axios = Axios.create({
+const config: AxiosRequestConfig = {
   responseType: "json",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
   },
-});
+};
 
-export async function getData(url: string): Promise<any> {
-  try {
-    const response = await axios.get(url, {
-      method: "GET",
-    });
+const axios = Axios.create(config);
 
-    return response.data;
-  } catch (err) {
-    console.error(err as AxiosError);
-  }
+export async function getData<T>(url: string): Promise<T> {
+  const response = await axios.get(url, {
+    method: "GET",
+  });
+
+  return response.data;
 }
