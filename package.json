@@ -13,6 +13,7 @@
     "@turbo/gen": "^1.10.16",
     "@unocss/postcss": "^0.56.5",
     "@unocss/preset-wind": "^0.56.5",
+    "@unocss/reset": "^0.57.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.51.0",

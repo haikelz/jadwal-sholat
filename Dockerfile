@@ -1,14 +1,19 @@
-# Test build with docker
-# NVM, i still confused to figure out how to configure docker with Next JS monorepo project
-FROM node:alpine as build
+FROM node:alpine AS build
 
 RUN npm i -g pnpm
-WORKDIR /usr/src/app
+RUN npm i -g turbo
+WORKDIR /jadwal-sholat
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 COPY package.json pnpm-lock.yaml ./
 COPY apps/jadwal-sholat/package.json ./apps/jadwal-sholat/package.json
+COPY packages/eslint-config-custom/package.json ./packages/eslint-config-custom/package.json
 
 RUN pnpm install
+
 COPY . ./
+RUN turbo run build
+
+COPY apps/jadwal-sholat/.next ./apps/jadwal-sholat/.next
+CMD ["turbo", "run", "dev"]

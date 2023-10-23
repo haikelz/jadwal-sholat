@@ -1,12 +1,7 @@
-Dockerfile*
-.dockerignore
 .git
 .github
 README.md
-build
-node_modules
+LICENSE
 cypress
 .husky
 .vscode
-.turbo
-.next
