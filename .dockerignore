@@ -2,6 +2,7 @@
 .github
 README.md
 LICENSE
-cypress
+apps/jadwal-sholat/cypress
+apps/jadwal-sholat/cypress.config.ts
 .husky
 .vscode

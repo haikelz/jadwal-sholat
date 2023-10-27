@@ -13,11 +13,11 @@ const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 export default function Client({ id }: { id: string }): JSX.Element {
   const formatDate: string = `${tahun}/${bulan}`;
 
-  const { data, isLoading, isError } = useFetch(
+  const { data, isPending, isError } = useFetch(
     id ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : ""
   );
 
-  if ((!data && isError) || isLoading) return <LoadingClient />;
+  if ((!data && isError) || isPending) return <LoadingClient />;
   if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
 
   const waktu = data.data;
@@ -25,7 +25,12 @@ export default function Client({ id }: { id: string }): JSX.Element {
   return (
     <>
       <div className="flex flex-col items-center justify-center">
-        <h1 className={cx("text-3xl font-bold tracking-wide sm:text-4xl", bitter.className)}>
+        <h1
+          className={cx(
+            "text-3xl font-bold tracking-wide sm:text-4xl",
+            bitter.className
+          )}
+        >
           {waktu.lokasi}
         </h1>
         <p className="text-lg font-medium">
@@ -33,7 +38,12 @@ export default function Client({ id }: { id: string }): JSX.Element {
         </p>
       </div>
       <div className="flex w-full items-center overflow-x-auto text-center lg:justify-center">
-        <TableJadwalSholat tanggal={hari} tahun={tahun} bulan={bulan} waktu={waktu} />
+        <TableJadwalSholat
+          tanggal={hari}
+          tahun={tahun}
+          bulan={bulan}
+          waktu={waktu}
+        />
       </div>
     </>
   );

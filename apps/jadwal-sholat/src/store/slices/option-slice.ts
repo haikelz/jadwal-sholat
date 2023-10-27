@@ -1,7 +1,9 @@
 import { StateCreator } from "zustand";
 import { OptionSliceProps } from "~interfaces";
 
-const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (set) => ({
+const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (
+  set
+) => ({
   audio: false,
   isMore: false,
   tafsir: false,

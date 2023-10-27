@@ -10,7 +10,9 @@ import Client from "./client";
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
-  const response: KotaProps[] = await getData(`${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`);
+  const response: KotaProps[] = await getData(
+    `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`
+  );
   return response.map((item) => ({
     id: item.id,
   }));
@@ -49,7 +51,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-export default async function KotaId({ params }: { params: { id: string } }): Promise<JSX.Element> {
+export default async function KotaId({
+  params,
+}: {
+  params: { id: string };
+}): Promise<JSX.Element> {
   const { id } = params;
 
   return (

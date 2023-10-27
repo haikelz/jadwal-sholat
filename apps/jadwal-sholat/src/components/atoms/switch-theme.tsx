@@ -36,7 +36,13 @@ export function SwitchTheme({
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
         {theme === "light" ? <Moon size={24} /> : <Sun size={24} />}
-        <p className={cx("hidden text-sm font-bold", "md:block", isMarginLeft ? "ml-2" : "")}>
+        <p
+          className={cx(
+            "hidden text-sm font-bold",
+            "md:block",
+            isMarginLeft ? "ml-2" : ""
+          )}
+        >
           {theme === "light" ? "Dark" : "Light"}
         </p>
       </button>

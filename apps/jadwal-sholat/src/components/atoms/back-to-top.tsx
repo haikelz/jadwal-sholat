@@ -12,7 +12,9 @@ export function BackToTop(): JSX.Element {
   return (
     <>
       {scroll >= height ? (
-        <div className={cx("fixed bottom-18 right-2.5", "md:right-4 md:bottom-4")}>
+        <div
+          className={cx("fixed bottom-18 right-2.5", "md:right-4 md:bottom-4")}
+        >
           <button
             type="button"
             aria-label="back to top"

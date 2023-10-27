@@ -21,7 +21,11 @@ export function TableJadwalSholat({ waktu }: WaktuProps): JSX.Element {
           {tableJadwalSholatList.map((item) => (
             <th
               key={item.id}
-              className={cx("border-r-2 border-r-black px-4", "px-4 text-xl", "dark:border-none")}
+              className={cx(
+                "border-r-2 border-r-black px-4",
+                "px-4 text-xl",
+                "dark:border-none"
+              )}
             >
               {item.name}
             </th>

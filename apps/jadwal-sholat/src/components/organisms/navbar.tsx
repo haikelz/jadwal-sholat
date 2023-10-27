@@ -7,9 +7,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { slugify } from "~lib/helpers";
 
-const SwitchTheme = dynamic(() => import("~components/atoms").then((obj) => obj.SwitchTheme), {
-  ssr: false,
-});
+const SwitchTheme = dynamic(
+  () => import("~components/atoms").then((obj) => obj.SwitchTheme),
+  {
+    ssr: false,
+  }
+);
 
 const navbarList = [
   {
@@ -71,7 +74,10 @@ export function Navbar(): JSX.Element {
         {navbarList.map((item) => {
           const Icon: LucideIcon = item.icon;
           return (
-            <div key={item.id} className="flex w-full items-center justify-center">
+            <div
+              key={item.id}
+              className="flex w-full items-center justify-center"
+            >
               <Link href={slugify(item.title)} passHref>
                 <button
                   className={cx(
@@ -83,7 +89,9 @@ export function Navbar(): JSX.Element {
                   )}
                 >
                   <Icon size={24} />
-                  <p className="hidden text-sm font-bold md:block">{item.title}</p>
+                  <p className="hidden text-sm font-bold md:block">
+                    {item.title}
+                  </p>
                 </button>
               </Link>
             </div>

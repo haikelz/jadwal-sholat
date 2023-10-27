@@ -37,7 +37,9 @@ export function ModalTafsir({ surat }: SuratProps): JSX.Element {
               )}
             >
               <div className="flex items-center justify-between rounded-t border-b p-4">
-                <h3 className="text-xl font-semibold">Tafsir Surat {surat.asma.id.short}</h3>
+                <h3 className="text-xl font-semibold">
+                  Tafsir Surat {surat.asma.id.short}
+                </h3>
                 <button
                   type="button"
                   className={cx(

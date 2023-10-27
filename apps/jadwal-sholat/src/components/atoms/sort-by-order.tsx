@@ -7,7 +7,10 @@ interface SortByOrderProps {
   setIsAscending: Dispatch<SetStateAction<boolean>>;
 }
 
-export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps): JSX.Element {
+export function SortByOrder({
+  isAscending,
+  setIsAscending,
+}: SortByOrderProps): JSX.Element {
   return (
     <div className="w-full flex justify-end items-center">
       <div
@@ -23,7 +26,9 @@ export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps): 
           onClick={() => setIsAscending((prev) => !prev)}
           className="flex space-x-1 ml-2 justify-center items-center"
         >
-          <span className="font-semibold">{isAscending ? "Ascending" : "Descending"}</span>
+          <span className="font-semibold">
+            {isAscending ? "Ascending" : "Descending"}
+          </span>
           {isAscending ? <ArrowUp size={20} /> : <ArrowDown size={20} />}
         </button>
       </div>

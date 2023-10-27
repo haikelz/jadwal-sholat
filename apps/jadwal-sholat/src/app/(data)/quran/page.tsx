@@ -44,7 +44,9 @@ export const metadata: Metadata = {
 };
 
 async function getSurat(): Promise<ListSuratProps> {
-  const response: ListSuratProps = await getData(`${NEXT_PUBLIC_QURAN_API}/quran`);
+  const response: ListSuratProps = await getData(
+    `${NEXT_PUBLIC_QURAN_API}/quran`
+  );
   return response;
 }
 
@@ -61,7 +63,12 @@ export default async function Quran(): Promise<JSX.Element> {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center space-x-3">
-          <h1 className={cx("text-3xl font-bold tracking-wide sm:text-4xl", bitter.className)}>
+          <h1
+            className={cx(
+              "text-3xl font-bold tracking-wide sm:text-4xl",
+              bitter.className
+            )}
+          >
             Baca Al-Qur&#39;an
           </h1>
           <Image src="/img/Quran.webp" width={40} height={40} alt="Al-Qur'an" />

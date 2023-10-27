@@ -3,7 +3,10 @@ import { cx } from "classix";
 export function LoadingClient(): JSX.Element {
   return (
     <div
-      className={cx("flex min-h-screen items-center justify-center", "p-8 space-x-3 text-center")}
+      className={cx(
+        "flex min-h-screen items-center justify-center",
+        "p-8 space-x-3 text-center"
+      )}
     >
       <p className="text-2xl font-bold">Loading</p>
       <div role="status">

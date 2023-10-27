@@ -37,10 +37,10 @@
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
-      "prettier --config ./.prettierrc.json --write"
+      "prettier --config ./prettier.config.js --write"
     ],
     "**/*.{css,scss,md,html,json}": [
-      "prettier --config ./.prettierrc.json --write"
+      "prettier --config ./prettier.config.js --write"
     ]
   },
   "packageManager": "pnpm@8.6.10",

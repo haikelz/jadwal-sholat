@@ -48,7 +48,15 @@ export function usePlayNextAudio(audioList: string[]): UsePlayNextAudioProps {
           },
         })
       : null;
-  }, [load, audioIndex, setAudioIndex, isPlayAudio, setIsAudioEnded, setAyat, audioList]);
+  }, [
+    load,
+    audioIndex,
+    setAudioIndex,
+    isPlayAudio,
+    setIsAudioEnded,
+    setAyat,
+    audioList,
+  ]);
 
   return {
     audioIndex,

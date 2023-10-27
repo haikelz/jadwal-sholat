@@ -12,13 +12,14 @@ import { arab } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
 
 export function DetailSurat({ surat }: SuratProps): JSX.Element {
-  const { lastRead, setLastRead, setNotification, terjemahan, audio } = useGlobalStore((state) => ({
-    lastRead: state.lastRead,
-    setLastRead: state.setLastRead,
-    setNotification: state.setNotification,
-    terjemahan: state.terjemahan,
-    audio: state.audio,
-  }));
+  const { lastRead, setLastRead, setNotification, terjemahan, audio } =
+    useGlobalStore((state) => ({
+      lastRead: state.lastRead,
+      setLastRead: state.setLastRead,
+      setNotification: state.setNotification,
+      terjemahan: state.terjemahan,
+      audio: state.audio,
+    }));
 
   const audioList: string[] = surat.ayahs.map((item) => item.audio.url);
 
@@ -133,7 +134,9 @@ export function DetailSurat({ surat }: SuratProps): JSX.Element {
                           "transition-all border border-gray-300 dark:border-gray-600 px-2.5 py-1",
                           "rounded-full space-x-2"
                         )}
-                        onClick={() => handlePlayAudio(index, ayat.number.insurah)}
+                        onClick={() =>
+                          handlePlayAudio(index, ayat.number.insurah)
+                        }
                       >
                         <Play size={20} />
                         <span className="font-medium">Play</span>
@@ -160,7 +163,11 @@ export function DetailSurat({ surat }: SuratProps): JSX.Element {
                 "dark:hover:text-blue-500"
               )}
               onClick={() =>
-                handleClick(surat.asma.id.short, ayat.number.insurah, surat.number as number)
+                handleClick(
+                  surat.asma.id.short,
+                  ayat.number.insurah,
+                  surat.number as number
+                )
               }
             >
               Tandai ayat

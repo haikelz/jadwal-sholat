@@ -9,7 +9,11 @@ import { useAscending } from "~hooks";
 import { AsmaulHusnaProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
 
-export function ListAsmaulHusna({ asmaulHusna }: { asmaulHusna: AsmaulHusnaProps[] }): JSX.Element {
+export function ListAsmaulHusna({
+  asmaulHusna,
+}: {
+  asmaulHusna: AsmaulHusnaProps[];
+}): JSX.Element {
   const [search, setSearch] = useState<string>("");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(search);
@@ -19,7 +23,10 @@ export function ListAsmaulHusna({ asmaulHusna }: { asmaulHusna: AsmaulHusnaProps
       asmaulHusna
         .filter((item) => {
           if (deferredSearch === "") return item;
-          else if (item.latin.toLowerCase().includes(deferredSearch.toLowerCase())) return item;
+          else if (
+            item.latin.toLowerCase().includes(deferredSearch.toLowerCase())
+          )
+            return item;
         })
         .sort(() => {
           if (isAscending) return 1;
@@ -56,7 +63,9 @@ export function ListAsmaulHusna({ asmaulHusna }: { asmaulHusna: AsmaulHusnaProps
             >
               <h3 className="text-xl font-bold">{item.urutan}</h3>
               <div className="my-3 w-full text-right">
-                <p className={cx("text-3xl font-medium", arab.className)}>{item.arab}</p>
+                <p className={cx("text-3xl font-medium", arab.className)}>
+                  {item.arab}
+                </p>
               </div>
               <p className="text-lg font-bold">
                 {deferredSearch
@@ -64,7 +73,10 @@ export function ListAsmaulHusna({ asmaulHusna }: { asmaulHusna: AsmaulHusnaProps
                       item.latin,
                       deferredSearch,
                       (match: string, index: number) => (
-                        <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
+                        <span
+                          key={index + 1}
+                          className="bg-lime-400 dark:bg-lime-600"
+                        >
                           {match}
                         </span>
                       )

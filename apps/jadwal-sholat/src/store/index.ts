@@ -1,7 +1,11 @@
 import { devtools } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { createWithEqualityFn } from "zustand/traditional";
-import { DateSliceProps, LastReadSliceProps, OptionSliceProps } from "~interfaces";
+import {
+  DateSliceProps,
+  LastReadSliceProps,
+  OptionSliceProps,
+} from "~interfaces";
 
 import dateSlice from "./slices/date-slice";
 import lastReadSlice from "./slices/last-read-slice";

@@ -11,7 +11,9 @@ export default function Time(): JSX.Element {
     setDate: state.setDate,
   }));
 
-  const formattedDate: string = format(date, `dd MMMM yyyy, kk.mm.ss`, { locale: id });
+  const formattedDate: string = format(date, `dd MMMM yyyy, kk.mm.ss`, {
+    locale: id,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {

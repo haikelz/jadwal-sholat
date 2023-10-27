@@ -46,10 +46,19 @@ export const metadata: Metadata = {
 export default function HomePage(): JSX.Element {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center text-center">
-      <Image src="/img/home.webp" width={100} height={100} alt="Al-Quran" loading="eager" />
+      <Image
+        src="/img/home.webp"
+        width={100}
+        height={100}
+        alt="Al-Quran"
+        loading="eager"
+      />
       <div className="mt-3 flex flex-col items-center justify-center text-center">
         <h1
-          className={cx("text-3xl font-bold tracking-wide sm:text-4xl", bitter.className)}
+          className={cx(
+            "text-3xl font-bold tracking-wide sm:text-4xl",
+            bitter.className
+          )}
         >{`Selamat ${
           hours >= 12 && hours < 15
             ? "Siang"

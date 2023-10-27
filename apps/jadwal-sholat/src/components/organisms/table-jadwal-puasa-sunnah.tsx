@@ -40,7 +40,8 @@ export function TableJadwalPuasaSunnah({
                 <td className="border-r-2 border-black px-2 text-xl font-medium dark:border-none lg:px-4">
                   {`${
                     fasting.date.substring(0, fasting.date.length - 2) +
-                    (Number(fasting.date.substring(fasting.date.length - 2)) - 1)
+                    (Number(fasting.date.substring(fasting.date.length - 2)) -
+                      1)
                   }`}
                 </td>
                 <td

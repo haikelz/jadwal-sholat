@@ -26,7 +26,9 @@ export function ListKota({ kota }: { kota: KotaProps[] }): JSX.Element {
         .filter((value) => {
           if (deferredSearch === "") {
             return value.id !== "3212";
-          } else if (value.lokasi.toLowerCase().includes(deferredSearch.toLowerCase())) {
+          } else if (
+            value.lokasi.toLowerCase().includes(deferredSearch.toLowerCase())
+          ) {
             return value.id !== "3212";
           }
         })
@@ -70,7 +72,10 @@ export function ListKota({ kota }: { kota: KotaProps[] }): JSX.Element {
                         loc.lokasi,
                         deferredSearch,
                         (match: string, index: number) => (
-                          <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
+                          <span
+                            key={index + 1}
+                            className="bg-lime-400 dark:bg-lime-600"
+                          >
                             {match}
                           </span>
                         )

@@ -1,6 +1,10 @@
 "use client";
 
-import { UseQueryResult, keepPreviousData, useQuery } from "@tanstack/react-query";
+import {
+  UseQueryResult,
+  keepPreviousData,
+  useQuery,
+} from "@tanstack/react-query";
 import { getData } from "~lib/utils/axios-config";
 
 /**

@@ -62,7 +62,11 @@ export default function Layout({ children }: ChildrenProps) {
       <body className={cx(ibmPlexSans.className)}>
         <Wrapper>
           <div
-            className={cx("bg-gray-50 text-black", "md:flex", "dark:bg-gray-900 dark:text-white")}
+            className={cx(
+              "bg-gray-50 text-black",
+              "md:flex",
+              "dark:bg-gray-900 dark:text-white"
+            )}
           >
             <Navbar />
             <main className="flex w-full justify-center">

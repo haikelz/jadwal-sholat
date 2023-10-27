@@ -44,7 +44,9 @@ export const metadata: Metadata = {
 };
 
 async function getJadwalSholat(): Promise<KotaProps[]> {
-  const response: KotaProps[] = await getData(`${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`);
+  const response: KotaProps[] = await getData(
+    `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`
+  );
   return response;
 }
 
@@ -61,7 +63,12 @@ export default async function JadwalSholat(): Promise<JSX.Element> {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
-          <h1 className={cx("text-3xl font-bold tracking-wide sm:text-4xl", bitter.className)}>
+          <h1
+            className={cx(
+              "text-3xl font-bold tracking-wide sm:text-4xl",
+              bitter.className
+            )}
+          >
             Jadwal Sholat
           </h1>
           <Image

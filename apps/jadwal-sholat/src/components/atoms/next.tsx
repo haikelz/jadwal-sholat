@@ -10,9 +10,9 @@ export function Next({ surat }: SuratProps): JSX.Element {
       {surat.number < 114 ? (
         <Link href={`/quran/surat/${surat.number + 1}`}>
           <button
-            onClick={removeSelectedSurat}
             type="button"
-            aria-label="Next"
+            aria-label="next"
+            onClick={removeSelectedSurat}
             className={cx(
               "flex items-center justify-center space-x-1 rounded-md",
               " border-2 border-black px-2 py-1",

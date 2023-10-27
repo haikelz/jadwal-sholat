@@ -46,7 +46,9 @@ interface GetAsmaulHusnaProps {
 }
 
 async function getAsmaulHusna(): Promise<AsmaulHusnaProps[]> {
-  const response: GetAsmaulHusnaProps = await getData(`${NEXT_PUBLIC_ASMAUL_HUSNA_API}/all`);
+  const response: GetAsmaulHusnaProps = await getData(
+    `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/all`
+  );
   return response.data;
 }
 
@@ -63,7 +65,12 @@ export default async function AsmaulHusna(): Promise<JSX.Element> {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
-          <h1 className={cx("text-3xl font-bold tracking-wide sm:text-4xl", bitter.className)}>
+          <h1
+            className={cx(
+              "text-3xl font-bold tracking-wide sm:text-4xl",
+              bitter.className
+            )}
+          >
             Asma&#39;ul Husna
           </h1>
         </div>
