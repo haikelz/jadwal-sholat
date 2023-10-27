@@ -1,10 +1,9 @@
 import { cx } from "classix";
 import { ArrowDown, ArrowUp } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
 
 interface SortByOrderProps {
   isAscending: boolean;
-  setIsAscending: Dispatch<SetStateAction<boolean>>;
+  setIsAscending: (isAscending: boolean) => void;
 }
 
 export function SortByOrder({
@@ -23,7 +22,7 @@ export function SortByOrder({
         <button
           type="button"
           aria-label="sort"
-          onClick={() => setIsAscending((prev) => !prev)}
+          onClick={() => setIsAscending(!isAscending)}
           className="flex space-x-1 ml-2 justify-center items-center"
         >
           <span className="font-semibold">

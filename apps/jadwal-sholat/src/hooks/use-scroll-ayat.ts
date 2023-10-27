@@ -8,19 +8,29 @@ interface ScrollAyatProps {
   lastRead: LastReadProps;
   ayat: string;
   isAudioEnded: boolean;
-  setIsAudioEnded: Dispatch<SetStateAction<boolean>>;
+  setIsAudioEnded: (isAudioEnded: boolean) => void;
 }
 
 /**
  * A custom hook for manage scroll to ayat feature
  * @param {ScrollAyatProps} scrollAyat - scrollAyat object
  */
-export function useScrollAyat({ lastRead, ayat, isAudioEnded, setIsAudioEnded }: ScrollAyatProps) {
+export function useScrollAyat({
+  lastRead,
+  ayat,
+  isAudioEnded,
+  setIsAudioEnded,
+}: ScrollAyatProps) {
   useEffect(() => {
-    const lastReadId = document.getElementById(`ayat-${lastRead.ayat?.toString()}`);
+    const lastReadId = document.getElementById(
+      `ayat-${lastRead.ayat?.toString()}`
+    );
     const ayatId = document.getElementById(ayat);
 
-    if (lastReadId && lastRead.number === Number(secureLocalStorage.getItem("selected-surat"))) {
+    if (
+      lastReadId &&
+      lastRead.number === Number(secureLocalStorage.getItem("selected-surat"))
+    ) {
       lastReadId.scrollIntoView({ behavior: "smooth" });
     }
 

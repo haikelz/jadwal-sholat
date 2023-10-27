@@ -3,20 +3,16 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { AudioLoadOptions, useAudioPlayer } from "react-use-audio-player";
 import { useDeepCompareEffect } from "use-deep-compare";
+import { PlayNextAudioSliceProps } from "~interfaces";
+import useGlobalStore from "~store";
 
-interface UsePlayNextAudioProps {
+interface UsePlayNextAudioProps extends PlayNextAudioSliceProps {
   audioIndex: number;
   setAudioIndex: Dispatch<SetStateAction<number>>;
-  isPlayAudio: boolean;
-  setIsPlayAudio: Dispatch<SetStateAction<boolean>>;
-  isAudioEnded: boolean;
-  setIsAudioEnded: Dispatch<SetStateAction<boolean>>;
   pause: () => void;
   play: () => void;
   playing: boolean;
-  ayat: string;
   load: (src: string, options?: AudioLoadOptions | undefined) => void;
-  setAyat: Dispatch<SetStateAction<string>>;
 }
 
 /**
@@ -24,10 +20,23 @@ interface UsePlayNextAudioProps {
  * @param {string[]} audioList - audiolist
  */
 export function usePlayNextAudio(audioList: string[]): UsePlayNextAudioProps {
-  const [ayat, setAyat] = useState<string>("ayat-1");
   const [audioIndex, setAudioIndex] = useState<number>(0);
-  const [isPlayAudio, setIsPlayAudio] = useState<boolean>(false);
-  const [isAudioEnded, setIsAudioEnded] = useState<boolean>(false);
+
+  const {
+    ayat,
+    setAyat,
+    isPlayAudio,
+    setIsPlayAudio,
+    isAudioEnded,
+    setIsAudioEnded,
+  } = useGlobalStore((state) => ({
+    ayat: state.ayat,
+    setAyat: state.setAyat,
+    isPlayAudio: state.isPlayAudio,
+    setIsPlayAudio: state.setIsPlayAudio,
+    isAudioEnded: state.isAudioEnded,
+    setIsAudioEnded: state.setIsAudioEnded,
+  }));
 
   const { pause, play, load, playing } = useAudioPlayer();
 
@@ -37,7 +46,7 @@ export function usePlayNextAudio(audioList: string[]): UsePlayNextAudioProps {
           autoplay: true,
           onend: () => {
             if (audioIndex < audioList.length - 1) {
-              setAudioIndex((index) => {
+              setAudioIndex((index: any) => {
                 if (index === audioList.length - 1) return 0;
                 return index + 1;
               });

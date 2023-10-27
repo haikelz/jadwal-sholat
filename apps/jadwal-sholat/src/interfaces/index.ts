@@ -128,6 +128,25 @@ export interface LastReadSliceProps {
   setLastRead: (lastRead: LastReadProps) => void;
 }
 
+export interface WidthSliceProps {
+  width: number;
+  setWidth: (width: number) => void;
+}
+
+export interface IsAscendingSliceProps {
+  isAscending: boolean;
+  setIsAscending: (isAscending: boolean) => void;
+}
+
+export interface PlayNextAudioSliceProps {
+  isPlayAudio: boolean;
+  setIsPlayAudio: (isPlayAudio: boolean) => void;
+  isAudioEnded: boolean;
+  setIsAudioEnded: (isAudioEnded: boolean) => void;
+  ayat: string;
+  setAyat: (ayat: string) => void;
+}
+
 export interface OptionSliceProps {
   audio: boolean;
   tafsir: boolean;
