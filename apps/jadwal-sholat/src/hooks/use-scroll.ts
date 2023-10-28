@@ -1,16 +1,20 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import useGlobalStore from "~store";
 
 /**
  * A custom hook to get height value, based on user's scroll
  * @returns {number} scroll value
  */
 export function useScroll(): number {
-  const [scroll, setScroll] = useState<number>(0);
+  const { scroll, setScroll } = useGlobalStore((state) => ({
+    scroll: state.scroll,
+    setScroll: state.setScroll,
+  }));
 
   const handleScroll = useCallback(() => {
-    setScroll(() => window.pageYOffset);
+    setScroll(window.pageYOffset);
   }, [setScroll]);
 
   useEffect(() => {

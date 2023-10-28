@@ -167,3 +167,8 @@ export interface AsmaulHusnaProps {
   arab: string;
   arti: string;
 }
+
+export interface ScrollSliceProps {
+  scroll: number;
+  setScroll: (scroll: number) => void;
+}
