@@ -1,12 +1,13 @@
 import { cx } from "classix";
 import { Metadata } from "next";
 import Image from "next/image";
-import { ListKota } from "~components/organisms";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
+
+import JadwalSholatClient from "./client";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
@@ -84,7 +85,7 @@ export default async function JadwalSholat(): Promise<JSX.Element> {
           Berikut daftar Kabupaten/Kota yang tersedia
         </p>
       </div>
-      <ListKota kota={kota} />
+      <JadwalSholatClient kota={kota} />
     </div>
   );
 }

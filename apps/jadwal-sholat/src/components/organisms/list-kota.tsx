@@ -2,18 +2,20 @@
 
 import { cx } from "classix";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
-import { SortByOrder, TidakAda } from "~components/atoms";
-import { SearchBar } from "~components/molecules";
-import { useAscending } from "~hooks";
+import { TidakAda } from "~components/atoms";
 import { KotaProps } from "~interfaces";
 
-export function ListKota({ kota }: { kota: KotaProps[] }): JSX.Element {
-  const [search, setSearch] = useState<string>("");
-
-  const { isAscending, setIsAscending, deferredSearch } = useAscending(search);
-
+export function ListKota({
+  kota,
+  deferredSearch,
+  isAscending,
+}: {
+  kota: KotaProps[];
+  deferredSearch: string;
+  isAscending: boolean;
+}): JSX.Element {
   /**
    * - Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
    * - Hal ini menjadi masalah karena hanya satu id yang valid, yakni 3211.
@@ -42,10 +44,6 @@ export function ListKota({ kota }: { kota: KotaProps[] }): JSX.Element {
 
   return (
     <>
-      <div className={cx("flex flex-col items-center justify-center")}>
-        <SearchBar search={search} setSearch={setSearch} />
-      </div>
-      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredKota.length ? (
         <div
           className={cx(

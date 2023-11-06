@@ -1,12 +1,8 @@
 import { cx } from "classix";
-import { ListAsmaulHusna } from "~components/organisms";
-import { env } from "~env.mjs";
-import { AsmaulHusnaProps } from "~interfaces";
-import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
-const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
+import { AsmaulHusnaClient } from "./client";
 
 const baseMetadata = {
   title: "Asma'ul Husna | Jadwal Sholat",
@@ -41,20 +37,7 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-interface GetAsmaulHusnaProps {
-  data: AsmaulHusnaProps[];
-}
-
-async function getAsmaulHusna(): Promise<AsmaulHusnaProps[]> {
-  const response: GetAsmaulHusnaProps = await getData(
-    `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/all`
-  );
-  return response.data;
-}
-
-export default async function AsmaulHusna(): Promise<JSX.Element> {
-  const asmaulHusna = await getAsmaulHusna();
-
+export default function AsmaulHusna(): JSX.Element {
   return (
     <div
       className={cx(
@@ -78,7 +61,7 @@ export default async function AsmaulHusna(): Promise<JSX.Element> {
           Berikut daftar Asma&#39;ul Husna
         </p>
       </div>
-      <ListAsmaulHusna asmaulHusna={asmaulHusna} />
+      <AsmaulHusnaClient />
     </div>
   );
 }

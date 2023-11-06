@@ -1,23 +1,21 @@
 "use client";
 
 import { cx } from "classix";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
-import { SortByOrder, TidakAda } from "~components/atoms";
-import { SearchBar } from "~components/molecules";
-import { useAscending } from "~hooks";
+import { TidakAda } from "~components/atoms";
 import { AsmaulHusnaProps } from "~interfaces";
 import { arab } from "~lib/utils/fonts";
 
 export function ListAsmaulHusna({
   asmaulHusna,
+  deferredSearch,
+  isAscending,
 }: {
   asmaulHusna: AsmaulHusnaProps[];
+  deferredSearch: string;
+  isAscending: boolean;
 }): JSX.Element {
-  const [search, setSearch] = useState<string>("");
-
-  const { isAscending, setIsAscending, deferredSearch } = useAscending(search);
-
   const filteredAsmaulHusna = useMemo(
     () =>
       asmaulHusna
@@ -38,10 +36,6 @@ export function ListAsmaulHusna({
 
   return (
     <>
-      <div className={cx("flex flex-col items-center justify-center")}>
-        <SearchBar search={search} setSearch={setSearch} />
-      </div>
-      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredAsmaulHusna.length ? (
         <div
           className={cx(

@@ -2,23 +2,24 @@
 
 import { cx } from "classix";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
-import { SortByOrder, TidakAda } from "~components/atoms";
-import { SearchBar } from "~components/molecules";
-import { useAscending } from "~hooks";
+import { TidakAda } from "~components/atoms";
 import { ListSuratProps } from "~interfaces";
 import { removeSelectedSurat } from "~lib/helpers";
 import useGlobalStore from "~store";
 
-export function ListSurat({ surat }: { surat: ListSuratProps }): JSX.Element {
-  const [search, setSearch] = useState<string>("");
-
-  const { isAscending, setIsAscending, deferredSearch } = useAscending(search);
-
-  const { lastRead, setLastRead } = useGlobalStore((state) => ({
-    lastRead: state.lastRead,
+export function ListSurat({
+  surat,
+  deferredSearch,
+  isAscending,
+}: {
+  surat: ListSuratProps;
+  deferredSearch: string;
+  isAscending: boolean;
+}): JSX.Element {
+  const { setLastRead } = useGlobalStore((state) => ({
     setLastRead: state.setLastRead,
   }));
 
@@ -27,7 +28,11 @@ export function ListSurat({ surat }: { surat: ListSuratProps }): JSX.Element {
       surat.data
         .filter((value) => {
           if (deferredSearch === "") return value;
-          else if (value.asma.id.short.toLowerCase().includes(deferredSearch.toLowerCase()))
+          else if (
+            value.asma.id.short
+              .toLowerCase()
+              .includes(deferredSearch.toLowerCase())
+          )
             return value;
         })
         .sort(() => {
@@ -46,39 +51,6 @@ export function ListSurat({ surat }: { surat: ListSuratProps }): JSX.Element {
 
   return (
     <>
-      <div
-        className={cx(
-          "flex flex-col items-center justify-center",
-          "text-center ",
-          "dark:text-white"
-        )}
-      >
-        <SearchBar search={search} setSearch={setSearch} />
-        <p className="mt-2 text-lg font-medium">
-          Terakhir dibaca:{" "}
-          {lastRead.ayat || lastRead.number !== null ? (
-            <Link
-              href={`/quran/surat/${lastRead.number}`}
-              onClick={() =>
-                secureLocalStorage.setItem("selected-surat", lastRead.number?.toString() as string)
-              }
-            >
-              <span
-                className={cx(
-                  "hover-animation underline-animation  font-bold",
-                  "hover:text-red-500",
-                  "dark:text-white dark:hover:text-blue-500"
-                )}
-              >
-                Surat {lastRead.name} ayat {lastRead.ayat}
-              </span>
-            </Link>
-          ) : (
-            "belum ada"
-          )}
-        </p>
-      </div>
-      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredSurat.length ? (
         <div
           className={cx(
@@ -103,7 +75,9 @@ export function ListSurat({ surat }: { surat: ListSuratProps }): JSX.Element {
                   "dark:border-gray-200 dark:bg-[#2A2A37] dark:text-white"
                 )}
               >
-                <p className="text-right font-semibold tracking-wide">{surat.type.id}</p>
+                <p className="text-right font-semibold tracking-wide">
+                  {surat.type.id}
+                </p>
                 <span className="text-xl font-bold">{surat.number}</span>
                 <p className="text-lg font-bold">
                   {deferredSearch
@@ -111,7 +85,10 @@ export function ListSurat({ surat }: { surat: ListSuratProps }): JSX.Element {
                         surat.asma.id.short,
                         deferredSearch,
                         (match: string, index: number) => (
-                          <span key={index + 1} className="bg-lime-400 dark:bg-lime-600">
+                          <span
+                            key={index + 1}
+                            className="bg-lime-400 dark:bg-lime-600"
+                          >
                             {match}
                           </span>
                         )

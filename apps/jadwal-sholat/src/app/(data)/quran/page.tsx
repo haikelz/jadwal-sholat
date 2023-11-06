@@ -1,12 +1,13 @@
 import { cx } from "classix";
 import { Metadata } from "next";
 import Image from "next/image";
-import { ListSurat } from "~components/organisms";
 import { env } from "~env.mjs";
 import { ListSuratProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
+
+import QuranClient from "./client";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
@@ -77,7 +78,7 @@ export default async function Quran(): Promise<JSX.Element> {
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;
         </p>
       </div>
-      <ListSurat surat={surat} />
+      <QuranClient surat={surat} />
     </div>
   );
 }
