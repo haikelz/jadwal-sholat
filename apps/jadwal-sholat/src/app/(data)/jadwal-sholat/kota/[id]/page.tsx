@@ -1,7 +1,7 @@
-import { cx } from "classix";
 import { Metadata } from "next";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 

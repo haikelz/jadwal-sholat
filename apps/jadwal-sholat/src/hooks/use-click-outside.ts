@@ -4,20 +4,21 @@ import { RefObject, useCallback, useEffect } from "react";
 
 /**
  * A custom hook that contains logic for close a modal if we click outside
- * @param {(param: boolean) => void} set - setter
+ * @param {(param: T) => void} set - setter
  * @param {RefObject<HTMLDivElement>} ref - reference to div modal element
  */
-export function useClickOutside(
-  set: (param: boolean) => void,
-  ref: RefObject<HTMLDivElement>
+export function useClickOutside<T>(
+  set: (param: T) => void,
+  ref: RefObject<HTMLDivElement>,
+  value: T
 ): void {
   const handleClickOutside = useCallback(
     (e: Event) => {
       if (ref.current && !ref.current.contains(e.target as HTMLDivElement)) {
-        set(false);
+        set(value);
       }
     },
-    [ref, set]
+    [ref, set, value]
   );
 
   useEffect(() => {

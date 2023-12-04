@@ -1,10 +1,10 @@
-import { cx } from "classix";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { SuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { removeSelectedSurat } from "~lib/helpers";
 
-export function Next({ surat }: SuratProps): JSX.Element {
+export function Next({ surat }: SuratProps) {
   return (
     <>
       {surat.number < 114 ? (

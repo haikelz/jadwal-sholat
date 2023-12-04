@@ -1,12 +1,15 @@
-import { cx } from "classix";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { cx } from "~lib/helpers";
 import { hours } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
 const Time = dynamic(() => import("~components/molecules/time"), {
+  loading: () => (
+    <div className="w-72 h-6 animate-pulse bg-gray-300 dark:bg-gray-700"></div>
+  ),
   ssr: false,
 });
 
@@ -43,7 +46,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-export default function HomePage(): JSX.Element {
+export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center text-center">
       <Image
@@ -51,7 +54,8 @@ export default function HomePage(): JSX.Element {
         width={100}
         height={100}
         alt="Al-Quran"
-        loading="eager"
+        fetchPriority="high"
+        draggable={false}
       />
       <div className="mt-3 flex flex-col items-center justify-center text-center">
         <h1
@@ -63,10 +67,10 @@ export default function HomePage(): JSX.Element {
           hours >= 12 && hours < 15
             ? "Siang"
             : hours >= 15 && hours < 18
-            ? "Sore"
-            : hours >= 18 && hours < 24
-            ? "Malam"
-            : "Pagi"
+              ? "Sore"
+              : hours >= 18 && hours < 24
+                ? "Malam"
+                : "Pagi"
         }`}</h1>
         <p className="mb-1 mt-2 text-lg font-medium md:text-xl">
           &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;

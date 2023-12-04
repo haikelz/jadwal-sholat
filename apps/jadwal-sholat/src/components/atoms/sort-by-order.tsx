@@ -1,15 +1,12 @@
-import { cx } from "classix";
 import { ArrowDown, ArrowUp } from "lucide-react";
+import { cx } from "~lib/helpers";
 
 interface SortByOrderProps {
   isAscending: boolean;
   setIsAscending: (isAscending: boolean) => void;
 }
 
-export function SortByOrder({
-  isAscending,
-  setIsAscending,
-}: SortByOrderProps): JSX.Element {
+export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps) {
   return (
     <div className="w-full flex justify-end items-center">
       <div

@@ -1,12 +1,12 @@
 "use client";
 
-import { cx } from "classix";
 import Link from "next/link";
 import { useEffect, useMemo } from "react";
 import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { ListSuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { removeSelectedSurat } from "~lib/helpers";
 import useGlobalStore from "~store";
 
@@ -18,7 +18,7 @@ export function ListSurat({
   surat: ListSuratProps;
   deferredSearch: string;
   isAscending: boolean;
-}): JSX.Element {
+}) {
   const { setLastRead } = useGlobalStore((state) => ({
     setLastRead: state.setLastRead,
   }));
@@ -26,14 +26,14 @@ export function ListSurat({
   const filteredSurat = useMemo(
     () =>
       surat.data
-        .filter((value) => {
-          if (deferredSearch === "") return value;
+        .filter((item) => {
+          if (deferredSearch === "" || deferredSearch === null) return item;
           else if (
-            value.asma.id.short
+            item.asma.id.short
               .toLowerCase()
               .includes(deferredSearch.toLowerCase())
           )
-            return value;
+            return item;
         })
         .sort(() => {
           if (isAscending) return 1;

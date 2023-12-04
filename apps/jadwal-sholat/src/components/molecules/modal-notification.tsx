@@ -1,15 +1,11 @@
 "use client";
 
-import { cx } from "classix";
 import { memo, useRef } from "react";
 import { useClickOutside } from "~hooks";
+import { cx } from "~lib/helpers";
 import useGlobalStore from "~store";
 
-export function ModalNotification({
-  description,
-}: {
-  description: string;
-}): JSX.Element {
+export function ModalNotification({ description }: { description: string }) {
   const { notification, setNotification } = useGlobalStore((state) => ({
     notification: state.notification,
     setNotification: state.setNotification,
@@ -17,7 +13,7 @@ export function ModalNotification({
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useClickOutside(setNotification, modalRef);
+  useClickOutside(setNotification, modalRef, false);
 
   return (
     <>

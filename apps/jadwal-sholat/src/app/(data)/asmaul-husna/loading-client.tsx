@@ -1,9 +1,9 @@
-import cx from "classix";
+import { cx } from "~lib/helpers";
 
 export default function LoadingClient() {
-  const arr: Array<number> = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-  ];
+  const arr: Array<number> = new Array(16)
+    .fill(null)
+    .map((_, index) => index + 1);
 
   return (
     <>
@@ -11,7 +11,7 @@ export default function LoadingClient() {
         <div className="relative flex items-center justify-center">
           <div className="w-[300px] animate-pulse bg-gray-300 dark:bg-gray-700 h-10 rounded-md"></div>
         </div>
-        <div className="mt-1.5 hidden flex justify-center space-x-4 items-center">
+        <div className="mt-1.5 hidden md:flex justify-center space-x-4 items-center">
           <div className="bg-gray-300 dark:bg-gray-700 animate-pulse h-4 w-[70px]"></div>
           <div className="bg-gray-300 dark:bg-gray-700 animate-pulse h-4 w-[70px]"></div>
         </div>

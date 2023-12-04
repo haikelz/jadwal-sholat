@@ -1,10 +1,10 @@
 "use client";
 
-import { cx } from "classix";
 import { BookMarked, Clock4, Home, List, LucideIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cx } from "~lib/helpers";
 import { slugify } from "~lib/helpers";
 
 const SwitchTheme = dynamic(
@@ -32,7 +32,7 @@ const navbarList = [
   },
 ];
 
-export function Navbar(): JSX.Element {
+export function Navbar() {
   const pathname = usePathname();
 
   return (

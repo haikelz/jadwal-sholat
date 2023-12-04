@@ -1,12 +1,12 @@
-import { cx } from "classix";
 import { PuasaSunnahProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { matchDate, numBulan } from "~lib/utils/constants";
 
 export function TableJadwalPuasaSunnah({
   puasaSunnah,
 }: {
   puasaSunnah: PuasaSunnahProps[];
-}): JSX.Element {
+}) {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">

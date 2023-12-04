@@ -1,6 +1,6 @@
-import { cx } from "classix";
+import { cx } from "~lib/helpers";
 
-export function LoadingClient(): JSX.Element {
+export function LoadingClient() {
   return (
     <div
       className={cx(

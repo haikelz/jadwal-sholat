@@ -1,19 +1,37 @@
 "use client";
 
-import { cx } from "classix";
 import { Search } from "lucide-react";
-import { Dispatch, SetStateAction, useRef } from "react";
+import {
+  ReadonlyURLSearchParams,
+  usePathname,
+  useRouter,
+} from "next/navigation";
+import { useCallback, useRef } from "react";
 import { useKeydown } from "~hooks";
+import { cx } from "~lib/helpers";
 
 interface SearchBarProps {
-  search: string;
-  setSearch: Dispatch<SetStateAction<string>>;
+  searchParams: ReadonlyURLSearchParams;
+  name: string;
 }
 
-export function SearchBar({ search, setSearch }: SearchBarProps): JSX.Element {
+export function SearchBar({ searchParams, name }: SearchBarProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   const ref = useRef<HTMLInputElement>(null);
 
-  useKeydown({ ref: ref, isShiftKey: true, key1: "Enter", key2: "Escape" });
+  useKeydown({ ref: ref, isShiftKey: true, key1: "Shift", key2: "Escape" });
 
   return (
     <div className="flex flex-col">
@@ -33,10 +51,13 @@ export function SearchBar({ search, setSearch }: SearchBarProps): JSX.Element {
             "dark:border-gray-600 dark:bg-gray-700",
             "dark:placeholder-gray-400 dark:focus:border-blue-500"
           )}
-          value={search}
           type="text"
           placeholder="Search...."
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) =>
+            router.push(
+              pathname + "?" + createQueryString(name, e.target.value)
+            )
+          }
         />
       </div>
       <div className="mt-1.5 hidden md:inline-block">

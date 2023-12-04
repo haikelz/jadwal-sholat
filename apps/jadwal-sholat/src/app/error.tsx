@@ -1,8 +1,8 @@
 "use client";
 
-import { cx } from "classix";
+import { cx } from "~lib/helpers";
 
-export default function ErrorPage(): JSX.Element {
+export default function ErrorPage() {
   return (
     <div
       className={cx(

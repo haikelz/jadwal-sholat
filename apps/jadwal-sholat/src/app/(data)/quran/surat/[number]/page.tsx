@@ -1,8 +1,8 @@
-import { cx } from "classix";
 import { Metadata } from "next";
 import { ReadingProgress } from "~components/atoms";
 import { env } from "~env.mjs";
 import { ListSuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 
@@ -11,7 +11,9 @@ import Client from "./client";
 const { NEXT_PUBLIC_QURAN_API } = env;
 
 export async function generateStaticParams(): Promise<{ number: string }[]> {
-  const response: ListSuratProps = await getData(`${NEXT_PUBLIC_QURAN_API}/quran`);
+  const response: ListSuratProps = await getData(
+    `${NEXT_PUBLIC_QURAN_API}/quran`
+  );
   return response.data.map((item) => ({ number: item.number.toString() }));
 }
 

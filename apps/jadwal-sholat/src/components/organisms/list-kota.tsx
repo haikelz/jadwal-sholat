@@ -1,11 +1,11 @@
 "use client";
 
-import { cx } from "classix";
 import Link from "next/link";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { KotaProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 
 export function ListKota({
   kota,
@@ -15,7 +15,7 @@ export function ListKota({
   kota: KotaProps[];
   deferredSearch: string;
   isAscending: boolean;
-}): JSX.Element {
+}) {
   /**
    * - Di API nya, ada satu kota yang mempunyai dua id yang berbeda(3211 dan 3212), jadi dia munculnya 2 kali di listKota nya.
    * - Hal ini menjadi masalah karena hanya satu id yang valid, yakni 3211.
@@ -25,13 +25,13 @@ export function ListKota({
   const filteredKota = useMemo(
     () =>
       kota
-        .filter((value) => {
-          if (deferredSearch === "") {
-            return value.id !== "3212";
+        .filter((item) => {
+          if (deferredSearch === "" || deferredSearch === null) {
+            return item.id !== "3212";
           } else if (
-            value.lokasi.toLowerCase().includes(deferredSearch.toLowerCase())
+            item.lokasi.toLowerCase().includes(deferredSearch.toLowerCase())
           ) {
-            return value.id !== "3212";
+            return item.id !== "3212";
           }
         })
         .sort(() => {

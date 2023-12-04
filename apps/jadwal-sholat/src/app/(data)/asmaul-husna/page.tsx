@@ -1,4 +1,4 @@
-import { cx } from "classix";
+import { cx } from "~lib/helpers";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
@@ -37,7 +37,7 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-export default function AsmaulHusna(): JSX.Element {
+export default function AsmaulHusna() {
   return (
     <div
       className={cx(

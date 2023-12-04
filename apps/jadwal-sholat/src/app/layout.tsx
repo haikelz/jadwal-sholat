@@ -1,8 +1,8 @@
-import { cx } from "classix";
 import { Metadata } from "next";
 import { BackToTop } from "~components/atoms";
 import { Navbar } from "~components/organisms";
 import { ChildrenProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { MetaUrl } from "~lib/utils/enums";
 import { arab, bitter, ibmPlexSans } from "~lib/utils/fonts";
 
