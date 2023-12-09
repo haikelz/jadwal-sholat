@@ -1,10 +1,10 @@
-import { cx } from "classix";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { SuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { removeSelectedSurat } from "~lib/helpers";
 
-export function Previous({ surat }: SuratProps): JSX.Element {
+export function Previous({ surat }: SuratProps) {
   return (
     <>
       {surat.number > 1 ? (

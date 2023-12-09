@@ -1,5 +1,5 @@
-import { cx } from "classix";
 import { WaktuProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { matchDate } from "~lib/utils/constants";
 
 const tableJadwalSholatList = [
@@ -13,7 +13,7 @@ const tableJadwalSholatList = [
   { id: 8, name: "Maghrib" },
 ];
 
-export function TableJadwalSholat({ waktu }: WaktuProps): JSX.Element {
+export function TableJadwalSholat({ waktu }: WaktuProps) {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">

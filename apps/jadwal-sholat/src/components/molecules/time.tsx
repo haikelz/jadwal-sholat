@@ -5,7 +5,7 @@ import id from "date-fns/locale/id";
 import { memo, useEffect } from "react";
 import useGlobalStore from "~store";
 
-export default function Time(): JSX.Element {
+export default function Time() {
   const { date, setDate } = useGlobalStore((state) => ({
     date: state.date,
     setDate: state.setDate,

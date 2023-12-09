@@ -1,11 +1,11 @@
 "use client";
 
-import { cx } from "classix";
 import { ArrowUp } from "lucide-react";
 import { memo } from "react";
 import { useScroll } from "~hooks";
+import { cx } from "~lib/helpers";
 
-export function BackToTop(): JSX.Element {
+export function BackToTop() {
   const scroll = useScroll();
   const height = 150;
 

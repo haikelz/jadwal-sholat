@@ -1,4 +1,5 @@
 {
+  "name": "jadwal-sholat",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -9,20 +10,20 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
-    "@turbo/gen": "^1.10.16",
-    "@unocss/postcss": "^0.56.5",
-    "@unocss/preset-wind": "^0.56.5",
-    "@unocss/reset": "^0.57.0",
+    "@jadwal-sholat/eslint-config": "workspace:*",
+    "@jadwal-sholat/typescript-config": "workspace:*",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@unocss/postcss": "^0.58.0",
+    "@unocss/preset-wind": "^0.58.0",
+    "@unocss/reset": "^0.58.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.51.0",
-    "eslint-config-custom": "workspace:*",
+    "eslint": "^8.55.0",
     "husky": "^8.0.3",
-    "lint-staged": "^15.0.2",
-    "prettier": "^3.0.3",
-    "turbo": "^1.10.16",
-    "unocss": "^0.56.5"
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.0",
+    "turbo": "^1.11.1",
+    "unocss": "^0.58.0"
   },
   "config": {
     "commitizen": {
@@ -31,7 +32,7 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && yarn cz --hook || true"
+      "prepare-commit-msg": "exec < /dev/tty && pnpm cz --hook || true"
     }
   },
   "lint-staged": {
@@ -43,6 +44,5 @@
       "prettier --config ./prettier.config.js --write"
     ]
   },
-  "packageManager": "pnpm@8.6.10",
-  "name": "jadwal-sholat"
+  "packageManager": "pnpm@8.6.10"
 }

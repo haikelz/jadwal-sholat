@@ -18,3 +18,4 @@ export const numTanggal: number = Number(hari);
 export const matchDate: string = format(date, "yyyy-MM-dd");
 
 export const browser = typeof window !== "undefined";
+export const condition = process.env.NODE_ENV;

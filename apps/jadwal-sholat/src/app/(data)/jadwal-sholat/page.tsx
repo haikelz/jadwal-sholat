@@ -1,8 +1,8 @@
-import { cx } from "classix";
 import { Metadata } from "next";
 import Image from "next/image";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
@@ -77,8 +77,8 @@ export default async function JadwalSholat(): Promise<JSX.Element> {
             width={40}
             height={40}
             alt="Mosque"
-            priority
-            loading="eager"
+            fetchPriority="high"
+            draggable={false}
           />
         </div>
         <p data-cy="description" className="mt-2 text-lg font-medium">

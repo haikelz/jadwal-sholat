@@ -8,7 +8,6 @@
 - Jadwal sholat
 - Baca Al-Qur'an(dengan audio yang bisa dipilih berdasarkan qori', terjemahan, juga bahasa latin)
 - Asma'ul Husna
-- ~~Jadwal puasa sunnah~~ Dari API nya udah ga valid lagi, soalnya jadwalnya untuk 2022 saja. Untuk detail bagian puasa sunnah aslinya, bisa lihat di bagian **Screenshots**
 
 ## ⚡Tech Stack
 
@@ -34,19 +33,19 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 
 ## Screenshots
 
-![ss 1](/apps/jadwal-sholat/public/docs/ss-desktop-1.png)
+![ss 1](/static/docs/ss-desktop-1.png)
 
-![ss 2](/apps/jadwal-sholat/public/docs/ss-desktop-2.png)
+![ss 2](/static/docs/ss-desktop-2.png)
 
-![ss 3](/apps/jadwal-sholat/public/docs/ss-desktop-3.png)
+![ss 3](/static/docs/ss-desktop-3.png)
 
-![ss 4](/apps/jadwal-sholat/public/docs/ss-desktop-4.png)
+![ss 4](/static/docs/ss-desktop-4.png)
 
-![ss 5](/apps/jadwal-sholat/public/docs/ss-desktop-5.png)
+![ss 5](/static/docs/ss-desktop-5.png)
 
-![ss 8](/apps/jadwal-sholat/public/docs/ss-desktop-8.png)
+![ss 8](/static/docs/ss-desktop-8.png)
 
-![ss 9](/apps/jadwal-sholat/public/docs/ss-desktop-9.png)
+![ss 9](/static/docs/ss-desktop-9.png)
 
 ## 🗒️Credits
 

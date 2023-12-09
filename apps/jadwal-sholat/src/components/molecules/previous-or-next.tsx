@@ -1,8 +1,8 @@
-import { cx } from "classix";
 import { Next, Previous } from "~components/atoms";
 import { SuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 
-export function PreviousOrNext({ surat }: SuratProps): JSX.Element {
+export function PreviousOrNext({ surat }: SuratProps) {
   return (
     <div
       className={cx(

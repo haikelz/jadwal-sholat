@@ -1,6 +1,9 @@
 {
   "root": true,
   "extends": [
-    "custom"
-  ]
+    "@jadwal-sholat/eslint-config/index.js"
+  ],
+  "parserOptions": {
+    "project": true
+  }
 }

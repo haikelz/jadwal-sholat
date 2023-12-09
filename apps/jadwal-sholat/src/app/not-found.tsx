@@ -1,6 +1,6 @@
-import { cx } from "classix";
+import { cx } from "~lib/helpers";
 
-export default function NotFoundPage(): JSX.Element {
+export default function NotFoundPage() {
   return (
     <div
       className={cx(

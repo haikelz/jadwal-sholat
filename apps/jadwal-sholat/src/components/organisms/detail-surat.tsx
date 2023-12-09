@@ -1,17 +1,16 @@
 "use client";
 
-import { cx } from "classix";
 import { Pause, Play } from "lucide-react";
 import { nanoid } from "nanoid";
 import { memo } from "react";
-import secureLocalStorage from "react-secure-storage";
 import { ModalNotification, ModalTafsir } from "~components/molecules";
 import { usePlayNextAudio, useScrollAyat } from "~hooks";
 import { SuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { arab } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
 
-export function DetailSurat({ surat }: SuratProps): JSX.Element {
+export function DetailSurat({ surat }: SuratProps) {
   const { lastRead, setLastRead, setNotification, terjemahan, audio } =
     useGlobalStore((state) => ({
       lastRead: state.lastRead,
@@ -37,7 +36,7 @@ export function DetailSurat({ surat }: SuratProps): JSX.Element {
   } = usePlayNextAudio(audioList);
 
   function saveData<T>(newData: T) {
-    secureLocalStorage.setItem("surat", JSON.stringify(newData));
+    localStorage.setItem("surat", JSON.stringify(newData));
   }
 
   function handleClick(name: string, ayat: number, number: number) {

@@ -1,20 +1,21 @@
 "use client";
 
-import cx from "classix";
 import Link from "next/link";
-import { useState } from "react";
-import secureLocalStorage from "react-secure-storage";
+import { useSearchParams } from "next/navigation";
 import { SortByOrder } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
 import { ListSurat } from "~components/organisms";
 import { useAscending } from "~hooks";
 import { ListSuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import useGlobalStore from "~store";
 
 export default function QuranClient({ surat }: { surat: ListSuratProps }) {
-  const [search, setSearch] = useState<string>("");
+  const searchParams = useSearchParams();
 
-  const { isAscending, setIsAscending, deferredSearch } = useAscending(search);
+  const { isAscending, setIsAscending, deferredSearch } = useAscending(
+    searchParams.get("search") as string
+  );
 
   const { lastRead } = useGlobalStore((state) => ({
     lastRead: state.lastRead,
@@ -29,16 +30,16 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
           "dark:text-white"
         )}
       >
-        <SearchBar search={search} setSearch={setSearch} />
+        <SearchBar searchParams={searchParams} name="search" />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
           {lastRead.ayat || lastRead.number !== null ? (
             <Link
               href={`/quran/surat/${lastRead.number}`}
               onClick={() =>
-                secureLocalStorage.setItem(
+                localStorage.setItem(
                   "selected-surat",
-                  lastRead.number?.toString() as string
+                  lastRead.number!.toString() as string
                 )
               }
             >

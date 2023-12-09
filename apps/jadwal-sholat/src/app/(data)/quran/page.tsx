@@ -1,8 +1,8 @@
-import { cx } from "classix";
 import { Metadata } from "next";
 import Image from "next/image";
 import { env } from "~env.mjs";
 import { ListSuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
@@ -72,7 +72,14 @@ export default async function Quran(): Promise<JSX.Element> {
           >
             Baca Al-Qur&#39;an
           </h1>
-          <Image src="/img/Quran.webp" width={40} height={40} alt="Al-Qur'an" />
+          <Image
+            src="/img/Quran.webp"
+            width={40}
+            height={40}
+            alt="Al-Qur'an"
+            fetchPriority="high"
+            draggable={false}
+          />
         </div>
         <p data-cy="description" className="mt-2 text-lg font-medium">
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;

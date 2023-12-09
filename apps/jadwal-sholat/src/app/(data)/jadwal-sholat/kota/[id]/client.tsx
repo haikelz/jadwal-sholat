@@ -1,16 +1,16 @@
 "use client";
 
-import { cx } from "classix";
 import { ErrorWhileFetch, LoadingClient } from "~components/molecules";
 import { TableJadwalSholat } from "~components/organisms";
 import { env } from "~env.mjs";
 import { useFetch } from "~hooks";
+import { cx } from "~lib/helpers";
 import { bulan, currentDate, hari, tahun } from "~lib/utils/constants";
 import { bitter } from "~lib/utils/fonts";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
-export default function Client({ id }: { id: string }): JSX.Element {
+export default function Client({ id }: { id: string }) {
   const formatDate: string = `${tahun}/${bulan}`;
 
   const { data, isPending, isError } = useFetch(

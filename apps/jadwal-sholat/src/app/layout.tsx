@@ -1,8 +1,8 @@
-import { cx } from "classix";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { BackToTop } from "~components/atoms";
 import { Navbar } from "~components/organisms";
 import { ChildrenProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { MetaUrl } from "~lib/utils/enums";
 import { arab, bitter, ibmPlexSans } from "~lib/utils/fonts";
 
@@ -50,6 +50,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   metadataBase: new URL(url),
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function Layout({ children }: ChildrenProps) {

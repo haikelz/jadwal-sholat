@@ -1,6 +1,5 @@
 "use client";
 
-import { cx } from "classix";
 import { Languages, MessageSquare, Volume2 } from "lucide-react";
 import { useAudioPlayer } from "react-use-audio-player";
 import {
@@ -11,13 +10,14 @@ import {
 import { DetailSurat } from "~components/organisms";
 import { env } from "~env.mjs";
 import { useFetch } from "~hooks";
+import { cx } from "~lib/helpers";
 import { bitter } from "~lib/utils/fonts";
 import { qoriOptions } from "~lib/utils/qori-options";
 import useGlobalStore from "~store";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
-export default function Client({ number }: { number: string }): JSX.Element {
+export default function Client({ number }: { number: string }) {
   const {
     audio,
     terjemahan,

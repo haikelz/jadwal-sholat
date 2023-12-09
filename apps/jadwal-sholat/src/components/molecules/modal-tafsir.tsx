@@ -1,13 +1,13 @@
 "use client";
 
-import { cx } from "classix";
 import { X } from "lucide-react";
 import { memo, useRef } from "react";
 import { useClickOutside } from "~hooks";
 import { SuratProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import useGlobalStore from "~store";
 
-export function ModalTafsir({ surat }: SuratProps): JSX.Element {
+export function ModalTafsir({ surat }: SuratProps) {
   const { tafsir, setTafsir } = useGlobalStore((state) => ({
     tafsir: state.tafsir,
     setTafsir: state.setTafsir,
@@ -15,7 +15,7 @@ export function ModalTafsir({ surat }: SuratProps): JSX.Element {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useClickOutside(setTafsir, modalRef);
+  useClickOutside(setTafsir, modalRef, false);
 
   return (
     <>

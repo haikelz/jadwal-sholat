@@ -1,10 +1,10 @@
 "use client";
 
-import { cx } from "classix";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { AsmaulHusnaProps } from "~interfaces";
+import { cx } from "~lib/helpers";
 import { arab } from "~lib/utils/fonts";
 
 export function ListAsmaulHusna({
@@ -15,12 +15,12 @@ export function ListAsmaulHusna({
   asmaulHusna: AsmaulHusnaProps[];
   deferredSearch: string;
   isAscending: boolean;
-}): JSX.Element {
+}) {
   const filteredAsmaulHusna = useMemo(
     () =>
       asmaulHusna
         .filter((item) => {
-          if (deferredSearch === "") return item;
+          if (deferredSearch === "" || deferredSearch === null) return item;
           else if (
             item.latin.toLowerCase().includes(deferredSearch.toLowerCase())
           )
