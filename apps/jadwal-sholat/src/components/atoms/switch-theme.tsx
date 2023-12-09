@@ -2,7 +2,6 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { memo } from "react";
 import { cx } from "~lib/helpers";
 
 export function SwitchTheme({
@@ -49,5 +48,3 @@ export function SwitchTheme({
     </div>
   );
 }
-
-memo(SwitchTheme);

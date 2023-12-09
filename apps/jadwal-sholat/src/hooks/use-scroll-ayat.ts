@@ -1,7 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect } from "react";
-import secureLocalStorage from "react-secure-storage";
+import { useEffect } from "react";
 import { LastReadProps } from "~interfaces";
 
 interface ScrollAyatProps {
@@ -29,7 +28,7 @@ export function useScrollAyat({
 
     if (
       lastReadId &&
-      lastRead.number === Number(secureLocalStorage.getItem("selected-surat"))
+      lastRead.number === Number(localStorage.getItem("selected-surat"))
     ) {
       lastReadId.scrollIntoView({ behavior: "smooth" });
     }

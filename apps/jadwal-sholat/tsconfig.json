@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/nextjs.json",
+  "extends": "@jadwal-sholat/typescript-config/nextjs.json",
   "compilerOptions": {
     "plugins": [
       {

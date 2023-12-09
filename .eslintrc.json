@@ -1,13 +1,7 @@
 {
-  "root": true,
-  "extends": [
-    "custom"
-  ],
-  "settings": {
-    "next": {
-      "rootDir": [
-        "apps/*/"
-      ]
-    }
+  "ignorePatterns": ["apps/**", "packages/**"],
+  "extends": ["@jadwal-sholat/eslint-config/library.js"],
+  "parserOptions": {
+    "project": true
   }
 }

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import secureLocalStorage from "react-secure-storage";
 import { SortByOrder } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
 import { ListSurat } from "~components/organisms";
@@ -38,7 +37,7 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
             <Link
               href={`/quran/surat/${lastRead.number}`}
               onClick={() =>
-                secureLocalStorage.setItem(
+                localStorage.setItem(
                   "selected-surat",
                   lastRead.number!.toString() as string
                 )

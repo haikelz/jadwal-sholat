@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useMemo } from "react";
-import secureLocalStorage from "react-secure-storage";
 import reactStringReplace from "react-string-replace";
 import { TidakAda } from "~components/atoms";
 import { ListSuratProps } from "~interfaces";
-import { cx } from "~lib/helpers";
-import { removeSelectedSurat } from "~lib/helpers";
+import { cx, removeSelectedSurat } from "~lib/helpers";
 import useGlobalStore from "~store";
 
 export function ListSurat({
@@ -44,8 +42,8 @@ export function ListSurat({
   );
 
   useEffect(() => {
-    if (secureLocalStorage.getItem("surat") as string) {
-      setLastRead(JSON.parse(secureLocalStorage.getItem("surat") as string));
+    if (localStorage.getItem("surat") as string) {
+      setLastRead(JSON.parse(localStorage.getItem("surat") as string));
     }
   }, [setLastRead]);
 
