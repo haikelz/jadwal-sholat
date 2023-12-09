@@ -14,5 +14,6 @@ module.exports = {
       presets: [require.resolve("next/babel")],
     },
   },
+  parser: "@babel/eslint-parser",
   plugins: ["jsx-a11y"],
 };

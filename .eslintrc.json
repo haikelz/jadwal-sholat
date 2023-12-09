@@ -1,6 +1,11 @@
 {
-  "ignorePatterns": ["apps/**", "packages/**"],
-  "extends": ["@jadwal-sholat/eslint-config/library.js"],
+  "ignorePatterns": [
+    "apps/**",
+    "packages/**"
+  ],
+  "extends": [
+    "@jadwal-sholat/eslint-config/library.js"
+  ],
   "parserOptions": {
     "project": true
   }
