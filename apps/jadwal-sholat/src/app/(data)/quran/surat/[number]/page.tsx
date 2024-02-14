@@ -22,8 +22,10 @@ export async function generateMetadata({
 }: {
   params: { number: string };
 }): Promise<Metadata | undefined> {
+  const { number } = params;
+
   const response: SuratProps = await getData(
-    `${NEXT_PUBLIC_QURAN_API}/quran/${params.number}`
+    `${NEXT_PUBLIC_QURAN_API}/quran/${number}`
   );
 
   const { asma, tafsir } = response.data;
@@ -33,7 +35,7 @@ export async function generateMetadata({
     description: tafsir.id,
     openGraph: {
       type: "website",
-      url: `${MetaUrl.Site_Url}/quran/surat/${params.number}`,
+      url: `${MetaUrl.Site_Url}/quran/surat/${number}`,
       title: asma.id.short,
       description: tafsir.id,
       images: [
@@ -42,12 +44,12 @@ export async function generateMetadata({
           alt: "OG Image",
         },
       ],
-      siteName: `info-jadwal-sholat.vercel.app/quran/surat/${params.number}`,
+      siteName: `info-jadwal-sholat.vercel.app/quran/surat/${number}`,
     },
     twitter: {
       title: asma.id.short,
       description: tafsir.id,
-      site: `${MetaUrl.Site_Url}/quran/surat/${params.number}`,
+      site: `${MetaUrl.Site_Url}/quran/surat/${number}`,
       card: "summary_large_image",
     },
     metadataBase: new URL(MetaUrl.Site_Url),
@@ -60,7 +62,7 @@ export default async function Surat({
   params: { number: string };
 }) {
   const { number } = params;
-
+  console.log(number);
   return (
     <>
       <ReadingProgress />
