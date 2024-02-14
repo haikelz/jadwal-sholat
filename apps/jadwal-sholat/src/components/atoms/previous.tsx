@@ -4,11 +4,11 @@ import { SuratProps } from "~interfaces";
 import { cx } from "~lib/helpers";
 import { removeSelectedSurat } from "~lib/helpers";
 
-export function Previous({ surat }: SuratProps) {
+export function Previous({ data }: SuratProps) {
   return (
     <>
-      {surat.number > 1 ? (
-        <Link href={`/quran/surat/${surat.number - 1}`}>
+      {data.number > 1 ? (
+        <Link href={`/quran/surat/${data.number - 1}`}>
           <button
             onClick={removeSelectedSurat}
             type="button"

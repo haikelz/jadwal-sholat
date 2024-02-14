@@ -8,7 +8,7 @@ import { useAscending } from "~hooks";
 import { KotaProps } from "~interfaces";
 import { cx } from "~lib/helpers";
 
-export default function JadwalSholatClient({ kota }: { kota: KotaProps[] }) {
+export default function JadwalSholatClient({ kota }: { kota: KotaProps }) {
   const searchParams = useSearchParams();
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(

@@ -25,7 +25,10 @@ function makeClient() {
    * Handle CORS issue when fetching GraphQL API using custom fetch
    * @see https://stackoverflow.com/a/77418037
    */
-  async function customFetch(uri: string, options: any): Promise<Response> {
+  async function customFetch(
+    uri: URL | RequestInfo,
+    options: any
+  ): Promise<Response> {
     const response = await fetch(NEXT_PUBLIC_ASMAUL_HUSNA_API, {
       method: "POST",
       body: JSON.stringify({ query: JSON.parse(options.body)["query"] }),

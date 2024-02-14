@@ -1,7 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
-import id from "date-fns/locale/id";
+import { id } from "date-fns/locale";
 import { memo, useEffect } from "react";
 import useGlobalStore from "~store";
 

@@ -10,52 +10,64 @@ import Client from "./client";
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
-  const response: KotaProps[] = await getData(
+  const response: KotaProps = await getData(
     `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`
   );
-  return response.map((item) => ({
+  return response.data.map((item) => ({
     id: item.id,
   }));
 }
 
-const baseMetadata = {
-  title: "Jadwal Sholat",
-  description: "Berikut daftar Kabupaten/Kota yang tersedia",
-  url: MetaUrl.Site_Url,
-};
+interface ResponseMetadataKotaProps {
+  data: {
+    id: string;
+    lokasi: string;
+  };
+}
 
-const { title, description, url } = baseMetadata;
-
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    type: "website",
-    url,
-    title,
-    description,
-    images: [
-      {
-        url: MetaUrl.Default_Og_Url,
-        alt: "OG Image",
-      },
-    ],
-    siteName: "info-jadwal-sholat.vercel.app",
-  },
-  twitter: {
-    title,
-    description,
-    site: url,
-    card: "summary_large_image",
-  },
-  metadataBase: new URL(url),
-};
-
-export default async function KotaId({
+export async function generateMetadata({
   params,
 }: {
   params: { id: string };
-}): Promise<JSX.Element> {
+}): Promise<Metadata | undefined> {
+  const response: ResponseMetadataKotaProps = await getData(
+    `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/${params.id}`
+  );
+  const { id, lokasi } = response.data;
+
+  const base = {
+    title: `Jadwal Sholat ${lokasi}`,
+    description: `Jadwal Sholat di ${lokasi}`,
+    url: MetaUrl.Site_Url,
+  };
+
+  return {
+    title: base.title,
+    description: base.description,
+    openGraph: {
+      type: "website",
+      url: base.url,
+      title: base.title,
+      description: base.description,
+      images: [
+        {
+          url: base.url,
+          alt: "OG Image",
+        },
+      ],
+      siteName: `info-jadwal-sholat.vercel.app/jadwal-sholat/kota/${id}`,
+    },
+    twitter: {
+      title: base.title,
+      description: base.description,
+      site: base.url,
+      card: "summary_large_image",
+    },
+    metadataBase: new URL(base.url),
+  };
+}
+
+export default async function KotaId({ params }: { params: { id: string } }) {
   const { id } = params;
 
   return (

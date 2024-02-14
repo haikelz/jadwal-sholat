@@ -44,14 +44,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-async function getJadwalSholat(): Promise<KotaProps[]> {
-  const response: KotaProps[] = await getData(
+async function getJadwalSholat(): Promise<KotaProps> {
+  const response: KotaProps = await getData(
     `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`
   );
   return response;
 }
 
-export default async function JadwalSholat(): Promise<JSX.Element> {
+export default async function JadwalSholat() {
   const kota = await getJadwalSholat();
 
   return (

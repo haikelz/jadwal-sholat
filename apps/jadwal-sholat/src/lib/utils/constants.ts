@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import id from "date-fns/locale/id";
+import { id } from "date-fns/locale";
 
 export const date: Date = new Date();
 export const tahun: string = format(date, "yyyy");

@@ -61,7 +61,7 @@ export interface ListSuratProps {
 }
 
 export interface SuratProps {
-  surat: {
+  data: {
     number: number;
     name: string;
     translation: string;

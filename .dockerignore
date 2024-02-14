@@ -6,3 +6,4 @@ apps/jadwal-sholat/cypress
 apps/jadwal-sholat/cypress.config.ts
 .husky
 .vscode
+apps/jadwal-sholat/node_modules

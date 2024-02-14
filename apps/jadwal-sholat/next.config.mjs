@@ -1,4 +1,5 @@
 import withPWAInit from "@ducanh2912/next-pwa";
+import UnoCSS from "@unocss/webpack";
 
 import "./src/env.mjs";
 
@@ -11,6 +12,11 @@ const withPWA = withPWAInit({
 const config = withPWA({
   reactStrictMode: true,
   compress: true,
+  webpack: (config) => {
+    config.cache = false;
+    config.plugins.push(UnoCSS());
+    return config;
+  },
   experimental: {
     webpackBuildWorker: true,
   },

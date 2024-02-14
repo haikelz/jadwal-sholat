@@ -11,11 +11,15 @@
 
 ## ⚡Tech Stack
 
-- Next JS 13
+- Next JS
 - Typescript
 - Uno CSS
 - React Query
 - Zustand
+
+## Todo
+
+- Get jadwal sholat based on User's location
 
 ## Getting Started
 

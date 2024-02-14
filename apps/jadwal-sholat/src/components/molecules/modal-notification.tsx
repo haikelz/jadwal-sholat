@@ -41,7 +41,7 @@ export function ModalNotification({ description }: { description: string }) {
                   className={cx(
                     "mt-2 inline-flex items-center rounded-md bg-blue-500 py-1.5 px-4",
                     "font-semibold text-white shadow-md transition-all",
-                    "hover:bg-gray-200 hover:",
+                    "hover:bg-blue-600 hover:dark:bg-blue-600",
                     "dark:hover:"
                   )}
                   onClick={() => setNotification(false)}
