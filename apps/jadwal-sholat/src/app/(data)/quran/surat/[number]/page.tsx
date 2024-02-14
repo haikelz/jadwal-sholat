@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ReadingProgress } from "~components/atoms";
 import { env } from "~env.mjs";
-import { ListSuratProps, SuratProps } from "~interfaces";
+import { ListSuratProps } from "~interfaces";
 import { cx } from "~lib/helpers";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
@@ -17,42 +17,38 @@ export async function generateStaticParams(): Promise<{ number: string }[]> {
   return response.data.map((item) => ({ number: item.number.toString() }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { number: string };
-}): Promise<Metadata | undefined> {
-  const response: SuratProps = await getData(
-    `${NEXT_PUBLIC_QURAN_API}/quran/${params.number}`
-  );
+const baseMetadata = {
+  title: "Baca Al-Qur'an | Jadwal Sholat",
+  description: "Berlomba-lombalah kamu dalam berbuat kebaikan",
+  url: MetaUrl.Site_Url,
+};
 
-  const { asma, tafsir } = response.data;
+const { title, description, url } = baseMetadata;
 
-  return {
-    title: asma.id.short,
-    description: tafsir.id,
-    openGraph: {
-      type: "website",
-      url: `${MetaUrl.Site_Url}/quran/surat/${params.number}`,
-      title: asma.id.short,
-      description: tafsir.id,
-      images: [
-        {
-          url: MetaUrl.Default_Og_Url,
-          alt: "OG Image",
-        },
-      ],
-      siteName: `info-jadwal-sholat.vercel.app/quran/surat/${params.number}`,
-    },
-    twitter: {
-      title: asma.id.short,
-      description: tafsir.id,
-      site: `${MetaUrl.Site_Url}/quran/surat/${params.number}`,
-      card: "summary_large_image",
-    },
-    metadataBase: new URL(MetaUrl.Site_Url),
-  };
-}
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    type: "website",
+    url,
+    title,
+    description,
+    images: [
+      {
+        url: MetaUrl.Default_Og_Url,
+        alt: "OG Image",
+      },
+    ],
+    siteName: "info-jadwal-sholat.vercel.app",
+  },
+  twitter: {
+    title,
+    description,
+    site: url,
+    card: "summary_large_image",
+  },
+  metadataBase: new URL(url),
+};
 
 export default async function Surat({
   params,
