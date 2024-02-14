@@ -1,7 +1,6 @@
 FROM node:alpine AS build
 
-RUN npm i -g pnpm
-RUN npm i -g turbo
+RUN npm install -g pnpm turbo
 WORKDIR /app
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -12,13 +11,14 @@ COPY package.json pnpm-lock.yaml ./
 COPY apps/jadwal-sholat/package.json ./apps/jadwal-sholat/package.json
 
 # packages
-COPY packages/eslint-config-custom/package.json ./packages/eslint-config-custom/package.json
-COPY packages/tsconfig/package.json ./packages/tsconfig/package.json
+COPY packages/eslint-config/package.json ./packages/eslint-config/package.json
+COPY packages/typescript-config/package.json ./packages/typescript-config/package.json
 
 RUN pnpm install
-
 COPY . ./
 RUN turbo run build
 
 COPY apps/jadwal-sholat/.next ./apps/jadwal-sholat/.next
+
+# run dev
 CMD ["turbo", "run", "dev"]

@@ -12,7 +12,7 @@ export function ListKota({
   deferredSearch,
   isAscending,
 }: {
-  kota: KotaProps[];
+  kota: KotaProps;
   deferredSearch: string;
   isAscending: boolean;
 }) {
@@ -24,7 +24,7 @@ export function ListKota({
    */
   const filteredKota = useMemo(
     () =>
-      kota
+      kota.data
         .filter((item) => {
           if (deferredSearch === "" || deferredSearch === null) {
             return item.id !== "3212";

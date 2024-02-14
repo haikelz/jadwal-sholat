@@ -1,8 +1,16 @@
 "use client";
 
-import { Pause, Play } from "lucide-react";
+import {
+  Bookmark,
+  BookmarkCheck,
+  ClipboardCheck,
+  ClipboardCopy,
+  Pause,
+  Play,
+} from "lucide-react";
 import { nanoid } from "nanoid";
-import { memo } from "react";
+import { memo, useCallback, useState } from "react";
+import { useClipboard } from "use-clipboard-copy";
 import { ModalNotification, ModalTafsir } from "~components/molecules";
 import { usePlayNextAudio, useScrollAyat } from "~hooks";
 import { SuratProps } from "~interfaces";
@@ -10,7 +18,24 @@ import { cx } from "~lib/helpers";
 import { arab } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
 
-export function DetailSurat({ surat }: SuratProps) {
+export function DetailSurat({ data }: SuratProps) {
+  const clipboard = useClipboard({ copiedTimeout: 1000 });
+  const [ayatClick, setAyatClick] = useState<number>(0);
+
+  const copyToClipboard = useCallback(
+    (surat: string, ayat: number, arab: string, arti: string) => {
+      setAyatClick(ayat);
+
+      clipboard.copy(`
+      Surat: ${surat}
+      Ayat: Ke-${ayat}
+      Arab: ${arab}
+      Arti: ${arti}
+      `);
+    },
+    [clipboard, setAyatClick]
+  );
+
   const { lastRead, setLastRead, setNotification, terjemahan, audio } =
     useGlobalStore((state) => ({
       lastRead: state.lastRead,
@@ -20,7 +45,7 @@ export function DetailSurat({ surat }: SuratProps) {
       audio: state.audio,
     }));
 
-  const audioList: string[] = surat.ayahs.map((item) => item.audio.url);
+  const audioList: string[] = data.ayahs.map((item) => item.audio.url);
 
   const {
     audioIndex,
@@ -74,7 +99,7 @@ export function DetailSurat({ surat }: SuratProps) {
   return (
     <>
       <div className="w-full flex flex-col space-y-7 my-7 text-end">
-        {surat.ayahs.map((ayat, index) => (
+        {data.ayahs.map((ayat, index) => (
           <div
             className={cx(
               "flex flex-col items-end justify-end",
@@ -153,28 +178,50 @@ export function DetailSurat({ surat }: SuratProps) {
                 {ayat.translation.id}
               </p>
             </div>
-            <button
-              type="button"
-              aria-label="tandai ayat"
-              className={cx(
-                "hover-animation underline-animation mt-2 font-semibold",
-                "hover:text-teal-700",
-                "dark:hover:text-blue-500"
-              )}
-              onClick={() =>
-                handleClick(
-                  surat.asma.id.short,
-                  ayat.number.insurah,
-                  surat.number as number
-                )
-              }
-            >
-              Tandai ayat
-            </button>
+            <div className="flex justify-center items-center space-x-3">
+              <button
+                type="button"
+                aria-label="copy"
+                title="Copy"
+                onClick={() =>
+                  copyToClipboard(
+                    data.asma.id.short,
+                    ayat.number.insurah,
+                    ayat.text.ar,
+                    ayat.translation.id
+                  )
+                }
+              >
+                {clipboard.copied && ayat.number.insurah === ayatClick ? (
+                  <ClipboardCheck />
+                ) : (
+                  <ClipboardCopy />
+                )}
+              </button>
+              <button
+                type="button"
+                aria-label="tandai ayat"
+                title="Bookmark"
+                onClick={() =>
+                  handleClick(
+                    data.asma.id.short,
+                    ayat.number.insurah,
+                    data.number as number
+                  )
+                }
+              >
+                {JSON.parse(localStorage.getItem("surat") || "").ayat ===
+                ayat.number.insurah ? (
+                  <BookmarkCheck />
+                ) : (
+                  <Bookmark />
+                )}
+              </button>
+            </div>
           </div>
         ))}
       </div>
-      <ModalTafsir surat={surat} />
+      <ModalTafsir data={data} />
       <ModalNotification description="Sudah Ditandai!" />
     </>
   );

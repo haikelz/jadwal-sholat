@@ -51,7 +51,7 @@ async function getSurat(): Promise<ListSuratProps> {
   return response;
 }
 
-export default async function Quran(): Promise<JSX.Element> {
+export default async function Quran() {
   const surat = await getSurat();
 
   return (

@@ -10,12 +10,12 @@ import {
   WidthSliceProps,
 } from "~interfaces";
 
-import dateSlice from "./slices/date-slice";
-import lastReadSlice from "./slices/last-read-slice";
-import optionSlice from "./slices/option-slice";
-import playNextAudioSlice from "./slices/play-next-audio-slice";
-import scrollSlice from "./slices/scroll-slice";
-import widthSlice from "./slices/width-slice";
+import dateSlice from "./slices/date.slice";
+import lastReadSlice from "./slices/last-read.slice";
+import optionSlice from "./slices/option.slice";
+import playNextAudioSlice from "./slices/play-next-audio.slice";
+import scrollSlice from "./slices/scroll.slice";
+import widthSlice from "./slices/width.slice";
 
 const useGlobalStore = createWithEqualityFn<
   LastReadSliceProps &

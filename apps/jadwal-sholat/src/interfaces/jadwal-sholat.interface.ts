@@ -25,6 +25,10 @@ export interface WaktuProps {
 }
 
 export interface KotaProps {
-  id: string;
-  lokasi: string;
+  data: [
+    {
+      id: string;
+      lokasi: string;
+    },
+  ];
 }

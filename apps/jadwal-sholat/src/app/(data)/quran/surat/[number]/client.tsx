@@ -47,14 +47,19 @@ export default function Client({ number }: { number: string }) {
     stop();
   }
 
-  const { data, isPending, isError } = useFetch(
+  const {
+    data: results,
+    isPending,
+    isError,
+  } = useFetch(
     number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : ""
   );
 
-  if ((!data && isError) || isPending) return <LoadingClient />;
-  if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
+  if ((!results && isError) || isPending) return <LoadingClient />;
+  if (isError || typeof results.data === "undefined")
+    return <ErrorWhileFetch />;
 
-  const surat = data.data;
+  const data = results.data;
 
   return (
     <>
@@ -66,11 +71,10 @@ export default function Client({ number }: { number: string }) {
               bitter.className
             )}
           >
-            {surat.asma.id.short}
+            {data.asma.id.short}
           </h1>
           <p className="font-semibold m-1 tracking-wide">
-            {surat.asma.translation.id}. Surat ke-{surat.number}.{" "}
-            {surat.type.id}
+            {data.asma.translation.id}. Surat ke-{data.number}. {data.type.id}
           </p>
         </div>
         <div className="mt-1 mb-2 flex space-x-4 flex-wrap justify-center items-center">
@@ -121,9 +125,9 @@ export default function Client({ number }: { number: string }) {
         </div>
       </div>
       <div className="my-7 w-full">
-        <PreviousOrNext surat={surat} />
-        <DetailSurat surat={surat} />
-        <PreviousOrNext surat={surat} />
+        <PreviousOrNext data={data} />
+        <DetailSurat data={data} />
+        <PreviousOrNext data={data} />
       </div>
     </>
   );

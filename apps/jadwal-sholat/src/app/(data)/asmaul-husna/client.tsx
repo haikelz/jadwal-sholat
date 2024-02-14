@@ -15,10 +15,11 @@ import LoadingClient from "./loading-client";
 export function AsmaulHusnaClient() {
   const searchParams = useSearchParams();
 
+  const { data, loading, error } = useQuery(asmaulHusnaQuery);
+
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
     searchParams.get("search") as string
   );
-  const { data, loading, error } = useQuery(asmaulHusnaQuery);
 
   if (loading) return <LoadingClient />;
   if (error) return <ErrorWhileFetch />;

@@ -1,19 +1,29 @@
 "use client";
 
-import { X } from "lucide-react";
-import { memo, useRef } from "react";
+import { ClipboardCheck, ClipboardCopy, X } from "lucide-react";
+import { memo, useCallback, useRef } from "react";
+import { useClipboard } from "use-clipboard-copy";
 import { useClickOutside } from "~hooks";
 import { SuratProps } from "~interfaces";
 import { cx } from "~lib/helpers";
 import useGlobalStore from "~store";
 
-export function ModalTafsir({ surat }: SuratProps) {
+export function ModalTafsir({ data }: SuratProps) {
+  const clipboard = useClipboard({ copiedTimeout: 1000 });
+
   const { tafsir, setTafsir } = useGlobalStore((state) => ({
     tafsir: state.tafsir,
     setTafsir: state.setTafsir,
   }));
 
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const copyToClipboard = useCallback(
+    (tafsir: string) => {
+      clipboard.copy(tafsir);
+    },
+    [clipboard]
+  );
 
   useClickOutside(setTafsir, modalRef, false);
 
@@ -38,24 +48,43 @@ export function ModalTafsir({ surat }: SuratProps) {
             >
               <div className="flex items-center justify-between rounded-t border-b p-4">
                 <h3 className="text-xl font-semibold">
-                  Tafsir Surat {surat.asma.id.short}
+                  Tafsir Surat {data.asma.id.short}
                 </h3>
-                <button
-                  type="button"
-                  className={cx(
-                    "ml-auto inline-flex items-center rounded-lg",
-                    "bg-transparent p-1.5 text-sm text-gray-400 transition-all",
-                    "hover:bg-gray-200",
-                    "dark:text-white dark:hover:text-gray-900"
-                  )}
-                  onClick={() => setTafsir(!tafsir)}
-                  aria-label="close modal tafsir"
-                >
-                  <X size={20} />
-                </button>
+                <div className="flex justify-center items-center space-x-2">
+                  <button
+                    type="button"
+                    aria-label="copy to clipboard"
+                    onClick={() => copyToClipboard(data.tafsir.id)}
+                    className={cx(
+                      "ml-auto inline-flex items-center rounded-lg",
+                      "bg-transparent p-1.5 text-sm transition-all",
+                      "hover:bg-gray-200",
+                      "dark:text-white dark:hover:text-gray-900"
+                    )}
+                  >
+                    {clipboard.copied ? (
+                      <ClipboardCheck size={20} />
+                    ) : (
+                      <ClipboardCopy size={20} />
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    className={cx(
+                      "ml-auto inline-flex items-center rounded-lg",
+                      "bg-transparent p-1.5 text-sm transition-all",
+                      "hover:bg-gray-200",
+                      "dark:text-white dark:hover:text-gray-900"
+                    )}
+                    onClick={() => setTafsir(!tafsir)}
+                    aria-label="close modal tafsir"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
               </div>
               <div className="space-y-6 p-6">
-                <p className="text-base leading-relaxed ">{surat.tafsir.id}</p>
+                <p className="text-base leading-relaxed ">{data.tafsir.id}</p>
               </div>
             </div>
           </div>
