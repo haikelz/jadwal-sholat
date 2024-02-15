@@ -19,8 +19,9 @@ import { arab } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
 
 export function DetailSurat({ data }: SuratProps) {
-  const clipboard = useClipboard({ copiedTimeout: 1000 });
   const [ayatClick, setAyatClick] = useState<number>(0);
+
+  const clipboard = useClipboard({ copiedTimeout: 1000 });
 
   const copyToClipboard = useCallback(
     (surat: string, ayat: number, arab: string, arti: string) => {
@@ -210,8 +211,7 @@ export function DetailSurat({ data }: SuratProps) {
                   )
                 }
               >
-                {JSON.parse(localStorage.getItem("surat") || "").ayat ===
-                ayat.number.insurah ? (
+                {lastRead.ayat === ayat.number.insurah ? (
                   <BookmarkCheck />
                 ) : (
                   <Bookmark />

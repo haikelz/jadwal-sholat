@@ -45,7 +45,7 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
             >
               <span
                 className={cx(
-                  "hover-animation underline-animation  font-bold",
+                  "hover-animation underline-animation font-bold",
                   "hover:text-red-500",
                   "dark:text-white dark:hover:text-blue-500"
                 )}
