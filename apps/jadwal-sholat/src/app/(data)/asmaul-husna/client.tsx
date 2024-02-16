@@ -24,7 +24,7 @@ export function AsmaulHusnaClient() {
   if (loading) return <LoadingClient />;
   if (error) return <ErrorWhileFetch />;
 
-  const asmaulHusna = data.data as AsmaulHusnaProps[];
+  const asmaulHusna = data as AsmaulHusnaProps[];
 
   return (
     <>
