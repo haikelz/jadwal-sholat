@@ -2,6 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { match } from "ts-pattern";
 import { cx } from "~lib/helpers";
 
 export function SwitchTheme({
@@ -34,7 +35,11 @@ export function SwitchTheme({
         )}
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
-        {theme === "light" ? <Moon size={24} /> : <Sun size={24} />}
+        {match(theme)
+          .with("light", () => <Moon size={24} />)
+          .otherwise(() => (
+            <Sun size={24} />
+          ))}
         <p
           className={cx(
             "hidden text-sm font-bold",
@@ -42,7 +47,9 @@ export function SwitchTheme({
             isMarginLeft ? "ml-2" : ""
           )}
         >
-          {theme === "light" ? "Dark" : "Light"}
+          {match(theme)
+            .with("light", () => "Dark")
+            .otherwise(() => "Light")}
         </p>
       </button>
     </div>

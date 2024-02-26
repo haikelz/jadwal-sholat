@@ -44,15 +44,20 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-async function getSurat(): Promise<ListSuratProps> {
-  const response: ListSuratProps = await getData(
-    `${NEXT_PUBLIC_QURAN_API}/quran`
-  );
-  return response;
+async function getSurat(): Promise<ListSuratProps | undefined> {
+  try {
+    const response: ListSuratProps = await getData(
+      `${NEXT_PUBLIC_QURAN_API}/quran`
+    );
+
+    return response;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export default async function Quran() {
-  const surat = await getSurat();
+  const surat = (await getSurat()) as ListSuratProps;
 
   return (
     <div

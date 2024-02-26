@@ -18,7 +18,5 @@ RUN pnpm install
 COPY . ./
 RUN turbo run build
 
-COPY apps/jadwal-sholat/.next ./apps/jadwal-sholat/.next
-
 # run dev
 CMD ["turbo", "run", "dev"]

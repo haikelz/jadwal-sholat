@@ -10,10 +10,13 @@ import Client from "./client";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
-export async function generateStaticParams(): Promise<{ number: string }[]> {
+export async function generateStaticParams(): Promise<
+  { number: string }[] | undefined
+> {
   const response: ListSuratProps = await getData(
     `${NEXT_PUBLIC_QURAN_API}/quran`
   );
+
   return response.data.map((item) => ({ number: item.number.toString() }));
 }
 
@@ -62,7 +65,7 @@ export default async function Surat({
   params: { number: string };
 }) {
   const { number } = params;
-  console.log(number);
+
   return (
     <>
       <ReadingProgress />

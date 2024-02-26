@@ -7,6 +7,7 @@ import {
   NextSSRInMemoryCache,
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
+import { P, match } from "ts-pattern";
 import { env } from "~env.mjs";
 import { ChildrenProps } from "~interfaces";
 
@@ -45,14 +46,15 @@ function makeClient() {
 
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
-    link:
-      typeof window === "undefined"
-        ? ApolloLink.from([
-            new SSRMultipartLink({
-              stripDefer: true,
-            }),
-            httpLink,
-          ])
-        : httpLink,
+    link: match({ window: window })
+      .with({ window: P.when((window) => typeof window === undefined) }, () =>
+        ApolloLink.from([
+          new SSRMultipartLink({
+            stripDefer: true,
+          }),
+          httpLink,
+        ])
+      )
+      .otherwise(() => httpLink),
   });
 }

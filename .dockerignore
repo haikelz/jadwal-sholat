@@ -7,3 +7,6 @@ apps/jadwal-sholat/cypress.config.ts
 .husky
 .vscode
 apps/jadwal-sholat/node_modules
+apps/jadwal-sholat/.next
+packages/eslint-config/node_modules
+.turbo

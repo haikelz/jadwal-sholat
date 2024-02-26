@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { nanoid } from "nanoid";
 import { memo, useCallback, useState } from "react";
+import { P, match } from "ts-pattern";
 import { useClipboard } from "use-clipboard-copy";
 import { ModalNotification, ModalTafsir } from "~components/molecules";
 import { usePlayNextAudio, useScrollAyat } from "~hooks";
@@ -133,48 +134,52 @@ export function DetailSurat({ data }: SuratProps) {
               </p>
             </div>
             <div className="mb-6 flex w-full flex-col items-start justify-start">
-              {audio ? (
-                <div className="mt-2.5 w-full flex justify-start items-start">
-                  <div className="rounded-full">
-                    {playing && audioList[audioIndex] === ayat.audio.url ? (
-                      <button
-                        type="button"
-                        aria-label="pause audio"
-                        className={cx(
-                          "flex justify-center items-center bg-gray-200 dark:bg-gray-800",
-                          "transition-all border border-gray-300 dark:border-gray-600 px-2.5 py-1",
-                          "rounded-full space-x-2"
-                        )}
-                        onClick={handlePauseAudio}
-                      >
-                        <Pause size={20} />
-                        <span className="font-medium">Pause</span>
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        aria-label="play audio"
-                        className={cx(
-                          "flex justify-center items-center bg-gray-200 dark:bg-gray-800",
-                          "transition-all border border-gray-300 dark:border-gray-600 px-2.5 py-1",
-                          "rounded-full space-x-2"
-                        )}
-                        onClick={() =>
-                          handlePlayAudio(index, ayat.number.insurah)
-                        }
-                      >
-                        <Play size={20} />
-                        <span className="font-medium">Play</span>
-                      </button>
-                    )}
+              {match({ audio: audio })
+                .with({ audio: true }, () => (
+                  <div className="mt-2.5 w-full flex justify-start items-start">
+                    <div className="rounded-full">
+                      {playing && audioList[audioIndex] === ayat.audio.url ? (
+                        <button
+                          type="button"
+                          aria-label="pause audio"
+                          className={cx(
+                            "flex justify-center items-center bg-gray-200 dark:bg-gray-800",
+                            "transition-all border border-gray-300 dark:border-gray-600 px-2.5 py-1",
+                            "rounded-full space-x-2"
+                          )}
+                          onClick={handlePauseAudio}
+                        >
+                          <Pause size={20} />
+                          <span className="font-medium">Pause</span>
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          aria-label="play audio"
+                          className={cx(
+                            "flex justify-center items-center bg-gray-200 dark:bg-gray-800",
+                            "transition-all border border-gray-300 dark:border-gray-600 px-2.5 py-1",
+                            "rounded-full space-x-2"
+                          )}
+                          onClick={() =>
+                            handlePlayAudio(index, ayat.number.insurah)
+                          }
+                        >
+                          <Play size={20} />
+                          <span className="font-medium">Play</span>
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ) : null}
-              {terjemahan ? (
-                <p className="mt-2 text-left italic font-medium text-teal-700 dark:text-teal-300">
-                  {ayat.text.read}
-                </p>
-              ) : null}
+                ))
+                .otherwise(() => null)}
+              {match({ terjemahan: terjemahan })
+                .with({ terjemahan: true }, () => (
+                  <p className="mt-2 text-left italic font-medium text-teal-700 dark:text-teal-300">
+                    {ayat.text.read}
+                  </p>
+                ))
+                .otherwise(() => null)}
               <p className="mt-6 text-left font-medium leading-relaxed tracking-wide">
                 {ayat.translation.id}
               </p>
@@ -193,11 +198,20 @@ export function DetailSurat({ data }: SuratProps) {
                   )
                 }
               >
-                {clipboard.copied && ayat.number.insurah === ayatClick ? (
-                  <ClipboardCheck />
-                ) : (
-                  <ClipboardCopy />
-                )}
+                {match({
+                  copied: clipboard.copied,
+                  insurah: ayat.number.insurah,
+                })
+                  .with(
+                    {
+                      copied: true,
+                      insurah: P.when((insurah) => insurah === ayatClick),
+                    },
+                    () => <ClipboardCheck />
+                  )
+                  .otherwise(() => (
+                    <ClipboardCopy />
+                  ))}
               </button>
               <button
                 type="button"
@@ -211,11 +225,18 @@ export function DetailSurat({ data }: SuratProps) {
                   )
                 }
               >
-                {lastRead.ayat === ayat.number.insurah ? (
-                  <BookmarkCheck />
-                ) : (
-                  <Bookmark />
-                )}
+                {match({ lastReadAyat: lastRead.ayat })
+                  .with(
+                    {
+                      lastReadAyat: P.when(
+                        (lastReadAyat) => lastReadAyat === ayat.number.insurah
+                      ),
+                    },
+                    () => <BookmarkCheck />
+                  )
+                  .otherwise(() => (
+                    <Bookmark />
+                  ))}
               </button>
             </div>
           </div>

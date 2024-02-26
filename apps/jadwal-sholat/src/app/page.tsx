@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { P, match } from "ts-pattern";
 import { cx } from "~lib/helpers";
 import { hours } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
@@ -63,15 +64,22 @@ export default function HomePage() {
             "text-3xl font-bold tracking-wide sm:text-4xl",
             bitter.className
           )}
-        >{`Selamat ${
-          hours >= 12 && hours < 15
-            ? "Siang"
-            : hours >= 15 && hours < 18
-              ? "Sore"
-              : hours >= 18 && hours < 24
-                ? "Malam"
-                : "Pagi"
-        }`}</h1>
+        >
+          {`Selamat ${match({ hours: hours })
+            .with(
+              { hours: P.when((hours) => hours >= 12 && hours < 15) },
+              () => "Siang"
+            )
+            .with(
+              { hours: P.when((hours) => hours >= 15 && hours < 18) },
+              () => "Sore"
+            )
+            .with(
+              { hours: P.when((hours) => hours >= 18 && hours < 24) },
+              () => "Malam"
+            )
+            .otherwise(() => "Pagi")}`}
+        </h1>
         <p className="mb-1 mt-2 text-lg font-medium md:text-xl">
           &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;
           <br />

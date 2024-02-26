@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { P, match } from "ts-pattern";
 import { SortByOrder } from "~components/atoms";
 import { SearchBar } from "~components/molecules";
 import { ListSurat } from "~components/organisms";
@@ -33,29 +34,36 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
         <SearchBar searchParams={searchParams} name="search" />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
-          {lastRead.ayat || lastRead.number !== null ? (
-            <Link
-              href={`/quran/surat/${lastRead.number}`}
-              onClick={() =>
-                localStorage.setItem(
-                  "selected-surat",
-                  lastRead.number!.toString() as string
-                )
-              }
-            >
-              <span
-                className={cx(
-                  "hover-animation underline-animation font-bold",
-                  "hover:text-red-500",
-                  "dark:text-white dark:hover:text-blue-500"
-                )}
-              >
-                Surat {lastRead.name} ayat {lastRead.ayat}
-              </span>
-            </Link>
-          ) : (
-            "belum ada"
-          )}
+          {match({ lastRead: lastRead })
+            .with(
+              {
+                lastRead: P.when(
+                  () => lastRead.ayat || lastRead.number !== null
+                ),
+              },
+              () => (
+                <Link
+                  href={`/quran/surat/${lastRead.number}`}
+                  onClick={() =>
+                    localStorage.setItem(
+                      "selected-surat",
+                      lastRead.number!.toString() as string
+                    )
+                  }
+                >
+                  <span
+                    className={cx(
+                      "hover-animation underline-animation font-bold",
+                      "hover:text-red-500",
+                      "dark:text-white dark:hover:text-blue-500"
+                    )}
+                  >
+                    Surat {lastRead.name} ayat {lastRead.ayat}
+                  </span>
+                </Link>
+              )
+            )
+            .otherwise(() => "belum ada")}
         </p>
       </div>
       <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />

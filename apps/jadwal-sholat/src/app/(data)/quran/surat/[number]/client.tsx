@@ -2,6 +2,7 @@
 
 import { Languages, MessageSquare, Volume2 } from "lucide-react";
 import { useAudioPlayer } from "react-use-audio-player";
+import { P, match } from "ts-pattern";
 import {
   ErrorWhileFetch,
   LoadingClient,
@@ -48,7 +49,12 @@ export default function Client({ number }: { number: string }) {
   }
 
   const { data, isPending, isError } = useFetch(
-    number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : ""
+    match({ number: number })
+      .with(
+        { number: P.when((number) => number) },
+        () => `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}`
+      )
+      .otherwise(() => "")
   );
 
   if ((!data && isError) || isPending) return <LoadingClient />;

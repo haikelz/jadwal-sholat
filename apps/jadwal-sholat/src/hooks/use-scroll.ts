@@ -14,7 +14,7 @@ export function useScroll(): number {
   }));
 
   const handleScroll = useCallback(() => {
-    setScroll(window.pageYOffset);
+    setScroll(window.scrollY);
   }, [setScroll]);
 
   useEffect(() => {
