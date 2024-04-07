@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { P, match } from "ts-pattern";
+import TransitionLayout from "~components/layout/transition-layout";
 import { cx } from "~lib/helpers";
 import { hours } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
@@ -49,7 +50,12 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center text-center">
+    <TransitionLayout
+      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex min-h-screen flex-col items-center justify-center text-center"
+    >
       <Image
         src="/img/home.webp"
         width={100}
@@ -87,6 +93,6 @@ export default function HomePage() {
         </p>
         <Time />
       </div>
-    </div>
+    </TransitionLayout>
   );
 }

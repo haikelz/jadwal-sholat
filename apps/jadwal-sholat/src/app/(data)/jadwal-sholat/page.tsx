@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import TransitionLayout from "~components/layout/transition-layout";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
 import { cx } from "~lib/helpers";
@@ -44,23 +45,25 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-async function getJadwalSholat(): Promise<KotaProps | undefined> {
+async function getJadwalSholat(): Promise<KotaProps> {
   try {
     const response: KotaProps = await getData(
       `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`
     );
-
     return response;
-  } catch (err) {
-    console.error(err);
+  } catch (err: any) {
+    throw new Error(err.message);
   }
 }
 
 export default async function JadwalSholat() {
-  const kota = (await getJadwalSholat()) as KotaProps;
+  const kota = await getJadwalSholat();
 
   return (
-    <div
+    <TransitionLayout
+      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className={cx(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
@@ -91,6 +94,6 @@ export default async function JadwalSholat() {
         </p>
       </div>
       <JadwalSholatClient kota={kota} />
-    </div>
+    </TransitionLayout>
   );
 }

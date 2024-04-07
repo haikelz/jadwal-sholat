@@ -1,30 +1,21 @@
 "use client";
 
-import { useQuery } from "@apollo/client";
 import { useSearchParams } from "next/navigation";
 import { SortByOrder } from "~components/atoms";
-import { ErrorWhileFetch, SearchBar } from "~components/molecules";
+import { SearchBar } from "~components/molecules";
 import { ListAsmaulHusna } from "~components/organisms";
 import { useAscending } from "~hooks";
 import { AsmaulHusnaProps } from "~interfaces";
 import { cx } from "~lib/helpers";
-import { asmaulHusnaQuery } from "~lib/utils/graphql/query";
 
-import LoadingClient from "./loading-client";
-
-export function AsmaulHusnaClient() {
+export function AsmaulHusnaClient(
+  { asmaulHusna }: { asmaulHusna: AsmaulHusnaProps[] }
+) {
   const searchParams = useSearchParams();
-
-  const { data, loading, error } = useQuery(asmaulHusnaQuery);
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
     searchParams.get("search") as string
   );
-
-  if (loading) return <LoadingClient />;
-  if (error) return <ErrorWhileFetch />;
-
-  const asmaulHusna = data as AsmaulHusnaProps[];
 
   return (
     <>

@@ -1,6 +1,6 @@
 FROM node:alpine AS build
 
-RUN npm install -g pnpm turbo
+RUN npm install -g pnpm
 WORKDIR /app
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -15,8 +15,10 @@ COPY packages/eslint-config/package.json ./packages/eslint-config/package.json
 COPY packages/typescript-config/package.json ./packages/typescript-config/package.json
 
 RUN pnpm install
+RUN pnpm install --filter jadwal-sholat
+
 COPY . ./
-RUN turbo run build
+RUN pnpm run build
 
 # run dev
-CMD ["turbo", "run", "dev"]
+CMD ["pnpm", "run", "dev"]

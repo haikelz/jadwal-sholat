@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ReadingProgress } from "~components/atoms";
+import TransitionLayout from "~components/layout/transition-layout";
 import { env } from "~env.mjs";
 import { ListSuratProps, SuratProps } from "~interfaces";
 import { cx } from "~lib/helpers";
@@ -10,9 +11,7 @@ import Client from "./client";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
-export async function generateStaticParams(): Promise<
-  { number: string }[] | undefined
-> {
+export async function generateStaticParams(): Promise<{ number: string }[]> {
   const response: ListSuratProps = await getData(
     `${NEXT_PUBLIC_QURAN_API}/quran`
   );
@@ -20,11 +19,9 @@ export async function generateStaticParams(): Promise<
   return response.data.map((item) => ({ number: item.number.toString() }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { number: string };
-}): Promise<Metadata | undefined> {
+export async function generateMetadata(
+  { params }: { params: { number: string } }
+): Promise<Metadata | undefined> {
   const { number } = params;
 
   const response: SuratProps = await getData(
@@ -59,17 +56,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function Surat({
-  params,
-}: {
-  params: { number: string };
-}) {
+export default async function Surat(
+  { params }: { params: { number: string } }
+) {
   const { number } = params;
 
   return (
     <>
       <ReadingProgress />
-      <div
+      <TransitionLayout
+        transition={{ duration: 0.3 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         className={cx(
           "flex w-full max-w-full",
           "flex-col items-center justify-start",
@@ -77,7 +75,7 @@ export default async function Surat({
         )}
       >
         <Client number={number} />
-      </div>
+      </TransitionLayout>
     </>
   );
 }

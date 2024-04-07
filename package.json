@@ -15,30 +15,16 @@
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.0.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
-    "turbo": "^1.12.4"
+    "turbo": "^1.13.2"
   },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && pnpm cz --hook || true"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --config ./prettier.config.js --write"
-    ],
-    "**/*.{css,scss,md,html,json}": [
-      "prettier --config ./prettier.config.js --write"
-    ]
   },
   "packageManager": "pnpm@8.6.10"
 }

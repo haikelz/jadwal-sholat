@@ -10,3 +10,4 @@ apps/jadwal-sholat/node_modules
 apps/jadwal-sholat/.next
 packages/eslint-config/node_modules
 .turbo
+node_modules
