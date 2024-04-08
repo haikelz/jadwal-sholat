@@ -48,7 +48,7 @@ export default function Client({ number }: { number: string }) {
     stop();
   }
 
-  const { data, isPending, isError } = useFetch(
+  const { data, isPending, isError, isRefetching } = useFetch(
     match({ number: number })
       .with(
         { number: P.when((number) => number) },
@@ -56,6 +56,8 @@ export default function Client({ number }: { number: string }) {
       )
       .otherwise(() => "")
   );
+
+  console.log(isRefetching);
 
   if ((!data && isError) || isPending) return <LoadingClient />;
   if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
@@ -131,6 +133,19 @@ export default function Client({ number }: { number: string }) {
         <DetailSurat data={surat} />
         <PreviousOrNext data={surat} />
       </div>
+      {isRefetching ? (
+        <div
+          className={cx(
+            "modal-blur fixed inset-0 top-0 z-50",
+            "flex min-h-screen w-full items-center justify-center",
+            "overflow-x-hidden backdrop-blur-[3px]"
+          )}
+        >
+          <div className="bg-white rounded-lg p-4 font-medium dark:bg-gray-800 dark:text-white">
+            Loading Qori' audio....
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }

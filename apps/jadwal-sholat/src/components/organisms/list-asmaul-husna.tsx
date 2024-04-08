@@ -8,15 +8,17 @@ import { AsmaulHusnaProps } from "~interfaces";
 import { cx } from "~lib/helpers";
 import { arab } from "~lib/utils/fonts";
 
-export function ListAsmaulHusna({
-  asmaulHusna,
-  deferredSearch,
-  isAscending,
-}: {
-  asmaulHusna: AsmaulHusnaProps[];
-  deferredSearch: string;
-  isAscending: boolean;
-}) {
+export function ListAsmaulHusna(
+  {
+    asmaulHusna,
+    deferredSearch,
+    isAscending,
+  }: {
+    asmaulHusna: AsmaulHusnaProps[];
+    deferredSearch: string;
+    isAscending: boolean;
+  }
+) {
   const filteredAsmaulHusna = useMemo(
     () =>
       asmaulHusna
