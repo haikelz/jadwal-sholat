@@ -5,6 +5,7 @@ import { useAudioPlayer } from "react-use-audio-player";
 import { P, match } from "ts-pattern";
 import {
   ErrorWhileFetch,
+  IsRefetching,
   LoadingClient,
   PreviousOrNext,
 } from "~components/molecules";
@@ -56,8 +57,6 @@ export default function Client({ number }: { number: string }) {
       )
       .otherwise(() => "")
   );
-
-  console.log(isRefetching);
 
   if ((!data && isError) || isPending) return <LoadingClient />;
   if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
@@ -133,19 +132,7 @@ export default function Client({ number }: { number: string }) {
         <DetailSurat data={surat} />
         <PreviousOrNext data={surat} />
       </div>
-      {isRefetching ? (
-        <div
-          className={cx(
-            "modal-blur fixed inset-0 top-0 z-50",
-            "flex min-h-screen w-full items-center justify-center",
-            "overflow-x-hidden backdrop-blur-[3px]"
-          )}
-        >
-          <div className="bg-white rounded-lg p-4 font-medium dark:bg-gray-800 dark:text-white">
-            Loading Qori' audio....
-          </div>
-        </div>
-      ) : null}
+      {isRefetching ? <IsRefetching /> : null}
     </>
   );
 }

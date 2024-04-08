@@ -34,7 +34,7 @@ export function ModalTafsir({ data }: SuratProps) {
             className={cx(
               "modal-blur fixed inset-0 top-0 z-50",
               "flex min-h-screen w-full items-center justify-center",
-              "overflow-x-hidden backdrop-blur-[3px]"
+              "overflow-x-hidden"
             )}
           >
             <div className="relative w-full max-w-2xl p-4 md:h-auto">
