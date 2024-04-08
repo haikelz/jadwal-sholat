@@ -25,7 +25,7 @@ export function ModalNotification({ description }: { description: string }) {
             className={cx(
               "modal-blur fixed inset-0 top-0 z-50",
               "flex min-h-screen w-full items-center justify-center",
-              "overflow-y-auto overflow-x-hidden  backdrop-blur-[3px]"
+              "overflow-y-auto overflow-x-hidden  modal-blur"
             )}
           >
             <div className="relative md:h-auto">

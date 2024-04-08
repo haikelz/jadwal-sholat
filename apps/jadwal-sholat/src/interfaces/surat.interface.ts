@@ -99,7 +99,7 @@ export interface SuratProps {
         translation: {
           id: string;
         };
-      },
+      }
     ];
     type: {
       id: string;
