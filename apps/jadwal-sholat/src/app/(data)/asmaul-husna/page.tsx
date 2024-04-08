@@ -46,7 +46,7 @@ export const metadata = {
 async function getAsmaulHusna(): Promise<AsmaulHusnaProps[]> {
   try {
     const response: { data: AsmaulHusnaProps[] } = await getData(
-      NEXT_PUBLIC_ASMAUL_HUSNA_API
+      `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/all`
     );
     return response.data;
   } catch (err: any) {
