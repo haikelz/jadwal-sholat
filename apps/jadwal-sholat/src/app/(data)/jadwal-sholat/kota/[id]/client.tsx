@@ -1,5 +1,6 @@
 "use client";
 
+import { P, match } from "ts-pattern";
 import { ErrorWhileFetch, LoadingClient } from "~components/molecules";
 import { TableJadwalSholat } from "~components/organisms";
 import { env } from "~env.mjs";
@@ -14,7 +15,12 @@ export default function Client({ id }: { id: string }) {
   const formatDate: string = `${tahun}/${bulan}`;
 
   const { data, isPending, isError } = useFetch(
-    id ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}` : ""
+    match({ id: id })
+      .with(
+        { id: P.when((id) => id) },
+        () => `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/jadwal/${id}/${formatDate}`
+      )
+      .otherwise(() => "")
   );
 
   if ((!data && isError) || isPending) return <LoadingClient />;

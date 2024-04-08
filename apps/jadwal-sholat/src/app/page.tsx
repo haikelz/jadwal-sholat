@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { P, match } from "ts-pattern";
+import TransitionLayout from "~components/layout/transition-layout";
 import { cx } from "~lib/helpers";
 import { hours } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
@@ -48,7 +50,12 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center text-center">
+    <TransitionLayout
+      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex min-h-screen flex-col items-center justify-center text-center"
+    >
       <Image
         src="/img/home.webp"
         width={100}
@@ -63,15 +70,22 @@ export default function HomePage() {
             "text-3xl font-bold tracking-wide sm:text-4xl",
             bitter.className
           )}
-        >{`Selamat ${
-          hours >= 12 && hours < 15
-            ? "Siang"
-            : hours >= 15 && hours < 18
-              ? "Sore"
-              : hours >= 18 && hours < 24
-                ? "Malam"
-                : "Pagi"
-        }`}</h1>
+        >
+          {`Selamat ${match({ hours: hours })
+            .with(
+              { hours: P.when((hours) => hours >= 12 && hours < 15) },
+              () => "Siang"
+            )
+            .with(
+              { hours: P.when((hours) => hours >= 15 && hours < 18) },
+              () => "Sore"
+            )
+            .with(
+              { hours: P.when((hours) => hours >= 18 && hours < 24) },
+              () => "Malam"
+            )
+            .otherwise(() => "Pagi")}`}
+        </h1>
         <p className="mb-1 mt-2 text-lg font-medium md:text-xl">
           &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;
           <br />
@@ -79,6 +93,6 @@ export default function HomePage() {
         </p>
         <Time />
       </div>
-    </div>
+    </TransitionLayout>
   );
 }

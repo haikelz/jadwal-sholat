@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import TransitionLayout from "~components/layout/transition-layout";
 import { env } from "~env.mjs";
 import { ListSuratProps } from "~interfaces";
 import { cx } from "~lib/helpers";
@@ -45,17 +46,24 @@ export const metadata: Metadata = {
 };
 
 async function getSurat(): Promise<ListSuratProps> {
-  const response: ListSuratProps = await getData(
-    `${NEXT_PUBLIC_QURAN_API}/quran`
-  );
-  return response;
+  try {
+    const response: ListSuratProps = await getData(
+      `${NEXT_PUBLIC_QURAN_API}/quran`
+    );
+    return response;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
 }
 
 export default async function Quran() {
   const surat = await getSurat();
 
   return (
-    <div
+    <TransitionLayout
+      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className={cx(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
@@ -86,6 +94,6 @@ export default async function Quran() {
         </p>
       </div>
       <QuranClient surat={surat} />
-    </div>
+    </TransitionLayout>
   );
 }

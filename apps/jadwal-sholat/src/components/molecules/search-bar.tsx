@@ -6,8 +6,7 @@ import {
   usePathname,
   useRouter,
 } from "next/navigation";
-import { useCallback, useRef } from "react";
-import { useKeydown } from "~hooks";
+import { useCallback } from "react";
 import { cx } from "~lib/helpers";
 
 interface SearchBarProps {
@@ -29,10 +28,6 @@ export function SearchBar({ searchParams, name }: SearchBarProps) {
     [searchParams]
   );
 
-  const ref = useRef<HTMLInputElement>(null);
-
-  useKeydown({ ref: ref, isShiftKey: true, key1: "Shift", key2: "Escape" });
-
   return (
     <div className="flex flex-col">
       <div className="relative flex items-center justify-center">
@@ -40,7 +35,6 @@ export function SearchBar({ searchParams, name }: SearchBarProps) {
           <Search size={20} />
         </div>
         <input
-          ref={ref}
           className={cx(
             "block w-[300px] rounded-md",
             "border-2 border-solid border-gray-400",
@@ -59,29 +53,6 @@ export function SearchBar({ searchParams, name }: SearchBarProps) {
             )
           }
         />
-      </div>
-      <div className="mt-1.5 hidden md:inline-block">
-        <kbd
-          className={cx(
-            "rounded-sm bg-blue-400 px-1.5 py-0.5",
-            "text-sm font-semibold",
-            "text-black shadow-sm",
-            "dark:bg-blue-500"
-          )}
-        >
-          Shift
-        </kbd>{" "}
-        <b>+</b>{" "}
-        <kbd
-          className={cx(
-            "rounded-sm bg-blue-400 px-1.5 py-0.5",
-            "text-sm font-semibold",
-            "text-black shadow-sm",
-            "dark:bg-blue-500"
-          )}
-        >
-          Enter
-        </kbd>
       </div>
     </div>
   );

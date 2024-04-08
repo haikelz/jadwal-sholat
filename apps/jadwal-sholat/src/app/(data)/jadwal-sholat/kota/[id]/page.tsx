@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import TransitionLayout from "~components/layout/transition-layout";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
 import { cx } from "~lib/helpers";
@@ -25,11 +26,9 @@ interface ResponseMetadataKotaProps {
   };
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata | undefined> {
+export async function generateMetadata(
+  { params }: { params: { id: string } }
+): Promise<Metadata | undefined> {
   const response: ResponseMetadataKotaProps = await getData(
     `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/${params.id}`
   );
@@ -71,7 +70,10 @@ export default async function KotaId({ params }: { params: { id: string } }) {
   const { id } = params;
 
   return (
-    <div
+    <TransitionLayout
+      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className={cx(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
@@ -79,6 +81,6 @@ export default async function KotaId({ params }: { params: { id: string } }) {
       )}
     >
       <Client id={id} />
-    </div>
+    </TransitionLayout>
   );
 }
