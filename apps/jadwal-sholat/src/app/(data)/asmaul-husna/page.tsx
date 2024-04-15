@@ -13,7 +13,7 @@ const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 const baseMetadata = {
   title: "Asma'ul Husna | Jadwal Sholat",
   description: "Berikut daftar Asma'ul Husna",
-  url: MetaUrl.Site_Url,
+  url: `${MetaUrl.Site_Url}/asmaul-husna`,
 };
 
 const { title, description, url } = baseMetadata;
@@ -32,7 +32,7 @@ export const metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "info-jadwal-sholat.vercel.app",
+    siteName: "info-jadwal-sholat.vercel.app/asmaul-husna",
   },
   twitter: {
     title,
