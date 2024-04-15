@@ -15,7 +15,7 @@ const { NEXT_PUBLIC_QURAN_API } = env;
 const baseMetadata = {
   title: "Baca Al-Qur'an | Jadwal Sholat",
   description: "Berlomba-lombalah kamu dalam berbuat kebaikan",
-  url: MetaUrl.Site_Url,
+  url: `${MetaUrl.Site_Url}/quran`,
 };
 
 const { title, description, url } = baseMetadata;

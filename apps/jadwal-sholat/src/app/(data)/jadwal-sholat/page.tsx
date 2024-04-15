@@ -15,7 +15,7 @@ const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 const baseMetadata = {
   title: "Jadwal Sholat",
   description: "Berikut daftar Kabupaten/Kota yang tersedia",
-  url: MetaUrl.Site_Url,
+  url: `${MetaUrl.Site_Url}/jadwal-sholat`,
 };
 
 const { title, description, url } = baseMetadata;

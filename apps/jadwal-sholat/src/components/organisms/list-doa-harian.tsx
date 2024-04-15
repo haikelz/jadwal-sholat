@@ -102,7 +102,7 @@ export function ListDoaHarian(
                   <p className="text-lg mb-1 text-left italic font-medium text-teal-700 dark:text-teal-300">
                     {item.latin}
                   </p>
-                  <p>{item.terjemah}</p>
+                  <p className="font-medium">{item.terjemah}</p>
                 </div>
               ))}
             </div>

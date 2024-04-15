@@ -14,8 +14,8 @@ const { NEXT_PUBLIC_DOA_HARIAN_API } = env;
 
 const baseMetadata = {
   title: "Do'a Harian | Jadwal Sholat",
-  description: "Berlomba-lombalah kamu dalam berbuat kebaikan",
-  url: MetaUrl.Site_Url,
+  description: "Berikut daftar do'a harian yang tersedia",
+  url: `${MetaUrl.Site_Url}/doa-harian`,
 };
 
 const { title, description, url } = baseMetadata;

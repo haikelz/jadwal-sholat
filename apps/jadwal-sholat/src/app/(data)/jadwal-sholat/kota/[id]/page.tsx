@@ -37,7 +37,7 @@ export async function generateMetadata(
   const base = {
     title: `Jadwal Sholat ${lokasi}`,
     description: `Jadwal Sholat di ${lokasi}`,
-    url: MetaUrl.Site_Url,
+    url: `${MetaUrl.Site_Url}/jadwal-sholat/kota/${id}`,
   };
 
   return {

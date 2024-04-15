@@ -30,14 +30,20 @@ export async function generateMetadata(
 
   const { asma, tafsir } = response.data;
 
-  return {
+  const base = {
     title: asma.id.short,
     description: tafsir.id,
+    url: `${MetaUrl.Site_Url}/quran/surat/${number}`,
+  };
+
+  return {
+    title: base.title,
+    description: base.description,
     openGraph: {
       type: "website",
-      url: `${MetaUrl.Site_Url}/quran/surat/${number}`,
-      title: asma.id.short,
-      description: tafsir.id,
+      url: base.url,
+      title: base.title,
+      description: base.description,
       images: [
         {
           url: MetaUrl.Default_Og_Url,
@@ -47,12 +53,12 @@ export async function generateMetadata(
       siteName: `info-jadwal-sholat.vercel.app/quran/surat/${number}`,
     },
     twitter: {
-      title: asma.id.short,
-      description: tafsir.id,
-      site: `${MetaUrl.Site_Url}/quran/surat/${number}`,
+      title: base.title,
+      description: base.description,
+      site: base.url,
       card: "summary_large_image",
     },
-    metadataBase: new URL(MetaUrl.Site_Url),
+    metadataBase: new URL(base.url),
   };
 }
 
