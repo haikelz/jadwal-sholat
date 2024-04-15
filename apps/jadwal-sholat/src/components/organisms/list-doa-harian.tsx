@@ -4,27 +4,27 @@ import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 import { P, match } from "ts-pattern";
 import { TidakAda } from "~components/atoms";
-import { AsmaulHusnaProps } from "~interfaces";
+import { DoaHarianProps } from "~interfaces";
 import { cx } from "~lib/helpers";
 
-export function ListAsmaulHusna(
+export function ListDoaHarian(
   {
-    asmaulHusna,
+    doaHarian,
     deferredSearch,
     isAscending,
   }: {
-    asmaulHusna: AsmaulHusnaProps[];
+    doaHarian: DoaHarianProps[];
     deferredSearch: string;
     isAscending: boolean;
   }
 ) {
-  const filteredAsmaulHusna = useMemo(
+  const filteredDoaHarian = useMemo(
     () =>
-      asmaulHusna
+      doaHarian
         .filter((item) => {
           if (deferredSearch === "" || deferredSearch === null) return item;
           else if (
-            item.latin.toLowerCase().includes(deferredSearch.toLowerCase())
+            item.judul.toLowerCase().includes(deferredSearch.toLowerCase())
           )
             return item;
         })
@@ -33,29 +33,29 @@ export function ListAsmaulHusna(
           if (!isAscending) return -1;
           return 0;
         }),
-    [deferredSearch, asmaulHusna, isAscending]
+    [deferredSearch, doaHarian, isAscending]
   );
 
   return (
     <>
-      {match({ filteredAsmaulHusna: filteredAsmaulHusna })
+      {match({ filteredDoaHarian: filteredDoaHarian })
         .with(
           {
-            filteredAsmaulHusna: P.when(
-              (filteredAsmaulHusna) => filteredAsmaulHusna.length
+            filteredDoaHarian: P.when(
+              (filteredDoaHarian) => filteredDoaHarian.length
             ),
           },
           () => (
             <div
               className={cx(
-                "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center",
+                "flex justify-start items-center w-full space-y-5 flex-col text-center",
                 "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
               )}
             >
-              {filteredAsmaulHusna.map((item) => (
+              {filteredDoaHarian.map((item) => (
                 <div
                   data-cy="card"
-                  key={item.urutan}
+                  key={item.id}
                   className={cx(
                     "flex flex-col w-full items-start justify-center",
                     "overflow-hidden rounded-md text-left",
@@ -64,13 +64,8 @@ export function ListAsmaulHusna(
                     "dark:border-white dark:bg-[#2A2A37]"
                   )}
                 >
-                  <div className="my-3 w-full text-right">
-                    <p className={cx("text-3xl font-medium", "arabic-font")}>
-                      {item.arab}
-                    </p>
-                  </div>
-                  <h3 className="text-lg my-1 font-bold">
-                    {item.urutan}.{" "}
+                  <h3 className="text-xl font-bold">
+                    {item.id}.{" "}
                     {match({ deferredSearch: deferredSearch })
                       .with(
                         {
@@ -80,7 +75,7 @@ export function ListAsmaulHusna(
                         },
                         () =>
                           reactStringReplace(
-                            item.latin,
+                            item.judul,
                             deferredSearch,
                             (match: string, index: number) => (
                               <span
@@ -92,16 +87,29 @@ export function ListAsmaulHusna(
                             )
                           )
                       )
-                      .otherwise(() => item.latin)}
+                      .otherwise(() => item.judul)}
                   </h3>
-                  <p>{item.arti}</p>
+                  <div className="my-3 w-full text-right">
+                    <p
+                      className={cx(
+                        "text-3xl font-medium leading-loose tracking-wide",
+                        "arabic-font"
+                      )}
+                    >
+                      {item.arab}
+                    </p>
+                  </div>
+                  <p className="text-lg mb-1 text-left italic font-medium text-teal-700 dark:text-teal-300">
+                    {item.latin}
+                  </p>
+                  <p>{item.terjemah}</p>
                 </div>
               ))}
             </div>
           )
         )
         .otherwise(() => (
-          <TidakAda title="Asma'ul Husna" />
+          <TidakAda title="Do'a Harian" />
         ))}
     </>
   );

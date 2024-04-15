@@ -16,7 +16,6 @@ import { ModalNotification, ModalTafsir } from "~components/molecules";
 import { usePlayNextAudio, useScrollAyat } from "~hooks";
 import { SuratProps } from "~interfaces";
 import { cx } from "~lib/helpers";
-import { arab } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
 
 export function DetailSurat({ data }: SuratProps) {
@@ -100,7 +99,7 @@ export function DetailSurat({ data }: SuratProps) {
 
   return (
     <>
-      <div className="w-full flex flex-col space-y-7 my-7 text-end">
+      <div className="w-full flex flex-col space-y-7 my-7">
         {data.ayahs.map((ayat, index) => (
           <div
             className={cx(
@@ -114,7 +113,7 @@ export function DetailSurat({ data }: SuratProps) {
               <div
                 id={`ayat-${ayat.number.insurah}`}
                 className={cx(
-                  "mr-2 flex h-12 w-12 items-center justify-center rounded-full p-6",
+                  "mr-2 flex h-8 w-8 items-center justify-center rounded-full p-5",
                   "border-black bg-gray-400 font-bold text-white",
                   "dark:bg-teal-600"
                 )}
@@ -123,8 +122,8 @@ export function DetailSurat({ data }: SuratProps) {
               </div>
               <p
                 className={cx(
-                  "text-right text-4xl font-medium leading-relaxed",
-                  arab.className,
+                  "text-right text-3xl tracking-wide font-medium leading-loose",
+                  "arabic-font",
                   playing && audioList[audioIndex] === ayat.audio.url
                     ? "text-teal-700 dark:text-teal-300"
                     : ""

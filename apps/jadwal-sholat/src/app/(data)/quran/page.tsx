@@ -52,7 +52,7 @@ async function getSurat(): Promise<ListSuratProps> {
     );
     return response;
   } catch (err: any) {
-    throw new Error(err.message);
+    throw new Error("Failed to fetch data!");
   }
 }
 

@@ -2,19 +2,19 @@ import { Metadata } from "next";
 import Image from "next/image";
 import TransitionLayout from "~components/layout/transition-layout";
 import { env } from "~env.mjs";
-import { KotaProps } from "~interfaces";
+import { DoaHarianProps } from "~interfaces";
 import { cx } from "~lib/helpers";
 import { getData } from "~lib/utils/axios-config";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
-import JadwalSholatClient from "./client";
+import DoaHarianClient from "./client";
 
-const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
+const { NEXT_PUBLIC_DOA_HARIAN_API } = env;
 
 const baseMetadata = {
-  title: "Jadwal Sholat",
-  description: "Berikut daftar Kabupaten/Kota yang tersedia",
+  title: "Do'a Harian | Jadwal Sholat",
+  description: "Berlomba-lombalah kamu dalam berbuat kebaikan",
   url: MetaUrl.Site_Url,
 };
 
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "info-jadwal-sholat.vercel.app/jadwal-sholat",
+    siteName: "info-jadwal-sholat.vercel.app/doa-harian",
   },
   twitter: {
     title,
@@ -45,19 +45,20 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-async function getJadwalSholat(): Promise<KotaProps> {
+async function getDoaHarian(): Promise<DoaHarianProps[]> {
   try {
-    const response: KotaProps = await getData(
-      `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`
+    const response: DoaHarianProps[] = await getData(
+      NEXT_PUBLIC_DOA_HARIAN_API
     );
+
     return response;
   } catch (err: any) {
     throw new Error("Failed to fetch data!");
   }
 }
 
-export default async function JadwalSholat() {
-  const kota = await getJadwalSholat();
+export default async function DoaHarian() {
+  const doaHarian = await getDoaHarian();
 
   return (
     <TransitionLayout
@@ -78,10 +79,10 @@ export default async function JadwalSholat() {
               bitter.className
             )}
           >
-            Jadwal Sholat
+            Do'a Harian
           </h1>
           <Image
-            src="/img/mosque.webp"
+            src="/img/pray.svg"
             width={40}
             height={40}
             alt="Mosque"
@@ -90,10 +91,10 @@ export default async function JadwalSholat() {
           />
         </div>
         <p data-cy="description" className="mt-2 text-lg font-medium">
-          Berikut daftar Kabupaten/Kota yang tersedia
+          Berikut daftar do'a harian yang tersedia
         </p>
       </div>
-      <JadwalSholatClient kota={kota} />
+      <DoaHarianClient doaHarian={doaHarian} />
     </TransitionLayout>
   );
 }

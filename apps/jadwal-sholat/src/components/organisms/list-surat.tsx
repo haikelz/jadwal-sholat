@@ -9,15 +9,17 @@ import { ListSuratProps } from "~interfaces";
 import { cx, removeSelectedSurat } from "~lib/helpers";
 import useGlobalStore from "~store";
 
-export function ListSurat({
-  surat,
-  deferredSearch,
-  isAscending,
-}: {
-  surat: ListSuratProps;
-  deferredSearch: string;
-  isAscending: boolean;
-}) {
+export function ListSurat(
+  {
+    surat,
+    deferredSearch,
+    isAscending,
+  }: {
+    surat: ListSuratProps;
+    deferredSearch: string;
+    isAscending: boolean;
+  }
+) {
   const { setLastRead } = useGlobalStore((state) => ({
     setLastRead: state.setLastRead,
   }));
@@ -80,8 +82,8 @@ export function ListSurat({
                     <p className="text-right font-semibold tracking-wide">
                       {surat.type.id}
                     </p>
-                    <span className="text-xl font-bold">{surat.number}</span>
-                    <p className="text-lg font-bold">
+                    <p className="text-lg font-bold my-1">
+                      {surat.number}.{" "}
                       {match({ deferredSearch: deferredSearch })
                         .with(
                           {
@@ -105,8 +107,10 @@ export function ListSurat({
                         )
                         .otherwise(() => surat.asma.id.short)}
                     </p>
-                    <p className="font-medium">{surat.asma.translation.id}</p>
-                    <p className="mt-0.5">Jumlah: {surat.ayahCount} ayat</p>
+                    <p className="font-medium mb-1">
+                      {surat.asma.translation.id}
+                    </p>
+                    <p>Jumlah: {surat.ayahCount} ayat</p>
                   </div>
                 </Link>
               ))}
