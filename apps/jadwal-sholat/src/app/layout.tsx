@@ -4,7 +4,7 @@ import { Navbar } from "~components/organisms";
 import { ChildrenProps } from "~interfaces";
 import { cx } from "~lib/helpers";
 import { MetaUrl } from "~lib/utils/enums";
-import { arab, bitter, ibmPlexSans } from "~lib/utils/fonts";
+import { bitter, ibmPlexSans } from "~lib/utils/fonts";
 
 import "./globals.css";
 import Wrapper from "./wrapper";
@@ -62,7 +62,7 @@ export default function Layout({ children }: ChildrenProps) {
   return (
     <html
       lang="en"
-      className={cx(ibmPlexSans.variable, arab.variable, bitter.variable)}
+      className={cx(ibmPlexSans.variable, bitter.variable)}
       suppressHydrationWarning
     >
       <body className={cx(ibmPlexSans.className)}>

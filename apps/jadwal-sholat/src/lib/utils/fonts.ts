@@ -1,4 +1,4 @@
-import { Bitter, IBM_Plex_Sans, Noto_Naskh_Arabic } from "next/font/google";
+import { Bitter, IBM_Plex_Sans, Noto_Sans_Arabic } from "next/font/google";
 
 export const bitter = Bitter({
   style: ["normal"],
@@ -16,8 +16,8 @@ export const ibmPlexSans = IBM_Plex_Sans({
   display: "swap",
 });
 
-export const arab = Noto_Naskh_Arabic({
-  weight: ["700"],
+export const notoSansArabic = Noto_Sans_Arabic({
+  weight: ["600"],
   style: ["normal"],
   subsets: ["arabic"],
   variable: "--font-arabic",

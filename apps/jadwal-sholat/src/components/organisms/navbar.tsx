@@ -1,11 +1,10 @@
 "use client";
 
-import { BookMarked, Clock4, Home, List, LucideIcon } from "lucide-react";
+import { BookMarked, Clock4, HandHelping, Home, List } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cx } from "~lib/helpers";
-import { slugify } from "~lib/helpers";
+import { cx, slugify } from "~lib/helpers";
 
 const SwitchTheme = dynamic(
   () => import("~components/atoms").then((obj) => obj.SwitchTheme),
@@ -30,6 +29,7 @@ const navbarList = [
     title: "Qur'an",
     icon: BookMarked,
   },
+  { id: 4, title: "Do'a Harian", icon: HandHelping },
 ];
 
 export function Navbar() {
@@ -44,60 +44,53 @@ export function Navbar() {
     >
       <div
         className={cx(
-          "fixed bottom-0 z-50 grid w-full grid-cols-5 grid-rows-1 gap-4",
-          "border-t border-t-gray-300 bg-gray-50 py-4 text-white",
-          "dark:border-t-[1px] dark:border-t-gray-600 dark:bg-gray-800",
-          "md:sticky md:top-0 md:left-0 md:flex md:max-h-screen md:min-h-screen",
-          "md:max-w-[80px] md:flex-col md:items-center md:justify-center md:gap-10",
+          "fixed bottom-0 z-50 w-full flex justify-between px-4 py-2.5 flex-row items-center",
+          "border-t border-t-gray-300 bg-gray-50 text-white",
+          "dark:border-t-[1px] dark:border-t-gray-600 md:justify-center dark:bg-gray-800",
+          "md:sticky md:top-0 md:left-0 md:max-h-screen md:min-h-screen",
+          "md:max-w-[80px] md:flex-col md:gap-10",
           "md:border-t-0 md:px-7 md:dark:border-t-0"
         )}
       >
-        <div className="flex w-full items-center justify-center">
-          <Link href="/">
-            <button
-              type="button"
-              aria-label="home"
-              className={cx(
-                "flex cursor-pointer flex-col items-center justify-center px-4",
-                "transition-all",
-                "md:p-2.5",
-                pathname === "/"
-                  ? "text-gray-600 dark:text-white"
-                  : "text-gray-500 dark:text-gray-400"
-              )}
-            >
-              <Home size={24} />
-              <p className="hidden text-sm font-semibold md:block">Home</p>
-            </button>
-          </Link>
-        </div>
+        <Link href="/">
+          <button
+            type="button"
+            aria-label="home"
+            className={cx(
+              "flex cursor-pointer flex-col items-center justify-center p-2",
+              "transition-all",
+              "md:p-2.5",
+              pathname === "/"
+                ? "text-gray-600 dark:text-white"
+                : "text-gray-500 dark:text-gray-400"
+            )}
+          >
+            <Home size={24} />
+            <p className="hidden text-sm font-semibold md:block">Home</p>
+          </button>
+        </Link>
         {navbarList.map((item) => {
-          const Icon: LucideIcon = item.icon;
+          const Icon = item.icon;
           return (
-            <div
-              key={item.id}
-              className="flex w-full items-center justify-center"
-            >
-              <Link href={slugify(item.title)} passHref>
-                <button
-                  className={cx(
-                    "flex cursor-pointer flex-col items-center justify-center px-4",
-                    "transition-all md:p-2.5",
-                    pathname.includes(slugify(item.title) as string)
-                      ? "text-gray-600 dark:text-white"
-                      : "text-gray-500 dark:text-gray-400"
-                  )}
-                >
-                  <Icon size={24} />
-                  <p className="hidden text-sm font-bold md:block">
-                    {item.title}
-                  </p>
-                </button>
-              </Link>
-            </div>
+            <Link href={slugify(item.title)} key={item.id}>
+              <button
+                className={cx(
+                  "flex cursor-pointer flex-col items-center justify-center p-2",
+                  "transition-all md:p-2.5",
+                  pathname.includes(slugify(item.title) as string)
+                    ? "text-gray-600 dark:text-white"
+                    : "text-gray-500 dark:text-gray-400"
+                )}
+              >
+                <Icon size={24} />
+                <p className="hidden text-sm font-bold md:block">
+                  {item.title}
+                </p>
+              </button>
+            </Link>
           );
         })}
-        <SwitchTheme flexDir="col" justifyItems="center" isMarginLeft={false} />
+        <SwitchTheme />
       </div>
     </nav>
   );

@@ -4,3 +4,4 @@ export { ListKota } from "./list-kota";
 export { ListSurat } from "./list-surat";
 export { Navbar } from "./navbar";
 export { TableJadwalSholat } from "./table-jadwal-sholat";
+export { ListDoaHarian } from "./list-doa-harian";
