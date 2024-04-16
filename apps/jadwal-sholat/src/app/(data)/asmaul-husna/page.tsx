@@ -65,7 +65,7 @@ export default async function AsmaulHusna() {
       className={cx(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "space-y-7 pt-8 pb-24 md:pb-8"
+        "pt-8 pb-24 md:pb-8"
       )}
     >
       <div className="flex flex-col items-center justify-center">
@@ -79,7 +79,7 @@ export default async function AsmaulHusna() {
             Asma&#39;ul Husna
           </h1>
         </div>
-        <p data-cy="description" className="mt-2 text-lg font-medium">
+        <p data-cy="description" className="mt-2 my-7 text-lg font-medium">
           Berikut daftar Asma&#39;ul Husna
         </p>
       </div>

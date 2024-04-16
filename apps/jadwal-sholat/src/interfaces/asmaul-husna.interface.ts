@@ -4,3 +4,10 @@ export interface AsmaulHusnaProps {
   arab: string;
   arti: string;
 }
+
+export interface numberModalAsmaulHusnaSliceProps {
+  numberModalAsmaulHusna: number;
+  setNumberModalAsmaulHusna: (numberModalAsmaulHusna: number) => void;
+  dataAsmaulHusna: AsmaulHusnaProps;
+  setDataAsmaulHusna: (dataAsmaulHusna: AsmaulHusnaProps) => void;
+}

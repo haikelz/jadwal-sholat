@@ -1,7 +1,7 @@
 "use client";
 
 import { ClipboardCheck, ClipboardCopy, X } from "lucide-react";
-import { memo, useCallback, useRef } from "react";
+import { memo, useCallback } from "react";
 import { match } from "ts-pattern";
 import { useClipboard } from "use-clipboard-copy";
 import { SuratProps } from "~interfaces";
@@ -15,8 +15,6 @@ export function ModalTafsir({ data }: SuratProps) {
     tafsir: state.tafsir,
     setTafsir: state.setTafsir,
   }));
-
-  const modalRef = useRef<HTMLDivElement>(null);
 
   const copyToClipboard = useCallback(
     (tafsir: string) => {
@@ -39,7 +37,6 @@ export function ModalTafsir({ data }: SuratProps) {
           >
             <div className="relative w-full max-w-2xl p-4 md:h-auto">
               <div
-                ref={modalRef}
                 className={cx(
                   "relative rounded-lg bg-white shadow",
                   "dark:bg-gray-800 dark:text-white"
