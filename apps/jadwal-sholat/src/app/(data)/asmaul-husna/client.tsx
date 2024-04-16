@@ -19,7 +19,7 @@ export function AsmaulHusnaClient(
 
   return (
     <>
-      <div className={cx("flex flex-col items-center justify-center")}>
+      <div className={cx("flex flex-col items-center justify-center mb-7")}>
         <SearchBar searchParams={searchParams} name="search" />
       </div>
       <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
