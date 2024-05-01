@@ -12,7 +12,12 @@ interface ScrollAyatProps {
 
 /**
  * A custom hook for manage scroll to ayat feature
- * @param {ScrollAyatProps} scrollAyat - scrollAyat object
+ * @export
+ * @param {ScrollAyatProps} param0
+ * @param {LastReadProps} param0.lastRead
+ * @param {string} param0.ayat
+ * @param {boolean} param0.isAudioEnded
+ * @param {(isAudioEnded: boolean) => void} param0.setIsAudioEnded
  */
 export function useScrollAyat({
   lastRead,

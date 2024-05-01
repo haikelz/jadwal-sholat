@@ -18,7 +18,10 @@ interface UsePlayNextAudioProps extends PlayNextAudioSliceProps {
 
 /**
  * A custom hook for manage autoplay to next audio feature
- * @param {string[]} audioList - audiolist
+ *
+ * @export
+ * @param {string[]} audioList
+ * @returns {UsePlayNextAudioProps}
  */
 export function usePlayNextAudio(audioList: string[]): UsePlayNextAudioProps {
   const [audioIndex, setAudioIndex] = useState<number>(0);

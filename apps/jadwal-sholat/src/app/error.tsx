@@ -1,11 +1,11 @@
 "use client";
 
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 
 export default function ErrorPage() {
   return (
     <div
-      className={cx(
+      className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
         "space-y-7 pt-8 pb-24 md:pb-8"

@@ -3,16 +3,14 @@
 import { Languages, MessageSquare, Volume2 } from "lucide-react";
 import { useAudioPlayer } from "react-use-audio-player";
 import { P, match } from "ts-pattern";
-import {
-  ErrorWhileFetch,
-  IsRefetching,
-  LoadingClient,
-  PreviousOrNext,
-} from "~components/molecules";
-import { DetailSurat } from "~components/organisms";
+import DetailSurat from "~components/detail-surat";
+import ErrorWhileFetch from "~components/error-while-fetch";
+import IsRefetching from "~components/is-refetching";
+import LoadingClient from "~components/loading-client";
+import PreviousOrNext from "~components/previous-or-next";
 import { env } from "~env.mjs";
 import { useFetch } from "~hooks";
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 import { bitter } from "~lib/utils/fonts";
 import { qoriOptions } from "~lib/utils/qori-options";
 import useGlobalStore from "~store";
@@ -68,7 +66,7 @@ export default function Client({ number }: { number: string }) {
       <div className="flex flex-col w-full items-center justify-center">
         <div className="flex flex-col items-center justify-center">
           <h1
-            className={cx(
+            className={cn(
               "text-3xl font-bold tracking-wide sm:text-4xl",
               bitter.className
             )}
@@ -110,11 +108,11 @@ export default function Client({ number }: { number: string }) {
           </button>
           <select
             defaultValue="Pilih Qori'"
-            className={cx(
-              "bg-gray-50 w-34 px-2.5 select-qori border border-gray-300 font-medium rounded-lg",
-              "focus:ring-blue-500 focus:border-blue-500 block",
-              "dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400",
-              "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className={cn(
+              "bg-gray-50 w-32 px-2.5 select-qori border border-input font-medium rounded-lg",
+              "block",
+              "dark:bg-gray-950 dark:border-gray-600",
+              "dark:text-white"
             )}
             onChange={(e) => setQori(Number(e.target.value))}
           >

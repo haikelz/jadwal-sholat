@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import TransitionLayout from "~components/layout/transition-layout";
+import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
 import { KotaProps } from "~interfaces";
-import { cx } from "~lib/helpers";
 import { getData } from "~lib/utils/axios-config";
+import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 
 import Client from "./client";
@@ -74,7 +74,7 @@ export default async function KotaId({ params }: { params: { id: string } }) {
       transition={{ duration: 0.3 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className={cx(
+      className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
         "space-y-7 pt-8 pb-24 md:pb-8"

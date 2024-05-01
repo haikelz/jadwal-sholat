@@ -1,4 +1,4 @@
-import Time from "~components/molecules/time";
+import Time from "~components/time";
 
 describe("Time", () => {
   it("Should display time component and test it", () => {

@@ -14,7 +14,7 @@
 
 - Next JS
 - Typescript
-- Uno CSS
+- Tailwind CSS + shadcn/ui
 - React Query
 - Zustand
 
@@ -34,19 +34,13 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 
 ## Screenshots
 
-![ss 1](/static/docs/ss-desktop-1.png)
-
-![ss 2](/static/docs/ss-desktop-2.png)
-
-![ss 3](/static/docs/ss-desktop-3.png)
-
-![ss 4](/static/docs/ss-desktop-4.png)
-
-![ss 5](/static/docs/ss-desktop-5.png)
-
-![ss 8](/static/docs/ss-desktop-8.png)
-
-![ss 9](/static/docs/ss-desktop-9.png)
+|                                                                     |                                                                      |
+| :-----------------------------------------------------------------: | :------------------------------------------------------------------: |
+| ![ss 1](/static/docs/Screenshot%20from%202024-05-01%2017-26-51.png) | ![ss 2](/static/docs/Screenshot%20from%202024-05-01%2017-26-58.png)  |
+| ![ss 3](/static/docs/Screenshot%20from%202024-05-01%2017-28-42.png) | ![ss 4](/static/docs/Screenshot%20from%202024-05-01%2017-28-49.png)  |
+| ![ss 5](/static/docs/Screenshot%20from%202024-05-01%2017-29-15.png) | ![ss 8](/static/docs/Screenshot%20from%202024-05-01%2017-29-20.png)  |
+| ![ss 9](/static/docs/Screenshot%20from%202024-05-01%2017-29-35.png) | ![ss 10](/static/docs/Screenshot%20from%202024-05-01%2017-29-42.png) |
+|                                                                     |                                                                      |
 
 ## 🗒️Credits
 
