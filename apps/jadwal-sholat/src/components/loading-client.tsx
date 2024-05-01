@@ -1,9 +1,9 @@
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 
-export function LoadingClient() {
+export default function LoadingClient() {
   return (
     <div
-      className={cx(
+      className={cn(
         "flex min-h-screen items-center justify-center",
         "p-8 space-x-3 text-center"
       )}
@@ -20,7 +20,7 @@ function Svg() {
   return (
     <svg
       aria-hidden="true"
-      className={cx(
+      className={cn(
         "mr-2 h-8 w-8 animate-spin",
         "fill-blue-600 text-gray-200",
         "dark:text-gray-600"

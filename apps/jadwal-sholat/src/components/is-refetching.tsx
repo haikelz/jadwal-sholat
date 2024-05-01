@@ -1,21 +1,21 @@
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 
-export function IsRefetching() {
+export default function IsRefetching() {
   return (
     <div
-      className={cx(
+      className={cn(
         "modal-blur fixed inset-0 top-0 z-50",
         "flex min-h-screen w-full items-center justify-center",
         "overflow-x-hidden"
       )}
     >
-      <div className="bg-white rounded-lg p-4 font-medium dark:bg-gray-800 dark:text-white">
+      <div className="bg-white rounded-lg p-4 font-medium dark:bg-gray-950 border border-input dark:text-white">
         <p className="flex justify-center w-full items-center">
           Loading
           <span role="status">
             <svg
               aria-hidden="true"
-              className={cx(
+              className={cn(
                 "h-5 w-5 ml-3 animate-spin",
                 "fill-blue-600 text-gray-200",
                 "dark:text-gray-600"

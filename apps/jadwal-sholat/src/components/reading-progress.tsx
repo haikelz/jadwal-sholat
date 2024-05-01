@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect } from "react";
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 import useGlobalStore from "~store";
 
-export function ReadingProgress() {
+export default function ReadingProgress() {
   const { width, setWidth } = useGlobalStore((state) => ({
     width: state.width,
     setWidth: state.setWidth,
@@ -29,7 +29,7 @@ export function ReadingProgress() {
   return (
     <div
       style={{ width: width + "%" }}
-      className={cx("fixed z-10 h-1 bg-rose-400", "dark:bg-blue-500")}
+      className={cn("fixed z-10 h-1 bg-gray-950", "dark:bg-gray-50")}
     ></div>
   );
 }

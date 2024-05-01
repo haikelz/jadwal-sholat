@@ -1,14 +1,14 @@
 "use client";
 
 import { ClipboardCheck, ClipboardCopy, X } from "lucide-react";
-import { memo, useCallback } from "react";
+import { useCallback } from "react";
 import { match } from "ts-pattern";
 import { useClipboard } from "use-clipboard-copy";
 import { SuratProps } from "~interfaces";
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 import useGlobalStore from "~store";
 
-export function ModalTafsir({ data }: SuratProps) {
+export default function ModalTafsir({ data }: SuratProps) {
   const clipboard = useClipboard({ copiedTimeout: 1000 });
 
   const { tafsir, setTafsir } = useGlobalStore((state) => ({
@@ -29,7 +29,7 @@ export function ModalTafsir({ data }: SuratProps) {
         .with({ tafsir: true }, () => (
           <div
             aria-modal="true"
-            className={cx(
+            className={cn(
               "modal-blur fixed inset-0 top-0 z-50",
               "flex min-h-screen w-full items-center justify-center",
               "overflow-x-hidden"
@@ -37,12 +37,12 @@ export function ModalTafsir({ data }: SuratProps) {
           >
             <div className="relative w-full max-w-2xl p-4 md:h-auto">
               <div
-                className={cx(
-                  "relative rounded-lg bg-white shadow",
-                  "dark:bg-gray-800 dark:text-white"
+                className={cn(
+                  "relative rounded-lg bg-white",
+                  "dark:bg-gray-950 border border-input dark:text-white"
                 )}
               >
-                <div className="flex items-center justify-between rounded-t border-b p-4">
+                <div className="flex items-center justify-between rounded-t border-b border-b-input p-4">
                   <h3 className="text-xl font-semibold">
                     Tafsir Surat {data.asma.id.short}
                   </h3>
@@ -51,7 +51,7 @@ export function ModalTafsir({ data }: SuratProps) {
                       type="button"
                       aria-label="copy to clipboard"
                       onClick={() => copyToClipboard(data.tafsir.id)}
-                      className={cx(
+                      className={cn(
                         "ml-auto inline-flex items-center rounded-lg",
                         "bg-transparent p-1.5 text-sm transition-all",
                         "hover:bg-gray-200",
@@ -68,7 +68,7 @@ export function ModalTafsir({ data }: SuratProps) {
                     </button>
                     <button
                       type="button"
-                      className={cx(
+                      className={cn(
                         "ml-auto inline-flex items-center rounded-lg",
                         "bg-transparent p-1.5 text-sm transition-all",
                         "hover:bg-gray-200",
@@ -92,5 +92,3 @@ export function ModalTafsir({ data }: SuratProps) {
     </>
   );
 }
-
-memo(ModalTafsir);

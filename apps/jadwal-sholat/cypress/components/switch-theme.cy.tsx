@@ -1,4 +1,4 @@
-import { SwitchTheme } from "~components/atoms";
+import SwitchTheme from "~components/switch-theme";
 
 describe("Dark Mode Icon", () => {
   it("Should display switch theme button and test it", () => {

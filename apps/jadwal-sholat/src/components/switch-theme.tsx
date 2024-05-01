@@ -3,19 +3,17 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { match } from "ts-pattern";
-import { cx } from "~lib/helpers";
+import { Button } from "~components/ui/button";
 
-export function SwitchTheme() {
+export default function SwitchTheme() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <button
+    <Button
       type="button"
       aria-label="switch theme"
-      className={cx(
-        "px-4 text-gray-500",
-        "dark:text-gray-400 md:flex md:justify-center md:items-center md:flex-col p-2 md:p-2.5"
-      )}
+      size="icon"
+      variant="outline"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {match(theme)
@@ -23,11 +21,6 @@ export function SwitchTheme() {
         .otherwise(() => (
           <Sun size={24} />
         ))}
-      <p className={cx("hidden text-sm font-bold", "md:block")}>
-        {match(theme)
-          .with("light", () => "Dark")
-          .otherwise(() => "Light")}
-      </p>
-    </button>
+    </Button>
   );
 }

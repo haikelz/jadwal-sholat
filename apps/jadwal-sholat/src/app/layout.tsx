@@ -1,8 +1,8 @@
 import { Metadata, Viewport } from "next";
-import { BackToTop } from "~components/atoms";
-import { Navbar } from "~components/organisms";
+import BackToTop from "~components/back-to-top";
+import Navbar from "~components/navbar";
 import { ChildrenProps } from "~interfaces";
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter, ibmPlexSans } from "~lib/utils/fonts";
 
@@ -62,25 +62,25 @@ export default function Layout({ children }: ChildrenProps) {
   return (
     <html
       lang="en"
-      className={cx(ibmPlexSans.variable, bitter.variable)}
+      className={cn(ibmPlexSans.variable, bitter.variable)}
       suppressHydrationWarning
     >
-      <body className={cx(ibmPlexSans.className)}>
+      <body className={cn(ibmPlexSans.className)}>
         <Wrapper>
           <div
-            className={cx(
-              "bg-gray-50 text-black",
+            className={cn(
+              "bg-white text-black",
               "md:flex",
-              "dark:bg-gray-900 dark:text-white"
+              "dark:bg-gray-950 dark:text-white"
             )}
           >
             <Navbar />
             <main className="flex w-full justify-center">
               <section
-                className={cx(
+                className={cn(
                   "flex w-full max-w-full flex-col items-center min-h-screen",
-                  "bg-gray-50 px-5 text-center",
-                  "dark:bg-gray-900"
+                  "bg-white px-5 text-center",
+                  "dark:bg-gray-950"
                 )}
               >
                 {children}

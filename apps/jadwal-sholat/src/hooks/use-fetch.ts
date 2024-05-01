@@ -9,6 +9,7 @@ import { getData } from "~lib/utils/axios-config";
 
 /**
  * A reusable useQuery with additional configuration
+ * @export
  * @param {string} link - API link
  * @returns {UseQueryResult<any, Error>} configured useQuery
  */

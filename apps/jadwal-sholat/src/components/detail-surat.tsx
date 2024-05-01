@@ -9,16 +9,18 @@ import {
   Play,
 } from "lucide-react";
 import { nanoid } from "nanoid";
-import { memo, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { P, match } from "ts-pattern";
 import { useClipboard } from "use-clipboard-copy";
-import { ModalNotification, ModalTafsir } from "~components/molecules";
 import { usePlayNextAudio, useScrollAyat } from "~hooks";
 import { SuratProps } from "~interfaces";
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 import useGlobalStore from "~store";
 
-export function DetailSurat({ data }: SuratProps) {
+import ModalNotification from "./modal-notification";
+import ModalTafsir from "./modal-tafsir";
+
+export default function DetailSurat({ data }: SuratProps) {
   const [ayatClick, setAyatClick] = useState<number>(0);
 
   const clipboard = useClipboard({ copiedTimeout: 1000 });
@@ -102,9 +104,9 @@ export function DetailSurat({ data }: SuratProps) {
       <div className="w-full flex flex-col space-y-7 my-7">
         {data.ayahs.map((ayat, index) => (
           <div
-            className={cx(
+            className={cn(
               "flex flex-col items-end justify-end",
-              "border-b-2 border-gray-300 py-4 ",
+              "border-b border-input py-4 ",
               "dark:text-white"
             )}
             key={index + 1}
@@ -112,20 +114,19 @@ export function DetailSurat({ data }: SuratProps) {
             <div className="relative flex w-full items-start justify-between">
               <div
                 id={`ayat-${ayat.number.insurah}`}
-                className={cx(
-                  "mr-2 flex h-8 w-8 items-center justify-center rounded-full p-5",
-                  "border-black bg-gray-400 font-bold text-white",
-                  "dark:bg-teal-600"
+                className={cn(
+                  "mr-2 flex h-8 w-8 border border-input items-center justify-center rounded-md p-5",
+                  "bg-gray-50 dark:bg-gray-950 font-bold"
                 )}
               >
                 <p className="font-bold">{ayat.number.insurah}</p>
               </div>
               <p
-                className={cx(
+                className={cn(
                   "text-right text-3xl tracking-wide font-medium leading-loose",
                   "arabic-font",
                   playing && audioList[audioIndex] === ayat.audio.url
-                    ? "text-teal-700 dark:text-teal-300"
+                    ? "text-gray-600 dark:text-gray-400"
                     : ""
                 )}
               >
@@ -141,8 +142,8 @@ export function DetailSurat({ data }: SuratProps) {
                         <button
                           type="button"
                           aria-label="pause audio"
-                          className={cx(
-                            "flex justify-center items-center bg-gray-200 dark:bg-gray-800",
+                          className={cn(
+                            "flex justify-center items-center bg-gray-50 dark:bg-gray-950 border border-input",
                             "transition-all border border-gray-300 dark:border-gray-600 px-2.5 py-1",
                             "rounded-full space-x-2"
                           )}
@@ -155,9 +156,9 @@ export function DetailSurat({ data }: SuratProps) {
                         <button
                           type="button"
                           aria-label="play audio"
-                          className={cx(
-                            "flex justify-center items-center bg-gray-200 dark:bg-gray-800",
-                            "transition-all border border-gray-300 dark:border-gray-600 px-2.5 py-1",
+                          className={cn(
+                            "flex justify-center items-center bg-gray-50 dark:bg-gray-800",
+                            "transition-all border border-input px-2.5 py-1",
                             "rounded-full space-x-2"
                           )}
                           onClick={() =>
@@ -246,5 +247,3 @@ export function DetailSurat({ data }: SuratProps) {
     </>
   );
 }
-
-memo(DetailSurat);

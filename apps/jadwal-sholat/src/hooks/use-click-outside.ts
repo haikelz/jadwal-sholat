@@ -5,8 +5,11 @@ import { P, match } from "ts-pattern";
 
 /**
  * A custom hook that contains logic for close a modal if we click outside
+ * @export
+ * @template T
  * @param {(param: T) => void} set - setter
  * @param {RefObject<HTMLDivElement>} ref - reference to div modal element
+ * @param {T} value - value
  */
 export function useClickOutside<T>(
   set: (param: T) => void,

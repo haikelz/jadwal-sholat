@@ -2,13 +2,13 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { P, match } from "ts-pattern";
-import TransitionLayout from "~components/layout/transition-layout";
-import { cx } from "~lib/helpers";
+import TransitionLayout from "~components/transition-layout";
+import { cn } from "~lib/utils/cn";
 import { hours } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
-const Time = dynamic(() => import("~components/molecules/time"), {
+const Time = dynamic(() => import("~components/time"), {
   loading: () => (
     <div className="w-72 h-6 animate-pulse bg-gray-300 dark:bg-gray-700"></div>
   ),
@@ -66,7 +66,7 @@ export default function HomePage() {
       />
       <div className="mt-3 flex flex-col items-center justify-center text-center">
         <h1
-          className={cx(
+          className={cn(
             "text-3xl font-bold tracking-wide sm:text-4xl",
             bitter.className
           )}

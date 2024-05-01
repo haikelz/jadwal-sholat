@@ -9,6 +9,7 @@ interface UseAscendingProps {
 }
 
 /**
+ * A custom hook to manage ascending - descending
  * @param {string} search - search value
  * @returns {UseAscendingProps} an object that contains isAscending boolean, setIsAscending setter, and deferredSearch value
  */

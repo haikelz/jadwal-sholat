@@ -3,10 +3,11 @@
 import { ArrowUp } from "lucide-react";
 import { memo } from "react";
 import { P, match } from "ts-pattern";
+import { Button } from "~components/ui/button";
 import { useScroll } from "~hooks";
-import { cx } from "~lib/helpers";
+import { cn } from "~lib/utils/cn";
 
-export function BackToTop() {
+export default function BackToTop() {
   const scroll = useScroll();
   const height = 150;
 
@@ -15,19 +16,16 @@ export function BackToTop() {
       {match({ scroll: scroll })
         .with({ scroll: P.when((scroll) => scroll >= height) }, () => (
           <div
-            className={cx(
-              "fixed bottom-18 right-2.5",
+            className={cn(
+              "fixed bottom-[75px] right-2.5",
               "md:right-4 md:bottom-4"
             )}
           >
-            <button
+            <Button
+              variant="outline"
+              size="icon"
               type="button"
               aria-label="back to top"
-              className={cx(
-                "rounded-md bg-rose-400 p-1.5 transition-all",
-                "hover:bg-rose-500",
-                "dark:bg-blue-500 dark:hover:bg-blue-600"
-              )}
               onClick={() => {
                 window.scrollTo({
                   top: 0,
@@ -36,8 +34,8 @@ export function BackToTop() {
                 });
               }}
             >
-              <ArrowUp className="text-white" />
-            </button>
+              <ArrowUp />
+            </Button>
           </div>
         ))
         .otherwise(() => null)}

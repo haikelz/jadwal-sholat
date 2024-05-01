@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import TransitionLayout from "~components/layout/transition-layout";
+import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
 import { DoaHarianProps } from "~interfaces";
-import { cx } from "~lib/helpers";
 import { getData } from "~lib/utils/axios-config";
+import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
@@ -65,7 +65,7 @@ export default async function DoaHarian() {
       transition={{ duration: 0.3 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className={cx(
+      className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
         "space-y-7 pt-8 pb-24 md:pb-8"
@@ -74,7 +74,7 @@ export default async function DoaHarian() {
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
           <h1
-            className={cx(
+            className={cn(
               "text-3xl font-bold tracking-wide sm:text-4xl",
               bitter.className
             )}
