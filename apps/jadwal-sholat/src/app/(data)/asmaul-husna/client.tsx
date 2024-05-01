@@ -146,7 +146,7 @@ export function AsmaulHusnaClient(
               <div className="relative w-full max-w-2xl p-4 md:h-auto">
                 <div
                   className={cn(
-                    "relative rounded-lg bg-white shadow",
+                    "relative rounded-lg bg-white",
                     "dark:bg-gray-950 border border-input dark:text-white"
                   )}
                 >

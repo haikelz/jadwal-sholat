@@ -92,7 +92,7 @@ export default function Client({ id }: { id: string }) {
                   className={cn(
                     "border-b-2 border-black dark:border-none",
                     waktu.date === matchDate
-                      ? "bg-teal-600 font-bold text-white dark:bg-gray-700"
+                      ? "bg-gray-700 font-bold text-white"
                       : "odd:bg-gray-300 dark:odd:bg-gray-900"
                   )}
                   key={index + 1}
