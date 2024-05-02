@@ -64,7 +64,7 @@ export default function JadwalSholatClient() {
         >
           <div
             className={cn(
-              "relative rounded-lg p-4 bg-white",
+              "relative w-full rounded-lg p-4 bg-white",
               "dark:bg-gray-950 border border-input dark:text-white"
             )}
           >
