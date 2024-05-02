@@ -28,3 +28,13 @@ export interface ScrollSliceProps {
   scroll: number;
   setScroll: (scroll: number) => void;
 }
+
+export interface LocationPositionProps {
+  position: { lat: number; lng: number };
+  setPosition: (pos: { lat: number; lng: number }) => void;
+}
+
+export interface IsOpenMapProps {
+  isOpenMap: boolean;
+  setIsOpenMap: (isOpenMap: boolean) => void;
+}

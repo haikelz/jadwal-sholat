@@ -42,7 +42,6 @@ export default function Client({ number }: { number: string }) {
 
   function handleShowAudio() {
     setAudio(!audio);
-
     // stop sound(if it's still playing)
     stop();
   }
@@ -58,6 +57,7 @@ export default function Client({ number }: { number: string }) {
 
   if ((!data && isError) || isPending) return <LoadingClient />;
   if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
+  if (isRefetching) return <IsRefetching />;
 
   const surat = data.data;
 
@@ -130,7 +130,6 @@ export default function Client({ number }: { number: string }) {
         <DetailSurat data={surat} />
         <PreviousOrNext data={surat} />
       </div>
-      {isRefetching ? <IsRefetching /> : null}
     </>
   );
 }

@@ -3,7 +3,9 @@ import { shallow } from "zustand/shallow";
 import { createWithEqualityFn } from "zustand/traditional";
 import {
   DateSliceProps,
+  IsOpenMapProps,
   LastReadSliceProps,
+  LocationPositionProps,
   OptionSliceProps,
   PlayNextAudioSliceProps,
   ScrollSliceProps,
@@ -12,7 +14,9 @@ import {
 } from "~interfaces";
 
 import dateSlice from "./slices/date.slice";
+import isOpenMapSlice from "./slices/is-open-map.slice";
 import lastReadSlice from "./slices/last-read.slice";
+import locationPositionSlice from "./slices/location-position.slice";
 import numberModalAsmaulHusnaSlice from "./slices/number-modal-asmaul-husna.slice";
 import optionSlice from "./slices/option.slice";
 import playNextAudioSlice from "./slices/play-next-audio.slice";
@@ -26,7 +30,9 @@ const useGlobalStore = createWithEqualityFn<
     WidthSliceProps &
     PlayNextAudioSliceProps &
     ScrollSliceProps &
-    numberModalAsmaulHusnaSliceProps
+    numberModalAsmaulHusnaSliceProps &
+    LocationPositionProps &
+    IsOpenMapProps
 >()(
   devtools((...set) => ({
     ...lastReadSlice(...set),
@@ -36,6 +42,8 @@ const useGlobalStore = createWithEqualityFn<
     ...playNextAudioSlice(...set),
     ...scrollSlice(...set),
     ...numberModalAsmaulHusnaSlice(...set),
+    ...locationPositionSlice(...set),
+    ...isOpenMapSlice(...set),
   })),
   shallow
 );

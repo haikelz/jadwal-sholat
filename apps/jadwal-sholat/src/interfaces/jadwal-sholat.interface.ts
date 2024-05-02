@@ -1,32 +1,76 @@
-export interface WaktuProps {
-  id: string;
-  lokasi: string;
-  date: string;
-  daerah: string;
-  jadwal: [
-    waktu: {
-      date: string;
-      tanggal: string;
-      imsak: string;
-      subuh: string;
-      terbit: string;
-      dhuha: string;
-      dzuhur: string;
-      ashar: string;
-      maghrib: string;
-      isya: string;
-    }
-  ];
-  tanggal: string;
-  bulan: string;
-  tahun: string;
+export interface JadwalSholatProps {
+  timings: TimingsProps;
+  date: DateProps;
 }
 
-export interface KotaProps {
-  data: [
-    {
-      id: string;
-      lokasi: string;
-    }
-  ];
+export interface TimingsProps {
+  Fajr: string;
+  Sunrise: string;
+  Dhuhr: string;
+  Asr: string;
+  Sunset: string;
+  Maghrib: string;
+  Isha: string;
+  Imsak: string;
+  Midnight: string;
+  Firstthird: string;
+  Lastthird: string;
+}
+
+export interface DateProps {
+  readable: string;
+  timestamp: string;
+  gregorian: GregorianProps;
+  hijri: HijriProps;
+}
+
+export interface GregorianProps {
+  date: string;
+  format: string;
+  day: string;
+  weekday: WeekdayProps;
+  month: MonthProps;
+  year: string;
+  designation: DesignationProps;
+}
+
+export interface WeekdayProps {
+  en: string;
+}
+
+export interface MonthProps {
+  number: number;
+  en: string;
+}
+
+export interface DesignationProps {
+  abbreviated: string;
+  expanded: string;
+}
+
+export interface HijriProps {
+  date: string;
+  format: string;
+  day: string;
+  weekday: Weekday2Props;
+  month: Month2Props;
+  year: string;
+  designation: Designation2Props;
+  holidays: string[];
+}
+
+export interface Weekday2Props {
+  en: string;
+  ar: string;
+}
+
+export interface Month2Props {
+  number: number;
+  en: string;
+  ar: string;
+}
+
+export interface Designation2Props {
+  abbreviated: string;
+  expanded: string;
 }

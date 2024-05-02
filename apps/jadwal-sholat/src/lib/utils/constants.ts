@@ -15,7 +15,7 @@ export const currentDate: string = format(date, "dd MMMM yyyy", { locale: id });
 export const numTahun: number = Number(tahun);
 export const numBulan: number = Number(bulan);
 export const numTanggal: number = Number(hari);
-export const matchDate: string = format(date, "yyyy-MM-dd");
+export const matchDate: string = format(date, "dd-MM-yyyy");
 
 export const browser = typeof window !== "undefined";
 export const condition = process.env.NODE_ENV;
