@@ -80,6 +80,9 @@ importers:
       leaflet-defaulticon-compatibility:
         specifier: ^0.1.2
         version: 0.1.2
+      leaflet-geosearch:
+        specifier: ^3.11.1
+        version: 3.11.1
       lucide-react:
         specifier: ^0.365.0
         version: 0.365.0(react@18.2.0)
@@ -5237,6 +5240,13 @@ packages:
 
   /leaflet-defaulticon-compatibility@0.1.2:
     resolution: {integrity: sha512-IrKagWxkTwzxUkFIumy/Zmo3ksjuAu3zEadtOuJcKzuXaD76Gwvg2Z1mLyx7y52ykOzM8rAH5ChBs4DnfdGa6Q==}
+    dev: false
+
+  /leaflet-geosearch@3.11.1:
+    resolution: {integrity: sha512-cILLFLmn8C3MtGhaafGqY7CuhUG2+bGyUgfPHgNgW6fs4EvYyiIO88nO2ZqR7Hy6Ba089haLkhODpZR+/fRrPQ==}
+    optionalDependencies:
+      '@googlemaps/js-api-loader': 1.16.6
+      leaflet: 1.9.4
     dev: false
 
   /leaflet@1.9.4:

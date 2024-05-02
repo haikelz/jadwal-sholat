@@ -14,7 +14,7 @@ import { AsmaulHusnaProps } from "~interfaces";
 import { cn } from "~lib/utils/cn";
 import useGlobalStore from "~store";
 
-export function AsmaulHusnaClient(
+export default function AsmaulHusnaClient(
   { asmaulHusna }: { asmaulHusna: AsmaulHusnaProps[] }
 ) {
   const searchParams = useSearchParams();

@@ -6,7 +6,7 @@ import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
-import { AsmaulHusnaClient } from "./client";
+import AsmaulHusnaClient from "./client";
 
 const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 

@@ -17,8 +17,9 @@ const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
 const Map = dynamic(() => import("~components/map"), {
   loading: () => (
-    <div className="lg:h-[620px] w-full h-[300px] lg:w-[1200px] animate-pulse bg-gray-100 dark:bg-gray-900"></div>
+    <div className="md:h-[620px] w-full h-[300px] animate-pulse bg-gray-100 dark:bg-gray-900"></div>
   ),
+  ssr: false,
 });
 
 export default function JadwalSholatClient() {
