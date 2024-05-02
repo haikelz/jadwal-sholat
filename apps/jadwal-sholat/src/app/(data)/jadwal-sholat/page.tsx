@@ -1,16 +1,12 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import TransitionLayout from "~components/transition-layout";
-import { env } from "~env.mjs";
-import { KotaProps } from "~interfaces";
-import { getData } from "~lib/utils/axios-config";
 import { cn } from "~lib/utils/cn";
+import { currentDate } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
 import JadwalSholatClient from "./client";
-
-const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
 const baseMetadata = {
   title: "Jadwal Sholat",
@@ -45,20 +41,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-async function getJadwalSholat(): Promise<KotaProps> {
-  try {
-    const response: KotaProps = await getData(
-      `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/kota/semua`
-    );
-    return response;
-  } catch (err: any) {
-    throw new Error("Failed to fetch data!");
-  }
-}
-
-export default async function JadwalSholat() {
-  const kota = await getJadwalSholat();
-
+export default function JadwalSholat() {
   return (
     <TransitionLayout
       transition={{ duration: 0.3 }}
@@ -67,10 +50,10 @@ export default async function JadwalSholat() {
       className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "space-y-7 pt-8 pb-24 md:pb-8"
+        "pt-8 pb-24 md:pb-8"
       )}
     >
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex mb-4 flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
           <h1
             className={cn(
@@ -90,10 +73,10 @@ export default async function JadwalSholat() {
           />
         </div>
         <p data-cy="description" className="mt-2 text-lg font-medium">
-          Berikut daftar Kabupaten/Kota yang tersedia
+          Berikut Jadwal Sholat untuk bulan ini, {currentDate}
         </p>
       </div>
-      <JadwalSholatClient kota={kota} />
+      <JadwalSholatClient />
     </TransitionLayout>
   );
 }

@@ -5,7 +5,7 @@
 
 ## 📝Fitur
 
-- Jadwal sholat
+- Jadwal sholat berdasarkan lokasi pengguna
 - Baca Al-Qur'an(dengan audio yang bisa dipilih berdasarkan qori', terjemahan, juga bahasa latin)
 - Asma'ul Husna
 - Do'a Harian

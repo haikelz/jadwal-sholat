@@ -28,7 +28,6 @@ export default function DetailSurat({ data }: SuratProps) {
   const copyToClipboard = useCallback(
     (surat: string, ayat: number, arab: string, arti: string) => {
       setAyatClick(ayat);
-
       clipboard.copy(`
       Surat: ${surat}
       Ayat: Ke-${ayat}
@@ -144,7 +143,7 @@ export default function DetailSurat({ data }: SuratProps) {
                           aria-label="pause audio"
                           className={cn(
                             "flex justify-center items-center bg-gray-50 dark:bg-gray-950 border border-input",
-                            "transition-all border border-gray-300 dark:border-gray-600 px-2.5 py-1",
+                            "transition-all border border-input px-2.5 py-1",
                             "rounded-full space-x-2"
                           )}
                           onClick={handlePauseAudio}
@@ -157,7 +156,7 @@ export default function DetailSurat({ data }: SuratProps) {
                           type="button"
                           aria-label="play audio"
                           className={cn(
-                            "flex justify-center items-center bg-gray-50 dark:bg-gray-800",
+                            "flex justify-center items-center bg-gray-50 dark:bg-gray-950",
                             "transition-all border border-input px-2.5 py-1",
                             "rounded-full space-x-2"
                           )}
