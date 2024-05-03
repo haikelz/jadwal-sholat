@@ -31,9 +31,9 @@ export default function DoaHarianClient(
           )
             return item;
         })
-        .sort(() => {
-          if (isAscending) return 1;
-          if (!isAscending) return -1;
+        .sort((a, b) => {
+          if (isAscending) return a.id - b.id;
+          if (!isAscending) return b.id - a.id;
           return 0;
         }),
     [deferredSearch, doaHarian, isAscending]

@@ -71,11 +71,11 @@ export default function HomePage() {
           )}
         >
           {`Selamat ${
-            hours >= 12 && hours < 15
+            Number(hours) >= 12 && Number(hours) < 15
               ? "Siang"
-              : hours >= 15 && hours < 18
+              : Number(hours) >= 15 && Number(hours) < 18
               ? "Sore"
-              : hours >= 18 && hours < 24
+              : Number(hours) >= 18 && Number(hours) < 24
               ? "Malam"
               : "Pagi"
           }`}

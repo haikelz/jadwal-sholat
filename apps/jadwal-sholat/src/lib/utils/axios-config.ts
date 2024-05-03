@@ -11,9 +11,13 @@ const config: AxiosRequestConfig = {
 const axios = Axios.create(config);
 
 export async function getData<T>(url: string): Promise<T> {
-  const response = await axios.get(url, {
-    method: "GET",
-  });
+  try {
+    const response = await axios.get(url, {
+      method: "GET",
+    });
 
-  return response.data;
+    return response.data;
+  } catch (err) {
+    throw new Error("Failed to fetch data!");
+  }
 }

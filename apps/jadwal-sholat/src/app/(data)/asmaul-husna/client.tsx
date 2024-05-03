@@ -45,9 +45,9 @@ export default function AsmaulHusnaClient(
           )
             return item;
         })
-        .sort(() => {
-          if (isAscending) return 1;
-          if (!isAscending) return -1;
+        .sort((a, b) => {
+          if (isAscending) return Number(a.urutan) - Number(b.urutan);
+          if (!isAscending) return Number(b.urutan) - Number(a.urutan);
           return 0;
         }),
     [deferredSearch, asmaulHusna, isAscending]

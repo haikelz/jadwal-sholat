@@ -5,7 +5,7 @@ export const date: Date = new Date();
 export const tahun: string = format(date, "yyyy");
 export const bulan: string = format(date, "MM");
 export const hari: string = format(date, "dd");
-export const hours: number = date.getHours();
+export const hours: string = format(date, "H");
 export const currentDate: string = format(date, "dd MMMM yyyy", { locale: id });
 
 /**
