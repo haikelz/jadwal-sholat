@@ -14,6 +14,13 @@ const Time = dynamic(() => import("~components/time"), {
   ssr: false,
 });
 
+const ClientDate = dynamic(() => import("~components/client-date"), {
+  loading: () => (
+    <div className="w-10 h-6 animate-pulse bg-gray-300 dark:bg-gray-700"></div>
+  ),
+  ssr: false,
+});
+
 const baseMetadata = {
   title: "Home | Jadwal Sholat",
   description: `"Maka nikmat Tuhanmu yang manakah yang kamu dustakan", Ar-Rahman ayat 13`,
@@ -70,15 +77,17 @@ export default function HomePage() {
             bitter.className
           )}
         >
-          {`Selamat ${
-            Number(hours) >= 12 && Number(hours) < 15
-              ? "Siang"
-              : Number(hours) >= 15 && Number(hours) < 18
-              ? "Sore"
-              : Number(hours) >= 18 && Number(hours) < 24
-              ? "Malam"
-              : "Pagi"
-          }`}
+          <ClientDate
+            date={`Selamat ${
+              Number(hours) >= 12 && Number(hours) < 15
+                ? "Siang"
+                : Number(hours) >= 15 && Number(hours) < 18
+                ? "Sore"
+                : Number(hours) >= 18 && Number(hours) < 24
+                ? "Malam"
+                : "Pagi"
+            }`}
+          />
         </h1>
         <p className="mb-1 mt-2 text-lg font-medium md:text-xl">
           &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;
