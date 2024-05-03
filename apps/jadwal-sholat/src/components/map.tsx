@@ -31,7 +31,7 @@ function SearchField() {
   useEffect(() => {
     map.addControl(searchControl);
     return () => map.removeControl(searchControl);
-  }, [map]);
+  }, [map, searchControl]);
 
   return null;
 }
