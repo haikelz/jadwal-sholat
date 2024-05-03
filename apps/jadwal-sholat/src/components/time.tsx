@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 import useGlobalStore from "~store";
 
 export default function Time() {
@@ -19,6 +19,7 @@ export default function Time() {
     const interval = setInterval(() => {
       setDate(() => new Date());
     }, 1000);
+
     return () => clearInterval(interval);
   }, [setDate]);
 
@@ -28,5 +29,3 @@ export default function Time() {
     </p>
   );
 }
-
-memo(Time);
