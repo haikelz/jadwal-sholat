@@ -2,21 +2,11 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import TransitionLayout from "~components/transition-layout";
-import { cn } from "~lib/utils/cn";
-import { hours } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
-import { bitter } from "~lib/utils/fonts";
 
 const Time = dynamic(() => import("~components/time"), {
   loading: () => (
     <div className="w-72 h-6 animate-pulse bg-gray-300 dark:bg-gray-700"></div>
-  ),
-  ssr: false,
-});
-
-const ClientDate = dynamic(() => import("~components/client-date"), {
-  loading: () => (
-    <div className="w-10 h-6 animate-pulse bg-gray-300 dark:bg-gray-700"></div>
   ),
   ssr: false,
 });
@@ -71,29 +61,6 @@ export default function HomePage() {
         draggable={false}
       />
       <div className="mt-3 flex flex-col items-center justify-center text-center">
-        <h1
-          className={cn(
-            "text-3xl font-bold tracking-wide sm:text-4xl",
-            bitter.className
-          )}
-        >
-          <ClientDate
-            date={`Selamat ${
-              Number(hours) >= 12 && Number(hours) < 15
-                ? "Siang"
-                : Number(hours) >= 15 && Number(hours) < 18
-                ? "Sore"
-                : Number(hours) >= 18 && Number(hours) < 24
-                ? "Malam"
-                : "Pagi"
-            }`}
-          />
-        </h1>
-        <p className="mb-1 mt-2 text-lg font-medium md:text-xl">
-          &#34;Maka nikmat Tuhanmu yang manakah yang kamu dustakan&#34;
-          <br />
-          Ar-Rahman ayat 13
-        </p>
         <Time />
       </div>
     </TransitionLayout>

@@ -1,20 +1,9 @@
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
-import Image from "next/image";
 import TransitionLayout from "~components/transition-layout";
 import { cn } from "~lib/utils/cn";
-import { currentDate } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
-import { bitter } from "~lib/utils/fonts";
 
 import JadwalSholatClient from "./client";
-
-const ClientDate = dynamic(() => import("~components/client-date"), {
-  loading: () => (
-    <div className="w-10 h-6 animate-pulse bg-gray-300 dark:bg-gray-700"></div>
-  ),
-  ssr: false,
-});
 
 const baseMetadata = {
   title: "Jadwal Sholat",
@@ -61,30 +50,6 @@ export default function JadwalSholat() {
         "pt-8 pb-24 md:pb-8"
       )}
     >
-      <div className="flex mb-4 flex-col items-center justify-center">
-        <div className="flex items-center justify-center gap-3">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-              bitter.className
-            )}
-          >
-            Jadwal Sholat
-          </h1>
-          <Image
-            src="/img/mosque.webp"
-            width={40}
-            height={40}
-            alt="Mosque"
-            fetchPriority="high"
-            draggable={false}
-          />
-        </div>
-        <p data-cy="description" className="mt-2 text-lg font-medium">
-          Berikut Jadwal Sholat untuk bulan ini,{" "}
-          <ClientDate date={currentDate} />
-        </p>
-      </div>
       <JadwalSholatClient />
     </TransitionLayout>
   );
