@@ -1,10 +1,7 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import TransitionLayout from "~components/transition-layout";
 import { cn } from "~lib/utils/cn";
-import { currentDate } from "~lib/utils/constants";
 import { MetaUrl } from "~lib/utils/enums";
-import { bitter } from "~lib/utils/fonts";
 
 import JadwalSholatClient from "./client";
 
@@ -53,29 +50,6 @@ export default function JadwalSholat() {
         "pt-8 pb-24 md:pb-8"
       )}
     >
-      <div className="flex mb-4 flex-col items-center justify-center">
-        <div className="flex items-center justify-center gap-3">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-              bitter.className
-            )}
-          >
-            Jadwal Sholat
-          </h1>
-          <Image
-            src="/img/mosque.webp"
-            width={40}
-            height={40}
-            alt="Mosque"
-            fetchPriority="high"
-            draggable={false}
-          />
-        </div>
-        <p data-cy="description" className="mt-2 text-lg font-medium">
-          Berikut Jadwal Sholat untuk bulan ini, {currentDate}
-        </p>
-      </div>
       <JadwalSholatClient />
     </TransitionLayout>
   );

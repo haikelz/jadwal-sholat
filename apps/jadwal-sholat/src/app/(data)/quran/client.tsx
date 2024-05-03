@@ -38,9 +38,9 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
           )
             return item;
         })
-        .sort(() => {
-          if (isAscending) return 1;
-          if (!isAscending) return -1;
+        .sort((a, b) => {
+          if (isAscending) return Number(a.number) - Number(b.number);
+          if (!isAscending) return Number(b.number) - Number(a.number);
           return 0;
         }),
     [surat, deferredSearch, isAscending]

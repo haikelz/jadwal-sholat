@@ -2,15 +2,17 @@
 
 import { MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import ErrorWhileFetch from "~components/error-while-fetch";
 import IsRefetching from "~components/is-refetching";
-import Jadwal from "~components/jadwal";
 import LoadingClient from "~components/loading-client";
+import Jadwal from "~components/table-jadwal-sholat";
 import { Button } from "~components/ui/button";
 import { env } from "~env.mjs";
 import { useFetch } from "~hooks";
 import { cn } from "~lib/utils/cn";
-import { bulan, tahun } from "~lib/utils/constants";
+import { bulan, currentDate, tahun } from "~lib/utils/constants";
+import { bitter } from "~lib/utils/fonts";
 import useGlobalStore from "~store";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
@@ -43,6 +45,29 @@ export default function JadwalSholatClient() {
 
   return (
     <>
+      <div className="flex mb-4 flex-col items-center justify-center">
+        <div className="flex items-center justify-center gap-3">
+          <h1
+            className={cn(
+              "text-3xl font-bold tracking-wide sm:text-4xl",
+              bitter.className
+            )}
+          >
+            Jadwal Sholat
+          </h1>
+          <Image
+            src="/img/mosque.webp"
+            width={40}
+            height={40}
+            alt="Mosque"
+            fetchPriority="high"
+            draggable={false}
+          />
+        </div>
+        <p data-cy="description" className="mt-2 text-lg font-medium">
+          Berikut Jadwal Sholat untuk bulan ini, {currentDate}
+        </p>
+      </div>
       <div className="flex mb-7 flex-col items-center justify-center">
         <Button
           className="font-bold space-x-2 justify-center items-center flex"
