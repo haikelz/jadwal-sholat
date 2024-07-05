@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
 import { JadwalSholatProps } from "~interfaces";
 import { cn } from "~lib/utils/cn";
 import { matchDate } from "~lib/utils/constants";
@@ -38,7 +40,9 @@ export default function Jadwal({ waktu }: { waktu: JadwalSholatProps[] }) {
           const dataTable = [
             {
               id: 1,
-              waktu: `${time.date.gregorian.weekday.en}, ${time.date.gregorian.date}`,
+              waktu: format(time.date.readable, "EEEE, d LLLL yyyy", {
+                locale: id,
+              }),
             },
             { id: 2, waktu: time.timings.Imsak.slice(0, 5) },
             { id: 3, waktu: time.timings.Fajr.slice(0, 5) },

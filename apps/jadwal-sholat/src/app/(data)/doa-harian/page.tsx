@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
@@ -8,7 +9,7 @@ import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
-import DoaHarianClient from "./client";
+const DoaHarianClient = dynamic(() => import("./client"));
 
 const { NEXT_PUBLIC_DOA_HARIAN_API } = env;
 
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "info-jadwal-sholat.vercel.app/doa-harian",
+    siteName: "jdwshlt.ekel.dev/doa-harian",
   },
   twitter: {
     title,

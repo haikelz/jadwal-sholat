@@ -17,11 +17,20 @@ const baseMetadata = {
 
 const { title, description, url } = baseMetadata;
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#030712" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   title,
   description,
   manifest: "/manifest.json",
-  themeColor: "#FFFFFF",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -41,7 +50,7 @@ export const metadata: Metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "info-jadwal-sholat.vercel.app",
+    siteName: "jdwshlt.ekel.dev",
   },
   twitter: {
     title,
@@ -50,12 +59,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   metadataBase: new URL(url),
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
 };
 
 export default function Layout({ children }: ChildrenProps) {

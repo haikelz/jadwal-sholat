@@ -27,7 +27,7 @@ export const metadata: Metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "info-jadwal-sholat.vercel.app/jadwal-sholat",
+    siteName: "jdwshlt.ekel.dev/jadwal-sholat",
   },
   twitter: {
     title,

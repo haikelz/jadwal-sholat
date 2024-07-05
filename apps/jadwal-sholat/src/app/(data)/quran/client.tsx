@@ -26,6 +26,7 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
     lastRead: state.lastRead,
     setLastRead: state.setLastRead,
   }));
+
   const filteredSurat = useMemo(
     () =>
       surat.data
