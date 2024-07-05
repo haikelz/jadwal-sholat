@@ -50,7 +50,7 @@ export async function generateMetadata(
           alt: "OG Image",
         },
       ],
-      siteName: `info-jadwal-sholat.vercel.app/quran/surat/${number}`,
+      siteName: `jdwshlt.ekel.dev/quran/surat/${number}`,
     },
     twitter: {
       title: base.title,

@@ -14,7 +14,7 @@ export default function Time() {
     setDate: state.setDate,
   }));
 
-  const formattedDate: string = format(date, `dd MMMM yyyy, kk.mm.ss`, {
+  const formattedDate: string = format(date, `EEEE, dd MMMM yyyy, kk.mm.ss`, {
     locale: id,
   });
 

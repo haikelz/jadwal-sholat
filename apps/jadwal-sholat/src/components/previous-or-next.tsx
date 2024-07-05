@@ -31,7 +31,7 @@ export default function PreviousOrNext({ data }: SuratProps) {
         ))
         .otherwise(() => null)}
       {match(data)
-        .with({ number: P.when((number) => number < 144) }, () => (
+        .with({ number: P.when((number) => number < 114) }, () => (
           <Link href={`/quran/surat/${data.number + 1}`}>
             <Button
               type="button"

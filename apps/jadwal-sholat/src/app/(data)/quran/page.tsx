@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
@@ -8,9 +9,9 @@ import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
-import QuranClient from "./client";
-
 const { NEXT_PUBLIC_QURAN_API } = env;
+
+const QuranClient = dynamic(() => import("./client"));
 
 const baseMetadata = {
   title: "Baca Al-Qur'an | Jadwal Sholat",
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "info-jadwal-sholat.vercel.app/quran",
+    siteName: "jdwshlt.ekel.dev/quran",
   },
   twitter: {
     title,

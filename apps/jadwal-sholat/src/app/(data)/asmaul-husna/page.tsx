@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
 import { AsmaulHusnaProps } from "~interfaces";
@@ -6,7 +7,7 @@ import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
-import AsmaulHusnaClient from "./client";
+const AsmaulHusnaClient = dynamic(() => import("./client"));
 
 const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 
@@ -32,7 +33,7 @@ export const metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "info-jadwal-sholat.vercel.app/asmaul-husna",
+    siteName: "jdwshlt.ekel.dev/asmaul-husna",
   },
   twitter: {
     title,
