@@ -15,20 +15,15 @@ const SwitchTheme = dynamic(() => import("~components/switch-theme"), {
 const navbarList = [
   {
     id: 1,
-    title: "Sholat",
-    icon: Clock4,
-  },
-  {
-    id: 2,
     title: "Asma'ul Husna",
     icon: List,
   },
   {
-    id: 3,
+    id: 2,
     title: "Qur'an",
     icon: BookMarked,
   },
-  { id: 4, title: "Do'a Harian", icon: HandHelping },
+  { id: 3, title: "Do'a Harian", icon: HandHelping },
 ];
 
 export default function Navbar() {
@@ -59,7 +54,7 @@ export default function Navbar() {
             variant="outline"
             className={cn(pathname === "/" ? "bg-accent" : "")}
           >
-            <Home size={24} />
+            <Clock4 size={24} />
           </Button>
         </Link>
         {navbarList.map((item) => {
