@@ -68,7 +68,7 @@ export default function JadwalSholatClient() {
           />
         </div>
         <p data-cy="description" className="mt-2 text-lg font-medium">
-          Berikut Jadwal Sholat untuk bulan ini, {currentDate} di{" "}
+          Berikut Jadwal Sholat untuk bulan ini, {currentDate} di wilayah{" "}
           <UserLocation />
         </p>
       </div>
