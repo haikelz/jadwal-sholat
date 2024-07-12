@@ -23,6 +23,9 @@ const Map = dynamic(() => import("~components/map"), {
   ),
   ssr: false,
 });
+const UserLocation = dynamic(() => import("~components/user-location"), {
+  ssr: false,
+});
 
 export default function JadwalSholatClient() {
   const { position, isOpenMap, setIsOpenMap } = useGlobalStore((state) => ({
@@ -65,7 +68,8 @@ export default function JadwalSholatClient() {
           />
         </div>
         <p data-cy="description" className="mt-2 text-lg font-medium">
-          Berikut Jadwal Sholat untuk bulan ini, {currentDate}
+          Berikut Jadwal Sholat untuk bulan ini, {currentDate} di{" "}
+          <UserLocation />
         </p>
       </div>
       <div className="flex mb-7 flex-col items-center justify-center">
