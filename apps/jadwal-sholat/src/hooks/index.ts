@@ -1,4 +1,3 @@
-export { useAdzan } from "./use-adzan";
 export { useAscending } from "./use-ascending";
 export { useClickOutside } from "./use-click-outside";
 export { useFetch } from "./use-fetch";
