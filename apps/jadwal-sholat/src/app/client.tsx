@@ -3,6 +3,7 @@
 import { MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Adzan from "~components/adzan";
 import ErrorWhileFetch from "~components/error-while-fetch";
 import IsRefetching from "~components/is-refetching";
 import LoadingClient from "~components/loading-client";
@@ -48,6 +49,7 @@ export default function JadwalSholatClient() {
 
   return (
     <>
+      <Adzan waktu={waktu} />
       <div className="flex mb-4 flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
           <h1
