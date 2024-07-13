@@ -2,6 +2,7 @@ import { devtools } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { createWithEqualityFn } from "zustand/traditional";
 import {
+  AdzanSliceProps,
   DateSliceProps,
   IsOpenMapProps,
   LastReadSliceProps,
@@ -13,6 +14,7 @@ import {
   numberModalAsmaulHusnaSliceProps,
 } from "~interfaces";
 
+import adzanSlice from "./slices/adzan.slice";
 import dateSlice from "./slices/date.slice";
 import isOpenMapSlice from "./slices/is-open-map.slice";
 import lastReadSlice from "./slices/last-read.slice";
@@ -32,7 +34,8 @@ const useGlobalStore = createWithEqualityFn<
     ScrollSliceProps &
     numberModalAsmaulHusnaSliceProps &
     LocationPositionProps &
-    IsOpenMapProps
+    IsOpenMapProps &
+    AdzanSliceProps
 >()(
   devtools((...set) => ({
     ...lastReadSlice(...set),
@@ -44,6 +47,7 @@ const useGlobalStore = createWithEqualityFn<
     ...numberModalAsmaulHusnaSlice(...set),
     ...locationPositionSlice(...set),
     ...isOpenMapSlice(...set),
+    ...adzanSlice(...set),
   })),
   shallow
 );

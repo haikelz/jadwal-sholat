@@ -109,3 +109,10 @@ export interface AddressProps {
   country_code: string;
   county: string;
 }
+
+export interface AdzanSliceProps {
+  isOpenConfirmModal: boolean;
+  setIsOpenConfirmModal: (isOpenConfirmModal: boolean) => void;
+  isPlayingAudioAdzan: boolean;
+  setIsPlayingAudioAdzan: (isPlayingAudioAdzan: boolean) => void;
+}
