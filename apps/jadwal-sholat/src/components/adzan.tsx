@@ -2,6 +2,7 @@
 
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import { useEffect } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
 import { useDeepCompareEffect } from "use-deep-compare";
 import { JadwalSholatProps } from "~interfaces";
@@ -27,6 +28,7 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
 
   const {
     date,
+    setDate,
     setIsOpenConfirmModal,
     setIsPlayingAudioAdzan,
     isPlayingAudioAdzan,
@@ -46,6 +48,14 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   const formattedTime: string = format(date, `kk.mm`, {
     locale: id,
   });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDate(() => new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [setDate]);
 
   useDeepCompareEffect(() => {
     if (

@@ -1,10 +1,10 @@
 "use client";
 
-import "leaflet/dist/leaflet.css";
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
-import "leaflet-geosearch/dist/geosearch.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
+import "leaflet-geosearch/dist/geosearch.css";
+import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 import {
   MapContainer,
@@ -54,23 +54,9 @@ function DetectPosition() {
 
 export default function Map() {
   // set default position to Kota Bandung
-  const { position, setPosition } = useGlobalStore((state) => ({
+  const { position } = useGlobalStore((state) => ({
     position: state.position,
-    setPosition: state.setPosition,
   }));
-
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setPosition({
-          lat: position.coords.latitude as number,
-          lng: position.coords.longitude as number,
-        });
-      });
-    } else {
-      console.log("Geolocation is not available in your browser.");
-    }
-  }, [setPosition, navigator]);
 
   return (
     <MapContainer
