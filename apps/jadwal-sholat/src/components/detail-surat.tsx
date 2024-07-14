@@ -60,7 +60,7 @@ export default function DetailSurat({ data }: SuratProps) {
     playing,
     ayat,
     setAyat,
-  } = usePlayNextAudio(audioList);
+  } = usePlayNextAudio(audioList, data.number);
 
   function saveData<T>(newData: T) {
     localStorage.setItem("surat", JSON.stringify(newData));

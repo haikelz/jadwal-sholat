@@ -126,9 +126,9 @@ export default function Client({ number }: { number: string }) {
         </div>
       </div>
       <div className="my-7 w-full">
-        <PreviousOrNext data={surat} />
+        <PreviousOrNext num={Number(number)} />
         <DetailSurat data={surat} />
-        <PreviousOrNext data={surat} />
+        <PreviousOrNext num={Number(number)} />
       </div>
     </>
   );
