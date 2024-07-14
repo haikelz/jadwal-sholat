@@ -3,14 +3,13 @@
 import { MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import Adzan from "~components/adzan";
 import ErrorWhileFetch from "~components/error-while-fetch";
 import IsRefetching from "~components/is-refetching";
 import LoadingClient from "~components/loading-client";
 import Jadwal from "~components/table-jadwal-sholat";
 import { Button } from "~components/ui/button";
 import { env } from "~env.mjs";
-import { useFetch } from "~hooks";
+import { useFetch, useGeolocation } from "~hooks";
 import { cn } from "~lib/utils/cn";
 import { bulan, currentDate, tahun } from "~lib/utils/constants";
 import { bitter } from "~lib/utils/fonts";
@@ -27,6 +26,9 @@ const Map = dynamic(() => import("~components/map"), {
 const UserLocation = dynamic(() => import("~components/user-location"), {
   ssr: false,
 });
+const Adzan = dynamic(() => import("~components/adzan"), {
+  ssr: false,
+});
 
 export default function JadwalSholatClient() {
   const { position, isOpenMap, setIsOpenMap } = useGlobalStore((state) => ({
@@ -36,6 +38,8 @@ export default function JadwalSholatClient() {
   }));
 
   const formatDate: string = `${tahun}/${bulan}`;
+
+  useGeolocation();
 
   const { data, isPending, isError, isRefetching } = useFetch(
     `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${formatDate}?latitude=${position.lat}&longitude=${position.lng}&method=20`

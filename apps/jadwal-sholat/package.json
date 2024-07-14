@@ -27,6 +27,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "fast-fuzzy": "^1.12.0",
     "framer-motion": "^11.2.13",
     "google-map-react": "^2.2.1",
     "htmr": "^1.0.2",
@@ -53,7 +54,6 @@
   "devDependencies": {
     "@jadwal-sholat/eslint-config": "workspace:*",
     "@jadwal-sholat/typescript-config": "workspace:*",
-    "@types/google-map-react": "^2.1.10",
     "@types/leaflet": "^1.9.12",
     "@types/node": "20.14.9",
     "@types/react": "18.3.3",
