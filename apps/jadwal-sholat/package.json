@@ -27,7 +27,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
-    "fast-fuzzy": "^1.12.0",
     "framer-motion": "^11.2.13",
     "google-map-react": "^2.2.1",
     "htmr": "^1.0.2",
