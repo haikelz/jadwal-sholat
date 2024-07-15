@@ -10,7 +10,7 @@ export default function IsRefetching() {
       )}
     >
       <div className="bg-white rounded-lg p-4 font-medium dark:bg-gray-950 border border-input dark:text-white">
-        <p className="flex justify-center w-full items-center">
+        <p className="flex justify-center w-full items-center font-bold">
           Loading
           <span role="status">
             <svg

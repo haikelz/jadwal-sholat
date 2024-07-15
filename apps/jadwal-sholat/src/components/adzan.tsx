@@ -71,10 +71,14 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
         },
       });
     } else if (
-      formattedTime === filteredWaktu.timings.Dhuhr ||
-      formattedTime === filteredWaktu.timings.Asr ||
-      formattedTime === filteredWaktu.timings.Maghrib ||
-      formattedTime === filteredWaktu.timings.Isha
+      (formattedTime >= filteredWaktu.timings.Dhuhr &&
+        formattedTime <= filteredWaktu.timings.Dhuhr + "00.10") ||
+      (formattedTime >= filteredWaktu.timings.Asr &&
+        formattedTime <= filteredWaktu.timings.Asr + "00.10") ||
+      (formattedTime >= filteredWaktu.timings.Maghrib &&
+        formattedTime <= filteredWaktu.timings.Maghrib + "00.10") ||
+      (formattedTime >= filteredWaktu.timings.Isha &&
+        formattedTime <= filteredWaktu.timings.Isha + "00.10")
     ) {
       setIsOpenConfirmModal(true);
 
