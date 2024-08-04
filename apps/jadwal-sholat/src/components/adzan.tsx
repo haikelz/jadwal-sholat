@@ -1,6 +1,6 @@
 "use client";
 
-import { format } from "date-fns";
+import { add, format, parse } from "date-fns";
 import { id } from "date-fns/locale";
 import { useEffect } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
@@ -18,11 +18,11 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     .map((item) => ({
       ...item,
       timings: {
-        Asr: item.timings.Asr.slice(0, 5),
-        Dhuhr: item.timings.Dhuhr.slice(0, 5),
-        Fajr: item.timings.Fajr.slice(0, 5),
-        Maghrib: item.timings.Maghrib.slice(0, 5),
-        Isha: item.timings.Isha.slice(0, 5),
+        Asr: item.timings.Asr.slice(0, 5).replace(":", "."),
+        Dhuhr: item.timings.Dhuhr.slice(0, 5).replace(":", "."),
+        Fajr: item.timings.Fajr.slice(0, 5).replace(":", "."),
+        Maghrib: item.timings.Maghrib.slice(0, 5).replace(":", "."),
+        Isha: item.timings.Isha.slice(0, 5).replace(":", "."),
       },
     }))[0];
 
@@ -49,6 +49,13 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     locale: id,
   });
 
+  function getAddTimeResult(timeNow: string, subMinutes: number) {
+    const parseTime = parse(timeNow, "HH.mm", new Date());
+    const addTime = add(parseTime, { minutes: subMinutes });
+
+    return format(addTime, "kk.mm", { locale: id });
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
       setDate(() => new Date());
@@ -60,7 +67,8 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   useDeepCompareEffect(() => {
     if (
       formattedTime >= filteredWaktu.timings.Fajr &&
-      formattedTime <= filteredWaktu.timings.Fajr + "00.05"
+      formattedTime <= getAddTimeResult(filteredWaktu.timings.Fajr, 10) &&
+      !isPlayingAudioAdzan
     ) {
       setIsOpenConfirmModal(true);
 
@@ -71,14 +79,16 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
         },
       });
     } else if (
-      (formattedTime >= filteredWaktu.timings.Dhuhr &&
-        formattedTime <= filteredWaktu.timings.Dhuhr + "00.10") ||
-      (formattedTime >= filteredWaktu.timings.Asr &&
-        formattedTime <= filteredWaktu.timings.Asr + "00.10") ||
-      (formattedTime >= filteredWaktu.timings.Maghrib &&
-        formattedTime <= filteredWaktu.timings.Maghrib + "00.10") ||
-      (formattedTime >= filteredWaktu.timings.Isha &&
-        formattedTime <= filteredWaktu.timings.Isha + "00.10")
+      ((formattedTime >= filteredWaktu.timings.Dhuhr &&
+        formattedTime <= getAddTimeResult(filteredWaktu.timings.Dhuhr, 10)) ||
+        (formattedTime >= filteredWaktu.timings.Asr &&
+          formattedTime <= getAddTimeResult(filteredWaktu.timings.Asr, 10)) ||
+        (formattedTime >= filteredWaktu.timings.Maghrib &&
+          formattedTime <=
+            getAddTimeResult(filteredWaktu.timings.Maghrib, 10)) ||
+        (formattedTime >= filteredWaktu.timings.Isha &&
+          formattedTime <= getAddTimeResult(filteredWaktu.timings.Isha, 10))) &&
+      !isPlayingAudioAdzan
     ) {
       setIsOpenConfirmModal(true);
 
@@ -94,6 +104,7 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     setIsOpenConfirmModal,
     load,
     stop,
+    isPlayingAudioAdzan,
     setIsPlayingAudioAdzan,
     filteredWaktu,
   ]);
@@ -120,19 +131,24 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
                 <h1 className="text-2xl font-bold">
                   Sudah Masuk Waktu{" "}
                   {formattedTime >= filteredWaktu.timings.Fajr &&
-                  formattedTime <= filteredWaktu.timings.Fajr + "00.05"
+                  formattedTime <=
+                    getAddTimeResult(filteredWaktu.timings.Fajr, 10)
                     ? "Subuh"
                     : formattedTime >= filteredWaktu.timings.Dhuhr &&
-                      formattedTime <= filteredWaktu.timings.Dhuhr + "00.05"
+                      formattedTime <=
+                        getAddTimeResult(filteredWaktu.timings.Dhuhr, 10)
                     ? "Dzuhur"
                     : formattedTime >= filteredWaktu.timings.Asr &&
-                      formattedTime <= filteredWaktu.timings.Asr + "00.05"
+                      formattedTime <=
+                        getAddTimeResult(filteredWaktu.timings.Asr, 10)
                     ? "Ashar"
                     : formattedTime >= filteredWaktu.timings.Maghrib &&
-                      formattedTime <= filteredWaktu.timings.Maghrib + "00.05"
+                      formattedTime <=
+                        getAddTimeResult(filteredWaktu.timings.Maghrib, 10)
                     ? "Maghrib"
                     : formattedTime >= filteredWaktu.timings.Isha &&
-                      formattedTime <= filteredWaktu.timings.Isha + "00.05"
+                      formattedTime <=
+                        getAddTimeResult(filteredWaktu.timings.Isha, 10)
                     ? "Isya"
                     : formattedTime >= "23.47" &&
                       formattedTime <= "23.47" + "00.05"
