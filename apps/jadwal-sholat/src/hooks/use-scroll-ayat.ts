@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect } from "react";
 import { LastReadProps } from "~interfaces";
 
@@ -19,17 +17,14 @@ interface ScrollAyatProps {
  * @param {boolean} param0.isAudioEnded
  * @param {(isAudioEnded: boolean) => void} param0.setIsAudioEnded
  */
-export function useScrollAyat({
-  lastRead,
-  ayat,
-  isAudioEnded,
-  setIsAudioEnded,
-}: ScrollAyatProps) {
+export function useScrollAyat(
+  { lastRead, ayat, isAudioEnded, setIsAudioEnded }: ScrollAyatProps
+) {
   useEffect(() => {
-    const lastReadId = document.getElementById(
-      `ayat-${lastRead.ayat?.toString()}`
-    );
     const ayatId = document.getElementById(ayat);
+    const lastReadId = document.getElementById(
+      `ayat-${lastRead.ayat?.toString() as string}`
+    );
 
     if (
       lastReadId &&
@@ -38,7 +33,10 @@ export function useScrollAyat({
       lastReadId.scrollIntoView({ behavior: "smooth" });
     }
 
-    if (isAudioEnded) ayatId?.scrollIntoView({ behavior: "smooth" });
+    if (isAudioEnded) {
+      ayatId?.scrollIntoView({ behavior: "smooth" });
+    }
+
     setIsAudioEnded(false);
   }, [lastRead, isAudioEnded, setIsAudioEnded, ayat]);
 }

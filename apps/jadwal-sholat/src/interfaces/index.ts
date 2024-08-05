@@ -30,7 +30,10 @@ export interface ScrollSliceProps {
 }
 
 export interface LocationPositionProps {
-  position: { lat: number; lng: number };
+  position: {
+    lat: number;
+    lng: number;
+  };
   setPosition: (pos: { lat: number; lng: number }) => void;
 }
 

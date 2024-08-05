@@ -1,5 +1,3 @@
-"use client";
-
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AudioLoadOptions, useAudioPlayer } from "react-use-audio-player";
