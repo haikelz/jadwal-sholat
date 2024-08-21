@@ -1,11 +1,12 @@
+import { cacheExchange, createClient, fetchExchange } from "@urql/next";
+import { registerUrql } from "@urql/next/rsc";
 import dynamic from "next/dynamic";
 import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
-import { AsmaulHusnaProps } from "~interfaces";
-import { getData } from "~lib/utils/axios-config";
 import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
+import { GetAllAsmaulHusnaQuery } from "~lib/utils/graphql";
 
 const AsmaulHusnaClient = dynamic(() => import("./client"));
 
@@ -44,19 +45,19 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-async function getAsmaulHusna(): Promise<AsmaulHusnaProps[]> {
-  try {
-    const response: { data: AsmaulHusnaProps[] } = await getData(
-      `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/all`
-    );
-    return response.data;
-  } catch (err: any) {
-    throw new Error(err.message);
-  }
-}
+/**
+ * @see https://commerce.nearform.com/open-source/urql/docs/advanced/server-side-rendering/#invalidating-data-from-a-server-component
+ */
+const urqlClient = () =>
+  createClient({
+    url: `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/graphql`,
+    exchanges: [cacheExchange, fetchExchange],
+  });
+
+const { getClient } = registerUrql(urqlClient);
 
 export default async function AsmaulHusna() {
-  const asmaulHusna = await getAsmaulHusna();
+  const asmaulHusna = await getClient().query(GetAllAsmaulHusnaQuery, {});
 
   return (
     <TransitionLayout
@@ -84,7 +85,7 @@ export default async function AsmaulHusna() {
           Berikut daftar Asma&#39;ul Husna
         </p>
       </div>
-      <AsmaulHusnaClient asmaulHusna={asmaulHusna} />
+      <AsmaulHusnaClient asmaulHusna={asmaulHusna.data.allAsmaulHusna.data} />
     </TransitionLayout>
   );
 }

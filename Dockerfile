@@ -19,6 +19,7 @@ RUN pnpm install --filter jadwal-sholat
 
 COPY . ./
 RUN pnpm run build
+COPY apps/jadwal-sholat/.next ./apps/jadwal-sholat/.next
 
 # run dev
 CMD ["pnpm", "run", "dev"]

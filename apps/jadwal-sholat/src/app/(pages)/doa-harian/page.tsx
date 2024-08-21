@@ -80,7 +80,7 @@ export default async function DoaHarian() {
               bitter.className
             )}
           >
-            Do'a Harian
+            Do&#39;a Harian
           </h1>
           <Image
             src="/img/pray.svg"
@@ -92,7 +92,7 @@ export default async function DoaHarian() {
           />
         </div>
         <p data-cy="description" className="mt-2 text-lg font-medium">
-          Berikut daftar do'a harian yang tersedia
+          Berikut daftar do&#39;a harian yang tersedia
         </p>
       </div>
       <DoaHarianClient doaHarian={doaHarian} />
