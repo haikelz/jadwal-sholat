@@ -1,25 +1,27 @@
+import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
-import { AsmaulHusnaProps } from "~interfaces";
+import { DoaHarianProps } from "~interfaces";
 import { getData } from "~lib/utils/axios-config";
 import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
 
-const AsmaulHusnaClient = dynamic(() => import("./client"));
+const DoaHarianClient = dynamic(() => import("./client"));
 
-const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
+const { NEXT_PUBLIC_DOA_HARIAN_API } = env;
 
 const baseMetadata = {
-  title: "Asma'ul Husna | Jadwal Sholat",
-  description: "Berikut daftar Asma'ul Husna",
-  url: `${MetaUrl.Site_Url}/asmaul-husna`,
+  title: "Do'a Harian | Jadwal Sholat",
+  description: "Berikut daftar do'a harian yang tersedia",
+  url: `${MetaUrl.Site_Url}/doa-harian`,
 };
 
 const { title, description, url } = baseMetadata;
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   openGraph: {
@@ -33,7 +35,7 @@ export const metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "jdwshlt.ekel.dev/asmaul-husna",
+    siteName: "jdwshlt.ekel.dev/doa-harian",
   },
   twitter: {
     title,
@@ -44,19 +46,20 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-async function getAsmaulHusna(): Promise<AsmaulHusnaProps[]> {
+async function getDoaHarian(): Promise<DoaHarianProps[]> {
   try {
-    const response: { data: AsmaulHusnaProps[] } = await getData(
-      `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/all`
+    const response: DoaHarianProps[] = await getData(
+      NEXT_PUBLIC_DOA_HARIAN_API
     );
-    return response.data;
+
+    return response;
   } catch (err: any) {
-    throw new Error(err.message);
+    throw new Error("Failed to fetch data!");
   }
 }
 
-export default async function AsmaulHusna() {
-  const asmaulHusna = await getAsmaulHusna();
+export default async function DoaHarian() {
+  const doaHarian = await getDoaHarian();
 
   return (
     <TransitionLayout
@@ -66,7 +69,7 @@ export default async function AsmaulHusna() {
       className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "pt-8 pb-24 md:pb-8"
+        "space-y-7 pt-8 pb-24 md:pb-8"
       )}
     >
       <div className="flex flex-col items-center justify-center">
@@ -77,14 +80,22 @@ export default async function AsmaulHusna() {
               bitter.className
             )}
           >
-            Asma&#39;ul Husna
+            Do&#39;a Harian
           </h1>
+          <Image
+            src="/img/pray.svg"
+            width={40}
+            height={40}
+            alt="Mosque"
+            fetchPriority="high"
+            draggable={false}
+          />
         </div>
-        <p data-cy="description" className="mt-2 my-7 text-lg font-medium">
-          Berikut daftar Asma&#39;ul Husna
+        <p data-cy="description" className="mt-2 text-lg font-medium">
+          Berikut daftar do&#39;a harian yang tersedia
         </p>
       </div>
-      <AsmaulHusnaClient asmaulHusna={asmaulHusna} />
+      <DoaHarianClient doaHarian={doaHarian} />
     </TransitionLayout>
   );
 }

@@ -1,27 +1,26 @@
-import { Metadata } from "next";
+import { cacheExchange, createClient, fetchExchange } from "@urql/next";
+import { registerUrql } from "@urql/next/rsc";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
-import { DoaHarianProps } from "~interfaces";
-import { getData } from "~lib/utils/axios-config";
 import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
+import { GetAllAsmaulHusnaQuery } from "~lib/utils/graphql";
 
-const DoaHarianClient = dynamic(() => import("./client"));
+const AsmaulHusnaClient = dynamic(() => import("./client"));
 
-const { NEXT_PUBLIC_DOA_HARIAN_API } = env;
+const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 
 const baseMetadata = {
-  title: "Do'a Harian | Jadwal Sholat",
-  description: "Berikut daftar do'a harian yang tersedia",
-  url: `${MetaUrl.Site_Url}/doa-harian`,
+  title: "Asma'ul Husna | Jadwal Sholat",
+  description: "Berikut daftar Asma'ul Husna",
+  url: `${MetaUrl.Site_Url}/asmaul-husna`,
 };
 
 const { title, description, url } = baseMetadata;
 
-export const metadata: Metadata = {
+export const metadata = {
   title,
   description,
   openGraph: {
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
         alt: "OG Image",
       },
     ],
-    siteName: "jdwshlt.ekel.dev/doa-harian",
+    siteName: "jdwshlt.ekel.dev/asmaul-husna",
   },
   twitter: {
     title,
@@ -46,20 +45,19 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-async function getDoaHarian(): Promise<DoaHarianProps[]> {
-  try {
-    const response: DoaHarianProps[] = await getData(
-      NEXT_PUBLIC_DOA_HARIAN_API
-    );
+/**
+ * @see https://commerce.nearform.com/open-source/urql/docs/advanced/server-side-rendering/#invalidating-data-from-a-server-component
+ */
+const urqlClient = () =>
+  createClient({
+    url: `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/graphql`,
+    exchanges: [cacheExchange, fetchExchange],
+  });
 
-    return response;
-  } catch (err: any) {
-    throw new Error("Failed to fetch data!");
-  }
-}
+const { getClient } = registerUrql(urqlClient);
 
-export default async function DoaHarian() {
-  const doaHarian = await getDoaHarian();
+export default async function AsmaulHusna() {
+  const asmaulHusna = await getClient().query(GetAllAsmaulHusnaQuery, {});
 
   return (
     <TransitionLayout
@@ -69,7 +67,7 @@ export default async function DoaHarian() {
       className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "space-y-7 pt-8 pb-24 md:pb-8"
+        "pt-8 pb-24 md:pb-8"
       )}
     >
       <div className="flex flex-col items-center justify-center">
@@ -80,22 +78,14 @@ export default async function DoaHarian() {
               bitter.className
             )}
           >
-            Do'a Harian
+            Asma&#39;ul Husna
           </h1>
-          <Image
-            src="/img/pray.svg"
-            width={40}
-            height={40}
-            alt="Mosque"
-            fetchPriority="high"
-            draggable={false}
-          />
         </div>
-        <p data-cy="description" className="mt-2 text-lg font-medium">
-          Berikut daftar do'a harian yang tersedia
+        <p data-cy="description" className="mt-2 my-7 text-lg font-medium">
+          Berikut daftar Asma&#39;ul Husna
         </p>
       </div>
-      <DoaHarianClient doaHarian={doaHarian} />
+      <AsmaulHusnaClient asmaulHusna={asmaulHusna.data.allAsmaulHusna.data} />
     </TransitionLayout>
   );
 }

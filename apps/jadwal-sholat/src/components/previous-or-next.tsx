@@ -1,7 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
-import { SuratProps } from "~interfaces";
 import { removeSelectedSurat } from "~lib/helpers";
 import { cn } from "~lib/utils/cn";
 

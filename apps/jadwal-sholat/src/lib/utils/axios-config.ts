@@ -8,7 +8,7 @@ const config: AxiosRequestConfig = {
   },
 };
 
-const axios = Axios.create(config);
+export const axios = Axios.create(config);
 
 export async function getData<T>(url: string): Promise<T> {
   try {

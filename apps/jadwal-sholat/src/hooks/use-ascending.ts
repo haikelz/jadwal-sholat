@@ -1,5 +1,3 @@
-"use client";
-
 import { Dispatch, SetStateAction, useDeferredValue, useState } from "react";
 
 interface UseAscendingProps {

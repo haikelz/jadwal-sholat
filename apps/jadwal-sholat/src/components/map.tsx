@@ -18,20 +18,19 @@ import useGlobalStore from "~store";
 
 function SearchField() {
   const provider = new OpenStreetMapProvider();
-
-  // @ts-ignore
-  const searchControl = new GeoSearchControl({
-    provider: provider,
-    style: "bar",
-  });
-
   const map = useMap();
 
   // @ts-ignore
   useEffect(() => {
+    // @ts-ignore
+    const searchControl = new GeoSearchControl({
+      provider: provider,
+      style: "bar",
+    });
+
     map.addControl(searchControl);
     return () => map.removeControl(searchControl);
-  }, [map, searchControl]);
+  }, [map]);
 
   return null;
 }
