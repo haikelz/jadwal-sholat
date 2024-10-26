@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { Suspense } from "react";
 import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
 import { ListSuratProps } from "~interfaces";
@@ -94,7 +95,9 @@ export default async function Quran() {
           &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;
         </p>
       </div>
-      <QuranClient surat={surat} />
+      <Suspense>
+        <QuranClient surat={surat} />
+      </Suspense>
     </TransitionLayout>
   );
 }

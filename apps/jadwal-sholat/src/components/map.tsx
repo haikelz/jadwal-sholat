@@ -5,7 +5,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 import "leaflet-geosearch/dist/geosearch.css";
 import "leaflet/dist/leaflet.css";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   MapContainer,
   Marker,
@@ -17,7 +17,8 @@ import {
 import useGlobalStore from "~store";
 
 function SearchField() {
-  const provider = new OpenStreetMapProvider();
+  const provider = useMemo(() => new OpenStreetMapProvider(), []);
+
   const map = useMap();
 
   // @ts-ignore
@@ -30,7 +31,7 @@ function SearchField() {
 
     map.addControl(searchControl);
     return () => map.removeControl(searchControl);
-  }, [map]);
+  }, [map, provider]);
 
   return null;
 }

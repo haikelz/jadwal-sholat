@@ -1,11 +1,11 @@
 import { StateCreator } from "zustand";
-import { numberModalAsmaulHusnaSliceProps } from "~interfaces";
+import { NumberModalAsmaulHusnaSliceProps } from "~interfaces";
 
 const numberModalAsmaulHusnaSlice: StateCreator<
-  numberModalAsmaulHusnaSliceProps,
+  NumberModalAsmaulHusnaSliceProps,
   [],
   [],
-  numberModalAsmaulHusnaSliceProps
+  NumberModalAsmaulHusnaSliceProps
 > = (set) => ({
   numberModalAsmaulHusna: 0,
   setNumberModalAsmaulHusna: (numberModalAsmaulHusna) =>
