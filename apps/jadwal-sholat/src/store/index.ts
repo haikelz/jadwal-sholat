@@ -7,11 +7,11 @@ import {
   IsOpenMapProps,
   LastReadSliceProps,
   LocationPositionProps,
+  NumberModalAsmaulHusnaSliceProps,
   OptionSliceProps,
   PlayNextAudioSliceProps,
   ScrollSliceProps,
   WidthSliceProps,
-  numberModalAsmaulHusnaSliceProps,
 } from "~interfaces";
 
 import adzanSlice from "./slices/adzan.slice";
@@ -32,7 +32,7 @@ const useGlobalStore = createWithEqualityFn<
     WidthSliceProps &
     PlayNextAudioSliceProps &
     ScrollSliceProps &
-    numberModalAsmaulHusnaSliceProps &
+    NumberModalAsmaulHusnaSliceProps &
     LocationPositionProps &
     IsOpenMapProps &
     AdzanSliceProps

@@ -1,16 +1,13 @@
-import { cacheExchange, createClient, fetchExchange } from "@urql/next";
 import { registerUrql } from "@urql/next/rsc";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import TransitionLayout from "~components/transition-layout";
-import { env } from "~env.mjs";
 import { cn } from "~lib/utils/cn";
 import { MetaUrl } from "~lib/utils/enums";
 import { bitter } from "~lib/utils/fonts";
-import { GetAllAsmaulHusnaQuery } from "~lib/utils/graphql";
+import { GetAllAsmaulHusnaQuery, urqlClient } from "~lib/utils/graphql";
 
 const AsmaulHusnaClient = dynamic(() => import("./client"));
-
-const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 
 const baseMetadata = {
   title: "Asma'ul Husna | Jadwal Sholat",
@@ -48,12 +45,6 @@ export const metadata = {
 /**
  * @see https://commerce.nearform.com/open-source/urql/docs/advanced/server-side-rendering/#invalidating-data-from-a-server-component
  */
-const urqlClient = () =>
-  createClient({
-    url: `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/graphql`,
-    exchanges: [cacheExchange, fetchExchange],
-  });
-
 const { getClient } = registerUrql(urqlClient);
 
 export default async function AsmaulHusna() {
@@ -85,7 +76,9 @@ export default async function AsmaulHusna() {
           Berikut daftar Asma&#39;ul Husna
         </p>
       </div>
-      <AsmaulHusnaClient asmaulHusna={asmaulHusna.data.allAsmaulHusna.data} />
+      <Suspense>
+        <AsmaulHusnaClient asmaulHusna={asmaulHusna.data.allAsmaulHusna.data} />
+      </Suspense>
     </TransitionLayout>
   );
 }

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { Suspense } from "react";
 import TransitionLayout from "~components/transition-layout";
 import { env } from "~env.mjs";
 import { DoaHarianProps } from "~interfaces";
@@ -95,7 +96,9 @@ export default async function DoaHarian() {
           Berikut daftar do&#39;a harian yang tersedia
         </p>
       </div>
-      <DoaHarianClient doaHarian={doaHarian} />
+      <Suspense>
+        <DoaHarianClient doaHarian={doaHarian} />
+      </Suspense>
     </TransitionLayout>
   );
 }

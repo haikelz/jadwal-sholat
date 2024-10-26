@@ -20,9 +20,9 @@ export async function generateStaticParams(): Promise<{ number: string }[]> {
 }
 
 export async function generateMetadata(
-  { params }: { params: { number: string } }
+  props: { params:Promise<{ number: string }> }
 ): Promise<Metadata | undefined> {
-  const { number } = params;
+  const { number } = await props.params;
 
   const response: SuratProps = await getData(
     `${NEXT_PUBLIC_QURAN_API}/quran/${number}`
@@ -63,9 +63,9 @@ export async function generateMetadata(
 }
 
 export default async function Surat(
-  { params }: { params: { number: string } }
+  props: { params:Promise<{ number: string }> }
 ) {
-  const { number } = params;
+  const { number } = await props.params;
 
   return (
     <>

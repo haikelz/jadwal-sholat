@@ -5,7 +5,7 @@ export interface AsmaulHusnaProps {
   arti: string;
 }
 
-export interface numberModalAsmaulHusnaSliceProps {
+export interface NumberModalAsmaulHusnaSliceProps {
   numberModalAsmaulHusna: number;
   setNumberModalAsmaulHusna: (numberModalAsmaulHusna: number) => void;
   dataAsmaulHusna: AsmaulHusnaProps;
