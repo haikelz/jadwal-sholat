@@ -1,4 +1,4 @@
-import { cacheExchange, createClient, fetchExchange } from "@urql/next";
+import { cacheExchange, createClient, fetchExchange, gql } from "@urql/next";
 import { env } from "~env.mjs";
 
 const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
@@ -9,7 +9,7 @@ export const urqlClient = () =>
     exchanges: [cacheExchange, fetchExchange],
   });
 
-export const GetAllAsmaulHusnaQuery: string = `
+export const GetAllAsmaulHusnaQuery = gql`
   query {
     allAsmaulHusna {
       data {

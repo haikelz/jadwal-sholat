@@ -7,7 +7,6 @@ import reactStringReplace from "react-string-replace";
 import { P, match } from "ts-pattern";
 import SearchBar from "~components/search-bar";
 import SortByOrder from "~components/sort-by-order";
-import TidakAda from "~components/tidak-ada";
 import { Card, CardContent, CardHeader } from "~components/ui/card";
 import { useAscending } from "~hooks";
 import { ListSuratProps } from "~interfaces";
@@ -160,7 +159,9 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
           )
         )
         .otherwise(() => (
-          <TidakAda title="surat" />
+          <p data-cy="not-found-text" className="text-lg font-medium">
+            Input Surat yang kamu masukkan tidak ditemukan!
+          </p>
         ))}
     </>
   );

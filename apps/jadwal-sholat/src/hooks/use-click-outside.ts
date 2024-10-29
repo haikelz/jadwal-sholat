@@ -1,5 +1,3 @@
-"use client";
-
 import { RefObject, useCallback, useEffect } from "react";
 import { P, match } from "ts-pattern";
 
