@@ -6,7 +6,6 @@ import reactStringReplace from "react-string-replace";
 import { P, match } from "ts-pattern";
 import SearchBar from "~components/search-bar";
 import SortByOrder from "~components/sort-by-order";
-import TidakAda from "~components/tidak-ada";
 import { Card, CardContent, CardHeader } from "~components/ui/card";
 import { useAscending } from "~hooks";
 import { DoaHarianProps } from "~interfaces";
@@ -110,7 +109,9 @@ export default function DoaHarianClient(
           )
         )
         .otherwise(() => (
-          <TidakAda title="Do'a Harian" />
+          <p data-cy="not-found-text" className="text-lg font-medium">
+            Input Do&#39;a yang kamu masukkan tidak ditemukan!
+          </p>
         ))}
     </>
   );

@@ -1,13 +1,12 @@
 "use client";
 
-import { X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 import { P, match } from "ts-pattern";
+import ModalAsmaulHusna from "~components/modal-asmaul-husna";
 import SearchBar from "~components/search-bar";
 import SortByOrder from "~components/sort-by-order";
-import TidakAda from "~components/tidak-ada";
 import { Card, CardContent, CardHeader } from "~components/ui/card";
 import { useAscending } from "~hooks";
 import { AsmaulHusnaProps } from "~interfaces";
@@ -123,7 +122,9 @@ export default function AsmaulHusnaClient(
           )
         )
         .otherwise(() => (
-          <TidakAda title="Asma'ul Husna" />
+          <p data-cy="not-found-text" className="text-lg font-medium">
+            Input Asma&#39;ul Husna yang kamu masukkan tidak ditemukan!
+          </p>
         ))}
       {match({ numberModalAsmaulHusna: numberModalAsmaulHusna })
         .with(
@@ -134,54 +135,7 @@ export default function AsmaulHusnaClient(
                 numberModalAsmaulHusna === Number(dataAsmaulHusna.urutan)
             ),
           },
-          () => (
-            <div
-              aria-modal="true"
-              className={cn(
-                "modal-blur fixed inset-0 top-0 z-50",
-                "flex min-h-screen w-full items-center justify-center",
-                "overflow-x-hidden"
-              )}
-            >
-              <div className="relative w-full max-w-2xl p-4 md:h-auto">
-                <div
-                  className={cn(
-                    "relative rounded-lg bg-white",
-                    "dark:bg-gray-950 border border-input dark:text-white"
-                  )}
-                >
-                  <div className="flex items-center justify-between rounded-t border-b border-b-input p-4">
-                    <span className="text-xl font-semibold">
-                      {dataAsmaulHusna.urutan}. {dataAsmaulHusna.latin}
-                    </span>
-                    <div className="flex justify-center items-center space-x-2">
-                      <button
-                        type="button"
-                        className={cn(
-                          "ml-auto inline-flex items-center rounded-lg",
-                          "bg-transparent p-1.5 text-sm transition-all",
-                          "hover:bg-gray-200",
-                          "dark:text-white dark:hover:text-gray-900"
-                        )}
-                        aria-label="close modal asmaul husna"
-                        onClick={() => setNumberModalAsmaulHusna(0)}
-                      >
-                        <X size={20} />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="space-y-6 p-6">
-                    <h3 className="text-3xl arabic-font">
-                      {dataAsmaulHusna.arab}
-                    </h3>
-                    <p className="text-base leading-relaxed">
-                      {dataAsmaulHusna.arti}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
+          () => <ModalAsmaulHusna />
         )
         .otherwise(() => null)}
     </>
