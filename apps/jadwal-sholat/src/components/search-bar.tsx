@@ -8,7 +8,6 @@ import {
 } from "next/navigation";
 import { useCallback } from "react";
 import { Input } from "~components/ui/input";
-import { useDebounce } from "~hooks";
 import { cn } from "~lib/utils/cn";
 
 interface SearchBarProps {
@@ -19,16 +18,13 @@ interface SearchBarProps {
 export default function SearchBar({ searchParams, name }: SearchBarProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const debouncedSearch = useDebounce(searchParams);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
+      params.set(name, value);
 
-      if (debouncedSearch) {
-        params.set(name, value);
-        return params.toString();
-      }
+      return params.toString();
     },
     [searchParams]
   );
