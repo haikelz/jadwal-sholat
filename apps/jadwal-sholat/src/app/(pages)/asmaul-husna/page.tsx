@@ -58,7 +58,7 @@ export default async function AsmaulHusna() {
       className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "pt-8 pb-24 md:pb-8"
+        "py-8"
       )}
     >
       <div className="flex flex-col items-center justify-center">
