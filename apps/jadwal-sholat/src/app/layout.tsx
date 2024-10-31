@@ -1,5 +1,4 @@
 import { Metadata, Viewport } from "next";
-import BackToTop from "~components/back-to-top";
 import Navbar from "~components/navbar";
 import { ChildrenProps } from "~interfaces";
 import { cn } from "~lib/utils/cn";
@@ -88,7 +87,6 @@ export default function Layout({ children }: ChildrenProps) {
               >
                 {children}
               </section>
-              <BackToTop />
             </main>
           </div>
         </Wrapper>

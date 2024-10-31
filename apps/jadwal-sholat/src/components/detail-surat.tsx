@@ -115,7 +115,10 @@ export default function DetailSurat({ data }: SuratProps) {
                 id={`ayat-${ayat.number.insurah}`}
                 className={cn(
                   "mr-2 flex h-8 w-8 border border-input items-center justify-center rounded-md p-5",
-                  "bg-gray-50 dark:bg-gray-950 font-bold"
+                  "font-bold",
+                  playing && audioList[audioIndex] === ayat.audio.url
+                    ? "bg-gray-50 dark:bg-gray-900"
+                    : ""
                 )}
               >
                 <p className="font-bold">{ayat.number.insurah}</p>

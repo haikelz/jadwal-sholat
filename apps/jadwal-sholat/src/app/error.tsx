@@ -8,7 +8,7 @@ export default function ErrorPage() {
       className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "space-y-7 pt-8 pb-24 md:pb-8"
+        "space-y-7 py-8"
       )}
     >
       <section className="flex flex-col items-center justify-center text-center">

@@ -17,7 +17,7 @@ export default function BackToTop() {
         .with({ scroll: P.when((scroll) => scroll >= height) }, () => (
           <div
             className={cn(
-              "fixed bottom-[75px] right-2.5",
+              "fixed bottom-[90px] right-2.5",
               "md:right-4 md:bottom-4"
             )}
           >

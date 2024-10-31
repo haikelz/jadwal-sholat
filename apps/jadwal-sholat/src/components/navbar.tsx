@@ -1,10 +1,17 @@
 "use client";
 
-import { BookMarked, Clock4, HandHelping, Home, List } from "lucide-react";
+import {
+  BookMarked,
+  Clock4,
+  HandHelping,
+  List,
+  LucideIcon,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "~components/ui/button";
+import { useShowHide } from "~hooks";
 import { slugify } from "~lib/helpers";
 import { cn } from "~lib/utils/cn";
 
@@ -28,55 +35,56 @@ const navbarList = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const isShow = useShowHide();
 
   return (
-    <nav
+    <div
       className={cn(
-        "bg-white dark:bg-gray-800",
-        "md:border-r md:border-r-gray-300 md:dark:border-r-gray-800"
+        "fixed md:bottom-0 bottom-4 z-50 w-96 mx-auto md:mx-0 left-0 right-0 rounded-md md:rounded-none md:w-full flex justify-between px-4 py-2.5 flex-row items-center",
+        "border border-gray-200 bg-white",
+        "md:border-0 dark:border-gray-800 md:justify-center dark:bg-gray-950",
+        "md:sticky md:top-0 md:left-0 md:max-h-screen md:min-h-screen",
+        "md:max-w-[80px] md:flex-col gap-4 md:gap-10 md:border-r",
+        "md:border-r md:border-r-gray-200 md:px-7 transition-all md:dark:border-r-gray-800",
+        isShow
+          ? "translate-y-0 opacity-100"
+          : "translate-y-full md:translate-y-0 md:opacity-100 bottom-0 opacity-0"
       )}
     >
-      <div
-        className={cn(
-          "fixed bottom-0 z-50 w-full flex justify-between px-4 py-2.5 flex-row items-center",
-          "border-t border-t-gray-300 bg-white",
-          "dark:border-t-[1px] dark:border-t-gray-800 md:justify-center dark:bg-gray-950",
-          "md:sticky md:top-0 md:left-0 md:max-h-screen md:min-h-screen",
-          "md:max-w-[80px] md:flex-col md:gap-10",
-          "md:border-t-0 md:px-7 md:dark:border-t-0"
-        )}
-      >
-        <Link href="/">
-          <Button
-            type="button"
-            aria-label="home"
-            size="icon"
-            variant="outline"
-            className={cn(pathname === "/" ? "bg-accent" : "")}
+      <Link className="rounded-full" href="/">
+        <Button
+          type="button"
+          aria-label="home"
+          size="icon"
+          variant="outline"
+          className={cn(pathname === "/" ? "bg-accent" : "")}
+        >
+          <Clock4 size={24} />
+        </Button>
+      </Link>
+      {navbarList.map((item) => {
+        const Icon: LucideIcon = item.icon;
+        return (
+          <Link
+            className="rounded-full"
+            href={slugify(item.title)}
+            key={item.id}
           >
-            <Clock4 size={24} />
-          </Button>
-        </Link>
-        {navbarList.map((item) => {
-          const Icon = item.icon;
-          return (
-            <Link href={slugify(item.title)} key={item.id}>
-              <Button
-                size="icon"
-                variant="outline"
-                className={cn(
-                  pathname.includes(slugify(item.title) as string)
-                    ? "bg-accent"
-                    : ""
-                )}
-              >
-                <Icon size={24} />
-              </Button>
-            </Link>
-          );
-        })}
-        <SwitchTheme />
-      </div>
-    </nav>
+            <Button
+              size="icon"
+              variant="outline"
+              className={cn(
+                pathname.includes(slugify(item.title) as string)
+                  ? "bg-accent"
+                  : ""
+              )}
+            >
+              <Icon size={24} />
+            </Button>
+          </Link>
+        );
+      })}
+      <SwitchTheme />
+    </div>
   );
 }

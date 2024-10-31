@@ -1,4 +1,9 @@
-export const qoriOptions: Array<{ id: number; name: string }> = [
+type QoriProps = {
+  id: number;
+  name: string;
+};
+
+export const qoriOptions: QoriProps[] = [
   {
     id: 1,
     name: "Abdul Basit Murattal",
@@ -38,5 +43,45 @@ export const qoriOptions: Array<{ id: number; name: string }> = [
   {
     id: 10,
     name: "Mahmoud Khalil Al-Hussary",
+  },
+  {
+    id: 11,
+    name: "Mahmoud Khalil Al-Hussary Mujawwad",
+  },
+  {
+    id: 12,
+    name: "Al Hudhaify",
+  },
+  {
+    id: 13,
+    name: "Ibrahim Akhdar",
+  },
+  {
+    id: 14,
+    name: "Maher Al Muaiqly",
+  },
+  {
+    id: 15,
+    name: "Menshawi",
+  },
+  {
+    id: 16,
+    name: "Minshawy Mujawwad",
+  },
+  {
+    id: 17,
+    name: "Mohammad al Tablaway",
+  },
+  {
+    id: 18,
+    name: "Muhammad Ayyoub",
+  },
+  {
+    id: 19,
+    name: "Muhammad Jibreel",
+  },
+  {
+    id: 20,
+    name: "Saood bin Ibraaheem Ash-Shuraym",
   },
 ];
