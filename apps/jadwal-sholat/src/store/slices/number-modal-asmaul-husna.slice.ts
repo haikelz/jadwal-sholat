@@ -1,5 +1,5 @@
+import { NumberModalAsmaulHusnaSliceProps } from "@/interfaces";
 import { StateCreator } from "zustand";
-import { NumberModalAsmaulHusnaSliceProps } from "~interfaces";
 
 const numberModalAsmaulHusnaSlice: StateCreator<
   NumberModalAsmaulHusnaSliceProps,

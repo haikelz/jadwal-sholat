@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils/cn";
 import { ArrowDown, ArrowUp } from "lucide-react";
-import { Button } from "~components/ui/button";
-import { cn } from "~lib/utils/cn";
 
 interface SortByOrderProps {
   isAscending: boolean;

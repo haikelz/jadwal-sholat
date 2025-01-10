@@ -1,5 +1,4 @@
-"use client";
-
+import useGlobalStore from "@/store";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
@@ -14,7 +13,6 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
-import useGlobalStore from "~store";
 
 function SearchField() {
   const provider = useMemo(() => new OpenStreetMapProvider(), []);

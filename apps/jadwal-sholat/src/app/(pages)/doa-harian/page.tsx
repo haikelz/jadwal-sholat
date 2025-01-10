@@ -1,14 +1,14 @@
+import TransitionLayout from "@/components/transition-layout";
+import { env } from "@/env.mjs";
+import { DoaHarianProps } from "@/interfaces";
+import { getData } from "@/lib/utils/axios-config";
+import { cn } from "@/lib/utils/cn";
+import { MetaUrl } from "@/lib/utils/enums";
+import { bitter } from "@/lib/utils/fonts";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense } from "react";
-import TransitionLayout from "~components/transition-layout";
-import { env } from "~env.mjs";
-import { DoaHarianProps } from "~interfaces";
-import { getData } from "~lib/utils/axios-config";
-import { cn } from "~lib/utils/cn";
-import { MetaUrl } from "~lib/utils/enums";
-import { bitter } from "~lib/utils/fonts";
 
 const DoaHarianClient = dynamic(() => import("./client"));
 

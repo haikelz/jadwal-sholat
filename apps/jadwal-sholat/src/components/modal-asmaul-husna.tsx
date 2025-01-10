@@ -1,6 +1,6 @@
+import { cn } from "@/lib/utils/cn";
+import useGlobalStore from "@/store";
 import { X } from "lucide-react";
-import { cn } from "~lib/utils/cn";
-import useGlobalStore from "~store";
 
 export default function ModalAsmaulHusna() {
   const { setNumberModalAsmaulHusna, dataAsmaulHusna } = useGlobalStore(

@@ -1,18 +1,17 @@
 "use client";
 
+import SearchBar from "@/components/search-bar";
+import SortByOrder from "@/components/sort-by-order";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useAscending } from "@/hooks";
+import { ListSuratProps } from "@/interfaces";
+import { removeSelectedSurat } from "@/lib/helpers";
+import { cn } from "@/lib/utils/cn";
+import useGlobalStore from "@/store";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import reactStringReplace from "react-string-replace";
-import { P, match } from "ts-pattern";
-import SearchBar from "~components/search-bar";
-import SortByOrder from "~components/sort-by-order";
-import { Card, CardContent, CardHeader } from "~components/ui/card";
-import { useAscending } from "~hooks";
-import { ListSuratProps } from "~interfaces";
-import { removeSelectedSurat } from "~lib/helpers";
-import { cn } from "~lib/utils/cn";
-import useGlobalStore from "~store";
 
 export default function QuranClient({ surat }: { surat: ListSuratProps }) {
   const searchParams = useSearchParams();
@@ -64,105 +63,91 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
         <SearchBar searchParams={searchParams} name="search" />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
-          {match({ lastRead: lastRead })
-            .with(
-              {
-                lastRead: P.when(
-                  () => lastRead.ayat || lastRead.number !== null
-                ),
-              },
-              () => (
-                <Link
-                  href={`/quran/surat/${lastRead.number}`}
-                  onClick={() =>
-                    localStorage.setItem(
-                      "selected-surat",
-                      lastRead.number!.toString() as string
-                    )
-                  }
-                >
-                  <span
-                    className={cn(
-                      "hover-animation underline-animation font-bold",
-                      "hover:text-red-500",
-                      "dark:text-white dark:hover:text-blue-500"
-                    )}
-                  >
-                    Surat {lastRead.name} ayat {lastRead.ayat}
-                  </span>
-                </Link>
-              )
-            )
-            .otherwise(() => "belum ada")}
+          {lastRead.ayat || lastRead.number !== null ? (
+            <Link
+              href={`/quran/surat/${lastRead.number}`}
+              onClick={() =>
+                localStorage.setItem(
+                  "selected-surat",
+                  lastRead.number!.toString() as string
+                )
+              }
+            >
+              <span
+                className={cn(
+                  "hover-animation underline-animation font-bold",
+                  "hover:text-red-500",
+                  "dark:text-white dark:hover:text-blue-500"
+                )}
+              >
+                Surat {lastRead.name} ayat {lastRead.ayat}
+              </span>
+            </Link>
+          ) : (
+            "belum ada"
+          )}
         </p>
       </div>
       <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
-      {match({ filteredSurat: filteredSurat })
-        .with(
-          { filteredSurat: P.when((filteredSurat) => filteredSurat.length) },
-          () => (
-            <div
-              className={cn(
-                "grid w-full grid-cols-1 grid-rows-1 gap-4",
-                "sm:grid-cols-2",
-                "lg:grid-cols-3",
-                "xl:grid-cols-4"
-              )}
-            >
-              {filteredSurat.map((surat) => (
-                <Link
-                  key={surat.number}
-                  href={`/quran/surat/${surat.number}`}
-                  onClick={removeSelectedSurat}
-                >
-                  <Card data-cy="card">
-                    <CardHeader>
-                      <p className="text-right font-semibold tracking-wide">
-                        {surat.type.id}
-                      </p>
-                    </CardHeader>
-                    <CardContent className="text-left">
-                      <p className="text-lg font-bold my-1">
-                        {surat.number}.{" "}
-                        {match({ deferredSearch: deferredSearch })
-                          .with(
-                            {
-                              deferredSearch: P.when(
-                                (deferredSearch) => deferredSearch
-                              ),
-                            },
-                            () =>
-                              reactStringReplace(
-                                surat.asma.id.short,
-                                deferredSearch,
-                                (match: string, index: number) => (
-                                  <span
-                                    key={index + 1}
-                                    className="bg-lime-400 dark:bg-lime-600"
-                                  >
-                                    {match}
-                                  </span>
-                                )
-                              )
+      {filteredSurat ? (
+        filteredSurat ? (
+          <div
+            className={cn(
+              "grid w-full grid-cols-1 grid-rows-1 gap-4",
+              "sm:grid-cols-2",
+              "lg:grid-cols-3",
+              "xl:grid-cols-4"
+            )}
+          >
+            {filteredSurat.map((surat) => (
+              <Link
+                key={surat.number}
+                href={`/quran/surat/${surat.number}`}
+                onClick={removeSelectedSurat}
+              >
+                <Card data-cy="card">
+                  <CardHeader>
+                    <p className="text-right font-semibold tracking-wide">
+                      {surat.type.id}
+                    </p>
+                  </CardHeader>
+                  <CardContent className="text-left">
+                    <p className="text-lg font-bold my-1">
+                      {surat.number}.{" "}
+                      {deferredSearch
+                        ? reactStringReplace(
+                            surat.asma.id.short,
+                            deferredSearch,
+                            (match: string, index: number) => (
+                              <span
+                                key={index + 1}
+                                className="bg-lime-400 dark:bg-lime-600"
+                              >
+                                {match}
+                              </span>
+                            )
                           )
-                          .otherwise(() => surat.asma.id.short)}
-                      </p>
-                      <p className="font-medium mb-1">
-                        {surat.asma.translation.id}
-                      </p>
-                      <p>Jumlah: {surat.ayahCount} ayat</p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          )
-        )
-        .otherwise(() => (
+                        : surat.asma.id.short}
+                    </p>
+                    <p className="font-medium mb-1">
+                      {surat.asma.translation.id}
+                    </p>
+                    <p>Jumlah: {surat.ayahCount} ayat</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        ) : (
           <p data-cy="not-found-text" className="text-lg font-medium">
             Input Surat yang kamu masukkan tidak ditemukan!
           </p>
-        ))}
+        )
+      ) : (
+        <p data-cy="not-found-text" className="text-lg font-medium">
+          Tidak ada data!
+        </p>
+      )}
     </>
   );
 }

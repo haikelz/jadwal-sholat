@@ -1,5 +1,5 @@
+import { OptionSliceProps } from "@/interfaces";
 import { StateCreator } from "zustand";
-import { OptionSliceProps } from "~interfaces";
 
 const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (
   set

@@ -1,14 +1,14 @@
 "use client";
 
+import { JadwalSholatProps } from "@/interfaces";
+import { cn } from "@/lib/utils/cn";
+import { matchDate } from "@/lib/utils/constants";
+import useGlobalStore from "@/store";
 import { add, format, parse } from "date-fns";
 import { id } from "date-fns/locale";
 import { useEffect } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
 import { useDeepCompareEffect } from "use-deep-compare";
-import { JadwalSholatProps } from "~interfaces";
-import { cn } from "~lib/utils/cn";
-import { matchDate } from "~lib/utils/constants";
-import useGlobalStore from "~store";
 
 import { Button } from "./ui/button";
 

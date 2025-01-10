@@ -3,7 +3,7 @@ import {
   keepPreviousData,
   useQuery,
 } from "@tanstack/react-query";
-import { getData } from "~lib/utils/axios-config";
+import { getData } from "@/lib/utils/axios-config";
 
 /**
  * A reusable useQuery with additional configuration

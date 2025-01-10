@@ -1,6 +1,3 @@
-import { devtools } from "zustand/middleware";
-import { shallow } from "zustand/shallow";
-import { createWithEqualityFn } from "zustand/traditional";
 import {
   AdzanSliceProps,
   DateSliceProps,
@@ -12,7 +9,10 @@ import {
   PlayNextAudioSliceProps,
   ScrollSliceProps,
   WidthSliceProps,
-} from "~interfaces";
+} from "@/interfaces";
+import { devtools } from "zustand/middleware";
+import { shallow } from "zustand/shallow";
+import { createWithEqualityFn } from "zustand/traditional";
 
 import adzanSlice from "./slices/adzan.slice";
 import dateSlice from "./slices/date.slice";

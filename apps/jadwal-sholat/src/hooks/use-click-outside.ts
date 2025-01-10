@@ -1,5 +1,4 @@
 import { RefObject, useCallback, useEffect } from "react";
-import { P, match } from "ts-pattern";
 
 /**
  * A custom hook that contains logic for close a modal if we click outside
@@ -16,17 +15,9 @@ export function useClickOutside<T>(
 ): void {
   const handleClickOutside = useCallback(
     (e: Event) => {
-      match({ current: ref.current }).with(
-        {
-          current: P.when(
-            (current) =>
-              current && !ref.current?.contains(e.target as HTMLDivElement)
-          ),
-        },
-        () => {
+      if(ref.current && !ref.current?.contains(e.target as HTMLDivElement)) {
           set(value);
-        }
-      );
+      }
     },
     [ref, set, value]
   );

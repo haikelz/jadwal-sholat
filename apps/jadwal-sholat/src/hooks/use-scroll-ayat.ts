@@ -1,5 +1,5 @@
+import { LastReadProps } from "@/interfaces";
 import { useEffect } from "react";
-import { LastReadProps } from "~interfaces";
 
 interface ScrollAyatProps {
   lastRead: LastReadProps;

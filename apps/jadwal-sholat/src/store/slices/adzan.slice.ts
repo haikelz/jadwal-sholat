@@ -1,5 +1,5 @@
+import { AdzanSliceProps } from "@/interfaces";
 import { StateCreator } from "zustand";
-import { AdzanSliceProps } from "~interfaces";
 
 const adzanSlice: StateCreator<AdzanSliceProps, [], [], AdzanSliceProps> = (
   set

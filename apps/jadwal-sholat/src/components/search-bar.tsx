@@ -1,5 +1,7 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils/cn";
 import { Search } from "lucide-react";
 import {
   ReadonlyURLSearchParams,
@@ -7,8 +9,6 @@ import {
   useRouter,
 } from "next/navigation";
 import { useCallback } from "react";
-import { Input } from "~components/ui/input";
-import { cn } from "~lib/utils/cn";
 
 interface SearchBarProps {
   searchParams: ReadonlyURLSearchParams;

@@ -1,14 +1,13 @@
+import { PlayNextAudioSliceProps } from "@/interfaces";
+import useGlobalStore from "@/store";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AudioLoadOptions, useAudioPlayer } from "react-use-audio-player";
-import { P, match } from "ts-pattern";
 import { useDeepCompareEffect } from "use-deep-compare";
-import { PlayNextAudioSliceProps } from "~interfaces";
-import useGlobalStore from "~store";
 
 interface UsePlayNextAudioProps extends PlayNextAudioSliceProps {
   audioIndex: number;
-  setAudioIndex: Dispatch<SetStateAction<number>>;
+  setAudioIndex: Dispatch<SetStateAction<number>>
   pause: () => void;
   play: () => void;
   playing: boolean;
@@ -49,43 +48,27 @@ export function usePlayNextAudio(
   const { pause, play, load, playing } = useAudioPlayer();
 
   useDeepCompareEffect(() => {
-    match({ isPlayAudio: isPlayAudio })
-      .with({ isPlayAudio: true }, () =>
-        load(audioList[audioIndex], {
-          autoplay: true,
-          onend: () => {
-            match({ audioIndex: audioIndex })
-              .with(
-                {
-                  audioIndex: P.when(
-                    (audioIndex) => audioIndex < audioList.length - 1
-                  ),
-                },
-                () => {
-                  setAudioIndex((index: number) => {
-                    if (index === audioList.length - 1) return 0;
-                    return index + 1;
-                  });
-                  setAyat(`ayat-${audioIndex + 2}`);
-                }
-              )
-              .with(
-                {
-                  audioIndex: P.when(
-                    (audioIndex) => audioIndex + 1 === audioList.length
-                  ),
-                },
-                () => {
-                  if (num === 114) return;
-                  router.push(`/quran/surat/${num + 1}`);
-                }
-              );
+    if (isPlayAudio) {
+      load(audioList[audioIndex], {
+        autoplay: true,
+        onend: () => {
+          if (audioIndex < audioList.length - 1) {
+            setAudioIndex((index: number) => {
+              if (index === audioList.length - 1) return 0;
+              return index + 1;
+            });
+            setAyat(`ayat-${audioIndex + 2}`);
+          }
 
-            setIsAudioEnded(true);
-          },
-        })
-      )
-      .otherwise(() => null);
+          if (audioIndex + 1 === audioList.length) {
+            if (num === 114) return;
+            router.push(`/quran/surat/${num + 1}`);
+          }
+
+          setIsAudioEnded(true);
+        },
+      });
+    }
   }, [
     load,
     audioIndex,
