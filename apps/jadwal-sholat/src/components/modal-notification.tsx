@@ -3,7 +3,7 @@
 import { useClickOutside } from "@/hooks";
 import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
 
 import { Button } from "./ui/button";
 
@@ -17,7 +17,7 @@ export default function ModalNotification(
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useClickOutside(setNotification, modalRef, false);
+  useClickOutside(setNotification, modalRef as RefObject<HTMLDivElement>, false);
 
   return (
     <>
