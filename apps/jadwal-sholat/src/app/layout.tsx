@@ -1,9 +1,10 @@
+import Navbar from "@/components/navbar";
+import { Toaster } from "@/components/ui/toaster";
+import { ChildrenProps } from "@/interfaces";
+import { cn } from "@/lib/utils/cn";
+import { MetaUrl } from "@/lib/utils/enums";
+import { bitter, ibmPlexSans } from "@/lib/utils/fonts";
 import { Metadata, Viewport } from "next";
-import Navbar from "~components/navbar";
-import { ChildrenProps } from "~interfaces";
-import { cn } from "~lib/utils/cn";
-import { MetaUrl } from "~lib/utils/enums";
-import { bitter, ibmPlexSans } from "~lib/utils/fonts";
 
 import "./globals.css";
 import Wrapper from "./wrapper";
@@ -90,6 +91,7 @@ export default function Layout({ children }: ChildrenProps) {
             </main>
           </div>
         </Wrapper>
+        <Toaster />
       </body>
     </html>
   );

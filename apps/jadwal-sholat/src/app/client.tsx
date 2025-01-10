@@ -1,32 +1,32 @@
 "use client";
 
+import ErrorWhileFetch from "@/components/error-while-fetch";
+import IsRefetching from "@/components/is-refetching";
+import LoadingClient from "@/components/loading-client";
+import Jadwal from "@/components/table-jadwal-sholat";
+import { Button } from "@/components/ui/button";
+import { env } from "@/env.mjs";
+import { useFetch, useGeolocation } from "@/hooks";
+import { cn } from "@/lib/utils/cn";
+import { bulan, currentDate, tahun } from "@/lib/utils/constants";
+import { bitter } from "@/lib/utils/fonts";
+import useGlobalStore from "@/store";
 import { MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import ErrorWhileFetch from "~components/error-while-fetch";
-import IsRefetching from "~components/is-refetching";
-import LoadingClient from "~components/loading-client";
-import Jadwal from "~components/table-jadwal-sholat";
-import { Button } from "~components/ui/button";
-import { env } from "~env.mjs";
-import { useFetch, useGeolocation } from "~hooks";
-import { cn } from "~lib/utils/cn";
-import { bulan, currentDate, tahun } from "~lib/utils/constants";
-import { bitter } from "~lib/utils/fonts";
-import useGlobalStore from "~store";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
-const Map = dynamic(() => import("~components/map"), {
+const Map = dynamic(() => import("@/components/map"), {
   loading: () => (
     <div className="md:h-[620px] w-full h-[300px] animate-pulse bg-gray-100 dark:bg-gray-900"></div>
   ),
   ssr: false,
 });
-const UserLocation = dynamic(() => import("~components/user-location"), {
+const UserLocation = dynamic(() => import("@/components/user-location"), {
   ssr: false,
 });
-const Adzan = dynamic(() => import("~components/adzan"), {
+const Adzan = dynamic(() => import("@/components/adzan"), {
   ssr: false,
 });
 

@@ -1,7 +1,7 @@
+import TransitionLayout from "@/components/transition-layout";
+import { cn } from "@/lib/utils/cn";
+import { MetaUrl } from "@/lib/utils/enums";
 import { Metadata } from "next";
-import TransitionLayout from "~components/transition-layout";
-import { cn } from "~lib/utils/cn";
-import { MetaUrl } from "~lib/utils/enums";
 
 import JadwalSholatClient from "./client";
 

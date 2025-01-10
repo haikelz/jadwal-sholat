@@ -1,9 +1,9 @@
 "use client";
 
+import { ChildrenProps } from "@/interfaces";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import { ThemeProvider } from "next-themes";
-import { ChildrenProps } from "~interfaces";
 
 export default function Wrapper({ children }: ChildrenProps) {
   const queryClient: QueryClient = new QueryClient();

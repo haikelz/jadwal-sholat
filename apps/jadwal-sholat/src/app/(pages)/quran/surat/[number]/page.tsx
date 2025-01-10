@@ -1,11 +1,11 @@
+import ReadingProgress from "@/components/reading-progress";
+import TransitionLayout from "@/components/transition-layout";
+import { env } from "@/env.mjs";
+import { ListSuratProps, SuratProps } from "@/interfaces";
+import { getData } from "@/lib/utils/axios-config";
+import { cn } from "@/lib/utils/cn";
+import { MetaUrl } from "@/lib/utils/enums";
 import { Metadata } from "next";
-import ReadingProgress from "~components/reading-progress";
-import TransitionLayout from "~components/transition-layout";
-import { env } from "~env.mjs";
-import { ListSuratProps, SuratProps } from "~interfaces";
-import { getData } from "~lib/utils/axios-config";
-import { cn } from "~lib/utils/cn";
-import { MetaUrl } from "~lib/utils/enums";
 
 import Client from "./client";
 

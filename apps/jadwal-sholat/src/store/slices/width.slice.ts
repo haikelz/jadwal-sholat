@@ -1,5 +1,5 @@
+import { WidthSliceProps } from "@/interfaces";
 import { StateCreator } from "zustand";
-import { WidthSliceProps } from "~interfaces";
 
 const widthSlice: StateCreator<WidthSliceProps, [], [], WidthSliceProps> = (
   set

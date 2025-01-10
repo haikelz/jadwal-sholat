@@ -1,8 +1,8 @@
 "use client";
 
+import { cn } from "@/lib/utils/cn";
+import useGlobalStore from "@/store";
 import { useCallback, useEffect } from "react";
-import { cn } from "~lib/utils/cn";
-import useGlobalStore from "~store";
 
 export default function ReadingProgress() {
   const { width, setWidth } = useGlobalStore((state) => ({

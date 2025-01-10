@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { LocationPositionProps } from "~interfaces";
+import { LocationPositionProps } from "@/interfaces";
 
 // Default position to Kota Bandung
 const locationPositionSlice: StateCreator<

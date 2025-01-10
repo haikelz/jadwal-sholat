@@ -1,5 +1,5 @@
+import useGlobalStore from "@/store";
 import { useEffect } from "react";
-import useGlobalStore from "~store";
 
 export function useGeolocation() {
   const { setPosition } = useGlobalStore((state) => ({

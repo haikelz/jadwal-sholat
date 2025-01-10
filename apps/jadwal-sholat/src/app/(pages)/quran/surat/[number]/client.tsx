@@ -1,19 +1,18 @@
 "use client";
 
+import DetailSurat from "@/components/detail-surat";
+import ErrorWhileFetch from "@/components/error-while-fetch";
+import IsRefetching from "@/components/is-refetching";
+import LoadingClient from "@/components/loading-client";
+import PreviousOrNext from "@/components/previous-or-next";
+import { env } from "@/env.mjs";
+import { useFetch } from "@/hooks";
+import { cn } from "@/lib/utils/cn";
+import { bitter } from "@/lib/utils/fonts";
+import { qoriOptions } from "@/lib/utils/qori-options";
+import useGlobalStore from "@/store";
 import { Languages, MessageSquare, Volume2 } from "lucide-react";
 import { useAudioPlayer } from "react-use-audio-player";
-import { P, match } from "ts-pattern";
-import DetailSurat from "~components/detail-surat";
-import ErrorWhileFetch from "~components/error-while-fetch";
-import IsRefetching from "~components/is-refetching";
-import LoadingClient from "~components/loading-client";
-import PreviousOrNext from "~components/previous-or-next";
-import { env } from "~env.mjs";
-import { useFetch } from "~hooks";
-import { cn } from "~lib/utils/cn";
-import { bitter } from "~lib/utils/fonts";
-import { qoriOptions } from "~lib/utils/qori-options";
-import useGlobalStore from "~store";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
@@ -47,12 +46,7 @@ export default function Client({ number }: { number: string }) {
   }
 
   const { data, isPending, isError, isRefetching } = useFetch(
-    match({ number: number })
-      .with(
-        { number: P.when((number) => number) },
-        () => `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}`
-      )
-      .otherwise(() => "")
+    number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : ""
   );
 
   if ((!data && isError) || isPending) return <LoadingClient />;

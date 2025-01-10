@@ -1,8 +1,8 @@
+import { JadwalSholatProps } from "@/interfaces";
+import { cn } from "@/lib/utils/cn";
+import { matchDate } from "@/lib/utils/constants";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
-import { JadwalSholatProps } from "~interfaces";
-import { cn } from "~lib/utils/cn";
-import { matchDate } from "~lib/utils/constants";
 
 const tableJadwalSholatList = [
   { id: 1, name: "Tanggal" },

@@ -1,10 +1,10 @@
 "use client";
 
+import { env } from "@/env.mjs";
+import { UserLocationProps } from "@/interfaces";
+import useGlobalStore from "@/store";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { env } from "~env.mjs";
-import { UserLocationProps } from "~interfaces";
-import useGlobalStore from "~store";
 
 const { NEXT_PUBLIC_NOMINATIM_API } = env;
 

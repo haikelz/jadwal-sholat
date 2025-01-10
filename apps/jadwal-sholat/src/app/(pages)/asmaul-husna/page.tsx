@@ -1,11 +1,11 @@
+import TransitionLayout from "@/components/transition-layout";
+import { cn } from "@/lib/utils/cn";
+import { MetaUrl } from "@/lib/utils/enums";
+import { bitter } from "@/lib/utils/fonts";
+import { GetAllAsmaulHusnaQuery, urqlClient } from "@/lib/utils/graphql";
 import { registerUrql } from "@urql/next/rsc";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import TransitionLayout from "~components/transition-layout";
-import { cn } from "~lib/utils/cn";
-import { MetaUrl } from "~lib/utils/enums";
-import { bitter } from "~lib/utils/fonts";
-import { GetAllAsmaulHusnaQuery, urqlClient } from "~lib/utils/graphql";
 
 const AsmaulHusnaClient = dynamic(() => import("./client"));
 
