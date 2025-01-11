@@ -48,7 +48,10 @@ export const metadata = {
 const { getClient } = registerUrql(urqlClient);
 
 export default async function AsmaulHusna() {
-  const asmaulHusna = await getClient().query(GetAllAsmaulHusnaQuery, {});
+  const asmaulHusna = await getClient().query(GetAllAsmaulHusnaQuery, {
+    page: 1,
+    limit: 100
+  });
 
   return (
     <TransitionLayout

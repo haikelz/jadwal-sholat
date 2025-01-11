@@ -11,8 +11,8 @@ export function urqlClient() {
 }
 
 export const GetAllAsmaulHusnaQuery = gql`
-  query {
-    allAsmaulHusna {
+  query($page: Int!, $limit: Int!) {
+    allAsmaulHusna(page: $page, limit: $limit) {
       data {
         urutan
         latin
