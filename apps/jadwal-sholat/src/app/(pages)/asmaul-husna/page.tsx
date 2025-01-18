@@ -1,13 +1,17 @@
 import TransitionLayout from "@/components/transition-layout";
+import { env } from "@/env.mjs";
+import { AsmaulHusnaProps } from "@/interfaces";
+import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
 import { bitter } from "@/lib/utils/fonts";
-import { GetAllAsmaulHusnaQuery, urqlClient } from "@/lib/utils/graphql";
-import { registerUrql } from "@urql/next/rsc";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
 const AsmaulHusnaClient = dynamic(() => import("./client"));
+
+const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env
+
 
 const baseMetadata = {
   title: "Asma'ul Husna | Jadwal Sholat",
@@ -42,13 +46,17 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-/**
- * @see https://commerce.nearform.com/open-source/urql/docs/advanced/server-side-rendering/#invalidating-data-from-a-server-component
- */
-const { getClient } = registerUrql(urqlClient);
+async function getAllAsmaulHusna ( ): Promise<AsmaulHusnaProps[]> {
+   try  {
+    const response: { data: AsmaulHusnaProps[] } = await getData(`${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/all`)
+    return response.data as AsmaulHusnaProps[]
+    } catch ( err: any) {
+    throw new Error ( err.message)
+   }
+}
 
 export default async function AsmaulHusna() {
-  const asmaulHusna = await getClient().query(GetAllAsmaulHusnaQuery, {});
+  const asmaulHusna: AsmaulHusnaProps[] = await getAllAsmaulHusna();
 
   return (
     <TransitionLayout
@@ -77,7 +85,7 @@ export default async function AsmaulHusna() {
         </p>
       </div>
       <Suspense>
-        <AsmaulHusnaClient asmaulHusna={asmaulHusna.data.allAsmaulHusna.data} />
+        <AsmaulHusnaClient asmaulHusna={asmaulHusna} />
       </Suspense>
     </TransitionLayout>
   );
