@@ -1,4 +1,5 @@
 import { JadwalSholatProps } from "@/interfaces";
+import { formatSholatTime } from "@/lib/helpers";
 import { cn } from "@/lib/utils/cn";
 import { matchDate } from "@/lib/utils/constants";
 import { format } from "date-fns";
@@ -44,20 +45,20 @@ export default function Jadwal({ waktu }: { waktu: JadwalSholatProps[] }) {
                 locale: id,
               }),
             },
-            { id: 2, waktu: time.timings.Imsak.slice(0, 5).replace(":", ".") },
-            { id: 3, waktu: time.timings.Fajr.slice(0, 5).replace(":", ".") },
+            { id: 2, waktu: formatSholatTime(time.timings.Imsak)},
+            { id: 3, waktu: formatSholatTime(time.timings.Fajr)},
             {
               id: 4,
-              waktu: time.timings.Sunrise.slice(0, 5).replace(":", "."),
+              waktu: formatSholatTime(time.timings.Sunrise),
             },
-            { id: 5, waktu: time.timings.Dhuhr.slice(0, 5).replace(":", ".") },
-            { id: 6, waktu: time.timings.Asr.slice(0, 5).replace(":", ".") },
-            { id: 7, waktu: time.timings.Sunset.slice(0, 5).replace(":", ".") },
+            { id: 5, waktu: formatSholatTime(time.timings.Dhuhr)},
+            { id: 6, waktu: formatSholatTime(time.timings.Asr)},
+            { id: 7, waktu: formatSholatTime(time.timings.Sunset)},
             {
               id: 8,
-              waktu: time.timings.Maghrib.slice(0, 5).replace(":", "."),
+              waktu: formatSholatTime(time.timings.Maghrib),
             },
-            { id: 9, waktu: time.timings.Isha.slice(0, 5).replace(":", ".") },
+            { id: 9, waktu: formatSholatTime(time.timings.Isha)},
           ];
           return (
             <tr

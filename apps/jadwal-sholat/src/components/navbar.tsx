@@ -39,8 +39,8 @@ export default function Navbar() {
     <div
       className={cn(
         "fixed bottom-0 z-50 mx-auto md:mx-0 left-0 right-0 rounded-none md:w-full flex justify-center space-x-4 md:space-x-0 md:justify-between px-4 py-2.5 flex-row items-center",
-        "border border-t-gray-200 md:border-t-0 bg-white/70",
-        "md:border-0 dark:border-t-gray-800 md:dark:border-t-0 md:justify-center backdrop-blur-sm dark:bg-gray-950/70",
+        "border border-t-gray-200 md:border-t-0 bg-white",
+        "md:border-0 dark:border-t-gray-800 md:dark:border-t-0 md:justify-center backdrop-blur-xs dark:bg-gray-950",
         "md:sticky md:top-0 md:left-0 md:max-h-screen md:min-h-screen",
         "md:max-w-[80px] md:flex-col gap-4 md:gap-10 md:border-r",
         "md:border-r md:border-r-gray-200 md:px-7 transition-all md:dark:border-r-gray-800"

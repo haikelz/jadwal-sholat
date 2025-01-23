@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
 import { useDeepCompareEffect } from "use-deep-compare";
 
+import { formatSholatTime } from "@/lib/helpers";
 import { Button } from "./ui/button";
 
 export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
@@ -18,11 +19,11 @@ export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     .map((item) => ({
       ...item,
       timings: {
-        Asr: item.timings.Asr.slice(0, 5).replace(":", "."),
-        Dhuhr: item.timings.Dhuhr.slice(0, 5).replace(":", "."),
-        Fajr: item.timings.Fajr.slice(0, 5).replace(":", "."),
-        Maghrib: item.timings.Maghrib.slice(0, 5).replace(":", "."),
-        Isha: item.timings.Isha.slice(0, 5).replace(":", "."),
+        Asr: formatSholatTime(item.timings.Asr),
+        Dhuhr: formatSholatTime(item.timings.Dhuhr),
+        Fajr: formatSholatTime(item.timings.Fajr),
+        Maghrib: formatSholatTime(item.timings.Maghrib),
+        Isha: formatSholatTime(item.timings.Isha),
       },
     }))[0];
 

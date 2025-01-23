@@ -72,13 +72,13 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
                   lastRead.number!.toString() as string
                 )
               }
+              className={cn(
+                "font-bold",
+                "hover:text-red-500",
+                "dark:text-white hover:underline"
+              )}
             >
               <span
-                className={cn(
-                  "hover-animation underline-animation font-bold",
-                  "hover:text-red-500",
-                  "dark:text-white dark:hover:text-blue-500"
-                )}
               >
                 Surat {lastRead.name} ayat {lastRead.ayat}
               </span>
