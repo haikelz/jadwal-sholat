@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
 
 /**
  * A custom hook to handle is an element showed or not based on user's current and previous scroll
  * @export
  * @returns {boolean}
  */
-export function useShowHide(): boolean {
+/*export function useShowHide(): boolean {
   const [isShow, setIsShow] = useState<boolean>(true);
   const [prevScrollPosition, setPrevScrollPosition] = useState<number>(0);
 
@@ -28,3 +27,4 @@ export function useShowHide(): boolean {
 
   return isShow;
 }
+*/

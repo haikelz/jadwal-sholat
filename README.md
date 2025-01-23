@@ -42,6 +42,10 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 | ![ss 9](/static/docs/Screenshot%20from%202024-05-01%2017-29-35.png) | ![ss 10](/static/docs/Screenshot%20from%202024-05-01%2017-29-42.png) |
 |                                                                     |                                                                      |
 
+## Activity
+
+![Alt](https://repobeats.axiom.co/api/embed/fdae03fe11b3e4d1ef0dec27555d7eb2b121bd5f.svg "Repobeats analytics image")
+
 ## 🗒️Credits
 
 Terima kasih telah menginspirasi saya
