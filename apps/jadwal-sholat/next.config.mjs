@@ -1,4 +1,5 @@
 import withPWAInit from "@ducanh2912/next-pwa";
+import { withSentryConfig } from "@sentry/nextjs";
 
 import "./src/env.mjs";
 
@@ -15,12 +16,22 @@ const withPWA = withPWAInit({
 });
 
 /** @type {import('next').NextConfig} */
-const config = withPWA({
-  reactStrictMode: true,
-  compress: true,
-  experimental: {
-    webpackBuildWorker: true,
-  },
-});
+const config = withSentryConfig(
+  withPWA({
+    reactStrictMode: true,
+    compress: true,
+    experimental: {
+      webpackBuildWorker: true,
+    },
+  }),
+  {
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT,
+    silent: false,
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+    widenClientFileUpload: true,
+    disableLogger: true,
+  }
+);
 
 export default config;
