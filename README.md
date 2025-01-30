@@ -1,36 +1,41 @@
 <div align="center">
-  <h1>Jadwal Sholat</h1> 
-  <p>Adalah sebuah Website untuk mendapatkan jadwal sholat, Asma'ul Husna, juga membaca Al-Qur'an</p>
+  <h1>Jadwal Sholat</h1>
+  <p>Jadwal Sholat is a Website that provides a prayer schedule, Asma'ul Husna, and Al-Qur'an reading with audio options for Quran reciter, translation, and 
+Latin.</p>
 </div>
 
-## 📝Fitur
+## 📝Features
 
-- Jadwal sholat berdasarkan lokasi pengguna
-- Baca Al-Qur'an(dengan audio yang bisa dipilih berdasarkan qori', terjemahan, juga bahasa latin)
+- Prayer schedule based on user location
+- Read Al-Qur'an (with audio selection for Quran reciter, translation, and Latin)
 - Asma'ul Husna
-- Do'a Harian
+- Daily prayers
 
-## ⚡Tech Stack
+## ⚡️Tech Stack
 
 - Next JS
-- Typescript
+- TypeScript
 - Tailwind CSS + shadcn/ui
 - React Query
 - Zustand
+- Sentry
+- Turborepo
 
 ## Getting Started
 
-Ada 3 branch yang ada di repositori ini:
+There are three branches in this repository:
 
-- `master` sebagai branch utama untuk production.
-- `dev` sebagai branch untuk pengembangan fitur.
-- `pagesDir` sebagai branch penyimpanan perubahan sebelum direfactor ke appDir.
+- `master` as the main branch for production.
+- `dev` as the development branch for feature development.
+- `pagesDir` as a branch to store changes before refactoring to appDir.
 
-Jika kamu ingin melihat dan mengetes project ini lebih detail:
+To see and test the project in detail:
 
-- Clone project ini `git clone https://github.com/haikelz/jadwal-sholat.git`.
-- Install dependencies dengan perintah `pnpm install`. Jika kamu memakai Package Manager yang lain, silahkan menyesuaikan dan jangan lupa untuk menghapus file `pnpm-lock.yaml`.
-- Project ini menggunakan **turborepo**. Jadi jika ingin me-run project ini dengan turbo, maka pastikan untuk menginstall turbonya terlebih dahulu secara global dengan perintah `pnpm install -g turbo`. Setelah terinstall, maka ketik `turbo run dev` dan lihat hasilnya di browser => `http://localhost:3000`.
+- Clone the project with `git clone https://github.com/haikelz/jadwal-sholat.git`.
+- Install dependencies with the command `pnpm install`. If you use a different package manager, please adjust it accordingly and don't forget 
+to remove the `pnpm-lock.yaml` file.
+- This project uses **turborepo**. So if you want to run the project with turbo, first install it globally with the command `pnpm install -g 
+turbo`. After installation, type `turbo run dev` and see the results in your browser => `http://localhost:3000`.
 
 ## Screenshots
 
@@ -48,7 +53,7 @@ Jika kamu ingin melihat dan mengetes project ini lebih detail:
 
 ## 🗒️Credits
 
-Terima kasih telah menginspirasi saya
+Thank you for inspiring me
 
 https://islamiah.vercel.app/
 
