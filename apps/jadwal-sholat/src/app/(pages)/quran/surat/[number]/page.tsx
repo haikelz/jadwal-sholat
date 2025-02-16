@@ -77,7 +77,7 @@ export default async function Surat(
         className={cn(
           "flex w-full max-w-full",
           "flex-col items-center justify-start",
-          "pt-8 pb-24 md:pb-14"
+          "pt-8 pb-24 md:pb-8" 
         )}
       >
         <Client number={number} />

@@ -47,7 +47,7 @@ export default function Homepage() {
       className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "py-8"
+        "pt-8 pb-24 md:pb-8"
       )}
     >
       <JadwalSholatClient />

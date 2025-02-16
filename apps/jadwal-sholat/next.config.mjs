@@ -27,8 +27,8 @@ const config = withSentryConfig(
   {
     org: process.env.SENTRY_ORG,
     project: process.env.SENTRY_PROJECT,
-    silent: false,
     authToken: process.env.SENTRY_AUTH_TOKEN,
+    silent: false,
     widenClientFileUpload: true,
     disableLogger: true,
   }

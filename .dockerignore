@@ -1,6 +1,7 @@
 .git
 .github
 README.md
+apps/jadwal-sholat/README.md
 LICENSE
 apps/jadwal-sholat/cypress
 apps/jadwal-sholat/cypress.config.ts
@@ -10,3 +11,4 @@ apps/jadwal-sholat/node_modules
 packages/eslint-config/node_modules
 .turbo
 node_modules
+cypress

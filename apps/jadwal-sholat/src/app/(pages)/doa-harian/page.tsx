@@ -70,7 +70,7 @@ export default async function DoaHarian() {
       className={cn(
         "flex w-full max-w-full",
         "flex-col items-center justify-start",
-        "space-y-7 py-8"
+        "space-y-7 pt-8 pb-24 md:pb-8"
       )}
     >
       <div className="flex flex-col items-center justify-center">

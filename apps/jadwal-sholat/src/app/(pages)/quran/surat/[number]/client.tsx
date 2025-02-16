@@ -119,7 +119,7 @@ export default function Client({ number }: { number: string }) {
           </select>
         </div>
       </div>
-      <div className="my-7 w-full">
+      <div className="mt-7 w-full">
         <PreviousOrNext num={Number(number)} />
         <DetailSurat data={surat} />
         <PreviousOrNext num={Number(number)} />
