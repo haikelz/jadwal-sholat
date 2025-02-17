@@ -1,11 +1,10 @@
 {
   "name": "@jadwal-sholat/eslint-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "files": [
     "library.js",
-    "next.js",
-    "react-internal.js"
+    "next.js"
   ],
   "publishConfig": {
     "access": "public"
