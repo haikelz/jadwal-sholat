@@ -13,11 +13,14 @@ import {
   Play,
 } from "lucide-react";
 import { nanoid } from "nanoid";
+import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 import { useClipboard } from "use-clipboard-copy";
 
-import ModalNotification from "./modal-notification";
-import ModalTafsir from "./modal-tafsir";
+const ModalNotification = dynamic(
+  () => import("@/components/modal-notification")
+);
+const ModalTafsir = dynamic(() => import("@/components/modal-tafsir"));
 
 export default function DetailSurat({ data }: SuratProps) {
   const [ayatClick, setAyatClick] = useState<number>(0);

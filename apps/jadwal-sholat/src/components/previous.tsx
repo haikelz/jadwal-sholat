@@ -7,7 +7,7 @@ export function Previous({ num }: { num: number }) {
   return (
     <>
       {num > 1 ? (
-        <Link href={`/quran/surat/${num - 1}`}>
+        <Link href={`/quran/${num - 1}`}>
           <button
             onClick={removeSelectedSurat}
             type="button"

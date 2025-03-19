@@ -73,12 +73,7 @@ export default async function Quran() {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center space-x-3">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-
-            )}
-          >
+          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
             Baca Al-Qur&#39;an
           </h1>
           <Image

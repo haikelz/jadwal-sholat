@@ -5,8 +5,9 @@ import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 
-import Client from "./client";
+const SuratClient = dynamic(() => import("./client"));
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
@@ -18,9 +19,9 @@ export async function generateStaticParams(): Promise<{ number: string }[]> {
   return response.data.map((item) => ({ number: item.number.toString() }));
 }
 
-export async function generateMetadata(
-  props: { params:Promise<{ number: string }> }
-): Promise<Metadata | undefined> {
+export async function generateMetadata(props: {
+  params: Promise<{ number: string }>;
+}): Promise<Metadata | undefined> {
   const { number } = await props.params;
 
   const response: SuratProps = await getData(
@@ -32,7 +33,7 @@ export async function generateMetadata(
   const base = {
     title: asma.id.short,
     description: tafsir.id,
-    url: `${MetaUrl.Site_Url}/quran/surat/${number}`,
+    url: `${MetaUrl.Site_Url}/quran/${number}`,
   };
 
   return {
@@ -49,7 +50,7 @@ export async function generateMetadata(
           alt: "OG Image",
         },
       ],
-      siteName: `jdwshlt.ekel.dev/quran/surat/${number}`,
+      siteName: `jdwshlt.ekel.dev/quran/${number}`,
     },
     twitter: {
       title: base.title,
@@ -61,9 +62,9 @@ export async function generateMetadata(
   };
 }
 
-export default async function Surat(
-  props: { params:Promise<{ number: string }> }
-) {
+export default async function Surat(props: {
+  params: Promise<{ number: string }>;
+}) {
   const { number } = await props.params;
 
   return (
@@ -78,7 +79,7 @@ export default async function Surat(
           "pt-8 pb-24 md:pb-8"
         )}
       >
-        <Client number={number} />
+        <SuratClient number={number} />
       </TransitionLayout>
     </>
   );

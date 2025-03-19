@@ -8,7 +8,7 @@ export function Next({ data }: SuratProps) {
   return (
     <>
       {data.number ? (
-        <Link href={`/quran/surat/${data.number + 1}`}>
+        <Link href={`/quran/${data.number + 1}`}>
           <button
             type="button"
             aria-label="next"

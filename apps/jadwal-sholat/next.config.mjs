@@ -22,6 +22,7 @@ const config = withSentryConfig(
     compress: true,
     experimental: {
       webpackBuildWorker: true,
+      optimizePackageImports: ["@radix-ui/*"],
     },
   }),
   {

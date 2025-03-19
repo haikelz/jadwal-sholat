@@ -1,3 +1,5 @@
+"use client";
+
 import useGlobalStore from "@/store";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";

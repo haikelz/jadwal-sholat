@@ -15,7 +15,7 @@ import { useAudioPlayer } from "react-use-audio-player";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
-export default function Client({ number }: { number: string }) {
+export default function SuratClient({ number }: { number: string }) {
   const {
     audio,
     terjemahan,

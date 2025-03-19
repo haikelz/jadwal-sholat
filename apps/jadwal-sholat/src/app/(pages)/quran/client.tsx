@@ -65,21 +65,16 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
           Terakhir dibaca:{" "}
           {lastRead.ayat || lastRead.number !== null ? (
             <Link
-              href={`/quran/surat/${lastRead.number}`}
+              href={`/quran/${lastRead.number}`}
               onClick={() =>
                 localStorage.setItem(
                   "selected-surat",
                   lastRead.number!.toString() as string
                 )
               }
-              className={cn(
-                "font-bold",
-                "hover:text-red-500",
-                "dark:text-white hover:underline"
-              )}
+              className={cn("font-bold", "dark:text-white hover:underline")}
             >
-              <span
-              >
+              <span>
                 Surat {lastRead.name} ayat {lastRead.ayat}
               </span>
             </Link>
@@ -102,7 +97,7 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
             {filteredSurat.map((surat) => (
               <Link
                 key={surat.number}
-                href={`/quran/surat/${surat.number}`}
+                href={`/quran/${surat.number}`}
                 onClick={removeSelectedSurat}
               >
                 <Card data-cy="card">

@@ -10,9 +10,11 @@ import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 
-export default function DoaHarianClient(
-  { doaHarian }: { doaHarian: DoaHarianProps[] }
-) {
+export default function DoaHarianClient({
+  doaHarian,
+}: {
+  doaHarian: DoaHarianProps[];
+}) {
   const searchParams = useSearchParams();
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(

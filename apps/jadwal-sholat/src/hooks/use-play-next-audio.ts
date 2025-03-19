@@ -7,7 +7,7 @@ import { useDeepCompareEffect } from "use-deep-compare";
 
 interface UsePlayNextAudioProps extends PlayNextAudioSliceProps {
   audioIndex: number;
-  setAudioIndex: Dispatch<SetStateAction<number>>
+  setAudioIndex: Dispatch<SetStateAction<number>>;
   pause: () => void;
   play: () => void;
   playing: boolean;
@@ -62,7 +62,7 @@ export function usePlayNextAudio(
 
           if (audioIndex + 1 === audioList.length) {
             if (num === 114) return;
-            router.push(`/quran/surat/${num + 1}`);
+            router.push(`/quran/${num + 1}`);
           }
 
           setIsAudioEnded(true);

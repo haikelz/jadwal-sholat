@@ -15,7 +15,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -143,8 +142,15 @@ export function CustomSidebar({ children }: ChildrenProps) {
                   {routesList.map((item, index) => (
                     <Fragment key={index + 1}>
                       <BreadcrumbItem className="hidden md:block">
-                        <BreadcrumbLink href={item.url}>
-                          {item.title}
+                        <BreadcrumbLink asChild>
+                          <Link
+                            href={item.url}
+                            className={cn(
+                              pathname === item.url ? "font-bold" : ""
+                            )}
+                          >
+                            {item.title}
+                          </Link>
                         </BreadcrumbLink>
                       </BreadcrumbItem>
                       {index >= routesList.length - 1 ? null : (

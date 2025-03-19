@@ -14,7 +14,7 @@ export default function PreviousOrNext({ num }: { num: number }) {
       )}
     >
       {num > 1 ? (
-        <Link href={`/quran/surat/${num - 1}`}>
+        <Link href={`/quran/${num - 1}`}>
           <Button
             onClick={removeSelectedSurat}
             type="button"
@@ -25,7 +25,7 @@ export default function PreviousOrNext({ num }: { num: number }) {
         </Link>
       ) : null}
       {num < 114 ? (
-        <Link href={`/quran/surat/${num + 1}`}>
+        <Link href={`/quran/${num + 1}`}>
           <Button type="button" aria-label="next" onClick={removeSelectedSurat}>
             <ArrowRight size={20} />
           </Button>

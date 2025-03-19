@@ -12,9 +12,11 @@ import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 
-export default function AsmaulHusnaClient(
-  { asmaulHusna }: { asmaulHusna: AsmaulHusnaProps[] }
-) {
+export default function AsmaulHusnaClient({
+  asmaulHusna,
+}: {
+  asmaulHusna: AsmaulHusnaProps[];
+}) {
   const searchParams = useSearchParams();
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
