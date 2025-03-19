@@ -10,8 +10,6 @@ import {
   HandHelping,
   List,
   LucideIcon,
-  Menu,
-  X,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -25,7 +23,6 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "./ui/breadcrumb";
-import { Button } from "./ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -38,7 +35,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-  useSidebar,
+  SidebarTrigger,
 } from "./ui/sidebar";
 
 const SwitchTheme = dynamic(() => import("@/components/switch-theme"), {
@@ -139,7 +136,7 @@ export function CustomSidebar({ children }: ChildrenProps) {
         <SidebarInset>
           <header className="flex h-16 shrink-0 sticky top-0 z-50 dark:bg-gray-950/70 bg-white/70 backdrop-blur-md items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
             <div className="flex items-center gap-2 px-4">
-              <CustomTrigger />
+              <SidebarTrigger />
               <Separator orientation="vertical" className="mr-2 h-4" />
               <Breadcrumb>
                 <BreadcrumbList>
@@ -173,20 +170,5 @@ export function CustomSidebar({ children }: ChildrenProps) {
         </SidebarInset>
       </SidebarProvider>
     </>
-  );
-}
-
-function CustomTrigger() {
-  const { toggleSidebar, open } = useSidebar();
-
-  return (
-    <Button
-      className={cn("rounded-full")}
-      size="icon"
-      onClick={toggleSidebar}
-      variant="outline"
-    >
-      {open ? <X /> : <Menu />}
-    </Button>
   );
 }

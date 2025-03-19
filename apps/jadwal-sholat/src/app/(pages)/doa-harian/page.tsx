@@ -74,12 +74,7 @@ export default async function DoaHarian() {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-
-            )}
-          >
+          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
             Do&#39;a Harian
           </h1>
           <Image

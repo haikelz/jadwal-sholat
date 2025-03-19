@@ -15,7 +15,6 @@ module.exports = {
   trailingComma: "es5",
   useTabs: false,
   vueIndentScriptAndStyle: false,
-  plugins: ["@trivago/prettier-plugin-sort-imports"],
   importOrder: ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,

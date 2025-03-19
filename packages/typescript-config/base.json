@@ -11,8 +11,14 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
+    "allowJs": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "noEmit": true,
+    "module": "ESNext",
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "incremental": true
   },
   "exclude": ["node_modules"]
 }

@@ -32,8 +32,8 @@ There are three branches in this repository:
 To see and test the project in detail:
 
 - Clone the project with `git clone https://github.com/haikelz/jadwal-sholat.git`.
-- Install dependencies with the command `pnpm install`. If you use a different package manager, please adjust it accordingly and don't forget 
-to remove the `pnpm-lock.yaml` file.
+- Install dependencies with the command `pnpm install`. If you use a different package manager, please adjust it accordingly and don't forget
+  to remove the `pnpm-lock.yaml` file.
 - This project uses **turborepo**. So if you want to run the project with turbo, first install it globally with the command `pnpm install -g 
 turbo`. After installation, type `turbo run dev` and see the results in your browser => `http://localhost:3000`.
 
@@ -41,10 +41,10 @@ turbo`. After installation, type `turbo run dev` and see the results in your bro
 
 |                                                                     |                                                                      |
 | :-----------------------------------------------------------------: | :------------------------------------------------------------------: |
-| ![ss 1](/static/docs/Screenshot%20from%202024-05-01%2017-26-51.png) | ![ss 2](/static/docs/Screenshot%20from%202024-05-02%2010-47-17.png)  |
-| ![ss 3](/static/docs/Screenshot%20from%202024-05-02%2010-47-26.png) | ![ss 4](/static/docs/Screenshot%20from%202024-05-01%2017-28-49.png)  |
-| ![ss 5](/static/docs/Screenshot%20from%202024-05-01%2017-29-15.png) | ![ss 8](/static/docs/Screenshot%20from%202024-05-01%2017-29-20.png)  |
-| ![ss 9](/static/docs/Screenshot%20from%202024-05-01%2017-29-35.png) | ![ss 10](/static/docs/Screenshot%20from%202024-05-01%2017-29-42.png) |
+| ![ss 1](/static/docs/Screenshot%20From%202025-03-19%2019-17-06.png) | ![ss 2](/static/docs/Screenshot%20From%202025-03-19%2019-20-16.png)  |
+| ![ss 3](/static/docs/Screenshot%20From%202025-03-19%2019-17-30.png) | ![ss 4](/static/docs/Screenshot%20From%202025-03-19%2019-17-33.png)  |
+| ![ss 5](/static/docs/Screenshot%20From%202025-03-19%2019-17-44.png) | ![ss 8](/static/docs/Screenshot%20From%202025-03-19%2019-18-19.png)  |
+| ![ss 9](/static/docs/Screenshot%20From%202025-03-19%2019-18-27.png) | ![ss 10](/static/docs/Screenshot%20From%202025-03-19%2019-20-11.png) |
 |                                                                     |                                                                      |
 
 ## Activity
