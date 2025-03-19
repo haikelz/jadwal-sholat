@@ -19,24 +19,14 @@ export default function PreviousOrNext({ num }: { num: number }) {
             onClick={removeSelectedSurat}
             type="button"
             aria-label="Previous"
-            className={cn("flex items-center justify-center space-x-1")}
           >
             <ArrowLeft size={20} />
-            <p className="text-base font-bold">Previous</p>
           </Button>
         </Link>
       ) : null}
       {num < 114 ? (
         <Link href={`/quran/surat/${num + 1}`}>
-          <Button
-            type="button"
-            aria-label="next"
-            onClick={removeSelectedSurat}
-            className={cn(
-              "flex items-center justify-center space-x-1 rounded-md"
-            )}
-          >
-            <p className="text-base font-bold">Next</p>
+          <Button type="button" aria-label="next" onClick={removeSelectedSurat}>
             <ArrowRight size={20} />
           </Button>
         </Link>

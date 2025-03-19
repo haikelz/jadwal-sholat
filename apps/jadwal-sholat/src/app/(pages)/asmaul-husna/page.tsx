@@ -4,14 +4,12 @@ import { AsmaulHusnaProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
-import { bitter } from "@/lib/utils/fonts";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
 const AsmaulHusnaClient = dynamic(() => import("./client"));
 
-const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env
-
+const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 
 const baseMetadata = {
   title: "Asma'ul Husna | Jadwal Sholat",
@@ -46,13 +44,15 @@ export const metadata = {
   metadataBase: new URL(url),
 };
 
-async function getAllAsmaulHusna ( ): Promise<AsmaulHusnaProps[]> {
-   try  {
-    const response: { data: AsmaulHusnaProps[] } = await getData(`${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/all`)
-    return response.data as AsmaulHusnaProps[]
-    } catch ( err: any) {
-    throw new Error ( err.message)
-   }
+async function getAllAsmaulHusna(): Promise {
+  try {
+    const response: { data: AsmaulHusnaProps[] } = await getData(
+      `${NEXT_PUBLIC_ASMAUL_HUSNA_API}/api/all`
+    );
+    return response.data as AsmaulHusnaProps[];
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
 }
 
 export default async function AsmaulHusna() {
@@ -71,12 +71,7 @@ export default async function AsmaulHusna() {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-              bitter.className
-            )}
-          >
+          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
             Asma&#39;ul Husna
           </h1>
         </div>

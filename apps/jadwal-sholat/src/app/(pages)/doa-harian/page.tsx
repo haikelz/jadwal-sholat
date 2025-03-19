@@ -4,7 +4,6 @@ import { DoaHarianProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
-import { bitter } from "@/lib/utils/fonts";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-async function getDoaHarian(): Promise<DoaHarianProps[]> {
+async function getDoaHarian(): Promise {
   try {
     const response: DoaHarianProps[] = await getData(
       NEXT_PUBLIC_DOA_HARIAN_API
@@ -75,12 +74,7 @@ export default async function DoaHarian() {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-              bitter.className
-            )}
-          >
+          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
             Do&#39;a Harian
           </h1>
           <Image

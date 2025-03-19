@@ -1,9 +1,9 @@
-import Navbar from "@/components/navbar";
+import { CustomSidebar } from "@/components/sidebar";
 import { Toaster } from "@/components/ui/toaster";
 import { ChildrenProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
-import { bitter, ibmPlexSans } from "@/lib/utils/fonts";
+import { geistSans } from "@/lib/utils/fonts";
 import { Metadata, Viewport } from "next";
 
 import "./globals.css";
@@ -63,12 +63,8 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: ChildrenProps) {
   return (
-    <html
-      lang="en"
-      className={cn(ibmPlexSans.variable, bitter.variable)}
-      suppressHydrationWarning
-    >
-      <body className={cn(ibmPlexSans.className)}>
+    <html lang="en" className={cn(geistSans.variable)} suppressHydrationWarning>
+      <body className={cn(geistSans.className)}>
         <Wrapper>
           <div
             className={cn(
@@ -77,18 +73,7 @@ export default function Layout({ children }: ChildrenProps) {
               "dark:bg-gray-950 dark:text-white"
             )}
           >
-            <Navbar />
-            <main className="flex w-full justify-center">
-              <section
-                className={cn(
-                  "flex w-full max-w-full flex-col items-center min-h-screen",
-                  "bg-white px-5 text-center",
-                  "dark:bg-gray-950"
-                )}
-              >
-                {children}
-              </section>
-            </main>
+            <CustomSidebar>{children}</CustomSidebar>
           </div>
         </Wrapper>
         <Toaster />

@@ -4,7 +4,6 @@ import { ListSuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
-import { bitter } from "@/lib/utils/fonts";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-async function getSurat(): Promise<ListSuratProps> {
+async function getSurat(): Promise {
   try {
     const response: ListSuratProps = await getData(
       `${NEXT_PUBLIC_QURAN_API}/quran`
@@ -74,12 +73,7 @@ export default async function Quran() {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center space-x-3">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-              bitter.className
-            )}
-          >
+          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
             Baca Al-Qur&#39;an
           </h1>
           <Image

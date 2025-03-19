@@ -9,7 +9,6 @@ import { env } from "@/env.mjs";
 import { useFetch, useGeolocation } from "@/hooks";
 import { cn } from "@/lib/utils/cn";
 import { bulan, currentDate, tahun } from "@/lib/utils/constants";
-import { bitter } from "@/lib/utils/fonts";
 import useGlobalStore from "@/store";
 import { MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -56,12 +55,7 @@ export default function JadwalSholatClient() {
       <Adzan waktu={waktu} />
       <div className="flex mb-4 flex-col items-center justify-center">
         <div className="flex items-center justify-center gap-3">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-              bitter.className
-            )}
-          >
+          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
             Jadwal Sholat
           </h1>
           <Image

@@ -29,7 +29,7 @@ export default function ReadingProgress() {
   return (
     <div
       style={{ width: width + "%" }}
-      className={cn("fixed z-10 h-1 bg-gray-950", "dark:bg-gray-50")}
+      className={cn("fixed z-50 h-1 top-0 bg-gray-950", "dark:bg-gray-50")}
     ></div>
   );
 }

@@ -1,4 +1,3 @@
-import ReadingProgress from "@/components/reading-progress";
 import TransitionLayout from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { ListSuratProps, SuratProps } from "@/interfaces";
@@ -69,7 +68,6 @@ export default async function Surat(
 
   return (
     <>
-      <ReadingProgress />
       <TransitionLayout
         transition={{ duration: 0.3 }}
         initial={{ opacity: 0 }}
@@ -77,7 +75,7 @@ export default async function Surat(
         className={cn(
           "flex w-full max-w-full",
           "flex-col items-center justify-start",
-          "pt-8 pb-24 md:pb-8" 
+          "pt-8 pb-24 md:pb-8"
         )}
       >
         <Client number={number} />

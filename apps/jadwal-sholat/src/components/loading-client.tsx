@@ -4,7 +4,7 @@ export default function LoadingClient() {
   return (
     <div
       className={cn(
-        "modal-blur fixed inset-0 top-0 z-50",
+        "modal-blur inset-0 fixed top-0 z-50",
         "flex min-h-screen w-full items-center justify-center",
         "overflow-x-hidden"
       )}

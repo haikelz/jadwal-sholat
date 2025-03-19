@@ -8,7 +8,6 @@ import PreviousOrNext from "@/components/previous-or-next";
 import { env } from "@/env.mjs";
 import { useFetch } from "@/hooks";
 import { cn } from "@/lib/utils/cn";
-import { bitter } from "@/lib/utils/fonts";
 import { qoriOptions } from "@/lib/utils/qori-options";
 import useGlobalStore from "@/store";
 import { Languages, MessageSquare, Volume2 } from "lucide-react";
@@ -59,12 +58,7 @@ export default function Client({ number }: { number: string }) {
     <>
       <div className="flex flex-col w-full items-center justify-center">
         <div className="flex flex-col items-center justify-center">
-          <h1
-            className={cn(
-              "text-3xl font-bold tracking-wide sm:text-4xl",
-              bitter.className
-            )}
-          >
+          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
             {surat.asma.id.short}
           </h1>
           <p className="font-semibold m-1 tracking-wide">
