@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ChildrenProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
-import { geistSans } from "@/lib/utils/fonts";
+import { geistSans, lpmqIsepMisbah } from "@/lib/utils/fonts";
 import { Metadata, Viewport } from "next";
 
 import "./globals.css";
@@ -63,7 +63,11 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: ChildrenProps) {
   return (
-    <html lang="en" className={cn(geistSans.variable)} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(geistSans.variable, lpmqIsepMisbah.variable)}
+      suppressHydrationWarning
+    >
       <body className={cn(geistSans.className)}>
         <Wrapper>
           <div
