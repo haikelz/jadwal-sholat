@@ -40,6 +40,13 @@ import {
 const SwitchTheme = dynamic(() => import("@/components/switch-theme"), {
   ssr: false,
 });
+const ReadingProgress = dynamic(
+  () =>
+    import("@/components/reading-progress").then(
+      (comp) => comp.ReadingProgress
+    ),
+  { ssr: false }
+);
 
 const navbarList = [
   {
@@ -133,34 +140,39 @@ export function CustomSidebar({ children }: ChildrenProps) {
           </SidebarFooter>
         </Sidebar>
         <SidebarInset>
-          <header className="flex h-16 shrink-0 sticky top-0 z-50 dark:bg-gray-950/70 bg-white/70 backdrop-blur-md items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-            <div className="flex items-center gap-2 px-4">
-              <SidebarTrigger />
-              <Separator orientation="vertical" className="mr-2 h-4" />
-              <Breadcrumb>
-                <BreadcrumbList>
-                  {routesList.map((item, index) => (
-                    <Fragment key={index + 1}>
-                      <BreadcrumbItem className="hidden md:block">
-                        <BreadcrumbLink asChild>
-                          <Link
-                            href={item.url}
-                            className={cn(
-                              pathname === item.url ? "font-bold" : ""
-                            )}
-                          >
-                            {item.title}
-                          </Link>
-                        </BreadcrumbLink>
-                      </BreadcrumbItem>
-                      {index >= routesList.length - 1 ? null : (
-                        <BreadcrumbSeparator className="hidden md:block" />
-                      )}
-                    </Fragment>
-                  ))}
-                </BreadcrumbList>
-              </Breadcrumb>
-            </div>
+          <header className="flex h-16 shrink-0 sticky top-0 px-4 z-50 dark:bg-gray-950/70 bg-white/70 backdrop-blur-md items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+            <nav className="flex justify-between space-x-2 w-full items-center">
+              <div className="flex items-center gap-2">
+                <SidebarTrigger />
+                <Separator orientation="vertical" className="mr-2 h-4" />
+                <Breadcrumb>
+                  <BreadcrumbList>
+                    {routesList.map((item, index) => (
+                      <Fragment key={index + 1}>
+                        <BreadcrumbItem className="hidden md:block">
+                          <BreadcrumbLink asChild>
+                            <Link
+                              href={item.url}
+                              className={cn(
+                                pathname === item.url ? "font-bold" : ""
+                              )}
+                            >
+                              {item.title}
+                            </Link>
+                          </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        {index >= routesList.length - 1 ? null : (
+                          <BreadcrumbSeparator className="hidden md:block" />
+                        )}
+                      </Fragment>
+                    ))}
+                  </BreadcrumbList>
+                </Breadcrumb>
+              </div>
+              {routeSegments.includes("quran") && routeSegments.length >= 2 ? (
+                <ReadingProgress />
+              ) : null}
+            </nav>
           </header>
           <main className="flex w-full justify-center min-h-svh">
             <section

@@ -1,10 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
 import { useCallback, useEffect } from "react";
 
-export default function ReadingProgress() {
+export function ReadingProgress() {
   const { width, setWidth } = useGlobalStore((state) => ({
     width: state.width,
     setWidth: state.setWidth,
@@ -26,10 +25,7 @@ export default function ReadingProgress() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  return (
-    <div
-      style={{ width: width + "%" }}
-      className={cn("fixed z-50 h-1 top-0 bg-gray-950", "dark:bg-gray-50")}
-    ></div>
-  );
+  const roundPercent = Math.round(width);
+
+  return <span className="text-sm font-bold">{roundPercent}%</span>;
 }
