@@ -9,15 +9,15 @@ import { removeSelectedSurat } from "@/lib/helpers";
 import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useQueryState } from "nuqs";
 import { useEffect, useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 
 export default function QuranClient({ surat }: { surat: ListSuratProps }) {
-  const searchParams = useSearchParams();
+  const [search, setSearch] = useQueryState("search");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
-    searchParams.get("search") as string
+    search as string
   );
 
   const { lastRead, setLastRead } = useGlobalStore((state) => ({
@@ -60,7 +60,7 @@ export default function QuranClient({ surat }: { surat: ListSuratProps }) {
           "dark:text-white"
         )}
       >
-        <SearchBar searchParams={searchParams} name="search" />
+        <SearchBar setSearch={setSearch} name="search" />
         <p className="mt-2 text-lg font-medium">
           Terakhir dibaca:{" "}
           {lastRead.ayat || lastRead.number !== null ? (

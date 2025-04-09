@@ -6,6 +6,7 @@ import { MetaUrl } from "@/lib/utils/enums";
 import { geistSans, lpmqIsepMisbah } from "@/lib/utils/fonts";
 import { Metadata, Viewport } from "next";
 
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import Wrapper from "./wrapper";
 
@@ -69,18 +70,20 @@ export default function Layout({ children }: ChildrenProps) {
       suppressHydrationWarning
     >
       <body className={cn(geistSans.className)}>
-        <Wrapper>
-          <div
-            className={cn(
-              "bg-white text-black",
-              "md:flex",
-              "dark:bg-gray-950 dark:text-white"
-            )}
-          >
-            <CustomSidebar>{children}</CustomSidebar>
-          </div>
-        </Wrapper>
-        <Toaster />
+        <NuqsAdapter>
+          <Wrapper>
+            <div
+              className={cn(
+                "bg-white text-black",
+                "md:flex",
+                "dark:bg-gray-950 dark:text-white"
+              )}
+            >
+              <CustomSidebar>{children}</CustomSidebar>
+            </div>
+          </Wrapper>
+          <Toaster />
+        </NuqsAdapter>
       </body>
     </html>
   );

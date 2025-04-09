@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useAscending } from "@/hooks";
 import { DoaHarianProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
-import { useSearchParams } from "next/navigation";
+import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 
@@ -15,10 +15,10 @@ export default function DoaHarianClient({
 }: {
   doaHarian: DoaHarianProps[];
 }) {
-  const searchParams = useSearchParams();
+  const [search, setSearch] = useQueryState("search");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
-    searchParams.get("search") as string
+    search as string
   );
 
   const filteredDoaHarian = useMemo(
@@ -42,7 +42,7 @@ export default function DoaHarianClient({
   return (
     <>
       <div className={cn("flex flex-col items-center justify-center")}>
-        <SearchBar searchParams={searchParams} name="search" />
+        <SearchBar setSearch={setSearch} name="search" />
       </div>
       <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredDoaHarian ? (

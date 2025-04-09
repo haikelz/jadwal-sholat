@@ -3,32 +3,17 @@
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils/cn";
 import { Search } from "lucide-react";
-import {
-  ReadonlyURLSearchParams,
-  usePathname,
-  useRouter,
-} from "next/navigation";
-import { useCallback } from "react";
+import { Options } from "nuqs";
 
 interface SearchBarProps {
-  searchParams: ReadonlyURLSearchParams;
   name: string;
+  setSearch: (
+    value: string | ((old: string | null) => string | null) | null,
+    options?: Options
+  ) => Promise<URLSearchParams>;
 }
 
-export default function SearchBar({ searchParams, name }: SearchBarProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
+export default function SearchBar({ name, setSearch }: SearchBarProps) {
   return (
     <div className="relative flex items-center justify-center">
       <div className="absolute left-0 pl-3">
@@ -37,9 +22,7 @@ export default function SearchBar({ searchParams, name }: SearchBarProps) {
       <Input
         type="text"
         placeholder="Search...."
-        onChange={(e) =>
-          router.push(pathname + "?" + createQueryString(name, e.target.value))
-        }
+        onChange={(e) => setSearch(e.target.value)}
         className={cn("w-[300px] placeholder:ml-6 px-3 py-1 pl-10")}
       />
     </div>

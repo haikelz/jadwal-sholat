@@ -8,7 +8,7 @@ import { useAscending } from "@/hooks";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
-import { useSearchParams } from "next/navigation";
+import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 
@@ -17,10 +17,10 @@ export default function AsmaulHusnaClient({
 }: {
   asmaulHusna: AsmaulHusnaProps[];
 }) {
-  const searchParams = useSearchParams();
+  const [search, setSearch] = useQueryState("search");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
-    searchParams.get("search") as string
+    search as string
   );
 
   const {
@@ -56,7 +56,7 @@ export default function AsmaulHusnaClient({
   return (
     <>
       <div className={cn("flex flex-col items-center justify-center mb-7")}>
-        <SearchBar searchParams={searchParams} name="search" />
+        <SearchBar setSearch={setSearch} name="search" />
       </div>
       <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredAsmaulHusna ? (
