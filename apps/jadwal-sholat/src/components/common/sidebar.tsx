@@ -21,7 +21,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "./ui/breadcrumb";
+} from "../ui/breadcrumb";
 import {
   Sidebar,
   SidebarContent,
@@ -35,14 +35,17 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
-} from "./ui/sidebar";
+} from "../ui/sidebar";
 
-const SwitchTheme = dynamic(() => import("@/components/switch-theme"), {
-  ssr: false,
-});
+const SwitchTheme = dynamic(
+  () => import("@/components/switch-theme").then((mod) => mod.SwitchTheme),
+  {
+    ssr: false,
+  }
+);
 const ReadingProgress = dynamic(
   () =>
-    import("@/components/reading-progress").then(
+    import("@/components/quran/detail-surat/reading-progress").then(
       (comp) => comp.ReadingProgress
     ),
   { ssr: false }

@@ -16,7 +16,7 @@ const tableJadwalSholatList = [
   { id: 8, name: "Maghrib" },
 ];
 
-export default function Jadwal({ waktu }: { waktu: JadwalSholatProps[] }) {
+export function Jadwal({ waktu }: { waktu: JadwalSholatProps[] }) {
   return (
     <table className="table-fixed border-2 border-black dark:border-none">
       <thead className="border-2 border-black dark:border-none">
@@ -45,20 +45,20 @@ export default function Jadwal({ waktu }: { waktu: JadwalSholatProps[] }) {
                 locale: id,
               }),
             },
-            { id: 2, waktu: formatSholatTime(time.timings.Imsak)},
-            { id: 3, waktu: formatSholatTime(time.timings.Fajr)},
+            { id: 2, waktu: formatSholatTime(time.timings.Imsak) },
+            { id: 3, waktu: formatSholatTime(time.timings.Fajr) },
             {
               id: 4,
               waktu: formatSholatTime(time.timings.Sunrise),
             },
-            { id: 5, waktu: formatSholatTime(time.timings.Dhuhr)},
-            { id: 6, waktu: formatSholatTime(time.timings.Asr)},
-            { id: 7, waktu: formatSholatTime(time.timings.Sunset)},
+            { id: 5, waktu: formatSholatTime(time.timings.Dhuhr) },
+            { id: 6, waktu: formatSholatTime(time.timings.Asr) },
+            { id: 7, waktu: formatSholatTime(time.timings.Sunset) },
             {
               id: 8,
               waktu: formatSholatTime(time.timings.Maghrib),
             },
-            { id: 9, waktu: formatSholatTime(time.timings.Isha)},
+            { id: 9, waktu: formatSholatTime(time.timings.Isha) },
           ];
           return (
             <tr

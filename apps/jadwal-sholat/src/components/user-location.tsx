@@ -23,7 +23,7 @@ async function getUserCurrentLocation(
   }
 }
 
-export default function UserLocation() {
+export function UserLocation() {
   const { position } = useGlobalStore((state) => ({
     position: state.position,
   }));
@@ -44,7 +44,9 @@ export default function UserLocation() {
         ? "-"
         : data?.address.city
         ? data.address.city
-        : data?.address.village ? data.address.village : data?.address.county }
+        : data?.address.village
+        ? data.address.village
+        : data?.address.county}
     </span>
   );
 }

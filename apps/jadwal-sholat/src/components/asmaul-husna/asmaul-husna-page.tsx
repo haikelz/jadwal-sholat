@@ -1,8 +1,5 @@
 "use client";
 
-import ModalAsmaulHusna from "@/components/modal-asmaul-husna";
-import SearchBar from "@/components/search-bar";
-import SortByOrder from "@/components/sort-by-order";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useAscending } from "@/hooks";
 import { AsmaulHusnaProps } from "@/interfaces";
@@ -11,8 +8,11 @@ import useGlobalStore from "@/store";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
+import { SearchBar } from "../common/search-bar";
+import { SortByOrder } from "../common/sort-by-order";
+import { ModalAsmaulHusna } from "./modal-asmaul-husna";
 
-export default function AsmaulHusnaClient({
+export function AsmaulHusnaPage({
   asmaulHusna,
 }: {
   asmaulHusna: AsmaulHusnaProps[];

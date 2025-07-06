@@ -52,7 +52,7 @@ function DetectPosition() {
   return null;
 }
 
-export default function Map() {
+export function Map() {
   // set default position to Kota Bandung
   const { position } = useGlobalStore((state) => ({
     position: state.position,

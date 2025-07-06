@@ -1,17 +1,15 @@
-import TransitionLayout from "@/components/transition-layout";
+import { QuranPage } from "@/components/quran/quran-page";
+import { TransitionLayout } from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { ListSuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense } from "react";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
-
-const QuranClient = dynamic(() => import("./client"));
 
 const baseMetadata = {
   title: "Baca Al-Qur'an | Jadwal Sholat",
@@ -90,7 +88,7 @@ export default async function Quran() {
         </p>
       </div>
       <Suspense>
-        <QuranClient surat={surat} />
+        <QuranPage surat={surat} />
       </Suspense>
     </TransitionLayout>
   );

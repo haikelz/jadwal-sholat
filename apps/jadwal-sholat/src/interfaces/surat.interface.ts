@@ -9,7 +9,6 @@ export interface PlayNextAudioSliceProps {
 
 export interface OptionSliceProps {
   audio: boolean;
-  tafsir: boolean;
   terjemahan: boolean;
   notification: boolean;
   isMore: boolean;
@@ -17,7 +16,6 @@ export interface OptionSliceProps {
   setNotification: (status: boolean) => void;
   setAudio: (status: boolean) => void;
   setTerjemahan: (status: boolean) => void;
-  setTafsir: (status: boolean) => void;
   setQori: (id: number) => void;
 }
 

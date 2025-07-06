@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
 import { X } from "lucide-react";
 
-export default function ModalAsmaulHusna() {
+export function ModalAsmaulHusna() {
   const { setNumberModalAsmaulHusna, dataAsmaulHusna } = useGlobalStore(
     (state) => ({
       setNumberModalAsmaulHusna: state.setNumberModalAsmaulHusna,

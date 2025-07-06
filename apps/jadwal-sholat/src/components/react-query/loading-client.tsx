@@ -1,12 +1,11 @@
 import { cn } from "@/lib/utils/cn";
 
-export default function LoadingClient() {
+export function LoadingClient() {
   return (
     <div
       className={cn(
-        "modal-blur inset-0 fixed top-0 z-50",
-        "flex min-h-screen w-full items-center justify-center",
-        "overflow-x-hidden"
+        "modal-blur z-50",
+        "flex min-h-screen h-full w-full items-center justify-center"
       )}
     >
       <div className="bg-white rounded-lg p-4 font-medium dark:bg-gray-950 border border-input dark:text-white">

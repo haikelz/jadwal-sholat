@@ -1,7 +1,7 @@
 "use client";
 
-import SearchBar from "@/components/search-bar";
-import SortByOrder from "@/components/sort-by-order";
+import { SearchBar } from "@/components/common/search-bar";
+import { SortByOrder } from "@/components/common/sort-by-order";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useAscending } from "@/hooks";
 import { ListSuratProps } from "@/interfaces";
@@ -13,7 +13,7 @@ import { useQueryState } from "nuqs";
 import { useEffect, useMemo } from "react";
 import reactStringReplace from "react-string-replace";
 
-export default function QuranClient({ surat }: { surat: ListSuratProps }) {
+export function QuranPage({ surat }: { surat: ListSuratProps }) {
   const [search, setSearch] = useQueryState("search");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(

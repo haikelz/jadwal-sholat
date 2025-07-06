@@ -1,9 +1,8 @@
-import TransitionLayout from "@/components/transition-layout";
+import { Homepage } from "@/components/homepage";
+import { TransitionLayout } from "@/components/transition-layout";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
 import { Metadata } from "next";
-
-import JadwalSholatClient from "./client";
 
 const baseMetadata = {
   title: "Jadwal Sholat",
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(url),
 };
 
-export default function Homepage() {
+export default function Home() {
   return (
     <TransitionLayout
       transition={{ duration: 0.3 }}
@@ -50,7 +49,7 @@ export default function Homepage() {
         "pt-8 pb-24 md:pb-8"
       )}
     >
-      <JadwalSholatClient />
+      <Homepage />
     </TransitionLayout>
   );
 }

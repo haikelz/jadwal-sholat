@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-export default function SwitchTheme() {
+export function SwitchTheme() {
   const { theme, setTheme } = useTheme();
 
   return (
