@@ -1,16 +1,17 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useAscending } from "@/hooks";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
-import useGlobalStore from "@/store";
+import dynamic from "next/dynamic";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
-import reactStringReplace from "react-string-replace";
 import { SearchBar } from "../common/search-bar";
 import { SortByOrder } from "../common/sort-by-order";
-import { ModalAsmaulHusna } from "./modal-asmaul-husna";
+
+const DialogAsmaulHusna = dynamic(() =>
+  import("./dialog-asmaul-husna").then((mod) => mod.DialogAsmaulHusna)
+);
 
 export function AsmaulHusnaPage({
   asmaulHusna,
@@ -22,18 +23,6 @@ export function AsmaulHusnaPage({
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
     search as string
   );
-
-  const {
-    numberModalAsmaulHusna,
-    setNumberModalAsmaulHusna,
-    dataAsmaulHusna,
-    setDataAsmaulHusna,
-  } = useGlobalStore((state) => ({
-    numberModalAsmaulHusna: state.numberModalAsmaulHusna,
-    setNumberModalAsmaulHusna: state.setNumberModalAsmaulHusna,
-    dataAsmaulHusna: state.dataAsmaulHusna,
-    setDataAsmaulHusna: state.setDataAsmaulHusna,
-  }));
 
   const filteredAsmaulHusna = useMemo(
     () =>
@@ -68,42 +57,11 @@ export function AsmaulHusnaPage({
             )}
           >
             {filteredAsmaulHusna.map((item) => (
-              <Card
-                data-cy="card"
-                role="button"
-                tabIndex={0}
+              <DialogAsmaulHusna
+                dataAsmaulHusna={item}
+                deferredSearch={deferredSearch}
                 key={item.urutan}
-                onClick={() => {
-                  setNumberModalAsmaulHusna(Number(item.urutan));
-                  setDataAsmaulHusna(item);
-                }}
-              >
-                <CardHeader className="my-3 w-full text-right">
-                  <p className={cn("text-3xl font-medium", "arabic-font")}>
-                    {item.arab}
-                  </p>
-                </CardHeader>
-                <CardContent className="mt-1 text-left">
-                  <h3 className="text-lg mb-1 font-bold">
-                    {item.urutan}.{" "}
-                    {deferredSearch
-                      ? reactStringReplace(
-                          item.latin,
-                          deferredSearch,
-                          (match: string, index: number) => (
-                            <span
-                              key={index + 1}
-                              className="bg-lime-400 dark:bg-lime-600"
-                            >
-                              {match}
-                            </span>
-                          )
-                        )
-                      : item.latin}
-                  </h3>
-                  <p>{item.arti}</p>
-                </CardContent>
-              </Card>
+              />
             ))}
           </div>
         ) : (
@@ -116,10 +74,6 @@ export function AsmaulHusnaPage({
           Tidak ada data!
         </p>
       )}
-      {numberModalAsmaulHusna > 0 &&
-      numberModalAsmaulHusna === Number(dataAsmaulHusna.urutan) ? (
-        <ModalAsmaulHusna />
-      ) : null}
     </>
   );
 }

@@ -7,7 +7,7 @@ import { RefObject, useRef } from "react";
 
 import { Button } from "../ui/button";
 
-export function ModalNotification({ description }: { description: string }) {
+export function DialogNotification({ description }: { description: string }) {
   const { notification, setNotification } = useGlobalStore((state) => ({
     notification: state.notification,
     setNotification: state.setNotification,

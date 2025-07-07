@@ -17,9 +17,9 @@ import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 import { useClipboard } from "use-clipboard-copy";
 
-const ModalNotification = dynamic(() =>
-  import("@/components/common/modal-notification").then(
-    (mod) => mod.ModalNotification
+const DialogNotification = dynamic(() =>
+  import("@/components/common/dialog-notification").then(
+    (mod) => mod.DialogNotification
   )
 );
 
@@ -227,7 +227,7 @@ export function DetailSurat({ data }: SuratProps) {
           </div>
         ))}
       </div>
-      <ModalNotification description="Sudah Ditandai!" />
+      <DialogNotification description="Sudah Ditandai!" />
     </>
   );
 }
