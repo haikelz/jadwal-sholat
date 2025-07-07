@@ -1,15 +1,13 @@
-import TransitionLayout from "@/components/transition-layout";
+import { DoaHarianPage } from "@/components/doa-harian/doa-harian-page";
+import { TransitionLayout } from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { DoaHarianProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense } from "react";
-
-const DoaHarianClient = dynamic(() => import("./client"));
 
 const { NEXT_PUBLIC_DOA_HARIAN_API } = env;
 
@@ -91,7 +89,7 @@ export default async function DoaHarian() {
         </p>
       </div>
       <Suspense>
-        <DoaHarianClient doaHarian={doaHarian} />
+        <DoaHarianPage doaHarian={doaHarian} />
       </Suspense>
     </TransitionLayout>
   );

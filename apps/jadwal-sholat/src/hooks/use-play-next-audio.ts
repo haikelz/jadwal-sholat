@@ -10,7 +10,7 @@ interface UsePlayNextAudioProps extends PlayNextAudioSliceProps {
   setAudioIndex: Dispatch<SetStateAction<number>>;
   pause: () => void;
   play: () => void;
-  playing: boolean;
+  isPlaying: boolean;
   load: (src: string, options?: AudioLoadOptions | undefined) => void;
 }
 
@@ -45,7 +45,7 @@ export function usePlayNextAudio(
     setIsAudioEnded: state.setIsAudioEnded,
   }));
 
-  const { pause, play, load, playing } = useAudioPlayer();
+  const { pause, play, load, isPlaying } = useAudioPlayer();
 
   useDeepCompareEffect(() => {
     if (isPlayAudio) {
@@ -89,7 +89,7 @@ export function usePlayNextAudio(
     pause,
     play,
     load,
-    playing,
+    isPlaying,
     ayat,
     setAyat,
   };

@@ -1,7 +1,5 @@
 "use client";
 
-import SearchBar from "@/components/search-bar";
-import SortByOrder from "@/components/sort-by-order";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useAscending } from "@/hooks";
 import { DoaHarianProps } from "@/interfaces";
@@ -9,12 +7,10 @@ import { cn } from "@/lib/utils/cn";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 import reactStringReplace from "react-string-replace";
+import { SearchBar } from "../common/search-bar";
+import { SortByOrder } from "../common/sort-by-order";
 
-export default function DoaHarianClient({
-  doaHarian,
-}: {
-  doaHarian: DoaHarianProps[];
-}) {
+export function DoaHarianPage({ doaHarian }: { doaHarian: DoaHarianProps[] }) {
   const [search, setSearch] = useQueryState("search");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(

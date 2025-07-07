@@ -5,8 +5,9 @@ import { HTMLAttributes } from "react";
 
 type TransitionLayoutProps = MotionProps & HTMLAttributes<HTMLDivElement>;
 
-export default function TransitionLayout(
-  { children, ...props }: TransitionLayoutProps
-) {
+export function TransitionLayout({
+  children,
+  ...props
+}: TransitionLayoutProps) {
   return <m.div {...props}>{children}</m.div>;
 }

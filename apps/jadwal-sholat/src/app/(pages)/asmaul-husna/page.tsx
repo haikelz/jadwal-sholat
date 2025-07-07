@@ -1,13 +1,11 @@
-import TransitionLayout from "@/components/transition-layout";
+import { AsmaulHusnaPage } from "@/components/asmaul-husna/asmaul-husna-page";
+import { TransitionLayout } from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
-import dynamic from "next/dynamic";
 import { Suspense } from "react";
-
-const AsmaulHusnaClient = dynamic(() => import("./client"));
 
 const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 
@@ -80,7 +78,7 @@ export default async function AsmaulHusna() {
         </p>
       </div>
       <Suspense>
-        <AsmaulHusnaClient asmaulHusna={asmaulHusna} />
+        <AsmaulHusnaPage asmaulHusna={asmaulHusna} />
       </Suspense>
     </TransitionLayout>
   );

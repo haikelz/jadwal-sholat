@@ -2,10 +2,9 @@ import { removeSelectedSurat } from "@/lib/helpers";
 import { cn } from "@/lib/utils/cn";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "../../ui/button";
 
-import { Button } from "./ui/button";
-
-export default function PreviousOrNext({ num }: { num: number }) {
+export function PreviousOrNext({ num }: { num: number }) {
   return (
     <div
       className={cn(

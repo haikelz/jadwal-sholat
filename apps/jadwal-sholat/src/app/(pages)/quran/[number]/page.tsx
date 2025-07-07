@@ -1,13 +1,11 @@
-import TransitionLayout from "@/components/transition-layout";
+import { DetailSuratPage } from "@/components/quran/detail-surat/detail-surat-page";
+import { TransitionLayout } from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { ListSuratProps, SuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-const SuratClient = dynamic(() => import("./client"));
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
@@ -79,7 +77,7 @@ export default async function Surat(props: {
           "pt-8 pb-24 md:pb-8"
         )}
       >
-        <SuratClient number={number} />
+        <DetailSuratPage number={number} />
       </TransitionLayout>
     </>
   );

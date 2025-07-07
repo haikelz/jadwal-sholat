@@ -7,9 +7,7 @@ interface SortByOrderProps {
   setIsAscending: (isAscending: boolean) => void;
 }
 
-export default function SortByOrder(
-  { isAscending, setIsAscending }: SortByOrderProps
-) {
+export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps) {
   return (
     <div className="w-full flex justify-end items-center">
       <Button

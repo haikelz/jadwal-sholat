@@ -1,4 +1,4 @@
-import { CustomSidebar } from "@/components/sidebar";
+import { CustomSidebar } from "@/components/common/sidebar";
 import { Toaster } from "@/components/ui/toaster";
 import { ChildrenProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";

@@ -13,7 +13,7 @@ import { useDeepCompareEffect } from "use-deep-compare";
 import { formatSholatTime } from "@/lib/helpers";
 import { Button } from "./ui/button";
 
-export default function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
+export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   const filteredWaktu = waktu
     .filter((item) => item.date.gregorian.date === matchDate)
     .map((item) => ({

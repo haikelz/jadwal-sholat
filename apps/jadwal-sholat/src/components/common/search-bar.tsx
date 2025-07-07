@@ -13,7 +13,7 @@ interface SearchBarProps {
   ) => Promise<URLSearchParams>;
 }
 
-export default function SearchBar({ name, setSearch }: SearchBarProps) {
+export function SearchBar({ name, setSearch }: SearchBarProps) {
   return (
     <div className="relative flex items-center justify-center">
       <div className="absolute left-0 pl-3">

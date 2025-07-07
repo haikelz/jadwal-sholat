@@ -1,5 +1,6 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.experimental.useFlatConfig": true,
-  "waktusholat.kota": "pangkalpinang"
+  "waktusholat.kota": "pangkalpinang",
+  "nxConsole.generateAiAgentRules": true
 }

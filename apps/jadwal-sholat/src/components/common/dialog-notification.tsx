@@ -5,13 +5,9 @@ import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
 import { RefObject, useRef } from "react";
 
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-export default function ModalNotification({
-  description,
-}: {
-  description: string;
-}) {
+export function DialogNotification({ description }: { description: string }) {
   const { notification, setNotification } = useGlobalStore((state) => ({
     notification: state.notification,
     setNotification: state.setNotification,

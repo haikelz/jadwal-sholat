@@ -13,13 +13,11 @@ import {
 import { devtools } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { createWithEqualityFn } from "zustand/traditional";
-
 import adzanSlice from "./slices/adzan.slice";
 import dateSlice from "./slices/date.slice";
 import isOpenMapSlice from "./slices/is-open-map.slice";
 import lastReadSlice from "./slices/last-read.slice";
 import locationPositionSlice from "./slices/location-position.slice";
-import numberModalAsmaulHusnaSlice from "./slices/number-modal-asmaul-husna.slice";
 import optionSlice from "./slices/option.slice";
 import playNextAudioSlice from "./slices/play-next-audio.slice";
 import scrollSlice from "./slices/scroll.slice";
@@ -44,7 +42,6 @@ const useGlobalStore = createWithEqualityFn<
     ...widthSlice(...set),
     ...playNextAudioSlice(...set),
     ...scrollSlice(...set),
-    ...numberModalAsmaulHusnaSlice(...set),
     ...locationPositionSlice(...set),
     ...isOpenMapSlice(...set),
     ...adzanSlice(...set),

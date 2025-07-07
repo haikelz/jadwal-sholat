@@ -17,12 +17,13 @@ import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 import { useClipboard } from "use-clipboard-copy";
 
-const ModalNotification = dynamic(
-  () => import("@/components/modal-notification")
+const DialogNotification = dynamic(() =>
+  import("@/components/common/dialog-notification").then(
+    (mod) => mod.DialogNotification
+  )
 );
-const ModalTafsir = dynamic(() => import("@/components/modal-tafsir"));
 
-export default function DetailSurat({ data }: SuratProps) {
+export function DetailSurat({ data }: SuratProps) {
   const [ayatClick, setAyatClick] = useState<number>(0);
 
   const clipboard = useClipboard({ copiedTimeout: 1000 });
@@ -59,7 +60,7 @@ export default function DetailSurat({ data }: SuratProps) {
     setIsAudioEnded,
     pause,
     play,
-    playing,
+    isPlaying,
     ayat,
     setAyat,
   } = usePlayNextAudio(audioList, data.number);
@@ -118,7 +119,7 @@ export default function DetailSurat({ data }: SuratProps) {
                 className={cn(
                   "mr-2 flex h-8 w-8 border border-input items-center justify-center rounded-md p-5",
                   "font-bold",
-                  playing && audioList[audioIndex] === ayat.audio.url
+                  isPlaying && audioList[audioIndex] === ayat.audio.url
                     ? "bg-gray-50 dark:bg-gray-900"
                     : ""
                 )}
@@ -129,7 +130,7 @@ export default function DetailSurat({ data }: SuratProps) {
                 className={cn(
                   "text-right text-3xl tracking-wide font-medium leading-loose",
                   "arabic-font",
-                  playing && audioList[audioIndex] === ayat.audio.url
+                  isPlaying && audioList[audioIndex] === ayat.audio.url
                     ? "text-gray-600 dark:text-gray-400"
                     : ""
                 )}
@@ -141,7 +142,7 @@ export default function DetailSurat({ data }: SuratProps) {
               {audio ? (
                 <div className="mt-2.5 w-full flex justify-start items-start">
                   <div className="rounded-full">
-                    {playing && audioList[audioIndex] === ayat.audio.url ? (
+                    {isPlaying && audioList[audioIndex] === ayat.audio.url ? (
                       <button
                         type="button"
                         aria-label="pause audio"
@@ -226,8 +227,7 @@ export default function DetailSurat({ data }: SuratProps) {
           </div>
         ))}
       </div>
-      <ModalTafsir data={data} />
-      <ModalNotification description="Sudah Ditandai!" />
+      <DialogNotification description="Sudah Ditandai!" />
     </>
   );
 }
