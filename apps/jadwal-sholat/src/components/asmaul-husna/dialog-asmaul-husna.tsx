@@ -1,3 +1,4 @@
+import { AsmaulHusnaProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import reactStringReplace from "react-string-replace";
 import { Button } from "../ui/button";
@@ -13,7 +14,15 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 
-export function DialogAsmaulHusna({ dataAsmaulHusna, deferredSearch }) {
+type DialogAsmaulHusnaProps = {
+  dataAsmaulHusna: AsmaulHusnaProps;
+  deferredSearch: string;
+};
+
+export function DialogAsmaulHusna({
+  dataAsmaulHusna,
+  deferredSearch,
+}: DialogAsmaulHusnaProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -53,7 +62,7 @@ export function DialogAsmaulHusna({ dataAsmaulHusna, deferredSearch }) {
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6 p-6 flex justify-center items-centerg text-center flex-col">
+        <div className="space-y-6 p-6 flex justify-center items-center text-center flex-col">
           <h3 className="text-3xl arabic-font">{dataAsmaulHusna.arab}</h3>
           <p className="text-base leading-relaxed">{dataAsmaulHusna.arti}</p>
         </div>
