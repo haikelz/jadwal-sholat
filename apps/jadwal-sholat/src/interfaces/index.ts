@@ -41,3 +41,29 @@ export interface IsOpenMapProps {
   isOpenMap: boolean;
   setIsOpenMap: (isOpenMap: boolean) => void;
 }
+
+export interface PuasaSunnahType {
+  id: number;
+  name: string;
+  description: string;
+  background_color: string;
+  text_color: string;
+}
+
+export interface PuasaSunnahCategory {
+  id: number;
+  name: string;
+}
+
+export interface PuasaSunnah {
+  id: number;
+  category_id: number;
+  type_id: number;
+  date: string;
+  year: number;
+  month: number;
+  day: number;
+  human_date: string;
+  category: PuasaSunnahCategory;
+  type: PuasaSunnahType;
+}

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils/cn";
 import { Separator } from "@radix-ui/react-separator";
 import {
   BookMarked,
+  Calendar,
   Clock4,
   HandHelping,
   List,
@@ -65,6 +66,7 @@ const navbarList = [
     url: "/quran",
   },
   { id: 3, title: "Do'a Harian", icon: HandHelping, url: "/doa-harian" },
+  { id: 4, title: "Puasa Sunnah", icon: Calendar, url: "/puasa-sunnah" },
 ];
 
 export function CustomSidebar({ children }: ChildrenProps) {

@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
 import { geistSans, lpmqIsepMisbah } from "@/lib/utils/fonts";
 import { Metadata, Viewport } from "next";
-
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import Wrapper from "./wrapper";

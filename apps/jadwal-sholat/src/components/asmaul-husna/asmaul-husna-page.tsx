@@ -3,9 +3,10 @@
 import { useAscending } from "@/hooks";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
+import axios from "axios";
 import dynamic from "next/dynamic";
 import { useQueryState } from "nuqs";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { SearchBar } from "../common/search-bar";
 import { SortByOrder } from "../common/sort-by-order";
 
@@ -41,6 +42,24 @@ export function AsmaulHusnaPage({
         }),
     [deferredSearch, asmaulHusna, isAscending]
   );
+
+  async function A() {
+    try {
+      const response: { data: AsmaulHusnaProps[] } = await axios.post(
+        `https://api-ahsan.shidiqcorp.id/register/customer`
+      );
+
+      console.log(response.data);
+      return response.data as AsmaulHusnaProps[];
+    } catch (err: any) {
+      console.log(err);
+      throw new Error(err.message);
+    }
+  }
+
+  useEffect(() => {
+    A();
+  }, []);
 
   return (
     <>

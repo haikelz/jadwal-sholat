@@ -11,7 +11,7 @@ Latin.</p>
 - Asma'ul Husna
 - Daily prayers
 
-## ⚡️Tech Stack
+## ⚡️Technologies
 
 - Next JS
 - TypeScript
@@ -19,7 +19,7 @@ Latin.</p>
 - React Query
 - Zustand
 - Sentry
-- Turborepo
+- NX Monorepo
 
 ## Getting Started
 
