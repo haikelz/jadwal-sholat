@@ -4,8 +4,7 @@ export function LoadingClient() {
   return (
     <div
       className={cn(
-        "modal-blur z-50",
-        "flex min-h-screen h-full w-full items-center justify-center"
+        "z-50 fixed top-0 left-0 flex min-h-screen h-full w-full items-center justify-center backdrop-blur-md"
       )}
     >
       <div className="bg-white rounded-lg p-4 font-medium dark:bg-gray-950 border border-input dark:text-white">
