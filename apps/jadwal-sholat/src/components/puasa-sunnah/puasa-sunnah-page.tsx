@@ -3,10 +3,10 @@
 import { env } from "@/env.mjs";
 import { useFetch } from "@/hooks";
 import { PuasaSunnahProps } from "@/interfaces";
+import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { cn } from "@/lib/utils/cn";
 import { bulan, matchDate, tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ErrorWhileFetch } from "../react-query/error-while-fetch";
 import { IsRefetching } from "../react-query/is-refetching";
@@ -93,8 +93,6 @@ const listMonthInYear = [
 
 export function PuasaSunnahPage() {
   const [selectedMonth, setSelectedMonth] = useState<string>(bulan);
-
-  const router = useRouter();
 
   const { typeId, setType } = useGlobalStore((state) => ({
     typeId: state.typeId,
@@ -187,7 +185,7 @@ export function PuasaSunnahPage() {
                 )}
               >
                 <td className="border-r-2 border-black px-4 text-xl font-semibold dark:border-none">
-                  {puasa.human_date}
+                  {formatToIndonesianDate(puasa.human_date)}
                 </td>
                 <td className="border-r-2 border-black px-4 text-xl font-semibold dark:border-none">
                   {puasa.type.name}
