@@ -1,7 +1,6 @@
 <div align="center">
   <h1>Jadwal Sholat</h1>
-  <p>Jadwal Sholat is a Website that provides a prayer schedule, Asma'ul Husna, and Al-Qur'an reading with audio options for Quran reciter, translation, and 
-Latin.</p>
+  <p>Jadwal Sholat is a Website that provides a prayer schedule, Asma'ul Husna, and Al-Qur'an reading with audio options for Quran reciter, translation, Latin and Puasa Sunnah schedule</p>
 </div>
 
 ## 📝Features
@@ -10,6 +9,7 @@ Latin.</p>
 - Read Al-Qur'an (with audio selection for Quran reciter, translation, and Latin)
 - Asma'ul Husna
 - Daily prayers
+- Puasa Sunnah schedule based on month, type of Puasa Sunnah, and current year.
 
 ## ⚡️Technologies
 
@@ -39,13 +39,14 @@ turbo`. After installation, type `turbo run dev` and see the results in your bro
 
 ## Screenshots
 
-|                                                                     |                                                                      |
-| :-----------------------------------------------------------------: | :------------------------------------------------------------------: |
-| ![ss 1](/static/docs/Screenshot%20From%202025-03-19%2019-17-06.png) | ![ss 2](/static/docs/Screenshot%20From%202025-03-19%2019-20-16.png)  |
-| ![ss 3](/static/docs/Screenshot%20From%202025-03-19%2019-17-30.png) | ![ss 4](/static/docs/Screenshot%20From%202025-03-19%2019-17-33.png)  |
-| ![ss 5](/static/docs/Screenshot%20From%202025-03-19%2019-17-44.png) | ![ss 8](/static/docs/Screenshot%20From%202025-03-19%2019-18-19.png)  |
-| ![ss 9](/static/docs/Screenshot%20From%202025-03-19%2019-18-27.png) | ![ss 10](/static/docs/Screenshot%20From%202025-03-19%2019-20-11.png) |
-|                                                                     |                                                                      |
+|                                                                      |                                                                      |
+| :------------------------------------------------------------------: | :------------------------------------------------------------------: |
+| ![ss 1](/static/docs/Screenshot%20From%202025-03-19%2019-17-06.png)  | ![ss 2](/static/docs/Screenshot%20From%202025-03-19%2019-20-16.png)  |
+| ![ss 3](/static/docs/Screenshot%20From%202025-03-19%2019-17-30.png)  | ![ss 4](/static/docs/Screenshot%20From%202025-03-19%2019-17-33.png)  |
+| ![ss 5](/static/docs/Screenshot%20From%202025-03-19%2019-17-44.png)  | ![ss 8](/static/docs/Screenshot%20From%202025-03-19%2019-18-19.png)  |
+| ![ss 9](/static/docs/Screenshot%20From%202025-03-19%2019-18-27.png)  | ![ss 10](/static/docs/Screenshot%20From%202025-03-19%2019-20-11.png) |
+| ![ss 10](/static/docs/Screenshot%20From%202025-11-27%2023-54-20.png) | ![ss 11](/static/docs/Screenshot%20From%202025-11-27%2023-54-39.png) |
+|                                                                      |                                                                      |
 
 ## Activity
 
