@@ -29,6 +29,13 @@ export interface ScrollSliceProps {
   setScroll: (scroll: number) => void;
 }
 
+export interface PuasaSunnahTypesSliceProps {
+  typeId?: number;
+  date?: Date;
+  setType: ({ typeId }: { typeId?: number }) => void;
+  setDate: ({ date }: { date?: Date }) => void;
+}
+
 export interface LocationPositionProps {
   position: {
     lat: number;
@@ -55,7 +62,7 @@ export interface PuasaSunnahCategory {
   name: string;
 }
 
-export interface PuasaSunnah {
+export interface PuasaSunnahProps {
   id: number;
   category_id: number;
   type_id: number;

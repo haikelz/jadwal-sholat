@@ -7,6 +7,7 @@ import {
   NumberModalAsmaulHusnaSliceProps,
   OptionSliceProps,
   PlayNextAudioSliceProps,
+  PuasaSunnahTypesSliceProps,
   ScrollSliceProps,
   WidthSliceProps,
 } from "@/interfaces";
@@ -20,6 +21,7 @@ import lastReadSlice from "./slices/last-read.slice";
 import locationPositionSlice from "./slices/location-position.slice";
 import optionSlice from "./slices/option.slice";
 import playNextAudioSlice from "./slices/play-next-audio.slice";
+import puasaSunnahTypesSlice from "./slices/puasa-sunnah-types.slice";
 import scrollSlice from "./slices/scroll.slice";
 import widthSlice from "./slices/width.slice";
 
@@ -33,7 +35,8 @@ const useGlobalStore = createWithEqualityFn<
     NumberModalAsmaulHusnaSliceProps &
     LocationPositionProps &
     IsOpenMapProps &
-    AdzanSliceProps
+    AdzanSliceProps &
+    PuasaSunnahTypesSliceProps
 >()(
   devtools((...set) => ({
     ...lastReadSlice(...set),
@@ -45,6 +48,7 @@ const useGlobalStore = createWithEqualityFn<
     ...locationPositionSlice(...set),
     ...isOpenMapSlice(...set),
     ...adzanSlice(...set),
+    ...puasaSunnahTypesSlice(...set),
   })),
   shallow
 );
