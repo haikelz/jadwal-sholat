@@ -7,9 +7,7 @@ const puasaSunnahTypesSlice: StateCreator<
   [],
   PuasaSunnahTypesSliceProps
 > = (set) => ({
-  date: new Date(),
   typeId: 9,
-  setDate: ({ date }: { date?: Date }) => set({ date }),
   setType: ({ typeId }: { typeId?: number }) =>
     set({
       typeId,

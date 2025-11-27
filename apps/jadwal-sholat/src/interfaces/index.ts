@@ -31,9 +31,7 @@ export interface ScrollSliceProps {
 
 export interface PuasaSunnahTypesSliceProps {
   typeId?: number;
-  date?: Date;
   setType: ({ typeId }: { typeId?: number }) => void;
-  setDate: ({ date }: { date?: Date }) => void;
 }
 
 export interface LocationPositionProps {
