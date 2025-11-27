@@ -7,6 +7,11 @@ export const bulan: string = format(date, "MM");
 export const hari: string = format(date, "dd");
 export const hours: string = format(date, "H");
 export const currentDate: string = format(date, "dd MMMM yyyy", { locale: id });
+export const currentDateWithDayOfWeek: string = format(
+  date,
+  "EEEE, d MMMM yyyy",
+  { locale: id }
+);
 
 /**
  * Karena waktunya masih berupa string, kita ubah ke number.

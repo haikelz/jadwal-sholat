@@ -5,7 +5,7 @@ import { useFetch } from "@/hooks";
 import { PuasaSunnahProps } from "@/interfaces";
 import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { cn } from "@/lib/utils/cn";
-import { bulan, matchDate, tahun } from "@/lib/utils/constants";
+import { bulan, currentDateWithDayOfWeek, tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
 import { useState } from "react";
 import { ErrorWhileFetch } from "../react-query/error-while-fetch";
@@ -179,7 +179,8 @@ export function PuasaSunnahPage() {
                 key={puasa.id}
                 className={cn(
                   "border-b-2 border-black dark:border-none",
-                  puasa.date === matchDate
+                  formatToIndonesianDate(puasa.human_date) ===
+                    currentDateWithDayOfWeek
                     ? "bg-gray-700 font-bold text-white"
                     : "odd:bg-gray-300 dark:odd:bg-gray-900"
                 )}
