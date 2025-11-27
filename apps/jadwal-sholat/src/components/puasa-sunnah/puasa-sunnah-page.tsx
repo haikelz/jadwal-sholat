@@ -6,10 +6,12 @@ import { PuasaSunnahProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import { bulan, matchDate, tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ErrorWhileFetch } from "../react-query/error-while-fetch";
 import { IsRefetching } from "../react-query/is-refetching";
 import { LoadingClient } from "../react-query/loading-client";
+import { Button } from "../ui/button";
 import {
   Select,
   SelectContent,
@@ -18,7 +20,7 @@ import {
   SelectValue,
 } from "../ui/select";
 
-const PUASA_TYPES = [
+const puasaTypesList = [
   { id: 1, name: "Puasa Senin Kamis" },
   { id: 2, name: "Puasa Ayyamul Bidh" },
   { id: 3, name: "Puasa Syawal" },
@@ -92,6 +94,8 @@ const listMonthInYear = [
 export function PuasaSunnahPage() {
   const [selectedMonth, setSelectedMonth] = useState<string>(bulan);
 
+  const router = useRouter();
+
   const { typeId, setType } = useGlobalStore((state) => ({
     typeId: state.typeId,
     setType: state.setType,
@@ -105,7 +109,16 @@ export function PuasaSunnahPage() {
   );
 
   if ((!data && isError) || isPending) return <LoadingClient />;
-  if (isError || !data?.data) return <ErrorWhileFetch />;
+  if (!data.data)
+    return (
+      <>
+        <p className="font-bold text-lg">
+          Jadwal Puasa Sunnah tidak ditemukan!
+        </p>
+        <Button onClick={() => window.location.reload()}>Refresh</Button>
+      </>
+    );
+  if (isError) return <ErrorWhileFetch />;
   if (isRefetching) return <IsRefetching />;
 
   const puasaList = data.data;
@@ -142,7 +155,7 @@ export function PuasaSunnahPage() {
             <SelectValue placeholder="Pilih Jenis Puasa" />
           </SelectTrigger>
           <SelectContent>
-            {PUASA_TYPES.map((type) => (
+            {puasaTypesList.map((type) => (
               <SelectItem key={type.id} value={type.id.toString()}>
                 {type.name}
               </SelectItem>
