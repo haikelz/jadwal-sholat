@@ -3,14 +3,13 @@
 import { env } from "@/env.mjs";
 import { useFetch } from "@/hooks";
 import { PuasaSunnahProps } from "@/interfaces";
-import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
-import { cn } from "@/lib/utils/cn";
-import { bulan, currentDateWithDayOfWeek, tahun } from "@/lib/utils/constants";
+import { bulan, tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
 import { useState } from "react";
 import { ErrorWhileFetch } from "../react-query/error-while-fetch";
 import { IsRefetching } from "../react-query/is-refetching";
 import { LoadingClient } from "../react-query/loading-client";
+import { TablePuasaSunnah } from "../table-puasa-sunnah";
 import { Button } from "../ui/button";
 import {
   Select,
@@ -31,12 +30,6 @@ const puasaTypesList = [
   { id: 8, name: "Puasa Nisfu Sya'ban" },
   { id: 9, name: "Semua" },
 ];
-
-interface PuasaSunnahResponse {
-  success: boolean;
-  message: string;
-  data: PuasaSunnahProps[];
-}
 
 const { NEXT_PUBLIC_PUASA_SUNNAH_API } = env;
 
@@ -119,7 +112,7 @@ export function PuasaSunnahPage() {
   if (isError) return <ErrorWhileFetch />;
   if (isRefetching) return <IsRefetching />;
 
-  const puasaList = data.data;
+  const puasaList: PuasaSunnahProps[] = data.data;
 
   return (
     <div className="container mx-auto px-4">
@@ -162,39 +155,7 @@ export function PuasaSunnahPage() {
         </Select>
       </div>
       <div className="overflow-x-auto w-full flex justify-center items-center">
-        <table className="w-full md:w-1/2 border-2 border-black dark:border-none">
-          <thead className="border-2 border-black dark:border-none">
-            <tr className="border-2 border-black dark:border-none">
-              <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-                Tanggal
-              </th>
-              <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
-                Jenis Puasa
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {puasaList.map((puasa: PuasaSunnahProps) => (
-              <tr
-                key={puasa.id}
-                className={cn(
-                  "border-b-2 border-black dark:border-none",
-                  formatToIndonesianDate(puasa.human_date) ===
-                    currentDateWithDayOfWeek
-                    ? "bg-gray-700 font-bold text-white"
-                    : "odd:bg-gray-300 dark:odd:bg-gray-900"
-                )}
-              >
-                <td className="border-r-2 border-black px-4 text-xl font-semibold dark:border-none">
-                  {formatToIndonesianDate(puasa.human_date)}
-                </td>
-                <td className="border-r-2 border-black px-4 text-xl font-semibold dark:border-none">
-                  {puasa.type.name}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <TablePuasaSunnah puasaList={puasaList} />
       </div>
     </div>
   );
