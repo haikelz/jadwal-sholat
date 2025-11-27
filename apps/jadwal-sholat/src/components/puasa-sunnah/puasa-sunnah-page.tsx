@@ -3,9 +3,8 @@
 import { env } from "@/env.mjs";
 import { useFetch } from "@/hooks";
 import { PuasaSunnahProps } from "@/interfaces";
-import { bulan, tahun } from "@/lib/utils/constants";
+import { tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
-import { useState } from "react";
 import { ErrorWhileFetch } from "../react-query/error-while-fetch";
 import { IsRefetching } from "../react-query/is-refetching";
 import { LoadingClient } from "../react-query/loading-client";
@@ -85,12 +84,14 @@ const listMonthInYear = [
 ];
 
 export function PuasaSunnahPage() {
-  const [selectedMonth, setSelectedMonth] = useState<string>(bulan);
-
-  const { typeId, setType } = useGlobalStore((state) => ({
-    typeId: state.typeId,
-    setType: state.setType,
-  }));
+  const { typeId, setType, selectedMonth, setSelectedMonth } = useGlobalStore(
+    (state) => ({
+      selectedMonth: state.selectedMonth,
+      setSelectedMonth: state.setSelectedMonth,
+      typeId: state.typeId,
+      setType: state.setType,
+    })
+  );
 
   const { data, isPending, isError, isRefetching, refetch } = useFetch(
     typeId === 9
@@ -120,7 +121,7 @@ export function PuasaSunnahPage() {
         <Select
           value={selectedMonth}
           onValueChange={(val: any) => {
-            setSelectedMonth(val);
+            setSelectedMonth({ selectedMonth: val });
             refetch();
           }}
         >

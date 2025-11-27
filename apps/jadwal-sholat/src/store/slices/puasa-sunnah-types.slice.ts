@@ -1,4 +1,5 @@
-import { PuasaSunnahTypesSliceProps } from "@/interfaces";
+import { PuasaSunnahTypesSliceProps } from "@/interfaces/puasa-sunnah.interface";
+import { bulan } from "@/lib/utils/constants";
 import { StateCreator } from "zustand";
 
 const puasaSunnahTypesSlice: StateCreator<
@@ -7,6 +8,9 @@ const puasaSunnahTypesSlice: StateCreator<
   [],
   PuasaSunnahTypesSliceProps
 > = (set) => ({
+  selectedMonth: bulan,
+  setSelectedMonth: ({ selectedMonth }: { selectedMonth?: string }) =>
+    set({ selectedMonth }),
   typeId: 9,
   setType: ({ typeId }: { typeId?: number }) =>
     set({

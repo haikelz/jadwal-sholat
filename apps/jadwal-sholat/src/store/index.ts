@@ -7,10 +7,10 @@ import {
   NumberModalAsmaulHusnaSliceProps,
   OptionSliceProps,
   PlayNextAudioSliceProps,
-  PuasaSunnahTypesSliceProps,
   ScrollSliceProps,
   WidthSliceProps,
 } from "@/interfaces";
+import { PuasaSunnahTypesSliceProps } from "@/interfaces/puasa-sunnah.interface";
 import { devtools } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { createWithEqualityFn } from "zustand/traditional";

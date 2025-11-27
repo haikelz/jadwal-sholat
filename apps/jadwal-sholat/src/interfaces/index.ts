@@ -29,11 +29,6 @@ export interface ScrollSliceProps {
   setScroll: (scroll: number) => void;
 }
 
-export interface PuasaSunnahTypesSliceProps {
-  typeId?: number;
-  setType: ({ typeId }: { typeId?: number }) => void;
-}
-
 export interface LocationPositionProps {
   position: {
     lat: number;

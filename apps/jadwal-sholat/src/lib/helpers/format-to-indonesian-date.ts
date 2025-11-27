@@ -1,6 +1,11 @@
 import { format, parse } from "date-fns";
 import { id } from "date-fns/locale";
 
+/**
+ * A helper function that format date string to Indonesian format date
+ * @param {string} dateString
+ * @returns
+ */
 export function formatToIndonesianDate(dateString: string): string | null {
   try {
     const parsedDate = parse(dateString, "EEEE, dd MMMM yyyy", new Date());
