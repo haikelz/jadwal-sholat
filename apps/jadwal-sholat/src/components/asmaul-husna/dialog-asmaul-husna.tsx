@@ -68,7 +68,7 @@ export function DialogAsmaulHusna({
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button>Close</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

@@ -116,7 +116,7 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
         <div
           aria-modal="true"
           className={cn(
-            "modal-blur fixed inset-0 top-0 z-50",
+            "backdrop-blur-md bg-white/70 dark:bg-gray-950/70 fixed inset-0 top-0 z-50",
             "flex min-h-screen w-full items-center justify-center",
             "overflow-y-auto overflow-x-hidden"
           )}
