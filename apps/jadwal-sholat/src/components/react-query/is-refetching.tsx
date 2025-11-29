@@ -4,7 +4,7 @@ export function IsRefetching() {
   return (
     <div
       className={cn(
-        "backdrop-blur-md bg-white/70 dark:bg-gray-950/70 fixed z-50",
+        "backdrop-blur-md bg-white/70 dark:bg-gray-950/70 top-0 inset-0 fixed z-50",
         "flex min-h-screen w-full items-center justify-center",
         "overflow-x-hidden"
       )}
