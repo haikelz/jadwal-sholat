@@ -9,13 +9,13 @@ export function TablePuasaSunnah({
   puasaList: PuasaSunnahProps[];
 }) {
   return (
-    <table className="w-full md:w-1/2 border-2 border-black dark:border-none">
+    <table className="w-full md:w-1/2 border-2 border-black dark:border-none min-w-[500px]">
       <thead className="border-2 border-black dark:border-none">
         <tr className="border-2 border-black dark:border-none">
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
+          <th className="border-r-2 border-r-black px-2 sm:px-4 text-base sm:text-xl dark:border-none">
             Tanggal
           </th>
-          <th className="border-r-2 border-r-black px-4 text-xl dark:border-none">
+          <th className="border-r-2 border-r-black px-2 sm:px-4 text-base sm:text-xl dark:border-none">
             Jenis Puasa
           </th>
         </tr>
@@ -32,10 +32,10 @@ export function TablePuasaSunnah({
                 : "odd:bg-gray-300 dark:odd:bg-gray-900"
             )}
           >
-            <td className="border-r-2 border-black px-4 text-xl font-semibold dark:border-none">
+            <td className="border-r-2 border-black px-2 sm:px-4 text-base sm:text-xl font-semibold dark:border-none">
               {formatToIndonesianDate(puasa.human_date)}
             </td>
-            <td className="border-r-2 border-black px-4 text-xl font-semibold dark:border-none">
+            <td className="border-r-2 border-black px-2 sm:px-4 text-base sm:text-xl font-semibold dark:border-none">
               {puasa.type.name}
             </td>
           </tr>

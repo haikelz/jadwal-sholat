@@ -45,7 +45,7 @@ export function DoaHarianPage({ doaHarian }: { doaHarian: DoaHarianProps[] }) {
         filteredDoaHarian.length ? (
           <div
             className={cn(
-              "flex justify-start items-center w-full space-y-5 flex-col text-center",
+              "flex justify-start items-center w-full space-y-4 flex-col text-center",
               "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             )}
           >

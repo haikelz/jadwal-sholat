@@ -52,7 +52,7 @@ export function AsmaulHusnaPage({
         filteredAsmaulHusna.length ? (
           <div
             className={cn(
-              "grid w-full grid-cols-1 grid-rows-1 gap-5 text-center mt-7",
+              "grid w-full grid-cols-1 grid-rows-1 gap-4 text-center mt-7",
               "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             )}
           >

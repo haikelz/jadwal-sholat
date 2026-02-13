@@ -155,7 +155,7 @@ export function PuasaSunnahPage() {
           </SelectContent>
         </Select>
       </div>
-      <div className="overflow-x-auto w-full flex justify-center items-center">
+      <div className="overflow-x-auto w-full md:flex justify-center items-center">
         <TablePuasaSunnah puasaList={puasaList} />
       </div>
     </div>
