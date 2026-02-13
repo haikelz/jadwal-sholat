@@ -34,51 +34,51 @@ const { NEXT_PUBLIC_PUASA_SUNNAH_API } = env;
 
 const listMonthInYear = [
   {
-    id: 1,
+    id: "01",
     month: "Januari",
   },
   {
-    id: 2,
+    id: "02",
     month: "Februari",
   },
   {
-    id: 3,
+    id: "03",
     month: "Maret",
   },
   {
-    id: 4,
+    id: "04",
     month: "April",
   },
   {
-    id: 5,
+    id: "05",
     month: "Mei",
   },
   {
-    id: 6,
+    id: "06",
     month: "Juni",
   },
   {
-    id: 7,
+    id: "07",
     month: "Juli",
   },
   {
-    id: 8,
+    id: "08",
     month: "Agustus",
   },
   {
-    id: 9,
+    id: "09",
     month: "September",
   },
   {
-    id: 10,
+    id: "10",
     month: "Oktober",
   },
   {
-    id: 11,
+    id: "11",
     month: "November",
   },
   {
-    id: 12,
+    id: "12",
     month: "Desember",
   },
 ];

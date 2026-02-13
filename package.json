@@ -8,13 +8,14 @@
     "dev:web": "nx dev jadwal-sholat"
   },
   "devDependencies": {
-    "@nx/eslint": "21.6.3",
-    "@nx/next": "21.6.3",
+    "@nx/eslint": "22.4.5",
+    "@nx/next": "22.4.5",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^9.39.2",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.3",
-    "nx": "21.6.3"
+    "lint-staged": "^16.2.7",
+    "nx": "22.4.5"
   },
   "config": {
     "commitizen": {
