@@ -1,8 +1,8 @@
 import { AsmaulHusnaProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import reactStringReplace from "react-string-replace";
-import { Button } from "../ui/button";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Dialog,
   DialogClose,
@@ -12,7 +12,7 @@ import {
   DialogOverlay,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 
 type DialogAsmaulHusnaProps = {
   dataAsmaulHusna: AsmaulHusnaProps;

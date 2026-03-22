@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils/cn";
 import { Separator } from "@radix-ui/react-separator";
 import {
   BookMarked,
+  BookOpen,
   Calendar,
   Clock4,
   HandHelping,
@@ -22,7 +23,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "../ui/breadcrumb";
+} from "@/components/ui/breadcrumb";
 import {
   Sidebar,
   SidebarContent,
@@ -36,7 +37,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
-} from "../ui/sidebar";
+} from "@/components/ui/sidebar";
 
 const SwitchTheme = dynamic(
   () => import("@/components/switch-theme").then((mod) => mod.SwitchTheme),
@@ -65,8 +66,14 @@ const navbarList = [
     icon: BookMarked,
     url: "/quran",
   },
-  { id: 3, title: "Do'a Harian", icon: HandHelping, url: "/doa-harian" },
-  { id: 4, title: "Puasa Sunnah", icon: Calendar, url: "/puasa-sunnah" },
+  {
+    id: 3,
+    title: "Hadith",
+    icon: BookOpen,
+    url: "/hadith",
+  },
+  { id: 4, title: "Do'a Harian", icon: HandHelping, url: "/doa-harian" },
+  { id: 5, title: "Puasa Sunnah", icon: Calendar, url: "/puasa-sunnah" },
 ];
 
 export function CustomSidebar({ children }: ChildrenProps) {

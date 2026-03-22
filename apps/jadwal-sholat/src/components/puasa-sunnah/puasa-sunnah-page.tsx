@@ -9,14 +9,14 @@ import { ErrorWhileFetch } from "../react-query/error-while-fetch";
 import { IsRefetching } from "../react-query/is-refetching";
 import { LoadingClient } from "../react-query/loading-client";
 import { TablePuasaSunnah } from "../table-puasa-sunnah";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
 
 const puasaTypesList = [
   { id: 1, name: "Puasa Senin Kamis" },

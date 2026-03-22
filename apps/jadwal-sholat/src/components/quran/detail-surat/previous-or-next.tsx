@@ -2,7 +2,7 @@ import { removeSelectedSurat } from "@/lib/helpers";
 import { cn } from "@/lib/utils/cn";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 
 export function PreviousOrNext({ num }: { num: number }) {
   return (

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
 import { RefObject, useRef } from "react";
 
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 export function DialogNotification({ description }: { description: string }) {
   const { notification, setNotification } = useGlobalStore((state) => ({

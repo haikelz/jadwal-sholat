@@ -4,7 +4,7 @@ import { SuratProps } from "@/interfaces";
 import { MessageSquare } from "lucide-react";
 import { useCallback } from "react";
 import { useClipboard } from "use-clipboard-copy";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -14,7 +14,7 @@ import {
   DialogOverlay,
   DialogTitle,
   DialogTrigger,
-} from "../../ui/dialog";
+} from "@/components/ui/dialog";
 
 export function DialogTafsir({ data }: SuratProps) {
   const clipboard = useClipboard({ copiedTimeout: 1000 });

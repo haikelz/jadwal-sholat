@@ -11,7 +11,7 @@ import { useAudioPlayer } from "react-use-audio-player";
 import { useDeepCompareEffect } from "use-deep-compare";
 
 import { formatSholatTime } from "@/lib/helpers";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   const filteredWaktu = waktu
