@@ -34,20 +34,20 @@ export function DetailHadithPage({
   if (!contents) return <ErrorWhileFetch />;
 
   return (
-    <div className="flex flex-col w-full space-y-6">
+    <div className="flex flex-col w-full space-y-4 sm:space-y-6 max-w-full mx-auto">
       <div className="text-center pb-4 border-b">
-        <p className="text-sm font-medium text-muted-foreground">
+        <p className="text-xs sm:text-sm font-medium text-muted-foreground">
           {bookMeta?.name ?? book}
         </p>
-        <h1 className="text-2xl font-bold mt-1">
+        <h1 className="text-xl sm:text-2xl font-bold mt-1">
           Hadith No. {contents.number}
         </h1>
       </div>
       {contents.arab && (
-        <div className="rounded-lg bg-muted/50 p-6">
+        <div className="rounded-lg bg-muted/50 p-4 sm:p-6 overflow-x-auto">
           <p
             className={cn(
-              "text-right arabic-font text-3xl tracking-wide font-medium leading-loose"
+              "text-right arabic-font text-xl sm:text-2xl md:text-3xl tracking-wide font-medium leading-loose wrap-break-word"
             )}
           >
             {contents.arab}
@@ -55,11 +55,13 @@ export function DetailHadithPage({
         </div>
       )}
       {contents.id && (
-        <div className="rounded-lg border p-6">
-          <p className="text-sm font-medium text-muted-foreground mb-2">
+        <div className="rounded-lg border p-4 sm:p-6">
+          <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-2">
             Terjemahan
           </p>
-          <p className="text-base leading-relaxed">{contents.id}</p>
+          <p className="text-sm sm:text-base leading-relaxed wrap-break-word">
+            {contents.id.slice(0, 1).toUpperCase() + contents.id.slice(1)}
+          </p>
         </div>
       )}
     </div>

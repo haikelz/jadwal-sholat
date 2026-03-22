@@ -2,39 +2,27 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "dev": {
-      "dependsOn": [
-        "^dev"
-      ],
+      "dependsOn": ["^dev"],
       "cache": true
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "cache": true
     },
     "start": {
-      "dependsOn": [
-        "^start"
-      ],
+      "dependsOn": ["^start"],
       "cache": true
     },
     "lint": {
-      "dependsOn": [
-        "^lint"
-      ],
+      "dependsOn": ["^lint"],
       "cache": true
     },
     "open": {
-      "dependsOn": [
-        "^open"
-      ],
+      "dependsOn": ["^open"],
       "cache": true
     },
     "test": {
-      "dependsOn": [
-        "^test"
-      ],
+      "dependsOn": ["^test"],
       "cache": true
     }
   },

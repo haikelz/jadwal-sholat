@@ -128,11 +128,13 @@ export function HadithPage() {
 
   return (
     <>
-      <div className={cn("flex flex-col items-center justify-center")}>
-        <div className="flex justify-center items-center gap-4">
+      <div
+        className={cn("flex flex-col items-center justify-center w-full px-4")}
+      >
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-none">
           <SearchBar setSearch={setSearch} name="search" />
           <Select value={book ?? "bukhari"} onValueChange={setBook}>
-            <SelectTrigger className="w-[220px]">
+            <SelectTrigger className="w-full sm:w-[220px]">
               <SelectValue placeholder="Pilih Kitab" />
             </SelectTrigger>
             <SelectContent>
@@ -149,7 +151,7 @@ export function HadithPage() {
         <>
           <div
             className={cn(
-              "grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-7"
+              "grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-7"
             )}
           >
             {filteredHadiths.map((h) => (
@@ -161,8 +163,8 @@ export function HadithPage() {
                   data-cy="card"
                   className="h-full hover:bg-muted/50 transition-colors"
                 >
-                  <CardHeader className="py-4">
-                    <h3 className="text-base font-bold text-center">
+                  <CardHeader className="py-3 sm:py-4 px-4">
+                    <h3 className="text-sm sm:text-base font-bold text-center wrap-break-word">
                       {bookMeta?.name} No. {h.number}
                     </h3>
                   </CardHeader>
@@ -172,7 +174,7 @@ export function HadithPage() {
           </div>
           <div
             ref={sentinelRef}
-            className="h-10 flex items-center justify-center"
+            className="h-10 flex items-center justify-center px-4"
           >
             {isFetchingNextPage && (
               <p className="text-sm text-muted-foreground font-bold">
@@ -182,7 +184,10 @@ export function HadithPage() {
           </div>
         </>
       ) : (
-        <p data-cy="not-found-text" className="text-lg font-medium">
+        <p
+          data-cy="not-found-text"
+          className="text-lg font-medium px-4 text-center"
+        >
           Hadith tidak ditemukan.
         </p>
       )}
