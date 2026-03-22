@@ -3,10 +3,13 @@
 import { ErrorWhileFetch } from "@/components/react-query/error-while-fetch";
 import { IsRefetching } from "@/components/react-query/is-refetching";
 import { LoadingClient } from "@/components/react-query/loading-client";
+import { Button } from "@/components/ui/button";
 import { env } from "@/env.mjs";
 import { useFetch } from "@/hooks";
 import { HadithDetailResponse } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const { NEXT_PUBLIC_HADITH_API } = env;
 
@@ -28,20 +31,46 @@ export function DetailHadithPage({
   const contents = response?.data?.contents;
   const bookMeta = response?.data;
 
+  const rawNum = parseInt(hadithNumber, 10);
+  const currentNum = (Number.isNaN(rawNum) ? contents?.number : rawNum) ?? 1;
+  const totalAvailable = bookMeta?.available ?? 0;
+  const canGoPrev = currentNum > 1;
+  const canGoNext = totalAvailable > 0 && currentNum < totalAvailable;
+
   if (isPending) return <LoadingClient />;
   if (isError) return <ErrorWhileFetch />;
   if (isRefetching) return <IsRefetching />;
   if (!contents) return <ErrorWhileFetch />;
 
   return (
-    <div className="flex flex-col w-full space-y-4 sm:space-y-6 max-w-full mx-auto">
-      <div className="text-center pb-4 border-b">
-        <p className="text-xs sm:text-sm font-medium text-muted-foreground">
-          {bookMeta?.name ?? book}
-        </p>
-        <h1 className="text-xl sm:text-2xl font-bold mt-1">
-          Hadith No. {contents.number}
-        </h1>
+    <div className="flex flex-col w-full space-y-4 sm:space-y-6 max-w-full mx-auto px-4 sm:px-6">
+      <div className="flex flex-row items-center justify-between gap-4 pb-4 border-b">
+        <div className="w-20 shrink-0">
+          {canGoPrev && (
+            <Link href={`/hadith/${book}/${currentNum - 1}`}>
+              <Button>
+                <ChevronLeft size={18} />
+              </Button>
+            </Link>
+          )}
+        </div>
+        <div className="text-center flex-1 min-w-0">
+          <p className="text-xs sm:text-sm font-medium text-muted-foreground">
+            {bookMeta?.name ?? book}
+          </p>
+          <h1 className="text-xl sm:text-2xl font-bold mt-1">
+            Hadith No. {contents.number}
+          </h1>
+        </div>
+        <div className="w-20 shrink-0 flex justify-end">
+          {canGoNext && (
+            <Link href={`/hadith/${book}/${currentNum + 1}`}>
+              <Button>
+                <ChevronRight size={18} />
+              </Button>
+            </Link>
+          )}
+        </div>
       </div>
       {contents.arab && (
         <div className="rounded-lg bg-muted/50 p-4 sm:p-6 overflow-x-auto">
