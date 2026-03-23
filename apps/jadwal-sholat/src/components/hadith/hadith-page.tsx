@@ -51,6 +51,23 @@ export function HadithPage() {
   const booksUrl = buildBooksUrl();
   const { data: booksData } = useFetch(booksUrl);
 
+  const books = useMemo((): HadithBook[] => {
+    if (!booksData?.data) return [];
+    return Array.isArray(booksData.data) ? booksData.data : [];
+  }, [booksData]);
+
+  const searchNum = useMemo(() => {
+    const n = parseInt(search ?? "", 10);
+    return Number.isNaN(n) ? null : n;
+  }, [search]);
+
+  const isSearchByNumber = searchNum !== null;
+  const currentBookMeta = useMemo(
+    () => books.find((b) => b.id === book),
+    [books, book]
+  );
+  const totalAvailable = currentBookMeta?.available ?? 0;
+
   const {
     data: hadithData,
     isPending,
@@ -70,25 +87,18 @@ export function HadithPage() {
     getNextPageParam: (lastPage, allPages) => {
       const data = lastPage?.data;
       if (!data?.hadiths?.length) return undefined;
-      const totalAvailable = data.available ?? 0;
-      const totalPages = Math.ceil(totalAvailable / PER_PAGE);
+      const avail = data.available ?? 0;
+      const totalPages = Math.ceil(avail / PER_PAGE);
       const currentPage = allPages.length;
       return currentPage < totalPages ? currentPage + 1 : undefined;
     },
-    enabled: !!book,
+    enabled: !!book && !isSearchByNumber,
   });
-
-  const books = useMemo((): HadithBook[] => {
-    if (!booksData?.data) return [];
-    return Array.isArray(booksData.data) ? booksData.data : [];
-  }, [booksData]);
 
   const hadiths = useMemo((): HadithProps[] => {
     const pages = hadithData?.pages ?? [];
     return pages.flatMap((p) => p?.data?.hadiths ?? []);
   }, [hadithData]);
-
-  const bookMeta = hadithData?.pages?.[0]?.data;
 
   const filteredHadiths = useMemo(() => {
     const q = search?.trim();
@@ -96,17 +106,11 @@ export function HadithPage() {
     return hadiths.filter((h) => String(h.number).includes(q));
   }, [hadiths, search]);
 
-  const searchNum = useMemo(() => {
-    const n = parseInt(search ?? "", 10);
-    return Number.isNaN(n) ? null : n;
-  }, [search]);
-
   const shouldFetchSingle =
     !!book &&
     searchNum !== null &&
     searchNum >= 1 &&
-    filteredHadiths.length === 0 &&
-    (bookMeta?.available ?? 0) >= searchNum;
+    totalAvailable >= searchNum;
 
   const { data: singleHadithRes, isFetching: isFetchingSingle } = useQuery({
     queryKey: ["hadith-single", book, searchNum],
@@ -124,10 +128,12 @@ export function HadithPage() {
   }, [shouldFetchSingle, singleHadithRes]);
 
   const displayHadiths = useMemo(() => {
-    if (singleHadithAsCard && filteredHadiths.length === 0)
-      return [singleHadithAsCard];
+    if (isSearchByNumber && singleHadithAsCard) return [singleHadithAsCard];
     return filteredHadiths;
-  }, [filteredHadiths, singleHadithAsCard]);
+  }, [filteredHadiths, singleHadithAsCard, isSearchByNumber]);
+
+  const bookName = currentBookMeta?.name ?? hadithData?.pages?.[0]?.data?.name ?? book;
+  const showSentinel = !isSearchByNumber;
 
   const handleIntersect = useCallback(
     (entries: IntersectionObserverEntry[]) => {
@@ -140,6 +146,7 @@ export function HadithPage() {
   );
 
   useEffect(() => {
+    if (!showSentinel) return;
     const observer = new IntersectionObserver(handleIntersect, {
       root: null,
       rootMargin: "100px",
@@ -148,11 +155,11 @@ export function HadithPage() {
     const sentinel = sentinelRef.current;
     if (sentinel) observer.observe(sentinel);
     return () => (sentinel ? observer.unobserve(sentinel) : undefined);
-  }, [handleIntersect, displayHadiths.length]);
+  }, [handleIntersect, showSentinel]);
 
-  if ((!books.length && !booksData) || (isPending && book))
+  if ((!books.length && !booksData) || (isPending && book && !isSearchByNumber))
     return <LoadingClient />;
-  if (isError) return <ErrorWhileFetch />;
+  if (isError && !isSearchByNumber) return <ErrorWhileFetch />;
 
   return (
     <>
@@ -197,23 +204,25 @@ export function HadithPage() {
                 >
                   <CardHeader className="py-3 sm:py-4 px-4">
                     <h3 className="text-sm sm:text-base font-bold text-center wrap-break-word">
-                      {bookMeta?.name} No. {h.number}
+                      {bookName} No. {h.number}
                     </h3>
                   </CardHeader>
                 </Card>
               </Link>
             ))}
           </div>
-          <div
-            ref={sentinelRef}
-            className="h-10 flex items-center justify-center px-4"
-          >
-            {isFetchingNextPage && (
-              <p className="text-sm text-muted-foreground font-bold">
-                Memuat...
-              </p>
-            )}
-          </div>
+          {showSentinel && (
+            <div
+              ref={sentinelRef}
+              className="h-10 flex items-center justify-center px-4"
+            >
+              {isFetchingNextPage && (
+                <p className="text-sm text-muted-foreground font-bold">
+                  Memuat...
+                </p>
+              )}
+            </div>
+          )}
         </>
       ) : shouldFetchSingle && isFetchingSingle ? (
         <p className="text-lg font-medium px-4 text-center mt-6 text-muted-foreground">
