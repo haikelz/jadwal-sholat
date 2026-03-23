@@ -22,5 +22,8 @@
       "path": "cz-conventional-changelog"
     }
   },
-  "packageManager": "pnpm@9.10.0"
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

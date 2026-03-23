@@ -21,8 +21,12 @@ const config = withSentryConfig(
     reactStrictMode: true,
     compress: true,
     experimental: {
-      webpackBuildWorker: true,
       optimizePackageImports: ["@radix-ui/*"],
+      webpackBuildWorker: true,
+      webpackMemoryOptimizations: true,
+      preloadEntriesOnStart: true,
+      turbopackFileSystemCacheForBuild: true,
+      turbopackFileSystemCacheForDev: true,
     },
   }),
   {
