@@ -4,6 +4,7 @@ import { ChildrenProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import { MetaUrl } from "@/lib/utils/enums";
 import { geistSans, lpmqIsepMisbah } from "@/lib/utils/fonts";
+import { Analytics } from "@vercel/analytics/next";
 import { Metadata, Viewport } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
@@ -83,6 +84,7 @@ export default function Layout({ children }: ChildrenProps) {
           </Wrapper>
           <Toaster />
         </NuqsAdapter>
+        <Analytics />
       </body>
     </html>
   );
