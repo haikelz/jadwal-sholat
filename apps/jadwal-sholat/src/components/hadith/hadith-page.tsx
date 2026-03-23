@@ -13,11 +13,15 @@ import {
 } from "@/components/ui/select";
 import { env } from "@/env.mjs";
 import { useFetch } from "@/hooks";
-import { HadithBook, HadithProps, HadithRangeResponse } from "@/interfaces";
+import {
+  HadithBook,
+  HadithProps,
+  HadithDetailResponse,
+  HadithRangeResponse,
+} from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
-import { getHadithSearchType } from "@/lib/utils/hadith-utils";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useMemo, useRef } from "react";
@@ -29,6 +33,10 @@ function buildHadithApiUrl(bookId: string, page: number): string {
   const from = (page - 1) * PER_PAGE + 1;
   const to = page * PER_PAGE;
   return `${NEXT_PUBLIC_HADITH_API}/books/${bookId}?range=${from}-${to}`;
+}
+
+function buildHadithSingleUrl(bookId: string, number: number): string {
+  return `${NEXT_PUBLIC_HADITH_API}/books/${bookId}/${number}`;
 }
 
 function buildBooksUrl(): string {
@@ -83,23 +91,43 @@ export function HadithPage() {
   const bookMeta = hadithData?.pages?.[0]?.data;
 
   const filteredHadiths = useMemo(() => {
-    const q = search?.trim().toLowerCase();
+    const q = search?.trim();
     if (!q) return hadiths;
-    const type = getHadithSearchType(search || "");
-    return hadiths.filter((h) => {
-      if (type === "number") return String(h.number).includes(q);
-      if (type === "arabic") return h.arab.toLowerCase().includes(q);
-      return h.id.toLowerCase().includes(q);
-    });
+    return hadiths.filter((h) => String(h.number).includes(q));
   }, [hadiths, search]);
 
-  const searchTypeLabel = useMemo(() => {
-    if (!search?.trim()) return null;
-    const type = getHadithSearchType(search);
-    if (type === "number") return "No. Hadith";
-    if (type === "arabic") return "Arab";
-    return "Indonesia";
+  const searchNum = useMemo(() => {
+    const n = parseInt(search ?? "", 10);
+    return Number.isNaN(n) ? null : n;
   }, [search]);
+
+  const shouldFetchSingle =
+    !!book &&
+    searchNum !== null &&
+    searchNum >= 1 &&
+    filteredHadiths.length === 0 &&
+    (bookMeta?.available ?? 0) >= searchNum;
+
+  const { data: singleHadithRes, isFetching: isFetchingSingle } = useQuery({
+    queryKey: ["hadith-single", book, searchNum],
+    queryFn: () =>
+      getData<HadithDetailResponse>(
+        buildHadithSingleUrl(book!, searchNum!)
+      ),
+    enabled: !!shouldFetchSingle,
+  });
+
+  const singleHadithAsCard = useMemo((): HadithProps | null => {
+    if (!shouldFetchSingle || !singleHadithRes?.data?.contents) return null;
+    const c = singleHadithRes.data.contents;
+    return { number: c.number, arab: c.arab, id: c.id };
+  }, [shouldFetchSingle, singleHadithRes]);
+
+  const displayHadiths = useMemo(() => {
+    if (singleHadithAsCard && filteredHadiths.length === 0)
+      return [singleHadithAsCard];
+    return filteredHadiths;
+  }, [filteredHadiths, singleHadithAsCard]);
 
   const handleIntersect = useCallback(
     (entries: IntersectionObserverEntry[]) => {
@@ -120,7 +148,7 @@ export function HadithPage() {
     const sentinel = sentinelRef.current;
     if (sentinel) observer.observe(sentinel);
     return () => (sentinel ? observer.unobserve(sentinel) : undefined);
-  }, [handleIntersect, filteredHadiths.length]);
+  }, [handleIntersect, displayHadiths.length]);
 
   if ((!books.length && !booksData) || (isPending && book))
     return <LoadingClient />;
@@ -132,7 +160,11 @@ export function HadithPage() {
         className={cn("flex flex-col items-center justify-center w-full px-4")}
       >
         <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-none">
-          <SearchBar setSearch={setSearch} name="search" />
+          <SearchBar
+            setSearch={setSearch}
+            name="search"
+            placeholder="Cari berdasarkan nomor hadith"
+          />
           <Select value={book ?? "bukhari"} onValueChange={setBook}>
             <SelectTrigger className="w-full sm:w-[220px]">
               <SelectValue placeholder="Pilih Kitab" />
@@ -147,14 +179,14 @@ export function HadithPage() {
           </Select>
         </div>
       </div>
-      {filteredHadiths.length ? (
+      {displayHadiths.length ? (
         <>
           <div
             className={cn(
               "grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-7"
             )}
           >
-            {filteredHadiths.map((h) => (
+            {displayHadiths.map((h) => (
               <Link
                 key={`${book}-${h.number}`}
                 href={`/hadith/${book}/${h.number}`}
@@ -183,10 +215,14 @@ export function HadithPage() {
             )}
           </div>
         </>
+      ) : shouldFetchSingle && isFetchingSingle ? (
+        <p className="text-lg font-medium px-4 text-center mt-6 text-muted-foreground">
+          Memuat...
+        </p>
       ) : (
         <p
           data-cy="not-found-text"
-          className="text-lg font-medium px-4 text-center"
+          className="text-lg font-medium px-4 text-center mt-6"
         >
           Hadith tidak ditemukan.
         </p>

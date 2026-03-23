@@ -7,13 +7,14 @@ import { Options } from "nuqs";
 
 interface SearchBarProps {
   name: string;
+  placeholder?: string;
   setSearch: (
     value: string | ((old: string | null) => string | null) | null,
     options?: Options
   ) => Promise<URLSearchParams>;
 }
 
-export function SearchBar({ name, setSearch }: SearchBarProps) {
+export function SearchBar({ name, placeholder = "Search....", setSearch }: SearchBarProps) {
   return (
     <div className="relative flex items-center justify-center">
       <div className="absolute left-0 pl-3">
@@ -21,7 +22,7 @@ export function SearchBar({ name, setSearch }: SearchBarProps) {
       </div>
       <Input
         type="text"
-        placeholder="Search...."
+        placeholder={placeholder}
         onChange={(e) => setSearch(e.target.value)}
         className={cn("w-[300px] placeholder:ml-6 px-3 py-1 pl-10")}
       />
