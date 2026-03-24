@@ -2,20 +2,17 @@
   "name": "jadwal-sholat",
   "private": true,
   "scripts": {
-    "build:web": "nx build jadwal-sholat",
-    "build:test": "nx test jadwal-sholat && nx build jadwal-sholat",
-    "test:web": "nx test jadwal-sholat",
-    "dev:web": "nx dev jadwal-sholat"
+    "build:web": "moon run jadwal-sholat:build",
+    "dev:web": "moon run jadwal-sholat:dev",
+    "test:web": "moon run jadwal-sholat:test"
   },
   "devDependencies": {
-    "@nx/eslint": "22.6.1",
-    "@nx/next": "22.6.1",
+    "@moonrepo/cli": "^2.1.1",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^10.1.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
-    "nx": "22.6.1"
+    "lint-staged": "^16.4.0"
   },
   "config": {
     "commitizen": {

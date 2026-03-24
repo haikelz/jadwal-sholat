@@ -1,0 +1,7 @@
+projects:
+  - "apps/*"
+  - "packages/*"
+
+vcs:
+  defaultBranch: "master"
+  provider: "github"

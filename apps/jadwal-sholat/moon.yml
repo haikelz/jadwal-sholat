@@ -1,0 +1,9 @@
+$schema: "https://moonrepo.dev/schemas/project.json"
+
+tags: ["next"]
+
+tasks:
+  dev:
+    script: "bun run dev"
+  build:
+    script: "bun run build"
