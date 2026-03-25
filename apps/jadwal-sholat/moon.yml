@@ -7,3 +7,5 @@ tasks:
     script: "bun run dev"
   build:
     script: "bun run build"
+  test:
+    script: "bun run test"

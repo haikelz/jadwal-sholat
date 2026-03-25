@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Jadwal Sholat</h1>
-  <p>Jadwal Sholat is a Website that provides a prayer schedule, Asma'ul Husna, and Al-Qur'an reading with audio options for Quran reciter, translation, Latin and Puasa Sunnah schedule</p>
+  <p>Jadwal Sholat is a website for prayer times, Asma'ul Husna, Al-Qur'an (with reciter, translation, and Latin), daily prayers, hadith, and Puasa Sunnah schedules.</p>
 </div>
 
 ## 📝Features
@@ -9,7 +9,8 @@
 - Read Al-Qur'an (with audio selection for Quran reciter, translation, and Latin)
 - Asma'ul Husna
 - Daily prayers
-- Puasa Sunnah schedule based on month, type of Puasa Sunnah, and current year.
+- Hadith (browse by book and number)
+- Puasa Sunnah schedule based on month, type of Puasa Sunnah, and current year
 
 ## ⚡️Technologies
 
@@ -19,23 +20,70 @@
 - React Query
 - Zustand
 - Sentry
-- NX Monorepo
+- [moonrepo](https://moonrepo.dev/) monorepo
+- Bun (package manager and runtime)
 
 ## Getting Started
 
-There are three branches in this repository:
+### Prerequisites
 
-- `master` as the main branch for production.
-- `dev` as the development branch for feature development.
-- `pagesDir` as a branch to store changes before refactoring to appDir.
+- [Bun](https://bun.sh/) (lockfile: `bun.lock`)
+- [moon](https://moonrepo.dev/) (also available as `@moonrepo/cli` in the workspace root)
 
-To see and test the project in detail:
+### Repository branches
 
-- Clone the project with `git clone https://github.com/haikelz/jadwal-sholat.git`.
-- Install dependencies with the command `pnpm install`. If you use a different package manager, please adjust it accordingly and don't forget
-  to remove the `pnpm-lock.yaml` file.
-- This project uses **turborepo**. So if you want to run the project with turbo, first install it globally with the command `pnpm install -g 
-turbo`. After installation, type `turbo run dev` and see the results in your browser => `http://localhost:3000`.
+- `master` — production
+- `dev` — feature development
+- `pagesDir` — historical branch before App Router migration
+
+### Install and run
+
+```bash
+git clone https://github.com/haikelz/jadwal-sholat.git
+cd jadwal-sholat
+bun install
+```
+
+Start the Next.js app (from the repository root):
+
+```bash
+bun run dev:web
+```
+
+Equivalent with moon:
+
+```bash
+moon run jadwal-sholat:dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Other useful commands (root)
+
+| Command | Description |
+| --- | --- |
+| `bun run dev:web` | Development server |
+| `bun run build:web` | Production build |
+| `bun run test:web` | E2E tests (Cypress via moon) |
+
+### App package (`apps/jadwal-sholat`)
+
+You can also run scripts from the app directory:
+
+```bash
+cd apps/jadwal-sholat
+bun run dev      # next dev
+bun run build    # next build
+bun run start    # next start
+bun run lint     # next lint
+bun run test     # cypress run
+bun run open     # cypress open
+```
+
+### Workspace layout
+
+- `apps/jadwal-sholat` — Next.js application
+- `packages/eslint-config`, `packages/typescript-config` — shared tooling
 
 ## Screenshots
 
