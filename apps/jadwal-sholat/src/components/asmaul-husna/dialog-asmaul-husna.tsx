@@ -2,14 +2,12 @@ import { AsmaulHusnaProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import reactStringReplace from "react-string-replace";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogOverlay,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -26,14 +24,18 @@ export function DialogAsmaulHusna({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Card data-cy="card" role="button" tabIndex={0}>
-          <CardHeader className="my-3 w-full text-right">
-            <p className={cn("text-3xl font-medium", "arabic-font")}>
+        <button
+          type="button"
+          data-cy="card"
+          className="w-full rounded-lg border bg-card text-left text-card-foreground shadow-xs transition-[background-color,box-shadow,transform] hover:bg-accent/60 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.96]"
+        >
+          <span className="my-3 block w-full px-6 pt-3 text-right">
+            <span className={cn("block text-3xl font-medium", "arabic-font")}>
               {dataAsmaulHusna.arab}
-            </p>
-          </CardHeader>
-          <CardContent className="mt-1 text-left">
-            <h3 className="text-lg mb-1 font-bold">
+            </span>
+          </span>
+          <span className="mt-1 block px-6 pb-6 text-left">
+            <span className="mb-1 block text-lg font-bold">
               {dataAsmaulHusna.urutan}.{" "}
               {deferredSearch
                 ? reactStringReplace(
@@ -49,12 +51,11 @@ export function DialogAsmaulHusna({
                     )
                   )
                 : dataAsmaulHusna.latin}
-            </h3>
-            <p>{dataAsmaulHusna.arti}</p>
-          </CardContent>
-        </Card>
+            </span>
+            <span className="block">{dataAsmaulHusna.arti}</span>
+          </span>
+        </button>
       </DialogTrigger>
-      <DialogOverlay />
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
@@ -68,7 +69,7 @@ export function DialogAsmaulHusna({
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button>Close</Button>
+            <Button>Tutup</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

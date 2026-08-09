@@ -5,6 +5,14 @@ import { IsRefetching } from "@/components/react-query/is-refetching";
 import { LoadingClient } from "@/components/react-query/loading-client";
 import { Jadwal } from "@/components/table-jadwal-sholat";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { env } from "@/env.mjs";
 import { useFetch, useGeolocation } from "@/hooks";
 import { cn } from "@/lib/utils/cn";
@@ -26,13 +34,13 @@ const UserLocation = dynamic(
   () => import("@/components/user-location").then((mod) => mod.UserLocation),
   {
     ssr: false,
-  }
+  },
 );
 const Adzan = dynamic(
   () => import("@/components/adzan").then((mod) => mod.Adzan),
   {
     ssr: false,
-  }
+  },
 );
 
 export function Homepage() {
@@ -47,7 +55,7 @@ export function Homepage() {
   useGeolocation();
 
   const { data, isPending, isError, isRefetching } = useFetch(
-    `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${formatDate}?latitude=${position.lat}&longitude=${position.lng}&method=20`
+    `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${formatDate}?latitude=${position.lat}&longitude=${position.lng}&method=20`,
   );
 
   if ((!data && isError) || isPending) return <LoadingClient />;
@@ -68,12 +76,15 @@ export function Homepage() {
             src="/img/mosque.webp"
             width={40}
             height={40}
-            alt="Mosque"
+            alt=""
             fetchPriority="high"
             draggable={false}
           />
         </div>
-        <p data-cy="description" className="mt-2 text-lg font-medium">
+        <p
+          data-cy="description"
+          className="mt-2 max-w-2xl text-base font-medium leading-relaxed sm:text-lg"
+        >
           Berikut Jadwal Sholat untuk bulan ini, {currentDate} di wilayah{" "}
           <UserLocation />
         </p>
@@ -84,38 +95,28 @@ export function Homepage() {
           onClick={() => setIsOpenMap(!isOpenMap)}
         >
           <MapPin size={20} />
-          <span>Set your Location</span>
+          <span>Atur lokasi</span>
         </Button>
       </div>
       <div className="flex w-full items-center overflow-x-auto text-center lg:justify-center">
         <Jadwal waktu={waktu} />
       </div>
-      {isOpenMap ? (
-        <div
-          className={cn(
-            "backdrop-blur-md bg-white/70 dark:bg-gray-950/70 fixed inset-0 p-4 top-0 z-50",
-            "flex min-h-screen w-full items-center justify-center",
-            "overflow-x-hidden"
-          )}
-        >
-          <div
-            className={cn(
-              "relative w-full rounded-lg p-4 bg-white",
-              "dark:bg-gray-950 border border-input dark:text-white"
-            )}
-          >
-            <Map />
-            <Button
-              type="button"
-              aria-label="close map"
-              onClick={() => setIsOpenMap(false)}
-              className="font-bold mt-4 w-[100px]"
-            >
-              Close
+      <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
+        <DialogContent className="max-h-[calc(100dvh-2rem)] max-w-[calc(100%-2rem)] overflow-y-auto sm:max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Pilih lokasi untuk jadwal sholat</DialogTitle>
+            <DialogDescription>
+              Cari atau geser peta, lalu pilih lokasi yang diinginkan.
+            </DialogDescription>
+          </DialogHeader>
+          <Map />
+          <DialogClose asChild>
+            <Button type="button" className="mx-auto w-[100px] font-bold">
+              Tutup
             </Button>
-          </div>
-        </div>
-      ) : null}
+          </DialogClose>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

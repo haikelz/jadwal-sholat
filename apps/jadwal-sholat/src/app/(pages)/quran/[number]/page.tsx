@@ -4,7 +4,7 @@ import { env } from "@/env.mjs";
 import { ListSuratProps, SuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
-import { MetaUrl } from "@/lib/utils/enums";
+import { createPageMetadata } from "@/lib/utils/metadata";
 import { Metadata } from "next";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
@@ -28,36 +28,13 @@ export async function generateMetadata(props: {
 
   const { asma, tafsir } = response.data;
 
-  const base = {
-    title: asma.id.short,
-    description: tafsir.id,
-    url: `${MetaUrl.Site_Url}/quran/${number}`,
-  };
+  const description = tafsir.id.replace(/\s+/g, " ").trim().slice(0, 155);
 
-  return {
-    title: base.title,
-    description: base.description,
-    openGraph: {
-      type: "website",
-      url: base.url,
-      title: base.title,
-      description: base.description,
-      images: [
-        {
-          url: MetaUrl.Default_Og_Url,
-          alt: "OG Image",
-        },
-      ],
-      siteName: `jdwshlt.ekel.dev/quran/${number}`,
-    },
-    twitter: {
-      title: base.title,
-      description: base.description,
-      site: base.url,
-      card: "summary_large_image",
-    },
-    metadataBase: new URL(base.url),
-  };
+  return createPageMetadata({
+    title: `Surat ${asma.id.short}`,
+    description,
+    path: `/quran/${number}`,
+  });
 }
 
 export default async function Surat(props: {

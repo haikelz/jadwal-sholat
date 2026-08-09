@@ -1,41 +1,14 @@
 import { HadithPage } from "@/components/hadith/hadith-page";
 import { TransitionLayout } from "@/components/transition-layout";
 import { cn } from "@/lib/utils/cn";
-import { MetaUrl } from "@/lib/utils/enums";
+import { createPageMetadata } from "@/lib/utils/metadata";
 import { Suspense } from "react";
 
-const baseMetadata = {
-  title: "Hadith | Jadwal Sholat",
-  description: "Kumpulan hadith Nabi Muhammad ﷺ",
-  url: `${MetaUrl.Site_Url}/hadith`,
-};
-
-const { title, description, url } = baseMetadata;
-
-export const metadata = {
-  title,
-  description,
-  openGraph: {
-    type: "website",
-    url,
-    title,
-    description,
-    images: [
-      {
-        url: MetaUrl.Default_Og_Url,
-        alt: "OG Image",
-      },
-    ],
-    siteName: "jdwshlt.ekel.dev/hadith",
-  },
-  twitter: {
-    title,
-    description,
-    site: url,
-    card: "summary_large_image",
-  },
-  metadataBase: new URL(url),
-};
+export const metadata = createPageMetadata({
+  title: "Hadith",
+  description: "Baca kumpulan hadith Nabi Muhammad ﷺ berdasarkan kitab dan nomor.",
+  path: "/hadith",
+});
 
 export default function Hadith() {
   return (

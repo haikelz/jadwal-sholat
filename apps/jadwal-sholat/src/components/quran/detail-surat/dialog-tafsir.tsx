@@ -9,9 +9,9 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogOverlay,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -29,23 +29,27 @@ export function DialogTafsir({ data }: SuratProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button type="button" className="flex items-center space-x-1">
+        <Button type="button" variant="ghost">
           <MessageSquare size={20} />
-          <p className="text-lg font-bold">Tafsir</p>
-        </button>
+          <span className="font-bold">Tafsir</span>
+        </Button>
       </DialogTrigger>
-      <DialogOverlay />
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Tafsir Surat {data.asma.id.short}</DialogTitle>
+          <DialogDescription>
+            Tafsir ringkas dalam bahasa Indonesia.
+          </DialogDescription>
         </DialogHeader>
-        <p className="leading-relaxed text-justify">{data.tafsir.id}</p>
+        <p className="max-h-[60dvh] overflow-y-auto text-left leading-relaxed">
+          {data.tafsir.id}
+        </p>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline">Tutup</Button>
           </DialogClose>
           <Button onClick={() => copyToClipboard(data.tafsir.id)}>
-            {clipboard.copied ? "Copied!" : "Copy"}
+            {clipboard.copied ? "Tersalin" : "Salin tafsir"}
           </Button>
         </DialogFooter>
       </DialogContent>

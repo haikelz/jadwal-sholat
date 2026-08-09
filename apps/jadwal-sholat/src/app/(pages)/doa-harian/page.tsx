@@ -4,45 +4,17 @@ import { env } from "@/env.mjs";
 import { DoaHarianProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
-import { MetaUrl } from "@/lib/utils/enums";
-import { Metadata } from "next";
+import { createPageMetadata } from "@/lib/utils/metadata";
 import Image from "next/image";
 import { Suspense } from "react";
 
 const { NEXT_PUBLIC_DOA_HARIAN_API } = env;
 
-const baseMetadata = {
-  title: "Do'a Harian | Jadwal Sholat",
-  description: "Berikut daftar do'a harian yang tersedia",
-  url: `${MetaUrl.Site_Url}/doa-harian`,
-};
-
-const { title, description, url } = baseMetadata;
-
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    type: "website",
-    url,
-    title,
-    description,
-    images: [
-      {
-        url: MetaUrl.Default_Og_Url,
-        alt: "OG Image",
-      },
-    ],
-    siteName: "jdwshlt.ekel.dev/doa-harian",
-  },
-  twitter: {
-    title,
-    description,
-    site: url,
-    card: "summary_large_image",
-  },
-  metadataBase: new URL(url),
-};
+export const metadata = createPageMetadata({
+  title: "Doa Harian",
+  description: "Baca kumpulan doa harian lengkap dengan tulisan Arab dan arti.",
+  path: "/doa-harian",
+});
 
 async function getDoaHarian(): Promise<DoaHarianProps[]> {
   try {
@@ -79,7 +51,7 @@ export default async function DoaHarian() {
             src="/img/pray.svg"
             width={40}
             height={40}
-            alt="Mosque"
+            alt=""
             fetchPriority="high"
             draggable={false}
           />

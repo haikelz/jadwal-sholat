@@ -14,7 +14,7 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <html lang="en">
+    <html lang="id">
       <body>
         <NextError statusCode={0} />
       </body>

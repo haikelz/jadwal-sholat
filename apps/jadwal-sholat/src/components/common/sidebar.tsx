@@ -1,22 +1,5 @@
 "use client";
 
-import { ChildrenProps } from "@/interfaces";
-import { slugify } from "@/lib/helpers";
-import { cn } from "@/lib/utils/cn";
-import { Separator } from "@radix-ui/react-separator";
-import {
-  BookMarked,
-  BookOpen,
-  Calendar,
-  Clock4,
-  HandHelping,
-  List,
-  LucideIcon,
-} from "lucide-react";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Fragment } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -38,19 +21,36 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { ChildrenProps } from "@/interfaces";
+import { slugify } from "@/lib/helpers";
+import { cn } from "@/lib/utils/cn";
+import { Separator } from "@radix-ui/react-separator";
+import {
+  BookMarked,
+  BookOpen,
+  Calendar,
+  Clock4,
+  HandHelping,
+  List,
+  LucideIcon,
+} from "lucide-react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Fragment } from "react";
 
 const SwitchTheme = dynamic(
   () => import("@/components/switch-theme").then((mod) => mod.SwitchTheme),
   {
     ssr: false,
-  }
+  },
 );
 const ReadingProgress = dynamic(
   () =>
     import("@/components/quran/detail-surat/reading-progress").then(
-      (comp) => comp.ReadingProgress
+      (comp) => comp.ReadingProgress,
     ),
-  { ssr: false }
+  { ssr: false },
 );
 
 const navbarList = [
@@ -98,107 +98,111 @@ export function CustomSidebar({ children }: ChildrenProps) {
       : [{ title: "Jadwal Sholat", url: "/" }, ...breadcrumbItems];
 
   return (
-    <>
-      <SidebarProvider>
-        <Sidebar>
-          <SidebarContent className="dark:bg-gray-900 bg-gray-50">
-            <SidebarGroup>
-              <SidebarGroupLabel>jdwshlt.ekel.dev</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton
-                      asChild
-                      className={cn(
-                        "hover:bg-gray-100 dark:hover:bg-gray-800 font-medium",
-                        pathname === "/"
-                          ? "bg-gray-100 dark:bg-gray-800 font-bold"
-                          : null
-                      )}
-                    >
-                      <Link href="/">
-                        <Clock4 />
-                        <span>Jadwal Sholat</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  {navbarList.map((item) => {
-                    const Icon: LucideIcon = item.icon;
-                    return (
-                      <SidebarMenuItem key={item.id}>
-                        <SidebarMenuButton
-                          asChild
-                          className={cn(
-                            "hover:bg-gray-100 dark:hover:bg-gray-800 font-medium",
-                            pathname.includes(item.url)
-                              ? "bg-gray-100 dark:bg-gray-800 font-bold"
-                              : null
-                          )}
-                        >
-                          <Link href={slugify(item.title)}>
-                            <Icon />
-                            <span>{item.title}</span>
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    );
-                  })}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          </SidebarContent>
-          <SidebarFooter className="dark:bg-gray-900 bg-gray-50 flex items-end justify-center">
-            <SwitchTheme />
-          </SidebarFooter>
-        </Sidebar>
-        <SidebarInset>
-          <header className="flex h-16 shrink-0 sticky top-0 px-4 z-50 dark:bg-gray-950/70 bg-white/70 backdrop-blur-md items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-            <nav className="flex justify-between space-x-2 w-full items-center">
-              <div className="flex items-center gap-2">
-                <SidebarTrigger />
-                <Separator orientation="vertical" className="mr-2 h-4" />
-                <Breadcrumb>
-                  <BreadcrumbList>
-                    {routesList.map((item, index) => (
-                      <Fragment key={index + 1}>
-                        <BreadcrumbItem className="hidden md:block">
-                          <BreadcrumbLink asChild>
-                            <Link
-                              href={item.url}
-                              className={cn(
-                                pathname === item.url ? "font-bold" : ""
-                              )}
-                            >
-                              {item.title}
-                            </Link>
-                          </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        {index >= routesList.length - 1 ? null : (
-                          <BreadcrumbSeparator className="hidden md:block" />
+    <SidebarProvider>
+      <a
+        href="#main-content"
+        className="sr-only fixed left-4 top-4 z-[60] rounded-md bg-background px-4 py-2 font-semibold text-foreground shadow-lg focus:not-sr-only"
+      >
+        Lewati ke konten utama
+      </a>
+      <Sidebar>
+        <SidebarContent className="dark:bg-gray-900 bg-gray-50">
+          <SidebarGroup>
+            <SidebarGroupLabel>jdwshlt.ekel.dev</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    asChild
+                    className={cn(
+                      "hover:bg-gray-100 dark:hover:bg-gray-800 font-medium",
+                      pathname === "/"
+                        ? "bg-gray-100 dark:bg-gray-800 font-bold"
+                        : null,
+                    )}
+                  >
+                    <Link href="/">
+                      <Clock4 />
+                      <span>Jadwal Sholat</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                {navbarList.map((item) => {
+                  const Icon: LucideIcon = item.icon;
+                  return (
+                    <SidebarMenuItem key={item.id}>
+                      <SidebarMenuButton
+                        asChild
+                        className={cn(
+                          "hover:bg-gray-100 dark:hover:bg-gray-800 font-medium",
+                          pathname.includes(item.url)
+                            ? "bg-gray-100 dark:bg-gray-800 font-bold"
+                            : null,
                         )}
-                      </Fragment>
-                    ))}
-                  </BreadcrumbList>
-                </Breadcrumb>
-              </div>
-              {routeSegments.includes("quran") && routeSegments.length >= 2 ? (
-                <ReadingProgress />
-              ) : null}
-            </nav>
-          </header>
-          <main className="flex w-full justify-center min-h-svh">
-            <section
-              className={cn(
-                "flex w-full max-w-full flex-col items-center min-h-screen",
-                "bg-white px-5 text-center",
-                "dark:bg-gray-950"
-              )}
-            >
-              {children}
-            </section>
-          </main>
-        </SidebarInset>
-      </SidebarProvider>
-    </>
+                      >
+                        <Link href={slugify(item.title)}>
+                          <Icon />
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+        <SidebarFooter className="dark:bg-gray-900 bg-gray-50 flex items-end justify-center">
+          <SwitchTheme />
+        </SidebarFooter>
+      </Sidebar>
+      <SidebarInset id="main-content" tabIndex={-1}>
+        <header className="flex h-16 shrink-0 sticky top-0 px-4 z-50 dark:bg-gray-950/70 bg-white/70 backdrop-blur-md items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+          <nav className="flex justify-between space-x-2 w-full items-center">
+            <div className="flex items-center gap-2">
+              <SidebarTrigger />
+              <Separator orientation="vertical" className="mr-2 h-4" />
+              <Breadcrumb>
+                <BreadcrumbList>
+                  {routesList.map((item, index) => (
+                    <Fragment key={index + 1}>
+                      <BreadcrumbItem className="hidden md:block">
+                        <BreadcrumbLink asChild>
+                          <Link
+                            href={item.url}
+                            className={cn(
+                              pathname === item.url ? "font-bold" : "",
+                            )}
+                          >
+                            {item.title}
+                          </Link>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      {index >= routesList.length - 1 ? null : (
+                        <BreadcrumbSeparator className="hidden md:block" />
+                      )}
+                    </Fragment>
+                  ))}
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+            {routeSegments.includes("quran") && routeSegments.length >= 2 ? (
+              <ReadingProgress />
+            ) : null}
+          </nav>
+        </header>
+        <div className="flex w-full justify-center min-h-svh">
+          <section
+            className={cn(
+              "flex w-full max-w-full flex-col items-center min-h-screen",
+              "bg-white px-5 text-center",
+              "dark:bg-gray-950",
+            )}
+          >
+            {children}
+          </section>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

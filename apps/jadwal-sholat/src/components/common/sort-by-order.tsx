@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils/cn";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
 interface SortByOrderProps {
@@ -11,16 +10,11 @@ export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps) {
   return (
     <div className="w-full flex justify-end items-center">
       <Button
-        className={cn("flex justify-center items-center")}
         onClick={() => setIsAscending(!isAscending)}
       >
-        <span className="font-medium">Sort By: </span>
-        <div className="flex space-x-1 ml-1 justify-center items-center">
-          <span className="font-bold">
-            {isAscending ? "Ascending" : "Descending"}
-          </span>
-          {isAscending ? <ArrowUp size={20} /> : <ArrowDown size={20} />}
-        </div>
+        <span>Urutkan:</span>
+        <span className="font-bold">{isAscending ? "Naik" : "Turun"}</span>
+        {isAscending ? <ArrowUp size={20} /> : <ArrowDown size={20} />}
       </Button>
     </div>
   );

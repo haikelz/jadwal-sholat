@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { usePlayNextAudio, useScrollAyat } from "@/hooks";
 import { SuratProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
@@ -143,35 +144,29 @@ export function DetailSurat({ data }: SuratProps) {
                 <div className="mt-2.5 w-full flex justify-start items-start">
                   <div className="rounded-full">
                     {isPlaying && audioList[audioIndex] === ayat.audio.url ? (
-                      <button
+                      <Button
                         type="button"
-                        aria-label="pause audio"
-                        className={cn(
-                          "flex justify-center items-center bg-gray-50 dark:bg-gray-950 border border-input",
-                          "transition-all border border-input px-2.5 py-1",
-                          "rounded-full space-x-2"
-                        )}
+                        variant="outline"
+                        size="sm"
+                        className="rounded-full"
                         onClick={handlePauseAudio}
                       >
                         <Pause size={20} />
-                        <span className="font-medium">Pause</span>
-                      </button>
+                        <span className="font-medium">Jeda</span>
+                      </Button>
                     ) : (
-                      <button
+                      <Button
                         type="button"
-                        aria-label="play audio"
-                        className={cn(
-                          "flex justify-center items-center bg-gray-50 dark:bg-gray-950",
-                          "transition-all border border-input px-2.5 py-1",
-                          "rounded-full space-x-2"
-                        )}
+                        variant="outline"
+                        size="sm"
+                        className="rounded-full"
                         onClick={() =>
                           handlePlayAudio(index, ayat.number.insurah)
                         }
                       >
                         <Play size={20} />
-                        <span className="font-medium">Play</span>
-                      </button>
+                        <span className="font-medium">Putar</span>
+                      </Button>
                     )}
                   </div>
                 </div>
@@ -186,10 +181,12 @@ export function DetailSurat({ data }: SuratProps) {
               </p>
             </div>
             <div className="flex justify-center items-center space-x-3">
-              <button
+              <Button
                 type="button"
-                aria-label="copy"
-                title="Copy"
+                variant="ghost"
+                size="icon"
+                aria-label="Salin ayat"
+                title="Salin ayat"
                 onClick={() =>
                   copyToClipboard(
                     data.asma.id.short,
@@ -204,11 +201,13 @@ export function DetailSurat({ data }: SuratProps) {
                 ) : (
                   <ClipboardCopy />
                 )}
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
-                aria-label="tandai ayat"
-                title="Bookmark"
+                variant="ghost"
+                size="icon"
+                aria-label="Tandai ayat terakhir dibaca"
+                title="Tandai ayat terakhir dibaca"
                 onClick={() =>
                   handleClick(
                     data.asma.id.short,
@@ -222,12 +221,12 @@ export function DetailSurat({ data }: SuratProps) {
                 ) : (
                   <Bookmark />
                 )}
-              </button>
+              </Button>
             </div>
           </div>
         ))}
       </div>
-      <DialogNotification description="Sudah Ditandai!" />
+      <DialogNotification description="Ayat ditandai sebagai bacaan terakhir." />
     </>
   );
 }

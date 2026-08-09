@@ -3,7 +3,7 @@ import { TransitionLayout } from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
-import { MetaUrl } from "@/lib/utils/enums";
+import { createPageMetadata } from "@/lib/utils/metadata";
 import { Metadata } from "next";
 
 const { NEXT_PUBLIC_HADITH_API } = env;
@@ -26,35 +26,17 @@ export async function generateMetadata(props: {
       .split("-")
       .map((item) => item.charAt(0).toUpperCase() + item.slice(1))
       .join(" ")} No. ${number}`;
-    const base = {
-      title: title,
-      description: contents?.id?.slice(0, 160) ?? `Hadith ${number}`,
-      url: `${MetaUrl.Site_Url}/hadith/${book}/${number}`,
-    };
-    return {
-      title: base.title,
-      description: base.description,
-      openGraph: {
-        type: "website",
-        url: base.url,
-        title: base.title,
-        description: base.description,
-        images: [{ url: MetaUrl.Default_Og_Url, alt: "OG Image" }],
-        siteName: `jdwshlt.ekel.dev/hadith/${book}/${number}`,
-      },
-      twitter: {
-        title: base.title,
-        description: base.description,
-        site: base.url,
-        card: "summary_large_image",
-      },
-      metadataBase: new URL(base.url),
-    };
+    return createPageMetadata({
+      title,
+      description: contents?.id?.slice(0, 155) ?? `Hadith nomor ${number}`,
+      path: `/hadith/${book}/${number}`,
+    });
   } catch {
-    return {
-      title: `Hadith #${number} | Jadwal Sholat`,
+    return createPageMetadata({
+      title: `Hadith nomor ${number}`,
       description: `Hadith ${number} dari ${book}`,
-    };
+      path: `/hadith/${book}/${number}`,
+    });
   }
 }
 

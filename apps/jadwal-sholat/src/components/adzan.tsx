@@ -1,7 +1,6 @@
 "use client";
 
 import { JadwalSholatProps } from "@/interfaces";
-import { cn } from "@/lib/utils/cn";
 import { matchDate } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
 import { add, format, parse } from "date-fns";
@@ -12,6 +11,14 @@ import { useDeepCompareEffect } from "use-deep-compare";
 
 import { formatSholatTime } from "@/lib/helpers";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   const filteredWaktu = waktu
@@ -110,94 +117,69 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     filteredWaktu,
   ]);
 
+  const prayerName =
+    formattedTime >= filteredWaktu.timings.Fajr &&
+    formattedTime <= getAddTimeResult(filteredWaktu.timings.Fajr, 10)
+      ? "Subuh"
+      : formattedTime >= filteredWaktu.timings.Dhuhr &&
+          formattedTime <= getAddTimeResult(filteredWaktu.timings.Dhuhr, 10)
+        ? "Dzuhur"
+        : formattedTime >= filteredWaktu.timings.Asr &&
+            formattedTime <= getAddTimeResult(filteredWaktu.timings.Asr, 10)
+          ? "Ashar"
+          : formattedTime >= filteredWaktu.timings.Maghrib &&
+              formattedTime <= getAddTimeResult(filteredWaktu.timings.Maghrib, 10)
+            ? "Maghrib"
+            : formattedTime >= filteredWaktu.timings.Isha &&
+                formattedTime <= getAddTimeResult(filteredWaktu.timings.Isha, 10)
+              ? "Isya"
+              : "";
+
   return (
-    <>
-      {isOpenConfirmModal ? (
-        <div
-          aria-modal="true"
-          className={cn(
-            "backdrop-blur-md bg-white/70 dark:bg-gray-950/70 fixed inset-0 top-0 z-50",
-            "flex min-h-screen w-full items-center justify-center",
-            "overflow-y-auto overflow-x-hidden"
-          )}
-        >
-          <div className="relative md:h-auto">
-            <div
-              className={cn(
-                "relative rounded-lg bg-white p-4",
-                "dark:bg-gray-950 border border-input dark:text-white"
-              )}
-            >
-              <div className="flex flex-col items-center justify-between rounded-t p-4">
-                <h1 className="text-2xl font-bold">
-                  Sudah Masuk Waktu{" "}
-                  {formattedTime >= filteredWaktu.timings.Fajr &&
-                  formattedTime <=
-                    getAddTimeResult(filteredWaktu.timings.Fajr, 10)
-                    ? "Subuh"
-                    : formattedTime >= filteredWaktu.timings.Dhuhr &&
-                      formattedTime <=
-                        getAddTimeResult(filteredWaktu.timings.Dhuhr, 10)
-                    ? "Dzuhur"
-                    : formattedTime >= filteredWaktu.timings.Asr &&
-                      formattedTime <=
-                        getAddTimeResult(filteredWaktu.timings.Asr, 10)
-                    ? "Ashar"
-                    : formattedTime >= filteredWaktu.timings.Maghrib &&
-                      formattedTime <=
-                        getAddTimeResult(filteredWaktu.timings.Maghrib, 10)
-                    ? "Maghrib"
-                    : formattedTime >= filteredWaktu.timings.Isha &&
-                      formattedTime <=
-                        getAddTimeResult(filteredWaktu.timings.Isha, 10)
-                    ? "Isya"
-                    : formattedTime >= "23.47" &&
-                      formattedTime <= "23.47" + "00.05"
-                    ? "Shubuh"
-                    : ""}
-                </h1>
-                {!isPlayingAudioAdzan ? (
-                  <div className="mt-2">
-                    <p>Apakah kamu ingin memutar suara Adzan?</p>
-                    <div className="mt-4 space-x-3 flex justify-center items-center">
-                      <Button
-                        type="button"
-                        aria-label="no"
-                        variant="destructive"
-                        onClick={() => setIsOpenConfirmModal(false)}
-                        className="font-bold"
-                      >
-                        No
-                      </Button>
-                      <Button
-                        type="button"
-                        aria-label="yes"
-                        onClick={() => {
-                          play();
-                          setIsOpenConfirmModal(false);
-                          setIsPlayingAudioAdzan(true);
-                        }}
-                        className="font-bold"
-                      >
-                        Yes
-                      </Button>
-                    </div>
-                  </div>
-                ) : (
-                  <Button
-                    type="button"
-                    aria-label="close"
-                    onClick={() => setIsOpenConfirmModal(false)}
-                    className="font-bold mt-2"
-                  >
-                    Close
-                  </Button>
-                )}
-              </div>
+    <Dialog open={isOpenConfirmModal} onOpenChange={setIsOpenConfirmModal}>
+      <DialogContent showCloseButton={false} className="sm:max-w-md">
+        <DialogHeader className="items-center text-center">
+          <DialogTitle className="text-2xl leading-tight">
+            Sudah masuk waktu {prayerName}
+          </DialogTitle>
+          <DialogDescription>
+            Apakah kamu ingin memutar suara adzan?
+          </DialogDescription>
+        </DialogHeader>
+        {!isPlayingAudioAdzan ? (
+          <div className="text-center">
+            <div className="mt-4 flex items-center justify-center gap-3">
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  variant="destructive"
+                  className="font-bold"
+                >
+                  Tidak
+                </Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    play();
+                    setIsPlayingAudioAdzan(true);
+                  }}
+                  className="font-bold"
+                >
+                  Putar adzan
+                </Button>
+              </DialogClose>
             </div>
           </div>
-        </div>
-      ) : null}
-    </>
+        ) : (
+          <DialogClose asChild>
+            <Button type="button" className="mx-auto font-bold">
+              Tutup
+            </Button>
+          </DialogClose>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -1,41 +1,14 @@
 import { PuasaSunnahPage } from "@/components/puasa-sunnah/puasa-sunnah-page";
 import { TransitionLayout } from "@/components/transition-layout";
 import { cn } from "@/lib/utils/cn";
-import { MetaUrl } from "@/lib/utils/enums";
+import { createPageMetadata } from "@/lib/utils/metadata";
 import { Suspense } from "react";
 
-const baseMetadata = {
-  title: "Puasa Sunnah | Jadwal Sholat",
-  description: "Berikut daftar Puasa Sunnah",
-  url: `${MetaUrl.Site_Url}/puasa-sunnah`,
-};
-
-const { title, description, url } = baseMetadata;
-
-export const metadata = {
-  title,
-  description,
-  openGraph: {
-    type: "website",
-    url,
-    title,
-    description,
-    images: [
-      {
-        url: MetaUrl.Default_Og_Url,
-        alt: "OG Image",
-      },
-    ],
-    siteName: "jdwshlt.ekel.dev/puasa-sunnah",
-  },
-  twitter: {
-    title,
-    description,
-    site: url,
-    card: "summary_large_image",
-  },
-  metadataBase: new URL(url),
-};
+export const metadata = createPageMetadata({
+  title: "Puasa Sunnah",
+  description: "Lihat jadwal puasa sunnah berdasarkan bulan, tahun, dan jenis puasa.",
+  path: "/puasa-sunnah",
+});
 
 export default function PuasaSunnah() {
   return (

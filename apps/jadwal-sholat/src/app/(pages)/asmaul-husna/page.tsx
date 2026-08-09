@@ -4,43 +4,16 @@ import { env } from "@/env.mjs";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
-import { MetaUrl } from "@/lib/utils/enums";
+import { createPageMetadata } from "@/lib/utils/metadata";
 import { Suspense } from "react";
 
 const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 
-const baseMetadata = {
-  title: "Asma'ul Husna | Jadwal Sholat",
-  description: "Berikut daftar Asma'ul Husna",
-  url: `${MetaUrl.Site_Url}/asmaul-husna`,
-};
-
-const { title, description, url } = baseMetadata;
-
-export const metadata = {
-  title,
-  description,
-  openGraph: {
-    type: "website",
-    url,
-    title,
-    description,
-    images: [
-      {
-        url: MetaUrl.Default_Og_Url,
-        alt: "OG Image",
-      },
-    ],
-    siteName: "jdwshlt.ekel.dev/asmaul-husna",
-  },
-  twitter: {
-    title,
-    description,
-    site: url,
-    card: "summary_large_image",
-  },
-  metadataBase: new URL(url),
-};
+export const metadata = createPageMetadata({
+  title: "Asmaul Husna",
+  description: "Baca 99 nama Allah beserta tulisan Arab dan artinya.",
+  path: "/asmaul-husna",
+});
 
 async function getAllAsmaulHusna(): Promise<AsmaulHusnaProps[]> {
   try {

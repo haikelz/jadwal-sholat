@@ -4,45 +4,17 @@ import { env } from "@/env.mjs";
 import { ListSuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { cn } from "@/lib/utils/cn";
-import { MetaUrl } from "@/lib/utils/enums";
-import { Metadata } from "next";
+import { createPageMetadata } from "@/lib/utils/metadata";
 import Image from "next/image";
 import { Suspense } from "react";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
-const baseMetadata = {
-  title: "Baca Al-Qur'an | Jadwal Sholat",
-  description: "Berlomba-lombalah kamu dalam berbuat kebaikan",
-  url: `${MetaUrl.Site_Url}/quran`,
-};
-
-const { title, description, url } = baseMetadata;
-
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    type: "website",
-    url,
-    title,
-    description,
-    images: [
-      {
-        url: MetaUrl.Default_Og_Url,
-        alt: "OG Image",
-      },
-    ],
-    siteName: "jdwshlt.ekel.dev/quran",
-  },
-  twitter: {
-    title,
-    description,
-    site: url,
-    card: "summary_large_image",
-  },
-  metadataBase: new URL(url),
-};
+export const metadata = createPageMetadata({
+  title: "Baca Al-Qur'an",
+  description: "Baca Al-Qur'an lengkap dengan audio, transliterasi, terjemahan, dan tafsir.",
+  path: "/quran",
+});
 
 async function getSurat(): Promise<ListSuratProps> {
   try {
@@ -78,7 +50,7 @@ export default async function Quran() {
             src="/img/Quran.webp"
             width={40}
             height={40}
-            alt="Al-Qur'an"
+            alt=""
             fetchPriority="high"
             draggable={false}
           />

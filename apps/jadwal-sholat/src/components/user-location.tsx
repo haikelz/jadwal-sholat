@@ -36,17 +36,15 @@ export function UserLocation() {
     refetchOnWindowFocus: false,
   });
 
+  const location =
+    data?.address.city ??
+    data?.address.village ??
+    data?.address.county ??
+    "lokasi terpilih";
+
   return (
     <span>
-      {isPending || isRefetching
-        ? ""
-        : isError
-        ? "-"
-        : data?.address.city
-        ? data.address.city
-        : data?.address.village
-        ? data.address.village
-        : data?.address.county}
+      {isPending || isRefetching || isError ? "lokasi terpilih" : location}
     </span>
   );
 }

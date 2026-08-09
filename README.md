@@ -1,27 +1,31 @@
 <div align="center">
   <h1>Jadwal Sholat</h1>
-  <p>Jadwal Sholat is a website for prayer times, Asma'ul Husna, Al-Qur'an (with reciter, translation, and Latin), daily prayers, hadith, and Puasa Sunnah schedules.</p>
+  <p>A mobile-friendly Islamic companion for prayer times, Al-Qur'an, hadith, daily prayers, Asmaul Husna, and sunnah fasting schedules.</p>
+  <p><a href="https://jdwshlt.ekel.dev">Open the website</a></p>
 </div>
 
-## 📝Features
+## Features
 
-- Prayer schedule based on user location
-- Read Al-Qur'an (with audio selection for Quran reciter, translation, and Latin)
-- Asma'ul Husna
-- Daily prayers
-- Hadith (browse by book and number)
-- Puasa Sunnah schedule based on month, type of Puasa Sunnah, and current year
+- Monthly prayer schedule based on the reader's location
+- Al-Qur'an with reciter selection, audio, transliteration, translation, tafsir, and last-read bookmarks
+- Hadith browsing by book and number
+- Daily prayers with Arabic text and Indonesian translation
+- The 99 names of Allah with Arabic text and meaning
+- Sunnah fasting schedules by month, year, and fasting type
+- Light and dark themes with responsive desktop and mobile navigation
+- Keyboard-friendly controls, accessible dialogs, reduced-motion support, and zoom-safe layouts
+- Canonical metadata, Open Graph and Twitter cards, `robots.txt`, and XML sitemap
 
-## ⚡️Technologies
+## Technology
 
-- Next JS
+- Next.js App Router
 - TypeScript
-- Tailwind CSS + shadcn/ui
-- React Query
+- Tailwind CSS v4 + shadcn/ui + Radix UI
+- TanStack Query
 - Zustand
 - Sentry
-- [moonrepo](https://moonrepo.dev/) monorepo
-- Bun (package manager and runtime)
+- [moonrepo](https://moonrepo.dev/) monorepo tooling
+- Bun
 
 ## Getting Started
 
@@ -42,6 +46,12 @@
 git clone https://github.com/haikelz/jadwal-sholat.git
 cd jadwal-sholat
 bun install
+```
+
+Copy the environment template and provide the API endpoints and optional Sentry values:
+
+```bash
+cp apps/jadwal-sholat/.env.example apps/jadwal-sholat/.env
 ```
 
 Start the Next.js app (from the repository root):
@@ -66,6 +76,13 @@ Open [http://localhost:3000](http://localhost:3000).
 | `bun run build:web` | Production build |
 | `bun run test:web` | E2E tests (Cypress via moon) |
 
+Type-check the application directly:
+
+```bash
+cd apps/jadwal-sholat
+bunx tsc --noEmit
+```
+
 ### App package (`apps/jadwal-sholat`)
 
 You can also run scripts from the app directory:
@@ -84,29 +101,42 @@ bun run open     # cypress open
 
 - `apps/jadwal-sholat` — Next.js application
 - `packages/eslint-config`, `packages/typescript-config` — shared tooling
+- `static/docs` — documentation screenshots
+- `AGENTS.md` — contributor and coding-agent guidance
 
 ## Screenshots
 
-|                                                                      |                                                                      |
-| :------------------------------------------------------------------: | :------------------------------------------------------------------: |
-| ![ss 1](/static/docs/Screenshot%20From%202025-03-19%2019-17-06.png)  | ![ss 2](/static/docs/Screenshot%20From%202025-03-19%2019-20-16.png)  |
-| ![ss 3](/static/docs/Screenshot%20From%202025-03-19%2019-17-30.png)  | ![ss 4](/static/docs/Screenshot%20From%202025-03-19%2019-17-33.png)  |
-| ![ss 5](/static/docs/Screenshot%20From%202025-03-19%2019-17-44.png)  | ![ss 8](/static/docs/Screenshot%20From%202025-03-19%2019-18-19.png)  |
-| ![ss 9](/static/docs/Screenshot%20From%202025-03-19%2019-18-27.png)  | ![ss 10](/static/docs/Screenshot%20From%202025-03-19%2019-20-11.png) |
-| ![ss 10](/static/docs/Screenshot%20From%202025-11-27%2023-54-20.png) | ![ss 11](/static/docs/Screenshot%20From%202025-11-27%2023-54-39.png) |
-|                                                                      |                                                                      |
+### Desktop
+
+| Prayer schedule | Al-Qur'an library |
+| :---: | :---: |
+| ![Prayer schedule on desktop](/static/docs/docs-screenshots.cy.ts/desktop-prayer-schedule.png) | ![Al-Qur'an library on desktop](/static/docs/docs-screenshots.cy.ts/desktop-quran-library.png) |
+
+### Mobile
+
+| Prayer schedule | Al-Qur'an reading |
+| :---: | :---: |
+| ![Prayer schedule on mobile](/static/docs/docs-screenshots.cy.ts/mobile-prayer-schedule.png) | ![Al-Qur'an reading on mobile](/static/docs/docs-screenshots.cy.ts/mobile-quran-reading.png) |
+
+The screenshots cover representative desktop and `390px` mobile layouts.
+
+## Accessibility and SEO
+
+The shared interface uses one main landmark, a skip link, visible focus indicators, labeled search fields, native controls, focus-managed Radix dialogs, responsive typography, and reduced-motion fallbacks. Arabic text uses the local LPMQ font in WOFF2 format.
+
+Metadata is centralized in `src/lib/utils/metadata.ts`. Public routes include unique descriptions, canonical URLs, Open Graph data, and Twitter cards. Next.js generates `/robots.txt` and `/sitemap.xml` from `robots.ts` and `sitemap.ts`.
 
 ## Activity
 
 ![Alt](https://repobeats.axiom.co/api/embed/fdae03fe11b3e4d1ef0dec27555d7eb2b121bd5f.svg "Repobeats analytics image")
 
-## 🗒️Credits
+## Credits
 
 Thank you for inspiring me
 
 https://islamiah.vercel.app/
 
-## 🤝Supports
+## Support
 
 - [Github Sponsor](https://github.com/sponsors/haikelz)
 - [Trakteer](https://trakteer.id/haikelz/tip)

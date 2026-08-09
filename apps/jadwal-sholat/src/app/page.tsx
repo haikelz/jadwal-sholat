@@ -1,41 +1,13 @@
 import { Homepage } from "@/components/homepage";
 import { TransitionLayout } from "@/components/transition-layout";
 import { cn } from "@/lib/utils/cn";
-import { MetaUrl } from "@/lib/utils/enums";
-import { Metadata } from "next";
+import { createPageMetadata } from "@/lib/utils/metadata";
 
-const baseMetadata = {
+export const metadata = createPageMetadata({
   title: "Jadwal Sholat",
-  description: "Berikut daftar Kabupaten/Kota yang tersedia",
-  url: `${MetaUrl.Site_Url}`,
-};
-
-const { title, description, url } = baseMetadata;
-
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    type: "website",
-    url,
-    title,
-    description,
-    images: [
-      {
-        url: MetaUrl.Default_Og_Url,
-        alt: "OG Image",
-      },
-    ],
-    siteName: "jdwshlt.ekel.dev",
-  },
-  twitter: {
-    title,
-    description,
-    site: url,
-    card: "summary_large_image",
-  },
-  metadataBase: new URL(url),
-};
+  description: "Lihat jadwal sholat bulan ini berdasarkan lokasi kamu.",
+  path: "/",
+});
 
 export default function Home() {
   return (

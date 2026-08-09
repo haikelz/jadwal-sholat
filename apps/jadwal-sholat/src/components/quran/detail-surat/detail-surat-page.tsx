@@ -5,6 +5,7 @@ import { PreviousOrNext } from "@/components/quran/detail-surat/previous-or-next
 import { ErrorWhileFetch } from "@/components/react-query/error-while-fetch";
 import { IsRefetching } from "@/components/react-query/is-refetching";
 import { LoadingClient } from "@/components/react-query/loading-client";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -70,24 +71,24 @@ export function DetailSuratPage({ number }: { number: string }) {
           </p>
         </div>
         <div className="mt-1 mb-2 flex space-x-4 flex-wrap justify-center items-center gap-4">
-          <button
+          <Button
             type="button"
-            aria-label="show audio"
-            className="flex items-center space-x-1"
+            variant="ghost"
+            aria-pressed={audio}
             onClick={handleShowAudio}
           >
             <Volume2 size={20} />
-            <p className="text-lg font-bold">Audio</p>
-          </button>
-          <button
+            <span className="font-bold">Audio</span>
+          </Button>
+          <Button
             type="button"
-            aria-label="show terjemahan"
-            className="flex items-center space-x-1"
+            variant="ghost"
+            aria-pressed={terjemahan}
             onClick={() => setTerjemahan(!terjemahan)}
           >
             <Languages size={20} />
-            <p className="text-lg font-bold">Latin</p>
-          </button>
+            <span className="font-bold">Latin</span>
+          </Button>
           <DialogTafsir data={surat} />
           <Select
             defaultValue="Pilih Qori'"
