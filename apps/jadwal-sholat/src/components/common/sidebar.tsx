@@ -30,7 +30,6 @@ import {
   BookOpen,
   Calendar,
   Clock4,
-  HandHelping,
   List,
   LucideIcon,
 } from "lucide-react";
@@ -72,7 +71,6 @@ const navbarList = [
     icon: BookOpen,
     url: "/hadith",
   },
-  { id: 4, title: "Do'a Harian", icon: HandHelping, url: "/doa-harian" },
   { id: 5, title: "Puasa Sunnah", icon: Calendar, url: "/puasa-sunnah" },
 ];
 

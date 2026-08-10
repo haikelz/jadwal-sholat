@@ -1,14 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/utils/metadata";
 
-const routes = [
-  "",
-  "/asmaul-husna",
-  "/doa-harian",
-  "/hadith",
-  "/puasa-sunnah",
-  "/quran",
-];
+const routes = ["", "/asmaul-husna", "/hadith", "/puasa-sunnah", "/quran"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = routes.map((route) => ({
