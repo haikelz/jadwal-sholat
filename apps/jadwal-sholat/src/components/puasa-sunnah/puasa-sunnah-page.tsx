@@ -181,9 +181,6 @@ export function PuasaSunnahPage() {
           </p>
         )}
       </div>
-      <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
-        {data.data.disclaimer}
-      </p>
     </div>
   );
 }

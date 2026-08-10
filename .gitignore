@@ -38,7 +38,7 @@ yarn-error.log*
 # kubernetes
 k8s
 
-
+tasks/*
 
 .nx/cache
 .nx/workspace-data

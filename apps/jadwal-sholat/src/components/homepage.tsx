@@ -195,14 +195,6 @@ export function Homepage() {
           hidden={activeSchedule !== "month"}
           className="mt-5 w-full sm:mt-6"
         >
-          <div className="mb-4 text-left">
-            <h3 className="text-xl font-bold tracking-tight sm:text-2xl">
-              Jadwal bulan ini
-            </h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Lihat jadwal lengkap untuk setiap tanggal.
-            </p>
-          </div>
           <Jadwal waktu={waktu} />
         </div>
       </section>
