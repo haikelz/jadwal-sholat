@@ -19,9 +19,10 @@ import { JadwalSholatProps } from "@/interfaces";
 import { formatSholatTime } from "@/lib/helpers";
 import { bulan, currentDate, matchDate, tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
-import { Clock3, MapPin } from "lucide-react";
+import { CalendarDays, Clock3, MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useState } from "react";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
@@ -45,6 +46,9 @@ const Adzan = dynamic(
 );
 
 export function Homepage() {
+  const [activeSchedule, setActiveSchedule] = useState<"today" | "month">(
+    "today",
+  );
   const { position, isOpenMap, setIsOpenMap } = useGlobalStore((state) => ({
     position: state.position,
     isOpenMap: state.isOpenMap,
@@ -119,56 +123,88 @@ export function Homepage() {
           <span>Atur lokasi</span>
         </Button>
       </div>
-      <section
-        aria-labelledby="jadwal-hari-ini"
-        className="mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border bg-card shadow-sm"
-      >
-        <div className="flex items-center gap-3 border-b bg-muted/60 px-4 py-4 sm:px-6">
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <Clock3 aria-hidden="true" className="size-5" />
-          </span>
-          <div className="min-w-0 text-left">
-            <h2
-              id="jadwal-hari-ini"
-              className="text-lg font-bold tracking-tight sm:text-xl"
-            >
-              Jadwal hari ini
-            </h2>
-            <p className="text-sm text-muted-foreground">{currentDate}</p>
-          </div>
-        </div>
-        {waktuHariIni.length > 0 ? (
-          <dl className="grid grid-cols-4 gap-x-3 gap-y-5 p-4 sm:grid-cols-8 sm:px-6 sm:py-5">
-            {waktuHariIni.map((item) => (
-              <div key={item.name} className="min-w-0 text-left">
-                <dt className="truncate text-xs font-medium text-muted-foreground">
-                  {item.name}
-                </dt>
-                <dd className="mt-1 text-base font-bold tabular-nums sm:text-lg">
-                  {formatSholatTime(item.time)}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        ) : (
-          <p className="px-4 py-6 text-center text-sm text-muted-foreground sm:px-6">
-            Jadwal hari ini belum tersedia.
-          </p>
-        )}
-      </section>
-      <section aria-labelledby="jadwal-bulan-ini" className="w-full">
-        <div className="mb-4 text-left">
-          <h2
-            id="jadwal-bulan-ini"
-            className="text-xl font-bold tracking-tight sm:text-2xl"
+      <section aria-labelledby="pilihan-jadwal" className="w-full">
+        <h2 id="pilihan-jadwal" className="sr-only">
+          Pilihan jadwal sholat
+        </h2>
+        <div
+          role="group"
+          aria-label="Tampilkan jadwal"
+          className="mx-auto grid w-full max-w-sm grid-cols-2 rounded-xl border bg-muted/70 p-1 shadow-xs"
+        >
+          <Button
+            type="button"
+            variant={activeSchedule === "today" ? "default" : "ghost"}
+            aria-pressed={activeSchedule === "today"}
+            aria-controls="jadwal-hari-ini"
+            className="h-11 rounded-lg font-semibold sm:h-10"
+            onClick={() => setActiveSchedule("today")}
           >
-            Jadwal bulan ini
-          </h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Lihat jadwal lengkap untuk setiap tanggal.
-          </p>
+            <Clock3 aria-hidden="true" />
+            Hari ini
+          </Button>
+          <Button
+            type="button"
+            variant={activeSchedule === "month" ? "default" : "ghost"}
+            aria-pressed={activeSchedule === "month"}
+            aria-controls="jadwal-bulan-ini"
+            className="h-11 rounded-lg font-semibold sm:h-10"
+            onClick={() => setActiveSchedule("month")}
+          >
+            <CalendarDays aria-hidden="true" />
+            Satu bulan
+          </Button>
         </div>
-        <Jadwal waktu={waktu} />
+        <div
+          id="jadwal-hari-ini"
+          hidden={activeSchedule !== "today"}
+          className="mx-auto mt-5 w-full max-w-4xl overflow-hidden rounded-2xl border bg-card shadow-sm sm:mt-6"
+        >
+          <div className="flex items-center gap-3 border-b bg-muted/60 px-4 py-4 sm:px-6">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <Clock3 aria-hidden="true" className="size-5" />
+            </span>
+            <div className="min-w-0 text-left">
+              <h3 className="text-lg font-bold tracking-tight sm:text-xl">
+                Jadwal hari ini
+              </h3>
+              <p className="text-sm text-muted-foreground">{currentDate}</p>
+            </div>
+          </div>
+          {waktuHariIni.length > 0 ? (
+            <dl className="grid grid-cols-4 gap-x-3 gap-y-5 p-4 sm:grid-cols-8 sm:px-6 sm:py-5">
+              {waktuHariIni.map((item) => (
+                <div key={item.name} className="min-w-0 text-left">
+                  <dt className="truncate text-xs font-medium text-muted-foreground">
+                    {item.name}
+                  </dt>
+                  <dd className="mt-1 text-base font-bold tabular-nums sm:text-lg">
+                    {formatSholatTime(item.time)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            <p className="px-4 py-6 text-center text-sm text-muted-foreground sm:px-6">
+              Jadwal hari ini belum tersedia.
+            </p>
+          )}
+        </div>
+        <div
+          id="jadwal-bulan-ini"
+          hidden={activeSchedule !== "month"}
+          className="mt-5 w-full sm:mt-6"
+        >
+          <div className="mb-4 text-left">
+            <h3 className="text-xl font-bold tracking-tight sm:text-2xl">
+              Jadwal bulan ini
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Lihat jadwal lengkap untuk setiap tanggal.
+            </p>
+          </div>
+          <Jadwal waktu={waktu} />
+        </div>
       </section>
       <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
         <DialogContent className="max-h-[calc(100dvh-2rem)] max-w-[calc(100%-2rem)] overflow-y-auto sm:max-w-4xl">
