@@ -1,4 +1,4 @@
-import { format, parse } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
 
 /**
@@ -8,7 +8,7 @@ import { id } from "date-fns/locale";
  */
 export function formatToIndonesianDate(dateString: string): string | null {
   try {
-    const parsedDate = parse(dateString, "EEEE, dd MMMM yyyy", new Date());
+    const parsedDate = parseISO(dateString);
     if (isNaN(parsedDate.getTime())) {
       throw new Error("Invalid date");
     }

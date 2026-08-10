@@ -20,8 +20,8 @@ import { useClipboard } from "use-clipboard-copy";
 
 const DialogNotification = dynamic(() =>
   import("@/components/common/dialog-notification").then(
-    (mod) => mod.DialogNotification
-  )
+    (mod) => mod.DialogNotification,
+  ),
 );
 
 export function DetailSurat({ data }: SuratProps) {
@@ -39,7 +39,7 @@ export function DetailSurat({ data }: SuratProps) {
       Arti: ${arti}
       `);
     },
-    [clipboard, setAyatClick]
+    [clipboard, setAyatClick],
   );
 
   const { lastRead, setLastRead, setNotification, terjemahan, audio } =
@@ -104,42 +104,43 @@ export function DetailSurat({ data }: SuratProps) {
 
   return (
     <>
-      <div className="w-full flex flex-col space-y-7 my-7">
+      <div className="my-6 flex w-full min-w-0 flex-col sm:my-8">
         {data.ayahs.map((ayat, index) => (
-          <div
+          <article
             className={cn(
-              "flex flex-col items-end justify-end",
-              "border-b border-input py-4 ",
-              "dark:text-white"
+              "flex min-w-0 flex-col border-b py-7 sm:py-9",
+              "text-foreground",
             )}
             key={index + 1}
           >
-            <div className="relative flex w-full items-start justify-between">
+            <div className="grid w-full min-w-0 grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-3 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-5">
               <div
                 id={`ayat-${ayat.number.insurah}`}
                 className={cn(
-                  "mr-2 flex h-8 w-8 border border-input items-center justify-center rounded-md p-5",
-                  "font-bold",
+                  "flex size-11 items-center justify-center rounded-xl border bg-card",
+                  "font-bold tabular-nums shadow-xs sm:size-12",
                   isPlaying && audioList[audioIndex] === ayat.audio.url
-                    ? "bg-gray-50 dark:bg-gray-900"
-                    : ""
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "",
                 )}
               >
-                <p className="font-bold">{ayat.number.insurah}</p>
+                <span>{ayat.number.insurah}</span>
               </div>
               <p
+                lang="ar"
+                dir="rtl"
                 className={cn(
-                  "text-right text-3xl tracking-wide font-medium leading-loose",
-                  "arabic-font",
+                  "arabic-font min-w-0 max-w-full text-right text-3xl font-medium leading-loose sm:text-4xl",
+                  "[overflow-wrap:anywhere]",
                   isPlaying && audioList[audioIndex] === ayat.audio.url
-                    ? "text-gray-600 dark:text-gray-400"
-                    : ""
+                    ? "text-muted-foreground"
+                    : "",
                 )}
               >
                 {ayat.text.ar}
               </p>
             </div>
-            <div className="mb-6 flex w-full flex-col items-start justify-start">
+            <div className="mt-5 flex w-full max-w-[72ch] flex-col items-start sm:ml-[4.25rem] sm:w-[calc(100%-4.25rem)]">
               {audio ? (
                 <div className="mt-2.5 w-full flex justify-start items-start">
                   <div className="rounded-full">
@@ -148,7 +149,7 @@ export function DetailSurat({ data }: SuratProps) {
                         type="button"
                         variant="outline"
                         size="sm"
-                        className="rounded-full"
+                        className="rounded-full px-4"
                         onClick={handlePauseAudio}
                       >
                         <Pause size={20} />
@@ -159,7 +160,7 @@ export function DetailSurat({ data }: SuratProps) {
                         type="button"
                         variant="outline"
                         size="sm"
-                        className="rounded-full"
+                        className="rounded-full px-4"
                         onClick={() =>
                           handlePlayAudio(index, ayat.number.insurah)
                         }
@@ -172,15 +173,15 @@ export function DetailSurat({ data }: SuratProps) {
                 </div>
               ) : null}
               {terjemahan ? (
-                <p className="mt-2 text-left italic font-medium text-teal-700 dark:text-teal-300">
+                <p className="mt-4 text-left text-base italic leading-relaxed text-muted-foreground">
                   {ayat.text.read}
                 </p>
               ) : null}
-              <p className="mt-6 text-left font-medium leading-relaxed tracking-wide">
+              <p className="mt-4 text-left text-base leading-7">
                 {ayat.translation.id}
               </p>
             </div>
-            <div className="flex justify-center items-center space-x-3">
+            <div className="mt-4 flex items-center justify-end gap-1">
               <Button
                 type="button"
                 variant="ghost"
@@ -192,7 +193,7 @@ export function DetailSurat({ data }: SuratProps) {
                     data.asma.id.short,
                     ayat.number.insurah,
                     ayat.text.ar,
-                    ayat.translation.id
+                    ayat.translation.id,
                   )
                 }
               >
@@ -212,7 +213,7 @@ export function DetailSurat({ data }: SuratProps) {
                   handleClick(
                     data.asma.id.short,
                     ayat.number.insurah,
-                    data.number as number
+                    data.number as number,
                   )
                 }
               >
@@ -223,7 +224,7 @@ export function DetailSurat({ data }: SuratProps) {
                 )}
               </Button>
             </div>
-          </div>
+          </article>
         ))}
       </div>
       <DialogNotification description="Ayat ditandai sebagai bacaan terakhir." />

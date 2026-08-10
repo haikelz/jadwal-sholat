@@ -67,40 +67,43 @@ export function Homepage() {
   return (
     <>
       <Adzan waktu={waktu} />
-      <div className="flex mb-4 flex-col items-center justify-center">
+      <header className="mx-auto flex max-w-3xl flex-col items-center justify-center text-center">
         <div className="flex items-center justify-center gap-3">
-          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
+          <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem]">
             Jadwal Sholat
           </h1>
-          <Image
-            src="/img/mosque.webp"
-            width={40}
-            height={40}
-            alt=""
-            fetchPriority="high"
-            draggable={false}
-          />
+          <span className="flex size-11 items-center justify-center rounded-xl bg-muted sm:size-12">
+            <Image
+              src="/img/mosque.webp"
+              width={32}
+              height={32}
+              alt=""
+              loading="eager"
+              fetchPriority="high"
+              draggable={false}
+            />
+          </span>
         </div>
         <p
           data-cy="description"
-          className="mt-2 max-w-2xl text-base font-medium leading-relaxed sm:text-lg"
+          className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          Berikut Jadwal Sholat untuk bulan ini, {currentDate} di wilayah{" "}
+          Jadwal sholat bulan ini untuk {currentDate} di wilayah{" "}
           <UserLocation />
         </p>
-      </div>
-      <div className="flex mb-7 flex-col items-center justify-center">
+      </header>
+      <div className="flex flex-col items-center justify-center">
         <Button
-          className="font-bold space-x-2 justify-center items-center flex"
+          className="flex items-center justify-center font-semibold"
           onClick={() => setIsOpenMap(!isOpenMap)}
         >
-          <MapPin size={20} />
+          <MapPin aria-hidden="true" size={18} />
           <span>Atur lokasi</span>
         </Button>
       </div>
-      <div className="flex w-full items-center overflow-x-auto text-center lg:justify-center">
+      <section aria-label="Jadwal sholat" className="w-full">
         <Jadwal waktu={waktu} />
-      </div>
+      </section>
       <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
         <DialogContent className="max-h-[calc(100dvh-2rem)] max-w-[calc(100%-2rem)] overflow-y-auto sm:max-w-4xl">
           <DialogHeader>

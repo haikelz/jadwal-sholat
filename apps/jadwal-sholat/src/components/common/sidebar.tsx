@@ -79,6 +79,11 @@ const navbarList = [
 export function CustomSidebar({ children }: ChildrenProps) {
   const pathname = usePathname();
   const routeSegments = pathname.slice(1).split("/").filter(Boolean);
+  const currentRouteTitle =
+    pathname === "/"
+      ? "Jadwal Sholat"
+      : (navbarList.find((item) => pathname.startsWith(item.url))?.title ??
+        "Jadwal Sholat");
 
   const breadcrumbItems = routeSegments.map((segment, index) => {
     const path = "/" + routeSegments.slice(0, index + 1).join("/");
@@ -106,22 +111,24 @@ export function CustomSidebar({ children }: ChildrenProps) {
         Lewati ke konten utama
       </a>
       <Sidebar>
-        <SidebarContent className="dark:bg-gray-900 bg-gray-50">
-          <SidebarGroup>
-            <SidebarGroupLabel>jdwshlt.ekel.dev</SidebarGroupLabel>
+        <SidebarContent>
+          <SidebarGroup className="pt-4">
+            <SidebarGroupLabel className="mb-2 px-3 text-xs font-semibold tracking-wide text-sidebar-foreground/60">
+              jdwshlt.ekel.dev
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton
                     asChild
-                    className={cn(
-                      "hover:bg-gray-100 dark:hover:bg-gray-800 font-medium",
-                      pathname === "/"
-                        ? "bg-gray-100 dark:bg-gray-800 font-bold"
-                        : null,
-                    )}
+                    size="lg"
+                    isActive={pathname === "/"}
+                    tooltip="Jadwal Sholat"
                   >
-                    <Link href="/">
+                    <Link
+                      href="/"
+                      aria-current={pathname === "/" ? "page" : undefined}
+                    >
                       <Clock4 />
                       <span>Jadwal Sholat</span>
                     </Link>
@@ -133,14 +140,16 @@ export function CustomSidebar({ children }: ChildrenProps) {
                     <SidebarMenuItem key={item.id}>
                       <SidebarMenuButton
                         asChild
-                        className={cn(
-                          "hover:bg-gray-100 dark:hover:bg-gray-800 font-medium",
-                          pathname.includes(item.url)
-                            ? "bg-gray-100 dark:bg-gray-800 font-bold"
-                            : null,
-                        )}
+                        size="lg"
+                        isActive={pathname.startsWith(item.url)}
+                        tooltip={item.title}
                       >
-                        <Link href={slugify(item.title)}>
+                        <Link
+                          href={slugify(item.title)}
+                          aria-current={
+                            pathname.startsWith(item.url) ? "page" : undefined
+                          }
+                        >
                           <Icon />
                           <span>{item.title}</span>
                         </Link>
@@ -152,16 +161,25 @@ export function CustomSidebar({ children }: ChildrenProps) {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
-        <SidebarFooter className="dark:bg-gray-900 bg-gray-50 flex items-end justify-center">
+        <SidebarFooter className="flex items-end justify-center border-t border-sidebar-border p-4">
           <SwitchTheme />
         </SidebarFooter>
       </Sidebar>
       <SidebarInset id="main-content" tabIndex={-1}>
-        <header className="flex h-16 shrink-0 sticky top-0 px-4 z-50 dark:bg-gray-950/70 bg-white/70 backdrop-blur-md items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <nav className="flex justify-between space-x-2 w-full items-center">
-            <div className="flex items-center gap-2">
+        <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-2 border-b bg-background/90 px-3 backdrop-blur-xl sm:px-5">
+          <nav
+            aria-label="Navigasi halaman"
+            className="flex w-full items-center justify-between gap-3"
+          >
+            <div className="flex min-w-0 items-center gap-2">
               <SidebarTrigger />
-              <Separator orientation="vertical" className="mr-2 h-4" />
+              <Separator
+                orientation="vertical"
+                className="hidden h-5 sm:block"
+              />
+              <span className="truncate text-sm font-semibold sm:hidden">
+                {currentRouteTitle}
+              </span>
               <Breadcrumb>
                 <BreadcrumbList>
                   {routesList.map((item, index) => (
@@ -191,12 +209,11 @@ export function CustomSidebar({ children }: ChildrenProps) {
             ) : null}
           </nav>
         </header>
-        <div className="flex w-full justify-center min-h-svh">
+        <div className="flex min-h-svh w-full justify-center">
           <section
             className={cn(
-              "flex w-full max-w-full flex-col items-center min-h-screen",
-              "bg-white px-5 text-center",
-              "dark:bg-gray-950",
+              "flex min-h-screen w-full min-w-0 flex-col px-4",
+              "bg-background text-foreground sm:px-6 lg:px-8",
             )}
           >
             {children}

@@ -1,9 +1,8 @@
+import { PageShell } from "@/components/common/page-shell";
 import { DetailSuratPage } from "@/components/quran/detail-surat/detail-surat-page";
-import { TransitionLayout } from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { ListSuratProps, SuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
-import { cn } from "@/lib/utils/cn";
 import { createPageMetadata } from "@/lib/utils/metadata";
 import { Metadata } from "next";
 
@@ -11,7 +10,7 @@ const { NEXT_PUBLIC_QURAN_API } = env;
 
 export async function generateStaticParams(): Promise<{ number: string }[]> {
   const response: ListSuratProps = await getData(
-    `${NEXT_PUBLIC_QURAN_API}/quran`
+    `${NEXT_PUBLIC_QURAN_API}/quran`,
   );
 
   return response.data.map((item) => ({ number: item.number.toString() }));
@@ -23,7 +22,7 @@ export async function generateMetadata(props: {
   const { number } = await props.params;
 
   const response: SuratProps = await getData(
-    `${NEXT_PUBLIC_QURAN_API}/quran/${number}`
+    `${NEXT_PUBLIC_QURAN_API}/quran/${number}`,
   );
 
   const { asma, tafsir } = response.data;
@@ -43,19 +42,8 @@ export default async function Surat(props: {
   const { number } = await props.params;
 
   return (
-    <>
-      <TransitionLayout
-        transition={{ duration: 0.3 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className={cn(
-          "flex w-full max-w-full",
-          "flex-col items-center justify-start",
-          "pt-8 pb-24 md:pb-8"
-        )}
-      >
-        <DetailSuratPage number={number} />
-      </TransitionLayout>
-    </>
+    <PageShell size="reader">
+      <DetailSuratPage number={number} />
+    </PageShell>
   );
 }

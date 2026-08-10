@@ -8,27 +8,33 @@ export function PreviousOrNext({ num }: { num: number }) {
   return (
     <div
       className={cn(
-        "flex w-full space-x-3",
-        num > 1 ? "justify-between" : "justify-end"
+        "flex w-full gap-3 border-y py-4",
+        num > 1 ? "justify-between" : "justify-end",
       )}
     >
       {num > 1 ? (
-        <Link href={`/quran/${num - 1}`}>
-          <Button
+        <Button asChild variant="outline">
+          <Link
+            href={`/quran/${num - 1}`}
             onClick={removeSelectedSurat}
-            type="button"
-            aria-label="Previous"
+            aria-label="Surat sebelumnya"
           >
-            <ArrowLeft size={20} />
-          </Button>
-        </Link>
+            <ArrowLeft aria-hidden="true" size={18} />
+            <span>Sebelumnya</span>
+          </Link>
+        </Button>
       ) : null}
       {num < 114 ? (
-        <Link href={`/quran/${num + 1}`}>
-          <Button type="button" aria-label="next" onClick={removeSelectedSurat}>
-            <ArrowRight size={20} />
-          </Button>
-        </Link>
+        <Button asChild variant="outline">
+          <Link
+            href={`/quran/${num + 1}`}
+            aria-label="Surat berikutnya"
+            onClick={removeSelectedSurat}
+          >
+            <span>Berikutnya</span>
+            <ArrowRight aria-hidden="true" size={18} />
+          </Link>
+        </Button>
       ) : null}
     </div>
   );

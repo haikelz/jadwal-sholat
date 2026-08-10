@@ -11,10 +11,10 @@ import { getData } from "@/lib/utils/axios-config";
  * @param {string} link - API link
  * @returns {UseQueryResult<any, Error>} configured useQuery
  */
-export function useFetch(link: string): UseQueryResult<any, Error> {
+export function useFetch<T = any>(link: string): UseQueryResult<T, Error> {
   return useQuery({
     queryKey: [link],
-    queryFn: () => getData(link),
+    queryFn: () => getData<T>(link),
     /**
      * @see https://tanstack.com/query/v5/docs/react/guides/migrating-to-v5#removed-keeppreviousdata-in-favor-of-placeholderdata-identity-function
      */

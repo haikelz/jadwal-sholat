@@ -17,73 +17,110 @@ const tableJadwalSholatList = [
 ];
 
 export function Jadwal({ waktu }: { waktu: JadwalSholatProps[] }) {
+  const rows = waktu.map((time) => ({
+    isToday: time.date.gregorian.date === matchDate,
+    key: time.date.gregorian.date,
+    date: format(time.date.readable, "EEEE, d LLLL yyyy", { locale: id }),
+    prayers: [
+      { name: "Imsak", time: formatSholatTime(time.timings.Imsak) },
+      { name: "Subuh", time: formatSholatTime(time.timings.Fajr) },
+      { name: "Terbit", time: formatSholatTime(time.timings.Sunrise) },
+      { name: "Dzuhur", time: formatSholatTime(time.timings.Dhuhr) },
+      { name: "Ashar", time: formatSholatTime(time.timings.Asr) },
+      { name: "Terbenam", time: formatSholatTime(time.timings.Sunset) },
+      { name: "Maghrib", time: formatSholatTime(time.timings.Maghrib) },
+      { name: "Isya", time: formatSholatTime(time.timings.Isha) },
+    ],
+  }));
+
   return (
-    <table className="min-w-max table-fixed border-2 border-black dark:border-none">
-      <thead className="border-2 border-black dark:border-none">
-        <tr className="border-2 border-black dark:border-none">
-          {tableJadwalSholatList.map((item) => (
-            <th
-              key={item.id}
-              className={cn(
-                "border-r-2 border-r-black px-1.5 py-1.5",
-                "whitespace-nowrap text-sm sm:px-2 sm:text-base",
-                "dark:border-none",
-              )}
-            >
-              {item.name}
-            </th>
-          ))}
-          <th className="whitespace-nowrap px-1.5 py-1.5 text-sm sm:px-2 sm:text-base">
-            Isya
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {waktu.map((time, index) => {
-          const dataTable = [
-            {
-              id: 1,
-              waktu: format(time.date.readable, "EEEE, d LLLL yyyy", {
-                locale: id,
-              }),
-            },
-            { id: 2, waktu: formatSholatTime(time.timings.Imsak) },
-            { id: 3, waktu: formatSholatTime(time.timings.Fajr) },
-            {
-              id: 4,
-              waktu: formatSholatTime(time.timings.Sunrise),
-            },
-            { id: 5, waktu: formatSholatTime(time.timings.Dhuhr) },
-            { id: 6, waktu: formatSholatTime(time.timings.Asr) },
-            { id: 7, waktu: formatSholatTime(time.timings.Sunset) },
-            {
-              id: 8,
-              waktu: formatSholatTime(time.timings.Maghrib),
-            },
-            { id: 9, waktu: formatSholatTime(time.timings.Isha) },
-          ];
-          return (
-            <tr
-              className={cn(
-                "border-b-2 border-black dark:border-none",
-                time.date.gregorian.date === matchDate
-                  ? "bg-gray-700 font-bold text-white"
-                  : "odd:bg-gray-300 dark:odd:bg-gray-900",
-              )}
-              key={index + 1}
-            >
-              {dataTable.map((item) => (
-                <td
-                  key={item.id}
-                  className="whitespace-nowrap border-r-2 border-black px-1.5 py-1.5 text-sm font-semibold tabular-nums dark:border-none sm:px-2 sm:text-base"
-                >
-                  {item.waktu}
-                </td>
+    <>
+      <div className="grid w-full gap-3 md:hidden">
+        {rows.map((row) => (
+          <article
+            key={row.key}
+            className={cn(
+              "rounded-xl border p-4 text-left shadow-xs",
+              row.isToday
+                ? "border-primary bg-primary text-primary-foreground"
+                : "bg-card text-card-foreground",
+            )}
+          >
+            <h2 className="text-base font-semibold">{row.date}</h2>
+            <dl className="mt-4 grid grid-cols-4 gap-x-3 gap-y-4">
+              {row.prayers.map((prayer) => (
+                <div key={prayer.name} className="min-w-0">
+                  <dt
+                    className={cn(
+                      "truncate text-xs",
+                      row.isToday
+                        ? "text-primary-foreground/75"
+                        : "text-muted-foreground",
+                    )}
+                  >
+                    {prayer.name}
+                  </dt>
+                  <dd className="mt-1 text-sm font-bold tabular-nums">
+                    {prayer.time}
+                  </dd>
+                </div>
               ))}
+            </dl>
+          </article>
+        ))}
+      </div>
+      <div className="hidden w-full overflow-x-auto rounded-xl border bg-card shadow-xs md:block">
+        <table className="w-full min-w-[860px] border-collapse text-left">
+          <caption className="sr-only">Jadwal sholat bulan ini</caption>
+          <thead className="bg-muted/70">
+            <tr>
+              {tableJadwalSholatList.map((item) => (
+                <th
+                  key={item.id}
+                  scope="col"
+                  className="whitespace-nowrap border-b px-3 py-3 text-sm font-semibold"
+                >
+                  {item.name}
+                </th>
+              ))}
+              <th
+                scope="col"
+                className="whitespace-nowrap border-b px-3 py-3 text-sm font-semibold"
+              >
+                Isya
+              </th>
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr
+                className={cn(
+                  "border-b last:border-0",
+                  row.isToday
+                    ? "bg-primary text-primary-foreground"
+                    : "even:bg-muted/35",
+                )}
+                key={row.key}
+              >
+                <th
+                  scope="row"
+                  className="whitespace-nowrap px-3 py-3 text-sm font-semibold"
+                >
+                  {row.date}
+                </th>
+                {row.prayers.map((prayer) => (
+                  <td
+                    key={prayer.name}
+                    className="px-3 py-3 text-sm font-medium tabular-nums"
+                  >
+                    {prayer.time}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/select";
 import { env } from "@/env.mjs";
 import { useFetch } from "@/hooks";
-import { cn } from "@/lib/utils/cn";
 import { qoriOptions } from "@/lib/utils/qori-options";
 import useGlobalStore from "@/store";
 import { Languages, Volume2 } from "lucide-react";
@@ -26,7 +25,7 @@ import { useAudioPlayer } from "react-use-audio-player";
 const { NEXT_PUBLIC_QURAN_API } = env;
 
 const DialogTafsir = dynamic(() =>
-  import("./dialog-tafsir").then((mod) => mod.DialogTafsir)
+  import("./dialog-tafsir").then((mod) => mod.DialogTafsir),
 );
 
 export function DetailSuratPage({ number }: { number: string }) {
@@ -49,7 +48,7 @@ export function DetailSuratPage({ number }: { number: string }) {
   }
 
   const { data, isPending, isError, isRefetching } = useFetch(
-    number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : ""
+    number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : "",
   );
 
   if ((!data && isError) || isPending) return <LoadingClient />;
@@ -59,49 +58,46 @@ export function DetailSuratPage({ number }: { number: string }) {
   const surat = data.data;
 
   return (
-    <>
-      <div className="flex flex-col w-full items-center justify-center">
+    <div className="flex w-full min-w-0 flex-col gap-6">
+      <header className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
         <div className="flex flex-col items-center justify-center">
-          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
             {surat.asma.id.short}
           </h1>
-          <p className="font-semibold m-1 tracking-wide">
+          <p className="mt-2 text-base leading-relaxed text-muted-foreground">
             {surat.asma.translation.id}. Surat ke-{surat.number}.{" "}
             {surat.type.id}
           </p>
         </div>
-        <div className="mt-1 mb-2 flex space-x-4 flex-wrap justify-center items-center gap-4">
+        <div className="mt-5 flex w-full flex-wrap items-center justify-center gap-2 rounded-xl border bg-card p-3 shadow-xs sm:w-auto">
           <Button
             type="button"
-            variant="ghost"
+            variant={audio ? "secondary" : "ghost"}
             aria-pressed={audio}
             onClick={handleShowAudio}
           >
-            <Volume2 size={20} />
-            <span className="font-bold">Audio</span>
+            <Volume2 aria-hidden="true" size={18} />
+            <span className="font-semibold">Audio</span>
           </Button>
           <Button
             type="button"
-            variant="ghost"
+            variant={terjemahan ? "secondary" : "ghost"}
             aria-pressed={terjemahan}
             onClick={() => setTerjemahan(!terjemahan)}
           >
-            <Languages size={20} />
-            <span className="font-bold">Latin</span>
+            <Languages aria-hidden="true" size={18} />
+            <span className="font-semibold">Latin</span>
           </Button>
           <DialogTafsir data={surat} />
           <Select
-            defaultValue="Pilih Qori'"
+            value={qori.toString()}
             onValueChange={(value) => setQori(Number(value))}
           >
-            <SelectTrigger className="w-32">
+            <SelectTrigger aria-label="Pilih qori" className="w-full sm:w-56">
               <SelectValue placeholder="Pilih Qori&#39;" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem className="font-medium" value="Pilih Qori&#39;">
-                  Pilih Qori&#39;
-                </SelectItem>
                 {qoriOptions.map((item) => (
                   <SelectItem
                     className="font-medium"
@@ -115,12 +111,12 @@ export function DetailSuratPage({ number }: { number: string }) {
             </SelectContent>
           </Select>
         </div>
-      </div>
-      <div className="mt-7 w-full">
+      </header>
+      <div className="mx-auto w-full max-w-3xl min-w-0">
         <PreviousOrNext num={Number(number)} />
         <DetailSurat data={surat} />
         <PreviousOrNext num={Number(number)} />
       </div>
-    </>
+    </div>
   );
 }

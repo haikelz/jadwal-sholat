@@ -9,12 +9,12 @@ const puasaSunnahTypesSlice: StateCreator<
   PuasaSunnahTypesSliceProps
 > = (set) => ({
   selectedMonth: bulan,
-  setSelectedMonth: ({ selectedMonth }: { selectedMonth?: string }) =>
+  setSelectedMonth: ({ selectedMonth }: { selectedMonth: string }) =>
     set({ selectedMonth }),
-  typeId: 9,
-  setType: ({ typeId }: { typeId?: number }) =>
+  selectedType: "all",
+  setSelectedType: ({ selectedType }) =>
     set({
-      typeId,
+      selectedType,
     }),
 });
 

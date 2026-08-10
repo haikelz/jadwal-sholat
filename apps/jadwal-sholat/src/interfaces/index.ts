@@ -4,6 +4,7 @@ export * from "./asmaul-husna.interface";
 export * from "./doa-harian.interface";
 export * from "./hadith.interface";
 export * from "./jadwal-sholat.interface";
+export * from "./puasa-sunnah.interface";
 export * from "./surat.interface";
 
 export interface ChildrenProps {
@@ -41,30 +42,4 @@ export interface LocationPositionProps {
 export interface IsOpenMapProps {
   isOpenMap: boolean;
   setIsOpenMap: (isOpenMap: boolean) => void;
-}
-
-export interface PuasaSunnahType {
-  id: number;
-  name: string;
-  description: string;
-  background_color: string;
-  text_color: string;
-}
-
-export interface PuasaSunnahCategory {
-  id: number;
-  name: string;
-}
-
-export interface PuasaSunnahProps {
-  id: number;
-  category_id: number;
-  type_id: number;
-  date: string;
-  year: number;
-  month: number;
-  day: number;
-  human_date: string;
-  category: PuasaSunnahCategory;
-  type: PuasaSunnahType;
 }

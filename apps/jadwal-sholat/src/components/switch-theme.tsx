@@ -10,12 +10,18 @@ export function SwitchTheme() {
   return (
     <Button
       type="button"
-      aria-label="switch theme"
+      aria-label={
+        theme === "dark" ? "Gunakan tema terang" : "Gunakan tema gelap"
+      }
       size="icon"
       variant="outline"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      {theme === "light" ? <Moon size={24} /> : <Sun size={24} />}
+      {theme === "light" ? (
+        <Moon aria-hidden="true" size={20} />
+      ) : (
+        <Sun aria-hidden="true" size={20} />
+      )}
     </Button>
   );
 }

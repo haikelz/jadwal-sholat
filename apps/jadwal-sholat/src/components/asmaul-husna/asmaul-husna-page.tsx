@@ -10,7 +10,7 @@ import { SearchBar } from "../common/search-bar";
 import { SortByOrder } from "../common/sort-by-order";
 
 const DialogAsmaulHusna = dynamic(() =>
-  import("./dialog-asmaul-husna").then((mod) => mod.DialogAsmaulHusna)
+  import("./dialog-asmaul-husna").then((mod) => mod.DialogAsmaulHusna),
 );
 
 export function AsmaulHusnaPage({
@@ -21,7 +21,7 @@ export function AsmaulHusnaPage({
   const [search, setSearch] = useQueryState("search");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
-    search as string
+    search as string,
   );
 
   const filteredAsmaulHusna = useMemo(
@@ -39,21 +39,26 @@ export function AsmaulHusnaPage({
           if (!isAscending) return Number(b.urutan) - Number(a.urutan);
           return 0;
         }),
-    [deferredSearch, asmaulHusna, isAscending]
+    [deferredSearch, asmaulHusna, isAscending],
   );
 
   return (
     <>
-      <div className={cn("flex flex-col items-center justify-center mb-7")}>
-        <SearchBar setSearch={setSearch} name="search" />
+      <div className="mb-7 flex w-full flex-col gap-3 rounded-xl border bg-card/50 p-3 shadow-xs sm:flex-row sm:items-center sm:justify-between sm:p-4">
+        <div className="w-full sm:max-w-md">
+          <SearchBar setSearch={setSearch} name="search" />
+        </div>
+        <SortByOrder
+          isAscending={isAscending}
+          setIsAscending={setIsAscending}
+        />
       </div>
-      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredAsmaulHusna ? (
         filteredAsmaulHusna.length ? (
           <div
             className={cn(
-              "grid w-full grid-cols-1 grid-rows-1 gap-4 text-center mt-7",
-              "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              "grid w-full grid-cols-1 gap-4 text-center",
+              "sm:grid-cols-2 xl:grid-cols-3",
             )}
           >
             {filteredAsmaulHusna.map((item) => (
@@ -65,13 +70,19 @@ export function AsmaulHusnaPage({
             ))}
           </div>
         ) : (
-          <p data-cy="not-found-text" className="text-lg font-medium">
-            Input Asma&#39;ul Husna yang kamu masukkan tidak ditemukan!
+          <p
+            data-cy="not-found-text"
+            className="py-12 text-center text-base text-muted-foreground"
+          >
+            Asmaul Husna yang dicari tidak ditemukan.
           </p>
         )
       ) : (
-        <p data-cy="not-found-text" className="text-lg font-medium">
-          Tidak ada data!
+        <p
+          data-cy="not-found-text"
+          className="py-12 text-center text-base text-muted-foreground"
+        >
+          Data Asmaul Husna belum tersedia.
         </p>
       )}
     </>

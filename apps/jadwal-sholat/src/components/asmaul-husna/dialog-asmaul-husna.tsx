@@ -27,14 +27,23 @@ export function DialogAsmaulHusna({
         <button
           type="button"
           data-cy="card"
-          className="w-full rounded-lg border bg-card text-left text-card-foreground shadow-xs transition-[background-color,box-shadow,transform] hover:bg-accent/60 focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.96]"
+          className="h-full w-full rounded-xl border border-border/70 bg-card text-left text-card-foreground shadow-xs transition-[background-color,border-color,box-shadow,transform] hover:border-border hover:bg-muted/40 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.96]"
         >
-          <span className="my-3 block w-full px-6 pt-3 text-right">
-            <span className={cn("block text-3xl font-medium", "arabic-font")}>
+          <span
+            className="block w-full px-6 pt-6 text-right"
+            lang="ar"
+            dir="rtl"
+          >
+            <span
+              className={cn(
+                "block text-4xl font-medium leading-relaxed",
+                "arabic-font",
+              )}
+            >
               {dataAsmaulHusna.arab}
             </span>
           </span>
-          <span className="mt-1 block px-6 pb-6 text-left">
+          <span className="mt-4 block px-6 pb-6 text-left">
             <span className="mb-1 block text-lg font-bold">
               {dataAsmaulHusna.urutan}.{" "}
               {deferredSearch
@@ -48,24 +57,34 @@ export function DialogAsmaulHusna({
                       >
                         {match}
                       </span>
-                    )
+                    ),
                   )
                 : dataAsmaulHusna.latin}
             </span>
-            <span className="block">{dataAsmaulHusna.arti}</span>
+            <span className="block leading-relaxed text-muted-foreground">
+              {dataAsmaulHusna.arti}
+            </span>
           </span>
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>
             {dataAsmaulHusna.urutan}. {dataAsmaulHusna.latin}
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6 p-6 flex justify-center items-center text-center flex-col">
-          <h3 className="text-3xl arabic-font">{dataAsmaulHusna.arab}</h3>
-          <p className="text-base leading-relaxed">{dataAsmaulHusna.arti}</p>
+        <div className="flex flex-col items-center justify-center space-y-6 px-2 py-8 text-center sm:px-8">
+          <h3
+            className="arabic-font text-4xl leading-relaxed"
+            lang="ar"
+            dir="rtl"
+          >
+            {dataAsmaulHusna.arab}
+          </h3>
+          <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+            {dataAsmaulHusna.arti}
+          </p>
         </div>
         <DialogFooter>
           <DialogClose asChild>

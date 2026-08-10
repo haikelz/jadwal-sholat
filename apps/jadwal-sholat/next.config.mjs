@@ -20,6 +20,14 @@ const config = withSentryConfig(
   withPWA({
     reactStrictMode: true,
     compress: true,
+    async rewrites() {
+      return [
+        {
+          source: "/api/puasa-sunnah",
+          destination: `${process.env.NEXT_PUBLIC_PUASA_SUNNAH_API}/api/id/fasting/schedules`,
+        },
+      ];
+    },
     experimental: {
       optimizePackageImports: ["@radix-ui/*"],
       webpackBuildWorker: true,
@@ -36,7 +44,7 @@ const config = withSentryConfig(
     silent: false,
     widenClientFileUpload: true,
     disableLogger: true,
-  }
+  },
 );
 
 export default config;

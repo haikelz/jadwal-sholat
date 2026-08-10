@@ -1,8 +1,7 @@
+import { PageShell } from "@/components/common/page-shell";
 import { DetailHadithPage } from "@/components/hadith/detail-hadith-page";
-import { TransitionLayout } from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { getData } from "@/lib/utils/axios-config";
-import { cn } from "@/lib/utils/cn";
 import { createPageMetadata } from "@/lib/utils/metadata";
 import { Metadata } from "next";
 
@@ -46,17 +45,8 @@ export default async function HadithDetail(props: {
   const { book, number } = await props.params;
 
   return (
-    <TransitionLayout
-      transition={{ duration: 0.3 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className={cn(
-        "flex w-full max-w-full",
-        "flex-col items-center justify-start",
-        "pt-8 pb-24 md:pb-8"
-      )}
-    >
+    <PageShell size="reader">
       <DetailHadithPage book={book} hadithNumber={number} />
-    </TransitionLayout>
+    </PageShell>
   );
 }

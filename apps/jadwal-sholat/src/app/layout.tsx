@@ -99,11 +99,7 @@ export default function Layout({ children }: ChildrenProps) {
         <NuqsAdapter>
           <Wrapper>
             <div
-              className={cn(
-                "bg-white text-black",
-                "md:flex",
-                "dark:bg-gray-950 dark:text-white"
-              )}
+              className={cn("min-h-svh bg-background text-foreground md:flex")}
             >
               <CustomSidebar>{children}</CustomSidebar>
             </div>

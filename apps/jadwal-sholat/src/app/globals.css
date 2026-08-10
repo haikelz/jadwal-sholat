@@ -121,25 +121,12 @@
   }
 }
 
-@media (min-width: 48rem) {
-  [data-slot="sidebar-inset"] {
-    width: calc(100vw - var(--sidebar-width));
-    max-width: calc(100vw - var(--sidebar-width));
-  }
-
-  [data-slot="sidebar"][data-state="collapsed"]
-    ~ [data-slot="sidebar-inset"] {
-    width: 100vw;
-    max-width: 100vw;
-  }
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply min-w-0 overflow-x-hidden bg-background text-foreground antialiased;
   }
   h1,
   h2,

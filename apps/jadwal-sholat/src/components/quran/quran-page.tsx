@@ -17,7 +17,7 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
   const [search, setSearch] = useQueryState("search");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
-    search as string
+    search as string,
   );
 
   const { lastRead, setLastRead } = useGlobalStore((state) => ({
@@ -42,7 +42,7 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
           if (!isAscending) return Number(b.number) - Number(a.number);
           return 0;
         }),
-    [surat, deferredSearch, isAscending]
+    [surat, deferredSearch, isAscending],
   );
 
   useEffect(() => {
@@ -53,45 +53,43 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
 
   return (
     <>
-      <div
-        className={cn(
-          "flex flex-col items-center justify-center",
-          "text-center ",
-          "dark:text-white"
-        )}
-      >
-        <SearchBar setSearch={setSearch} name="search" />
-        <p className="mt-2 text-lg font-medium">
-          Terakhir dibaca:{" "}
+      <div className="mb-7 grid w-full items-center gap-3 rounded-xl border bg-card/50 p-3 shadow-xs sm:p-4 lg:grid-cols-[minmax(16rem,1fr)_auto_auto]">
+        <div className="w-full lg:max-w-md">
+          <SearchBar setSearch={setSearch} name="search" />
+        </div>
+        <div className="flex min-h-10 min-w-0 items-center rounded-lg bg-muted/60 px-3 py-2 text-sm text-muted-foreground">
+          <span className="me-1 shrink-0">Terakhir dibaca:</span>
           {lastRead.ayat || lastRead.number !== null ? (
             <Link
               href={`/quran/${lastRead.number}`}
               onClick={() =>
                 localStorage.setItem(
                   "selected-surat",
-                  lastRead.number!.toString() as string
+                  lastRead.number!.toString() as string,
                 )
               }
-              className={cn("font-bold", "dark:text-white hover:underline")}
+              className="min-w-0 truncate rounded-sm font-semibold text-foreground underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
-              <span>
-                Surat {lastRead.name} ayat {lastRead.ayat}
-              </span>
+              Surat {lastRead.name} ayat {lastRead.ayat}
             </Link>
           ) : (
-            "belum ada"
+            <span className="font-medium text-foreground">belum ada</span>
           )}
-        </p>
+        </div>
+        <div className="flex justify-end">
+          <SortByOrder
+            isAscending={isAscending}
+            setIsAscending={setIsAscending}
+          />
+        </div>
       </div>
-      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredSurat ? (
-        filteredSurat ? (
+        filteredSurat.length ? (
           <div
             className={cn(
-              "grid w-full grid-cols-1 grid-rows-1 gap-4",
+              "grid w-full grid-cols-1 gap-4",
               "sm:grid-cols-2",
-              "lg:grid-cols-3",
-              "xl:grid-cols-4"
+              "xl:grid-cols-3",
             )}
           >
             {filteredSurat.map((surat) => (
@@ -99,15 +97,19 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
                 key={surat.number}
                 href={`/quran/${surat.number}`}
                 onClick={removeSelectedSurat}
+                className="h-full rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2"
               >
-                <Card data-cy="card">
-                  <CardHeader>
-                    <p className="text-right font-semibold tracking-wide">
+                <Card
+                  data-cy="card"
+                  className="h-full rounded-xl border-border/70 shadow-xs transition-[background-color,border-color,box-shadow,transform] hover:border-border hover:bg-muted/30 hover:shadow-sm active:scale-[0.96]"
+                >
+                  <CardHeader className="pb-2">
+                    <p className="text-right text-sm font-medium tracking-wide text-muted-foreground">
                       {surat.type.id}
                     </p>
                   </CardHeader>
                   <CardContent className="text-left">
-                    <p className="text-lg font-bold my-1">
+                    <p className="my-1 text-xl font-bold">
                       {surat.number}.{" "}
                       {deferredSearch
                         ? reactStringReplace(
@@ -120,27 +122,35 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
                               >
                                 {match}
                               </span>
-                            )
+                            ),
                           )
                         : surat.asma.id.short}
                     </p>
-                    <p className="font-medium mb-1">
+                    <p className="mb-2 font-medium">
                       {surat.asma.translation.id}
                     </p>
-                    <p>Jumlah: {surat.ayahCount} ayat</p>
+                    <p className="text-sm text-muted-foreground">
+                      {surat.ayahCount} ayat
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
             ))}
           </div>
         ) : (
-          <p data-cy="not-found-text" className="text-lg font-medium">
-            Input Surat yang kamu masukkan tidak ditemukan!
+          <p
+            data-cy="not-found-text"
+            className="py-12 text-center text-base text-muted-foreground"
+          >
+            Surat yang dicari tidak ditemukan.
           </p>
         )
       ) : (
-        <p data-cy="not-found-text" className="text-lg font-medium">
-          Tidak ada data!
+        <p
+          data-cy="not-found-text"
+          className="py-12 text-center text-base text-muted-foreground"
+        >
+          Data surat belum tersedia.
         </p>
       )}
     </>

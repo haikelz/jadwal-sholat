@@ -64,7 +64,7 @@ export function HadithPage() {
   const isSearchByNumber = searchNum !== null;
   const currentBookMeta = useMemo(
     () => books.find((b) => b.id === book),
-    [books, book]
+    [books, book],
   );
   const totalAvailable = currentBookMeta?.available ?? 0;
 
@@ -79,7 +79,7 @@ export function HadithPage() {
     queryKey: ["hadiths", book],
     queryFn: async ({ pageParam }) => {
       const res = await getData<HadithRangeResponse>(
-        buildHadithApiUrl(book!, pageParam)
+        buildHadithApiUrl(book!, pageParam),
       );
       return res;
     },
@@ -115,9 +115,7 @@ export function HadithPage() {
   const { data: singleHadithRes, isFetching: isFetchingSingle } = useQuery({
     queryKey: ["hadith-single", book, searchNum],
     queryFn: () =>
-      getData<HadithDetailResponse>(
-        buildHadithSingleUrl(book!, searchNum!)
-      ),
+      getData<HadithDetailResponse>(buildHadithSingleUrl(book!, searchNum!)),
     enabled: !!shouldFetchSingle,
   });
 
@@ -132,7 +130,8 @@ export function HadithPage() {
     return filteredHadiths;
   }, [filteredHadiths, singleHadithAsCard, isSearchByNumber]);
 
-  const bookName = currentBookMeta?.name ?? hadithData?.pages?.[0]?.data?.name ?? book;
+  const bookName =
+    currentBookMeta?.name ?? hadithData?.pages?.[0]?.data?.name ?? book;
   const showSentinel = !isSearchByNumber;
 
   const handleIntersect = useCallback(
@@ -142,7 +141,7 @@ export function HadithPage() {
         fetchNextPage();
       }
     },
-    [hasNextPage, isFetchingNextPage, fetchNextPage]
+    [hasNextPage, isFetchingNextPage, fetchNextPage],
   );
 
   useEffect(() => {
@@ -158,22 +157,26 @@ export function HadithPage() {
   }, [handleIntersect, showSentinel]);
 
   if ((!books.length && !booksData) || (isPending && book && !isSearchByNumber))
-    return <LoadingClient />;
+    return (
+      <div className="flex min-h-64 w-full items-center justify-center rounded-xl border bg-card/40">
+        <LoadingClient />
+      </div>
+    );
   if (isError && !isSearchByNumber) return <ErrorWhileFetch />;
 
   return (
     <>
-      <div
-        className={cn("flex flex-col items-center justify-center w-full px-4")}
-      >
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-none">
-          <SearchBar
-            setSearch={setSearch}
-            name="search"
-            placeholder="Cari berdasarkan nomor hadith"
-          />
+      <div className="w-full rounded-xl border bg-card/50 p-3 shadow-xs sm:p-4">
+        <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="w-full sm:max-w-md">
+            <SearchBar
+              setSearch={setSearch}
+              name="search"
+              placeholder="Cari berdasarkan nomor hadith"
+            />
+          </div>
           <Select value={book ?? "bukhari"} onValueChange={setBook}>
-            <SelectTrigger className="w-full sm:w-[220px]">
+            <SelectTrigger className="w-full sm:w-60">
               <SelectValue placeholder="Pilih Kitab" />
             </SelectTrigger>
             <SelectContent>
@@ -190,22 +193,26 @@ export function HadithPage() {
         <>
           <div
             className={cn(
-              "grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-7"
+              "mt-6 grid w-full grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3",
             )}
           >
             {displayHadiths.map((h) => (
               <Link
                 key={`${book}-${h.number}`}
                 href={`/hadith/${book}/${h.number}`}
+                className="h-full rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 <Card
                   data-cy="card"
-                  className="h-full hover:bg-muted/50 transition-colors"
+                  className="h-full rounded-xl border-border/70 shadow-xs transition-[background-color,border-color,box-shadow,transform] hover:border-border hover:bg-muted/40 hover:shadow-sm active:scale-[0.96]"
                 >
-                  <CardHeader className="py-3 sm:py-4 px-4">
-                    <h3 className="text-sm sm:text-base font-bold text-center wrap-break-word">
+                  <CardHeader className="gap-3 px-5 py-5">
+                    <h3 className="text-base font-bold wrap-break-word">
                       {bookName} No. {h.number}
                     </h3>
+                    <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                      {h.id}
+                    </p>
                   </CardHeader>
                 </Card>
               </Link>
@@ -214,11 +221,11 @@ export function HadithPage() {
           {showSentinel && (
             <div
               ref={sentinelRef}
-              className="h-10 flex items-center justify-center px-4"
+              className="flex min-h-16 items-center justify-center px-4"
             >
               {isFetchingNextPage && (
                 <p className="text-sm text-muted-foreground font-bold">
-                  Memuat...
+                  Memuat hadith berikutnya…
                 </p>
               )}
             </div>
@@ -226,7 +233,7 @@ export function HadithPage() {
         </>
       ) : shouldFetchSingle && isFetchingSingle ? (
         <p className="text-lg font-medium px-4 text-center mt-6 text-muted-foreground">
-          Memuat...
+          Memuat hadith…
         </p>
       ) : (
         <p

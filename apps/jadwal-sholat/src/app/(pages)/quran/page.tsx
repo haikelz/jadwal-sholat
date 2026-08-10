@@ -1,9 +1,8 @@
+import { PageHeader, PageShell } from "@/components/common/page-shell";
 import { QuranPage } from "@/components/quran/quran-page";
-import { TransitionLayout } from "@/components/transition-layout";
 import { env } from "@/env.mjs";
 import { ListSuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
-import { cn } from "@/lib/utils/cn";
 import { createPageMetadata } from "@/lib/utils/metadata";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -12,14 +11,15 @@ const { NEXT_PUBLIC_QURAN_API } = env;
 
 export const metadata = createPageMetadata({
   title: "Baca Al-Qur'an",
-  description: "Baca Al-Qur'an lengkap dengan audio, transliterasi, terjemahan, dan tafsir.",
+  description:
+    "Baca Al-Qur'an lengkap dengan audio, transliterasi, terjemahan, dan tafsir.",
   path: "/quran",
 });
 
 async function getSurat(): Promise<ListSuratProps> {
   try {
     const response: ListSuratProps = await getData(
-      `${NEXT_PUBLIC_QURAN_API}/quran`
+      `${NEXT_PUBLIC_QURAN_API}/quran`,
     );
     return response;
   } catch (err: any) {
@@ -31,37 +31,24 @@ export default async function Quran() {
   const surat = await getSurat();
 
   return (
-    <TransitionLayout
-      transition={{ duration: 0.3 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className={cn(
-        "flex w-full max-w-full",
-        "flex-col items-center justify-start",
-        "space-y-7 pt-8 pb-24 md:pb-8"
-      )}
-    >
-      <div className="flex flex-col items-center justify-center">
-        <div className="flex items-center justify-center space-x-3">
-          <h1 className={cn("text-3xl font-bold tracking-wide sm:text-4xl")}>
-            Baca Al-Qur&#39;an
-          </h1>
+    <PageShell>
+      <PageHeader
+        title="Baca Al-Qur'an"
+        description="Berlomba-lombalah dalam berbuat kebaikan."
+        icon={
           <Image
             src="/img/Quran.webp"
-            width={40}
-            height={40}
+            width={32}
+            height={32}
             alt=""
             fetchPriority="high"
             draggable={false}
           />
-        </div>
-        <p data-cy="description" className="mt-2 text-lg font-medium">
-          &#34;Berlomba-lombalah kamu dalam berbuat kebaikan&#34;
-        </p>
-      </div>
+        }
+      />
       <Suspense>
         <QuranPage surat={surat} />
       </Suspense>
-    </TransitionLayout>
+    </PageShell>
   );
 }

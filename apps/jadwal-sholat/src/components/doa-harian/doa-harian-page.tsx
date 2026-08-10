@@ -14,7 +14,7 @@ export function DoaHarianPage({ doaHarian }: { doaHarian: DoaHarianProps[] }) {
   const [search, setSearch] = useQueryState("search");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
-    search as string
+    search as string,
   );
 
   const filteredDoaHarian = useMemo(
@@ -32,27 +32,36 @@ export function DoaHarianPage({ doaHarian }: { doaHarian: DoaHarianProps[] }) {
           if (!isAscending) return b.id - a.id;
           return 0;
         }),
-    [deferredSearch, doaHarian, isAscending]
+    [deferredSearch, doaHarian, isAscending],
   );
 
   return (
     <>
-      <div className={cn("flex flex-col items-center justify-center")}>
-        <SearchBar setSearch={setSearch} name="search" />
+      <div className="mb-7 flex w-full flex-col gap-3 rounded-xl border bg-card/50 p-3 shadow-xs sm:flex-row sm:items-center sm:justify-between sm:p-4">
+        <div className="w-full sm:max-w-md">
+          <SearchBar setSearch={setSearch} name="search" />
+        </div>
+        <SortByOrder
+          isAscending={isAscending}
+          setIsAscending={setIsAscending}
+        />
       </div>
-      <SortByOrder isAscending={isAscending} setIsAscending={setIsAscending} />
       {filteredDoaHarian ? (
         filteredDoaHarian.length ? (
           <div
             className={cn(
-              "flex justify-start items-center w-full space-y-4 flex-col text-center",
-              "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              "grid w-full grid-cols-1 items-start gap-5",
+              "lg:grid-cols-2",
             )}
           >
             {filteredDoaHarian.map((item) => (
-              <Card data-cy="card" key={item.id} className="w-full">
-                <CardHeader className="text-left">
-                  <h3 className="text-xl font-bold">
+              <Card
+                data-cy="card"
+                key={item.id}
+                className="h-full w-full rounded-xl border-border/70 shadow-xs"
+              >
+                <CardHeader className="px-5 pb-3 text-left sm:px-6">
+                  <h3 className="text-lg font-bold sm:text-xl">
                     {item.id}.{" "}
                     {deferredSearch
                       ? reactStringReplace(
@@ -65,38 +74,48 @@ export function DoaHarianPage({ doaHarian }: { doaHarian: DoaHarianProps[] }) {
                             >
                               {match}
                             </span>
-                          )
+                          ),
                         )
                       : item.judul}
                   </h3>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-5 pb-6 sm:px-6">
                   <p
+                    lang="ar"
+                    dir="rtl"
                     className={cn(
-                      "text-3xl font-medium leading-loose text-right tracking-wide my-3",
-                      "arabic-font"
+                      "my-4 text-right text-3xl font-medium leading-[2.1] tracking-wide sm:text-4xl",
+                      "arabic-font",
                     )}
                   >
                     {item.arab}
                   </p>
-                  <div className="w-full text-left">
-                    <p className="text-lg mb-1 text-left italic font-medium text-teal-700 dark:text-teal-300">
+                  <div className="w-full space-y-3 text-left">
+                    <p className="text-base leading-relaxed italic font-medium text-teal-700 dark:text-teal-300">
                       {item.latin}
                     </p>
-                    <p className="font-medium">{item.terjemah}</p>
+                    <p className="max-w-prose leading-relaxed text-muted-foreground">
+                      {item.terjemah}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
         ) : (
-          <p data-cy="not-found-text" className="text-lg font-medium">
-            Input Do&#39;a yang kamu masukkan tidak ditemukan!
+          <p
+            data-cy="not-found-text"
+            className="py-12 text-center text-base text-muted-foreground"
+          >
+            Doa yang dicari tidak ditemukan.
           </p>
         )
       ) : (
-        <p data-cy="not-found-text" className="text-lg font-medium">
-          Tidak ada data!
+        <p
+          data-cy="not-found-text"
+          className="py-12 text-center text-base text-muted-foreground"
+        >
+          Data doa belum tersedia.
         </p>
       )}
     </>

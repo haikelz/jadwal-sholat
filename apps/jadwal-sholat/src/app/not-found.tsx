@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils/cn";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -9,24 +10,21 @@ export const metadata: Metadata = {
 
 export default function NotFoundPage() {
   return (
-    <div
-      className={cn(
-        "flex w-full max-w-full",
-        "flex-col items-center justify-start",
-        "space-y-7 py-8"
-      )}
-    >
-      <section className="flex flex-col items-center justify-center text-center">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">404</h1>
-        <p className="mt-3 font-medium">
+    <div className="flex min-h-[70vh] w-full items-center justify-center py-12">
+      <section className="flex max-w-lg flex-col items-center rounded-2xl border bg-card p-7 text-center shadow-sm sm:p-10">
+        <p className="text-sm font-semibold text-muted-foreground">Galat 404</p>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight">
+          Halaman tidak ditemukan
+        </h1>
+        <p className="mt-3 text-base leading-relaxed text-muted-foreground">
           Halaman yang kamu cari tidak ditemukan.
         </p>
-        <Link
-          href="/"
-          className="mt-6 rounded-md bg-primary px-4 py-2 font-semibold text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2"
-        >
-          Kembali ke jadwal sholat
-        </Link>
+        <Button asChild className="mt-6">
+          <Link href="/">
+            <ArrowLeft aria-hidden="true" className="size-4" />
+            Kembali ke jadwal sholat
+          </Link>
+        </Button>
       </section>
     </div>
   );

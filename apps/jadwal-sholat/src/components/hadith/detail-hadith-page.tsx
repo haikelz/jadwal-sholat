@@ -43,52 +43,66 @@ export function DetailHadithPage({
   if (!contents) return <ErrorWhileFetch />;
 
   return (
-    <div className="flex flex-col w-full space-y-4 sm:space-y-6 max-w-full mx-auto px-4 sm:px-6">
-      <div className="flex flex-row items-center justify-between gap-4 pb-4 border-b">
-        {canGoPrev && (
-          <Link href={`/hadith/${book}/${currentNum - 1}`}>
-            <Button>
-              <ChevronLeft size={18} />
+    <article className="mx-auto flex w-full max-w-3xl min-w-0 flex-col gap-5 sm:gap-6">
+      <header className="grid grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center gap-3 border-b pb-5 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
+        <div>
+          {canGoPrev ? (
+            <Button asChild size="icon" variant="outline">
+              <Link
+                href={`/hadith/${book}/${currentNum - 1}`}
+                aria-label="Hadith sebelumnya"
+              >
+                <ChevronLeft aria-hidden="true" size={18} />
+              </Link>
             </Button>
-          </Link>
-        )}
-        <div className="text-center flex-1 min-w-0">
-          <p className="text-xs sm:text-sm font-medium text-muted-foreground">
+          ) : null}
+        </div>
+        <div className="min-w-0 text-center">
+          <p className="truncate text-sm font-medium text-muted-foreground">
             {bookMeta?.name ?? book}
           </p>
-          <h1 className="text-xl sm:text-2xl font-bold mt-1">
-            Hadith No. {contents.number}
+          <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+            Hadith no. {contents.number}
           </h1>
         </div>
-        {canGoNext && (
-          <Link href={`/hadith/${book}/${currentNum + 1}`}>
-            <Button>
-              <ChevronRight size={18} />
+        <div className="flex justify-end">
+          {canGoNext ? (
+            <Button asChild size="icon" variant="outline">
+              <Link
+                href={`/hadith/${book}/${currentNum + 1}`}
+                aria-label="Hadith berikutnya"
+              >
+                <ChevronRight aria-hidden="true" size={18} />
+              </Link>
             </Button>
-          </Link>
-        )}
-      </div>
+          ) : null}
+        </div>
+      </header>
       {contents.arab && (
-        <div className="rounded-lg bg-muted/50 p-4 sm:p-6 overflow-x-auto">
+        <section className="min-w-0 rounded-2xl bg-muted/60 p-5 sm:p-8">
+          <h2 className="sr-only">Teks Arab</h2>
           <p
+            lang="ar"
+            dir="rtl"
             className={cn(
-              "text-right arabic-font text-xl sm:text-2xl md:text-3xl tracking-wide font-medium leading-loose wrap-break-word"
+              "arabic-font min-w-0 max-w-full text-right text-2xl font-medium leading-loose sm:text-3xl",
+              "[overflow-wrap:anywhere]",
             )}
           >
             {contents.arab}
           </p>
-        </div>
+        </section>
       )}
       {contents.id && (
-        <div className="rounded-lg border p-4 sm:p-6">
-          <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-2">
+        <section className="rounded-2xl border bg-card p-5 shadow-xs sm:p-8">
+          <h2 className="mb-3 text-sm font-semibold text-muted-foreground">
             Terjemahan
-          </p>
-          <p className="text-sm sm:text-base leading-relaxed wrap-break-word">
+          </h2>
+          <p className="max-w-[70ch] text-base leading-7 [overflow-wrap:anywhere]">
             {contents.id.slice(0, 1).toUpperCase() + contents.id.slice(1)}
           </p>
-        </div>
+        </section>
       )}
-    </div>
+    </article>
   );
 }
