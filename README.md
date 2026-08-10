@@ -1,17 +1,16 @@
 <div align="center">
   <h1>Jadwal Sholat</h1>
-  <p>A mobile-friendly Islamic companion for prayer times, Al-Qur'an, hadith, daily prayers, Asmaul Husna, and sunnah fasting schedules.</p>
+  <p>A mobile-friendly Islamic companion for prayer times, Al-Qur'an, hadith, Asmaul Husna, and sunnah fasting schedules.</p>
   <p><a href="https://jdwshlt.ekel.dev">Open the website</a></p>
 </div>
 
 ## Features
 
-- Monthly prayer schedule based on the reader's location
+- Today's prayer times and a switchable monthly schedule based on the reader's location
 - Al-Qur'an with reciter selection, audio, transliteration, translation, tafsir, and last-read bookmarks
 - Hadith browsing by book and number
-- Daily prayers with Arabic text and Indonesian translation
 - The 99 names of Allah with Arabic text and meaning
-- Sunnah fasting schedules by month, year, and fasting type
+- Sunnah fasting schedules by month and fasting type, powered by the [Puasa Sunnah API](https://puasasunnah.ekel.dev/swagger/index.html)
 - Light and dark themes with responsive desktop and mobile navigation
 - Keyboard-friendly controls, accessible dialogs, reduced-motion support, and zoom-safe layouts
 - Canonical metadata, Open Graph and Twitter cards, `robots.txt`, and XML sitemap
@@ -108,17 +107,17 @@ bun run open     # cypress open
 
 ### Desktop
 
-| Prayer schedule | Al-Qur'an library |
-| :---: | :---: |
-| ![Prayer schedule on desktop](/static/docs/docs-screenshots.cy.ts/desktop-prayer-schedule.png) | ![Al-Qur'an library on desktop](/static/docs/docs-screenshots.cy.ts/desktop-quran-library.png) |
+| Prayer schedule | Sunnah fasting | Al-Qur'an library |
+| :---: | :---: | :---: |
+| ![Prayer schedule on desktop](/static/docs/docs-screenshots.cy.ts/desktop-prayer-schedule.png) | ![Sunnah fasting schedule on desktop](/static/docs/docs-screenshots.cy.ts/desktop-sunnah-fasting.png) | ![Al-Qur'an library on desktop](/static/docs/docs-screenshots.cy.ts/desktop-quran-library.png) |
 
 ### Mobile
 
-| Prayer schedule | Al-Qur'an reading |
-| :---: | :---: |
-| ![Prayer schedule on mobile](/static/docs/docs-screenshots.cy.ts/mobile-prayer-schedule.png) | ![Al-Qur'an reading on mobile](/static/docs/docs-screenshots.cy.ts/mobile-quran-reading.png) |
+| Prayer schedule | Sunnah fasting | Al-Qur'an reading |
+| :---: | :---: | :---: |
+| ![Prayer schedule on mobile](/static/docs/docs-screenshots.cy.ts/mobile-prayer-schedule.png) | ![Sunnah fasting schedule on mobile](/static/docs/docs-screenshots.cy.ts/mobile-sunnah-fasting.png) | ![Al-Qur'an reading on mobile](/static/docs/docs-screenshots.cy.ts/mobile-quran-reading.png) |
 
-The screenshots cover representative desktop and `390px` mobile layouts.
+The screenshots were captured from a production build at `1440×900` for desktop and `390×844` for mobile.
 
 ## Accessibility and SEO
 
