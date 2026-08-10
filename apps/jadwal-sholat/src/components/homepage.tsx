@@ -15,10 +15,11 @@ import {
 } from "@/components/ui/dialog";
 import { env } from "@/env.mjs";
 import { useFetch, useGeolocation } from "@/hooks";
-import { cn } from "@/lib/utils/cn";
-import { bulan, currentDate, tahun } from "@/lib/utils/constants";
+import { JadwalSholatProps } from "@/interfaces";
+import { formatSholatTime } from "@/lib/helpers";
+import { bulan, currentDate, matchDate, tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
-import { MapPin } from "lucide-react";
+import { Clock3, MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 
@@ -54,15 +55,32 @@ export function Homepage() {
 
   useGeolocation();
 
-  const { data, isPending, isError, isRefetching } = useFetch(
+  const { data, isPending, isError, isRefetching } = useFetch<{
+    data: JadwalSholatProps[];
+  }>(
     `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${formatDate}?latitude=${position.lat}&longitude=${position.lng}&method=20`,
   );
 
   if ((!data && isError) || isPending) return <LoadingClient />;
-  if (isError || typeof data.data === "undefined") return <ErrorWhileFetch />;
+  if (isError || !data?.data) return <ErrorWhileFetch />;
   if (isRefetching) return <IsRefetching />;
 
   const waktu = data.data;
+  const jadwalHariIni = waktu.find(
+    (item) => item.date.gregorian.date === matchDate,
+  );
+  const waktuHariIni = jadwalHariIni
+    ? [
+        { name: "Imsak", time: jadwalHariIni.timings.Imsak },
+        { name: "Subuh", time: jadwalHariIni.timings.Fajr },
+        { name: "Terbit", time: jadwalHariIni.timings.Sunrise },
+        { name: "Dzuhur", time: jadwalHariIni.timings.Dhuhr },
+        { name: "Ashar", time: jadwalHariIni.timings.Asr },
+        { name: "Terbenam", time: jadwalHariIni.timings.Sunset },
+        { name: "Maghrib", time: jadwalHariIni.timings.Maghrib },
+        { name: "Isya", time: jadwalHariIni.timings.Isha },
+      ]
+    : [];
 
   return (
     <>
@@ -101,7 +119,55 @@ export function Homepage() {
           <span>Atur lokasi</span>
         </Button>
       </div>
-      <section aria-label="Jadwal sholat" className="w-full">
+      <section
+        aria-labelledby="jadwal-hari-ini"
+        className="mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border bg-card shadow-sm"
+      >
+        <div className="flex items-center gap-3 border-b bg-muted/60 px-4 py-4 sm:px-6">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+            <Clock3 aria-hidden="true" className="size-5" />
+          </span>
+          <div className="min-w-0 text-left">
+            <h2
+              id="jadwal-hari-ini"
+              className="text-lg font-bold tracking-tight sm:text-xl"
+            >
+              Jadwal hari ini
+            </h2>
+            <p className="text-sm text-muted-foreground">{currentDate}</p>
+          </div>
+        </div>
+        {waktuHariIni.length > 0 ? (
+          <dl className="grid grid-cols-4 gap-x-3 gap-y-5 p-4 sm:grid-cols-8 sm:px-6 sm:py-5">
+            {waktuHariIni.map((item) => (
+              <div key={item.name} className="min-w-0 text-left">
+                <dt className="truncate text-xs font-medium text-muted-foreground">
+                  {item.name}
+                </dt>
+                <dd className="mt-1 text-base font-bold tabular-nums sm:text-lg">
+                  {formatSholatTime(item.time)}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <p className="px-4 py-6 text-center text-sm text-muted-foreground sm:px-6">
+            Jadwal hari ini belum tersedia.
+          </p>
+        )}
+      </section>
+      <section aria-labelledby="jadwal-bulan-ini" className="w-full">
+        <div className="mb-4 text-left">
+          <h2
+            id="jadwal-bulan-ini"
+            className="text-xl font-bold tracking-tight sm:text-2xl"
+          >
+            Jadwal bulan ini
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Lihat jadwal lengkap untuk setiap tanggal.
+          </p>
+        </div>
         <Jadwal waktu={waktu} />
       </section>
       <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
