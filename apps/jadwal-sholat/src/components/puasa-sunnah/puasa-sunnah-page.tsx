@@ -26,7 +26,9 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { useFetch, useNow } from "@/hooks";
 import { PuasaSunnahScheduleResponse, PuasaSunnahTypeKey } from "@/interfaces";
+import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { getDateParts } from "@/lib/utils/date-parts";
+import { format } from "date-fns";
 import useGlobalStore from "@/store";
 import { CalendarX, CircleAlert } from "lucide-react";
 import { useId } from "react";
@@ -73,6 +75,7 @@ export function PuasaSunnahPage() {
 
   const now = useNow();
   const today = now ? getDateParts(now) : null;
+  const todayIso = now ? format(now, "yyyy-MM-dd") : undefined;
   const month = selectedMonth ?? today?.bulan;
 
   const { data, isPending, isError, isRefetching, refetch } =
@@ -146,6 +149,11 @@ export function PuasaSunnahPage() {
             ),
     }));
 
+  // The first fast from today on in the shown month and type, if any.
+  const nextFast = todayIso
+    ? puasaList.find((puasa) => puasa.date.slice(0, 10) >= todayIso)
+    : undefined;
+
   const isLoading = isPending || isRefetching;
 
   return (
@@ -181,12 +189,34 @@ export function PuasaSunnahPage() {
           </Alert>
         </FramePanel>
       ) : puasaList.length > 0 ? (
-        <FramePanel className="p-0">
-          <TablePuasaSunnah
-            puasaList={puasaList}
-            today={today?.currentDateWithDayOfWeek}
-          />
-        </FramePanel>
+        <>
+          {nextFast ? (
+            <FramePanel fit>
+              <p className="flex flex-wrap items-center gap-x-2 text-sm">
+                <span className="text-muted-foreground">Berikutnya</span>
+                <span className="font-medium">
+                  {formatToIndonesianDate(nextFast.date)}
+                </span>
+                <span
+                  aria-hidden
+                  className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
+                />
+                <span className="text-muted-foreground">
+                  {nextFast.recommendations
+                    .map((recommendation) => recommendation.name)
+                    .join(", ")}
+                </span>
+              </p>
+            </FramePanel>
+          ) : null}
+          <FramePanel className="p-0">
+            <TablePuasaSunnah
+              puasaList={puasaList}
+              today={today?.currentDateWithDayOfWeek}
+              todayIso={todayIso}
+            />
+          </FramePanel>
+        </>
       ) : (
         <FramePanel>
           <Empty>
