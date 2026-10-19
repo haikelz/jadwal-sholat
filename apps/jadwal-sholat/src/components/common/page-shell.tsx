@@ -5,20 +5,18 @@ import { TransitionLayout } from "../transition-layout";
 export function PageShell({
   children,
   className,
-  size = "wide",
 }: {
   children: ReactNode;
   className?: string;
-  size?: "wide" | "reader";
 }) {
   return (
     <TransitionLayout
-      transition={{ duration: 0.24 }}
+      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       className={cn(
-        "mx-auto flex w-full flex-col gap-8 pb-24 pt-7 sm:gap-10 sm:pt-10 md:pb-12 lg:pt-12",
-        size === "reader" ? "max-w-5xl" : "max-w-7xl",
+        "mx-auto flex w-full min-w-0 flex-col gap-6 pt-6 pb-24 md:pb-12 lg:pt-8",
+        "max-w-7xl",
         className,
       )}
     >
@@ -30,30 +28,23 @@ export function PageShell({
 export function PageHeader({
   title,
   description,
-  icon,
+  actions,
 }: {
   title: string;
   description: ReactNode;
-  icon?: ReactNode;
+  actions?: ReactNode;
 }) {
   return (
-    <header className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
-      <div className="flex items-center justify-center gap-3">
-        <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem]">
-          {title}
-        </h1>
-        {icon ? (
-          <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-muted sm:size-12">
-            {icon}
-          </span>
-        ) : null}
+    <header className="flex w-full flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex min-w-0 flex-col gap-0.5">
+        <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+        <p data-cy="description" className="text-sm text-muted-foreground">
+          {description}
+        </p>
       </div>
-      <p
-        data-cy="description"
-        className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
-      >
-        {description}
-      </p>
+      {actions ? (
+        <div className="flex shrink-0 items-center gap-2">{actions}</div>
+      ) : null}
     </header>
   );
 }

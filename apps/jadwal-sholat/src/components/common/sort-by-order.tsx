@@ -8,14 +8,17 @@ interface SortByOrderProps {
 
 export function SortByOrder({ isAscending, setIsAscending }: SortByOrderProps) {
   return (
-    <div className="w-full flex justify-end items-center">
-      <Button
-        onClick={() => setIsAscending(!isAscending)}
-      >
-        <span>Urutkan:</span>
-        <span className="font-bold">{isAscending ? "Naik" : "Turun"}</span>
-        {isAscending ? <ArrowUp size={20} /> : <ArrowDown size={20} />}
-      </Button>
-    </div>
+    <Button
+      type="button"
+      variant="outline"
+      onClick={() => setIsAscending(!isAscending)}
+    >
+      Urutkan: {isAscending ? "naik" : "turun"}
+      {isAscending ? (
+        <ArrowUp aria-hidden="true" data-icon="inline-end" />
+      ) : (
+        <ArrowDown aria-hidden="true" data-icon="inline-end" />
+      )}
+    </Button>
   );
 }

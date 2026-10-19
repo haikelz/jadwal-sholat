@@ -6,6 +6,7 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -20,17 +21,15 @@ export function DialogNotification({ description }: { description: string }) {
   return (
     <Dialog open={notification} onOpenChange={setNotification}>
       <DialogContent showCloseButton={false} className="sm:max-w-md">
-        <DialogHeader className="items-center text-center">
-          <DialogTitle className="text-xl leading-snug">Pemberitahuan</DialogTitle>
-          <DialogDescription className="text-base text-foreground">
-            {description}
-          </DialogDescription>
+        <DialogHeader>
+          <DialogTitle>Pemberitahuan</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        <DialogClose asChild>
-          <Button type="button" className="mx-auto font-semibold">
-            Mengerti
-          </Button>
-        </DialogClose>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button">Mengerti</Button>
+          </DialogClose>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

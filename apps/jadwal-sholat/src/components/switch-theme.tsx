@@ -5,23 +5,18 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export function SwitchTheme() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   return (
     <Button
       type="button"
-      aria-label={
-        theme === "dark" ? "Gunakan tema terang" : "Gunakan tema gelap"
-      }
       size="icon"
-      variant="outline"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      variant="ghost"
+      aria-label={isDark ? "Gunakan tema terang" : "Gunakan tema gelap"}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
     >
-      {theme === "light" ? (
-        <Moon aria-hidden="true" size={20} />
-      ) : (
-        <Sun aria-hidden="true" size={20} />
-      )}
+      {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
     </Button>
   );
 }

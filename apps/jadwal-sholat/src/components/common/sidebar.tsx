@@ -5,26 +5,27 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
+  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { ChildrenProps } from "@/interfaces";
 import { slugify } from "@/lib/helpers";
-import { cn } from "@/lib/utils/cn";
-import { Separator } from "@radix-ui/react-separator";
 import {
   BookMarked,
   BookOpen,
@@ -75,78 +76,73 @@ const navbarList = [
 ];
 
 export function CustomSidebar({ children }: ChildrenProps) {
-  const pathname = usePathname();
-  const routeSegments = pathname.slice(1).split("/").filter(Boolean);
-  const currentRouteTitle =
-    pathname === "/"
-      ? "Jadwal Sholat"
-      : (navbarList.find((item) => pathname.startsWith(item.url))?.title ??
-        "Jadwal Sholat");
-
-  const breadcrumbItems = routeSegments.map((segment, index) => {
-    const path = "/" + routeSegments.slice(0, index + 1).join("/");
-
-    return {
-      title:
-        segment === ""
-          ? "Jadwal Sholat"
-          : (segment[0].toUpperCase() + segment.slice(1)).replace("-", " "),
-      url: path,
-    };
-  });
-
-  const routesList =
-    pathname === "/"
-      ? [{ title: "Jadwal Sholat", url: "/" }]
-      : [{ title: "Jadwal Sholat", url: "/" }, ...breadcrumbItems];
-
   return (
     <SidebarProvider>
+      <SidebarShell>{children}</SidebarShell>
+    </SidebarProvider>
+  );
+}
+
+function SidebarShell({ children }: ChildrenProps) {
+  const pathname = usePathname();
+  const { setOpenMobile } = useSidebar();
+
+  const routeSegments = pathname.slice(1).split("/").filter(Boolean);
+  const section = navbarList.find((item) => pathname.startsWith(item.url));
+  const currentRouteTitle = section?.title ?? "Jadwal Sholat";
+  const [, first, second] = routeSegments;
+  const detailTitle =
+    section?.url === "/quran" && first
+      ? `Surat ${first}`
+      : section?.url === "/hadith" && first && second
+        ? `HR. ${first[0].toUpperCase()}${first.slice(1)} no. ${second}`
+        : null;
+
+  const routesList = [
+    { title: "Jadwal Sholat", url: "/" },
+    ...(section ? [{ title: section.title, url: section.url }] : []),
+    ...(detailTitle ? [{ title: detailTitle, url: pathname }] : []),
+  ];
+
+  return (
+    <>
       <a
         href="#main-content"
-        className="sr-only fixed left-4 top-4 z-[60] rounded-md bg-background px-4 py-2 font-semibold text-foreground shadow-lg focus:not-sr-only"
+        className="sr-only fixed top-4 left-4 z-60 bg-background p-2 text-sm font-semibold text-foreground focus:not-sr-only"
       >
         Lewati ke konten utama
       </a>
-      <Sidebar>
+      <Sidebar collapsible="offcanvas">
+        <SidebarHeader>
+          <span className="px-2 text-xs font-medium text-muted-foreground">
+            jdwshlt.ekel.dev
+          </span>
+        </SidebarHeader>
         <SidebarContent>
-          <SidebarGroup className="pt-4">
-            <SidebarGroupLabel className="mb-2 px-3 text-xs font-semibold tracking-wide text-sidebar-foreground/60">
-              jdwshlt.ekel.dev
-            </SidebarGroupLabel>
+          <SidebarGroup>
+            <SidebarGroupLabel>Menu</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton
-                    asChild
-                    size="lg"
-                    isActive={pathname === "/"}
-                    tooltip="Jadwal Sholat"
-                  >
-                    <Link
-                      href="/"
-                      aria-current={pathname === "/" ? "page" : undefined}
-                    >
-                      <Clock4 />
-                      <span>Jadwal Sholat</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                {navbarList.map((item) => {
+                {[
+                  { id: 0, title: "Jadwal Sholat", icon: Clock4, url: "/" },
+                  ...navbarList,
+                ].map((item) => {
                   const Icon: LucideIcon = item.icon;
+                  const isActive =
+                    item.url === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(item.url);
                   return (
                     <SidebarMenuItem key={item.id}>
                       <SidebarMenuButton
                         asChild
-                        size="lg"
-                        isActive={pathname.startsWith(item.url)}
+                        isActive={isActive}
                         tooltip={item.title}
                       >
                         <Link
-                          href={slugify(item.title)}
-                          aria-current={
-                            pathname.startsWith(item.url) ? "page" : undefined
-                          }
+                          href={item.url === "/" ? "/" : slugify(item.title)}
+                          aria-current={isActive ? "page" : undefined}
+                          onClick={() => setOpenMobile(false)}
                         >
                           <Icon />
                           <span>{item.title}</span>
@@ -159,65 +155,56 @@ export function CustomSidebar({ children }: ChildrenProps) {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
-        <SidebarFooter className="flex items-end justify-center border-t border-sidebar-border p-4">
-          <SwitchTheme />
-        </SidebarFooter>
       </Sidebar>
-      <SidebarInset id="main-content" tabIndex={-1}>
-        <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-2 border-b bg-background/90 px-3 backdrop-blur-xl sm:px-5">
+      <SidebarInset id="main-content" tabIndex={-1} className="min-w-0">
+        <header className="sticky top-0 z-40 flex h-14 shrink-0 items-center gap-2 border-b bg-background/90 px-4 backdrop-blur sm:px-6">
           <nav
             aria-label="Navigasi halaman"
-            className="flex w-full items-center justify-between gap-3"
+            className="flex w-full min-w-0 items-center justify-between gap-3"
           >
             <div className="flex min-w-0 items-center gap-2">
-              <SidebarTrigger />
+              <SidebarTrigger aria-label="Buka atau tutup navigasi" />
               <Separator
                 orientation="vertical"
-                className="hidden h-5 sm:block"
+                className="data-[orientation=vertical]:h-4"
               />
-              <span className="truncate text-sm font-semibold sm:hidden">
+              <span className="truncate text-sm font-medium md:hidden">
                 {currentRouteTitle}
               </span>
-              <Breadcrumb>
+              <Breadcrumb className="hidden md:block">
                 <BreadcrumbList>
-                  {routesList.map((item, index) => (
-                    <Fragment key={index + 1}>
-                      <BreadcrumbItem className="hidden md:block">
-                        <BreadcrumbLink asChild>
-                          <Link
-                            href={item.url}
-                            className={cn(
-                              pathname === item.url ? "font-bold" : "",
-                            )}
-                          >
-                            {item.title}
-                          </Link>
-                        </BreadcrumbLink>
-                      </BreadcrumbItem>
-                      {index >= routesList.length - 1 ? null : (
-                        <BreadcrumbSeparator className="hidden md:block" />
-                      )}
-                    </Fragment>
-                  ))}
+                  {routesList.map((item, index) => {
+                    const isLast = index === routesList.length - 1;
+                    return (
+                      <Fragment key={item.url}>
+                        <BreadcrumbItem>
+                          {isLast ? (
+                            <BreadcrumbPage>{item.title}</BreadcrumbPage>
+                          ) : (
+                            <BreadcrumbLink asChild>
+                              <Link href={item.url}>{item.title}</Link>
+                            </BreadcrumbLink>
+                          )}
+                        </BreadcrumbItem>
+                        {isLast ? null : <BreadcrumbSeparator />}
+                      </Fragment>
+                    );
+                  })}
                 </BreadcrumbList>
               </Breadcrumb>
             </div>
-            {routeSegments.includes("quran") && routeSegments.length >= 2 ? (
-              <ReadingProgress />
-            ) : null}
+            <div className="flex shrink-0 items-center gap-2">
+              {routeSegments.includes("quran") && routeSegments.length >= 2 ? (
+                <ReadingProgress />
+              ) : null}
+              <SwitchTheme />
+            </div>
           </nav>
         </header>
-        <div className="flex min-h-svh w-full justify-center">
-          <section
-            className={cn(
-              "flex min-h-screen w-full min-w-0 flex-col px-4",
-              "bg-background text-foreground sm:px-6 lg:px-8",
-            )}
-          >
-            {children}
-          </section>
+        <div className="flex w-full min-w-0 flex-1 flex-col px-4 sm:px-6 lg:px-8">
+          {children}
         </div>
       </SidebarInset>
-    </SidebarProvider>
+    </>
   );
 }
