@@ -50,7 +50,7 @@ const useGlobalStore = createWithEqualityFn<
     ...adzanSlice(...set),
     ...puasaSunnahTypesSlice(...set),
   })),
-  shallow
+  shallow,
 );
 
 export default useGlobalStore;

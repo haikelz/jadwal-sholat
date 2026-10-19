@@ -2,7 +2,7 @@ import { DateSliceProps } from "@/interfaces";
 import { StateCreator } from "zustand";
 
 const dateSlice: StateCreator<DateSliceProps, [], [], DateSliceProps> = (
-  set
+  set,
 ) => ({
   date: new Date(),
   setDate: (func: Function) => set({ date: func() }),

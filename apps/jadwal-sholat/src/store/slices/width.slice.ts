@@ -2,7 +2,7 @@ import { WidthSliceProps } from "@/interfaces";
 import { StateCreator } from "zustand";
 
 const widthSlice: StateCreator<WidthSliceProps, [], [], WidthSliceProps> = (
-  set
+  set,
 ) => ({
   width: 0,
   setWidth: (width: number) => set({ width: width }),

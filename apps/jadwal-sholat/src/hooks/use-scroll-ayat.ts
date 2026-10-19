@@ -17,13 +17,16 @@ interface ScrollAyatProps {
  * @param {boolean} param0.isAudioEnded
  * @param {(isAudioEnded: boolean) => void} param0.setIsAudioEnded
  */
-export function useScrollAyat(
-  { lastRead, ayat, isAudioEnded, setIsAudioEnded }: ScrollAyatProps
-) {
+export function useScrollAyat({
+  lastRead,
+  ayat,
+  isAudioEnded,
+  setIsAudioEnded,
+}: ScrollAyatProps) {
   useEffect(() => {
     const ayatId = document.getElementById(ayat);
     const lastReadId = document.getElementById(
-      `ayat-${lastRead.ayat?.toString() as string}`
+      `ayat-${lastRead.ayat?.toString() as string}`,
     );
 
     if (

@@ -2,7 +2,7 @@ import { AdzanSliceProps } from "@/interfaces";
 import { StateCreator } from "zustand";
 
 const adzanSlice: StateCreator<AdzanSliceProps, [], [], AdzanSliceProps> = (
-  set
+  set,
 ) => ({
   isOpenConfirmModal: false,
   setIsOpenConfirmModal: (isOpenConfirmModal: boolean) =>

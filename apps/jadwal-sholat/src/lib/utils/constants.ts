@@ -10,7 +10,7 @@ export const currentDate: string = format(date, "dd MMMM yyyy", { locale: id });
 export const currentDateWithDayOfWeek: string = format(
   date,
   "EEEE, d MMMM yyyy",
-  { locale: id }
+  { locale: id },
 );
 
 /**

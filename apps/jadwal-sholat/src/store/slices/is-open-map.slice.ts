@@ -2,7 +2,7 @@ import { IsOpenMapProps } from "@/interfaces";
 import { StateCreator } from "zustand";
 
 const isOpenMapSlice: StateCreator<IsOpenMapProps, [], [], IsOpenMapProps> = (
-  set
+  set,
 ) => ({
   isOpenMap: false,
   setIsOpenMap: (isOpenMap) => set({ isOpenMap: isOpenMap }),

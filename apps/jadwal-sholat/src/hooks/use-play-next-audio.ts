@@ -24,7 +24,7 @@ interface UsePlayNextAudioProps extends PlayNextAudioSliceProps {
  */
 export function usePlayNextAudio(
   audioList: string[],
-  num: number
+  num: number,
 ): UsePlayNextAudioProps {
   const router = useRouter();
   const [audioIndex, setAudioIndex] = useState<number>(0);
