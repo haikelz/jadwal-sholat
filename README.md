@@ -91,6 +91,7 @@ cd apps/jadwal-sholat
 bun run dev      # next dev
 bun run build    # next build
 bun run start    # next start
+bun run lint     # eslint . (flat config in eslint.config.mjs)
 bun run test     # cypress run
 bun run open     # cypress open
 ```
@@ -131,6 +132,8 @@ The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell` a
 - The homepage loads the monthly data grid lazily, after today's schedule.
 - Application code reads API URLs from `src/lib/utils/public-env.ts`. `src/env.mjs` still validates them with zod when `next.config.mjs` loads, which keeps zod out of the browser bundle.
 - The page entrance animation is plain CSS, so no animation library ships to the browser.
+- Data requests use the native `fetch` API (no axios), and TanStack Query keeps fetched data fresh for an hour, so returning to a page does not refetch it.
+- The homepage waits for the reader's location (remembered between visits) before fetching, so the month schedule loads once instead of once for the default city and again for the real location.
 
 ## Accessibility and SEO
 
