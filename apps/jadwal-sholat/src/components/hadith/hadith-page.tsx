@@ -39,7 +39,7 @@ import {
   HadithDetailResponse,
   HadithRangeResponse,
 } from "@/interfaces";
-import { getData } from "@/lib/utils/axios-config";
+import { getData } from "@/lib/utils/get-data";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CircleAlert, SearchX } from "lucide-react";
 import Link from "next/link";

@@ -2,7 +2,7 @@ import { PageHeader, PageShell } from "@/components/common/page-shell";
 import { AsmaulHusnaPage } from "@/components/asmaul-husna/asmaul-husna-page";
 import { env } from "@/lib/utils/public-env";
 import { AsmaulHusnaProps } from "@/interfaces";
-import { getData } from "@/lib/utils/axios-config";
+import { getData } from "@/lib/utils/get-data";
 import { createPageMetadata } from "@/lib/utils/metadata";
 import { Suspense } from "react";
 

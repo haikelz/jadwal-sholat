@@ -4,22 +4,21 @@ import { env } from "@/lib/utils/public-env";
 import { UserLocationProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { getData } from "@/lib/utils/get-data";
 
 const { NEXT_PUBLIC_NOMINATIM_API } = env;
 
 async function getUserCurrentLocation(
   lat: number,
-  lng: number
+  lng: number,
 ): Promise<UserLocationProps | undefined> {
   try {
-    const response = await axios.get(
-      `${NEXT_PUBLIC_NOMINATIM_API}/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+    return await getData<UserLocationProps>(
+      `${NEXT_PUBLIC_NOMINATIM_API}/reverse?format=jsonv2&lat=${lat}&lon=${lng}`,
     );
-
-    return response.data as UserLocationProps;
-  } catch (err) {
-    console.log("Failed to get user location!");
+  } catch {
+    // The label falls back to "lokasi terpilih".
+    return undefined;
   }
 }
 

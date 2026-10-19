@@ -1,7 +1,7 @@
 import { PageShell } from "@/components/common/page-shell";
 import { DetailHadithPage } from "@/components/hadith/detail-hadith-page";
 import { env } from "@/lib/utils/public-env";
-import { getData } from "@/lib/utils/axios-config";
+import { getData } from "@/lib/utils/get-data";
 import { createPageMetadata } from "@/lib/utils/metadata";
 import { HadithDetailResponse } from "@/interfaces";
 import { Metadata } from "next";

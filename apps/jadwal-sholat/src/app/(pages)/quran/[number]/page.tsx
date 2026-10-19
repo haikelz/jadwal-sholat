@@ -2,7 +2,7 @@ import { PageShell } from "@/components/common/page-shell";
 import { DetailSuratPage } from "@/components/quran/detail-surat/detail-surat-page";
 import { env } from "@/lib/utils/public-env";
 import { SuratProps } from "@/interfaces";
-import { getData } from "@/lib/utils/axios-config";
+import { getData } from "@/lib/utils/get-data";
 import { createPageMetadata } from "@/lib/utils/metadata";
 import { DEFAULT_QORI } from "@/lib/utils/qori-options";
 import { Metadata } from "next";
