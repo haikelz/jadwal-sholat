@@ -45,3 +45,6 @@ tasks/*
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 .moon/cache
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/

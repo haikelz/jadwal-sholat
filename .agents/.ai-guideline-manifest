@@ -1,0 +1,16 @@
+# ai-guideline installer manifest v2
+# workspace graft/apps/jadwal-sholat: javascript-typescript nextjs docker
+# workspace .moon/cache/schemas: javascript-typescript
+# workspace .: javascript-typescript
+# workspace packages/eslint-config: javascript-typescript
+# workspace packages/typescript-config: javascript-typescript
+# workspace apps/jadwal-sholat: javascript-typescript nextjs design-system docker
+general.md 4f2d6fdb6ca10c62308b184fbb8023d8343640c309d285828da74e0f2f05240d
+preferences.md 4cde13acecabe2040856aa7ef47f12dde5134e61aba94c8b15604d8c8604a1fb
+harness.md 5f003edf4a8a16632150346fbe3bb8a5d60e2092f9a26e10d9e6175bd3ba6d26
+guidelines/javascript-typescript.md ed2855655b927b5910de153750f27839e869eed96cd9e3a8e1e6abb2034d4f6a
+guidelines/haikel-javascript-typescript.md 81d462148134e12aaf89c2a964b200ec99a1aa018c2483494e4a1721eb01f07b
+guidelines/nextjs.md b868f1fff30c5037be776da660b5eac33de02ec08bc7808c16ea74f3e8986bb7
+guidelines/docker.md 34b211b5c06981db09794be451ecf8614323ac1f1076eb51e3cf8edf30562fca
+guidelines/design-system.md 13ba42c4d8e46ead2758ab6a5986133ae933cdf68cd360825ff5c9a700469dbf
+guidelines/tutor.md f01c6aef5ac5ff1edbf99f7f8bbfb515ae140964229ba633cfa3e2da55e8519b
