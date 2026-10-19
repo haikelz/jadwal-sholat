@@ -6,11 +6,12 @@
 
 ## Features
 
-- The next prayer with a live countdown, today's prayer times, and the full monthly schedule based on the reader's location
-- Al-Qur'an with reciter selection, audio, transliteration, translation, tafsir, and last-read bookmarks
+- The current prayer period, the next prayer with a live countdown, today's times, the Hijri date, and the monthly schedule scrolled to today, based on the reader's remembered location
+- Optional adzan reminders through browser notifications, and the last loaded schedule when offline
+- Al-Qur'an with reciter selection, audio, transliteration, translation, tafsir, a sticky reading toolbar, jump-to-ayah, Makkiyyah/Madaniyyah filtering, and a "continue reading" shortcut
 - Hadith browsing by book and number
-- The 99 names of Allah with Arabic text and meaning
-- Sunnah fasting schedules by month and fasting type, powered by the [Puasa Sunnah API](https://puasasunnah.ekel.dev/swagger/index.html)
+- The 99 names of Allah with Arabic text, meaning, and one-tap copy
+- Sunnah fasting schedules by month and fasting type, with the next fast highlighted, powered by the [Puasa Sunnah API](https://puasasunnah.ekel.dev/swagger/index.html)
 - Light and dark themes with responsive desktop and mobile navigation
 - Keyboard-friendly controls, accessible dialogs, reduced-motion support, and zoom-safe layouts
 - Canonical metadata, Open Graph and Twitter cards, `robots.txt`, and XML sitemap
@@ -123,7 +124,7 @@ The screenshots were captured from a production build at `1440×900` for desktop
 
 ## Design system
 
-The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell` and left-aligned `PageHeader`, and content sits in ReUI `Frame` panels. Tables use the ReUI data grid. Colors come from semantic theme tokens (shadcn neutral plus ReUI's success, info, and warning tokens) and work in light and dark mode. Every data region has its own loading skeleton, empty state, and error state with a retry action.
+The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell` and left-aligned `PageHeader`. Glance pages (the prayer schedule and sunnah fasting) use ReUI `Frame` panels and the ReUI data grid. Reading pages (Al-Qur'an, hadith, Asma'ul Husna) use a centered reading column with plain divided rows instead of panels. Mobile navigation is a bottom tab bar; desktop uses a sidebar. Colors come from semantic theme tokens (shadcn neutral plus ReUI's success, info, and warning tokens) and work in light and dark mode. Every data region has its own loading skeleton, empty state, and error state with a retry action.
 
 ## Performance
 
