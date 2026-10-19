@@ -1,27 +1,9 @@
 "use client";
 
-import { MotionProps, m, useReducedMotion } from "framer-motion";
-import { HTMLAttributes } from "react";
+import { HTMLMotionProps, m } from "motion/react";
 
-type TransitionLayoutProps = MotionProps & HTMLAttributes<HTMLDivElement>;
-
-export function TransitionLayout({
-  children,
-  initial,
-  animate,
-  transition,
-  ...props
-}: TransitionLayoutProps) {
-  const shouldReduceMotion = useReducedMotion();
-
-  return (
-    <m.div
-      {...props}
-      initial={shouldReduceMotion ? false : initial}
-      animate={shouldReduceMotion ? undefined : animate}
-      transition={shouldReduceMotion ? { duration: 0 } : transition}
-    >
-      {children}
-    </m.div>
-  );
+// MotionConfig reducedMotion="user" in the wrapper drops the transform and
+// keeps the fade for people who prefer reduced motion.
+export function TransitionLayout(props: HTMLMotionProps<"div">) {
+  return <m.div {...props} />;
 }

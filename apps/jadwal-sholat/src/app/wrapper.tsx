@@ -2,7 +2,7 @@
 
 import { ChildrenProps } from "@/interfaces";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, MotionConfig, domAnimation } from "motion/react";
 import { ThemeProvider } from "next-themes";
 import { useState } from "react";
 
@@ -11,11 +11,14 @@ export default function Wrapper({ children }: ChildrenProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider enableSystem attribute="class">
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
         <LazyMotion features={domAnimation}>
-          <AnimatePresence initial={false} mode="wait">
-            {children}
-          </AnimatePresence>
+          <MotionConfig reducedMotion="user">{children}</MotionConfig>
         </LazyMotion>
       </ThemeProvider>
     </QueryClientProvider>
