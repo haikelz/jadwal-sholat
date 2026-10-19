@@ -20,8 +20,10 @@ export function useFetch<T = any>(
     queryKey: [link],
     queryFn: () => getData<T>(link),
     // Server-rendered pages hand their data over here; it is fresh already.
-    initialData,
-    staleTime: initialData === undefined ? 0 : Infinity,
+    // Otherwise the QueryClient's default staleTime applies.
+    ...(initialData !== undefined
+      ? { initialData, staleTime: Infinity }
+      : {}),
     /**
      * @see https://tanstack.com/query/v5/docs/react/guides/migrating-to-v5#removed-keeppreviousdata-in-favor-of-placeholderdata-identity-function
      */
