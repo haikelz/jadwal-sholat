@@ -16,6 +16,7 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -138,23 +139,17 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   return (
     <Dialog open={isOpenConfirmModal} onOpenChange={setIsOpenConfirmModal}>
       <DialogContent showCloseButton={false} className="sm:max-w-md">
-        <DialogHeader className="items-center text-center">
-          <DialogTitle className="text-2xl leading-tight">
-            Sudah masuk waktu {prayerName}
-          </DialogTitle>
+        <DialogHeader>
+          <DialogTitle>Sudah masuk waktu {prayerName}</DialogTitle>
           <DialogDescription>
             Apakah kamu ingin memutar suara adzan?
           </DialogDescription>
         </DialogHeader>
-        {!isPlayingAudioAdzan ? (
-          <div className="text-center">
-            <div className="mt-4 flex items-center justify-center gap-3">
+        <DialogFooter>
+          {!isPlayingAudioAdzan ? (
+            <>
               <DialogClose asChild>
-                <Button
-                  type="button"
-                  variant="destructive"
-                  className="font-bold"
-                >
+                <Button type="button" variant="outline">
                   Tidak
                 </Button>
               </DialogClose>
@@ -165,20 +160,19 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
                     play();
                     setIsPlayingAudioAdzan(true);
                   }}
-                  className="font-bold"
                 >
                   Putar adzan
                 </Button>
               </DialogClose>
-            </div>
-          </div>
-        ) : (
-          <DialogClose asChild>
-            <Button type="button" className="mx-auto font-bold">
-              Tutup
-            </Button>
-          </DialogClose>
-        )}
+            </>
+          ) : (
+            <DialogClose asChild>
+              <Button type="button" variant="outline">
+                Tutup
+              </Button>
+            </DialogClose>
+          )}
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

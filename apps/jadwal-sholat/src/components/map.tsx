@@ -64,7 +64,7 @@ export function Map() {
       center={[position.lat, position.lng]}
       zoom={13}
       scrollWheelZoom={false}
-      className="md:h-[620px] w-full h-[300px]"
+      className="h-75 w-full md:h-155"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

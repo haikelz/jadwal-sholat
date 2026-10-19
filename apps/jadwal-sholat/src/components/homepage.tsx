@@ -1,8 +1,19 @@
 "use client";
 
-import { ErrorWhileFetch } from "@/components/react-query/error-while-fetch";
-import { IsRefetching } from "@/components/react-query/is-refetching";
-import { LoadingClient } from "@/components/react-query/loading-client";
+import { PageHeader } from "@/components/common/page-shell";
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/reui/alert";
+import {
+  Frame,
+  FrameDescription,
+  FrameHeader,
+  FramePanel,
+  FrameTitle,
+} from "@/components/reui/frame";
 import { Jadwal } from "@/components/table-jadwal-sholat";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,208 +21,302 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 import { env } from "@/env.mjs";
 import { useFetch, useGeolocation } from "@/hooks";
 import { JadwalSholatProps } from "@/interfaces";
-import { formatSholatTime } from "@/lib/helpers";
+import {
+  formatCountdown,
+  formatSholatTime,
+  getNextPrayer,
+} from "@/lib/helpers";
+import { cn } from "@/lib/utils/cn";
 import { bulan, currentDate, matchDate, tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
-import { CalendarDays, Clock3, MapPin } from "lucide-react";
+import { CalendarX2, CircleAlert, MapPin, RefreshCw } from "lucide-react";
 import dynamic from "next/dynamic";
-import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
 const Map = dynamic(() => import("@/components/map").then((mod) => mod.Map), {
-  loading: () => (
-    <div className="md:h-[620px] w-full h-[300px] animate-pulse bg-gray-100 dark:bg-gray-900"></div>
-  ),
+  loading: () => <Skeleton className="h-75 w-full md:h-155" />,
   ssr: false,
 });
 const UserLocation = dynamic(
   () => import("@/components/user-location").then((mod) => mod.UserLocation),
-  {
-    ssr: false,
-  },
+  { ssr: false },
 );
 const Adzan = dynamic(
   () => import("@/components/adzan").then((mod) => mod.Adzan),
-  {
-    ssr: false,
-  },
+  { ssr: false },
 );
 
-export function Homepage() {
-  const [activeSchedule, setActiveSchedule] = useState<"today" | "month">(
-    "today",
+const prayerTimes = [
+  { key: "Imsak", name: "Imsak" },
+  { key: "Fajr", name: "Subuh" },
+  { key: "Sunrise", name: "Terbit" },
+  { key: "Dhuhr", name: "Dzuhur" },
+  { key: "Asr", name: "Ashar" },
+  { key: "Sunset", name: "Terbenam" },
+  { key: "Maghrib", name: "Maghrib" },
+  { key: "Isha", name: "Isya" },
+] as const;
+
+function ScheduleSkeleton() {
+  return (
+    <Frame stacked role="status" aria-live="polite">
+      <span className="sr-only">Memuat jadwal sholat…</span>
+      <FrameHeader className="flex-row items-center justify-between gap-2">
+        <Skeleton className="h-4 w-16" />
+        <Skeleton className="h-7 w-28" />
+      </FrameHeader>
+      <FramePanel className="flex flex-col gap-1.5">
+        <Skeleton className="h-3 w-16" />
+        <Skeleton className="h-7 w-40" />
+        <Skeleton className="h-4 w-28" />
+      </FramePanel>
+      <FramePanel>
+        <div className="grid grid-cols-4 gap-x-3 gap-y-4 lg:grid-cols-8">
+          {prayerTimes.map((prayer) => (
+            <div key={prayer.key} className="flex flex-col gap-1.5">
+              <Skeleton className="h-3 w-10" />
+              <Skeleton className="h-4 w-12" />
+            </div>
+          ))}
+        </div>
+      </FramePanel>
+    </Frame>
   );
+}
+
+function useNow(intervalMs = 30_000) {
+  const [now, setNow] = useState<Date | null>(null);
+  useEffect(() => {
+    setNow(new Date());
+    const id = setInterval(() => setNow(new Date()), intervalMs);
+    return () => clearInterval(id);
+  }, [intervalMs]);
+  return now;
+}
+
+export function Homepage() {
   const { position, isOpenMap, setIsOpenMap } = useGlobalStore((state) => ({
     position: state.position,
     isOpenMap: state.isOpenMap,
     setIsOpenMap: state.setIsOpenMap,
   }));
 
-  const formatDate: string = `${tahun}/${bulan}`;
-
   useGeolocation();
+  const now = useNow();
 
-  const { data, isPending, isError, isRefetching } = useFetch<{
+  const { data, isPending, isError, isRefetching, refetch } = useFetch<{
     data: JadwalSholatProps[];
   }>(
-    `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${formatDate}?latitude=${position.lat}&longitude=${position.lng}&method=20`,
+    `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${tahun}/${bulan}?latitude=${position.lat}&longitude=${position.lng}&method=20`,
   );
 
-  if ((!data && isError) || isPending) return <LoadingClient />;
-  if (isError || !data?.data) return <ErrorWhileFetch />;
-  if (isRefetching) return <IsRefetching />;
-
-  const waktu = data.data;
-  const jadwalHariIni = waktu.find(
+  const waktu = data?.data ?? [];
+  const todayIndex = waktu.findIndex(
     (item) => item.date.gregorian.date === matchDate,
   );
-  const waktuHariIni = jadwalHariIni
-    ? [
-        { name: "Imsak", time: jadwalHariIni.timings.Imsak },
-        { name: "Subuh", time: jadwalHariIni.timings.Fajr },
-        { name: "Terbit", time: jadwalHariIni.timings.Sunrise },
-        { name: "Dzuhur", time: jadwalHariIni.timings.Dhuhr },
-        { name: "Ashar", time: jadwalHariIni.timings.Asr },
-        { name: "Terbenam", time: jadwalHariIni.timings.Sunset },
-        { name: "Maghrib", time: jadwalHariIni.timings.Maghrib },
-        { name: "Isya", time: jadwalHariIni.timings.Isha },
-      ]
-    : [];
+  const jadwalHariIni = waktu[todayIndex];
+  const nextPrayer =
+    jadwalHariIni && now
+      ? getNextPrayer(
+          jadwalHariIni.timings,
+          waktu[todayIndex + 1]?.timings,
+          now,
+        )
+      : null;
+
+  const locationButton = (
+    <Button
+      type="button"
+      variant="outline"
+      size="sm"
+      onClick={() => setIsOpenMap(true)}
+    >
+      <MapPin aria-hidden="true" />
+      <span className="sr-only">Ubah lokasi, saat ini </span>
+      <UserLocation />
+    </Button>
+  );
+
+  function renderSchedule() {
+    if (isPending) return <ScheduleSkeleton />;
+
+    if (isError && waktu.length === 0) {
+      return (
+        <Alert variant="destructive">
+          <CircleAlert aria-hidden="true" />
+          <AlertTitle>Jadwal belum dapat dimuat</AlertTitle>
+          <AlertDescription>Periksa koneksi, lalu coba lagi.</AlertDescription>
+          <AlertAction>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => refetch()}
+            >
+              <RefreshCw aria-hidden="true" />
+              Coba lagi
+            </Button>
+          </AlertAction>
+        </Alert>
+      );
+    }
+
+    if (waktu.length === 0) {
+      return (
+        <Empty className="border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <CalendarX2 aria-hidden="true" />
+            </EmptyMedia>
+            <EmptyTitle>Jadwal belum tersedia</EmptyTitle>
+            <EmptyDescription>Coba pilih lokasi lain.</EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <Button type="button" onClick={() => setIsOpenMap(true)}>
+              <MapPin aria-hidden="true" />
+              Pilih lokasi
+            </Button>
+          </EmptyContent>
+        </Empty>
+      );
+    }
+
+    return (
+      <div className="flex min-w-0 flex-col gap-6">
+        <Frame stacked>
+          <FrameHeader className="flex-row items-center justify-between gap-2">
+            <div className="flex min-w-0 items-center gap-2">
+              <FrameTitle>
+                <h2>Hari ini</h2>
+              </FrameTitle>
+              {isRefetching ? (
+                <Spinner aria-label="Memperbarui jadwal" />
+              ) : null}
+            </div>
+            {locationButton}
+          </FrameHeader>
+          <FramePanel aria-live="polite">
+            {nextPrayer ? (
+              <div className="flex flex-col gap-0.5">
+                <p className="text-xs text-muted-foreground">
+                  {nextPrayer.isTomorrow ? "Berikutnya, besok" : "Berikutnya"}
+                </p>
+                <p className="flex flex-wrap items-baseline gap-x-2">
+                  <span className="text-2xl font-semibold tracking-tight">
+                    {nextPrayer.name}
+                  </span>
+                  <span className="text-2xl font-semibold tracking-tight tabular-nums">
+                    {formatSholatTime(nextPrayer.time)}
+                  </span>
+                </p>
+                <p className="text-sm text-muted-foreground tabular-nums">
+                  {now ? formatCountdown(now, nextPrayer.at) : null}
+                </p>
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                {!jadwalHariIni
+                  ? "Jadwal hari ini belum tersedia."
+                  : now
+                    ? "Sholat hari ini sudah selesai."
+                    : "Menghitung waktu sholat berikutnya…"}
+              </p>
+            )}
+          </FramePanel>
+          {jadwalHariIni ? (
+            <FramePanel aria-busy={isRefetching}>
+              <dl className="grid grid-cols-4 gap-x-3 gap-y-4 lg:grid-cols-8">
+                {prayerTimes.map((prayer) => {
+                  const isNext =
+                    !nextPrayer?.isTomorrow && nextPrayer?.key === prayer.key;
+                  return (
+                    <div
+                      key={prayer.key}
+                      aria-current={isNext ? "time" : undefined}
+                      className="flex min-w-0 flex-col gap-0.5"
+                    >
+                      <dt
+                        className={cn(
+                          "truncate text-xs",
+                          isNext ? "text-foreground" : "text-muted-foreground",
+                        )}
+                      >
+                        {prayer.name}
+                      </dt>
+                      <dd
+                        className={cn(
+                          "text-sm tabular-nums",
+                          isNext
+                            ? "font-semibold text-foreground"
+                            : "font-medium text-muted-foreground",
+                        )}
+                      >
+                        {formatSholatTime(jadwalHariIni.timings[prayer.key])}
+                      </dd>
+                    </div>
+                  );
+                })}
+              </dl>
+            </FramePanel>
+          ) : null}
+        </Frame>
+        <Frame>
+          <FrameHeader>
+            <FrameTitle>
+              <h2>Bulan ini</h2>
+            </FrameTitle>
+            <FrameDescription>Hari ini ditandai.</FrameDescription>
+          </FrameHeader>
+          <FramePanel className="p-0" aria-busy={isRefetching}>
+            <Jadwal waktu={waktu} />
+          </FramePanel>
+        </Frame>
+      </div>
+    );
+  }
 
   return (
     <>
-      <Adzan waktu={waktu} />
-      <header className="mx-auto flex max-w-3xl flex-col items-center justify-center text-center">
-        <div className="flex items-center justify-center gap-3">
-          <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem]">
-            Jadwal Sholat
-          </h1>
-          <span className="flex size-11 items-center justify-center rounded-xl bg-muted sm:size-12">
-            <Image
-              src="/img/mosque.webp"
-              width={32}
-              height={32}
-              alt=""
-              loading="eager"
-              fetchPriority="high"
-              draggable={false}
-            />
-          </span>
-        </div>
-        <p
-          data-cy="description"
-          className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
-        >
-          Jadwal sholat bulan ini untuk {currentDate} di wilayah{" "}
-          <UserLocation />
-        </p>
-      </header>
-      <div className="flex flex-col items-center justify-center">
-        <Button
-          className="flex items-center justify-center font-semibold"
-          onClick={() => setIsOpenMap(!isOpenMap)}
-        >
-          <MapPin aria-hidden="true" size={18} />
-          <span>Atur lokasi</span>
-        </Button>
-      </div>
-      <section aria-labelledby="pilihan-jadwal" className="w-full">
-        <h2 id="pilihan-jadwal" className="sr-only">
-          Pilihan jadwal sholat
-        </h2>
-        <div
-          role="group"
-          aria-label="Tampilkan jadwal"
-          className="mx-auto grid w-full max-w-sm grid-cols-2 rounded-xl border bg-muted/70 p-1 shadow-xs"
-        >
-          <Button
-            type="button"
-            variant={activeSchedule === "today" ? "default" : "ghost"}
-            aria-pressed={activeSchedule === "today"}
-            aria-controls="jadwal-hari-ini"
-            className="h-11 rounded-lg font-semibold sm:h-10"
-            onClick={() => setActiveSchedule("today")}
-          >
-            <Clock3 aria-hidden="true" />
-            Hari ini
-          </Button>
-          <Button
-            type="button"
-            variant={activeSchedule === "month" ? "default" : "ghost"}
-            aria-pressed={activeSchedule === "month"}
-            aria-controls="jadwal-bulan-ini"
-            className="h-11 rounded-lg font-semibold sm:h-10"
-            onClick={() => setActiveSchedule("month")}
-          >
-            <CalendarDays aria-hidden="true" />
-            Satu bulan
-          </Button>
-        </div>
-        <div
-          id="jadwal-hari-ini"
-          hidden={activeSchedule !== "today"}
-          className="mx-auto mt-5 w-full max-w-4xl overflow-hidden rounded-2xl border bg-card shadow-sm sm:mt-6"
-        >
-          <div className="flex items-center gap-3 border-b bg-muted/60 px-4 py-4 sm:px-6">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              <Clock3 aria-hidden="true" className="size-5" />
-            </span>
-            <div className="min-w-0 text-left">
-              <h3 className="text-lg font-bold tracking-tight sm:text-xl">
-                Jadwal hari ini
-              </h3>
-              <p className="text-sm text-muted-foreground">{currentDate}</p>
-            </div>
-          </div>
-          {waktuHariIni.length > 0 ? (
-            <dl className="grid grid-cols-4 gap-x-3 gap-y-5 p-4 sm:grid-cols-8 sm:px-6 sm:py-5">
-              {waktuHariIni.map((item) => (
-                <div key={item.name} className="min-w-0 text-left">
-                  <dt className="truncate text-xs font-medium text-muted-foreground">
-                    {item.name}
-                  </dt>
-                  <dd className="mt-1 text-base font-bold tabular-nums sm:text-lg">
-                    {formatSholatTime(item.time)}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          ) : (
-            <p className="px-4 py-6 text-center text-sm text-muted-foreground sm:px-6">
-              Jadwal hari ini belum tersedia.
-            </p>
-          )}
-        </div>
-        <div
-          id="jadwal-bulan-ini"
-          hidden={activeSchedule !== "month"}
-          className="mt-5 w-full sm:mt-6"
-        >
-          <Jadwal waktu={waktu} />
-        </div>
+      {waktu.length > 0 ? <Adzan waktu={waktu} /> : null}
+      <PageHeader title="Jadwal Sholat" description={currentDate} />
+      <section aria-label="Jadwal sholat" className="flex min-w-0 flex-col">
+        {renderSchedule()}
       </section>
       <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
-        <DialogContent className="max-h-[calc(100dvh-2rem)] max-w-[calc(100%-2rem)] overflow-y-auto sm:max-w-4xl">
+        <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto sm:max-w-4xl">
           <DialogHeader>
-            <DialogTitle>Pilih lokasi untuk jadwal sholat</DialogTitle>
+            <DialogTitle>Pilih lokasi</DialogTitle>
             <DialogDescription>
-              Cari atau geser peta, lalu pilih lokasi yang diinginkan.
+              Cari atau ketuk peta untuk memilih lokasi.
             </DialogDescription>
           </DialogHeader>
           <Map />
-          <DialogClose asChild>
-            <Button type="button" className="mx-auto w-[100px] font-bold">
-              Tutup
-            </Button>
-          </DialogClose>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button type="button" variant="outline">
+                Tutup
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>
