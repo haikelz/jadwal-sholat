@@ -1,8 +1,9 @@
 import { CustomSidebar } from "@/components/common/sidebar";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChildrenProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
-import { geistSans, lpmqIsepMisbah } from "@/lib/utils/fonts";
+import { geistMono, geistSans, lpmqIsepMisbah } from "@/lib/utils/fonts";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_OG_IMAGE,
@@ -17,8 +18,8 @@ import Wrapper from "./wrapper";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
-    { media: "(prefers-color-scheme: dark)", color: "#030712" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -92,19 +93,21 @@ export default function Layout({ children }: ChildrenProps) {
   return (
     <html
       lang="id"
-      className={cn(geistSans.variable, lpmqIsepMisbah.variable)}
+      className={cn(
+        geistSans.variable,
+        geistMono.variable,
+        lpmqIsepMisbah.variable,
+      )}
       suppressHydrationWarning
     >
       <body className={geistSans.className}>
         <NuqsAdapter>
           <Wrapper>
-            <div
-              className={cn("min-h-svh bg-background text-foreground md:flex")}
-            >
+            <TooltipProvider>
               <CustomSidebar>{children}</CustomSidebar>
-            </div>
+            </TooltipProvider>
+            <Toaster />
           </Wrapper>
-          <Toaster />
         </NuqsAdapter>
         <Analytics />
       </body>

@@ -29,7 +29,6 @@ const config = withSentryConfig(
       ];
     },
     experimental: {
-      optimizePackageImports: ["@radix-ui/*"],
       webpackBuildWorker: true,
       webpackMemoryOptimizations: true,
       preloadEntriesOnStart: true,

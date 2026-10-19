@@ -1,4 +1,4 @@
-import { Geist } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
 export const geistSans = Geist({
@@ -6,6 +6,14 @@ export const geistSans = Geist({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--font-geist-sans",
+  display: "swap",
+});
+
+export const geistMono = Geist_Mono({
+  style: ["normal"],
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
