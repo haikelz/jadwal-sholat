@@ -1,14 +1,15 @@
+import { Button } from "@/components/ui/button";
 import { removeSelectedSurat } from "@/lib/helpers";
 import { cn } from "@/lib/utils/cn";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export function PreviousOrNext({ num }: { num: number }) {
   return (
-    <div
+    <nav
+      aria-label="Navigasi surat"
       className={cn(
-        "flex w-full gap-3 border-y py-4",
+        "flex w-full gap-2",
         num > 1 ? "justify-between" : "justify-end",
       )}
     >
@@ -19,8 +20,8 @@ export function PreviousOrNext({ num }: { num: number }) {
             onClick={removeSelectedSurat}
             aria-label="Surat sebelumnya"
           >
-            <ArrowLeft aria-hidden="true" size={18} />
-            <span>Sebelumnya</span>
+            <ArrowLeft aria-hidden="true" data-icon="inline-start" />
+            Sebelumnya
           </Link>
         </Button>
       ) : null}
@@ -31,11 +32,11 @@ export function PreviousOrNext({ num }: { num: number }) {
             aria-label="Surat berikutnya"
             onClick={removeSelectedSurat}
           >
-            <span>Berikutnya</span>
-            <ArrowRight aria-hidden="true" size={18} />
+            Berikutnya
+            <ArrowRight aria-hidden="true" data-icon="inline-end" />
           </Link>
         </Button>
       ) : null}
-    </div>
+    </nav>
   );
 }

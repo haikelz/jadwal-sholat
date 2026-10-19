@@ -2,12 +2,27 @@
 
 import { SearchBar } from "@/components/common/search-bar";
 import { SortByOrder } from "@/components/common/sort-by-order";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/reui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Frame,
+  FrameDescription,
+  FramePanel,
+  FrameTitle,
+} from "@/components/reui/frame";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import { useAscending } from "@/hooks";
 import { ListSuratProps } from "@/interfaces";
 import { removeSelectedSurat } from "@/lib/helpers";
-import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
+import { BookMarked, SearchX } from "lucide-react";
 import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { useEffect, useMemo } from "react";
@@ -52,107 +67,118 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
   }, [setLastRead]);
 
   return (
-    <>
-      <div className="mb-7 grid w-full items-center gap-3 rounded-xl border bg-card/50 p-3 shadow-xs sm:p-4 lg:grid-cols-[minmax(16rem,1fr)_auto_auto]">
-        <div className="w-full lg:max-w-md">
-          <SearchBar setSearch={setSearch} name="search" />
-        </div>
-        <div className="flex min-h-10 min-w-0 items-center rounded-lg bg-muted/60 px-3 py-2 text-sm text-muted-foreground">
-          <span className="me-1 shrink-0">Terakhir dibaca:</span>
-          {lastRead.ayat || lastRead.number !== null ? (
-            <Link
-              href={`/quran/${lastRead.number}`}
-              onClick={() =>
-                localStorage.setItem(
-                  "selected-surat",
-                  lastRead.number!.toString() as string,
-                )
-              }
-              className="min-w-0 truncate rounded-sm font-semibold text-foreground underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
-            >
-              Surat {lastRead.name} ayat {lastRead.ayat}
-            </Link>
-          ) : (
-            <span className="font-medium text-foreground">belum ada</span>
-          )}
-        </div>
-        <div className="flex justify-end">
+    <div className="flex w-full flex-col gap-6">
+      <div className="flex w-full flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <SearchBar value={search} setSearch={setSearch} name="search" />
+        <div className="flex min-w-0 items-center justify-between gap-3 lg:justify-end">
+          <p className="flex min-w-0 items-center gap-1 text-sm text-muted-foreground">
+            <span className="shrink-0">Terakhir dibaca:</span>
+            {lastRead.ayat || lastRead.number !== null ? (
+              <Link
+                href={`/quran/${lastRead.number}`}
+                onClick={() =>
+                  localStorage.setItem(
+                    "selected-surat",
+                    lastRead.number!.toString() as string,
+                  )
+                }
+                className="min-w-0 truncate font-medium text-foreground underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                Surat {lastRead.name} ayat {lastRead.ayat}
+              </Link>
+            ) : (
+              <span className="font-medium text-foreground">belum ada</span>
+            )}
+          </p>
           <SortByOrder
             isAscending={isAscending}
             setIsAscending={setIsAscending}
           />
         </div>
       </div>
-      {filteredSurat ? (
-        filteredSurat.length ? (
-          <div
-            className={cn(
-              "grid w-full grid-cols-1 gap-4",
-              "sm:grid-cols-2",
-              "xl:grid-cols-3",
-            )}
-          >
-            {filteredSurat.map((surat) => (
-              <Link
-                key={surat.number}
-                href={`/quran/${surat.number}`}
-                onClick={removeSelectedSurat}
-                className="h-full rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2"
-              >
-                <Card
-                  data-cy="card"
-                  className="h-full rounded-xl border-border/70 shadow-xs transition-[background-color,border-color,box-shadow,transform] hover:border-border hover:bg-muted/30 hover:shadow-sm active:scale-[0.96]"
-                >
-                  <CardHeader className="pb-2">
-                    <p className="text-right text-sm font-medium tracking-wide text-muted-foreground">
-                      {surat.type.id}
-                    </p>
-                  </CardHeader>
-                  <CardContent className="text-left">
-                    <p className="my-1 text-xl font-bold">
-                      {surat.number}.{" "}
+      {surat.data.length === 0 ? (
+        <Empty data-cy="not-found-text" className="border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <BookMarked aria-hidden="true" />
+            </EmptyMedia>
+            <EmptyTitle>Data surat belum tersedia</EmptyTitle>
+            <EmptyDescription>
+              Muat ulang halaman untuk mencoba lagi.
+            </EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <Button onClick={() => window.location.reload()}>Muat ulang</Button>
+          </EmptyContent>
+        </Empty>
+      ) : filteredSurat.length ? (
+        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {filteredSurat.map((surat) => (
+            <Frame
+              key={surat.number}
+              variant="ghost"
+              data-cy="card"
+              className="group relative has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
+            >
+              <FramePanel className="flex flex-col gap-1 transition-colors group-hover:bg-muted/50">
+                <div className="flex items-start justify-between gap-2">
+                  <FrameTitle>
+                    <Link
+                      href={`/quran/${surat.number}`}
+                      onClick={removeSelectedSurat}
+                      className="outline-none after:absolute after:inset-0"
+                    >
+                      <span className="tabular-nums">{surat.number}.</span>{" "}
                       {deferredSearch
                         ? reactStringReplace(
                             surat.asma.id.short,
                             deferredSearch,
                             (match: string, index: number) => (
-                              <span
+                              <mark
                                 key={index + 1}
-                                className="bg-lime-400 dark:bg-lime-600"
+                                className="bg-primary/15 text-foreground"
                               >
                                 {match}
-                              </span>
+                              </mark>
                             ),
                           )
                         : surat.asma.id.short}
-                    </p>
-                    <p className="mb-2 font-medium">
-                      {surat.asma.translation.id}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {surat.ayahCount} ayat
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p
-            data-cy="not-found-text"
-            className="py-12 text-center text-base text-muted-foreground"
-          >
-            Surat yang dicari tidak ditemukan.
-          </p>
-        )
+                    </Link>
+                  </FrameTitle>
+                  <Badge variant="outline">{surat.type.id}</Badge>
+                </div>
+                <FrameDescription className="flex items-center gap-2">
+                  <span className="truncate">{surat.asma.translation.id}</span>
+                  <span
+                    aria-hidden
+                    className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
+                  />
+                  <span className="shrink-0 tabular-nums">
+                    {surat.ayahCount} ayat
+                  </span>
+                </FrameDescription>
+              </FramePanel>
+            </Frame>
+          ))}
+        </div>
       ) : (
-        <p
-          data-cy="not-found-text"
-          className="py-12 text-center text-base text-muted-foreground"
-        >
-          Data surat belum tersedia.
-        </p>
+        <Empty data-cy="not-found-text" className="border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <SearchX aria-hidden="true" />
+            </EmptyMedia>
+            <EmptyTitle>Surat tidak ditemukan</EmptyTitle>
+            <EmptyDescription>
+              Coba kata kunci lain atau hapus pencarian.
+            </EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <Button variant="outline" onClick={() => setSearch(null)}>
+              Hapus pencarian
+            </Button>
+          </EmptyContent>
+        </Empty>
       )}
-    </>
+    </div>
   );
 }

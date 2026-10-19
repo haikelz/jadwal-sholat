@@ -1,9 +1,5 @@
 "use client";
 
-import { SuratProps } from "@/interfaces";
-import { MessageSquare } from "lucide-react";
-import { useCallback } from "react";
-import { useClipboard } from "use-clipboard-copy";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,6 +11,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { SuratProps } from "@/interfaces";
+import { Check, Copy, MessageSquare } from "lucide-react";
+import { useCallback } from "react";
+import { useClipboard } from "use-clipboard-copy";
 
 export function DialogTafsir({ data }: SuratProps) {
   const clipboard = useClipboard({ copiedTimeout: 1000 });
@@ -23,25 +23,25 @@ export function DialogTafsir({ data }: SuratProps) {
     (tafsir: string) => {
       clipboard.copy(tafsir);
     },
-    [clipboard]
+    [clipboard],
   );
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button type="button" variant="ghost">
-          <MessageSquare size={20} />
-          <span className="font-bold">Tafsir</span>
+        <Button type="button" variant="outline">
+          <MessageSquare aria-hidden="true" data-icon="inline-start" />
+          Tafsir
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-xl">
         <DialogHeader>
           <DialogTitle>Tafsir Surat {data.asma.id.short}</DialogTitle>
           <DialogDescription>
             Tafsir ringkas dalam bahasa Indonesia.
           </DialogDescription>
         </DialogHeader>
-        <p className="max-h-[60dvh] overflow-y-auto text-left leading-relaxed">
+        <p className="max-h-[60dvh] overflow-y-auto text-left text-sm leading-relaxed">
           {data.tafsir.id}
         </p>
         <DialogFooter>
@@ -49,6 +49,11 @@ export function DialogTafsir({ data }: SuratProps) {
             <Button variant="outline">Tutup</Button>
           </DialogClose>
           <Button onClick={() => copyToClipboard(data.tafsir.id)}>
+            {clipboard.copied ? (
+              <Check aria-hidden="true" data-icon="inline-start" />
+            ) : (
+              <Copy aria-hidden="true" data-icon="inline-start" />
+            )}
             {clipboard.copied ? "Tersalin" : "Salin tafsir"}
           </Button>
         </DialogFooter>

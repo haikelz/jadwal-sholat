@@ -42,7 +42,7 @@ export default async function Surat(props: {
   const { number } = await props.params;
 
   return (
-    <PageShell size="reader">
+    <PageShell>
       <DetailSuratPage number={number} />
     </PageShell>
   );

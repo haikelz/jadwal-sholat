@@ -4,7 +4,6 @@ import { env } from "@/env.mjs";
 import { ListSuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { createPageMetadata } from "@/lib/utils/metadata";
-import Image from "next/image";
 import { Suspense } from "react";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
@@ -35,16 +34,6 @@ export default async function Quran() {
       <PageHeader
         title="Baca Al-Qur'an"
         description="Berlomba-lombalah dalam berbuat kebaikan."
-        icon={
-          <Image
-            src="/img/Quran.webp"
-            width={32}
-            height={32}
-            alt=""
-            fetchPriority="high"
-            draggable={false}
-          />
-        }
       />
       <Suspense>
         <QuranPage surat={surat} />

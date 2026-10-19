@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/reui/badge";
 import useGlobalStore from "@/store";
 import { useCallback, useEffect } from "react";
 
@@ -25,7 +26,15 @@ export function ReadingProgress() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const roundPercent = Math.round(width);
+  const roundPercent = Math.round(width) || 0;
 
-  return <span className="text-sm font-bold">{roundPercent}%</span>;
+  return (
+    <Badge
+      variant="outline"
+      className="tabular-nums"
+      aria-label={`Progres membaca ${roundPercent}%`}
+    >
+      {roundPercent}%
+    </Badge>
+  );
 }
