@@ -45,7 +45,7 @@ export default async function HadithDetail(props: {
   const { book, number } = await props.params;
 
   return (
-    <PageShell size="reader">
+    <PageShell>
       <DetailHadithPage book={book} hadithNumber={number} />
     </PageShell>
   );

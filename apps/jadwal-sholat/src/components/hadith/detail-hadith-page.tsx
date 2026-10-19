@@ -1,20 +1,51 @@
 "use client";
 
-import { ErrorWhileFetch } from "@/components/react-query/error-while-fetch";
-import { IsRefetching } from "@/components/react-query/is-refetching";
-import { LoadingClient } from "@/components/react-query/loading-client";
+import { PageHeader } from "@/components/common/page-shell";
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/reui/alert";
 import { Button } from "@/components/ui/button";
+import { Frame, FramePanel } from "@/components/reui/frame";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { env } from "@/env.mjs";
 import { useFetch } from "@/hooks";
 import { HadithDetailResponse } from "@/interfaces";
-import { cn } from "@/lib/utils/cn";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, CircleAlert } from "lucide-react";
 import Link from "next/link";
 
 const { NEXT_PUBLIC_HADITH_API } = env;
 
 function buildHadithDetailUrl(book: string, hadithNumber: string): string {
   return `${NEXT_PUBLIC_HADITH_API}/books/${book}/${hadithNumber}`;
+}
+
+function DetailHadithSkeleton() {
+  return (
+    <div
+      role="status"
+      aria-label="Memuat hadith"
+      className="flex flex-col gap-6"
+    >
+      <div className="flex flex-col gap-2">
+        <Skeleton className="h-7 w-48" />
+        <Skeleton className="h-4 w-32" />
+      </div>
+      <Frame spacing="default">
+        <FramePanel className="flex flex-col gap-4">
+          <Skeleton className="ms-auto h-8 w-4/5" />
+          <Skeleton className="ms-auto h-8 w-3/5" />
+          <Separator />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-11/12" />
+          <Skeleton className="h-4 w-2/3" />
+        </FramePanel>
+      </Frame>
+    </div>
+  );
 }
 
 export function DetailHadithPage({
@@ -25,11 +56,11 @@ export function DetailHadithPage({
   hadithNumber: string;
 }) {
   const apiUrl = buildHadithDetailUrl(book, hadithNumber);
-  const { data, isPending, isError, isRefetching } = useFetch(apiUrl);
+  const { data, isPending, isError, isRefetching, refetch } =
+    useFetch<HadithDetailResponse>(apiUrl);
 
-  const response = data as HadithDetailResponse | undefined;
-  const contents = response?.data?.contents;
-  const bookMeta = response?.data;
+  const contents = data?.data?.contents;
+  const bookMeta = data?.data;
 
   const rawNum = parseInt(hadithNumber, 10);
   const currentNum = (Number.isNaN(rawNum) ? contents?.number : rawNum) ?? 1;
@@ -37,72 +68,75 @@ export function DetailHadithPage({
   const canGoPrev = currentNum > 1;
   const canGoNext = totalAvailable > 0 && currentNum < totalAvailable;
 
-  if (isPending) return <LoadingClient />;
-  if (isError) return <ErrorWhileFetch />;
-  if (isRefetching) return <IsRefetching />;
-  if (!contents) return <ErrorWhileFetch />;
+  if (isPending || isRefetching) return <DetailHadithSkeleton />;
+
+  if (isError || !contents)
+    return (
+      <Alert variant="destructive">
+        <CircleAlert aria-hidden="true" />
+        <AlertTitle>Hadith belum dapat dimuat</AlertTitle>
+        <AlertDescription>
+          Periksa koneksi internet, lalu coba lagi.
+        </AlertDescription>
+        <AlertAction>
+          <Button variant="outline" size="sm" onClick={() => refetch()}>
+            Coba lagi
+          </Button>
+        </AlertAction>
+      </Alert>
+    );
 
   return (
-    <article className="mx-auto flex w-full max-w-3xl min-w-0 flex-col gap-5 sm:gap-6">
-      <header className="grid grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center gap-3 border-b pb-5 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
-        <div>
-          {canGoPrev ? (
-            <Button asChild size="icon" variant="outline">
-              <Link
-                href={`/hadith/${book}/${currentNum - 1}`}
-                aria-label="Hadith sebelumnya"
+    <article className="flex w-full min-w-0 flex-col gap-6">
+      <PageHeader
+        title={`Hadith no. ${contents.number}`}
+        description={bookMeta?.name ?? book}
+        actions={
+          <>
+            {canGoPrev ? (
+              <Button asChild variant="outline">
+                <Link href={`/hadith/${book}/${currentNum - 1}`}>
+                  <ChevronLeft aria-hidden="true" data-icon="inline-start" />
+                  Sebelumnya
+                </Link>
+              </Button>
+            ) : null}
+            {canGoNext ? (
+              <Button asChild variant="outline">
+                <Link href={`/hadith/${book}/${currentNum + 1}`}>
+                  Berikutnya
+                  <ChevronRight aria-hidden="true" data-icon="inline-end" />
+                </Link>
+              </Button>
+            ) : null}
+          </>
+        }
+      />
+      <Frame spacing="default">
+        <FramePanel className="flex flex-col gap-4">
+          {contents.arab ? (
+            <section className="flex flex-col gap-2">
+              <h2 className="sr-only">Teks Arab</h2>
+              <p
+                lang="ar"
+                dir="rtl"
+                className="arabic-font min-w-0 max-w-full text-right text-2xl wrap-anywhere sm:text-3xl"
               >
-                <ChevronLeft aria-hidden="true" size={18} />
-              </Link>
-            </Button>
+                {contents.arab}
+              </p>
+            </section>
           ) : null}
-        </div>
-        <div className="min-w-0 text-center">
-          <p className="truncate text-sm font-medium text-muted-foreground">
-            {bookMeta?.name ?? book}
-          </p>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
-            Hadith no. {contents.number}
-          </h1>
-        </div>
-        <div className="flex justify-end">
-          {canGoNext ? (
-            <Button asChild size="icon" variant="outline">
-              <Link
-                href={`/hadith/${book}/${currentNum + 1}`}
-                aria-label="Hadith berikutnya"
-              >
-                <ChevronRight aria-hidden="true" size={18} />
-              </Link>
-            </Button>
+          {contents.arab && contents.id ? <Separator /> : null}
+          {contents.id ? (
+            <section className="flex flex-col gap-2">
+              <h2 className="text-xs font-medium text-muted-foreground">Terjemahan</h2>
+              <p className="max-w-3xl text-sm wrap-anywhere">
+                {contents.id.slice(0, 1).toUpperCase() + contents.id.slice(1)}
+              </p>
+            </section>
           ) : null}
-        </div>
-      </header>
-      {contents.arab && (
-        <section className="min-w-0 rounded-2xl bg-muted/60 p-5 sm:p-8">
-          <h2 className="sr-only">Teks Arab</h2>
-          <p
-            lang="ar"
-            dir="rtl"
-            className={cn(
-              "arabic-font min-w-0 max-w-full text-right text-2xl font-medium leading-loose sm:text-3xl",
-              "[overflow-wrap:anywhere]",
-            )}
-          >
-            {contents.arab}
-          </p>
-        </section>
-      )}
-      {contents.id && (
-        <section className="rounded-2xl border bg-card p-5 shadow-xs sm:p-8">
-          <h2 className="mb-3 text-sm font-semibold text-muted-foreground">
-            Terjemahan
-          </h2>
-          <p className="max-w-[70ch] text-base leading-7 [overflow-wrap:anywhere]">
-            {contents.id.slice(0, 1).toUpperCase() + contents.id.slice(1)}
-          </p>
-        </section>
-      )}
+        </FramePanel>
+      </Frame>
     </article>
   );
 }
