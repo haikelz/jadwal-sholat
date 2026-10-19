@@ -8,7 +8,7 @@ import { getData } from "@/lib/utils/get-data";
 /**
  * A reusable useQuery with additional configuration
  * @export
- * @param {string} link - API link
+ * @param {string} link - API link; an empty string waits without fetching
  * @param {T} [initialData] - data the server already fetched for this link
  * @returns {UseQueryResult<any, Error>} configured useQuery
  */
@@ -19,6 +19,8 @@ export function useFetch<T = any>(
   return useQuery({
     queryKey: [link],
     queryFn: () => getData<T>(link),
+    // Callers pass "" until the URL is known (clock, location, route param).
+    enabled: link !== "",
     // Server-rendered pages hand their data over here; it is fresh already.
     // Otherwise the QueryClient's default staleTime applies.
     ...(initialData !== undefined

@@ -24,9 +24,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useFetch } from "@/hooks";
+import { useFetch, useNow } from "@/hooks";
 import { PuasaSunnahScheduleResponse, PuasaSunnahTypeKey } from "@/interfaces";
-import { tahun } from "@/lib/utils/constants";
+import { getDateParts } from "@/lib/utils/date-parts";
 import useGlobalStore from "@/store";
 import { CalendarX, CircleAlert } from "lucide-react";
 import { useId } from "react";
@@ -71,9 +71,16 @@ export function PuasaSunnahPage() {
       setSelectedType: state.setSelectedType,
     }));
 
+  const now = useNow();
+  const today = now ? getDateParts(now) : null;
+  const month = selectedMonth ?? today?.bulan;
+
   const { data, isPending, isError, isRefetching, refetch } =
     useFetch<PuasaSunnahScheduleResponse>(
-      `/api/puasa-sunnah?period=month&date=${tahun}-${selectedMonth}-01`,
+      // Wait for the clock so a prerendered page never asks for the build month.
+      today && month
+        ? `/api/puasa-sunnah?period=month&date=${today.tahun}-${month}-01`
+        : "",
     );
 
   const filters = (
@@ -82,7 +89,7 @@ export function PuasaSunnahPage() {
         Bulan
       </label>
       <Select
-        value={selectedMonth}
+        value={month ?? ""}
         onValueChange={(value) => setSelectedMonth({ selectedMonth: value })}
       >
         <SelectTrigger id={monthId} className="w-full min-w-0 sm:w-40">
@@ -175,7 +182,10 @@ export function PuasaSunnahPage() {
         </FramePanel>
       ) : puasaList.length > 0 ? (
         <FramePanel className="p-0">
-          <TablePuasaSunnah puasaList={puasaList} />
+          <TablePuasaSunnah
+            puasaList={puasaList}
+            today={today?.currentDateWithDayOfWeek}
+          />
         </FramePanel>
       ) : (
         <FramePanel>

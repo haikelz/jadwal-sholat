@@ -35,7 +35,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { env } from "@/lib/utils/public-env";
-import { useFetch, useGeolocation } from "@/hooks";
+import { useFetch, useGeolocation, useNow } from "@/hooks";
 import { JadwalSholatProps } from "@/interfaces";
 import {
   formatCountdown,
@@ -43,11 +43,10 @@ import {
   getNextPrayer,
 } from "@/lib/helpers";
 import { cn } from "@/lib/utils/cn";
-import { bulan, currentDate, matchDate, tahun } from "@/lib/utils/constants";
+import { getDateParts } from "@/lib/utils/date-parts";
 import useGlobalStore from "@/store";
 import { CalendarX2, CircleAlert, MapPin, RefreshCw } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
@@ -117,16 +116,6 @@ function ScheduleSkeleton() {
   );
 }
 
-function useNow(intervalMs = 30_000) {
-  const [now, setNow] = useState<Date | null>(null);
-  useEffect(() => {
-    setNow(new Date());
-    const id = setInterval(() => setNow(new Date()), intervalMs);
-    return () => clearInterval(id);
-  }, [intervalMs]);
-  return now;
-}
-
 export function Homepage() {
   const { position, isOpenMap, setIsOpenMap } = useGlobalStore((state) => ({
     position: state.position,
@@ -136,16 +125,20 @@ export function Homepage() {
 
   useGeolocation();
   const now = useNow();
+  const today = now ? getDateParts(now) : null;
 
   const { data, isPending, isError, isRefetching, refetch } = useFetch<{
     data: JadwalSholatProps[];
   }>(
-    `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${tahun}/${bulan}?latitude=${position.lat}&longitude=${position.lng}&method=20`,
+    // Wait for the clock so a prerendered page never fetches the build month.
+    today
+      ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${today.tahun}/${today.bulan}?latitude=${position.lat}&longitude=${position.lng}&method=20`
+      : "",
   );
 
   const waktu = data?.data ?? [];
   const todayIndex = waktu.findIndex(
-    (item) => item.date.gregorian.date === matchDate,
+    (item) => item.date.gregorian.date === today?.matchDate,
   );
   const jadwalHariIni = waktu[todayIndex];
   const nextPrayer =
@@ -301,7 +294,7 @@ export function Homepage() {
             <FrameDescription>Hari ini ditandai.</FrameDescription>
           </FrameHeader>
           <FramePanel className="p-0" aria-busy={isRefetching}>
-            <Jadwal waktu={waktu} />
+            <Jadwal waktu={waktu} today={today?.matchDate} />
           </FramePanel>
         </Frame>
       </div>
@@ -311,7 +304,10 @@ export function Homepage() {
   return (
     <>
       {waktu.length > 0 ? <Adzan waktu={waktu} /> : null}
-      <PageHeader title="Jadwal Sholat" description={currentDate} />
+      <PageHeader
+        title="Jadwal Sholat"
+        description={today?.currentDate ?? "\u00a0"}
+      />
       <section aria-label="Jadwal sholat" className="flex min-w-0 flex-col">
         {renderSchedule()}
       </section>

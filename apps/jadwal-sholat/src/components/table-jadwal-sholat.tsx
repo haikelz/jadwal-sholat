@@ -11,7 +11,6 @@ import { DataGridScrollArea } from "@/components/reui/data-grid/data-grid-scroll
 import { DataGridTable } from "@/components/reui/data-grid/data-grid-table";
 import { JadwalSholatProps } from "@/interfaces";
 import { formatSholatTime } from "@/lib/helpers";
-import { matchDate } from "@/lib/utils/constants";
 import { ColumnDef, useTable } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
@@ -36,12 +35,19 @@ type JadwalRow = {
   date: string;
 } & Record<PrayerKey, string>;
 
-export function Jadwal({ waktu }: { waktu: JadwalSholatProps[] }) {
+export function Jadwal({
+  waktu,
+  today,
+}: {
+  waktu: JadwalSholatProps[];
+  /** Today as `dd-MM-yyyy`, from the caller's live clock. */
+  today?: string;
+}) {
   const rows = useMemo<JadwalRow[]>(
     () =>
       waktu.map((time) => ({
         key: time.date.gregorian.date,
-        isToday: time.date.gregorian.date === matchDate,
+        isToday: time.date.gregorian.date === today,
         date: format(time.date.readable, "EEEE, d LLLL yyyy", { locale: id }),
         ...(Object.fromEntries(
           prayerColumns.map((prayer) => [
@@ -50,7 +56,7 @@ export function Jadwal({ waktu }: { waktu: JadwalSholatProps[] }) {
           ]),
         ) as Record<PrayerKey, string>),
       })),
-    [waktu],
+    [waktu, today],
   );
 
   const columns = useMemo<ColumnDef<DataGridFeatures, JadwalRow>[]>(

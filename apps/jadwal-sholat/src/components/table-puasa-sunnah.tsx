@@ -11,14 +11,16 @@ import { DataGridScrollArea } from "@/components/reui/data-grid/data-grid-scroll
 import { DataGridTable } from "@/components/reui/data-grid/data-grid-table";
 import { PuasaSunnahScheduleDate } from "@/interfaces";
 import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
-import { currentDateWithDayOfWeek } from "@/lib/utils/constants";
 import { ColumnDef, useTable } from "@tanstack/react-table";
 import { useMemo } from "react";
 
 export function TablePuasaSunnah({
   puasaList,
+  today,
 }: {
   puasaList: PuasaSunnahScheduleDate[];
+  /** Today as "EEEE, d MMMM yyyy" (Indonesian), from the caller's live clock. */
+  today?: string;
 }) {
   const columns = useMemo<
     ColumnDef<DataGridFeatures, PuasaSunnahScheduleDate>[]
@@ -33,7 +35,7 @@ export function TablePuasaSunnah({
           return (
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-medium">{date}</span>
-              {date === currentDateWithDayOfWeek ? (
+              {date === today ? (
                 <Badge variant="primary-light">Hari ini</Badge>
               ) : null}
             </div>
@@ -56,7 +58,7 @@ export function TablePuasaSunnah({
         size: 420,
       },
     ],
-    [],
+    [today],
   );
 
   const table = useTable({

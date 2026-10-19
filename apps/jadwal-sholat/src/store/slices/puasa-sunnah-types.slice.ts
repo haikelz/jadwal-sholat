@@ -1,5 +1,4 @@
 import { PuasaSunnahTypesSliceProps } from "@/interfaces/puasa-sunnah.interface";
-import { bulan } from "@/lib/utils/constants";
 import { StateCreator } from "zustand";
 
 const puasaSunnahTypesSlice: StateCreator<
@@ -8,7 +7,8 @@ const puasaSunnahTypesSlice: StateCreator<
   [],
   PuasaSunnahTypesSliceProps
 > = (set) => ({
-  selectedMonth: bulan,
+  // null until the reader picks one; the page falls back to the current month.
+  selectedMonth: null,
   setSelectedMonth: ({ selectedMonth }: { selectedMonth: string }) =>
     set({ selectedMonth }),
   selectedType: "all",

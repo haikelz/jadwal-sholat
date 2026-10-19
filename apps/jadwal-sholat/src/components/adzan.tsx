@@ -1,7 +1,6 @@
 "use client";
 
 import { JadwalSholatProps } from "@/interfaces";
-import { matchDate } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
 import { add, format, parse } from "date-fns";
 import { id } from "date-fns/locale";
@@ -22,19 +21,6 @@ import {
 } from "@/components/ui/dialog";
 
 export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
-  const filteredWaktu = waktu
-    .filter((item) => item.date.gregorian.date === matchDate)
-    .map((item) => ({
-      ...item,
-      timings: {
-        Asr: formatSholatTime(item.timings.Asr),
-        Dhuhr: formatSholatTime(item.timings.Dhuhr),
-        Fajr: formatSholatTime(item.timings.Fajr),
-        Maghrib: formatSholatTime(item.timings.Maghrib),
-        Isha: formatSholatTime(item.timings.Isha),
-      },
-    }))[0];
-
   const {
     date,
     setDate,
@@ -51,6 +37,20 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     isPlayingAudioAdzan: state.isPlayingAudioAdzan,
     setIsPlayingAudioAdzan: state.setIsPlayingAudioAdzan,
   }));
+
+  // Match against the live clock so the row follows midnight.
+  const filteredWaktu = waktu
+    .filter((item) => item.date.gregorian.date === format(date, "dd-MM-yyyy"))
+    .map((item) => ({
+      ...item,
+      timings: {
+        Asr: formatSholatTime(item.timings.Asr),
+        Dhuhr: formatSholatTime(item.timings.Dhuhr),
+        Fajr: formatSholatTime(item.timings.Fajr),
+        Maghrib: formatSholatTime(item.timings.Maghrib),
+        Isha: formatSholatTime(item.timings.Isha),
+      },
+    }))[0];
 
   const { load, play, stop } = useAudioPlayer();
 
@@ -74,6 +74,8 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   }, [setDate]);
 
   useDeepCompareEffect(() => {
+    // The month's data has no row for today right after the month rolls over.
+    if (!filteredWaktu) return;
     if (
       formattedTime >= filteredWaktu.timings.Fajr &&
       formattedTime <= getAddTimeResult(filteredWaktu.timings.Fajr, 10) &&
@@ -118,8 +120,9 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     filteredWaktu,
   ]);
 
-  const prayerName =
-    formattedTime >= filteredWaktu.timings.Fajr &&
+  const prayerName = !filteredWaktu
+    ? ""
+    : formattedTime >= filteredWaktu.timings.Fajr &&
     formattedTime <= getAddTimeResult(filteredWaktu.timings.Fajr, 10)
       ? "Subuh"
       : formattedTime >= filteredWaktu.timings.Dhuhr &&

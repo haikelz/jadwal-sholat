@@ -1,5 +1,5 @@
 export interface PuasaSunnahTypesSliceProps {
-  selectedMonth: string;
+  selectedMonth: string | null;
   setSelectedMonth: ({ selectedMonth }: { selectedMonth: string }) => void;
   selectedType: PuasaSunnahTypeKey | "all";
   setSelectedType: ({
