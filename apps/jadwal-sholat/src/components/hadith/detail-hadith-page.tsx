@@ -8,7 +8,6 @@ import {
   AlertTitle,
 } from "@/components/reui/alert";
 import { Button } from "@/components/ui/button";
-import { Frame, FramePanel } from "@/components/reui/frame";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { env } from "@/lib/utils/public-env";
@@ -34,16 +33,20 @@ function DetailHadithSkeleton() {
         <Skeleton className="h-7 w-48" />
         <Skeleton className="h-4 w-32" />
       </div>
-      <Frame spacing="default">
-        <FramePanel className="flex flex-col gap-4">
-          <Skeleton className="ms-auto h-8 w-4/5" />
-          <Skeleton className="ms-auto h-8 w-3/5" />
-          <Separator />
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col items-end gap-3">
+          <Skeleton className="h-8 w-full" />
+          <Skeleton className="h-8 w-4/5" />
+          <Skeleton className="h-8 w-3/5" />
+        </div>
+        <Separator />
+        <div className="flex flex-col gap-2">
+          <Skeleton className="h-3 w-20" />
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-11/12" />
           <Skeleton className="h-4 w-2/3" />
-        </FramePanel>
-      </Frame>
+        </div>
+      </div>
     </div>
   );
 }
@@ -114,33 +117,32 @@ export function DetailHadithPage({
           </>
         }
       />
-      <Frame spacing="default">
-        <FramePanel className="flex flex-col gap-4">
-          {contents.arab ? (
-            <section className="flex flex-col gap-2">
-              <h2 className="sr-only">Teks Arab</h2>
-              <p
-                lang="ar"
-                dir="rtl"
-                className="arabic-font min-w-0 max-w-full text-right text-2xl wrap-anywhere sm:text-3xl"
-              >
-                {contents.arab}
-              </p>
-            </section>
-          ) : null}
-          {contents.arab && contents.id ? <Separator /> : null}
-          {contents.id ? (
-            <section className="flex flex-col gap-2">
-              <h2 className="text-xs font-medium text-muted-foreground">
-                Terjemahan
-              </h2>
-              <p className="max-w-3xl text-sm wrap-anywhere">
-                {contents.id.slice(0, 1).toUpperCase() + contents.id.slice(1)}
-              </p>
-            </section>
-          ) : null}
-        </FramePanel>
-      </Frame>
+      {/* A reading surface: text in the centered column, no panel chrome. */}
+      <div className="flex flex-col gap-6">
+        {contents.arab ? (
+          <section className="flex flex-col gap-2">
+            <h2 className="sr-only">Teks Arab</h2>
+            <p
+              lang="ar"
+              dir="rtl"
+              className="arabic-font min-w-0 text-right text-2xl wrap-anywhere sm:text-3xl"
+            >
+              {contents.arab}
+            </p>
+          </section>
+        ) : null}
+        {contents.arab && contents.id ? <Separator /> : null}
+        {contents.id ? (
+          <section className="flex flex-col gap-2">
+            <h2 className="text-xs font-medium text-muted-foreground">
+              Terjemahan
+            </h2>
+            <p className="text-sm wrap-anywhere">
+              {contents.id.slice(0, 1).toUpperCase() + contents.id.slice(1)}
+            </p>
+          </section>
+        ) : null}
+      </div>
     </article>
   );
 }

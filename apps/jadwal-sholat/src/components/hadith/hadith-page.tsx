@@ -9,12 +9,6 @@ import {
 } from "@/components/reui/alert";
 import { Button } from "@/components/ui/button";
 import {
-  Frame,
-  FrameDescription,
-  FramePanel,
-  FrameTitle,
-} from "@/components/reui/frame";
-import {
   Empty,
   EmptyContent,
   EmptyDescription,
@@ -63,15 +57,13 @@ function buildBooksUrl(): string {
   return `${NEXT_PUBLIC_HADITH_API}/books`;
 }
 
-function HadithCardSkeleton() {
+function HadithRowSkeleton() {
   return (
-    <Frame variant="ghost">
-      <FramePanel className="flex flex-col gap-2">
-        <Skeleton className="h-5 w-2/5" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-4/5" />
-      </FramePanel>
-    </Frame>
+    <li className="flex flex-col gap-2 px-2 py-3">
+      <Skeleton className="h-4 w-2/5" />
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-4/5" />
+    </li>
   );
 }
 
@@ -215,15 +207,15 @@ export function HadithPage() {
         </Select>
       </div>
       {isLoadingList || (shouldFetchSingle && isFetchingSingle) ? (
-        <div
+        <ul
           role="status"
           aria-label="Memuat hadith"
-          className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"
+          className="flex w-full flex-col divide-y border-y"
         >
           {Array.from({ length: isLoadingList ? 6 : 1 }, (_, index) => (
-            <HadithCardSkeleton key={index} />
+            <HadithRowSkeleton key={index} />
           ))}
-        </div>
+        </ul>
       ) : isError && !isSearchByNumber ? (
         <Alert variant="destructive">
           <CircleAlert aria-hidden="true" />
@@ -239,30 +231,24 @@ export function HadithPage() {
         </Alert>
       ) : displayHadiths.length ? (
         <>
-          <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {/* A reading list: plain rows instead of a grid of panels. */}
+          <ul className="flex w-full flex-col divide-y border-y">
             {displayHadiths.map((h) => (
-              <Frame
-                key={`${book}-${h.number}`}
-                variant="ghost"
-                data-cy="card"
-                className="group relative has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
-              >
-                <FramePanel className="flex flex-col gap-1 transition-colors group-hover:bg-muted/50">
-                  <FrameTitle className="wrap-break-word">
-                    <Link
-                      href={`/hadith/${book}/${h.number}`}
-                      className="outline-none after:absolute after:inset-0"
-                    >
-                      {bookName} no. {h.number}
-                    </Link>
-                  </FrameTitle>
-                  <FrameDescription className="line-clamp-2">
+              <li key={`${book}-${h.number}`} data-cy="card">
+                <Link
+                  href={`/hadith/${book}/${h.number}`}
+                  className="flex flex-col gap-1 px-2 py-3 transition-colors outline-none hover:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+                >
+                  <span className="text-sm font-medium wrap-break-word">
+                    {bookName} no. {h.number}
+                  </span>
+                  <span className="line-clamp-2 text-sm text-muted-foreground">
                     {h.id}
-                  </FrameDescription>
-                </FramePanel>
-              </Frame>
+                  </span>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
           {showSentinel && (
             <div
               ref={sentinelRef}

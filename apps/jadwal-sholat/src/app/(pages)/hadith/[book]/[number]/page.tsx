@@ -51,7 +51,7 @@ export default async function HadithDetail(props: {
   const hadith = await getHadith(book, number).catch(() => undefined);
 
   return (
-    <PageShell>
+    <PageShell width="reading">
       <DetailHadithPage
         book={book}
         hadithNumber={number}
