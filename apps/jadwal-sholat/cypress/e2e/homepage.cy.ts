@@ -1,14 +1,12 @@
 describe("homepage", () => {
-  it("should display homepage and test it", () => {
-    cy.visit("http://localhost:3000/");
+  it("shows today's schedule and the month grid", () => {
+    cy.visit("/");
 
-    // test the description
-    cy.get("p").contains("Maka nikmat Tuhanmu yang manakah yang kamu dustakan");
-
-    // test the image
-    cy.get("img").should("be.visible");
-
-    // test if there is navbar
+    cy.get("h1").contains("Jadwal Sholat");
     cy.get("nav").should("be.visible");
+
+    // Both sections render once the location settles and the month loads.
+    cy.contains("h2", "Hari ini", { timeout: 15000 }).should("be.visible");
+    cy.contains("h2", "Bulan ini").should("be.visible");
   });
 });
