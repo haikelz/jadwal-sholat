@@ -5,12 +5,6 @@ import { SortByOrder } from "@/components/common/sort-by-order";
 import { Badge } from "@/components/reui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Frame,
-  FrameDescription,
-  FramePanel,
-  FrameTitle,
-} from "@/components/reui/frame";
-import {
   Empty,
   EmptyContent,
   EmptyDescription,
@@ -18,18 +12,28 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
+import { Toggle } from "@/components/ui/toggle";
 import { useAscending } from "@/hooks";
 import { ListSuratProps } from "@/interfaces";
 import { removeSelectedSurat } from "@/lib/helpers";
 import useGlobalStore from "@/store";
-import { BookMarked, SearchX } from "lucide-react";
+import { BookMarked, BookOpenText, SearchX } from "lucide-react";
 import Link from "next/link";
 import { useQueryState } from "nuqs";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import reactStringReplace from "react-string-replace";
+
+const typeOptions = [
+  { value: "all", label: "Semua" },
+  { value: "Makkiyyah", label: "Makkiyyah" },
+  { value: "Madaniyyah", label: "Madaniyyah" },
+] as const;
+
+type TypeFilter = (typeof typeOptions)[number]["value"];
 
 export function QuranPage({ surat }: { surat: ListSuratProps }) {
   const [search, setSearch] = useQueryState("search");
+  const [type, setType] = useState<TypeFilter>("all");
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
     search as string,
@@ -43,21 +47,20 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
   const filteredSurat = useMemo(
     () =>
       surat.data
-        .filter((item) => {
-          if (deferredSearch === "" || deferredSearch === null) return item;
-          else if (
+        .filter((item) => type === "all" || item.type.id === type)
+        .filter(
+          (item) =>
+            !deferredSearch ||
             item.asma.id.short
               .toLowerCase()
-              .includes(deferredSearch.toLowerCase())
-          )
-            return item;
-        })
-        .sort((a, b) => {
-          if (isAscending) return Number(a.number) - Number(b.number);
-          if (!isAscending) return Number(b.number) - Number(a.number);
-          return 0;
-        }),
-    [surat, deferredSearch, isAscending],
+              .includes(deferredSearch.toLowerCase()),
+        )
+        .sort((a, b) =>
+          isAscending
+            ? Number(a.number) - Number(b.number)
+            : Number(b.number) - Number(a.number),
+        ),
+    [surat, deferredSearch, isAscending, type],
   );
 
   useEffect(() => {
@@ -66,30 +69,44 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
     }
   }, [setLastRead]);
 
+  const hasLastRead = lastRead.number !== null && lastRead.ayat !== null;
+
   return (
     <div className="flex w-full flex-col gap-6">
-      <div className="flex w-full flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+      {hasLastRead ? (
+        <Button asChild className="max-w-full self-start">
+          <Link
+            href={`/quran/${lastRead.number}`}
+            onClick={() =>
+              localStorage.setItem("selected-surat", String(lastRead.number))
+            }
+          >
+            <BookOpenText aria-hidden="true" data-icon="inline-start" />
+            <span className="truncate">
+              Lanjutkan membaca: {lastRead.name} ayat {lastRead.ayat}
+            </span>
+          </Link>
+        </Button>
+      ) : null}
+      <div className="flex w-full flex-col gap-3">
         <SearchBar value={search} setSearch={setSearch} name="search" />
-        <div className="flex min-w-0 items-center justify-between gap-3 lg:justify-end">
-          <p className="flex min-w-0 items-center gap-1 text-sm text-muted-foreground">
-            <span className="shrink-0">Terakhir dibaca:</span>
-            {lastRead.ayat || lastRead.number !== null ? (
-              <Link
-                href={`/quran/${lastRead.number}`}
-                onClick={() =>
-                  localStorage.setItem(
-                    "selected-surat",
-                    lastRead.number!.toString() as string,
-                  )
-                }
-                className="min-w-0 truncate font-medium text-foreground underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div
+            role="group"
+            aria-label="Jenis surat"
+            className="flex flex-wrap items-center gap-1"
+          >
+            {typeOptions.map((option) => (
+              <Toggle
+                key={option.value}
+                variant="outline"
+                pressed={type === option.value}
+                onPressedChange={() => setType(option.value)}
               >
-                Surat {lastRead.name} ayat {lastRead.ayat}
-              </Link>
-            ) : (
-              <span className="font-medium text-foreground">belum ada</span>
-            )}
-          </p>
+                {option.label}
+              </Toggle>
+            ))}
+          </div>
           <SortByOrder
             isAscending={isAscending}
             setIsAscending={setIsAscending}
@@ -112,55 +129,54 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
           </EmptyContent>
         </Empty>
       ) : filteredSurat.length ? (
-        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="flex w-full flex-col divide-y border-y">
           {filteredSurat.map((surat) => (
-            <Frame
-              key={surat.number}
-              variant="ghost"
-              data-cy="card"
-              className="group relative has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
-            >
-              <FramePanel className="flex flex-col gap-1 transition-colors group-hover:bg-muted/50">
-                <div className="flex items-start justify-between gap-2">
-                  <FrameTitle>
-                    <Link
-                      href={`/quran/${surat.number}`}
-                      onClick={removeSelectedSurat}
-                      className="outline-none after:absolute after:inset-0"
-                    >
-                      <span className="tabular-nums">{surat.number}.</span>{" "}
-                      {deferredSearch
-                        ? reactStringReplace(
-                            surat.asma.id.short,
-                            deferredSearch,
-                            (match: string, index: number) => (
-                              <mark
-                                key={index + 1}
-                                className="bg-primary/15 text-foreground"
-                              >
-                                {match}
-                              </mark>
-                            ),
-                          )
-                        : surat.asma.id.short}
-                    </Link>
-                  </FrameTitle>
-                  <Badge variant="outline">{surat.type.id}</Badge>
-                </div>
-                <FrameDescription className="flex items-center gap-2">
-                  <span className="truncate">{surat.asma.translation.id}</span>
-                  <span
-                    aria-hidden
-                    className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
-                  />
-                  <span className="shrink-0 tabular-nums">
-                    {surat.ayahCount} ayat
+            <li key={surat.number} data-cy="card">
+              <Link
+                href={`/quran/${surat.number}`}
+                onClick={removeSelectedSurat}
+                className="flex items-center gap-3 px-2 py-3 transition-colors outline-none hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring dark:hover:bg-muted/30"
+              >
+                <span className="w-8 shrink-0 text-sm text-muted-foreground tabular-nums">
+                  {surat.number}
+                </span>
+                <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                  <span className="truncate text-sm font-medium">
+                    {deferredSearch
+                      ? reactStringReplace(
+                          surat.asma.id.short,
+                          deferredSearch,
+                          (match: string, index: number) => (
+                            <mark
+                              key={index + 1}
+                              className="bg-primary/15 text-foreground"
+                            >
+                              {match}
+                            </mark>
+                          ),
+                        )
+                      : surat.asma.id.short}
                   </span>
-                </FrameDescription>
-              </FramePanel>
-            </Frame>
+                  <span className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+                    <span className="truncate">
+                      {surat.asma.translation.id}
+                    </span>
+                    <span
+                      aria-hidden
+                      className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
+                    />
+                    <span className="shrink-0 tabular-nums">
+                      {surat.ayahCount} ayat
+                    </span>
+                  </span>
+                </span>
+                <Badge variant="outline" className="shrink-0">
+                  {surat.type.id}
+                </Badge>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       ) : (
         <Empty data-cy="not-found-text" className="border">
           <EmptyHeader>
@@ -169,12 +185,18 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
             </EmptyMedia>
             <EmptyTitle>Surat tidak ditemukan</EmptyTitle>
             <EmptyDescription>
-              Coba kata kunci lain atau hapus pencarian.
+              Coba kata kunci lain atau tampilkan semua surat.
             </EmptyDescription>
           </EmptyHeader>
           <EmptyContent>
-            <Button variant="outline" onClick={() => setSearch(null)}>
-              Hapus pencarian
+            <Button
+              variant="outline"
+              onClick={() => {
+                setSearch(null);
+                setType("all");
+              }}
+            >
+              Tampilkan semua
             </Button>
           </EmptyContent>
         </Empty>

@@ -1,6 +1,5 @@
 "use client";
 
-import { Frame, FramePanel } from "@/components/reui/frame";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -110,129 +109,133 @@ export function DetailSurat({ data }: SuratProps) {
 
   return (
     <>
-      <Frame stacked spacing="default" className="w-full min-w-0">
+      <div className="flex w-full min-w-0 flex-col divide-y">
         {data.ayahs.map((ayat, index) => {
           const isCurrent =
             isPlaying && audioList[audioIndex] === ayat.audio.url;
 
           return (
-            <FramePanel key={index + 1}>
-              <article className="flex min-w-0 flex-col gap-4">
-                <div className="flex items-center justify-between gap-2">
-                  <span
-                    id={`ayat-${ayat.number.insurah}`}
-                    aria-label={`Ayat ${ayat.number.insurah}`}
-                    className={cn(
-                      "flex size-8 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors",
-                      isCurrent &&
-                        "border-primary bg-primary text-primary-foreground",
-                    )}
-                  >
-                    {ayat.number.insurah}
-                  </span>
-                  <div className="flex items-center gap-1">
-                    {audio ? (
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            aria-label={isCurrent ? "Jeda ayat" : "Putar ayat"}
-                            onClick={() =>
-                              isCurrent
-                                ? handlePauseAudio()
-                                : handlePlayAudio(index, ayat.number.insurah)
-                            }
-                          >
-                            {isCurrent ? (
-                              <Pause aria-hidden="true" />
-                            ) : (
-                              <Play aria-hidden="true" />
-                            )}
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          {isCurrent ? "Jeda" : "Putar"}
-                        </TooltipContent>
-                      </Tooltip>
-                    ) : null}
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          aria-label="Salin ayat"
-                          onClick={() =>
-                            copyToClipboard(
-                              data.asma.id.short,
-                              ayat.number.insurah,
-                              ayat.text.ar,
-                              ayat.translation.id,
-                            )
-                          }
-                        >
-                          {clipboard.copied &&
-                          ayat.number.insurah === ayatClick ? (
-                            <ClipboardCheck aria-hidden="true" />
-                          ) : (
-                            <ClipboardCopy aria-hidden="true" />
-                          )}
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>Salin ayat</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          aria-label="Tandai ayat terakhir dibaca"
-                          aria-pressed={lastRead.ayat === ayat.number.insurah}
-                          onClick={() =>
-                            handleClick(
-                              data.asma.id.short,
-                              ayat.number.insurah,
-                              data.number as number,
-                            )
-                          }
-                        >
-                          {lastRead.ayat === ayat.number.insurah ? (
-                            <BookmarkCheck aria-hidden="true" />
-                          ) : (
-                            <Bookmark aria-hidden="true" />
-                          )}
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>Tandai terakhir dibaca</TooltipContent>
-                    </Tooltip>
-                  </div>
-                </div>
-                <p
-                  lang="ar"
-                  dir="rtl"
+            <article
+              key={index + 1}
+              className="flex min-w-0 flex-col gap-4 py-6 first:pt-0"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span
+                  id={`ayat-${ayat.number.insurah}`}
+                  aria-label={`Ayat ${ayat.number.insurah}`}
+                  // Focus target for "Lompat ke ayat".
+                  tabIndex={-1}
                   className={cn(
-                    "arabic-font min-w-0 text-right text-3xl font-medium wrap-anywhere sm:text-4xl",
-                    isCurrent && "text-muted-foreground",
+                    // Clear the sticky app header and reading toolbar.
+                    "flex size-8 scroll-mt-44 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-32",
+                    isCurrent &&
+                      "border-primary bg-primary text-primary-foreground",
                   )}
                 >
-                  {ayat.text.ar}
-                </p>
-                <div className="flex min-w-0 flex-col gap-1">
-                  {terjemahan ? (
-                    <p className="text-sm italic text-muted-foreground">
-                      {ayat.text.read}
-                    </p>
+                  {ayat.number.insurah}
+                </span>
+                <div className="flex items-center gap-1">
+                  {audio ? (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          aria-label={isCurrent ? "Jeda ayat" : "Putar ayat"}
+                          onClick={() =>
+                            isCurrent
+                              ? handlePauseAudio()
+                              : handlePlayAudio(index, ayat.number.insurah)
+                          }
+                        >
+                          {isCurrent ? (
+                            <Pause aria-hidden="true" />
+                          ) : (
+                            <Play aria-hidden="true" />
+                          )}
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        {isCurrent ? "Jeda" : "Putar"}
+                      </TooltipContent>
+                    </Tooltip>
                   ) : null}
-                  <p className="text-sm">{ayat.translation.id}</p>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        aria-label="Salin ayat"
+                        onClick={() =>
+                          copyToClipboard(
+                            data.asma.id.short,
+                            ayat.number.insurah,
+                            ayat.text.ar,
+                            ayat.translation.id,
+                          )
+                        }
+                      >
+                        {clipboard.copied &&
+                        ayat.number.insurah === ayatClick ? (
+                          <ClipboardCheck aria-hidden="true" />
+                        ) : (
+                          <ClipboardCopy aria-hidden="true" />
+                        )}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Salin ayat</TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        aria-label="Tandai ayat terakhir dibaca"
+                        aria-pressed={lastRead.ayat === ayat.number.insurah}
+                        onClick={() =>
+                          handleClick(
+                            data.asma.id.short,
+                            ayat.number.insurah,
+                            data.number as number,
+                          )
+                        }
+                      >
+                        {lastRead.ayat === ayat.number.insurah ? (
+                          <BookmarkCheck aria-hidden="true" />
+                        ) : (
+                          <Bookmark aria-hidden="true" />
+                        )}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Tandai terakhir dibaca</TooltipContent>
+                  </Tooltip>
                 </div>
-              </article>
-            </FramePanel>
+              </div>
+              <p
+                lang="ar"
+                dir="rtl"
+                className={cn(
+                  "arabic-font min-w-0 text-right text-3xl font-medium wrap-anywhere sm:text-4xl",
+                  isCurrent && "text-muted-foreground",
+                )}
+              >
+                {ayat.text.ar}
+              </p>
+              <div className="flex min-w-0 flex-col gap-1">
+                {terjemahan ? (
+                  <p className="text-sm italic text-muted-foreground">
+                    {ayat.text.read}
+                  </p>
+                ) : null}
+                <p className="text-sm">{ayat.translation.id}</p>
+              </div>
+            </article>
           );
         })}
-      </Frame>
+      </div>
       <DialogNotification description="Ayat ditandai sebagai bacaan terakhir." />
     </>
   );

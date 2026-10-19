@@ -4,14 +4,22 @@ import { ReactNode } from "react";
 export function PageShell({
   children,
   className,
+  width = "wide",
 }: {
   children: ReactNode;
   className?: string;
+  /**
+   * "wide" for glance pages (schedules, tables); "reading" for a centered
+   * column of comfortable line length (Qur'an, hadith, Asma'ul Husna).
+   */
+  width?: "wide" | "reading";
 }) {
   return (
     <div
       className={cn(
-        "mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-6 pt-6 pb-24 md:pb-12 lg:pt-8",
+        // pb-24 below md leaves room for the fixed bottom navigation.
+        "mx-auto flex w-full min-w-0 flex-col gap-6 pt-6 pb-24 md:pb-12 lg:pt-8",
+        width === "reading" ? "max-w-3xl" : "max-w-7xl",
         // CSS entrance instead of a motion library; globals.css shortens it
         // for prefers-reduced-motion.
         "animate-in fade-in slide-in-from-bottom-1.5 duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",

@@ -42,7 +42,7 @@ export default async function Quran() {
   const surat = await getSurat();
 
   return (
-    <PageShell>
+    <PageShell width="reading">
       <PageHeader
         title="Baca Al-Qur'an"
         description="Berlomba-lombalah dalam berbuat kebaikan."

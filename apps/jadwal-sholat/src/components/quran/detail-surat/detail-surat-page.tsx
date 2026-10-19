@@ -13,6 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Toggle } from "@/components/ui/toggle";
 import { env } from "@/lib/utils/public-env";
 import { useFetch } from "@/hooks";
@@ -21,6 +23,7 @@ import { SuratProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { Languages, Volume2 } from "lucide-react";
 import dynamic from "next/dynamic";
+import { FormEvent, useId, useState } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
@@ -47,6 +50,8 @@ export function DetailSuratPage({
     }));
 
   const { stop } = useAudioPlayer();
+  const jumpId = useId();
+  const [jumpTo, setJumpTo] = useState("");
 
   function handleShowAudio() {
     setAudio(!audio);
@@ -65,6 +70,16 @@ export function DetailSuratPage({
   if (isRefetching) return <IsRefetching />;
 
   const surat = data.data;
+
+  function handleJump(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const ayat = Number(jumpTo);
+    if (!Number.isInteger(ayat) || ayat < 1 || ayat > surat.ayahCount) return;
+    const target = document.getElementById(`ayat-${ayat}`);
+    // Default (instant) scrolling: AGENTS.md rules out smooth scrolling.
+    target?.scrollIntoView({ block: "start" });
+    target?.focus({ preventScroll: true });
+  }
 
   return (
     <div className="flex w-full min-w-0 flex-col gap-6">
@@ -86,10 +101,11 @@ export function DetailSuratPage({
           </span>
         }
       />
-      <div
-        role="toolbar"
+      {/* Sticky under the h-14 app header so the controls stay reachable in
+          long surahs. */}
+      <section
         aria-label="Pengaturan bacaan"
-        className="flex flex-wrap items-center gap-2"
+        className="sticky top-14 z-10 flex flex-wrap items-center gap-2 border-b bg-background/95 py-3 backdrop-blur"
       >
         <Toggle
           variant="outline"
@@ -108,25 +124,49 @@ export function DetailSuratPage({
           Latin
         </Toggle>
         <DialogTafsir data={surat} />
-        <Select
-          value={qori.toString()}
-          onValueChange={(value) => setQori(Number(value))}
-        >
-          <SelectTrigger
-            aria-label="Pilih qori"
-            className="w-full sm:ml-auto sm:w-56"
+        <div className="flex w-full min-w-0 items-center gap-2 sm:ml-auto sm:w-auto">
+          <Select
+            value={qori.toString()}
+            onValueChange={(value) => setQori(Number(value))}
           >
-            <SelectValue placeholder="Pilih qori" />
-          </SelectTrigger>
-          <SelectContent>
-            {qoriOptions.map((item) => (
-              <SelectItem key={item.id} value={item.id.toString()}>
-                {item.id}. {item.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+            <SelectTrigger
+              aria-label="Pilih qori"
+              className="min-w-0 flex-1 sm:w-48 sm:flex-none"
+            >
+              <SelectValue placeholder="Pilih qori" />
+            </SelectTrigger>
+            <SelectContent>
+              {qoriOptions.map((item) => (
+                <SelectItem key={item.id} value={item.id.toString()}>
+                  {item.id}. {item.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <form
+            onSubmit={handleJump}
+            className="flex shrink-0 items-center gap-1"
+          >
+            <label htmlFor={jumpId} className="sr-only">
+              Lompat ke ayat
+            </label>
+            <Input
+              id={jumpId}
+              type="number"
+              inputMode="numeric"
+              min={1}
+              max={surat.ayahCount}
+              placeholder="Ayat"
+              value={jumpTo}
+              onChange={(event) => setJumpTo(event.target.value)}
+              className="w-20"
+            />
+            <Button type="submit" variant="outline">
+              Buka
+            </Button>
+          </form>
+        </div>
+      </section>
       <div className="flex w-full min-w-0 flex-col gap-4">
         <DetailSurat data={surat} />
         <PreviousOrNext num={Number(number)} />

@@ -47,7 +47,7 @@ export default async function Surat(props: {
   const surat = await getSurat(number);
 
   return (
-    <PageShell>
+    <PageShell width="reading">
       <DetailSuratPage number={number} initialData={surat} />
     </PageShell>
   );
