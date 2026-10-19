@@ -12,15 +12,12 @@ import {
 import { useAscending } from "@/hooks";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { SearchX } from "lucide-react";
-import dynamic from "next/dynamic";
+import { DialogAsmaulHusna } from "./dialog-asmaul-husna";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 import { SearchBar } from "../common/search-bar";
 import { SortByOrder } from "../common/sort-by-order";
 
-const DialogAsmaulHusna = dynamic(() =>
-  import("./dialog-asmaul-husna").then((mod) => mod.DialogAsmaulHusna),
-);
 
 export function AsmaulHusnaPage({
   asmaulHusna,
