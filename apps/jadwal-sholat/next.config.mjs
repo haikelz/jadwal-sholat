@@ -35,7 +35,7 @@ const config = withSentryConfig(
     experimental: {
       webpackBuildWorker: true,
       webpackMemoryOptimizations: true,
-      preloadEntriesOnStart: true,
+      preloadEntriesOnStart: false,
       turbopackFileSystemCacheForBuild: true,
       turbopackFileSystemCacheForDev: true,
     },
