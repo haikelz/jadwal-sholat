@@ -12,9 +12,9 @@ import {
 import { useAscending } from "@/hooks";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { SearchX } from "lucide-react";
-import { AsmaulHusnaDialog, AsmaulHusnaItem } from "./dialog-asmaul-husna";
+import { AsmaulHusnaRow } from "./asmaul-husna-row";
 import { useQueryState } from "nuqs";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { SearchBar } from "../common/search-bar";
 import { SortByOrder } from "../common/sort-by-order";
 
@@ -24,7 +24,6 @@ export function AsmaulHusnaPage({
   asmaulHusna: AsmaulHusnaProps[];
 }) {
   const [search, setSearch] = useQueryState("search");
-  const [selected, setSelected] = useState<AsmaulHusnaProps | null>(null);
 
   const { isAscending, setIsAscending, deferredSearch } = useAscending(
     search as string,
@@ -58,16 +57,15 @@ export function AsmaulHusnaPage({
         />
       </div>
       {filteredAsmaulHusna.length ? (
-        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="flex w-full flex-col divide-y border-y">
           {filteredAsmaulHusna.map((item) => (
-            <AsmaulHusnaItem
+            <AsmaulHusnaRow
               dataAsmaulHusna={item}
               deferredSearch={deferredSearch}
-              onSelect={setSelected}
               key={item.urutan}
             />
           ))}
-        </div>
+        </ul>
       ) : (
         <Empty className="border">
           <EmptyHeader>
@@ -90,12 +88,6 @@ export function AsmaulHusnaPage({
           </EmptyContent>
         </Empty>
       )}
-      <AsmaulHusnaDialog
-        selected={selected}
-        onOpenChange={(open) => {
-          if (!open) setSelected(null);
-        }}
-      />
     </div>
   );
 }
