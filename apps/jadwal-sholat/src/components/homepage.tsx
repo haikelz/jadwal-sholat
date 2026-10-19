@@ -123,15 +123,15 @@ export function Homepage() {
     setIsOpenMap: state.setIsOpenMap,
   }));
 
-  useGeolocation();
+  const isLocationReady = useGeolocation();
   const now = useNow();
   const today = now ? getDateParts(now) : null;
 
   const { data, isPending, isError, isRefetching, refetch } = useFetch<{
     data: JadwalSholatProps[];
   }>(
-    // Wait for the clock so a prerendered page never fetches the build month.
-    today
+    // Wait for the clock and the location so the month is fetched once.
+    today && isLocationReady
       ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${today.tahun}/${today.bulan}?latitude=${position.lat}&longitude=${position.lng}&method=20`
       : "",
   );
