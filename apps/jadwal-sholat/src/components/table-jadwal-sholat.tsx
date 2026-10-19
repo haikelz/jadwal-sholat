@@ -184,6 +184,9 @@ export function Jadwal({
           recordCount={rows.length}
           emptyMessage="Jadwal bulan ini belum tersedia."
           tableLayout={{ stripped: true, headerSticky: true }}
+          // The default sticky header uses the page background, which reads
+          // as a dark band inside the card-colored panel. Match the panel.
+          tableClassNames={{ headerSticky: "sticky top-0 z-10 bg-card" }}
         >
           <DataGridContainer>
             <DataGridScrollArea className="h-120">
