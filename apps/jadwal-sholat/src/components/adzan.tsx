@@ -6,7 +6,6 @@ import { add, format, parse } from "date-fns";
 import { id } from "date-fns/locale";
 import { useEffect, useRef } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
-import { useDeepCompareEffect } from "use-deep-compare";
 
 import { formatSholatTime } from "@/lib/helpers";
 import { Button } from "@/components/ui/button";
@@ -73,53 +72,6 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     return () => clearInterval(interval);
   }, [setDate]);
 
-  useDeepCompareEffect(() => {
-    // The month's data has no row for today right after the month rolls over.
-    if (!filteredWaktu) return;
-    if (
-      formattedTime >= filteredWaktu.timings.Fajr &&
-      formattedTime <= getAddTimeResult(filteredWaktu.timings.Fajr, 10) &&
-      !isPlayingAudioAdzan
-    ) {
-      setIsOpenConfirmModal(true);
-
-      load("/audio/adzan-shubuh.mp3", {
-        onend: () => {
-          setIsPlayingAudioAdzan(false);
-          stop();
-        },
-      });
-    } else if (
-      ((formattedTime >= filteredWaktu.timings.Dhuhr &&
-        formattedTime <= getAddTimeResult(filteredWaktu.timings.Dhuhr, 10)) ||
-        (formattedTime >= filteredWaktu.timings.Asr &&
-          formattedTime <= getAddTimeResult(filteredWaktu.timings.Asr, 10)) ||
-        (formattedTime >= filteredWaktu.timings.Maghrib &&
-          formattedTime <=
-            getAddTimeResult(filteredWaktu.timings.Maghrib, 10)) ||
-        (formattedTime >= filteredWaktu.timings.Isha &&
-          formattedTime <= getAddTimeResult(filteredWaktu.timings.Isha, 10))) &&
-      !isPlayingAudioAdzan
-    ) {
-      setIsOpenConfirmModal(true);
-
-      load("/audio/adzan.mp3", {
-        onend: () => {
-          setIsPlayingAudioAdzan(false);
-          stop();
-        },
-      });
-    }
-  }, [
-    formattedTime,
-    setIsOpenConfirmModal,
-    load,
-    stop,
-    isPlayingAudioAdzan,
-    setIsPlayingAudioAdzan,
-    filteredWaktu,
-  ]);
-
   const prayerName = !filteredWaktu
     ? ""
     : formattedTime >= filteredWaktu.timings.Fajr &&
@@ -139,10 +91,42 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
               ? "Isya"
               : "";
 
+  const dayKey = format(date, "yyyy-MM-dd");
+
+  // Open the prompt and load the adzan once per prayer per day. The audio
+  // hook returns a new `stop` on every render, so this effect re-runs often;
+  // the ref makes those runs no-ops. Without it, each run called load(), which
+  // re-rendered and re-ran the effect: an endless update loop (React #185).
+  const promptedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!prayerName || isPlayingAudioAdzan) return;
+    const key = `${dayKey}-${prayerName}`;
+    if (promptedRef.current === key) return;
+    promptedRef.current = key;
+
+    setIsOpenConfirmModal(true);
+    load(
+      prayerName === "Subuh" ? "/audio/adzan-shubuh.mp3" : "/audio/adzan.mp3",
+      {
+        onend: () => {
+          setIsPlayingAudioAdzan(false);
+          stop();
+        },
+      },
+    );
+  }, [
+    prayerName,
+    dayKey,
+    isPlayingAudioAdzan,
+    setIsOpenConfirmModal,
+    setIsPlayingAudioAdzan,
+    load,
+    stop,
+  ]);
+
   // Opt-in reminder for a hidden tab: once per prayer time, only after the
   // reader granted permission from the homepage.
   const notifiedRef = useRef<string | null>(null);
-  const dayKey = format(date, "yyyy-MM-dd");
   useEffect(() => {
     if (!prayerName || !("Notification" in window)) return;
     if (Notification.permission !== "granted") return;
