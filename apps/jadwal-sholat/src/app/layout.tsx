@@ -106,7 +106,12 @@ export default function Layout({ children }: ChildrenProps) {
             <TooltipProvider>
               <CustomSidebar>{children}</CustomSidebar>
             </TooltipProvider>
-            <Toaster />
+            {/* Keep toasts above the mobile bottom navigation. */}
+            <Toaster
+              mobileOffset={{
+                bottom: "calc(4.5rem + env(safe-area-inset-bottom))",
+              }}
+            />
           </Wrapper>
         </NuqsAdapter>
         <Analytics />
