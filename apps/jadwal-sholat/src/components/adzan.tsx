@@ -4,7 +4,7 @@ import { JadwalSholatProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { add, format, parse } from "date-fns";
 import { id } from "date-fns/locale";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
 import { useDeepCompareEffect } from "use-deep-compare";
 
@@ -138,6 +138,33 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
                 formattedTime <= getAddTimeResult(filteredWaktu.timings.Isha, 10)
               ? "Isya"
               : "";
+
+  // Opt-in reminder for a hidden tab: once per prayer time, only after the
+  // reader granted permission from the homepage.
+  const notifiedRef = useRef<string | null>(null);
+  const dayKey = format(date, "yyyy-MM-dd");
+  useEffect(() => {
+    if (!prayerName || !("Notification" in window)) return;
+    if (Notification.permission !== "granted") return;
+    if (document.visibilityState !== "hidden") return;
+    const key = `${dayKey}-${prayerName}`;
+    if (notifiedRef.current === key) return;
+    notifiedRef.current = key;
+
+    const title = `Sudah masuk waktu ${prayerName}`;
+    const options = {
+      body: "Buka Jadwal Sholat untuk memutar adzan.",
+      tag: key,
+    };
+    try {
+      new Notification(title, options);
+    } catch {
+      // Android Chrome only allows notifications through the service worker.
+      navigator.serviceWorker?.ready
+        .then((registration) => registration.showNotification(title, options))
+        .catch(() => undefined);
+    }
+  }, [prayerName, dayKey]);
 
   return (
     <Dialog open={isOpenConfirmModal} onOpenChange={setIsOpenConfirmModal}>
