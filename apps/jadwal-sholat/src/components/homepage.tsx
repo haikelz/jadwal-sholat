@@ -14,7 +14,6 @@ import {
   FramePanel,
   FrameTitle,
 } from "@/components/reui/frame";
-import { Jadwal } from "@/components/table-jadwal-sholat";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -56,6 +55,21 @@ const Map = dynamic(() => import("@/components/map").then((mod) => mod.Map), {
   loading: () => <Skeleton className="h-75 w-full md:h-155" />,
   ssr: false,
 });
+// The month grid sits below the fold and pulls in TanStack Table (~46KB gzip),
+// so it loads after the today panel.
+const Jadwal = dynamic(
+  () => import("@/components/table-jadwal-sholat").then((mod) => mod.Jadwal),
+  {
+    loading: () => (
+      <div className="flex flex-col gap-2 p-4" role="status">
+        <span className="sr-only">Memuat jadwal bulan ini…</span>
+        {Array.from({ length: 6 }, (_, index) => (
+          <Skeleton key={index} className="h-8 w-full" />
+        ))}
+      </div>
+    ),
+  },
+);
 const UserLocation = dynamic(
   () => import("@/components/user-location").then((mod) => mod.UserLocation),
   { ssr: false },
