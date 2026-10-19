@@ -20,6 +20,21 @@ function toDate(time: string, day: Date) {
   return result;
 }
 
+/**
+ * The obligatory prayer whose time has most recently started today, or null
+ * before Subuh.
+ */
+export function getCurrentPrayer(
+  today: TimingsProps,
+  now: Date,
+): { key: PrayerKey; name: string } | null {
+  let current: { key: PrayerKey; name: string } | null = null;
+  for (const prayer of PRAYERS) {
+    if (toDate(today[prayer.key], now) <= now) current = prayer;
+  }
+  return current;
+}
+
 /** The next obligatory prayer after `now`, falling back to tomorrow's Subuh. */
 export function getNextPrayer(
   today: TimingsProps,

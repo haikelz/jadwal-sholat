@@ -7,6 +7,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/reui/alert";
+import { Badge } from "@/components/reui/badge";
 import {
   Frame,
   FrameDescription,
@@ -36,17 +37,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { env } from "@/lib/utils/public-env";
 import { useFetch, useGeolocation, useNow } from "@/hooks";
+import { useStoredCopy } from "@/hooks/use-stored-copy";
 import { JadwalSholatProps } from "@/interfaces";
 import {
   formatCountdown,
   formatSholatTime,
   getNextPrayer,
 } from "@/lib/helpers";
+import { getCurrentPrayer } from "@/lib/helpers/next-prayer";
 import { cn } from "@/lib/utils/cn";
 import { getDateParts } from "@/lib/utils/date-parts";
 import useGlobalStore from "@/store";
-import { CalendarX2, CircleAlert, MapPin, RefreshCw } from "lucide-react";
+import { Bell, CalendarX2, CircleAlert, MapPin, RefreshCw } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
@@ -89,6 +93,32 @@ const prayerTimes = [
   { key: "Isha", name: "Isya" },
 ] as const;
 
+/** Asks for notification permission so the adzan prompt can reach a hidden tab. */
+function ReminderButton() {
+  const [permission, setPermission] = useState<NotificationPermission | null>(
+    null,
+  );
+
+  useEffect(() => {
+    if ("Notification" in window) setPermission(Notification.permission);
+  }, []);
+
+  // Hidden once the reader has answered, or where notifications don't exist.
+  if (permission !== "default") return null;
+
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      size="sm"
+      onClick={async () => setPermission(await Notification.requestPermission())}
+    >
+      <Bell aria-hidden="true" />
+      Aktifkan pengingat
+    </Button>
+  );
+}
+
 function ScheduleSkeleton() {
   return (
     <Frame stacked role="status" aria-live="polite">
@@ -127,7 +157,14 @@ export function Homepage() {
   const now = useNow();
   const today = now ? getDateParts(now) : null;
 
-  const { data, isPending, isError, isRefetching, refetch } = useFetch<{
+  const {
+    data,
+    isPending,
+    isError,
+    isRefetching,
+    isPlaceholderData,
+    refetch,
+  } = useFetch<{
     data: JadwalSholatProps[];
   }>(
     // Wait for the clock and the location so the month is fetched once.
@@ -136,11 +173,22 @@ export function Homepage() {
       : "",
   );
 
-  const waktu = data?.data ?? [];
+  // The last schedule fetched for this month: shown while the network loads,
+  // and instead of the error when the reader is offline.
+  const stored = useStoredCopy(
+    "jadwal-sholat:schedule",
+    today ? `${today.tahun}-${today.bulan}` : "",
+    // keepPreviousData briefly shows the old month; never store that.
+    isPlaceholderData ? undefined : data,
+  );
+  const isShowingStored = !data && stored !== undefined;
+  const waktu = data?.data ?? stored?.data ?? [];
   const todayIndex = waktu.findIndex(
     (item) => item.date.gregorian.date === today?.matchDate,
   );
   const jadwalHariIni = waktu[todayIndex];
+  const currentPrayer =
+    jadwalHariIni && now ? getCurrentPrayer(jadwalHariIni.timings, now) : null;
   const nextPrayer =
     jadwalHariIni && now
       ? getNextPrayer(
@@ -164,7 +212,7 @@ export function Homepage() {
   );
 
   function renderSchedule() {
-    if (isPending) return <ScheduleSkeleton />;
+    if (isPending && waktu.length === 0) return <ScheduleSkeleton />;
 
     if (isError && waktu.length === 0) {
       return (
@@ -215,19 +263,40 @@ export function Homepage() {
               <FrameTitle>
                 <h2>Hari ini</h2>
               </FrameTitle>
-              {isRefetching ? (
+              {isRefetching || (isPending && isShowingStored) ? (
                 <Spinner aria-label="Memperbarui jadwal" />
               ) : null}
+              {isError && isShowingStored ? (
+                <Badge variant="warning-light">Jadwal tersimpan</Badge>
+              ) : null}
             </div>
-            {locationButton}
+            <div className="flex flex-wrap items-center justify-end gap-2">
+              <ReminderButton />
+              {locationButton}
+            </div>
           </FrameHeader>
-          <FramePanel aria-live="polite">
+          <FramePanel>
+            {/* Announces only when the next prayer changes, not every
+                countdown tick. */}
+            <p className="sr-only" aria-live="polite">
+              {nextPrayer
+                ? `Sholat berikutnya ${nextPrayer.name} pukul ${formatSholatTime(nextPrayer.time)}`
+                : ""}
+            </p>
             {nextPrayer ? (
               <div className="flex flex-col gap-0.5">
+                {currentPrayer ? (
+                  <p className="text-sm font-medium">
+                    Sedang waktu {currentPrayer.name}
+                  </p>
+                ) : null}
                 <p className="text-xs text-muted-foreground">
                   {nextPrayer.isTomorrow ? "Berikutnya, besok" : "Berikutnya"}
                 </p>
-                <p className="flex flex-wrap items-baseline gap-x-2">
+                <p
+                  aria-hidden="true"
+                  className="flex flex-wrap items-baseline gap-x-2"
+                >
                   <span className="text-2xl font-semibold tracking-tight">
                     {nextPrayer.name}
                   </span>
@@ -306,7 +375,28 @@ export function Homepage() {
       {waktu.length > 0 ? <Adzan waktu={waktu} /> : null}
       <PageHeader
         title="Jadwal Sholat"
-        description={today?.currentDate ?? "\u00a0"}
+        description={
+          today ? (
+            <span className="flex flex-wrap items-center gap-x-2">
+              <span>{today.currentDate}</span>
+              {jadwalHariIni ? (
+                <>
+                  <span
+                    aria-hidden
+                    className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
+                  />
+                  <span>
+                    {Number(jadwalHariIni.date.hijri.day)}{" "}
+                    {jadwalHariIni.date.hijri.month.en}{" "}
+                    {jadwalHariIni.date.hijri.year} H
+                  </span>
+                </>
+              ) : null}
+            </span>
+          ) : (
+            "\u00a0"
+          )
+        }
       />
       <section aria-label="Jadwal sholat" className="flex min-w-0 flex-col">
         {renderSchedule()}

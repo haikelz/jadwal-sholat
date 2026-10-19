@@ -1,6 +1,6 @@
 // Run: bun src/lib/helpers/next-prayer.check.ts
 import assert from "node:assert/strict";
-import { formatCountdown, getNextPrayer } from "./next-prayer";
+import { formatCountdown, getCurrentPrayer, getNextPrayer } from "./next-prayer";
 
 const day = {
   Imsak: "04:11 (WIB)",
@@ -27,5 +27,10 @@ assert.equal(formatCountdown(at(12, 48), at(15, 2)), "2 jam 14 menit lagi");
 assert.equal(formatCountdown(at(14, 48), at(15, 2)), "14 menit lagi");
 assert.equal(formatCountdown(at(13, 2), at(15, 2)), "2 jam lagi");
 assert.equal(formatCountdown(at(15, 2), at(15, 2)), "kurang dari 1 menit lagi");
+
+assert.equal(getCurrentPrayer(day, at(3, 0)), null);
+assert.equal(getCurrentPrayer(day, at(4, 21))?.name, "Subuh");
+assert.equal(getCurrentPrayer(day, at(12, 48))?.name, "Dzuhur");
+assert.equal(getCurrentPrayer(day, at(23, 30))?.name, "Isya");
 
 console.log("next-prayer: ok");
