@@ -20,7 +20,19 @@ async function getSurat(): Promise<ListSuratProps> {
     const response: ListSuratProps = await getData(
       `${NEXT_PUBLIC_QURAN_API}/quran`,
     );
-    return response;
+    // The API also returns tafsir and recitation for every surah (~170KB).
+    // Pass only what the list renders so the page payload stays small.
+    return {
+      data: response.data.map(({ number, asma, ayahCount, type }) => ({
+        number,
+        asma: {
+          id: { short: asma.id.short },
+          translation: { id: asma.translation.id },
+        },
+        ayahCount,
+        type: { id: type.id },
+      })),
+    };
   } catch (err: any) {
     throw new Error("Failed to fetch data!");
   }
