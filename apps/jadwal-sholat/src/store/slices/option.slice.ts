@@ -1,14 +1,15 @@
+import { DEFAULT_QORI } from "@/lib/utils/qori-options";
 import { OptionSliceProps } from "@/interfaces";
 import { StateCreator } from "zustand";
 
 const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (
-  set
+  set,
 ) => ({
   audio: false,
   isMore: false,
   terjemahan: false,
   notification: false,
-  qori: 7,
+  qori: DEFAULT_QORI,
   setNotification: (status) => set({ notification: status }),
   setAudio: (status) =>
     set({

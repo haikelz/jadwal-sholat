@@ -1,3 +1,5 @@
+export const DEFAULT_QORI = 7;
+
 type QoriProps = {
   id: number;
   name: string;

@@ -16,7 +16,8 @@ import {
 import { Toggle } from "@/components/ui/toggle";
 import { env } from "@/lib/utils/public-env";
 import { useFetch } from "@/hooks";
-import { qoriOptions } from "@/lib/utils/qori-options";
+import { DEFAULT_QORI, qoriOptions } from "@/lib/utils/qori-options";
+import { SuratProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { Languages, Volume2 } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -28,7 +29,13 @@ const DialogTafsir = dynamic(() =>
   import("./dialog-tafsir").then((mod) => mod.DialogTafsir),
 );
 
-export function DetailSuratPage({ number }: { number: string }) {
+export function DetailSuratPage({
+  number,
+  initialData,
+}: {
+  number: string;
+  initialData?: SuratProps;
+}) {
   const { audio, terjemahan, setAudio, setTerjemahan, qori, setQori } =
     useGlobalStore((state) => ({
       audio: state.audio,
@@ -49,6 +56,8 @@ export function DetailSuratPage({ number }: { number: string }) {
 
   const { data, isPending, isError, isRefetching } = useFetch(
     number ? `${NEXT_PUBLIC_QURAN_API}/quran/${number}?imamId=${qori}` : "",
+    // The server rendered the default reciter; other reciters fetch here.
+    qori === DEFAULT_QORI ? initialData : undefined,
   );
 
   if ((!data && isError) || isPending) return <LoadingClient />;

@@ -61,6 +61,7 @@ export interface ListSuratProps {
 export interface SuratProps {
   data: {
     number: number;
+    ayahCount: number;
     name: string;
     translation: string;
     bismillah: {

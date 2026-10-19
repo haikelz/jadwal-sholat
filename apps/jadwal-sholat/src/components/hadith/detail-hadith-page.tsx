@@ -51,13 +51,15 @@ function DetailHadithSkeleton() {
 export function DetailHadithPage({
   book,
   hadithNumber,
+  initialData,
 }: {
   book: string;
   hadithNumber: string;
+  initialData?: HadithDetailResponse;
 }) {
   const apiUrl = buildHadithDetailUrl(book, hadithNumber);
   const { data, isPending, isError, isRefetching, refetch } =
-    useFetch<HadithDetailResponse>(apiUrl);
+    useFetch<HadithDetailResponse>(apiUrl, initialData);
 
   const contents = data?.data?.contents;
   const bookMeta = data?.data;
@@ -129,7 +131,9 @@ export function DetailHadithPage({
           {contents.arab && contents.id ? <Separator /> : null}
           {contents.id ? (
             <section className="flex flex-col gap-2">
-              <h2 className="text-xs font-medium text-muted-foreground">Terjemahan</h2>
+              <h2 className="text-xs font-medium text-muted-foreground">
+                Terjemahan
+              </h2>
               <p className="max-w-3xl text-sm wrap-anywhere">
                 {contents.id.slice(0, 1).toUpperCase() + contents.id.slice(1)}
               </p>
