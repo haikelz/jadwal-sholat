@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils/cn";
 import { ReactNode } from "react";
-import { TransitionLayout } from "../transition-layout";
 
 export function PageShell({
   children,
@@ -10,18 +9,17 @@ export function PageShell({
   className?: string;
 }) {
   return (
-    <TransitionLayout
-      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
+    <div
       className={cn(
-        "mx-auto flex w-full min-w-0 flex-col gap-6 pt-6 pb-24 md:pb-12 lg:pt-8",
-        "max-w-7xl",
+        "mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-6 pt-6 pb-24 md:pb-12 lg:pt-8",
+        // CSS entrance instead of a motion library; globals.css shortens it
+        // for prefers-reduced-motion.
+        "animate-in fade-in slide-in-from-bottom-1.5 duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
         className,
       )}
     >
       {children}
-    </TransitionLayout>
+    </div>
   );
 }
 

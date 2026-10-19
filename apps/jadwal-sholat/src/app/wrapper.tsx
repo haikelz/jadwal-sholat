@@ -2,7 +2,6 @@
 
 import { ChildrenProps } from "@/interfaces";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { LazyMotion, MotionConfig, domAnimation } from "motion/react";
 import { ThemeProvider } from "next-themes";
 import { useState } from "react";
 
@@ -17,9 +16,7 @@ export default function Wrapper({ children }: ChildrenProps) {
         enableSystem
         disableTransitionOnChange
       >
-        <LazyMotion features={domAnimation}>
-          <MotionConfig reducedMotion="user">{children}</MotionConfig>
-        </LazyMotion>
+        {children}
       </ThemeProvider>
     </QueryClientProvider>
   );
