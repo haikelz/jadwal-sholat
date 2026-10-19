@@ -1,6 +1,21 @@
 "use client";
 
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/reui/alert";
+import { Frame, FrameHeader, FramePanel } from "@/components/reui/frame";
 import { Button } from "@/components/ui/button";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import {
   Select,
   SelectContent,
@@ -8,13 +23,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useFetch } from "@/hooks";
 import { PuasaSunnahScheduleResponse, PuasaSunnahTypeKey } from "@/interfaces";
 import { tahun } from "@/lib/utils/constants";
 import useGlobalStore from "@/store";
-import { ErrorWhileFetch } from "../react-query/error-while-fetch";
-import { IsRefetching } from "../react-query/is-refetching";
-import { LoadingClient } from "../react-query/loading-client";
+import { CalendarX, CircleAlert } from "lucide-react";
+import { useId } from "react";
 import { TablePuasaSunnah } from "../table-puasa-sunnah";
 
 const puasaTypesList = [
@@ -31,57 +46,23 @@ const puasaTypesList = [
 ] as const;
 
 const listMonthInYear = [
-  {
-    id: "01",
-    month: "Januari",
-  },
-  {
-    id: "02",
-    month: "Februari",
-  },
-  {
-    id: "03",
-    month: "Maret",
-  },
-  {
-    id: "04",
-    month: "April",
-  },
-  {
-    id: "05",
-    month: "Mei",
-  },
-  {
-    id: "06",
-    month: "Juni",
-  },
-  {
-    id: "07",
-    month: "Juli",
-  },
-  {
-    id: "08",
-    month: "Agustus",
-  },
-  {
-    id: "09",
-    month: "September",
-  },
-  {
-    id: "10",
-    month: "Oktober",
-  },
-  {
-    id: "11",
-    month: "November",
-  },
-  {
-    id: "12",
-    month: "Desember",
-  },
+  { id: "01", month: "Januari" },
+  { id: "02", month: "Februari" },
+  { id: "03", month: "Maret" },
+  { id: "04", month: "April" },
+  { id: "05", month: "Mei" },
+  { id: "06", month: "Juni" },
+  { id: "07", month: "Juli" },
+  { id: "08", month: "Agustus" },
+  { id: "09", month: "September" },
+  { id: "10", month: "Oktober" },
+  { id: "11", month: "November" },
+  { id: "12", month: "Desember" },
 ];
 
 export function PuasaSunnahPage() {
+  const monthId = useId();
+  const typeId = useId();
   const { selectedType, setSelectedType, selectedMonth, setSelectedMonth } =
     useGlobalStore((state) => ({
       selectedMonth: state.selectedMonth,
@@ -90,25 +71,57 @@ export function PuasaSunnahPage() {
       setSelectedType: state.setSelectedType,
     }));
 
-  const { data, isPending, isError, isRefetching } =
+  const { data, isPending, isError, isRefetching, refetch } =
     useFetch<PuasaSunnahScheduleResponse>(
       `/api/puasa-sunnah?period=month&date=${tahun}-${selectedMonth}-01`,
     );
 
-  if (isPending) return <LoadingClient />;
-  if (isError) return <ErrorWhileFetch />;
-  if (!data?.data)
-    return (
-      <>
-        <p className="text-lg font-bold">
-          Jadwal puasa sunnah tidak ditemukan.
-        </p>
-        <Button onClick={() => window.location.reload()}>Muat ulang</Button>
-      </>
-    );
-  if (isRefetching) return <IsRefetching />;
+  const filters = (
+    <FrameHeader className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:items-center">
+      <label htmlFor={monthId} className="sr-only">
+        Bulan
+      </label>
+      <Select
+        value={selectedMonth}
+        onValueChange={(value) => setSelectedMonth({ selectedMonth: value })}
+      >
+        <SelectTrigger id={monthId} className="w-full min-w-0 sm:w-40">
+          <SelectValue placeholder="Pilih bulan" />
+        </SelectTrigger>
+        <SelectContent>
+          {listMonthInYear.map((item) => (
+            <SelectItem key={item.id} value={item.id}>
+              {item.month}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <label htmlFor={typeId} className="sr-only">
+        Jenis puasa
+      </label>
+      <Select
+        value={selectedType}
+        onValueChange={(value) =>
+          setSelectedType({
+            selectedType: value as PuasaSunnahTypeKey | "all",
+          })
+        }
+      >
+        <SelectTrigger id={typeId} className="w-full min-w-0 sm:w-72">
+          <SelectValue placeholder="Pilih jenis puasa" />
+        </SelectTrigger>
+        <SelectContent>
+          {puasaTypesList.map((type) => (
+            <SelectItem key={type.key} value={type.key}>
+              {type.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </FrameHeader>
+  );
 
-  const puasaList = data.data.dates
+  const puasaList = (data?.data?.dates ?? [])
     .filter(
       (puasa) =>
         selectedType === "all" ||
@@ -126,61 +139,75 @@ export function PuasaSunnahPage() {
             ),
     }));
 
+  const isLoading = isPending || isRefetching;
+
   return (
-    <div className="mx-auto w-full max-w-4xl">
-      <div className="mb-6 grid gap-4 rounded-xl border bg-card p-4 shadow-xs sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] sm:p-5">
-        <div className="min-w-0 space-y-2 text-left">
-          <span className="text-sm font-semibold">Bulan</span>
-          <Select
-            value={selectedMonth}
-            onValueChange={(val) => {
-              setSelectedMonth({ selectedMonth: val });
-            }}
-          >
-            <SelectTrigger aria-label="Pilih bulan" className="w-full">
-              <SelectValue placeholder="Pilih bulan" />
-            </SelectTrigger>
-            <SelectContent>
-              {listMonthInYear.map((item) => (
-                <SelectItem key={item.id} value={item.id}>
-                  {item.month}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="min-w-0 space-y-2 text-left">
-          <span className="text-sm font-semibold">Jenis puasa</span>
-          <Select
-            value={selectedType}
-            onValueChange={(val) => {
-              setSelectedType({
-                selectedType: val as PuasaSunnahTypeKey | "all",
-              });
-            }}
-          >
-            <SelectTrigger aria-label="Pilih jenis puasa" className="w-full">
-              <SelectValue placeholder="Pilih jenis puasa" />
-            </SelectTrigger>
-            <SelectContent>
-              {puasaTypesList.map((type) => (
-                <SelectItem key={type.key} value={type.key}>
-                  {type.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-      <div className="w-full">
-        {puasaList.length > 0 ? (
+    <Frame spacing="default">
+      {filters}
+      {isLoading ? (
+        <FramePanel
+          role="status"
+          aria-live="polite"
+          className="flex flex-col gap-3"
+        >
+          <span className="sr-only">Memuat jadwal puasa sunnah…</span>
+          {Array.from({ length: 6 }, (_, index) => (
+            <div key={index} className="flex items-center gap-4">
+              <Skeleton className="h-4 w-48" />
+              <Skeleton className="h-5 w-32 rounded-full" />
+            </div>
+          ))}
+        </FramePanel>
+      ) : isError ? (
+        <FramePanel>
+          <Alert variant="destructive">
+            <CircleAlert aria-hidden="true" />
+            <AlertTitle>Jadwal belum dapat dimuat</AlertTitle>
+            <AlertDescription>
+              Periksa koneksi internet, lalu coba lagi.
+            </AlertDescription>
+            <AlertAction>
+              <Button variant="outline" size="sm" onClick={() => refetch()}>
+                Coba lagi
+              </Button>
+            </AlertAction>
+          </Alert>
+        </FramePanel>
+      ) : puasaList.length > 0 ? (
+        <FramePanel className="p-0">
           <TablePuasaSunnah puasaList={puasaList} />
-        ) : (
-          <p className="text-center text-lg font-semibold">
-            Tidak ada jadwal untuk jenis puasa yang dipilih pada bulan ini.
-          </p>
-        )}
-      </div>
-    </div>
+        </FramePanel>
+      ) : (
+        <FramePanel>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <CalendarX aria-hidden="true" />
+              </EmptyMedia>
+              <EmptyTitle>Belum ada jadwal</EmptyTitle>
+              <EmptyDescription>
+                {data?.data
+                  ? "Tidak ada jadwal untuk jenis puasa ini bulan ini."
+                  : "Jadwal puasa sunnah tidak ditemukan."}
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              {data?.data && selectedType !== "all" ? (
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedType({ selectedType: "all" })}
+                >
+                  Tampilkan semua
+                </Button>
+              ) : (
+                <Button variant="outline" onClick={() => refetch()}>
+                  Muat ulang
+                </Button>
+              )}
+            </EmptyContent>
+          </Empty>
+        </FramePanel>
+      )}
+    </Frame>
   );
 }

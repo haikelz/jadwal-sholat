@@ -15,7 +15,7 @@ export default function PuasaSunnah() {
     <PageShell>
       <PageHeader
         title="Puasa Sunnah"
-        description="Jadwal puasa sunnah berdasarkan bulan dan jenis puasa yang dipilih."
+        description="Jadwal puasa sunnah per bulan dan jenis."
       />
       <Suspense>
         <PuasaSunnahPage />
