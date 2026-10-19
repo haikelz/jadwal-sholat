@@ -6,7 +6,7 @@
 
 ## Features
 
-- Today's prayer times and a switchable monthly schedule based on the reader's location
+- The next prayer with a live countdown, today's prayer times, and the full monthly schedule based on the reader's location
 - Al-Qur'an with reciter selection, audio, transliteration, translation, tafsir, and last-read bookmarks
 - Hadith browsing by book and number
 - The 99 names of Allah with Arabic text and meaning
@@ -19,8 +19,8 @@
 
 - Next.js App Router
 - TypeScript
-- Tailwind CSS v4 + shadcn/ui + Radix UI
-- TanStack Query
+- Tailwind CSS v4 + shadcn/ui (`radix-nova` style) + [ReUI](https://reui.io) (Frame, Badge, Alert, Data Grid)
+- TanStack Query and TanStack Table
 - Zustand
 - Sentry
 - [moonrepo](https://moonrepo.dev/) monorepo tooling
@@ -91,7 +91,6 @@ cd apps/jadwal-sholat
 bun run dev      # next dev
 bun run build    # next build
 bun run start    # next start
-bun run lint     # next lint
 bun run test     # cypress run
 bun run open     # cypress open
 ```
@@ -99,6 +98,8 @@ bun run open     # cypress open
 ### Workspace layout
 
 - `apps/jadwal-sholat` — Next.js application
+  - `src/components/ui` — shadcn/ui primitives installed with the shadcn CLI
+  - `src/components/reui` — ReUI components (Frame, Badge, Alert, Data Grid)
 - `packages/eslint-config`, `packages/typescript-config` — shared tooling
 - `static/docs` — documentation screenshots
 - `AGENTS.md` — contributor and coding-agent guidance
@@ -119,9 +120,21 @@ bun run open     # cypress open
 
 The screenshots were captured from a production build at `1440×900` for desktop and `390×844` for mobile.
 
+## Design system
+
+The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell` and left-aligned `PageHeader`, and content sits in ReUI `Frame` panels. Tables use the ReUI data grid. Colors come from semantic theme tokens (shadcn neutral plus ReUI's success, info, and warning tokens) and work in light and dark mode. Every data region has its own loading skeleton, empty state, and error state with a retry action.
+
+## Performance
+
+- Surah and hadith detail pages fetch their content on the server, so the text arrives in the HTML. Surah pages render on their first visit and stay cached for a day instead of being prerendered during the build.
+- The Qur'an list page receives only the fields it renders, not the full surah payload.
+- The homepage loads the monthly data grid lazily, after today's schedule.
+- Application code reads API URLs from `src/lib/utils/public-env.ts`. `src/env.mjs` still validates them with zod when `next.config.mjs` loads, which keeps zod out of the browser bundle.
+- The page entrance animation is plain CSS, so no animation library ships to the browser.
+
 ## Accessibility and SEO
 
-The shared interface uses one main landmark, a skip link, visible focus indicators, labeled search fields, native controls, focus-managed Radix dialogs, responsive typography, and reduced-motion fallbacks. Arabic text uses the local LPMQ font in WOFF2 format.
+The shared interface uses one main landmark, a skip link, visible focus indicators, labeled search fields, focus-managed Radix dialogs, responsive typography, and reduced-motion fallbacks. Arabic text uses the local LPMQ font in WOFF2 format.
 
 Metadata is centralized in `src/lib/utils/metadata.ts`. Public routes include unique descriptions, canonical URLs, Open Graph data, and Twitter cards. Next.js generates `/robots.txt` and `/sitemap.xml` from `robots.ts` and `sitemap.ts`.
 
