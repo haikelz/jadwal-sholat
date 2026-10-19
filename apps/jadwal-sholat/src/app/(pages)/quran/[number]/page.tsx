@@ -1,6 +1,6 @@
 import { PageShell } from "@/components/common/page-shell";
 import { DetailSuratPage } from "@/components/quran/detail-surat/detail-surat-page";
-import { env } from "@/env.mjs";
+import { env } from "@/lib/utils/public-env";
 import { ListSuratProps, SuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/axios-config";
 import { createPageMetadata } from "@/lib/utils/metadata";

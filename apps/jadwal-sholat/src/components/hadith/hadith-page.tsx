@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
-import { env } from "@/env.mjs";
+import { env } from "@/lib/utils/public-env";
 import { useFetch } from "@/hooks";
 import {
   HadithBook,

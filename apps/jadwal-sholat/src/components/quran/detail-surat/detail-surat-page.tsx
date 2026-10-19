@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Toggle } from "@/components/ui/toggle";
-import { env } from "@/env.mjs";
+import { env } from "@/lib/utils/public-env";
 import { useFetch } from "@/hooks";
 import { qoriOptions } from "@/lib/utils/qori-options";
 import useGlobalStore from "@/store";

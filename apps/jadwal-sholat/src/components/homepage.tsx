@@ -35,7 +35,7 @@ import {
 } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
-import { env } from "@/env.mjs";
+import { env } from "@/lib/utils/public-env";
 import { useFetch, useGeolocation } from "@/hooks";
 import { JadwalSholatProps } from "@/interfaces";
 import {

@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Frame, FramePanel } from "@/components/reui/frame";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { env } from "@/env.mjs";
+import { env } from "@/lib/utils/public-env";
 import { useFetch } from "@/hooks";
 import { HadithDetailResponse } from "@/interfaces";
 import { ChevronLeft, ChevronRight, CircleAlert } from "lucide-react";

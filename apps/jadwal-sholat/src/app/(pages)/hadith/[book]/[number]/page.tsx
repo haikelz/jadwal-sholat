@@ -1,6 +1,6 @@
 import { PageShell } from "@/components/common/page-shell";
 import { DetailHadithPage } from "@/components/hadith/detail-hadith-page";
-import { env } from "@/env.mjs";
+import { env } from "@/lib/utils/public-env";
 import { getData } from "@/lib/utils/axios-config";
 import { createPageMetadata } from "@/lib/utils/metadata";
 import { Metadata } from "next";
