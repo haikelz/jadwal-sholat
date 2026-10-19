@@ -1,5 +1,6 @@
 import withPWAInit from "@ducanh2912/next-pwa";
 import { withSentryConfig } from "@sentry/nextjs";
+import { fileURLToPath } from "node:url";
 
 import "./src/env.mjs";
 
@@ -19,6 +20,9 @@ const withPWA = withPWAInit({
 const config = withSentryConfig(
   withPWA({
     reactStrictMode: true,
+    // Pin the monorepo root so a stray lockfile higher up (e.g. in $HOME)
+    // can't make Next infer the wrong workspace.
+    turbopack: { root: fileURLToPath(new URL("../..", import.meta.url)) },
     compress: true,
     async rewrites() {
       return [
