@@ -1,8 +1,17 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import { useAscending } from "@/hooks";
 import { AsmaulHusnaProps } from "@/interfaces";
-import { cn } from "@/lib/utils/cn";
+import { SearchX } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
@@ -43,48 +52,46 @@ export function AsmaulHusnaPage({
   );
 
   return (
-    <>
-      <div className="mb-7 flex w-full flex-col gap-3 rounded-xl border bg-card/50 p-3 shadow-xs sm:flex-row sm:items-center sm:justify-between sm:p-4">
-        <div className="w-full sm:max-w-md">
-          <SearchBar setSearch={setSearch} name="search" />
-        </div>
+    <div className="flex w-full flex-col gap-6">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <SearchBar value={search} setSearch={setSearch} name="search" />
         <SortByOrder
           isAscending={isAscending}
           setIsAscending={setIsAscending}
         />
       </div>
-      {filteredAsmaulHusna ? (
-        filteredAsmaulHusna.length ? (
-          <div
-            className={cn(
-              "grid w-full grid-cols-1 gap-4 text-center",
-              "sm:grid-cols-2 xl:grid-cols-3",
-            )}
-          >
-            {filteredAsmaulHusna.map((item) => (
-              <DialogAsmaulHusna
-                dataAsmaulHusna={item}
-                deferredSearch={deferredSearch}
-                key={item.urutan}
-              />
-            ))}
-          </div>
-        ) : (
-          <p
-            data-cy="not-found-text"
-            className="py-12 text-center text-base text-muted-foreground"
-          >
-            Asmaul Husna yang dicari tidak ditemukan.
-          </p>
-        )
+      {filteredAsmaulHusna.length ? (
+        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {filteredAsmaulHusna.map((item) => (
+            <DialogAsmaulHusna
+              dataAsmaulHusna={item}
+              deferredSearch={deferredSearch}
+              key={item.urutan}
+            />
+          ))}
+        </div>
       ) : (
-        <p
-          data-cy="not-found-text"
-          className="py-12 text-center text-base text-muted-foreground"
-        >
-          Data Asmaul Husna belum tersedia.
-        </p>
+        <Empty className="border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <SearchX aria-hidden="true" />
+            </EmptyMedia>
+            <EmptyTitle data-cy="not-found-text">
+              {asmaulHusna.length
+                ? "Asmaul Husna yang dicari tidak ditemukan."
+                : "Data Asmaul Husna belum tersedia."}
+            </EmptyTitle>
+            <EmptyDescription>
+              Coba kata kunci lain atau tampilkan semua nama.
+            </EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <Button variant="outline" onClick={() => setSearch(null)}>
+              Hapus pencarian
+            </Button>
+          </EmptyContent>
+        </Empty>
       )}
-    </>
+    </div>
   );
 }
