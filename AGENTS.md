@@ -17,15 +17,22 @@
 
 The production build prerenders API-backed routes and therefore requires valid values from `apps/jadwal-sholat/.env` plus network access to those APIs.
 
+Builds are memory-heavy. Stop `bun run dev:web` and any other `next build` or `next start` before building, and run one build at a time.
+
 ## Implementation conventions
 
-- Use TypeScript, React Server/Client Components, Tailwind CSS v4, and the existing shadcn/Radix primitives.
-- Prefer shared components in `src/components/ui` over custom interactive elements.
+- Use TypeScript, React Server/Client Components, Tailwind CSS v4, shadcn/ui (`radix-nova` style), and ReUI.
+- Prefer shared components in `src/components/ui` (shadcn) and `src/components/reui` (ReUI) over custom interactive elements. Tables use the ReUI data grid, modals use `Dialog`, toasts use `sonner`.
+- Install components from `apps/jadwal-sholat` with `bunx --bun shadcn@latest add <name> --yes` (ReUI items as `@reui/<name>`). The CLI writes `import { cn } from "cn"` and adds a `cn` package: change the imports to `@/lib/utils/cn` and run `bun remove cn`.
+- Do not restyle installed components (radius, height, padding, shadow); use their `size` and `variant` props, and change the look through the theme tokens in `globals.css`.
+- Build pages with `PageShell` and `PageHeader` from `src/components/common/page-shell.tsx` and put content in ReUI `Frame` panels. Give every data region a `Skeleton` loading state, an `Empty` state with one action, and an inline `Alert` error with a retry.
+- Read API URLs from `src/lib/utils/public-env.ts` in application code. Only `next.config.mjs` imports `src/env.mjs`, so zod stays out of the browser bundle.
+- Pass only the fields a client component renders, and keep `generateStaticParams` light: surah pages render on first visit (`revalidate`) instead of all 114 at build time.
 - Keep mobile styles as the default; add larger-screen behavior with responsive variants.
 - Preserve one `<main>` landmark, a logical heading hierarchy, visible focus states, keyboard behavior, and accessible names for every control.
 - Keep mobile form text at `text-base`; use `sm:text-sm` only above the mobile breakpoint.
 - Use `arabic-font` and `lang="ar"` for Arabic source text. The font is defined centrally in `src/lib/utils/fonts.ts` and `globals.css`.
-- Respect `prefers-reduced-motion`; do not add unconditional motion or smooth scrolling.
+- Respect `prefers-reduced-motion`; do not add unconditional motion or smooth scrolling. Use CSS (`tw-animate-css` utilities) for motion rather than an animation library.
 - Write interface copy in clear Indonesian and use sentence case.
 
 ## SEO
