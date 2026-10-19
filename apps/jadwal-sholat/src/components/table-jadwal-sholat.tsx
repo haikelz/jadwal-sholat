@@ -14,7 +14,7 @@ import { formatSholatTime } from "@/lib/helpers";
 import { ColumnDef, useTable } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 const prayerColumns = [
   { key: "Imsak", name: "Imsak" },
@@ -28,6 +28,21 @@ const prayerColumns = [
 ] as const;
 
 type PrayerKey = (typeof prayerColumns)[number]["key"];
+
+/** The nearest ancestor (up to `root`) that scrolls vertically. */
+function getScrollParent(element: HTMLElement, root: HTMLElement) {
+  for (let node = element.parentElement; node; node = node.parentElement) {
+    const { overflowY } = getComputedStyle(node);
+    if (
+      (overflowY === "auto" || overflowY === "scroll") &&
+      node.scrollHeight > node.clientHeight
+    ) {
+      return node;
+    }
+    if (node === root) break;
+  }
+  return null;
+}
 
 type JadwalRow = {
   key: string;
@@ -92,6 +107,30 @@ export function Jadwal({
     [],
   );
 
+  // Center today's row inside the grid's own scroll region, once per mount.
+  // Setting scrollTop (not scrollIntoView) never moves the page itself.
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hasScrolledRef = useRef(false);
+  useEffect(() => {
+    const root = containerRef.current;
+    if (!root || !today || hasScrolledRef.current) return;
+    const targets = root.querySelectorAll<HTMLElement>(
+      `[data-today], [data-row-id="${today}"]`,
+    );
+    for (const target of targets) {
+      // Skip the layout hidden at this breakpoint.
+      if (target.offsetParent === null) continue;
+      const scroller = getScrollParent(target, root);
+      if (!scroller) continue;
+      const offset =
+        target.getBoundingClientRect().top -
+        scroller.getBoundingClientRect().top;
+      scroller.scrollTop +=
+        offset - (scroller.clientHeight - target.clientHeight) / 2;
+      hasScrolledRef.current = true;
+    }
+  }, [today, rows]);
+
   const table = useTable({
     features: dataGridFeatures,
     columns,
@@ -104,12 +143,16 @@ export function Jadwal({
   });
 
   return (
-    <>
-      <ul className="flex flex-col divide-y md:hidden">
+    <div ref={containerRef}>
+      {/* ponytail: fixed-height scroll regions keep the month compact below
+          today's panel; upgrade to a flex-filled height if the page layout
+          ever gives this panel a bounded height. */}
+      <ul className="flex max-h-120 flex-col divide-y overflow-y-auto md:hidden">
         {rows.map((row) => (
           <li
             key={row.key}
             aria-current={row.isToday ? "date" : undefined}
+            data-today={row.isToday || undefined}
             className="flex flex-col gap-3 p-4"
           >
             <div className="flex items-center gap-2">
@@ -140,15 +183,15 @@ export function Jadwal({
           table={table}
           recordCount={rows.length}
           emptyMessage="Jadwal bulan ini belum tersedia."
-          tableLayout={{ stripped: true, rowRounded: true }}
+          tableLayout={{ stripped: true, headerSticky: true }}
         >
           <DataGridContainer>
-            <DataGridScrollArea>
+            <DataGridScrollArea className="h-120">
               <DataGridTable />
             </DataGridScrollArea>
           </DataGridContainer>
         </DataGrid>
       </div>
-    </>
+    </div>
   );
 }
