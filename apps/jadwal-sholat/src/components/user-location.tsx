@@ -14,7 +14,8 @@ async function getUserCurrentLocation(
 ): Promise<UserLocationProps | undefined> {
   try {
     return await getData<UserLocationProps>(
-      `${NEXT_PUBLIC_NOMINATIM_API}/reverse?format=jsonv2&lat=${lat}&lon=${lng}`,
+      // accept-language=id names places in Indonesian ("Kota Bandung").
+      `${NEXT_PUBLIC_NOMINATIM_API}/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=id`,
     );
   } catch {
     // The label falls back to "lokasi terpilih".
@@ -28,7 +29,8 @@ export function UserLocation() {
   }));
 
   const { data, isPending, isError, isRefetching } = useQuery({
-    queryKey: [position.lat, position.lng],
+    // Include the language so cached English labels are not reused.
+    queryKey: ["location", position.lat, position.lng, "id"],
     queryFn: () => getUserCurrentLocation(position.lat, position.lng),
     placeholderData: keepPreviousData,
     refetchOnReconnect: false,
