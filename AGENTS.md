@@ -13,6 +13,7 @@
 - Start the web app: `bun run dev:web`
 - Type-check: `cd apps/jadwal-sholat && bunx tsc --noEmit`
 - Production build: `bun run build:web`
+- Lint: `cd apps/jadwal-sholat && bun run lint` (ESLint flat config in `eslint.config.mjs`)
 - Cypress E2E tests: `bun run test:web`
 
 The production build prerenders API-backed routes and therefore requires valid values from `apps/jadwal-sholat/.env` plus network access to those APIs.
@@ -26,6 +27,8 @@ Builds are memory-heavy. Stop `bun run dev:web` and any other `next build` or `n
 - Install components from `apps/jadwal-sholat` with `bunx --bun shadcn@latest add <name> --yes` (ReUI items as `@reui/<name>`). The CLI writes `import { cn } from "cn"` and adds a `cn` package: change the imports to `@/lib/utils/cn` and run `bun remove cn`.
 - Do not restyle installed components (radius, height, padding, shadow); use their `size` and `variant` props, and change the look through the theme tokens in `globals.css`.
 - Build pages with `PageShell` and `PageHeader` from `src/components/common/page-shell.tsx` and put content in ReUI `Frame` panels. Give every data region a `Skeleton` loading state, an `Empty` state with one action, and an inline `Alert` error with a retry.
+- Fetch with `getData` from `src/lib/utils/get-data.ts` (native `fetch`); in client components use `useFetch`, which accepts server `initialData` and skips the request while its URL is `""`.
+- Read the current time with the `useNow()` hook and format it with `getDateParts()` from `src/lib/utils/date-parts.ts`. Never compute dates at module level: prerendered pages would bake in the build date, and open tabs go stale after midnight.
 - Read API URLs from `src/lib/utils/public-env.ts` in application code. Only `next.config.mjs` imports `src/env.mjs`, so zod stays out of the browser bundle.
 - Pass only the fields a client component renders, and keep `generateStaticParams` light: surah pages render on first visit (`revalidate`) instead of all 114 at build time.
 - Keep mobile styles as the default; add larger-screen behavior with responsive variants.
