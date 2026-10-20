@@ -1,6 +1,6 @@
 "use client";
 
-import { PageHeader } from "@/components/common/page-shell";
+import { HomeShortcuts } from "@/components/home/home-shortcuts";
 import {
   Alert,
   AlertAction,
@@ -11,6 +11,7 @@ import { Badge } from "@/components/reui/badge";
 import {
   Frame,
   FrameDescription,
+  FrameFooter,
   FrameHeader,
   FramePanel,
   FrameTitle,
@@ -38,19 +39,21 @@ import { Spinner } from "@/components/ui/spinner";
 import { env } from "@/lib/utils/public-env";
 import { useFetch, useGeolocation, useNow } from "@/hooks";
 import { useStoredCopy } from "@/hooks/use-stored-copy";
-import { JadwalSholatProps } from "@/interfaces";
+import { JadwalSholatProps, TimingsProps } from "@/interfaces";
 import {
   formatCountdown,
   formatSholatTime,
   getNextPrayer,
 } from "@/lib/helpers";
-import { getCurrentPrayer } from "@/lib/helpers/next-prayer";
+import { getCurrentPrayer, PrayerKey } from "@/lib/helpers/next-prayer";
 import { cn } from "@/lib/utils/cn";
 import { getDateParts } from "@/lib/utils/date-parts";
 import useGlobalStore from "@/store";
+import { format } from "date-fns";
+import { id as localeId } from "date-fns/locale";
 import { Bell, CalendarX2, CircleAlert, MapPin, RefreshCw } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 const { NEXT_PUBLIC_JADWAL_SHOLAT_API } = env;
 
@@ -59,14 +62,14 @@ const Map = dynamic(() => import("@/components/map").then((mod) => mod.Map), {
   ssr: false,
 });
 // The month grid sits below the fold and pulls in TanStack Table (~46KB gzip),
-// so it loads after the today panel.
+// so it loads after today's times.
 const Jadwal = dynamic(
   () => import("@/components/table-jadwal-sholat").then((mod) => mod.Jadwal),
   {
     loading: () => (
       <div className="flex flex-col gap-2 p-4" role="status">
         <span className="sr-only">Memuat jadwal bulan ini…</span>
-        {Array.from({ length: 6 }, (_, index) => (
+        {Array.from({ length: 5 }, (_, index) => (
           <Skeleton key={index} className="h-8 w-full" />
         ))}
       </div>
@@ -93,6 +96,13 @@ const prayerTimes = [
   { key: "Isha", name: "Isya" },
 ] as const;
 
+// Grid placement. Mobile stacks hero → times → shortcuts → month by `order`;
+// from md the hero and shortcuts share the first row.
+const HERO = "order-1 md:col-start-1 md:row-start-1";
+const SHORTCUTS = "order-3 md:col-start-2 md:row-start-1 md:self-end";
+const STRIP = "order-2 md:col-span-2 md:row-start-2";
+const MONTH = "order-4 md:col-span-2 md:row-start-3";
+
 /** Asks for notification permission so the adzan prompt can reach a hidden tab. */
 function ReminderButton() {
   const [permission, setPermission] = useState<NotificationPermission | null>(
@@ -111,7 +121,9 @@ function ReminderButton() {
       type="button"
       variant="outline"
       size="sm"
-      onClick={async () => setPermission(await Notification.requestPermission())}
+      onClick={async () =>
+        setPermission(await Notification.requestPermission())
+      }
     >
       <Bell aria-hidden="true" />
       Aktifkan pengingat
@@ -119,30 +131,104 @@ function ReminderButton() {
   );
 }
 
+function Dot() {
+  return (
+    <span
+      aria-hidden="true"
+      className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
+    />
+  );
+}
+
+/** Today's eight times as a plain strip; the next prayer is highlighted. */
+function TodayTimes({
+  timings,
+  nextKey,
+  nowTime,
+  className,
+}: {
+  timings: TimingsProps;
+  nextKey?: PrayerKey;
+  /** The current time as `HH.mm`, to mute times that have passed. */
+  nowTime?: string;
+  className?: string;
+}) {
+  return (
+    <section
+      aria-label="Waktu sholat hari ini"
+      className={cn("border-y", className)}
+    >
+      <dl className="grid grid-cols-4 gap-y-1 py-2 md:grid-cols-8 md:py-0">
+        {prayerTimes.map((prayer) => {
+          const time = formatSholatTime(timings[prayer.key]);
+          const isNext = prayer.key === nextKey;
+          const hasPassed = !isNext && nowTime !== undefined && time <= nowTime;
+          return (
+            <div
+              key={prayer.key}
+              aria-current={isNext ? "time" : undefined}
+              className={cn(
+                "flex min-w-0 flex-col gap-0.5 px-3 py-3 md:py-4",
+                isNext && "bg-muted",
+              )}
+            >
+              <dt
+                className={cn(
+                  "truncate text-xs",
+                  isNext
+                    ? "font-medium text-foreground"
+                    : "text-muted-foreground",
+                )}
+              >
+                {prayer.name}
+              </dt>
+              <dd
+                className={cn(
+                  "text-lg tabular-nums",
+                  isNext ? "font-semibold" : "font-medium",
+                  hasPassed && "text-muted-foreground",
+                )}
+              >
+                {time}
+              </dd>
+            </div>
+          );
+        })}
+      </dl>
+    </section>
+  );
+}
+
 function ScheduleSkeleton() {
   return (
-    <Frame stacked role="status" aria-live="polite">
-      <span className="sr-only">Memuat jadwal sholat…</span>
-      <FrameHeader className="flex-row items-center justify-between gap-2">
-        <Skeleton className="h-4 w-16" />
-        <Skeleton className="h-7 w-28" />
-      </FrameHeader>
-      <FramePanel className="flex flex-col gap-1.5">
-        <Skeleton className="h-3 w-16" />
-        <Skeleton className="h-7 w-40" />
-        <Skeleton className="h-4 w-28" />
-      </FramePanel>
-      <FramePanel>
-        <div className="grid grid-cols-4 gap-x-3 gap-y-4 lg:grid-cols-8">
-          {prayerTimes.map((prayer) => (
-            <div key={prayer.key} className="flex flex-col gap-1.5">
-              <Skeleton className="h-3 w-10" />
-              <Skeleton className="h-4 w-12" />
-            </div>
+    <>
+      <div
+        role="status"
+        aria-live="polite"
+        className={cn(
+          STRIP,
+          "grid grid-cols-4 gap-y-1 border-y md:grid-cols-8",
+        )}
+      >
+        <span className="sr-only">Memuat jadwal sholat…</span>
+        {prayerTimes.map((prayer) => (
+          <div key={prayer.key} className="flex flex-col gap-1.5 px-3 py-4">
+            <Skeleton className="h-3 w-10" />
+            <Skeleton className="h-6 w-14" />
+          </div>
+        ))}
+      </div>
+      <Frame className={MONTH}>
+        <FrameHeader>
+          <Skeleton className="h-4 w-32" />
+        </FrameHeader>
+        <FramePanel className="flex flex-col gap-2">
+          {Array.from({ length: 5 }, (_, index) => (
+            <Skeleton key={index} className="h-8 w-full" />
           ))}
-        </div>
-      </FramePanel>
-    </Frame>
+        </FramePanel>
+      </Frame>
+    </>
   );
 }
 
@@ -152,26 +238,22 @@ export function Homepage() {
     isOpenMap: state.isOpenMap,
     setIsOpenMap: state.setIsOpenMap,
   }));
+  const [showFullMonth, setShowFullMonth] = useState(false);
+  const monthPanelId = useId();
 
   const isLocationReady = useGeolocation();
   const now = useNow();
   const today = now ? getDateParts(now) : null;
 
-  const {
-    data,
-    isPending,
-    isError,
-    isRefetching,
-    isPlaceholderData,
-    refetch,
-  } = useFetch<{
-    data: JadwalSholatProps[];
-  }>(
-    // Wait for the clock and the location so the month is fetched once.
-    today && isLocationReady
-      ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${today.tahun}/${today.bulan}?latitude=${position.lat}&longitude=${position.lng}&method=20`
-      : "",
-  );
+  const { data, isPending, isError, isRefetching, isPlaceholderData, refetch } =
+    useFetch<{
+      data: JadwalSholatProps[];
+    }>(
+      // Wait for the clock and the location so the month is fetched once.
+      today && isLocationReady
+        ? `${NEXT_PUBLIC_JADWAL_SHOLAT_API}/${today.tahun}/${today.bulan}?latitude=${position.lat}&longitude=${position.lng}&method=20`
+        : "",
+    );
 
   // The last schedule fetched for this month: shown while the network loads,
   // and instead of the error when the reader is offline.
@@ -198,209 +280,215 @@ export function Homepage() {
         )
       : null;
 
-  const locationButton = (
-    <Button
-      type="button"
-      variant="outline"
-      size="sm"
-      onClick={() => setIsOpenMap(true)}
-    >
-      <MapPin aria-hidden="true" />
-      <span className="sr-only">Ubah lokasi, saat ini </span>
-      <UserLocation />
-    </Button>
-  );
+  const hijri = jadwalHariIni?.date.hijri;
+  const nextLabel = `${currentPrayer ? `Sedang waktu ${currentPrayer.name} · b` : "B"}erikutnya${nextPrayer?.isTomorrow ? ", besok" : ""}`;
+  const isLoadingFirst = isPending && waktu.length === 0;
 
   function renderSchedule() {
-    if (isPending && waktu.length === 0) return <ScheduleSkeleton />;
+    if (isLoadingFirst) return <ScheduleSkeleton />;
 
     if (isError && waktu.length === 0) {
       return (
-        <Alert variant="destructive">
-          <CircleAlert aria-hidden="true" />
-          <AlertTitle>Jadwal belum dapat dimuat</AlertTitle>
-          <AlertDescription>Periksa koneksi, lalu coba lagi.</AlertDescription>
-          <AlertAction>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => refetch()}
-            >
-              <RefreshCw aria-hidden="true" />
-              Coba lagi
-            </Button>
-          </AlertAction>
-        </Alert>
+        <div className={STRIP}>
+          <Alert variant="destructive">
+            <CircleAlert aria-hidden="true" />
+            <AlertTitle>Jadwal belum dapat dimuat</AlertTitle>
+            <AlertDescription>
+              Periksa koneksi, lalu coba lagi.
+            </AlertDescription>
+            <AlertAction>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => refetch()}
+              >
+                <RefreshCw aria-hidden="true" />
+                Coba lagi
+              </Button>
+            </AlertAction>
+          </Alert>
+        </div>
       );
     }
 
     if (waktu.length === 0) {
       return (
-        <Empty className="border">
-          <EmptyHeader>
-            <EmptyMedia variant="icon">
-              <CalendarX2 aria-hidden="true" />
-            </EmptyMedia>
-            <EmptyTitle>Jadwal belum tersedia</EmptyTitle>
-            <EmptyDescription>Coba pilih lokasi lain.</EmptyDescription>
-          </EmptyHeader>
-          <EmptyContent>
-            <Button type="button" onClick={() => setIsOpenMap(true)}>
-              <MapPin aria-hidden="true" />
-              Pilih lokasi
-            </Button>
-          </EmptyContent>
-        </Empty>
+        <div className={STRIP}>
+          <Empty className="border">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <CalendarX2 aria-hidden="true" />
+              </EmptyMedia>
+              <EmptyTitle>Jadwal belum tersedia</EmptyTitle>
+              <EmptyDescription>Coba pilih lokasi lain.</EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button type="button" onClick={() => setIsOpenMap(true)}>
+                <MapPin aria-hidden="true" />
+                Pilih lokasi
+              </Button>
+            </EmptyContent>
+          </Empty>
+        </div>
       );
     }
 
     return (
-      <div className="flex min-w-0 flex-col gap-6">
-        <Frame stacked>
-          <FrameHeader className="flex-row items-center justify-between gap-2">
-            <div className="flex min-w-0 items-center gap-2">
-              <FrameTitle>
-                <h2>Hari ini</h2>
-              </FrameTitle>
-              {isRefetching || (isPending && isShowingStored) ? (
-                <Spinner aria-label="Memperbarui jadwal" />
-              ) : null}
-              {isError && isShowingStored ? (
-                <Badge variant="warning-light">Jadwal tersimpan</Badge>
-              ) : null}
-            </div>
-            <div className="flex flex-wrap items-center justify-end gap-2">
-              <ReminderButton />
-              {locationButton}
-            </div>
-          </FrameHeader>
-          <FramePanel>
-            {/* Announces only when the next prayer changes, not every
-                countdown tick. */}
-            <p className="sr-only" aria-live="polite">
-              {nextPrayer
-                ? `Sholat berikutnya ${nextPrayer.name} pukul ${formatSholatTime(nextPrayer.time)}`
-                : ""}
-            </p>
-            {nextPrayer ? (
-              <div className="flex flex-col gap-0.5">
-                {currentPrayer ? (
-                  <p className="text-sm font-medium">
-                    Sedang waktu {currentPrayer.name}
-                  </p>
-                ) : null}
-                <p className="text-xs text-muted-foreground">
-                  {nextPrayer.isTomorrow ? "Berikutnya, besok" : "Berikutnya"}
-                </p>
-                <p
-                  aria-hidden="true"
-                  className="flex flex-wrap items-baseline gap-x-2"
-                >
-                  <span className="text-2xl font-semibold tracking-tight">
-                    {nextPrayer.name}
-                  </span>
-                  <span className="text-2xl font-semibold tracking-tight tabular-nums">
-                    {formatSholatTime(nextPrayer.time)}
-                  </span>
-                </p>
-                <p className="text-sm text-muted-foreground tabular-nums">
-                  {now ? formatCountdown(now, nextPrayer.at) : null}
-                </p>
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">
-                {!jadwalHariIni
-                  ? "Jadwal hari ini belum tersedia."
-                  : now
-                    ? "Sholat hari ini sudah selesai."
-                    : "Menghitung waktu sholat berikutnya…"}
-              </p>
-            )}
-          </FramePanel>
-          {jadwalHariIni ? (
-            <FramePanel aria-busy={isRefetching}>
-              <dl className="grid grid-cols-4 gap-x-3 gap-y-4 lg:grid-cols-8">
-                {prayerTimes.map((prayer) => {
-                  const isNext =
-                    !nextPrayer?.isTomorrow && nextPrayer?.key === prayer.key;
-                  return (
-                    <div
-                      key={prayer.key}
-                      aria-current={isNext ? "time" : undefined}
-                      className="flex min-w-0 flex-col gap-0.5"
-                    >
-                      <dt
-                        className={cn(
-                          "truncate text-xs",
-                          isNext ? "text-foreground" : "text-muted-foreground",
-                        )}
-                      >
-                        {prayer.name}
-                      </dt>
-                      <dd
-                        className={cn(
-                          "text-sm tabular-nums",
-                          isNext
-                            ? "font-semibold text-foreground"
-                            : "font-medium text-muted-foreground",
-                        )}
-                      >
-                        {formatSholatTime(jadwalHariIni.timings[prayer.key])}
-                      </dd>
-                    </div>
-                  );
-                })}
-              </dl>
-            </FramePanel>
-          ) : null}
-        </Frame>
-        <Frame>
-          <FrameHeader>
+      <>
+        {jadwalHariIni ? (
+          <TodayTimes
+            className={STRIP}
+            timings={jadwalHariIni.timings}
+            nextKey={
+              nextPrayer && !nextPrayer.isTomorrow ? nextPrayer.key : undefined
+            }
+            nowTime={now ? format(now, "HH.mm") : undefined}
+          />
+        ) : null}
+        <Frame className={MONTH}>
+          <FrameHeader className="flex-row items-baseline justify-between gap-2">
             <FrameTitle>
-              <h2>Bulan ini</h2>
+              <h2>
+                {now
+                  ? format(now, "MMMM yyyy", { locale: localeId })
+                  : "Bulan ini"}
+              </h2>
             </FrameTitle>
-            <FrameDescription>Hari ini ditandai.</FrameDescription>
+            <FrameDescription>Hari ini ditandai</FrameDescription>
           </FrameHeader>
-          <FramePanel className="p-0" aria-busy={isRefetching}>
-            <Jadwal waktu={waktu} today={today?.matchDate} />
+          <FramePanel
+            id={monthPanelId}
+            className="p-0"
+            aria-busy={isRefetching}
+          >
+            <Jadwal
+              waktu={waktu}
+              today={today?.matchDate}
+              range={showFullMonth ? "full" : "around-today"}
+            />
           </FramePanel>
+          <FrameFooter className="flex-row">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              aria-expanded={showFullMonth}
+              aria-controls={monthPanelId}
+              onClick={() => setShowFullMonth((value) => !value)}
+            >
+              {showFullMonth
+                ? "Tampilkan sekitar hari ini"
+                : "Lihat sebulan penuh"}
+            </Button>
+          </FrameFooter>
         </Frame>
-      </div>
+      </>
     );
   }
 
   return (
     <>
       {waktu.length > 0 ? <Adzan waktu={waktu} /> : null}
-      <PageHeader
-        title="Jadwal Sholat"
-        description={
-          today ? (
-            <span className="flex flex-wrap items-center gap-x-2">
+      <div className="grid min-w-0 grid-cols-1 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:gap-x-16 md:gap-y-10">
+        <section
+          aria-labelledby="hero-title"
+          className={cn(HERO, "flex min-w-0 flex-col gap-3")}
+        >
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+            {today ? (
               <span>{today.currentDate}</span>
-              {jadwalHariIni ? (
-                <>
-                  <span
-                    aria-hidden
-                    className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
-                  />
-                  <span>
-                    {Number(jadwalHariIni.date.hijri.day)}{" "}
-                    {jadwalHariIni.date.hijri.month.en}{" "}
-                    {jadwalHariIni.date.hijri.year} H
-                  </span>
-                </>
-              ) : null}
-            </span>
+            ) : (
+              <Skeleton className="h-4 w-32" />
+            )}
+            {hijri ? (
+              <>
+                <Dot />
+                <span>
+                  {Number(hijri.day)} {hijri.month.en} {hijri.year} H
+                </span>
+              </>
+            ) : null}
+            <Dot />
+            <Button
+              type="button"
+              variant="link"
+              size="sm"
+              onClick={() => setIsOpenMap(true)}
+            >
+              <MapPin aria-hidden="true" />
+              <span className="sr-only">Ubah lokasi, saat ini </span>
+              <UserLocation />
+            </Button>
+            {isRefetching || (isPending && isShowingStored) ? (
+              <Spinner aria-label="Memperbarui jadwal" />
+            ) : null}
+            {isError && isShowingStored ? (
+              <Badge variant="warning-light">Jadwal tersimpan</Badge>
+            ) : null}
+          </div>
+
+          {/* Announces only when the next prayer changes, not every
+              countdown tick. */}
+          <p className="sr-only" aria-live="polite">
+            {nextPrayer
+              ? `Sholat berikutnya ${nextPrayer.name} pukul ${formatSholatTime(nextPrayer.time)}`
+              : ""}
+          </p>
+
+          {nextPrayer ? (
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-muted-foreground">{nextLabel}</p>
+              <h1
+                id="hero-title"
+                className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-5xl leading-none font-semibold tracking-tight md:text-7xl"
+              >
+                <span className="sr-only">Jadwal sholat, berikutnya </span>
+                <span>{nextPrayer.name}</span>
+                <span className="text-muted-foreground tabular-nums">
+                  {formatSholatTime(nextPrayer.time)}
+                </span>
+              </h1>
+              <p className="text-base tabular-nums">
+                {now ? formatCountdown(now, nextPrayer.at) : null}
+              </p>
+            </div>
           ) : (
-            "\u00a0"
-          )
-        }
-      />
-      <section aria-label="Jadwal sholat" className="flex min-w-0 flex-col">
+            <div className="flex flex-col gap-2">
+              <h1
+                id="hero-title"
+                className="text-3xl font-semibold tracking-tight md:text-4xl"
+              >
+                Jadwal Sholat
+              </h1>
+              {isLoadingFirst ? (
+                <Skeleton className="h-12 w-64 max-w-full" />
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  {!jadwalHariIni
+                    ? "Jadwal hari ini belum tersedia."
+                    : now
+                      ? "Sholat hari ini sudah selesai."
+                      : "Menghitung waktu sholat berikutnya…"}
+                </p>
+              )}
+            </div>
+          )}
+
+          <div className="flex flex-wrap gap-2 pt-1">
+            <ReminderButton />
+          </div>
+        </section>
+
+        <HomeShortcuts
+          className={SHORTCUTS}
+          month={today ? `${today.tahun}-${today.bulan}` : undefined}
+          todayIso={now ? format(now, "yyyy-MM-dd") : undefined}
+        />
+
         {renderSchedule()}
-      </section>
+      </div>
+
       <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
         <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto sm:max-w-4xl">
           <DialogHeader>

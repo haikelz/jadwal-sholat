@@ -11,6 +11,7 @@ import { DataGridScrollArea } from "@/components/reui/data-grid/data-grid-scroll
 import { DataGridTable } from "@/components/reui/data-grid/data-grid-table";
 import { JadwalSholatProps } from "@/interfaces";
 import { formatSholatTime } from "@/lib/helpers";
+import { cn } from "@/lib/utils/cn";
 import { ColumnDef, useTable } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
@@ -53,11 +54,15 @@ type JadwalRow = {
 export function Jadwal({
   waktu,
   today,
+  range = "full",
 }: {
   waktu: JadwalSholatProps[];
   /** Today as `dd-MM-yyyy`, from the caller's live clock. */
   today?: string;
+  /** "around-today" shows today ±2 days; "full" the whole month. */
+  range?: "around-today" | "full";
 }) {
+  const isFull = range === "full";
   const rows = useMemo<JadwalRow[]>(
     () =>
       waktu.map((time) => ({
@@ -73,6 +78,13 @@ export function Jadwal({
       })),
     [waktu, today],
   );
+
+  // Today ±2 days; the whole month when today isn't in it (month rollover).
+  const visibleRows = useMemo(() => {
+    const todayIndex = rows.findIndex((row) => row.isToday);
+    if (isFull || todayIndex === -1) return rows;
+    return rows.slice(Math.max(0, todayIndex - 2), todayIndex + 3);
+  }, [rows, isFull]);
 
   const columns = useMemo<ColumnDef<DataGridFeatures, JadwalRow>[]>(
     () => [
@@ -113,7 +125,8 @@ export function Jadwal({
   const hasScrolledRef = useRef(false);
   useEffect(() => {
     const root = containerRef.current;
-    if (!root || !today || hasScrolledRef.current) return;
+    // Only the full month scrolls; the around-today view already starts there.
+    if (!root || !today || !isFull || hasScrolledRef.current) return;
     const targets = root.querySelectorAll<HTMLElement>(
       `[data-today], [data-row-id="${today}"]`,
     );
@@ -129,16 +142,16 @@ export function Jadwal({
         offset - (scroller.clientHeight - target.clientHeight) / 2;
       hasScrolledRef.current = true;
     }
-  }, [today, rows]);
+  }, [today, rows, isFull]);
 
   const table = useTable({
     features: dataGridFeatures,
     columns,
-    data: rows,
+    data: visibleRows,
     getRowId: (row: JadwalRow) => row.key,
     state: {
       // ponytail: one month fits on one page, so paging stays off.
-      pagination: { pageIndex: 0, pageSize: Math.max(rows.length, 1) },
+      pagination: { pageIndex: 0, pageSize: Math.max(visibleRows.length, 1) },
     },
   });
 
@@ -147,8 +160,13 @@ export function Jadwal({
       {/* ponytail: fixed-height scroll regions keep the month compact below
           today's panel; upgrade to a flex-filled height if the page layout
           ever gives this panel a bounded height. */}
-      <ul className="flex max-h-120 flex-col divide-y overflow-y-auto md:hidden">
-        {rows.map((row) => (
+      <ul
+        className={cn(
+          "flex flex-col divide-y md:hidden",
+          isFull && "max-h-120 overflow-y-auto",
+        )}
+      >
+        {visibleRows.map((row) => (
           <li
             key={row.key}
             aria-current={row.isToday ? "date" : undefined}
@@ -181,15 +199,15 @@ export function Jadwal({
       <div className="hidden w-full md:block">
         <DataGrid
           table={table}
-          recordCount={rows.length}
+          recordCount={visibleRows.length}
           emptyMessage="Jadwal bulan ini belum tersedia."
-          tableLayout={{ stripped: true, headerSticky: true }}
+          tableLayout={{ stripped: true, headerSticky: isFull }}
           // The default sticky header uses the page background, which reads
           // as a dark band inside the card-colored panel. Match the panel.
           tableClassNames={{ headerSticky: "sticky top-0 z-10 bg-card" }}
         >
           <DataGridContainer>
-            <DataGridScrollArea className="h-120">
+            <DataGridScrollArea className={isFull ? "h-120" : undefined}>
               <DataGridTable />
             </DataGridScrollArea>
           </DataGridContainer>
