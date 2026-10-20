@@ -6,7 +6,7 @@
 
 ## Features
 
-- The current prayer period, the next prayer with a live countdown, today's times, the Hijri date, and the monthly schedule scrolled to today, based on the reader's remembered location
+- The current prayer period, the next prayer with a live countdown, today's times, the Hijri date, shortcuts to continue reading and the next sunnah fast, and the days around today with the full month one tap away, based on the reader's remembered location
 - Optional adzan reminders through browser notifications, and the last loaded schedule when offline
 - Al-Qur'an with reciter selection, audio, transliteration, translation, tafsir, a sticky reading toolbar, jump-to-ayah, Makkiyyah/Madaniyyah filtering, and a "continue reading" shortcut
 - Hadith browsing by book and number
@@ -124,7 +124,7 @@ The screenshots were captured from a production build at `1440×900` for desktop
 
 ## Design system
 
-The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell` and left-aligned `PageHeader`. Glance pages (the prayer schedule and sunnah fasting) use ReUI `Frame` panels and the ReUI data grid. Reading pages (Al-Qur'an, hadith, Asma'ul Husna) use a centered reading column with plain divided rows instead of panels. Mobile navigation is a bottom tab bar; desktop uses a sidebar. Colors come from semantic theme tokens (shadcn neutral plus ReUI's success, info, and warning tokens) and work in light and dark mode. Every data region has its own loading skeleton, empty state, and error state with a retry action.
+The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell`; list pages use a left-aligned `PageHeader`, and surah pages use a centered, mushaf-style header. The homepage leads with the next prayer in plain type and keeps a ReUI `Frame` only around the month data grid; the sunnah fasting page uses a `Frame` and the data grid. Reading pages (Al-Qur'an, hadith, Asma'ul Husna) use a centered reading column with plain divided rows instead of panels. Desktop navigation is a top bar; on phones it is a bottom tab bar. Colors come from semantic theme tokens (shadcn neutral plus ReUI's success, info, and warning tokens) and work in light and dark mode. Every data region has its own loading skeleton, empty state, and error state with a retry action.
 
 ## Performance
 
