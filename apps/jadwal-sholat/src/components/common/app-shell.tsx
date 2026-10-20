@@ -56,7 +56,7 @@ export function AppShell({ children }: ChildrenProps) {
       </a>
       {/* h-14 on phones, h-16 from md: sticky page toolbars sit below it. */}
       <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 md:h-16 lg:px-8">
+        <div className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between gap-3 px-4 sm:px-6 md:h-16 lg:px-8">
           {/* Phones: back link on detail pages, then the section title. */}
           <div className="flex min-w-0 items-center gap-1 md:hidden">
             {backHref ? (

@@ -9,8 +9,9 @@ export function PageShell({
   children: ReactNode;
   className?: string;
   /**
-   * "wide" for glance pages (schedules, tables); "reading" for a centered
-   * column of comfortable line length (Qur'an, hadith, Asma'ul Husna).
+   * "wide" (default) is the site width shared with the top bar, so page
+   * edges line up everywhere. "reading" is a narrower centered column for
+   * long text on detail pages (a surah, a hadith).
    */
   width?: "wide" | "reading";
 }) {
@@ -19,7 +20,7 @@ export function PageShell({
       className={cn(
         // pb-24 below md leaves room for the fixed bottom navigation.
         "mx-auto flex w-full min-w-0 flex-col gap-6 pt-6 pb-24 md:pb-12 lg:pt-8",
-        width === "reading" ? "max-w-3xl" : "max-w-7xl",
+        width === "reading" ? "max-w-3xl" : "max-w-5xl",
         // CSS entrance instead of a motion library; globals.css shortens it
         // for prefers-reduced-motion.
         "animate-in fade-in slide-in-from-bottom-1.5 duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",

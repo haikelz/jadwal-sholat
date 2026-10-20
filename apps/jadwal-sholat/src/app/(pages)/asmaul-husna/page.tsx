@@ -29,7 +29,7 @@ export default async function AsmaulHusna() {
   const asmaulHusna: AsmaulHusnaProps[] = await getAllAsmaulHusna();
 
   return (
-    <PageShell width="reading">
+    <PageShell>
       <PageHeader
         title="Asma'ul Husna"
         description="Kenali 99 nama Allah beserta tulisan Arab dan artinya."

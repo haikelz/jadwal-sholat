@@ -12,7 +12,7 @@ export const metadata = createPageMetadata({
 
 export default function Hadith() {
   return (
-    <PageShell width="reading">
+    <PageShell>
       <PageHeader
         title="Hadith"
         description="Kumpulan hadith Nabi Muhammad ﷺ berdasarkan kitab dan nomor."
