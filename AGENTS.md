@@ -28,7 +28,8 @@ Builds are memory-heavy. Stop `bun run dev:web` and any other `next build` or `n
 - Do not restyle installed components (radius, height, padding, shadow); use their `size` and `variant` props, and change the look through the theme tokens in `globals.css`.
 - Build pages with `PageShell` and `PageHeader` from `src/components/common/page-shell.tsx`. The site is a companion app, not a dashboard, so it uses two layouts:
   - Glance pages (homepage schedule, Puasa Sunnah): `<PageShell>`. The homepage leads with the next prayer as plain type and keeps a `Frame` only around the month data grid; Puasa Sunnah keeps its `Frame` and data grid.
-  - Reading pages (Qur'an, hadith, Asma'ul Husna): `<PageShell width="reading">`, a centered column with no frames around content; separate items with `divide-y` rows and generous spacing.
+  - Reading pages (Qur'an, hadith, Asma'ul Husna): no frames around content; separate items with `divide-y` rows and generous spacing. List pages use the default site width; detail pages (a surah, a hadith) use `<PageShell width="reading">`, a centered 768px column with a centered header (`PageHeader align="center"` or the surah's mushaf-style header).
+- Widths: the top bar and every `PageShell` share one site width (`max-w-5xl`), so page edges line up; only detail pages narrow to the reading column. Don't add page-level `max-w-*` elsewhere.
 - Navigation is a top bar with the five sections from `md` up and a bottom tab bar below `md`; there is no sidebar and there are no breadcrumbs. On phones, detail pages show a back link in the top bar. `PageShell` reserves `pb-24` for the bar on mobile.
 - Give every data region a `Skeleton` loading state, an `Empty` state with one action, and an inline `Alert` error with a retry.
 - Fetch with `getData` from `src/lib/utils/get-data.ts` (native `fetch`); in client components use `useFetch`, which accepts server `initialData` and skips the request while its URL is `""`.
