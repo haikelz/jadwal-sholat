@@ -36,14 +36,27 @@ export function PageHeader({
   title,
   description,
   actions,
+  align = "start",
 }: {
   title: string;
   description: ReactNode;
   actions?: ReactNode;
+  /** "center" for detail pages in the reading column. */
+  align?: "start" | "center";
 }) {
+  const centered = align === "center";
   return (
-    <header className="flex w-full flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-      <div className="flex min-w-0 flex-col gap-0.5">
+    <header
+      className={cn(
+        "flex w-full flex-col gap-4",
+        centered
+          ? "items-center text-center"
+          : "sm:flex-row sm:items-end sm:justify-between",
+      )}
+    >
+      <div
+        className={cn("flex min-w-0 flex-col gap-0.5", centered && "items-center")}
+      >
         <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
         <p data-cy="description" className="text-sm text-muted-foreground">
           {description}

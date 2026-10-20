@@ -94,6 +94,7 @@ export function DetailHadithPage({
   return (
     <article className="flex w-full min-w-0 flex-col gap-6">
       <PageHeader
+        align="center"
         title={`Hadith no. ${contents.number}`}
         description={bookMeta?.name ?? book}
         actions={
