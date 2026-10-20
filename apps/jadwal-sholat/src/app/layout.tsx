@@ -1,4 +1,4 @@
-import { CustomSidebar } from "@/components/common/sidebar";
+import { AppShell } from "@/components/common/app-shell";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChildrenProps } from "@/interfaces";
@@ -104,7 +104,7 @@ export default function Layout({ children }: ChildrenProps) {
         <NuqsAdapter>
           <Wrapper>
             <TooltipProvider>
-              <CustomSidebar>{children}</CustomSidebar>
+              <AppShell>{children}</AppShell>
             </TooltipProvider>
             {/* Keep toasts above the mobile bottom navigation. */}
             <Toaster

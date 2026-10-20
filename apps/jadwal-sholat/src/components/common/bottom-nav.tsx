@@ -20,16 +20,17 @@ export type NavItem = {
   url: string;
 };
 
+// Order and labels follow the "Next Layout" canvas.
 export const navItems: NavItem[] = [
   { title: "Jadwal Sholat", shortTitle: "Jadwal", icon: Clock4, url: "/" },
+  { title: "Al-Qur'an", shortTitle: "Qur'an", icon: BookMarked, url: "/quran" },
+  { title: "Hadith", shortTitle: "Hadith", icon: BookOpen, url: "/hadith" },
   {
     title: "Asma'ul Husna",
     shortTitle: "Asmaul Husna",
     icon: List,
     url: "/asmaul-husna",
   },
-  { title: "Qur'an", shortTitle: "Qur'an", icon: BookMarked, url: "/quran" },
-  { title: "Hadith", shortTitle: "Hadith", icon: BookOpen, url: "/hadith" },
   {
     title: "Puasa Sunnah",
     shortTitle: "Puasa",
@@ -42,13 +43,13 @@ export function isNavItemActive(pathname: string, url: string) {
   return url === "/" ? pathname === "/" : pathname.startsWith(url);
 }
 
-/** Thumb-reachable section tabs for phones; desktop uses the sidebar. */
+/** Thumb-reachable section tabs for phones; desktop uses the top bar. */
 export function BottomNav() {
   const pathname = usePathname();
 
   return (
     <nav
-      aria-label="Navigasi utama"
+      aria-label="Navigasi bawah"
       className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
     >
       <ul className="grid grid-cols-5">
