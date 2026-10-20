@@ -117,7 +117,13 @@ export function DetailSurat({ data }: SuratProps) {
           return (
             <article
               key={index + 1}
-              className="flex min-w-0 flex-col gap-4 py-6 first:pt-0"
+              aria-current={isCurrent ? "true" : undefined}
+              className={cn(
+                "flex min-w-0 flex-col gap-4 py-6 transition-colors first:pt-0",
+                // Soft highlight on the ayah being recited; the negative
+                // margin keeps the text where it was.
+                isCurrent && "-mx-4 rounded-xl bg-muted/60 px-4 first:pt-6",
+              )}
             >
               <div className="flex items-center justify-between gap-2">
                 <span
@@ -126,8 +132,10 @@ export function DetailSurat({ data }: SuratProps) {
                   // Focus target for "Lompat ke ayat".
                   tabIndex={-1}
                   className={cn(
-                    // Clear the sticky app header and reading toolbar.
-                    "flex size-8 scroll-mt-44 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-32",
+                    // Clear the sticky app header and reading toolbar:
+                    // mobile 56px header + ~97px wrapped toolbar, md+ 64px
+                    // header + ~57px one-row toolbar.
+                    "flex size-8 scroll-mt-40 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-32",
                     isCurrent &&
                       "border-primary bg-primary text-primary-foreground",
                   )}
@@ -219,7 +227,6 @@ export function DetailSurat({ data }: SuratProps) {
                 dir="rtl"
                 className={cn(
                   "arabic-font min-w-0 text-right text-3xl font-medium wrap-anywhere sm:text-4xl",
-                  isCurrent && "text-muted-foreground",
                 )}
               >
                 {ayat.text.ar}

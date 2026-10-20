@@ -5,7 +5,6 @@ import { PreviousOrNext } from "@/components/quran/detail-surat/previous-or-next
 import { ErrorWhileFetch } from "@/components/react-query/error-while-fetch";
 import { IsRefetching } from "@/components/react-query/is-refetching";
 import { LoadingClient } from "@/components/react-query/loading-client";
-import { PageHeader } from "@/components/common/page-shell";
 import {
   Select,
   SelectContent,
@@ -21,7 +20,8 @@ import { useFetch } from "@/hooks";
 import { DEFAULT_QORI, qoriOptions } from "@/lib/utils/qori-options";
 import { SuratProps } from "@/interfaces";
 import useGlobalStore from "@/store";
-import { Languages, Volume2 } from "lucide-react";
+import { ChevronLeft, Languages, Volume2 } from "lucide-react";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import { FormEvent, useId, useState } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
@@ -83,29 +83,48 @@ export function DetailSuratPage({
 
   return (
     <div className="flex w-full min-w-0 flex-col gap-6">
-      <PageHeader
-        title={surat.asma.id.short}
-        description={
-          <span className="flex flex-wrap items-center gap-x-2">
-            <span>{surat.asma.translation.id}</span>
-            <span
-              aria-hidden
-              className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
-            />
-            <span>{surat.type.id}</span>
-            <span
-              aria-hidden
-              className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
-            />
-            <span className="tabular-nums">{surat.ayahCount} ayat</span>
-          </span>
-        }
-      />
-      {/* Sticky under the h-14 app header so the controls stay reachable in
-          long surahs. */}
+      {/* Mobile has the app bar's back button; desktop gets this link. */}
+      <Link
+        href="/quran"
+        className="hidden items-center gap-1 self-start rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:inline-flex"
+      >
+        <ChevronLeft aria-hidden="true" className="size-4" />
+        Daftar surat
+      </Link>
+      {/* Centered, mushaf-style surah header. */}
+      <header className="flex flex-col items-center gap-1 text-center">
+        <p
+          lang="ar"
+          dir="rtl"
+          className="arabic-font text-4xl leading-relaxed md:text-5xl"
+        >
+          {surat.asma.ar.short}
+        </p>
+        <h1 className="text-xl font-semibold tracking-tight md:text-2xl">
+          {surat.asma.id.short}
+        </h1>
+        <p
+          data-cy="description"
+          className="flex flex-wrap items-center justify-center gap-x-2 text-sm text-muted-foreground"
+        >
+          <span>{surat.asma.translation.id}</span>
+          <span
+            aria-hidden
+            className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
+          />
+          <span>{surat.type.id}</span>
+          <span
+            aria-hidden
+            className="size-1 shrink-0 rounded-full bg-muted-foreground/40"
+          />
+          <span className="tabular-nums">{surat.ayahCount} ayat</span>
+        </p>
+      </header>
+      {/* Sticky under the app header (h-14 on mobile, h-16 from md) so the
+          controls stay reachable in long surahs. */}
       <section
         aria-label="Pengaturan bacaan"
-        className="sticky top-14 z-10 flex flex-wrap items-center gap-2 border-b bg-background/95 py-3 backdrop-blur"
+        className="sticky top-14 z-10 flex flex-wrap items-center gap-2 border-b bg-background/95 py-3 backdrop-blur md:top-16"
       >
         <Toggle
           variant="outline"

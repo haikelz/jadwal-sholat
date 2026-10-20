@@ -78,6 +78,10 @@ export interface SuratProps {
       id: {
         short: string;
       };
+      ar: {
+        short: string;
+        long: string;
+      };
     };
     tafsir: {
       id: string;
