@@ -1,5 +1,6 @@
 "use client";
 
+import { ShareButton } from "@/components/common/share-button";
 import { DetailSurat } from "@/components/quran/detail-surat/detail-surat";
 import { PreviousOrNext } from "@/components/quran/detail-surat/previous-or-next";
 import { ErrorWhileFetch } from "@/components/react-query/error-while-fetch";
@@ -119,6 +120,13 @@ export function DetailSuratPage({
           />
           <span className="tabular-nums">{surat.ayahCount} ayat</span>
         </p>
+        <div className="pt-2">
+          <ShareButton
+            path={`/quran/${surat.number}`}
+            title={`QS. ${surat.asma.id.short}`}
+            excerpt={`${surat.asma.translation.id} · ${surat.ayahCount} ayat`}
+          />
+        </div>
       </header>
       {/* Sticky under the app header (h-14 on mobile, h-16 from md) so the
           controls stay reachable in long surahs. */}

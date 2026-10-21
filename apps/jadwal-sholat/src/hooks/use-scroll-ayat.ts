@@ -29,7 +29,11 @@ export function useScrollAyat({
       `ayat-${lastRead.ayat?.toString() as string}`,
     );
 
+    // A shared link to one ayah (#ayat-N) wins over the last-read position.
+    const hasAyatLink = window.location.hash.startsWith("#ayat-");
+
     if (
+      !hasAyatLink &&
       lastReadId &&
       lastRead.number === Number(localStorage.getItem("selected-surat"))
     ) {

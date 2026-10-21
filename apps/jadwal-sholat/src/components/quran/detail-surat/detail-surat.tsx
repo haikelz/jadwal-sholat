@@ -1,5 +1,6 @@
 "use client";
 
+import { ShareButton } from "@/components/common/share-button";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -136,6 +137,8 @@ export function DetailSurat({ data }: SuratProps) {
                     // mobile 56px header + ~97px wrapped toolbar, md+ 64px
                     // header + ~57px one-row toolbar.
                     "flex size-8 scroll-mt-40 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-32",
+                    // An ayah opened from a shared link (#ayat-N) is marked.
+                    "target:border-foreground target:ring-2 target:ring-ring/50",
                     isCurrent &&
                       "border-primary bg-primary text-primary-foreground",
                   )}
@@ -169,6 +172,12 @@ export function DetailSurat({ data }: SuratProps) {
                       </TooltipContent>
                     </Tooltip>
                   ) : null}
+                  <ShareButton
+                    iconOnly
+                    path={`/quran/${data.number}#ayat-${ayat.number.insurah}`}
+                    title={`QS. ${data.asma.id.short}: ${ayat.number.insurah}`}
+                    excerpt={ayat.translation.id}
+                  />
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button

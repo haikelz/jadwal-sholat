@@ -1,6 +1,7 @@
 "use client";
 
 import { PageHeader } from "@/components/common/page-shell";
+import { ShareButton } from "@/components/common/share-button";
 import {
   Alert,
   AlertAction,
@@ -107,6 +108,11 @@ export function DetailHadithPage({
                 </Link>
               </Button>
             ) : null}
+            <ShareButton
+              path={`/hadith/${book}/${contents.number}`}
+              title={`${bookMeta?.name ?? book} no. ${contents.number}`}
+              excerpt={contents.id}
+            />
             {canGoNext ? (
               <Button asChild variant="outline">
                 <Link href={`/hadith/${book}/${currentNum + 1}`}>
