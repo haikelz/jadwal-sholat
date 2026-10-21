@@ -33,6 +33,7 @@ import useGlobalStore from "@/store";
 import { CalendarX, CircleAlert } from "lucide-react";
 import { useId } from "react";
 import { TablePuasaSunnah } from "../table-puasa-sunnah";
+import { PuasaCalendar } from "./puasa-calendar";
 
 const puasaTypesList = [
   { key: "all", name: "Semua" },
@@ -166,12 +167,20 @@ export function PuasaSunnahPage() {
           className="flex flex-col gap-3"
         >
           <span className="sr-only">Memuat jadwal puasa sunnah…</span>
-          {Array.from({ length: 6 }, (_, index) => (
-            <div key={index} className="flex items-center gap-4">
-              <Skeleton className="h-4 w-48" />
-              <Skeleton className="h-5 w-32 rounded-full" />
-            </div>
-          ))}
+          <div className="flex flex-col gap-3 md:hidden">
+            {Array.from({ length: 6 }, (_, index) => (
+              <div key={index} className="flex items-center gap-4">
+                <Skeleton className="h-4 w-48" />
+                <Skeleton className="h-5 w-32 rounded-full" />
+              </div>
+            ))}
+          </div>
+          {/* Desktop shows a month calendar, so its skeleton is one too. */}
+          <div className="hidden grid-cols-7 gap-2 md:grid">
+            {Array.from({ length: 35 }, (_, index) => (
+              <Skeleton key={index} className="h-24" />
+            ))}
+          </div>
         </FramePanel>
       ) : isError ? (
         <FramePanel>
@@ -209,13 +218,24 @@ export function PuasaSunnahPage() {
               </p>
             </FramePanel>
           ) : null}
-          <FramePanel className="p-0">
+          {/* Phones keep the list; from md up the month reads as a calendar. */}
+          <FramePanel className="p-0 md:hidden">
             <TablePuasaSunnah
               puasaList={puasaList}
               today={today?.currentDateWithDayOfWeek}
               todayIso={todayIso}
             />
           </FramePanel>
+          {today && month ? (
+            <FramePanel className="hidden p-0 md:block">
+              <PuasaCalendar
+                year={today.tahun}
+                month={month}
+                puasaList={puasaList}
+                todayIso={todayIso}
+              />
+            </FramePanel>
+          ) : null}
         </>
       ) : (
         <FramePanel>
