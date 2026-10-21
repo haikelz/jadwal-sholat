@@ -88,9 +88,9 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
           </Link>
         </Button>
       ) : null}
-      <div className="flex w-full flex-col gap-3">
+      <div className="flex w-full flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <SearchBar value={search} setSearch={setSearch} name="search" />
-        <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2 md:justify-end">
           <div
             role="group"
             aria-label="Jenis surat"
@@ -129,9 +129,11 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
           </EmptyContent>
         </Empty>
       ) : filteredSurat.length ? (
-        <ul className="flex w-full flex-col divide-y border-y">
+        // One column on phones; on wider screens the 114 surahs flow into
+        // columns instead of stretching each row across the page.
+        <ul className="grid w-full grid-cols-1 border-t md:grid-cols-2 md:gap-x-8 lg:grid-cols-3">
           {filteredSurat.map((surat) => (
-            <li key={surat.number} data-cy="card">
+            <li key={surat.number} data-cy="card" className="border-b">
               <Link
                 href={`/quran/${surat.number}`}
                 onClick={removeSelectedSurat}

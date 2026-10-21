@@ -40,7 +40,7 @@ export function AsmaulHusnaRow({
   return (
     <li
       data-cy="card"
-      className="flex items-center justify-between gap-4 px-2 py-3"
+      className="flex items-center justify-between gap-4 border-b px-2 py-3"
     >
       <div className="flex min-w-0 flex-col gap-0.5">
         <p className="text-sm font-medium">

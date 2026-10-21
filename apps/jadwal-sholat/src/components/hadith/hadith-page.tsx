@@ -59,7 +59,7 @@ function buildBooksUrl(): string {
 
 function HadithRowSkeleton() {
   return (
-    <li className="flex flex-col gap-2 px-2 py-3">
+    <li className="flex flex-col gap-2 border-b px-2 py-3">
       <Skeleton className="h-4 w-2/5" />
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-4/5" />
@@ -210,7 +210,7 @@ export function HadithPage() {
         <ul
           role="status"
           aria-label="Memuat hadith"
-          className="flex w-full flex-col divide-y border-y"
+          className="grid w-full grid-cols-1 border-t md:grid-cols-2 md:gap-x-8"
         >
           {Array.from({ length: isLoadingList ? 6 : 1 }, (_, index) => (
             <HadithRowSkeleton key={index} />
@@ -231,10 +231,10 @@ export function HadithPage() {
         </Alert>
       ) : displayHadiths.length ? (
         <>
-          {/* A reading list: plain rows instead of a grid of panels. */}
-          <ul className="flex w-full flex-col divide-y border-y">
+          {/* Plain rows; two columns on wider screens instead of full-width lines. */}
+          <ul className="grid w-full grid-cols-1 border-t md:grid-cols-2 md:gap-x-8">
             {displayHadiths.map((h) => (
-              <li key={`${book}-${h.number}`} data-cy="card">
+              <li key={`${book}-${h.number}`} data-cy="card" className="border-b">
                 <Link
                   href={`/hadith/${book}/${h.number}`}
                   className="flex flex-col gap-1 px-2 py-3 transition-colors outline-none hover:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"

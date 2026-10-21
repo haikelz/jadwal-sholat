@@ -57,7 +57,7 @@ export function AsmaulHusnaPage({
         />
       </div>
       {filteredAsmaulHusna.length ? (
-        <ul className="flex w-full flex-col divide-y border-y">
+        <ul className="grid w-full grid-cols-1 border-t md:grid-cols-2 md:gap-x-8">
           {filteredAsmaulHusna.map((item) => (
             <AsmaulHusnaRow
               dataAsmaulHusna={item}
