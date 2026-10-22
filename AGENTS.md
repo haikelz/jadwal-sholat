@@ -4,7 +4,8 @@
 
 - `apps/jadwal-sholat` is the Next.js App Router application.
 - `apps/mobile` is the Android app (Expo SDK 58, Expo Router, NativeWind v4 + React Native Reusables). See `apps/mobile/AGENTS.md`.
-- `packages/core` holds framework-free domain code shared by the web and the Android app: API schemas and URL builders, prayer logic, the adzan schedule, dates, share links, Qur'an and puasa helpers, and bundled static data. It must never import React, React Query or zustand, because each app pins its own React.
+- `packages/core` holds framework-free domain code shared by the web and the Android app: API schemas and URL builders, prayer logic, the adzan schedule, dates, share links, Qur'an and puasa helpers, and bundled static data. It must never import React, React Query or zustand.
+- Both apps pin the same `react`, `react-dom`, `@types/react` and `@types/react-dom`: the versions the Expo SDK in `apps/mobile` requires. A fresh install (Vercel, EAS) hoists one copy per package for the whole workspace, so two versions mix type definitions and can load two Reacts. Bump them together.
 - `packages/eslint-config` and `packages/typescript-config` contain shared tooling.
 - `static/docs` contains README screenshots.
 - Run workspace commands from the repository root unless a command says otherwise.
