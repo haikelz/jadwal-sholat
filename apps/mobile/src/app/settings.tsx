@@ -1,3 +1,4 @@
+import { AdzanSettings } from "@/components/adzan/adzan-settings";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Text } from "@/components/ui/text";
@@ -16,6 +17,8 @@ export default function SettingsScreen() {
 
   return (
     <ScrollView contentContainerClassName="gap-8 p-4 pb-10">
+      <AdzanSettings />
+
       <View className="gap-3">
         <Text variant="large" accessibilityRole="header">
           Tema

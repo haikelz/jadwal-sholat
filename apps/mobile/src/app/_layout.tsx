@@ -1,5 +1,6 @@
 import "../global.css";
 
+import { AdzanSync } from "@/components/adzan/adzan-sync";
 import { queryClient } from "@/lib/query-client";
 import { NAV_THEME } from "@/lib/theme";
 import { useStoresHydrated } from "@/store/hydration";
@@ -49,6 +50,7 @@ export default function RootLayout() {
             options={{ presentation: "modal", title: "Tafsir" }}
           />
         </Stack>
+        <AdzanSync />
         <PortalHost />
       </ThemeProvider>
     </QueryClientProvider>
