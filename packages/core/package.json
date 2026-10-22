@@ -1,0 +1,31 @@
+{
+  "name": "@jadwal-sholat/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Framework-free domain code shared by the web and Android apps. Never imports React.",
+  "exports": {
+    "./api": "./src/api/index.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./prayer": "./src/prayer/index.ts",
+    "./dates": "./src/dates/index.ts",
+    "./share": "./src/share/index.ts",
+    "./quran": "./src/quran/index.ts",
+    "./puasa": "./src/puasa/index.ts",
+    "./data": "./src/data/index.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "snapshot:data": "bun scripts/snapshot-static-data.ts"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@jadwal-sholat/typescript-config": "workspace:*",
+    "@types/bun": "^1.4.3",
+    "typescript": "5.9.3"
+  }
+}

@@ -4,7 +4,9 @@
   "scripts": {
     "build:web": "moon run jadwal-sholat:build",
     "dev:web": "moon run jadwal-sholat:dev",
-    "test:web": "moon run jadwal-sholat:test"
+    "test:core": "moon run core:test",
+    "test:web": "moon run jadwal-sholat:test",
+    "typecheck:core": "moon run core:typecheck"
   },
   "devDependencies": {
     "@moonrepo/cli": "^2.1.1",

@@ -20,6 +20,8 @@ const withPWA = withPWAInit({
 const config = withSentryConfig(
   withPWA({
     reactStrictMode: true,
+    // Shared TS source from packages/core; Next compiles it like app code.
+    transpilePackages: ["@jadwal-sholat/core"],
     // Pin the monorepo root so a stray lockfile higher up (e.g. in $HOME)
     // can't make Next infer the wrong workspace.
     turbopack: { root: fileURLToPath(new URL("../..", import.meta.url)) },

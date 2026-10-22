@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@jadwal-sholat/core/share";
 import { MetaUrl } from "./enums";
 
 export const SITE_NAME = "Jadwal Sholat";
-export const SITE_URL = MetaUrl.Site_Url;
+export { SITE_URL };
 export const DEFAULT_OG_IMAGE = MetaUrl.Default_Og_Url;
 export const DEFAULT_DESCRIPTION =
   "Jadwal sholat berdasarkan lokasi, Al-Qur'an, hadith, doa harian, Asmaul Husna, dan jadwal puasa sunnah.";

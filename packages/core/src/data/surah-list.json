@@ -1,0 +1,1712 @@
+[
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Fatihah"
+      },
+      "translation": {
+        "id": "Pembukaan"
+      }
+    },
+    "ayahCount": 7,
+    "number": 1,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Baqarah"
+      },
+      "translation": {
+        "id": "Sapi"
+      }
+    },
+    "ayahCount": 286,
+    "number": 2,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Ali 'Imran"
+      },
+      "translation": {
+        "id": "Keluarga Imran"
+      }
+    },
+    "ayahCount": 200,
+    "number": 3,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Nisa'"
+      },
+      "translation": {
+        "id": "Wanita"
+      }
+    },
+    "ayahCount": 176,
+    "number": 4,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Ma'idah"
+      },
+      "translation": {
+        "id": "Hidangan"
+      }
+    },
+    "ayahCount": 120,
+    "number": 5,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-An'am"
+      },
+      "translation": {
+        "id": "Binatang Ternak"
+      }
+    },
+    "ayahCount": 165,
+    "number": 6,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-A'raf"
+      },
+      "translation": {
+        "id": "Tempat Tertinggi"
+      }
+    },
+    "ayahCount": 206,
+    "number": 7,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Anfal"
+      },
+      "translation": {
+        "id": "Rampasan Perang"
+      }
+    },
+    "ayahCount": 75,
+    "number": 8,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Taubah"
+      },
+      "translation": {
+        "id": "Pengampunan"
+      }
+    },
+    "ayahCount": 129,
+    "number": 9,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Yunus"
+      },
+      "translation": {
+        "id": "Yunus"
+      }
+    },
+    "ayahCount": 109,
+    "number": 10,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Hud"
+      },
+      "translation": {
+        "id": "Hud"
+      }
+    },
+    "ayahCount": 123,
+    "number": 11,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Yusuf"
+      },
+      "translation": {
+        "id": "Yusuf"
+      }
+    },
+    "ayahCount": 111,
+    "number": 12,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Ar-Ra'd"
+      },
+      "translation": {
+        "id": "Guruh"
+      }
+    },
+    "ayahCount": 43,
+    "number": 13,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Ibrahim"
+      },
+      "translation": {
+        "id": "Ibrahim"
+      }
+    },
+    "ayahCount": 52,
+    "number": 14,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Hijr"
+      },
+      "translation": {
+        "id": "Hijr"
+      }
+    },
+    "ayahCount": 99,
+    "number": 15,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Nahl"
+      },
+      "translation": {
+        "id": "Lebah"
+      }
+    },
+    "ayahCount": 128,
+    "number": 16,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Isra'"
+      },
+      "translation": {
+        "id": "Memperjalankan Malam Hari"
+      }
+    },
+    "ayahCount": 111,
+    "number": 17,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Kahf"
+      },
+      "translation": {
+        "id": "Goa"
+      }
+    },
+    "ayahCount": 110,
+    "number": 18,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Maryam"
+      },
+      "translation": {
+        "id": "Maryam"
+      }
+    },
+    "ayahCount": 98,
+    "number": 19,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Taha"
+      },
+      "translation": {
+        "id": "Taha"
+      }
+    },
+    "ayahCount": 135,
+    "number": 20,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Anbiya'"
+      },
+      "translation": {
+        "id": "Para Nabi"
+      }
+    },
+    "ayahCount": 112,
+    "number": 21,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Hajj"
+      },
+      "translation": {
+        "id": "Haji"
+      }
+    },
+    "ayahCount": 78,
+    "number": 22,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Mu'minun"
+      },
+      "translation": {
+        "id": "Orang-Orang Mukmin"
+      }
+    },
+    "ayahCount": 118,
+    "number": 23,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Nur"
+      },
+      "translation": {
+        "id": "Cahaya"
+      }
+    },
+    "ayahCount": 64,
+    "number": 24,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Furqan"
+      },
+      "translation": {
+        "id": "Pembeda"
+      }
+    },
+    "ayahCount": 77,
+    "number": 25,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Asy-Syu'ara'"
+      },
+      "translation": {
+        "id": "Para Penyair"
+      }
+    },
+    "ayahCount": 227,
+    "number": 26,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Naml"
+      },
+      "translation": {
+        "id": "Semut-semut"
+      }
+    },
+    "ayahCount": 93,
+    "number": 27,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Qasas"
+      },
+      "translation": {
+        "id": "Kisah-Kisah"
+      }
+    },
+    "ayahCount": 88,
+    "number": 28,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-'Ankabut"
+      },
+      "translation": {
+        "id": "Laba-Laba"
+      }
+    },
+    "ayahCount": 69,
+    "number": 29,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Ar-Rum"
+      },
+      "translation": {
+        "id": "Romawi"
+      }
+    },
+    "ayahCount": 60,
+    "number": 30,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Luqman"
+      },
+      "translation": {
+        "id": "Luqman"
+      }
+    },
+    "ayahCount": 34,
+    "number": 31,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "As-Sajdah"
+      },
+      "translation": {
+        "id": "Sajdah"
+      }
+    },
+    "ayahCount": 30,
+    "number": 32,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Ahzab"
+      },
+      "translation": {
+        "id": "Golongan Yang Bersekutu"
+      }
+    },
+    "ayahCount": 73,
+    "number": 33,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Saba'"
+      },
+      "translation": {
+        "id": "Saba'"
+      }
+    },
+    "ayahCount": 54,
+    "number": 34,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Fatir"
+      },
+      "translation": {
+        "id": "Maha Pencipta"
+      }
+    },
+    "ayahCount": 45,
+    "number": 35,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Yasin"
+      },
+      "translation": {
+        "id": "Yasin"
+      }
+    },
+    "ayahCount": 83,
+    "number": 36,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "As-Saffat"
+      },
+      "translation": {
+        "id": "Barisan-Barisan"
+      }
+    },
+    "ayahCount": 182,
+    "number": 37,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Sad"
+      },
+      "translation": {
+        "id": "Sad"
+      }
+    },
+    "ayahCount": 88,
+    "number": 38,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Az-Zumar"
+      },
+      "translation": {
+        "id": "Rombongan"
+      }
+    },
+    "ayahCount": 75,
+    "number": 39,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Gafir"
+      },
+      "translation": {
+        "id": "Maha Pengampun"
+      }
+    },
+    "ayahCount": 85,
+    "number": 40,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Fussilat"
+      },
+      "translation": {
+        "id": "Yang Dijelaskan"
+      }
+    },
+    "ayahCount": 54,
+    "number": 41,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Asy-Syura"
+      },
+      "translation": {
+        "id": "Musyawarah"
+      }
+    },
+    "ayahCount": 53,
+    "number": 42,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Az-Zukhruf"
+      },
+      "translation": {
+        "id": "Perhiasan"
+      }
+    },
+    "ayahCount": 89,
+    "number": 43,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Ad-Dukhan"
+      },
+      "translation": {
+        "id": "Kabut"
+      }
+    },
+    "ayahCount": 59,
+    "number": 44,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Jasiyah"
+      },
+      "translation": {
+        "id": "Berlutut"
+      }
+    },
+    "ayahCount": 37,
+    "number": 45,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Ahqaf"
+      },
+      "translation": {
+        "id": "Bukit Pasir"
+      }
+    },
+    "ayahCount": 35,
+    "number": 46,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Muhammad"
+      },
+      "translation": {
+        "id": "Muhammad"
+      }
+    },
+    "ayahCount": 38,
+    "number": 47,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Fath"
+      },
+      "translation": {
+        "id": "Kemenangan"
+      }
+    },
+    "ayahCount": 29,
+    "number": 48,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Hujurat"
+      },
+      "translation": {
+        "id": "Kamar-Kamar"
+      }
+    },
+    "ayahCount": 18,
+    "number": 49,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Qaf"
+      },
+      "translation": {
+        "id": "Qaf"
+      }
+    },
+    "ayahCount": 45,
+    "number": 50,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Az-Zariyat"
+      },
+      "translation": {
+        "id": "Angin yang Menerbangkan"
+      }
+    },
+    "ayahCount": 60,
+    "number": 51,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Tur"
+      },
+      "translation": {
+        "id": "Bukit Tursina"
+      }
+    },
+    "ayahCount": 49,
+    "number": 52,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Najm"
+      },
+      "translation": {
+        "id": "Bintang"
+      }
+    },
+    "ayahCount": 62,
+    "number": 53,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Qamar"
+      },
+      "translation": {
+        "id": "Bulan"
+      }
+    },
+    "ayahCount": 55,
+    "number": 54,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Ar-Rahman"
+      },
+      "translation": {
+        "id": "Maha Pengasih"
+      }
+    },
+    "ayahCount": 78,
+    "number": 55,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Waqi'ah"
+      },
+      "translation": {
+        "id": "Hari Kiamat"
+      }
+    },
+    "ayahCount": 96,
+    "number": 56,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Hadid"
+      },
+      "translation": {
+        "id": "Besi"
+      }
+    },
+    "ayahCount": 29,
+    "number": 57,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Mujadalah"
+      },
+      "translation": {
+        "id": "Gugatan"
+      }
+    },
+    "ayahCount": 22,
+    "number": 58,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Hasyr"
+      },
+      "translation": {
+        "id": "Pengusiran"
+      }
+    },
+    "ayahCount": 24,
+    "number": 59,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Mumtahanah"
+      },
+      "translation": {
+        "id": "Wanita Yang Diuji"
+      }
+    },
+    "ayahCount": 13,
+    "number": 60,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "As-Saff"
+      },
+      "translation": {
+        "id": "Barisan"
+      }
+    },
+    "ayahCount": 14,
+    "number": 61,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Jumu'ah"
+      },
+      "translation": {
+        "id": "Jumat"
+      }
+    },
+    "ayahCount": 11,
+    "number": 62,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Munafiqun"
+      },
+      "translation": {
+        "id": "Orang-Orang Munafik"
+      }
+    },
+    "ayahCount": 11,
+    "number": 63,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Tagabun"
+      },
+      "translation": {
+        "id": "Pengungkapan Kesalahan"
+      }
+    },
+    "ayahCount": 18,
+    "number": 64,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Talaq"
+      },
+      "translation": {
+        "id": "Talak"
+      }
+    },
+    "ayahCount": 12,
+    "number": 65,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Tahrim"
+      },
+      "translation": {
+        "id": "Pengharaman"
+      }
+    },
+    "ayahCount": 12,
+    "number": 66,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Mulk"
+      },
+      "translation": {
+        "id": "Kerajaan"
+      }
+    },
+    "ayahCount": 30,
+    "number": 67,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Qalam"
+      },
+      "translation": {
+        "id": "Pena"
+      }
+    },
+    "ayahCount": 52,
+    "number": 68,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Haqqah"
+      },
+      "translation": {
+        "id": "Hari Kiamat"
+      }
+    },
+    "ayahCount": 52,
+    "number": 69,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Ma'arij"
+      },
+      "translation": {
+        "id": "Tempat Naik"
+      }
+    },
+    "ayahCount": 44,
+    "number": 70,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Nuh"
+      },
+      "translation": {
+        "id": "Nuh"
+      }
+    },
+    "ayahCount": 28,
+    "number": 71,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Jinn"
+      },
+      "translation": {
+        "id": "Jin"
+      }
+    },
+    "ayahCount": 28,
+    "number": 72,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Muzzammil"
+      },
+      "translation": {
+        "id": "Orang Yang Berselimut"
+      }
+    },
+    "ayahCount": 20,
+    "number": 73,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Muddassir"
+      },
+      "translation": {
+        "id": "Orang Yang Berkemul"
+      }
+    },
+    "ayahCount": 56,
+    "number": 74,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Qiyamah"
+      },
+      "translation": {
+        "id": "Hari Kiamat"
+      }
+    },
+    "ayahCount": 40,
+    "number": 75,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Insan"
+      },
+      "translation": {
+        "id": "Manusia"
+      }
+    },
+    "ayahCount": 31,
+    "number": 76,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Mursalat"
+      },
+      "translation": {
+        "id": "Malaikat Yang Diutus"
+      }
+    },
+    "ayahCount": 50,
+    "number": 77,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Naba'"
+      },
+      "translation": {
+        "id": "Berita Besar"
+      }
+    },
+    "ayahCount": 40,
+    "number": 78,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Nazi'at"
+      },
+      "translation": {
+        "id": "Malaikat Yang Mencabut"
+      }
+    },
+    "ayahCount": 46,
+    "number": 79,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "'Abasa"
+      },
+      "translation": {
+        "id": "Bermuka Masam"
+      }
+    },
+    "ayahCount": 42,
+    "number": 80,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Takwir"
+      },
+      "translation": {
+        "id": "Penggulungan"
+      }
+    },
+    "ayahCount": 29,
+    "number": 81,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Infitar"
+      },
+      "translation": {
+        "id": "Terbelah"
+      }
+    },
+    "ayahCount": 19,
+    "number": 82,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Mutaffifin"
+      },
+      "translation": {
+        "id": "Orang-Orang Curang"
+      }
+    },
+    "ayahCount": 36,
+    "number": 83,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Insyiqaq"
+      },
+      "translation": {
+        "id": "Terbelah"
+      }
+    },
+    "ayahCount": 25,
+    "number": 84,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Buruj"
+      },
+      "translation": {
+        "id": "Gugusan Bintang"
+      }
+    },
+    "ayahCount": 22,
+    "number": 85,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Tariq"
+      },
+      "translation": {
+        "id": "Yang Datang Di Malam Hari"
+      }
+    },
+    "ayahCount": 17,
+    "number": 86,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-A'la"
+      },
+      "translation": {
+        "id": "Maha Tinggi"
+      }
+    },
+    "ayahCount": 19,
+    "number": 87,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Gasyiyah"
+      },
+      "translation": {
+        "id": "Hari Kiamat"
+      }
+    },
+    "ayahCount": 26,
+    "number": 88,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Fajr"
+      },
+      "translation": {
+        "id": "Fajar"
+      }
+    },
+    "ayahCount": 30,
+    "number": 89,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Balad"
+      },
+      "translation": {
+        "id": "Negeri"
+      }
+    },
+    "ayahCount": 20,
+    "number": 90,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Asy-Syams"
+      },
+      "translation": {
+        "id": "Matahari"
+      }
+    },
+    "ayahCount": 15,
+    "number": 91,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Lail"
+      },
+      "translation": {
+        "id": "Malam"
+      }
+    },
+    "ayahCount": 21,
+    "number": 92,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Ad-Duha"
+      },
+      "translation": {
+        "id": "Duha"
+      }
+    },
+    "ayahCount": 11,
+    "number": 93,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Asy-Syarh"
+      },
+      "translation": {
+        "id": "Lapang"
+      }
+    },
+    "ayahCount": 8,
+    "number": 94,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Tin"
+      },
+      "translation": {
+        "id": "Buah Tin"
+      }
+    },
+    "ayahCount": 8,
+    "number": 95,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-'Alaq"
+      },
+      "translation": {
+        "id": "Segumpal Darah"
+      }
+    },
+    "ayahCount": 19,
+    "number": 96,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Qadr"
+      },
+      "translation": {
+        "id": "Kemuliaan"
+      }
+    },
+    "ayahCount": 5,
+    "number": 97,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Bayyinah"
+      },
+      "translation": {
+        "id": "Bukti Nyata"
+      }
+    },
+    "ayahCount": 8,
+    "number": 98,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Az-Zalzalah"
+      },
+      "translation": {
+        "id": "Guncangan"
+      }
+    },
+    "ayahCount": 8,
+    "number": 99,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-'Adiyat"
+      },
+      "translation": {
+        "id": "Kuda Yang Berlari Kencang"
+      }
+    },
+    "ayahCount": 11,
+    "number": 100,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Qari'ah"
+      },
+      "translation": {
+        "id": "Hari Kiamat"
+      }
+    },
+    "ayahCount": 11,
+    "number": 101,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "At-Takasur"
+      },
+      "translation": {
+        "id": "Bermegah-Megahan"
+      }
+    },
+    "ayahCount": 8,
+    "number": 102,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-'Asr"
+      },
+      "translation": {
+        "id": "Asar"
+      }
+    },
+    "ayahCount": 3,
+    "number": 103,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Humazah"
+      },
+      "translation": {
+        "id": "Pengumpat"
+      }
+    },
+    "ayahCount": 9,
+    "number": 104,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Fil"
+      },
+      "translation": {
+        "id": "Gajah"
+      }
+    },
+    "ayahCount": 5,
+    "number": 105,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Quraisy"
+      },
+      "translation": {
+        "id": "Quraisy"
+      }
+    },
+    "ayahCount": 4,
+    "number": 106,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Ma'un"
+      },
+      "translation": {
+        "id": "Barang Yang Berguna"
+      }
+    },
+    "ayahCount": 7,
+    "number": 107,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Kausar"
+      },
+      "translation": {
+        "id": "Pemberian Yang Banyak"
+      }
+    },
+    "ayahCount": 3,
+    "number": 108,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Kafirun"
+      },
+      "translation": {
+        "id": "Orang-Orang kafir"
+      }
+    },
+    "ayahCount": 6,
+    "number": 109,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Nasr"
+      },
+      "translation": {
+        "id": "Pertolongan"
+      }
+    },
+    "ayahCount": 3,
+    "number": 110,
+    "type": {
+      "id": "Madaniyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Lahab"
+      },
+      "translation": {
+        "id": "Api Yang Bergejolak"
+      }
+    },
+    "ayahCount": 5,
+    "number": 111,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Ikhlas"
+      },
+      "translation": {
+        "id": "Ikhlas"
+      }
+    },
+    "ayahCount": 4,
+    "number": 112,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "Al-Falaq"
+      },
+      "translation": {
+        "id": "Subuh"
+      }
+    },
+    "ayahCount": 5,
+    "number": 113,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  },
+  {
+    "asma": {
+      "id": {
+        "short": "An-Nas"
+      },
+      "translation": {
+        "id": "Manusia"
+      }
+    },
+    "ayahCount": 6,
+    "number": 114,
+    "type": {
+      "id": "Makkiyyah"
+    }
+  }
+]

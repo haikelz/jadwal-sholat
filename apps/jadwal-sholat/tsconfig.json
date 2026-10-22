@@ -7,6 +7,8 @@
       }
     ],
     "baseUrl": ".",
+    // Resolves package "exports" subpaths such as @jadwal-sholat/core/prayer.
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": ["src/*"]
     }

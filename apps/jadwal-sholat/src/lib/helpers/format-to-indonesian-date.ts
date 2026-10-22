@@ -1,20 +1,2 @@
-import { format, parseISO } from "date-fns";
-import { id } from "date-fns/locale";
-
-/**
- * A helper function that format date string to Indonesian format date
- * @param {string} dateString
- * @returns
- */
-export function formatToIndonesianDate(dateString: string): string | null {
-  try {
-    const parsedDate = parseISO(dateString);
-    if (isNaN(parsedDate.getTime())) {
-      throw new Error("Invalid date");
-    }
-    return format(parsedDate, "EEEE, d MMMM yyyy", { locale: id });
-  } catch (error) {
-    console.error("Error converting date:", error);
-    return null;
-  }
-}
+// Moved to packages/core.
+export { formatToIndonesianDate } from "@jadwal-sholat/core/dates";

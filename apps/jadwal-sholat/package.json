@@ -19,6 +19,7 @@
     "test": "cypress run"
   },
   "dependencies": {
+    "@jadwal-sholat/core": "workspace:*",
     "@base-ui/react": "^1.9.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@ducanh2912/next-pwa": "^10.2.9",
