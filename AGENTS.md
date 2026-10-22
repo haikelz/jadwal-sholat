@@ -3,6 +3,8 @@
 ## Project structure
 
 - `apps/jadwal-sholat` is the Next.js App Router application.
+- `apps/mobile` is the Android app (Expo SDK 58, Expo Router, NativeWind v4 + React Native Reusables). See `apps/mobile/AGENTS.md`.
+- `packages/core` holds framework-free domain code shared by the web and the Android app: API schemas and URL builders, prayer logic, the adzan schedule, dates, share links, Qur'an and puasa helpers, and bundled static data. It must never import React, React Query or zustand, because each app pins its own React.
 - `packages/eslint-config` and `packages/typescript-config` contain shared tooling.
 - `static/docs` contains README screenshots.
 - Run workspace commands from the repository root unless a command says otherwise.
@@ -15,6 +17,8 @@
 - Production build: `bun run build:web`
 - Lint: `cd apps/jadwal-sholat && bun run lint` (ESLint flat config in `eslint.config.mjs`)
 - Cypress E2E tests: `bun run test:web`
+- Core tests and types: `bun run test:core`, `bun run typecheck:core`
+- Android app: `bun run dev:mobile` (Metro for Expo Go or a development build), `bun run typecheck:mobile`, `bun run build:android` (preview APK on EAS). Native code compiles on EAS only; don't run Gradle or `expo run:android` locally.
 
 The production build prerenders API-backed routes and therefore requires valid values from `apps/jadwal-sholat/.env` plus network access to those APIs.
 
@@ -133,7 +137,9 @@ Match the changed path first, then use only that workspace's applicable profile.
 
 - `graft/apps/jadwal-sholat/**`: javascript-typescript, nextjs, docker.
 - `.moon/cache/schemas/**`: javascript-typescript.
+- `packages/core/**`: javascript-typescript.
 - `packages/eslint-config/**`: javascript-typescript.
 - `packages/typescript-config/**`: javascript-typescript.
 - `apps/jadwal-sholat/**`: javascript-typescript, nextjs, design-system, docker.
+- `apps/mobile/**`: javascript-typescript, design-system.
 <!-- AI-GUIDELINES:END -->
