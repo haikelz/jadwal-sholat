@@ -135,8 +135,15 @@
   html {
     @apply font-sans;
     /* All-ages scale: text-sm body copy renders at about 16px, and every
-       rem-based control grows with it. */
+       rem-based control grows with it. Readers can go larger from the
+       display settings (src/lib/utils/display-settings.ts). */
     font-size: 112.5%;
+  }
+  html[data-text-size="large"] {
+    font-size: 125%;
+  }
+  html[data-text-size="xlarge"] {
+    font-size: 140%;
   }
   body {
     @apply min-w-0 overflow-x-hidden bg-background text-foreground antialiased;
@@ -181,8 +188,22 @@
   }
 }
 
+/* Each Arabic element sets --arabic-size (e.g. [--arabic-size:1.875rem]);
+   the reader's Arabic size setting scales it. Unlayered, so it wins over
+   any text-* utility. */
+:root {
+  --arabic-scale: 1;
+}
+html[data-arabic-size="large"] {
+  --arabic-scale: 1.25;
+}
+html[data-arabic-size="xlarge"] {
+  --arabic-scale: 1.5;
+}
+
 .arabic-font {
   font-family: var(--font-lpmq), serif;
+  font-size: calc(var(--arabic-size, 1em) * var(--arabic-scale));
   line-height: 2;
 }
 

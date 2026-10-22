@@ -5,6 +5,7 @@ import {
   isNavItemActive,
   navItems,
 } from "@/components/common/bottom-nav";
+import { DisplaySettings } from "@/components/common/display-settings";
 import { ChildrenProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import { ChevronLeft } from "lucide-react";
@@ -12,10 +13,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const SwitchTheme = dynamic(
-  () => import("@/components/switch-theme").then((mod) => mod.SwitchTheme),
-  { ssr: false },
-);
 const ReadingProgress = dynamic(
   () =>
     import("@/components/quran/detail-surat/reading-progress").then(
@@ -108,7 +105,7 @@ export function AppShell({ children }: ChildrenProps) {
 
           <div className="flex shrink-0 items-center gap-2">
             {isQuranDetail ? <ReadingProgress /> : null}
-            <SwitchTheme />
+            <DisplaySettings />
           </div>
         </div>
       </header>

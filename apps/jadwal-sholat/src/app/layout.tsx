@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChildrenProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
+import { DISPLAY_SETTINGS_SCRIPT } from "@/lib/utils/display-settings";
 import { geistMono, geistSans, lpmqIsepMisbah } from "@/lib/utils/fonts";
 import {
   DEFAULT_DESCRIPTION,
@@ -100,6 +101,10 @@ export default function Layout({ children }: ChildrenProps) {
       )}
       suppressHydrationWarning
     >
+      <head>
+        {/* Applies the reader's saved text sizes before the first paint. */}
+        <script dangerouslySetInnerHTML={{ __html: DISPLAY_SETTINGS_SCRIPT }} />
+      </head>
       <body className={geistSans.className}>
         <NuqsAdapter>
           <Wrapper>
