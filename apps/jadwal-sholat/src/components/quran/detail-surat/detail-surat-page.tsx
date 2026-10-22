@@ -128,11 +128,12 @@ export function DetailSuratPage({
           />
         </div>
       </header>
-      {/* Sticky under the app header (h-14 on mobile, h-16 from md) so the
-          controls stay reachable in long surahs. */}
+      {/* Sticky under the h-16 app header from md, so the controls stay
+          reachable in long surahs. On phones the labeled controls wrap to
+          several rows, so they scroll away and the audio bar takes over. */}
       <section
         aria-label="Pengaturan bacaan"
-        className="sticky top-14 z-10 flex flex-wrap items-center gap-2 border-b bg-background/95 py-3 backdrop-blur md:top-16"
+        className="flex flex-wrap items-center gap-2 border-b bg-background/95 py-3 backdrop-blur md:sticky md:top-16 md:z-10"
       >
         <Toggle
           variant="outline"
