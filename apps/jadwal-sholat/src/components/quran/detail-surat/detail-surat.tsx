@@ -13,6 +13,9 @@ import {
   ClipboardCopy,
   Pause,
   Play,
+  SkipBack,
+  SkipForward,
+  Square,
 } from "lucide-react";
 import { nanoid } from "nanoid";
 import dynamic from "next/dynamic";
@@ -27,6 +30,8 @@ const DialogNotification = dynamic(() =>
 
 export function DetailSurat({ data }: SuratProps) {
   const [ayatClick, setAyatClick] = useState<number>(0);
+  // The audio bar stays open while paused, until the reader stops it.
+  const [isPlayerOpen, setIsPlayerOpen] = useState(false);
 
   const clipboard = useClipboard({ copiedTimeout: 1000 });
 
@@ -85,6 +90,7 @@ export function DetailSurat({ data }: SuratProps) {
   }
 
   function handlePlayAudio(index: number, ayat: number) {
+    setIsPlayerOpen(true);
     setAudioIndex(() => {
       if (index > audioList.length - 1) return 0;
       return index;
@@ -100,6 +106,14 @@ export function DetailSurat({ data }: SuratProps) {
     setIsPlayAudio(false);
     pause();
   }
+
+  function handleStopAudio() {
+    handlePauseAudio();
+    setIsPlayerOpen(false);
+  }
+
+  // audioIndex is zero-based; ayah numbers start at 1.
+  const playAt = (index: number) => handlePlayAudio(index, index + 1);
 
   useScrollAyat({ lastRead, ayat, isAudioEnded, setIsAudioEnded });
 
@@ -127,10 +141,9 @@ export function DetailSurat({ data }: SuratProps) {
                 // Focus target for "Lompat ke ayat".
                 tabIndex={-1}
                 className={cn(
-                  // Clear the sticky app header and reading toolbar:
-                  // mobile 56px header + ~97px wrapped toolbar, md+ 64px
-                  // header + ~57px one-row toolbar.
-                  "flex size-8 scroll-mt-40 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-32",
+                  // Clear the sticky bars: the app header on phones, the
+                  // header plus the reading toolbar from md.
+                  "flex size-8 scroll-mt-20 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-40",
                   // An ayah opened from a shared link (#ayat-N) is marked.
                   "target:border-foreground target:ring-2 target:ring-ring/50",
                   isCurrent &&
@@ -230,6 +243,55 @@ export function DetailSurat({ data }: SuratProps) {
           );
         })}
       </div>
+      {/* One large control for the whole surah, pinned above the phone tab
+          bar while recitation is on. */}
+      {isPlayerOpen ? (
+        <section
+          aria-label="Pemutar audio"
+          className="sticky bottom-[calc(3.5rem+env(safe-area-inset-bottom))] z-10 flex flex-wrap items-center justify-between gap-2 border-t bg-background/95 py-3 backdrop-blur md:bottom-0"
+        >
+          <p className="text-sm font-medium" aria-live="polite">
+            {isPlaying ? "Diputar" : "Dijeda"} · Ayat {audioIndex + 1}
+          </p>
+          <div className="flex flex-wrap items-center gap-1">
+            <Button
+              type="button"
+              variant="ghost"
+              disabled={audioIndex === 0}
+              onClick={() => playAt(audioIndex - 1)}
+            >
+              <SkipBack aria-hidden="true" data-icon="inline-start" />
+              Mundur
+            </Button>
+            <Button
+              type="button"
+              onClick={() =>
+                isPlaying ? handlePauseAudio() : playAt(audioIndex)
+              }
+            >
+              {isPlaying ? (
+                <Pause aria-hidden="true" data-icon="inline-start" />
+              ) : (
+                <Play aria-hidden="true" data-icon="inline-start" />
+              )}
+              {isPlaying ? "Jeda" : "Putar"}
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              disabled={audioIndex >= audioList.length - 1}
+              onClick={() => playAt(audioIndex + 1)}
+            >
+              <SkipForward aria-hidden="true" data-icon="inline-start" />
+              Lanjut
+            </Button>
+            <Button type="button" variant="ghost" onClick={handleStopAudio}>
+              <Square aria-hidden="true" data-icon="inline-start" />
+              Berhenti
+            </Button>
+          </div>
+        </section>
+      ) : null}
       <DialogNotification description="Ayat ditandai sebagai bacaan terakhir." />
     </>
   );
