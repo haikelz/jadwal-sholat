@@ -31,7 +31,7 @@ export function DialogTafsir({ data }: SuratProps) {
       <DialogTrigger asChild>
         <Button type="button" variant="outline">
           <MessageSquare aria-hidden="true" data-icon="inline-start" />
-          Tafsir
+          Penjelasan (tafsir)
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl">

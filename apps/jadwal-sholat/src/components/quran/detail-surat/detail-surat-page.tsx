@@ -52,6 +52,7 @@ export function DetailSuratPage({
 
   const { stop } = useAudioPlayer();
   const jumpId = useId();
+  const qoriId = useId();
   const [jumpTo, setJumpTo] = useState("");
 
   function handleShowAudio() {
@@ -152,13 +153,21 @@ export function DetailSuratPage({
           Latin
         </Toggle>
         <DialogTafsir data={surat} />
-        <div className="flex w-full min-w-0 items-center gap-2 sm:ml-auto sm:w-auto">
+        <div className="flex w-full min-w-0 flex-wrap items-center gap-2 sm:ml-auto sm:w-auto">
+          <label
+            id={`${qoriId}-label`}
+            htmlFor={qoriId}
+            className="text-sm text-muted-foreground"
+          >
+            Suara pembaca (qori)
+          </label>
           <Select
             value={qori.toString()}
             onValueChange={(value) => setQori(Number(value))}
           >
             <SelectTrigger
-              aria-label="Pilih qori"
+              id={qoriId}
+              aria-labelledby={`${qoriId}-label`}
               className="min-w-0 flex-1 sm:w-48 sm:flex-none"
             >
               <SelectValue placeholder="Pilih qori" />
@@ -175,8 +184,8 @@ export function DetailSuratPage({
             onSubmit={handleJump}
             className="flex shrink-0 items-center gap-1"
           >
-            <label htmlFor={jumpId} className="sr-only">
-              Lompat ke ayat
+            <label htmlFor={jumpId} className="text-sm text-muted-foreground">
+              Ke ayat
             </label>
             <Input
               id={jumpId}
