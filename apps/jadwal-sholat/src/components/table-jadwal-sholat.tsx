@@ -184,7 +184,7 @@ export function Jadwal({
             <dl className="grid grid-cols-4 gap-x-3 gap-y-3">
               {prayerColumns.map((prayer) => (
                 <div key={prayer.key} className="flex min-w-0 flex-col gap-0.5">
-                  <dt className="truncate text-xs text-muted-foreground">
+                  <dt className="truncate text-sm text-muted-foreground">
                     {prayer.name}
                   </dt>
                   <dd className="text-sm font-semibold tabular-nums">
