@@ -1,0 +1,61 @@
+import { Text } from "@/components/ui/text";
+import { cn } from "@/lib/utils";
+import {
+  DAY_TIMES,
+  formatSholatTime,
+  type PrayerKey,
+} from "@jadwal-sholat/core/prayer";
+import type { PrayerTimings } from "@jadwal-sholat/core/schemas";
+import { View } from "react-native";
+
+/** Today's eight times in a 4×2 grid; the next prayer is highlighted. */
+export function TodayTimes({
+  timings,
+  nextKey,
+  nowTime,
+}: {
+  timings: PrayerTimings;
+  nextKey?: PrayerKey;
+  /** The current time as "HH.mm", to mute times that have passed. */
+  nowTime: string;
+}) {
+  return (
+    <View
+      accessibilityLabel="Waktu sholat hari ini"
+      className="flex-row flex-wrap border-y border-border py-2"
+    >
+      {DAY_TIMES.map((prayer) => {
+        const time = formatSholatTime(timings[prayer.key]);
+        const isNext = prayer.key === nextKey;
+        const hasPassed = !isNext && time <= nowTime;
+        return (
+          <View
+            key={prayer.key}
+            accessible
+            accessibilityLabel={`${prayer.name} ${time}${isNext ? ", berikutnya" : ""}`}
+            className={cn("w-1/4 gap-0.5 rounded-md px-3 py-3", isNext && "bg-muted")}
+          >
+            <Text
+              numberOfLines={1}
+              className={cn(
+                "text-xs",
+                isNext ? "font-medium text-foreground" : "text-muted-foreground",
+              )}
+            >
+              {prayer.name}
+            </Text>
+            <Text
+              className={cn(
+                "text-lg tabular-nums",
+                isNext ? "font-semibold" : "font-medium",
+                hasPassed && "text-muted-foreground",
+              )}
+            >
+              {time}
+            </Text>
+          </View>
+        );
+      })}
+    </View>
+  );
+}
