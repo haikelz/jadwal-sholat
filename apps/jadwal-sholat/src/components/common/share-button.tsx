@@ -9,11 +9,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
@@ -42,8 +37,8 @@ type ShareButtonProps = {
   title: string;
   /** Optional excerpt (a translation) added under the title. */
   excerpt?: string;
-  /** Icon-only trigger for dense rows such as ayah actions. */
-  iconOnly?: boolean;
+  /** `ghost` for quiet rows such as ayah actions. */
+  variant?: "outline" | "ghost";
 };
 
 /**
@@ -55,7 +50,7 @@ export function ShareButton({
   path,
   title,
   excerpt,
-  iconOnly = false,
+  variant = "outline",
 }: ShareButtonProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -100,27 +95,15 @@ export function ShareButton({
 
   return (
     <>
-      {iconOnly ? (
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              aria-label={`Bagikan ${title}`}
-              onClick={share}
-            >
-              <Share2 aria-hidden="true" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Bagikan</TooltipContent>
-        </Tooltip>
-      ) : (
-        <Button type="button" variant="outline" onClick={share}>
-          <Share2 aria-hidden="true" data-icon="inline-start" />
-          Bagikan
-        </Button>
-      )}
+      <Button
+        type="button"
+        variant={variant}
+        aria-label={`Bagikan ${title}`}
+        onClick={share}
+      >
+        <Share2 aria-hidden="true" data-icon="inline-start" />
+        Bagikan
+      </Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>

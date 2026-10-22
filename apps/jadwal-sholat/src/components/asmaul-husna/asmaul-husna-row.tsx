@@ -1,11 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -66,24 +61,20 @@ export function AsmaulHusnaRow({
         <p lang="ar" dir="rtl" className="arabic-font [--arabic-size:1.5rem]">
           {dataAsmaulHusna.arab}
         </p>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              aria-label={isCopied ? "Tersalin" : "Salin"}
-              onClick={handleCopy}
-            >
-              {isCopied ? (
-                <Check aria-hidden="true" />
-              ) : (
-                <Copy aria-hidden="true" />
-              )}
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>{isCopied ? "Tersalin" : "Salin"}</TooltipContent>
-        </Tooltip>
+        {/* A word beside the icon: not every reader knows the copy icon. */}
+        <Button
+          type="button"
+          variant="ghost"
+          aria-label={`${isCopied ? "Tersalin" : "Salin"} ${dataAsmaulHusna.latin}`}
+          onClick={handleCopy}
+        >
+          {isCopied ? (
+            <Check aria-hidden="true" data-icon="inline-start" />
+          ) : (
+            <Copy aria-hidden="true" data-icon="inline-start" />
+          )}
+          {isCopied ? "Tersalin" : "Salin"}
+        </Button>
       </div>
     </li>
   );
