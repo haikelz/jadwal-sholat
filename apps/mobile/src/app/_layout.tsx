@@ -44,6 +44,10 @@ export default function RootLayout() {
             options={{ presentation: "modal", title: "Pilih lokasi" }}
           />
           <Stack.Screen name="settings" options={{ title: "Pengaturan" }} />
+          <Stack.Screen
+            name="quran/[number]/tafsir"
+            options={{ presentation: "modal", title: "Tafsir" }}
+          />
         </Stack>
         <PortalHost />
       </ThemeProvider>
