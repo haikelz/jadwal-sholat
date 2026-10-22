@@ -154,6 +154,8 @@ The screenshots were captured from a production build at `1440×900` for desktop
 
 The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell`; list pages use a left-aligned `PageHeader`, and surah pages use a centered, mushaf-style header. The homepage leads with the next prayer in plain type and keeps a ReUI `Frame` only around the month data grid; the sunnah fasting page uses a `Frame` and the data grid. Reading pages (Al-Qur'an, hadith, Asma'ul Husna) use a centered reading column with plain divided rows instead of panels. Desktop navigation is a top bar; on phones it is a bottom tab bar. Colors come from semantic theme tokens (shadcn neutral plus ReUI's success, info, and warning tokens) and work in light and dark mode. Every data region has its own loading skeleton, empty state, and error state with a retry action.
 
+The interface is tuned for readers of every age (`apps/jadwal-sholat/DESIGN.md`): body text renders at about 16px, the "Tampilan" dialog in the top bar sets the theme, text size and Arabic size, every action shows a word next to its icon, and touch targets reach 44px. The surah page keeps one audio bar with large controls while recitation plays.
+
 ## Performance
 
 - Surah and hadith detail pages fetch their content on the server, so the text arrives in the HTML. Surah pages render on their first visit and stay cached for a day instead of being prerendered during the build.
