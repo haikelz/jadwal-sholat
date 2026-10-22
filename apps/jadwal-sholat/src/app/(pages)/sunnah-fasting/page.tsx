@@ -7,7 +7,7 @@ export const metadata = createPageMetadata({
   title: "Puasa Sunnah",
   description:
     "Lihat jadwal puasa sunnah berdasarkan bulan, tahun, dan jenis puasa.",
-  path: "/puasa-sunnah",
+  path: "/sunnah-fasting",
 });
 
 export default function PuasaSunnah() {

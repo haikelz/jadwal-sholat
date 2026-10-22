@@ -26,10 +26,20 @@ const config = withSentryConfig(
     // can't make Next infer the wrong workspace.
     turbopack: { root: fileURLToPath(new URL("../..", import.meta.url)) },
     compress: true,
+    // The site moved from Indonesian to English paths; keep old links working.
+    async redirects() {
+      return [
+        {
+          source: "/puasa-sunnah",
+          destination: "/sunnah-fasting",
+          permanent: true,
+        },
+      ];
+    },
     async rewrites() {
       return [
         {
-          source: "/api/puasa-sunnah",
+          source: "/api/sunnah-fasting",
           destination: `${process.env.NEXT_PUBLIC_PUASA_SUNNAH_API}/api/id/fasting/schedules`,
         },
       ];

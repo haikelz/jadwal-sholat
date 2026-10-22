@@ -35,7 +35,7 @@ export const navItems: NavItem[] = [
     title: "Puasa Sunnah",
     shortTitle: "Puasa",
     icon: Calendar,
-    url: "/puasa-sunnah",
+    url: "/sunnah-fasting",
   },
 ];
 

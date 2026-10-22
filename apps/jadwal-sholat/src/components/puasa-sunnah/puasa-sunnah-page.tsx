@@ -83,7 +83,7 @@ export function PuasaSunnahPage() {
     useFetch<PuasaSunnahScheduleResponse>(
       // Wait for the clock so a prerendered page never asks for the build month.
       today && month
-        ? `/api/puasa-sunnah?period=month&date=${today.tahun}-${month}-01`
+        ? `/api/sunnah-fasting?period=month&date=${today.tahun}-${month}-01`
         : "",
     );
 

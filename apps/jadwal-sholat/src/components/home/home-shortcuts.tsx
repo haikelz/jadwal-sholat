@@ -70,7 +70,7 @@ export function HomeShortcuts({
 
   // Same URL as the Puasa Sunnah page, so both share one cached response.
   const { data } = useFetch<PuasaSunnahScheduleResponse>(
-    month ? `/api/puasa-sunnah?period=month&date=${month}-01` : "",
+    month ? `/api/sunnah-fasting?period=month&date=${month}-01` : "",
   );
   const nextFast = todayIso
     ? data?.data?.dates?.find((puasa) => puasa.date.slice(0, 10) >= todayIso)
@@ -100,7 +100,7 @@ export function HomeShortcuts({
       ) : null}
       {nextFast ? (
         <ShortcutRow
-          href="/puasa-sunnah"
+          href="/sunnah-fasting"
           label="Puasa berikutnya"
           value={`${formatToIndonesianDate(nextFast.date) ?? nextFast.date.slice(0, 10)} · ${nextFast.recommendations
             .map((recommendation) => recommendation.name)
