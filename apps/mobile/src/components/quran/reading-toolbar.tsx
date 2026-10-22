@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -60,7 +61,7 @@ export function ReadingToolbar({
   return (
     <View
       accessibilityLabel="Pengaturan bacaan"
-      className="gap-2 border-b border-border py-3"
+      className="gap-3 border-b border-border py-3"
     >
       <View className="flex-row flex-wrap gap-2">
         <Toggle
@@ -83,18 +84,19 @@ export function ReadingToolbar({
         </Toggle>
         <Button variant="outline" onPress={onOpenTafsir}>
           <Icon as={MessageSquare} size={16} />
-          <Text>Tafsir</Text>
+          <Text>Penjelasan (tafsir)</Text>
         </Button>
       </View>
 
-      <View className="flex-row items-center gap-2">
+      <View className="gap-1.5">
+        <Label>Suara pembaca (qori)</Label>
         <Select
           value={selected}
           onValueChange={(option) => {
             if (option) onQoriChange(Number(option.value));
           }}
         >
-          <SelectTrigger accessibilityLabel="Pilih qori" className="min-w-0 flex-1">
+          <SelectTrigger accessibilityLabel="Suara pembaca (qori)">
             <SelectValue placeholder="Pilih qori" />
           </SelectTrigger>
           <SelectContent
@@ -113,19 +115,25 @@ export function ReadingToolbar({
             </ScrollView>
           </SelectContent>
         </Select>
-        <Input
-          accessibilityLabel="Lompat ke ayat"
-          placeholder="Ayat"
-          keyboardType="number-pad"
-          returnKeyType="go"
-          className="w-20"
-          value={jumpTo}
-          onChangeText={setJumpTo}
-          onSubmitEditing={jump}
-        />
-        <Button variant="outline" accessibilityLabel="Buka ayat" onPress={jump}>
-          <Text>Buka</Text>
-        </Button>
+      </View>
+
+      <View className="gap-1.5">
+        <Label>Ke ayat</Label>
+        <View className="flex-row items-center gap-2">
+          <Input
+            accessibilityLabel="Ke ayat"
+            placeholder={`1–${ayahCount}`}
+            keyboardType="number-pad"
+            returnKeyType="go"
+            className="w-24"
+            value={jumpTo}
+            onChangeText={setJumpTo}
+            onSubmitEditing={jump}
+          />
+          <Button variant="outline" accessibilityLabel="Buka ayat" onPress={jump}>
+            <Text>Buka</Text>
+          </Button>
+        </View>
       </View>
     </View>
   );
