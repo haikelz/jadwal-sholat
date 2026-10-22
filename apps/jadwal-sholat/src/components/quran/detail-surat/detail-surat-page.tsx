@@ -97,7 +97,7 @@ export function DetailSuratPage({
         <p
           lang="ar"
           dir="rtl"
-          className="arabic-font text-4xl leading-relaxed md:text-5xl"
+          className="arabic-font [--arabic-size:2.25rem] md:[--arabic-size:3rem]"
         >
           {surat.asma.ar.short}
         </p>

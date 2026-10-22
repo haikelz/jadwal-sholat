@@ -235,7 +235,7 @@ export function DetailSurat({ data }: SuratProps) {
                 lang="ar"
                 dir="rtl"
                 className={cn(
-                  "arabic-font min-w-0 text-right text-3xl font-medium wrap-anywhere sm:text-4xl",
+                  "arabic-font min-w-0 text-right font-medium wrap-anywhere [--arabic-size:1.875rem] sm:[--arabic-size:2.25rem]",
                 )}
               >
                 {ayat.text.ar}

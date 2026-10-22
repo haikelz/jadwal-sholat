@@ -63,7 +63,7 @@ export function AsmaulHusnaRow({
         <p className="text-sm text-muted-foreground">{dataAsmaulHusna.arti}</p>
       </div>
       <div className="flex shrink-0 items-center gap-2">
-        <p lang="ar" dir="rtl" className="arabic-font text-2xl">
+        <p lang="ar" dir="rtl" className="arabic-font [--arabic-size:1.5rem]">
           {dataAsmaulHusna.arab}
         </p>
         <Tooltip>

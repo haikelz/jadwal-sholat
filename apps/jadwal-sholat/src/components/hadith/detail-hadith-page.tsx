@@ -132,7 +132,7 @@ export function DetailHadithPage({
             <p
               lang="ar"
               dir="rtl"
-              className="arabic-font min-w-0 text-right text-2xl wrap-anywhere sm:text-3xl"
+              className="arabic-font min-w-0 text-right wrap-anywhere [--arabic-size:1.5rem] sm:[--arabic-size:1.875rem]"
             >
               {contents.arab}
             </p>
