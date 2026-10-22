@@ -13,7 +13,7 @@ describe("asmaul-husna page", () => {
     cy.get(`[data-cy="card"]`).first().should("contain", "Ar Rahman");
     cy.get(`[data-cy="card"]`)
       .first()
-      .find('button[aria-label="Salin"]')
+      .find('button[aria-label^="Salin"]')
       .should("be.visible");
   });
 });
