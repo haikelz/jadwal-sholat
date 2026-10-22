@@ -87,23 +87,21 @@ export interface SuratProps {
       id: string;
     };
     description: string;
-    ayahs: [
-      ayat: {
-        number: {
-          insurah: number;
-        };
-        text: {
-          ar: string;
-          read: string;
-        };
-        audio: {
-          url: string;
-        };
-        translation: {
-          id: string;
-        };
-      }
-    ];
+    ayahs: Array<{
+      number: {
+        insurah: number;
+      };
+      text: {
+        ar: string;
+        read: string;
+      };
+      audio: {
+        url: string;
+      };
+      translation: {
+        id: string;
+      };
+    }>;
     type: {
       id: string;
     };
