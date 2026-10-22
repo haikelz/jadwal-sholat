@@ -111,7 +111,6 @@ export default function HadithDetailScreen() {
           <View className="flex-row flex-wrap gap-2">
             <Button
               variant="outline"
-              size="sm"
               onPress={() =>
                 shareLink({
                   excerpt: contents.id,
@@ -125,7 +124,6 @@ export default function HadithDetailScreen() {
             </Button>
             <Button
               variant="outline"
-              size="sm"
               onPress={() =>
                 copyText(
                   `${contents.arab}\n\n${capitalize(contents.id)}\n\n(${title})`,

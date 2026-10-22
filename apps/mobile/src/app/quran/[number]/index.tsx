@@ -265,7 +265,6 @@ export default function SurahScreen() {
             ? () => (
                 <Button
                   variant="ghost"
-                  size="icon"
                   accessibilityLabel={`Bagikan surat ${surah.asma.id.short}`}
                   onPress={() =>
                     void shareLink({
@@ -275,7 +274,8 @@ export default function SurahScreen() {
                     })
                   }
                 >
-                  <Icon as={Share2} size={20} />
+                  <Icon as={Share2} size={18} />
+                  <Text>Bagikan</Text>
                 </Button>
               )
             : undefined,

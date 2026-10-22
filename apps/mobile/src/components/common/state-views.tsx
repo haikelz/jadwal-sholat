@@ -23,7 +23,6 @@ export function ErrorState({
       <AlertDescription>{description}</AlertDescription>
       <Button
         variant="outline"
-        size="sm"
         className="mb-1.5 ml-6 self-start"
         onPress={onRetry}
       >

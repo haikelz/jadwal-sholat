@@ -100,11 +100,11 @@ export default function QuranScreen() {
           </ToggleGroup>
           <Button
             variant="outline"
-            size="icon"
             accessibilityLabel={`Urutkan: ${ascending ? "naik" : "turun"}`}
             onPress={() => setAscending((value) => !value)}
           >
             <Icon as={ascending ? ArrowUp : ArrowDown} size={16} />
+            <Text>{ascending ? "1–114" : "114–1"}</Text>
           </Button>
         </View>
       </View>

@@ -111,8 +111,9 @@ export default function HadithScreen() {
             }}
             onSubmitEditing={submitSearch}
           />
-          <Button size="icon" accessibilityLabel="Buka hadith" onPress={submitSearch}>
+          <Button accessibilityLabel="Buka hadith" onPress={submitSearch}>
             <Icon as={Search} />
+            <Text>Buka</Text>
           </Button>
         </View>
         {outOfRange ? (
