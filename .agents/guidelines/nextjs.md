@@ -520,10 +520,139 @@ Apply this section only when the capability exists or the task introduces it. Pr
 
 ### PWA and service workers
 
-- Add PWA behavior only for a real offline/installability requirement. Webpack-based PWA plugins require `next build --webpack`.
-- Version caches and define update behavior. Never cache authenticated HTML, session endpoints, mutation responses, or sensitive API data.
-- Prefer network-first for changing documents/data and cache-first only for immutable revisioned assets. Disable service workers in development/tests and verify against a production build.
-- Do not commit generated service-worker bundles unless the tool requires tracked artifacts.
+Add PWA support **only when the owner's request mentions it** (PWA, installable app, offline support, or `next-pwa`). Discovering that an app could be a PWA is not a request. A handover project that already ships a service worker keeps its current tool and config; change only what the task names.
+
+When the owner asks, use `@ducanh2912/next-pwa`. Derive every project-specific value from the codebase, list the discovered values in the reply before the config so the owner can correct them, then fill the template below. Never paste the template with its example values.
+
+#### Discover the values
+
+| Value | Find it in | When nothing is found |
+| --- | --- | --- |
+| `privatePrefixes` | `proxy.ts` (or `middleware.ts`) matchers and auth redirects, route groups whose layout checks the session (`(dashboard)`, `(app)`, `(admin)`), and pages that read the session. Prepend `basePath` and locale segments when the app has them. | Ask the owner. An app with login never ships an empty list. |
+| `apiPrefixes` | `app/api/**` route handlers, plus `rewrites()` that proxy a backend through the app. | `["/api/"]` |
+| `staticPrefixes` | `/_next/static/` plus `public/` folders holding versioned or rarely changing files the UI loads (`/icons/`, `/fonts/`). Leave out user uploads and files replaced in place under the same name. | `["/_next/static/"]` |
+| `cacheName` | `name` in the app's `package.json`, as `<name>-static-v1`. | `app-static-v1` |
+| Offline route | An existing offline page. With `[locale]` routing, the route lives under the default locale. | Create `app/~offline/page.tsx`. |
+| `output` | `standalone` when the app ships in a container (`Dockerfile`, `docker.md` §8). Keep the current value otherwise, and omit it on Vercel. | Keep the current value. |
+| `outputFileTracingRoot` | In a monorepo, the workspace root (`pnpm-workspace.yaml`, `turbo.json`, `nx.json`), for example `path.join(import.meta.dirname, "../..")`. | `process.cwd()` for a single app. |
+| Security headers | Existing `headers()`, `proxy.ts`, and any CSP. Keep stricter existing values. Drop `X-Frame-Options: DENY` if the app is embedded in an iframe and use CSP `frame-ancestors` instead. In `Permissions-Policy`, set a feature to `(self)` when the code uses it (`getUserMedia` for camera or microphone, `navigator.geolocation`), and `()` otherwise. | The template's headers. |
+| `optimizePackageImports` | Import statements: installed packages imported by named exports from a large barrel. Skip the packages Next.js already optimizes (`lucide-react`, `date-fns`, `lodash-es`, `recharts`, `@tabler/icons-react`, `react-icons/*`, and the rest of the installed version's default list). | Omit the key. |
+| Build command | `package.json` scripts, the `Dockerfile` build step, and CI. Every place that runs `next build` needs `--webpack`. | Add a `build` script. |
+| Manifest | An existing `app/manifest.*` or `public/manifest.json`. Take `name` from metadata in the root layout, colors from the design tokens or the `viewport` export's `themeColor`, and icons from existing files. | Ask the owner for the name and icons. |
+
+#### Template
+
+```ts
+// next.config.ts
+import withPWAInit from "@ducanh2912/next-pwa";
+import type { NextConfig } from "next";
+
+// Discovered values. Each list is the single source for both the service
+// worker and the response headers, so a new prefix is added once.
+const privatePrefixes = ["/dashboard"];
+const apiPrefixes = ["/api/"];
+const staticPrefixes = ["/_next/static/", "/icons/"];
+
+const withPWA = withPWAInit({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+  cacheStartUrl: false,
+  dynamicStartUrl: false,
+  cacheOnFrontEndNav: false,
+  aggressiveFrontEndNavCaching: false,
+  extendDefaultRuntimeCaching: false,
+  reloadOnOnline: false,
+  fallbacks: { document: "/~offline" },
+  workboxOptions: {
+    runtimeCaching: [
+      {
+        // Private, API, and RSC traffic never touches the cache.
+        urlPattern: ({ url, request }) =>
+          [...apiPrefixes, ...privatePrefixes].some((prefix) =>
+            url.pathname.startsWith(prefix),
+          ) ||
+          request.headers.get("rsc") === "1" ||
+          url.searchParams.has("_rsc"),
+        handler: "NetworkOnly",
+        options: {},
+      },
+      {
+        // Content-hashed build output and stable public assets.
+        urlPattern: ({ url }) =>
+          staticPrefixes.some((prefix) => url.pathname.startsWith(prefix)),
+        handler: "CacheFirst",
+        options: {
+          cacheName: "app-static-v1",
+          expiration: { maxEntries: 100, maxAgeSeconds: 2592000 },
+        },
+      },
+      {
+        // Pages stay fresh; the offline fallback covers network failure.
+        urlPattern: ({ request }) => request.mode === "navigate",
+        handler: "NetworkOnly",
+        options: {},
+      },
+    ],
+  },
+});
+
+const config: NextConfig = {
+  output: "standalone",
+  outputFileTracingRoot: process.cwd(),
+  poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+      ...privatePrefixes.map((prefix) => ({
+        source: `${prefix}/:path*`,
+        headers: [{ key: "Cache-Control", value: "private, no-store" }],
+      })),
+      {
+        source: "/sw.js",
+        headers: [{ key: "Cache-Control", value: "no-cache" }],
+      },
+    ];
+  },
+  experimental: {
+    optimizePackageImports: ["radix-ui"],
+    webpackBuildWorker: true,
+    webpackMemoryOptimizations: true,
+  },
+};
+
+export default withPWA(config);
+```
+
+#### Fixed policy
+
+These parts hold for every project; do not adapt them away:
+
+- Documents, RSC payloads, API routes, and private routes are `NetworkOnly`. Only `staticPrefixes` use `CacheFirst`.
+- The `cacheStartUrl`, `dynamicStartUrl`, front-end navigation caching, `extendDefaultRuntimeCaching`, and `reloadOnOnline` options stay `false`, and the plugin stays disabled in development.
+- `sw.js` is served with `no-cache` so clients pick up a new worker. With `basePath`, prefix that header source and every pattern.
+- Bump the version in `cacheName` whenever the caching rules change, so old entries are dropped.
+- `webpackBuildWorker` stays: the plugin adds a custom webpack config, which turns the worker off unless it is set. Do not add `preloadEntriesOnStart` or the `turbopackFileSystemCache*` flags; Next.js 16 enables them by default.
+- Merge into the existing `next.config.*`: keep its headers, redirects, images, and other keys, and wrap the final export with `withPWA`.
+
+The rest of a PWA change:
+
+- **Build script.** The plugin is webpack-only. Every `next build` found in discovery becomes `next build --webpack`. Keep `next dev` on Turbopack while `disable` turns the plugin off in development; add `--webpack` to dev only if the installed version refuses the webpack config.
+- **Offline page.** Create `app/~offline/page.tsx` as a static page with no data fetching, explaining that the app is offline and offering a retry.
+- **Manifest and icons.** Add `app/manifest.ts` returning `MetadataRoute.Manifest` with `name`, `short_name`, `start_url`, `display: "standalone"`, `theme_color`, `background_color`, and icons at 192px, 512px, and a 512px `maskable` variant, using the values found in discovery.
+- **Generated files.** Add `public/sw.js`, `public/sw.js.map`, `public/workbox-*.js`, `public/workbox-*.js.map`, and `public/swe-worker-*.js` to `.gitignore`.
+- **Never cache** authenticated HTML, session or auth endpoints, mutation responses, or personal data. When a new private route prefix appears later, add it to `privatePrefixes` in the same change.
+- **Verify** on a production build: the service worker registers, the manifest is valid and the app is installable, `/_next/static/` responses come from the cache, a private route and an RSC request never do, and the offline page appears for a navigation with the network disabled.
 
 ### Observability
 
