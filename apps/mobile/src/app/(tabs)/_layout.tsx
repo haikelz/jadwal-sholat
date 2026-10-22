@@ -5,6 +5,7 @@ import {
   BookMarked,
   Calendar,
   Clock4,
+  List,
   type LucideIcon,
 } from "lucide-react-native";
 import { useColorScheme } from "nativewind";
@@ -13,6 +14,7 @@ import { useColorScheme } from "nativewind";
 const TABS: { name: string; title: string; label: string; icon: LucideIcon }[] = [
   { name: "index", title: "Jadwal Sholat", label: "Jadwal", icon: Clock4 },
   { name: "quran", title: "Al-Qur'an", label: "Qur'an", icon: BookMarked },
+  { name: "asmaul-husna", title: "Asma'ul Husna", label: "Asmaul Husna", icon: List },
   { name: "sunnah-fasting", title: "Puasa Sunnah", label: "Puasa", icon: Calendar },
 ];
 
