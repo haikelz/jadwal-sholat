@@ -152,7 +152,7 @@ export default function SurahScreen() {
         name: surah.asma.id.short,
         surah: surah.number,
       });
-      ToastAndroid.show("Ayat ditandai sebagai bacaan terakhir", ToastAndroid.SHORT);
+      ToastAndroid.show("Ayat ditandai sebagai bacaan terakhir", ToastAndroid.LONG);
     },
     [setLastRead, surah],
   );

@@ -129,7 +129,7 @@ export function AdzanSettings() {
 
   async function testAdzan() {
     await scheduleTestAdzan();
-    ToastAndroid.show("Adzan berbunyi dalam 1 menit", ToastAndroid.SHORT);
+    ToastAndroid.show("Adzan berbunyi dalam 1 menit", ToastAndroid.LONG);
   }
 
   // Shown after a denied request, or when access was revoked in Android's
