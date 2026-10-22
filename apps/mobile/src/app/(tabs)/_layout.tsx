@@ -3,6 +3,7 @@ import { THEME } from "@/lib/theme";
 import { Tabs } from "expo-router";
 import {
   BookMarked,
+  BookOpen,
   Calendar,
   Clock4,
   List,
@@ -14,6 +15,7 @@ import { useColorScheme } from "nativewind";
 const TABS: { name: string; title: string; label: string; icon: LucideIcon }[] = [
   { name: "index", title: "Jadwal Sholat", label: "Jadwal", icon: Clock4 },
   { name: "quran", title: "Al-Qur'an", label: "Qur'an", icon: BookMarked },
+  { name: "hadith", title: "Hadith", label: "Hadith", icon: BookOpen },
   { name: "asmaul-husna", title: "Asma'ul Husna", label: "Asmaul Husna", icon: List },
   { name: "sunnah-fasting", title: "Puasa Sunnah", label: "Puasa", icon: Calendar },
 ];
