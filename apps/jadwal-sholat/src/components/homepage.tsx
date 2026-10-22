@@ -51,7 +51,14 @@ import { getDateParts } from "@/lib/utils/date-parts";
 import useGlobalStore from "@/store";
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
-import { Bell, CalendarX2, CircleAlert, MapPin, RefreshCw } from "lucide-react";
+import {
+  Bell,
+  CalendarX2,
+  Check,
+  CircleAlert,
+  MapPin,
+  RefreshCw,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect, useId, useState } from "react";
 
@@ -116,18 +123,24 @@ function ReminderButton() {
   // Hidden once the reader has answered, or where notifications don't exist.
   if (permission !== "default") return null;
 
+  // Say what the reminder does before the browser asks for permission.
   return (
-    <Button
-      type="button"
-      variant="outline"
-      size="sm"
-      onClick={async () =>
-        setPermission(await Notification.requestPermission())
-      }
-    >
-      <Bell aria-hidden="true" />
-      Aktifkan pengingat
-    </Button>
+    <div className="flex flex-col items-start gap-1.5">
+      <Button
+        type="button"
+        variant="outline"
+        onClick={async () =>
+          setPermission(await Notification.requestPermission())
+        }
+      >
+        <Bell aria-hidden="true" />
+        Aktifkan pengingat adzan
+      </Button>
+      <p className="text-sm text-muted-foreground">
+        Pengingat muncul saat masuk waktu sholat. Browser akan meminta izin
+        notifikasi.
+      </p>
+    </div>
   );
 }
 
@@ -158,7 +171,7 @@ function TodayTimes({
       aria-label="Waktu sholat hari ini"
       className={cn("border-y", className)}
     >
-      <dl className="grid grid-cols-4 gap-y-1 py-2 md:grid-cols-8 md:py-0">
+      <dl className="grid grid-cols-2 gap-y-1 py-2 sm:grid-cols-4 md:grid-cols-8 md:py-0">
         {prayerTimes.map((prayer) => {
           const time = formatSholatTime(timings[prayer.key]);
           const isNext = prayer.key === nextKey;
@@ -174,13 +187,19 @@ function TodayTimes({
             >
               <dt
                 className={cn(
-                  "truncate text-xs",
+                  "flex items-center gap-1 truncate text-sm",
                   isNext
                     ? "font-medium text-foreground"
                     : "text-muted-foreground",
                 )}
               >
+                {hasPassed ? (
+                  <Check aria-hidden="true" className="size-3.5 shrink-0" />
+                ) : null}
                 {prayer.name}
+                {hasPassed ? (
+                  <span className="sr-only">, sudah lewat</span>
+                ) : null}
               </dt>
               <dd
                 className={cn(
@@ -191,6 +210,12 @@ function TodayTimes({
               >
                 {time}
               </dd>
+              {/* State in words, not only the muted background. */}
+              {isNext ? (
+                <dd>
+                  <Badge variant="primary-light">Berikutnya</Badge>
+                </dd>
+              ) : null}
             </div>
           );
         })}
@@ -207,7 +232,7 @@ function ScheduleSkeleton() {
         aria-live="polite"
         className={cn(
           STRIP,
-          "grid grid-cols-4 gap-y-1 border-y md:grid-cols-8",
+          "grid grid-cols-2 gap-y-1 border-y sm:grid-cols-4 md:grid-cols-8",
         )}
       >
         <span className="sr-only">Memuat jadwal sholat…</span>
@@ -410,13 +435,14 @@ export function Homepage() {
             <Dot />
             <Button
               type="button"
-              variant="link"
-              size="sm"
+              variant="outline"
               onClick={() => setIsOpenMap(true)}
             >
               <MapPin aria-hidden="true" />
-              <span className="sr-only">Ubah lokasi, saat ini </span>
+              <span className="sr-only">Lokasi saat ini </span>
               <UserLocation />
+              <span aria-hidden="true">·</span>
+              Ubah
             </Button>
             {isRefetching || (isPending && isShowingStored) ? (
               <Spinner aria-label="Memperbarui jadwal" />
