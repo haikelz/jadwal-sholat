@@ -4,6 +4,22 @@ import type { ConfigContext, ExpoConfig } from "expo/config";
 // next to the store app instead of replacing it.
 const isDev = process.env.APP_VARIANT === "development";
 
+// EAS skips the gitignored .env, so EAS builds read the public API URLs from
+// the EAS environment that eas.json names. Stop a build when one is missing
+// instead of shipping an app that can't reach its APIs.
+const API_URL_VARS = [
+  "EXPO_PUBLIC_ASMAUL_HUSNA_API",
+  "EXPO_PUBLIC_HADITH_API",
+  "EXPO_PUBLIC_JADWAL_SHOLAT_API",
+  "EXPO_PUBLIC_NOMINATIM_API",
+  "EXPO_PUBLIC_PUASA_SUNNAH_API",
+  "EXPO_PUBLIC_QURAN_API",
+];
+const missingApiUrls = API_URL_VARS.filter((name) => !URL.canParse(process.env[name] ?? ""));
+if (process.env.EAS_BUILD && missingApiUrls.length > 0) {
+  throw new Error(`Set ${missingApiUrls.join(", ")} in the EAS environment (see .env.example).`);
+}
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: isDev ? "Jadwal Sholat (Dev)" : "Jadwal Sholat",

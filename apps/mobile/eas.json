@@ -9,6 +9,7 @@
     },
     "development": {
       "extends": "base",
+      "environment": "development",
       "developmentClient": true,
       "distribution": "internal",
       "env": { "APP_VARIANT": "development" },
@@ -16,11 +17,13 @@
     },
     "preview": {
       "extends": "base",
+      "environment": "preview",
       "distribution": "internal",
       "android": { "buildType": "apk" }
     },
     "production": {
       "extends": "base",
+      "environment": "production",
       "autoIncrement": true
     }
   },
