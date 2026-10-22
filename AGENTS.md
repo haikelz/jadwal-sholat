@@ -45,7 +45,8 @@ Builds are memory-heavy. Stop `bun run dev:web` and any other `next build` or `n
 - Keep mobile styles as the default; add larger-screen behavior with responsive variants.
 - Preserve one `<main>` landmark, a logical heading hierarchy, visible focus states, keyboard behavior, and accessible names for every control.
 - Keep mobile form text at `text-base`; use `sm:text-sm` only above the mobile breakpoint.
-- Use `arabic-font` and `lang="ar"` for Arabic source text. The font is defined centrally in `src/lib/utils/fonts.ts` and `globals.css`.
+- Use `arabic-font` and `lang="ar"` for Arabic source text. The font is defined centrally in `src/lib/utils/fonts.ts` and `globals.css`. Size it with `[--arabic-size:<rem>]`, never a `text-*` class, so the reader's Arabic size setting applies.
+- Follow the all-ages profile in `apps/jadwal-sholat/DESIGN.md`: the root text scale (body `text-sm` renders at about 16px), a visible word beside every icon in a button, default-size actions, and plain words beside jargon.
 - Respect `prefers-reduced-motion`; do not add unconditional motion or smooth scrolling. Use CSS (`tw-animate-css` utilities) for motion rather than an animation library.
 - Write interface copy in clear Indonesian and use sentence case.
 

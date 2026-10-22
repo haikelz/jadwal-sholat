@@ -10,7 +10,8 @@ Expo SDK 58 app with the same sections as the web: Jadwal, Qur'an, Hadith, Asma'
 - Persisted state uses zustand `persist` with AsyncStorage (`src/store/*`). The splash screen stays up until every store hydrates (`src/store/hydration.ts`).
 - Fetch through `api` from `src/lib/api.ts` with React Query and the shared `queryKeys` from core.
 - Every data region has a skeleton, an empty state with one action and an inline error with retry (`src/components/common/state-views.tsx`).
-- Arabic text uses `ArabicText` (right to left, line height twice the font size).
+- Arabic text uses `ArabicText` (right to left, line height twice the font size, scaled by the reader's Arabic size setting). Other text follows Android's font size; never set `allowFontScaling={false}`.
+- Follow `DESIGN.md`: every action shows an icon plus a word, and its accessible name contains that word.
 - Copy is Indonesian, in sentence case. Every control has an accessible name.
 - Native code compiles on EAS only (`bun run build:android`, or `bunx eas-cli build --profile development`). Don't run Gradle or `expo run:android` locally: the laptop runs out of memory.
 - `eas.json` pins EAS to the Bun version that wrote `bun.lock` (`base` profile); bump it with your local Bun.
