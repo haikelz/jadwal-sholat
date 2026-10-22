@@ -21,7 +21,6 @@ export function ErrorWhileFetch() {
         <AlertAction>
           <Button
             type="button"
-            size="sm"
             variant="outline"
             onClick={() => window.location.reload()}
           >

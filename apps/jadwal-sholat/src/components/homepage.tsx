@@ -300,7 +300,6 @@ export function Homepage() {
               <Button
                 type="button"
                 variant="outline"
-                size="sm"
                 onClick={() => refetch()}
               >
                 <RefreshCw aria-hidden="true" />
@@ -371,8 +370,7 @@ export function Homepage() {
           <FrameFooter className="flex-row">
             <Button
               type="button"
-              variant="ghost"
-              size="sm"
+              variant="outline"
               aria-expanded={showFullMonth}
               aria-controls={monthPanelId}
               onClick={() => setShowFullMonth((value) => !value)}

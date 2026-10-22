@@ -85,7 +85,7 @@ export function DetailHadithPage({
           Periksa koneksi internet, lalu coba lagi.
         </AlertDescription>
         <AlertAction>
-          <Button variant="outline" size="sm" onClick={() => refetch()}>
+          <Button variant="outline" onClick={() => refetch()}>
             Coba lagi
           </Button>
         </AlertAction>
