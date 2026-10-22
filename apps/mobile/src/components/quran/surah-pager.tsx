@@ -36,7 +36,7 @@ export function SurahPager({
           onPress={() => onNavigate(previous)}
           className="items-start gap-0.5 rounded-lg px-3 py-2 active:bg-muted/50"
         >
-          <Text className="text-xs text-muted-foreground">Surat sebelumnya</Text>
+          <Text className="text-sm text-muted-foreground">Surat sebelumnya</Text>
           <View className="flex-row items-center gap-1">
             <Icon as={ArrowLeft} size={16} />
             <Text className="text-sm font-medium">
@@ -52,7 +52,7 @@ export function SurahPager({
           onPress={() => onNavigate(next)}
           className="items-end gap-0.5 rounded-lg px-3 py-2 active:bg-muted/50"
         >
-          <Text className="text-xs text-muted-foreground">Surat berikutnya</Text>
+          <Text className="text-sm text-muted-foreground">Surat berikutnya</Text>
           <View className="flex-row items-center gap-1">
             <Text className="text-sm font-medium">
               {surahName(next) ?? `Surat ${next}`}

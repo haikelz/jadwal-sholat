@@ -141,7 +141,7 @@ export default function HadithDetailScreen() {
         {contents.arab && contents.id ? <Separator /> : null}
         {contents.id ? (
           <View className="gap-2">
-            <Text className="text-xs font-medium text-muted-foreground">
+            <Text className="text-sm font-medium text-muted-foreground">
               Terjemahan
             </Text>
             <Text className="text-sm leading-6">{capitalize(contents.id)}</Text>

@@ -52,7 +52,7 @@ export default function QuranScreen() {
             >
               <Icon as={BookOpenText} size={18} />
               <View className="min-w-0 flex-1">
-                <Text className="text-xs text-muted-foreground">
+                <Text className="text-sm text-muted-foreground">
                   Lanjutkan membaca
                 </Text>
                 <Text numberOfLines={1} className="text-sm font-medium">
