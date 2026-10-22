@@ -1,0 +1,21 @@
+$schema: "https://moonrepo.dev/schemas/project.json"
+
+language: "typescript"
+tags: ["expo"]
+dependsOn: ["core"]
+
+# Native code compiles on EAS only; there is no local Gradle task on purpose.
+tasks:
+  dev:
+    script: "bunx expo start"
+    preset: "server"
+  typecheck:
+    script: "bunx tsc --noEmit"
+  lint:
+    script: "bunx expo lint"
+  doctor:
+    script: "bunx expo-doctor"
+  build-preview:
+    script: "bunx eas-cli build --platform android --profile preview"
+    options:
+      runInCI: false

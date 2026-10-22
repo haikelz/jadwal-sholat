@@ -2,11 +2,14 @@
   "name": "jadwal-sholat",
   "private": true,
   "scripts": {
+    "build:android": "moon run mobile:build-preview",
     "build:web": "moon run jadwal-sholat:build",
+    "dev:mobile": "moon run mobile:dev",
     "dev:web": "moon run jadwal-sholat:dev",
     "test:core": "moon run core:test",
     "test:web": "moon run jadwal-sholat:test",
-    "typecheck:core": "moon run core:typecheck"
+    "typecheck:core": "moon run core:typecheck",
+    "typecheck:mobile": "moon run mobile:typecheck"
   },
   "devDependencies": {
     "@moonrepo/cli": "^2.1.1",
