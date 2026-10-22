@@ -46,62 +46,23 @@ export const AyahItem = memo(function AyahItem({
     // Soft highlight on the ayah being recited.
     <View className={cn("px-4", isPlaying && "bg-muted/60")}>
       <View className="gap-4 border-b border-border py-6">
-        <View className="flex-row items-center justify-between gap-2">
-          <View
-            accessible
-            accessibilityLabel={`Ayat ${number}`}
+        <View
+          accessible
+          accessibilityLabel={`Ayat ${number}`}
+          className={cn(
+            "size-8 items-center justify-center rounded-full border border-border",
+            isLinked && "border-foreground",
+            isPlaying && "border-primary bg-primary",
+          )}
+        >
+          <Text
             className={cn(
-              "size-8 items-center justify-center rounded-full border border-border",
-              isLinked && "border-foreground",
-              isPlaying && "border-primary bg-primary",
+              "text-xs font-medium tabular-nums",
+              isPlaying && "text-primary-foreground",
             )}
           >
-            <Text
-              className={cn(
-                "text-xs font-medium tabular-nums",
-                isPlaying && "text-primary-foreground",
-              )}
-            >
-              {number}
-            </Text>
-          </View>
-          <View className="flex-row items-center gap-1">
-            {showAudio ? (
-              <Button
-                variant="ghost"
-                size="icon"
-                accessibilityLabel={isPlaying ? `Jeda ayat ${number}` : `Putar ayat ${number}`}
-                onPress={() => onTogglePlay(ayah)}
-              >
-                <Icon as={isPlaying ? Pause : Play} size={18} />
-              </Button>
-            ) : null}
-            <Button
-              variant="ghost"
-              size="icon"
-              accessibilityLabel={`Bagikan ayat ${number}`}
-              onPress={() => onShare(ayah)}
-            >
-              <Icon as={Share2} size={18} />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              accessibilityLabel={`Salin ayat ${number}`}
-              onPress={() => onCopy(ayah)}
-            >
-              <Icon as={ClipboardCopy} size={18} />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              accessibilityLabel={`Tandai ayat ${number} sebagai bacaan terakhir`}
-              accessibilityState={{ selected: isLastRead }}
-              onPress={() => onBookmark(ayah)}
-            >
-              <Icon as={isLastRead ? BookmarkCheck : Bookmark} size={18} />
-            </Button>
-          </View>
+            {number}
+          </Text>
         </View>
 
         <ArabicText selectable>{ayah.text.ar}</ArabicText>
@@ -115,6 +76,45 @@ export const AyahItem = memo(function AyahItem({
           <Text selectable className="text-sm">
             {ayah.translation.id}
           </Text>
+        </View>
+
+        {/* Labeled actions under the text; the row wraps on narrow phones. */}
+        <View className="flex-row flex-wrap gap-1">
+          {showAudio ? (
+            <Button
+              variant="ghost"
+              accessibilityLabel={isPlaying ? `Jeda ayat ${number}` : `Putar ayat ${number}`}
+              onPress={() => onTogglePlay(ayah)}
+            >
+              <Icon as={isPlaying ? Pause : Play} size={18} />
+              <Text>{isPlaying ? "Jeda" : "Putar"}</Text>
+            </Button>
+          ) : null}
+          <Button
+            variant="ghost"
+            accessibilityLabel={`Bagikan ayat ${number}`}
+            onPress={() => onShare(ayah)}
+          >
+            <Icon as={Share2} size={18} />
+            <Text>Bagikan</Text>
+          </Button>
+          <Button
+            variant="ghost"
+            accessibilityLabel={`Salin ayat ${number}`}
+            onPress={() => onCopy(ayah)}
+          >
+            <Icon as={ClipboardCopy} size={18} />
+            <Text>Salin</Text>
+          </Button>
+          <Button
+            variant="ghost"
+            accessibilityLabel={`${isLastRead ? "Ditandai" : "Tandai"} ayat ${number} sebagai bacaan terakhir`}
+            accessibilityState={{ selected: isLastRead }}
+            onPress={() => onBookmark(ayah)}
+          >
+            <Icon as={isLastRead ? BookmarkCheck : Bookmark} size={18} />
+            <Text>{isLastRead ? "Ditandai" : "Tandai"}</Text>
+          </Button>
         </View>
       </View>
     </View>

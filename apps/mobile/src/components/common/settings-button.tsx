@@ -10,6 +10,8 @@ export function SettingsButton() {
         variant="ghost"
         size="icon"
         accessibilityLabel="Pengaturan"
+        // 40dp button + 4dp each side reaches Android's 48dp touch target.
+        hitSlop={4}
         className="mr-2"
       >
         <Icon as={Settings} size={20} />

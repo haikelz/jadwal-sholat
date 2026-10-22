@@ -97,12 +97,12 @@ export default function LocationScreen() {
                 onSubmitEditing={submit}
               />
               <Button
-                size="icon"
-                accessibilityLabel="Cari"
+                accessibilityLabel="Cari kota"
                 disabled={search.isPending}
                 onPress={submit}
               >
                 <Icon as={Search} />
+                <Text>Cari</Text>
               </Button>
             </View>
           </View>

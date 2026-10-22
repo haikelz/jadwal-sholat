@@ -36,13 +36,13 @@ export function AsmaulHusnaRow({
         <ArabicText size={24}>{item.arab}</ArabicText>
         <Button
           variant="ghost"
-          size="icon"
           accessibilityLabel={`Salin ${item.latin}`}
           onPress={() =>
             copyText(`${item.latin} (${item.arab}): ${item.arti}`, "Asmaul Husna disalin")
           }
         >
           <Icon as={Copy} size={16} />
+          <Text>Salin</Text>
         </Button>
       </View>
     </View>

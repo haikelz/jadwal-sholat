@@ -161,7 +161,6 @@ export function AdzanSettings() {
           </AlertDescription>
           <Button
             variant="outline"
-            size="sm"
             className="mb-1.5 ml-6 self-start"
             onPress={() => Linking.openSettings()}
           >
@@ -200,7 +199,7 @@ export function AdzanSettings() {
                 : "Tepat waktu."}
             </Text>
             {access?.exactAlarm === false ? (
-              <Button variant="outline" size="sm" className="self-start" onPress={allowExactAlarm}>
+              <Button variant="outline" className="self-start" onPress={allowExactAlarm}>
                 <Text>Izinkan alarm tepat waktu</Text>
               </Button>
             ) : null}
@@ -214,7 +213,6 @@ export function AdzanSettings() {
             </AlertDescription>
             <Button
               variant="outline"
-              size="sm"
               className="mb-1.5 ml-6 self-start"
               onPress={openBatterySettings}
             >
@@ -223,7 +221,7 @@ export function AdzanSettings() {
           </Alert>
 
           {__DEV__ ? (
-            <Button variant="secondary" size="sm" className="self-start" onPress={testAdzan}>
+            <Button variant="secondary" className="self-start" onPress={testAdzan}>
               <Icon as={BellRing} />
               <Text>Tes adzan dalam 1 menit</Text>
             </Button>

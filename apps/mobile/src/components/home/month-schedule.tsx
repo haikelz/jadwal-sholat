@@ -91,7 +91,6 @@ export function MonthSchedule({
 
       <Button
         variant="ghost"
-        size="sm"
         className="self-start"
         accessibilityState={{ expanded: showFullMonth }}
         onPress={() => setShowFullMonth((value) => !value)}
