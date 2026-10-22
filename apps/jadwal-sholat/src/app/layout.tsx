@@ -112,7 +112,9 @@ export default function Layout({ children }: ChildrenProps) {
               <AppShell>{children}</AppShell>
             </TooltipProvider>
             {/* Keep toasts above the mobile bottom navigation. */}
+            {/* 6 s instead of 4, so slower readers can finish a toast. */}
             <Toaster
+              duration={6000}
               mobileOffset={{
                 bottom: "calc(4.5rem + env(safe-area-inset-bottom))",
               }}
