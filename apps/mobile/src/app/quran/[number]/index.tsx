@@ -3,6 +3,7 @@ import {
   ErrorState,
   ListSkeleton,
 } from "@/components/common/state-views";
+import { AudioBar } from "@/components/quran/audio-bar";
 import { AyahItem } from "@/components/quran/ayah-item";
 import { ReadingToolbar } from "@/components/quran/reading-toolbar";
 import { SurahHeader } from "@/components/quran/surah-header";
@@ -200,59 +201,64 @@ export default function SurahScreen() {
       );
     }
 
+    // The audio bar is a sibling under the list, so the list ends above it
+    // and the last ayah never hides behind the controls.
     return (
-      <FlashList
-        ref={listRef}
-        data={surah.ayahs}
-        keyExtractor={(ayah) => String(ayah.number.insurah)}
-        initialScrollIndex={linkedIndex}
-        keyboardShouldPersistTaps="handled"
-        extraData={{ currentIndex, lastReadAyah, linkedIndex, playing, showAudio, showLatin }}
-        contentContainerStyle={{ paddingBottom: 40 }}
-        ListHeaderComponent={
-          <View className="gap-4 px-4 pt-6">
-            <SurahHeader surah={surah} />
-            <ReadingToolbar
-              ayahCount={surah.ayahCount}
-              qori={qori}
+      <View className="flex-1">
+        <FlashList
+          ref={listRef}
+          data={surah.ayahs}
+          keyExtractor={(ayah) => String(ayah.number.insurah)}
+          initialScrollIndex={linkedIndex}
+          keyboardShouldPersistTaps="handled"
+          extraData={{ currentIndex, lastReadAyah, linkedIndex, playing, showAudio, showLatin }}
+          contentContainerStyle={{ paddingBottom: 40 }}
+          ListHeaderComponent={
+            <View className="gap-4 px-4 pt-6">
+              <SurahHeader surah={surah} />
+              <ReadingToolbar
+                ayahCount={surah.ayahCount}
+                qori={qori}
+                showAudio={showAudio}
+                showLatin={showLatin}
+                onJump={(index) => listRef.current?.scrollToIndex({ index })}
+                onOpenTafsir={() =>
+                  router.push({
+                    pathname: "/quran/[number]/tafsir",
+                    params: { number: String(surah.number) },
+                  })
+                }
+                onQoriChange={(next) => {
+                  // The new reciter refetches every ayah URL.
+                  stopAyahs();
+                  setQori(next);
+                }}
+                onShowAudioChange={(next) => {
+                  if (!next) stopAyahs();
+                  setShowAudio(next);
+                }}
+                onShowLatinChange={setShowLatin}
+              />
+            </View>
+          }
+          renderItem={({ item, index }) => (
+            <AyahItem
+              ayah={item}
               showAudio={showAudio}
               showLatin={showLatin}
-              onJump={(index) => listRef.current?.scrollToIndex({ index })}
-              onOpenTafsir={() =>
-                router.push({
-                  pathname: "/quran/[number]/tafsir",
-                  params: { number: String(surah.number) },
-                })
-              }
-              onQoriChange={(next) => {
-                // The new reciter refetches every ayah URL.
-                stopAyahs();
-                setQori(next);
-              }}
-              onShowAudioChange={(next) => {
-                if (!next) stopAyahs();
-                setShowAudio(next);
-              }}
-              onShowLatinChange={setShowLatin}
+              isPlaying={index === currentIndex && playing}
+              isLastRead={item.number.insurah === lastReadAyah}
+              isLinked={index === linkedIndex}
+              onTogglePlay={togglePlay}
+              onShare={share}
+              onCopy={copy}
+              onBookmark={bookmark}
             />
-          </View>
-        }
-        renderItem={({ item, index }) => (
-          <AyahItem
-            ayah={item}
-            showAudio={showAudio}
-            showLatin={showLatin}
-            isPlaying={index === currentIndex && playing}
-            isLastRead={item.number.insurah === lastReadAyah}
-            isLinked={index === linkedIndex}
-            onTogglePlay={togglePlay}
-            onShare={share}
-            onCopy={copy}
-            onBookmark={bookmark}
-          />
-        )}
-        ListFooterComponent={<SurahPager number={surah.number} onNavigate={goToSurah} />}
-      />
+          )}
+          ListFooterComponent={<SurahPager number={surah.number} onNavigate={goToSurah} />}
+        />
+        <AudioBar surah={surah} qori={qori} />
+      </View>
     );
   }
 
