@@ -1,3 +1,5 @@
+import { Badge } from "@/components/ui/badge";
+import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import {
@@ -6,9 +8,13 @@ import {
   type PrayerKey,
 } from "@jadwal-sholat/core/prayer";
 import type { PrayerTimings } from "@jadwal-sholat/core/schemas";
+import { Check } from "lucide-react-native";
 import { View } from "react-native";
 
-/** Today's eight times in a 4×2 grid; the next prayer is highlighted. */
+/**
+ * Today's eight times in a 2×4 grid. The next prayer carries a "Berikutnya"
+ * badge and passed prayers a check, so the state never relies on color alone.
+ */
 export function TodayTimes({
   timings,
   nextKey,
@@ -32,27 +38,40 @@ export function TodayTimes({
           <View
             key={prayer.key}
             accessible
-            accessibilityLabel={`${prayer.name} ${time}${isNext ? ", berikutnya" : ""}`}
-            className={cn("w-1/4 gap-0.5 rounded-md px-3 py-3", isNext && "bg-muted")}
+            accessibilityLabel={`${prayer.name} ${time}${isNext ? ", berikutnya" : hasPassed ? ", sudah lewat" : ""}`}
+            className={cn(
+              "w-1/2 flex-row flex-wrap items-center justify-between gap-1 rounded-md px-3 py-3",
+              isNext && "bg-muted",
+            )}
           >
-            <Text
-              numberOfLines={1}
-              className={cn(
-                "text-xs",
-                isNext ? "font-medium text-foreground" : "text-muted-foreground",
-              )}
-            >
-              {prayer.name}
-            </Text>
-            <Text
-              className={cn(
-                "text-lg tabular-nums",
-                isNext ? "font-semibold" : "font-medium",
-                hasPassed && "text-muted-foreground",
-              )}
-            >
-              {time}
-            </Text>
+            <View className="gap-0.5">
+              <Text
+                numberOfLines={1}
+                className={cn(
+                  "text-sm",
+                  isNext ? "font-medium text-foreground" : "text-muted-foreground",
+                )}
+              >
+                {prayer.name}
+              </Text>
+              <Text
+                className={cn(
+                  "text-lg tabular-nums",
+                  isNext ? "font-semibold" : "font-medium",
+                  hasPassed && "text-muted-foreground",
+                )}
+              >
+                {time}
+              </Text>
+            </View>
+            {/* State in words and icons too, never only color. */}
+            {isNext ? (
+              <Badge>
+                <Text>Berikutnya</Text>
+              </Badge>
+            ) : hasPassed ? (
+              <Icon as={Check} size={16} className="text-muted-foreground" />
+            ) : null}
           </View>
         );
       })}

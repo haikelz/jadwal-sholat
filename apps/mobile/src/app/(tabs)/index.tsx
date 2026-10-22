@@ -131,18 +131,6 @@ export default function HomeScreen() {
               </Text>
             </>
           ) : null}
-          <Dot />
-          <Link href="/location" asChild>
-            <Button
-              variant="link"
-              size="sm"
-              className="h-auto px-0"
-              accessibilityLabel={`Ubah lokasi, saat ini ${label ?? "belum dipilih"}`}
-            >
-              <Icon as={MapPin} />
-              <Text>{label ?? "Pilih lokasi"}</Text>
-            </Button>
-          </Link>
           {isPending && isShowingStored ? (
             <ActivityIndicator accessibilityLabel="Memperbarui jadwal" size="small" />
           ) : null}
@@ -152,6 +140,17 @@ export default function HomeScreen() {
             </Badge>
           ) : null}
         </View>
+
+        <Link href="/location" asChild>
+          <Button
+            variant="outline"
+            className="self-start"
+            accessibilityLabel={`Ubah lokasi, saat ini ${label ?? "belum dipilih"}`}
+          >
+            <Icon as={MapPin} />
+            <Text>{label ? `${label} · Ubah` : "Pilih lokasi"}</Text>
+          </Button>
+        </Link>
 
         {nextPrayer ? (
           <View
@@ -195,12 +194,17 @@ export default function HomeScreen() {
         )}
 
         {adzanEnabled ? null : (
-          <Link href="/settings" asChild>
-            <Button variant="outline" size="sm" className="self-start">
-              <Icon as={Bell} />
-              <Text>Aktifkan adzan</Text>
-            </Button>
-          </Link>
+          <View className="gap-1.5">
+            <Link href="/settings" asChild>
+              <Button variant="outline" className="self-start">
+                <Icon as={Bell} />
+                <Text>Aktifkan adzan</Text>
+              </Button>
+            </Link>
+            <Text variant="muted">
+              Adzan berbunyi saat masuk waktu sholat, juga saat aplikasi ditutup.
+            </Text>
+          </View>
         )}
       </View>
 
