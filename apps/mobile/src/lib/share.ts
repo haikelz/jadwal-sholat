@@ -27,5 +27,5 @@ export async function shareLink({
 
 export async function copyText(text: string, message = "Disalin") {
   await Clipboard.setStringAsync(text);
-  ToastAndroid.show(message, ToastAndroid.SHORT);
+  ToastAndroid.show(message, ToastAndroid.LONG);
 }

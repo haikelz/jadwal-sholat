@@ -51,7 +51,7 @@ export function ReadingToolbar({
   function jump() {
     const ayah = Number(jumpTo);
     if (!Number.isInteger(ayah) || ayah < 1 || ayah > ayahCount) {
-      ToastAndroid.show(`Masukkan nomor ayat 1–${ayahCount}`, ToastAndroid.SHORT);
+      ToastAndroid.show(`Masukkan nomor ayat 1–${ayahCount}`, ToastAndroid.LONG);
       return;
     }
     onJump(ayah - 1);
