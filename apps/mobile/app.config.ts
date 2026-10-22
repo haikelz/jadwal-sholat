@@ -36,6 +36,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         android: {
           // Android 9 (API 28) and newer.
           minSdkVersion: 28,
+          // Phones only: 64-bit ARM, plus 32-bit ARM for low-end Android 9–10
+          // (Go edition) phones. Skipping the x86 emulator and Chromebook
+          // builds halves the APK.
+          buildArchs: ["arm64-v8a", "armeabi-v7a"],
         },
       },
     ],
