@@ -58,7 +58,7 @@ export function PuasaRow({
           </Badge>
         ) : null}
       </View>
-      <Text className="text-xs text-muted-foreground">{hijri}</Text>
+      <Text className="text-sm text-muted-foreground">{hijri}</Text>
       <View className={cn("flex-row flex-wrap gap-1", isPast && "opacity-60")}>
         {puasa.recommendations.map((recommendation) => (
           <Badge key={recommendation.key} variant="outline">

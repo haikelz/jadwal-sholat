@@ -66,7 +66,7 @@ function SwitchRow({
       <View className="min-w-0 flex-1 gap-0.5">
         <Label onPress={() => onCheckedChange(!checked)}>{label}</Label>
         {description ? (
-          <Text className="text-xs text-muted-foreground">{description}</Text>
+          <Text className="text-sm text-muted-foreground">{description}</Text>
         ) : null}
       </View>
       <Switch

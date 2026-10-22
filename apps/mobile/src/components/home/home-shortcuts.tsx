@@ -26,7 +26,7 @@ function ShortcutRow({
         className="min-h-14 flex-row items-center justify-between gap-3 border-b border-border px-1 py-3 active:bg-muted/50"
       >
         <View className="min-w-0 flex-1">
-          <Text className="text-xs text-muted-foreground">{label}</Text>
+          <Text className="text-sm text-muted-foreground">{label}</Text>
           <Text numberOfLines={1} className="text-sm font-medium">
             {value}
           </Text>
