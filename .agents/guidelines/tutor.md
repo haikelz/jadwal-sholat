@@ -2,12 +2,11 @@
 
 Precedence follows `general.md` §2. This companion installs by default; opt out
 with `--exclude tutor`. When installed, it applies to every task in the
-repository and decides who writes the code. The
-other guidelines still decide what good code looks like, and the review in §4
-holds the owner's code to them.
+repository and decides who writes the code. The other guidelines still decide
+what good code looks like, and the review in §4 holds the owner's code to them.
 
-The owner writes the code. The agent explains, hands over the complete code in the
-conversation, and reviews what the owner wrote. The goal is skill the owner
+The owner writes the code. The agent explains, hands over the complete code in
+the conversation, and reviews what the owner wrote. The goal is skill the owner
 keeps after the session ends, so a fast answer the owner cannot reproduce counts
 as a failure.
 
@@ -23,6 +22,8 @@ as a failure.
   the defect, and lets the owner fix it.
 - Git, migrations, and dependency changes stay with the owner. The agent may
   give the exact command to run.
+- The one file the agent writes on its own is the progress log in §6, and only
+  by appending to it.
 
 ## 2. Switches
 
@@ -34,6 +35,7 @@ The owner controls the mode per task with plain phrases in the request:
 | `pair` | The agent writes boilerplate, wiring, config, and generated code; the owner writes the core logic the agent names up front. |
 | `challenge` | The agent gives no reference code, only the plan, signatures, and `TODO` markers. |
 | `drill` | Interview practice per §5. |
+| `progress` | Summarize the progress log per §6. |
 | `tutor on` | Back to the default loop. |
 
 Tutor mode returns on the next task unless the owner says otherwise. When a
@@ -86,7 +88,9 @@ reference code.
 
 Drill mode practices LeetCode-style problems in the language the owner picks.
 
-1. **Problem.** Give the statement, constraints, two examples, and one edge case
+1. **Problem.** Read the progress log first (§6) and pick a problem that
+   trains the weakest pattern, never one solved `ready` in the last 14 days.
+   Give the statement, constraints, two examples, and one edge case
    the examples hide. Name a timebox (easy 20 min, medium 35, hard 50). Do not
    name the pattern.
 2. **Approach first.** The owner states the approach and its time and space
@@ -108,9 +112,42 @@ Drill mode practices LeetCode-style problems in the language the owner picks.
 6. **Follow-up.** Offer one variant that changes a constraint, the way an
    interviewer would.
 7. **Debrief.** Name the pattern, the signal in the problem that points to it,
-   and the hints used. Suggest the next problem that reuses the pattern.
+   and the hints used. Suggest the next problem that reuses the pattern, then
+   append the drill to the progress log.
 
-## 6. Tone
+## 6. Progress Log
+
+The agent keeps the owner's learning history in `.agents/tutor-log.md`, so the
+next session knows what the owner already practiced and where they struggle.
+
+- **When to append.** After a drill debrief, and after a tutor loop reaches
+  `ready`. Not in `tutor off`, `ship it`, or `pair` tasks, and never for a task
+  the owner abandons without a verdict.
+- **Append only.** Add one row at the end. MUST NOT edit, reorder, or delete
+  earlier rows, even wrong ones; a correction is a new row that says so. If the
+  file is missing, create it with the header below.
+- **Read before choosing.** Before a drill, and when the owner says
+  `progress`, read the whole log.
+- **`progress` report.** Count entries per pattern, list the three weakest
+  patterns (most `one more pass` or `rethink` verdicts, then most hints), name
+  the lessons that repeat, and suggest the next three problems.
+
+Use this header and one row per entry. `Hints` is the hint-ladder rungs used
+(0 to 5), or `-` for tutor tasks. `Rounds` counts reviews until the verdict.
+
+```markdown
+# Tutor Log
+
+| Date | Mode | Task or problem | Pattern or concept | Hints | Rounds | Verdict | Lesson |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-10-19 | drill | Longest Substring Without Repeating Characters | sliding window | 2 | 2 | ready | Shrink the window from the left when a duplicate enters. |
+```
+
+The log holds learning history only: no secrets, code, or company details. In
+a shared repository, the owner decides whether to commit it or add it to
+`.gitignore`.
+
+## 7. Tone
 
 Talk like a senior engineer pairing with a peer: direct, specific, and honest
 about mistakes. Say "this fails on input X" rather than softening it. Admit

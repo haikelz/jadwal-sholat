@@ -3,13 +3,33 @@
 Precedence follows `general.md` §2. This guide defines the owner's interface
 system: ReUI on shadcn `base-nova`, Tailwind CSS v4, oklch tokens, and the Geist
 type family. It applies to React applications (Next.js, Astro islands) and to
-Svelte applications that port ReUI by hand. A project that standardizes on
-another component library, such as HeroUI, follows that library instead.
+Svelte applications that port ReUI by hand. It applies only when §1 says so; a
+handover project keeps the system it already has.
 
 Read `preferences.md` §5 for general interface quality. This file owns the
 concrete system.
 
-## 1. Foundation
+## 1. When This Guide Applies
+
+The owner's projects come in two kinds. Apply this guide only to the first.
+
+- **From scratch, with ReUI mentioned.** Apply the whole guide, including the
+  ReUI MCP workflow in §3, when the owner's request mentions ReUI or this
+  guide, for example "build it from scratch with ReUI". After setup, record
+  `Design system: ReUI (from scratch)` in the project's `DESIGN.md`; that line
+  carries the mention to later tasks in the same project.
+- **Handover, or no mention.** A project the owner inherited, or any request
+  that does not mention ReUI, follows the component library, tokens, fonts,
+  and conventions already in the code. MUST NOT install ReUI, add the `@reui`
+  registry or MCP server, swap fonts, rewrite tokens, or restyle screens toward
+  this guide. A `components.json` file alone is not a mention; plenty of
+  handover projects use stock shadcn with their own look.
+- **ReUI mentioned in a handover project.** Apply it to the surfaces the owner
+  names. Do not migrate other screens unless the owner asks for a migration.
+- **Unclear.** If a new project has no component system yet and the owner has
+  not mentioned one, ask once before choosing.
+
+## 2. Foundation
 
 - Component system: ReUI, a shadcn registry. Stock shadcn primitives cover what
   ReUI does not replace.
@@ -27,7 +47,7 @@ concrete system.
 Every frontend keeps a `DESIGN.md` at its root that records the direction, the
 token source, and every deliberate deviation from this guide.
 
-## 2. ReUI Setup
+## 3. ReUI Setup
 
 Register ReUI in `components.json`:
 
@@ -52,13 +72,46 @@ Register ReUI in `components.json`:
   `components/ui/`. Feature code composes them; it does not copy them.
 - Keep upstream class strings, variant names, and `data-slot` attributes when
   adapting an installed component. Put a short comment beside each deviation.
-- Before building a block from scratch, search ReUI for an existing component
-  or `c-*` example. The ReUI MCP server (`https://mcp.reui.io`) exposes search,
-  examples, install commands, and usage validation:
-  `claude mcp add --transport http reui https://mcp.reui.io`.
 - Append `.md` to any reui.io docs URL to read it as Markdown.
 
-## 3. Svelte Ports
+### ReUI MCP server
+
+From-scratch projects connect the ReUI MCP server at `https://mcp.reui.io`
+(remote HTTP). It searches components, examples, blocks, and icons, returns
+real component APIs and install commands, and validates usage. Register it for
+the project, so every agent and teammate gets it from the repository:
+
+```json
+{
+  "mcpServers": {
+    "reui": { "type": "http", "url": "https://mcp.reui.io" }
+  }
+}
+```
+
+That is `.mcp.json` for Claude Code, or run
+`claude mcp add --transport http --scope project reui https://mcp.reui.io`.
+Other agents register the same URL as a remote HTTP server in their own MCP
+config. Premium blocks and Motion Icons need the license sent as
+`Authorization: Bearer <key>`; read the key from the untracked local env file
+and never commit it.
+
+For every UI task in a from-scratch project, use the MCP before writing markup:
+
+1. `search` for an existing component, `c-*` example, or block. Build by hand
+   only when nothing fits, and say so.
+2. `get_component` to read the real props, then `get_examples` for the exact
+   composition. Never guess an API.
+3. `get_install_command`, then install with the shadcn CLI per the bullets
+   above.
+4. Compose the installed parts with real data and semantic tokens.
+5. `validate_usage` on the result and walk `get_audit_checklist` before
+   calling the task done, alongside §14.
+
+When the MCP server is unreachable, fall back to the reui.io Markdown docs and
+report that the MCP checks did not run.
+
+## 4. Svelte Ports
 
 ReUI ships React only. Svelte applications port it to Bits UI and never add a
 React runtime.
@@ -76,7 +129,7 @@ Sources of truth, in order:
 - Express variants with `tailwind-variants` (`tv()`), mirroring the upstream
   `cva` definition key for key.
 
-## 4. Typography
+## 5. Typography
 
 ### Loading Geist
 
@@ -157,7 +210,7 @@ migration task. Never mix two sans families in one product surface.
 - Use sentence case. Do not use uppercase, letter-spaced eyebrows or kickers.
 - Apply `text-wrap: pretty` to paragraphs and `text-wrap: balance` to headings.
 
-## 5. Color Tokens
+## 6. Color Tokens
 
 Define tokens once in the global stylesheet. Components use semantic classes
 (`bg-card`, `text-muted-foreground`, `border-border`) and never hex values,
@@ -238,7 +291,7 @@ Color meaning:
   `-light` pattern: 10% background, matching foreground text.
 - Data series read `--chart-*`, never `--primary` or status tokens.
 
-## 6. Theme Switching
+## 7. Theme Switching
 
 - Use the `.dark` class with `@custom-variant dark (&:is(.dark *));`.
 - Default to the system preference. Persist an explicit choice in
@@ -248,7 +301,7 @@ Color meaning:
 - Set `color-scheme` to match the active theme.
 - Offer light, dark, and system in the theme control.
 
-## 7. Surfaces and Elevation
+## 8. Surfaces and Elevation
 
 - In-flow surfaces are flat. Separate them with hairline borders (`border`),
   not shadows. Shadows belong to overlays: popovers, menus, dialogs, sheets,
@@ -261,7 +314,7 @@ Color meaning:
   Nested radii stay concentric: inner radius equals outer radius minus the gap.
 - Dense data (tables) uses the Frame `dense` option so the panel has no padding.
 
-## 8. Layout
+## 9. Layout
 
 - Spacing follows the 4px Tailwind scale. Typical rhythm: `gap-1.5` to `gap-3`
   inside components, `gap-4` between widgets, `mb-6` under the page header.
@@ -279,7 +332,7 @@ Color meaning:
 - Test at 375, 768, and 1280 pixels. No page-level horizontal scroll; wide
   tables scroll inside their own container.
 
-## 9. Components
+## 10. Components
 
 - Buttons: `base-nova` sizes, `h-8` default, `h-6`/`h-7`/`h-9` for xs, sm, lg.
   Destructive buttons use the tinted `bg-destructive/10 text-destructive` form.
@@ -298,7 +351,7 @@ Color meaning:
   with a retry action.
 - Toasts: an Alert on an opaque popover surface.
 
-## 10. Motion
+## 11. Motion
 
 - Easing: `cubic-bezier(0.16, 1, 0.3, 1)` for enter and exit.
 - Durations: 150 to 200ms for state changes, at most 300ms for entrances in
@@ -308,7 +361,7 @@ Color meaning:
 - Wrap every animation in `prefers-reduced-motion: no-preference`, or use
   `MotionConfig reducedMotion="user"` with Motion for React.
 
-## 11. Accessibility
+## 12. Accessibility
 
 - Target WCAG 2.2 AA.
 - Focus: a 2px outline with a 2px offset on every interactive element. If the
@@ -321,7 +374,7 @@ Color meaning:
 - Preserve loading, empty, error, success, disabled, and permission-denied
   states for every data view.
 
-## 12. Avoid
+## 13. Avoid
 
 - Glow effects, gradient text, glass blur, and decorative grid or dot
   backgrounds.
@@ -334,7 +387,7 @@ Color meaning:
   hand-building a conflicting visual language.
 - Adding a React runtime to a Svelte application to reuse a ReUI component.
 
-## 13. Verification
+## 14. Verification
 
 - Run the formatter, lint, type check, and build (see the language owner
   profile §8).

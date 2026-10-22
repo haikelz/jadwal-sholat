@@ -128,7 +128,7 @@ Read `.agents/general.md` and `.agents/preferences.md` for every task. Then sele
 - **JavaScript or TypeScript language/library work:** `.agents/guidelines/javascript-typescript.md` and `.agents/guidelines/haikel-javascript-typescript.md`.
 - **Next.js UI or application work:** `.agents/guidelines/javascript-typescript.md`, `.agents/guidelines/haikel-javascript-typescript.md`, and `.agents/guidelines/nextjs.md`.
 - **Container, Compose, delivery, or runtime work:** `.agents/guidelines/docker.md`; add an application profile only when its build or runtime behavior also changes.
-- **UI, styling, theming, or design-system work:** `.agents/guidelines/design-system.md`; add the framework profile only when its code also changes.
+- **UI, styling, theming, or design-system work:** `.agents/guidelines/design-system.md`; its §1 decides whether ReUI applies (from-scratch projects where the owner mentions it) or the existing system stays (handover projects). Add the framework profile only when its code also changes.
 - **Cross-cutting work:** use the union of only the affected profiles and state why each additional document is needed.
 
 ### Workspace scopes
