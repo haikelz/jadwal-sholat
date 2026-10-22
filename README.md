@@ -26,6 +26,7 @@
 - TanStack Query and TanStack Table
 - Zustand
 - Sentry
+- Expo (React Native), Expo Router, NativeWind and [React Native Reusables](https://reactnativereusables.com) for the Android app
 - [moonrepo](https://moonrepo.dev/) monorepo tooling
 - Bun
 
@@ -77,6 +78,9 @@ Open [http://localhost:3000](http://localhost:3000).
 | `bun run dev:web` | Development server |
 | `bun run build:web` | Production build |
 | `bun run test:web` | E2E tests (Cypress via moon) |
+| `bun run test:core` | Unit tests for `packages/core` |
+| `bun run dev:mobile` | Metro for the Android app (Expo Go or a development build) |
+| `bun run build:android` | Preview APK on EAS |
 
 Type-check the application directly:
 
@@ -99,11 +103,33 @@ bun run test     # cypress run
 bun run open     # cypress open
 ```
 
+### Android app (`apps/mobile`)
+
+The Android app is an Expo project with the same five sections as the website, plus adzan alarms that ring at the prayer time while the app is closed.
+
+Preview it in [Expo Go](https://expo.dev/go) on a phone on the same network:
+
+```bash
+bun run dev:mobile
+```
+
+Scan the QR code with Expo Go. Expo Go can't play the adzan as a notification sound or run background tasks; use a development build for those:
+
+```bash
+cd apps/mobile
+bunx eas-cli login
+bunx eas-cli build --platform android --profile development
+```
+
+`bun run build:android` builds an installable preview APK on EAS. Native code compiles on EAS only, so no Android Studio or local Gradle is needed.
+
 ### Workspace layout
 
 - `apps/jadwal-sholat` — Next.js application
   - `src/components/ui` — shadcn/ui primitives installed with the shadcn CLI
   - `src/components/reui` — ReUI components (Frame, Badge, Alert, Data Grid)
+- `apps/mobile` — Android app (Expo Router, NativeWind, React Native Reusables)
+- `packages/core` — framework-free code shared by both apps: API schemas and clients, prayer times, the adzan schedule, dates, share links, and the bundled surah list and Asma'ul Husna
 - `packages/eslint-config`, `packages/typescript-config` — shared tooling
 - `static/docs` — documentation screenshots
 - `AGENTS.md` — contributor and coding-agent guidance
