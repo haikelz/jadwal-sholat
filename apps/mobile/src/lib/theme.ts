@@ -10,7 +10,7 @@ export const THEME = {
     destructive: "#e7000b",
     foreground: "#0a0a0a",
     muted: "#f5f5f5",
-    mutedForeground: "#737373",
+    mutedForeground: "#696969",
     primary: "#171717",
   },
   dark: {
