@@ -30,6 +30,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     "expo-router",
+    [
+      "expo-build-properties",
+      {
+        android: {
+          // Android 9 (API 28) and newer.
+          minSdkVersion: 28,
+        },
+      },
+    ],
     "expo-location",
     "expo-background-task",
     [
