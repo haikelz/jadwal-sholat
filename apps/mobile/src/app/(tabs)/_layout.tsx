@@ -3,6 +3,7 @@ import { THEME } from "@/lib/theme";
 import { Tabs } from "expo-router";
 import {
   BookMarked,
+  Calendar,
   Clock4,
   type LucideIcon,
 } from "lucide-react-native";
@@ -12,6 +13,7 @@ import { useColorScheme } from "nativewind";
 const TABS: { name: string; title: string; label: string; icon: LucideIcon }[] = [
   { name: "index", title: "Jadwal Sholat", label: "Jadwal", icon: Clock4 },
   { name: "quran", title: "Al-Qur'an", label: "Qur'an", icon: BookMarked },
+  { name: "sunnah-fasting", title: "Puasa Sunnah", label: "Puasa", icon: Calendar },
 ];
 
 export default function TabsLayout() {
