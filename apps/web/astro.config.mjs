@@ -1,7 +1,11 @@
 import react from "@astrojs/react";
 import sentry from "@sentry/astro";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
+
+// Public API base URLs, read from .env locally and from the Pages build
+// variables on Cloudflare. They end up in the browser bundle.
+const publicUrl = envField.string({ context: "client", access: "public", url: true });
 
 // Static output for Cloudflare Pages: no adapter. Pages serve /quran/1 from
 // quran/1.html, so URLs keep the Next site's no-trailing-slash form.
@@ -9,6 +13,15 @@ export default defineConfig({
   site: "https://jdwshlt.ekel.dev",
   trailingSlash: "never",
   build: { format: "file" },
+  env: {
+    schema: {
+      ASMAUL_HUSNA_API: publicUrl,
+      HADITH_API: publicUrl,
+      JADWAL_SHOLAT_API: publicUrl,
+      NOMINATIM_API: publicUrl,
+      QURAN_API: publicUrl,
+    },
+  },
   integrations: [
     react(),
     sentry({
