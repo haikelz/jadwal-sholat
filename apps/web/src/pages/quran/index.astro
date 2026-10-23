@@ -1,0 +1,37 @@
+---
+import { PageHeader, PageShell } from "@/components/common/page-shell";
+import { QuranListIsland } from "@/components/islands/quran-list-island";
+import type { ListSuratProps } from "@/interfaces";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
+import { SURAH_LIST } from "@jadwal-sholat/core/data";
+
+// The bundled list, so the page builds without the network; only the fields
+// a row renders reach the island.
+const surat: ListSuratProps = {
+  data: SURAH_LIST.map(({ asma, ayahCount, number, type }) => ({
+    asma: {
+      id: { short: asma.id.short },
+      translation: { id: asma.translation.id },
+    },
+    ayahCount: String(ayahCount),
+    number: String(number),
+    type: { id: type.id },
+  })),
+};
+---
+
+<BaseLayout
+  title="Al-Qur'an Online: 114 Surat, Terjemahan dan Audio"
+  description="Baca 114 surat Al-Qur'an lengkap dengan teks Arab, latin, terjemahan Indonesia, tafsir, dan audio murottal dari 20 qori."
+  path="/quran"
+  jsonLd={[breadcrumbJsonLd([{ name: "Al-Qur'an", path: "/quran" }])]}
+>
+  <PageShell>
+    <PageHeader
+      title="Baca Al-Qur'an"
+      description="Berlomba-lombalah dalam berbuat kebaikan."
+    />
+    <QuranListIsland client:load surat={surat} />
+  </PageShell>
+</BaseLayout>
