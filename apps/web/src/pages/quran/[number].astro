@@ -1,0 +1,66 @@
+---
+import { PageShell } from "@/components/common/page-shell";
+import { QuranSurahIsland } from "@/components/islands/quran-surah-island";
+import { ReadingProgress } from "@/components/quran/detail-surat/reading-progress";
+import type { SuratProps } from "@/interfaces";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getData } from "@/lib/utils/get-data";
+import { breadcrumbJsonLd, toDescription } from "@/lib/utils/metadata";
+import { env } from "@/lib/utils/public-env";
+import { DEFAULT_QORI } from "@/lib/utils/qori-options";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() =>
+  Array.from({ length: 114 }, (_, index) => ({
+    params: { number: String(index + 1) },
+  }))) satisfies GetStaticPaths;
+
+const { number } = Astro.params as { number: string };
+const { data } = await getData<SuratProps>(
+  `${env.QURAN_API}/quran/${number}?imamId=${DEFAULT_QORI}`,
+);
+const { asma, ayahCount, type } = data;
+
+// Only what the reading island renders: the API also sends per-ayah tafsir
+// and English text, about half of Al-Baqarah's 627 KB. The cast is because
+// SuratProps declares fields the API never sends; the other reciters still
+// fetch the full response in the browser.
+const initialData = {
+  data: {
+    asma: {
+      ar: { short: asma.ar.short },
+      id: { short: asma.id.short },
+      translation: { id: asma.translation.id },
+    },
+    ayahCount,
+    ayahs: data.ayahs.map((ayah) => ({
+      audio: { url: ayah.audio.url },
+      number: { insurah: ayah.number.insurah },
+      text: { ar: ayah.text.ar, read: ayah.text.read },
+      translation: { id: ayah.translation.id },
+    })),
+    number: data.number,
+    tafsir: { id: data.tafsir.id },
+    type: { id: type.id },
+  },
+} as SuratProps;
+---
+
+<BaseLayout
+  title={`Surat ${asma.id.short} (${asma.ar.short}): Arab, Latin dan Artinya`}
+  description={toDescription(
+    `Baca Surat ${asma.id.short} (${asma.translation.id}), surat ke-${number}, ${type.id}, ${ayahCount} ayat: teks Arab, latin, terjemahan Indonesia, tafsir, dan audio murottal.`,
+  )}
+  path={`/quran/${number}`}
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: "Al-Qur'an", path: "/quran" },
+      { name: `Surat ${asma.id.short}`, path: `/quran/${number}` },
+    ]),
+  ]}
+>
+  <ReadingProgress client:load slot="header-actions" />
+  <PageShell width="reading">
+    <QuranSurahIsland client:load number={number} initialData={initialData} />
+  </PageShell>
+</BaseLayout>
