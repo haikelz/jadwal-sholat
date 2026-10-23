@@ -92,14 +92,13 @@ export function ReadingToolbar({
       </View>
 
       <View className="gap-1.5">
-        <Label>Suara pembaca (qori)</Label>
         <Select
           value={selected}
           onValueChange={(option) => {
             if (option) onQoriChange(Number(option.value));
           }}
         >
-          <SelectTrigger accessibilityLabel="Suara pembaca (qori)">
+          <SelectTrigger accessibilityLabel="Pilih qori">
             <SelectValue placeholder="Pilih qori" />
           </SelectTrigger>
           <SelectContent

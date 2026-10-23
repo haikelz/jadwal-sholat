@@ -52,7 +52,6 @@ export function DetailSuratPage({
 
   const { stop } = useAudioPlayer();
   const jumpId = useId();
-  const qoriId = useId();
   const [jumpTo, setJumpTo] = useState("");
 
   function handleShowAudio() {
@@ -154,20 +153,12 @@ export function DetailSuratPage({
         </Toggle>
         <DialogTafsir data={surat} />
         <div className="flex w-full min-w-0 flex-wrap items-center gap-2 sm:ml-auto sm:w-auto">
-          <label
-            id={`${qoriId}-label`}
-            htmlFor={qoriId}
-            className="text-sm text-muted-foreground"
-          >
-            Suara pembaca (qori)
-          </label>
           <Select
             value={qori.toString()}
             onValueChange={(value) => setQori(Number(value))}
           >
             <SelectTrigger
-              id={qoriId}
-              aria-labelledby={`${qoriId}-label`}
+              aria-label="Pilih qori"
               className="min-w-0 flex-1 sm:w-48 sm:flex-none"
             >
               <SelectValue placeholder="Pilih qori" />
