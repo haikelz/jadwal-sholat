@@ -53,9 +53,11 @@ Builds are memory-heavy. Stop `bun run dev:web` and any other `next build` or `n
 
 ## SEO
 
-- Build page metadata with `createPageMetadata` from `src/lib/utils/metadata.ts`.
+- Build page metadata with `createPageMetadata` from `src/lib/utils/metadata.ts`. Write titles and descriptions in Indonesian around what people search for ("Surat Al-Kahf (الكهف): Arab, Latin dan Artinya"); cut API text with `toDescription`, which stops at a word boundary. The homepage passes `absoluteTitle`; other titles get the " | Jadwal Sholat" suffix, including on social cards.
+- Give every indexable page a `BreadcrumbList` with `<JsonLd data={breadcrumbJsonLd([...])} />`. The root layout carries the `WebSite` schema.
+- Detail routes call `notFound()` for malformed params and for a 404 from the API (`FetchError` from `get-data.ts`), so missing surahs and hadith are real 404s, not soft ones.
 - Every indexable route needs a unique title, description, canonical path, Open Graph URL, and Twitter card data.
-- Keep `robots.ts` and `sitemap.ts` aligned with public routes.
+- Keep `robots.ts` and the sitemaps aligned with public routes: `sitemap.ts` (static pages and the 114 surahs) and `(pages)/hadith/sitemap.ts` (every hadith, because the hadith list renders in the browser). `robots.ts` lists both and disallows `/api/`.
 - Reuse the shared social image unless a route has a deliberate, production-ready replacement.
 
 ## Documentation screenshots

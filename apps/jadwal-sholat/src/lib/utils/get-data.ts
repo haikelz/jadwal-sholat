@@ -1,3 +1,14 @@
+/** A non-2xx response; pages turn a 404 into Next's notFound(). */
+export class FetchError extends Error {
+  constructor(
+    readonly status: number,
+    url: string,
+  ) {
+    super(`Failed to fetch data! (${status} ${url})`);
+    this.name = "FetchError";
+  }
+}
+
 /**
  * GET a JSON endpoint with the platform `fetch`.
  *
@@ -11,9 +22,7 @@ export async function getData<T>(url: string, init?: RequestInit): Promise<T> {
     headers: { Accept: "application/json", ...init?.headers },
   });
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data! (${response.status} ${url})`);
-  }
+  if (!response.ok) throw new FetchError(response.status, url);
 
   return (await response.json()) as T;
 }

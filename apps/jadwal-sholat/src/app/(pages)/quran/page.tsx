@@ -1,17 +1,18 @@
+import { JsonLd } from "@/components/common/json-ld";
 import { PageHeader, PageShell } from "@/components/common/page-shell";
 import { QuranPage } from "@/components/quran/quran-page";
 import { env } from "@/lib/utils/public-env";
 import { ListSuratProps } from "@/interfaces";
 import { getData } from "@/lib/utils/get-data";
-import { createPageMetadata } from "@/lib/utils/metadata";
+import { breadcrumbJsonLd, createPageMetadata } from "@/lib/utils/metadata";
 import { Suspense } from "react";
 
 const { NEXT_PUBLIC_QURAN_API } = env;
 
 export const metadata = createPageMetadata({
-  title: "Baca Al-Qur'an",
+  title: "Al-Qur'an Online: 114 Surat, Terjemahan dan Audio",
   description:
-    "Baca Al-Qur'an lengkap dengan audio, transliterasi, terjemahan, dan tafsir.",
+    "Baca 114 surat Al-Qur'an lengkap dengan teks Arab, latin, terjemahan Indonesia, tafsir, dan audio murottal dari 20 qori.",
   path: "/quran",
 });
 
@@ -43,6 +44,7 @@ export default async function Quran() {
 
   return (
     <PageShell>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Al-Qur'an", path: "/quran" }])} />
       <PageHeader
         title="Baca Al-Qur'an"
         description="Berlomba-lombalah dalam berbuat kebaikan."
