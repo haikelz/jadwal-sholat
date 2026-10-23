@@ -1,0 +1,21 @@
+---
+import { PageHeader, PageShell } from "@/components/common/page-shell";
+import { PuasaSunnahIsland } from "@/components/islands/puasa-sunnah-island";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
+---
+
+<BaseLayout
+  title="Jadwal Puasa Sunnah Bulan Ini"
+  description="Jadwal puasa sunnah tiap bulan: Senin Kamis, Ayyamul Bidh, Arafah, Asyura, puasa Syawal, dan awal Zulhijah, lengkap dengan tanggal Hijriah."
+  path="/sunnah-fasting"
+  jsonLd={[breadcrumbJsonLd([{ name: "Puasa Sunnah", path: "/sunnah-fasting" }])]}
+>
+  <PageShell>
+    <PageHeader
+      title="Puasa Sunnah"
+      description="Jadwal puasa sunnah per bulan dan jenis."
+    />
+    <PuasaSunnahIsland client:load />
+  </PageShell>
+</BaseLayout>
