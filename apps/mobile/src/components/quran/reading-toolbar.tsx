@@ -52,7 +52,10 @@ export function ReadingToolbar({
   function jump() {
     const ayah = Number(jumpTo);
     if (!Number.isInteger(ayah) || ayah < 1 || ayah > ayahCount) {
-      ToastAndroid.show(`Masukkan nomor ayat 1–${ayahCount}`, ToastAndroid.LONG);
+      ToastAndroid.show(
+        `Masukkan nomor ayat 1–${ayahCount}`,
+        ToastAndroid.LONG,
+      );
       return;
     }
     onJump(ayah - 1);
@@ -110,7 +113,11 @@ export function ReadingToolbar({
           >
             <ScrollView className="max-h-72">
               {QORI_ITEMS.map((item) => (
-                <SelectItem key={item.value} label={item.label} value={item.value} />
+                <SelectItem
+                  key={item.value}
+                  label={item.label}
+                  value={item.value}
+                />
               ))}
             </ScrollView>
           </SelectContent>
@@ -130,7 +137,11 @@ export function ReadingToolbar({
             onChangeText={setJumpTo}
             onSubmitEditing={jump}
           />
-          <Button variant="outline" accessibilityLabel="Buka ayat" onPress={jump}>
+          <Button
+            variant="outline"
+            accessibilityLabel="Buka ayat"
+            onPress={jump}
+          >
             <Text>Buka</Text>
           </Button>
         </View>

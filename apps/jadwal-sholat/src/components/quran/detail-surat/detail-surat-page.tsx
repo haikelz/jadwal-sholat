@@ -6,6 +6,8 @@ import { PreviousOrNext } from "@/components/quran/detail-surat/previous-or-next
 import { ErrorWhileFetch } from "@/components/react-query/error-while-fetch";
 import { IsRefetching } from "@/components/react-query/is-refetching";
 import { LoadingClient } from "@/components/react-query/loading-client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -13,17 +15,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Toggle } from "@/components/ui/toggle";
-import { env } from "@/lib/utils/public-env";
 import { useFetch } from "@/hooks";
-import { DEFAULT_QORI, qoriOptions } from "@/lib/utils/qori-options";
 import { SuratProps } from "@/interfaces";
+import { env } from "@/lib/utils/public-env";
+import { DEFAULT_QORI, qoriOptions } from "@/lib/utils/qori-options";
 import useGlobalStore from "@/store";
 import { ChevronLeft, Languages, Volume2 } from "lucide-react";
-import Link from "next/link";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { FormEvent, useId, useState } from "react";
 import { useAudioPlayer } from "react-use-audio-player";
 
