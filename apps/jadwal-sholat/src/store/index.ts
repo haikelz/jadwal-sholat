@@ -4,7 +4,6 @@ import {
   IsOpenMapProps,
   LastReadSliceProps,
   LocationPositionProps,
-  NumberModalAsmaulHusnaSliceProps,
   OptionSliceProps,
   PlayNextAudioSliceProps,
   ScrollSliceProps,
@@ -32,7 +31,6 @@ const useGlobalStore = createWithEqualityFn<
     WidthSliceProps &
     PlayNextAudioSliceProps &
     ScrollSliceProps &
-    NumberModalAsmaulHusnaSliceProps &
     LocationPositionProps &
     IsOpenMapProps &
     AdzanSliceProps &
