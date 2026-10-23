@@ -36,4 +36,4 @@ Use `arabic-font` with `lang="ar"` and `dir="rtl"`. Set the size with `[--arabic
 
 ## Writing
 
-Indonesian, sentence case, plain words. Jargon gets its meaning beside it: "Suara pembaca (qori)", "Penjelasan (tafsir)". Say what a permission is for before the browser asks.
+Indonesian, sentence case, plain words. Jargon gets its meaning beside it, e.g. "Penjelasan (tafsir)"; well-known controls such as the qori picker need no visible label. Say what a permission is for before the browser asks.
