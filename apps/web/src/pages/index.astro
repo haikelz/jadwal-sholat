@@ -1,0 +1,18 @@
+---
+import { PageShell } from "@/components/common/page-shell";
+import { HomeIsland } from "@/components/islands/home-island";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Jadwal Sholat Hari Ini Sesuai Lokasi Kamu"
+  description="Waktu sholat hari ini dan sebulan penuh sesuai lokasi kamu, metode Kemenag RI: Imsak, Subuh, Dzuhur, Ashar, Maghrib, Isya, plus pengingat adzan."
+  path="/"
+  absoluteTitle
+>
+  <PageShell>
+    <!-- client:load, not client:only: the hero and today's skeleton ship as
+         static HTML; browser-only parts mount inside the island. -->
+    <HomeIsland client:load />
+  </PageShell>
+</BaseLayout>
