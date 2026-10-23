@@ -1,0 +1,14 @@
+$schema: "https://moonrepo.dev/schemas/project.json"
+
+language: "typescript"
+tags: ["astro"]
+dependsOn: ["core"]
+
+tasks:
+  dev:
+    script: "bun run dev"
+    preset: "server"
+  build:
+    script: "bun run build"
+  check:
+    script: "bun run check"
