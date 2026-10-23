@@ -1,16 +1,18 @@
+import { JsonLd } from "@/components/common/json-ld";
 import { PageHeader, PageShell } from "@/components/common/page-shell";
 import { AsmaulHusnaPage } from "@/components/asmaul-husna/asmaul-husna-page";
 import { env } from "@/lib/utils/public-env";
 import { AsmaulHusnaProps } from "@/interfaces";
 import { getData } from "@/lib/utils/get-data";
-import { createPageMetadata } from "@/lib/utils/metadata";
+import { breadcrumbJsonLd, createPageMetadata } from "@/lib/utils/metadata";
 import { Suspense } from "react";
 
 const { NEXT_PUBLIC_ASMAUL_HUSNA_API } = env;
 
 export const metadata = createPageMetadata({
-  title: "Asmaul Husna",
-  description: "Baca 99 nama Allah beserta tulisan Arab dan artinya.",
+  title: "Asmaul Husna: 99 Nama Allah, Arab, Latin dan Artinya",
+  description:
+    "Daftar lengkap 99 Asmaul Husna dengan tulisan Arab, latin, dan artinya dalam bahasa Indonesia. Cari nama dan salin dengan satu ketukan.",
   path: "/asmaul-husna",
 });
 
@@ -30,6 +32,9 @@ export default async function AsmaulHusna() {
 
   return (
     <PageShell>
+      <JsonLd
+        data={breadcrumbJsonLd([{ name: "Asmaul Husna", path: "/asmaul-husna" }])}
+      />
       <PageHeader
         title="Asma'ul Husna"
         description="Kenali 99 nama Allah beserta tulisan Arab dan artinya."

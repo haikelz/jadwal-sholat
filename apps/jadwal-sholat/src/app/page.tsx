@@ -3,9 +3,11 @@ import { PageShell } from "@/components/common/page-shell";
 import { createPageMetadata } from "@/lib/utils/metadata";
 
 export const metadata = createPageMetadata({
-  title: "Jadwal Sholat",
-  description: "Lihat jadwal sholat bulan ini berdasarkan lokasi kamu.",
+  title: "Jadwal Sholat Hari Ini Sesuai Lokasi Kamu",
+  description:
+    "Waktu sholat hari ini dan sebulan penuh sesuai lokasi kamu, metode Kemenag RI: Imsak, Subuh, Dzuhur, Ashar, Maghrib, Isya, plus pengingat adzan.",
   path: "/",
+  absoluteTitle: true,
 });
 
 export default function Home() {

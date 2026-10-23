@@ -1,4 +1,5 @@
 import { AppShell } from "@/components/common/app-shell";
+import { JsonLd } from "@/components/common/json-ld";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChildrenProps } from "@/interfaces";
@@ -10,6 +11,7 @@ import {
   DEFAULT_OG_IMAGE,
   SITE_NAME,
   SITE_URL,
+  WEBSITE_JSON_LD,
 } from "@/lib/utils/metadata";
 import { Analytics } from "@vercel/analytics/next";
 import { Metadata, Viewport } from "next";
@@ -41,7 +43,6 @@ export const metadata: Metadata = {
     "waktu sholat",
     "Al-Qur'an",
     "hadith",
-    "doa harian",
     "Asmaul Husna",
     "puasa sunnah",
   ],
@@ -104,6 +105,7 @@ export default function Layout({ children }: ChildrenProps) {
       <head>
         {/* Applies the reader's saved text sizes before the first paint. */}
         <script dangerouslySetInnerHTML={{ __html: DISPLAY_SETTINGS_SCRIPT }} />
+        <JsonLd data={WEBSITE_JSON_LD} />
       </head>
       <body className={geistSans.className}>
         <NuqsAdapter>

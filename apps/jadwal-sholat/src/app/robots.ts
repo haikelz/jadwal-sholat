@@ -6,8 +6,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      // The same-origin proxy for the puasa API; nothing to index.
+      disallow: "/api/",
     },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: [`${SITE_URL}/sitemap.xml`, `${SITE_URL}/hadith/sitemap.xml`],
     host: SITE_URL,
   };
 }
