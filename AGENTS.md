@@ -2,7 +2,8 @@
 
 ## Project structure
 
-- `apps/jadwal-sholat` is the Next.js App Router application.
+- `apps/jadwal-sholat` is the Next.js App Router application, live on Vercel until `apps/web` replaces it.
+- `apps/web` is the Astro 7 + React rewrite of the website, built as static files for Cloudflare Pages. See `apps/web/AGENTS.md`.
 - `apps/mobile` is the Android app (Expo SDK 58, Expo Router, NativeWind v4 + React Native Reusables). See `apps/mobile/AGENTS.md`.
 - `packages/core` holds framework-free domain code shared by the web and the Android app: API schemas and URL builders, prayer logic, the adzan schedule, dates, share links, Qur'an and puasa helpers, and bundled static data. It must never import React, React Query or zustand.
 - Both apps pin the same `react`, `react-dom`, `@types/react` and `@types/react-dom`: the versions the Expo SDK in `apps/mobile` requires. A fresh install (Vercel, EAS) hoists one copy per package for the whole workspace, so two versions mix type definitions and can load two Reacts. Bump them together.
@@ -19,6 +20,7 @@
 - Lint: `cd apps/jadwal-sholat && bun run lint` (ESLint flat config in `eslint.config.mjs`)
 - Cypress E2E tests: `bun run test:web`
 - Core tests and types: `bun run test:core`, `bun run typecheck:core`
+- Astro website: `bun run dev:astro`, `bun run build:astro` (static output in `apps/web/dist`).
 - Android app: `bun run dev:mobile` (Metro for Expo Go or a development build), `bun run typecheck:mobile`, `bun run build:android` (preview APK on EAS). Native code compiles on EAS only; don't run Gradle or `expo run:android` locally.
 
 The production build prerenders API-backed routes and therefore requires valid values from `apps/jadwal-sholat/.env` plus network access to those APIs.
@@ -146,4 +148,5 @@ Match the changed path first, then use only that workspace's applicable profile.
 - `packages/typescript-config/**`: javascript-typescript.
 - `apps/jadwal-sholat/**`: javascript-typescript, nextjs, design-system, docker.
 - `apps/mobile/**`: javascript-typescript, design-system.
+- `apps/web/**`: javascript-typescript, design-system.
 <!-- AI-GUIDELINES:END -->

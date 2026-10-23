@@ -123,11 +123,34 @@ bunx eas-cli build --platform android --profile development
 
 `bun run build:android` builds an installable preview APK on EAS. Native code compiles on EAS only, so no Android Studio or local Gradle is needed.
 
+### Astro website (`apps/web`)
+
+`apps/web` is the Astro + React rewrite of the website, built as static files for Cloudflare Pages. The Next app keeps serving the site until the switch.
+
+```bash
+bun run dev:astro     # http://localhost:4321
+bun run build:astro   # static output in apps/web/dist
+```
+
+Cloudflare Pages project settings (Git integration):
+
+| Setting | Value |
+| --- | --- |
+| Root directory | `apps/web` |
+| Build command | `cd ../.. && bun install --frozen-lockfile && cd apps/web && bun run build` |
+| Build output directory | `dist` |
+| Environment variables | `SKIP_DEPENDENCY_INSTALL=1` (the build command installs the Bun workspace), `BUN_VERSION=1.3.11`, `NODE_VERSION=24` (Astro 7 needs Node 22.23.4 or later) |
+| Optional | `PUBLIC_SENTRY_DSN` to report browser errors; `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` to upload source maps |
+| Build watch paths | `apps/web/*`, `packages/core/*`, `bun.lock` |
+
+Pages picks up `apps/web/functions` (the puasa API proxy), `public/_redirects` and `public/_headers` automatically. Turn on Web Analytics under the project's Metrics tab; Cloudflare adds the script itself.
+
 ### Workspace layout
 
 - `apps/jadwal-sholat` — Next.js application
   - `src/components/ui` — shadcn/ui primitives installed with the shadcn CLI
   - `src/components/reui` — ReUI components (Frame, Badge, Alert, Data Grid)
+- `apps/web` — Astro + React rewrite of the website, for Cloudflare Pages
 - `apps/mobile` — Android app (Expo Router, NativeWind, React Native Reusables)
 - `packages/core` — framework-free code shared by both apps: API schemas and clients, prayer times, the adzan schedule, dates, share links, and the bundled surah list and Asma'ul Husna
 - `packages/eslint-config`, `packages/typescript-config` — shared tooling
