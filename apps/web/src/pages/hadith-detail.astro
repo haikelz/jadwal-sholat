@@ -1,0 +1,20 @@
+---
+import { PageShell } from "@/components/common/page-shell";
+import { HadithDetailIsland } from "@/components/islands/hadith-detail-island";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// Cloudflare Pages serves every /hadith/<book>/<n> URL from this page
+// (public/_redirects). The island reads the URL, loads the hadith and
+// rewrites the title, description and canonical to match it.
+---
+
+<BaseLayout
+  title="Hadith: Arab dan Terjemahan"
+  description="Baca hadith dengan teks Arab dan terjemahan Indonesia."
+  path="/hadith-detail"
+  noCanonical
+>
+  <PageShell width="reading">
+    <HadithDetailIsland client:load />
+  </PageShell>
+</BaseLayout>
