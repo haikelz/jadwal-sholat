@@ -1,0 +1,6 @@
+# Cloudflare Pages rules, first match wins.
+/puasa-sunnah /sunnah-fasting 301
+# Hadith pages render in the browser from one static shell.
+/hadith/:book/:number /hadith-detail 200
+# A book without a hadith number has no page.
+/hadith/:book /hadith 308
