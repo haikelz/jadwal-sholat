@@ -1,0 +1,29 @@
+---
+import { PageHeader, PageShell } from "@/components/common/page-shell";
+import { AsmaulHusnaIsland } from "@/components/islands/asmaul-husna-island";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
+import { ASMAUL_HUSNA } from "@jadwal-sholat/core/data";
+
+// Bundled with core, so the build needs no network. The web components
+// read `urutan` as a string.
+const asmaulHusna = ASMAUL_HUSNA.map((item) => ({
+  ...item,
+  urutan: String(item.urutan),
+}));
+---
+
+<BaseLayout
+  title="Asmaul Husna: 99 Nama Allah, Arab, Latin dan Artinya"
+  description="Daftar lengkap 99 Asmaul Husna dengan tulisan Arab, latin, dan artinya dalam bahasa Indonesia. Cari nama dan salin dengan satu ketukan."
+  path="/asmaul-husna"
+  jsonLd={[breadcrumbJsonLd([{ name: "Asmaul Husna", path: "/asmaul-husna" }])]}
+>
+  <PageShell>
+    <PageHeader
+      title="Asma'ul Husna"
+      description="Kenali 99 nama Allah beserta tulisan Arab dan artinya."
+    />
+    <AsmaulHusnaIsland client:load asmaulHusna={asmaulHusna} />
+  </PageShell>
+</BaseLayout>
