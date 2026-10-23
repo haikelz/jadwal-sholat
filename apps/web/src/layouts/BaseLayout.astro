@@ -1,0 +1,134 @@
+---
+import "@/styles/global.css";
+import BottomNav from "@/components/layout/BottomNav.astro";
+import SiteHeader from "@/components/layout/SiteHeader.astro";
+import { Toaster } from "@/components/ui/sonner";
+import { DISPLAY_SETTINGS_SCRIPT } from "@/lib/utils/display-settings";
+import {
+  pageMeta,
+  SITE_NAME,
+  WEBSITE_JSON_LD,
+  type PageMeta,
+} from "@/lib/utils/metadata";
+import { env } from "@/lib/utils/public-env";
+import { ClientRouter } from "astro:transitions";
+
+type Props = PageMeta & {
+  /** Extra schema.org objects, e.g. the page's BreadcrumbList. */
+  jsonLd?: Record<string, unknown>[];
+  /** Pages that must not be indexed, such as the 404. */
+  noindex?: boolean;
+  /**
+   * Leave out the canonical and og:url, for the hadith shell: its HTML is
+   * served for every /hadith/<book>/<n> URL and sets the real one itself.
+   */
+  noCanonical?: boolean;
+};
+
+const { jsonLd = [], noindex = false, noCanonical = false, ...page } = Astro.props;
+const meta = pageMeta(page);
+const structuredData = [WEBSITE_JSON_LD, ...jsonLd];
+// sw.js caches the prayer-time API for offline use. It can't read astro:env,
+// so the API's origin rides along in its URL.
+const serviceWorkerUrl = `/sw.js?prayer-api=${encodeURIComponent(new URL(env.JADWAL_SHOLAT_API).origin)}`;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    {!noCanonical && <link rel="canonical" href={meta.canonical} />}
+    <meta
+      name="robots"
+      content={noindex ? "noindex" : "index, follow, max-image-preview:large"}
+    />
+    <meta property="og:type" content="website" />
+    {!noCanonical && <meta property="og:url" content={meta.canonical} />}
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:image" content={meta.image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Jadwal Sholat — waktu ibadah dan bacaan Islami"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="twitter:image" content={meta.image} />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0a0a0a"
+    />
+    <meta name="application-name" content={SITE_NAME} />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/img/icon-192x192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&display=swap"
+    />
+    <!-- Saved theme and text sizes, applied before the first paint. -->
+    <script is:inline set:html={DISPLAY_SETTINGS_SCRIPT} />
+    {
+      structuredData.map((data) => (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(data).replace(/</g, "\\u003c")}
+        />
+      ))
+    }
+    <ClientRouter />
+  </head>
+  <body>
+    <a
+      href="#main-content"
+      class="sr-only fixed top-4 left-4 z-60 bg-background p-2 text-sm font-semibold text-foreground focus:not-sr-only"
+    >
+      Lewati ke konten utama
+    </a>
+    <SiteHeader path={page.path}>
+      <slot name="header-actions" slot="actions" />
+    </SiteHeader>
+    <main
+      id="main-content"
+      tabindex="-1"
+      class="flex w-full min-w-0 flex-1 flex-col px-4 outline-none sm:px-6 lg:px-8"
+    >
+      <slot />
+    </main>
+    <BottomNav path={page.path} />
+    <!-- 6 s instead of 4, so slower readers can finish a toast; kept above
+         the phone tab bar. -->
+    <Toaster
+      client:idle
+      transition:persist="toaster"
+      duration={6000}
+      mobileOffset={{ bottom: "calc(4.5rem + env(safe-area-inset-bottom))" }}
+    />
+    {
+      import.meta.env.PROD && (
+        <script is:inline define:vars={{ serviceWorkerUrl }}>
+          if ("serviceWorker" in navigator) navigator.serviceWorker.register(serviceWorkerUrl);
+        </script>
+      )
+    }
+  </body>
+</html>

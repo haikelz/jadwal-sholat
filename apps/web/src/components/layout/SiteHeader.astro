@@ -1,0 +1,86 @@
+---
+import { DisplaySettings } from "@/components/common/display-settings";
+import { isNavItemActive, navItems } from "@/lib/nav";
+import { cn } from "@/lib/utils/cn";
+import { ChevronLeft } from "lucide-react";
+
+/**
+ * Site chrome: a top bar with the section links from md up, a slim title
+ * bar on phones (the bottom tab bar has the sections). A companion site, not
+ * an app shell, so there is no sidebar.
+ */
+const { path } = Astro.props as { path: string };
+
+const segments = path.slice(1).split("/").filter(Boolean);
+const section = navItems.find(
+  (item) => item.url !== "/" && isNavItemActive(path, item.url),
+);
+// Detail routes get a back link on phones: /quran/<n>, and hadith pages,
+// which all render from the /hadith-detail shell.
+const isDetail =
+  (segments[0] === "quran" && segments.length >= 2) ||
+  path === "/hadith-detail";
+const backHref = section && isDetail ? section.url : null;
+---
+
+<header class="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
+  <div
+    class="mx-auto flex h-14 w-full max-w-5xl items-center justify-between gap-3 px-4 sm:px-6 md:h-16 lg:px-8"
+  >
+    <div class="flex min-w-0 items-center gap-1 md:hidden">
+      {
+        backHref ? (
+          <a
+            href={backHref}
+            aria-label="Kembali"
+            class="-ml-3 inline-flex size-11 shrink-0 items-center justify-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            <ChevronLeft aria-hidden="true" className="size-5" />
+          </a>
+        ) : null
+      }
+      <span class="truncate text-sm font-semibold">
+        {section?.title ?? "Jadwal Sholat"}
+      </span>
+    </div>
+
+    <div class="hidden min-w-0 items-center gap-6 md:flex">
+      <a
+        href="/"
+        class="shrink-0 rounded-md text-sm font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+      >
+        Jadwal Sholat
+      </a>
+      <nav aria-label="Navigasi utama">
+        <ul class="flex items-center gap-1">
+          {
+            navItems.map((item) => {
+              const isActive = isNavItemActive(path, item.url);
+              return (
+                <li>
+                  <a
+                    href={item.url}
+                    aria-current={isActive ? "page" : undefined}
+                    class={cn(
+                      "inline-flex h-9 items-center rounded-md px-3 text-sm whitespace-nowrap transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+                      isActive
+                        ? "bg-muted font-medium text-foreground"
+                        : "text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    {item.url === "/" ? item.shortTitle : item.title}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div class="flex shrink-0 items-center gap-2">
+      <slot name="actions" />
+      <DisplaySettings client:idle transition:persist="display-settings" />
+    </div>
+  </div>
+</header>
