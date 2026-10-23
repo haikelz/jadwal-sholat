@@ -1,0 +1,21 @@
+---
+import { PageHeader, PageShell } from "@/components/common/page-shell";
+import { HadithListIsland } from "@/components/islands/hadith-list-island";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
+---
+
+<BaseLayout
+  title="Kumpulan Hadith: Bukhari, Muslim dan Kitab Lainnya"
+  description="Baca 38.000+ hadith dari kitab Bukhari, Muslim, Abu Daud, Tirmidzi, Nasa'i, Ibnu Majah, Ahmad, Darimi, dan Malik, dengan teks Arab dan terjemahan."
+  path="/hadith"
+  jsonLd={[breadcrumbJsonLd([{ name: "Hadith", path: "/hadith" }])]}
+>
+  <PageShell>
+    <PageHeader
+      title="Hadith"
+      description="Kumpulan hadith Nabi Muhammad ﷺ berdasarkan kitab dan nomor."
+    />
+    <HadithListIsland client:load />
+  </PageShell>
+</BaseLayout>
