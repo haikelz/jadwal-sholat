@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "build:android": "moon run mobile:build-preview",
+    "build:astro": "moon run web:build",
     "build:web": "moon run jadwal-sholat:build",
+    "dev:astro": "moon run web:dev",
     "dev:mobile": "moon run mobile:dev",
     "dev:web": "moon run jadwal-sholat:dev",
     "test:core": "moon run core:test",
