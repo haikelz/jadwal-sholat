@@ -9,9 +9,10 @@ const config = getDefaultConfig(__dirname);
 const root = path.resolve(__dirname, "../..");
 const escape = (value) => value.replace(/[/\\^$*+?.()|[\]{}]/g, "\\$&");
 const ignored = [
-  "apps/jadwal-sholat/.next",
-  "apps/jadwal-sholat/cypress",
-  "apps/jadwal-sholat/public",
+  "apps/web/dist",
+  "apps/web/.astro",
+  "apps/web/cypress",
+  "apps/web/public",
   ".moon/cache",
   "graft",
 ].map((dir) => new RegExp(`^${escape(path.join(root, dir))}(/.*)?$`));
