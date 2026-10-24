@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 // Static output for Cloudflare Pages: no adapter. Pages serve /quran/1 from
-// quran/1.html, so URLs keep the Next site's no-trailing-slash form.
+// quran/1.html, so URLs have no trailing slash.
 export default defineConfig({
   site: "https://jdwshlt.ekel.dev",
   trailingSlash: "never",

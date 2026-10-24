@@ -1,6 +1,6 @@
 # Website (`apps/web`)
 
-Astro 7 with React islands, built as static files for Cloudflare Pages. It replaces the Next app in `apps/jadwal-sholat`; until the switch, keep both in step.
+Astro 7 with React islands, built as static files for Cloudflare Pages.
 
 ## Project rules
 

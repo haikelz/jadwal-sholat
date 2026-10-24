@@ -1,7 +1,7 @@
 import { createApiClient } from "@jadwal-sholat/core/api";
 import Constants from "expo-constants";
 
-// ponytail: the same public endpoints as the web's .env, fixed in code.
+// ponytail: the same public endpoints as the website's public-env.ts, fixed in code.
 // Move them to EXPO_PUBLIC_* variables if a staging API ever appears.
 export const api = createApiClient({
   baseUrls: {

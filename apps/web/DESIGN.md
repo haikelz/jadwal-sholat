@@ -1,6 +1,6 @@
 # Design
 
-Design system: ReUI (from scratch), on shadcn/ui `radix-nova`, Tailwind CSS v4, Geist for interface text (Google Fonts), LPMQ Isep Misbah for Arabic (`public/fonts`), and Lucide icons. Same system as the Next app in `apps/jadwal-sholat`, which this Astro app replaces.
+Design system: ReUI (from scratch), on shadcn/ui `radix-nova`, Tailwind CSS v4, Geist for interface text (Google Fonts), LPMQ Isep Misbah for Arabic (`public/fonts`), and Lucide icons.
 
 Direction: a calm companion app for every age, from children learning to read the Qur'an to grandparents checking the next prayer. Plain type leads; a `Frame` wraps only data grids; reading pages have no frames.
 

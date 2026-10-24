@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /*
- * Mirrors the web tokens in apps/jadwal-sholat/src/app/globals.css (shadcn
+ * Mirrors the web tokens in apps/web/src/styles/global.css (shadcn
  * neutral + ReUI, with the all-ages contrast fixes: darker muted text and a
  * focus ring drawn in the primary color). The web uses oklch, which React
  * Native can't parse, so these are the same colors in HSL. Keep

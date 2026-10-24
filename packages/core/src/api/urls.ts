@@ -5,7 +5,7 @@ export type ApiBaseUrls = {
   hadith: string;
   nominatim: string;
   prayer: string;
-  /** The upstream puasa sunnah API, not the web's /api/sunnah-fasting rewrite. */
+  /** The upstream puasa sunnah API; the website reaches it through its /api/sunnah-fasting Pages Function. */
   puasaSunnah: string;
   quran: string;
 };
