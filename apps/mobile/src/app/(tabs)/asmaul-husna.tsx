@@ -52,7 +52,7 @@ export default function AsmaulHusnaScreen() {
         keyExtractor={(item) => String(item.urutan)}
         keyboardShouldPersistTaps="handled"
         contentContainerClassName="px-4 pb-10"
-        ListHeaderComponent={names.length ? <View className="border-b border-border" /> : null}
+        ListHeaderComponent={names.length ? <View className="border-b border-border" /> : undefined}
         ListEmptyComponent={
           <EmptyState
             icon={SearchX}
