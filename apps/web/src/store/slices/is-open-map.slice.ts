@@ -1,5 +1,5 @@
-import { IsOpenMapProps } from "@/interfaces";
-import { StateCreator } from "zustand";
+import type { IsOpenMapProps } from "@/interfaces";
+import type { StateCreator } from "zustand";
 
 const isOpenMapSlice: StateCreator<IsOpenMapProps, [], [], IsOpenMapProps> = (
   set,

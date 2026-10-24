@@ -1,5 +1,5 @@
-import { ScrollSliceProps } from "@/interfaces";
-import { StateCreator } from "zustand";
+import type { ScrollSliceProps } from "@/interfaces";
+import type { StateCreator } from "zustand";
 
 const scrollSlice: StateCreator<ScrollSliceProps, [], [], ScrollSliceProps> = (
   set,

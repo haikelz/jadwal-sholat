@@ -1,8 +1,8 @@
-import { PlayNextAudioSliceProps } from "@/interfaces";
+import type { PlayNextAudioSliceProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { navigate } from "astro:transitions/client";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { AudioLoadOptions, useAudioPlayer } from "react-use-audio-player";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import { type AudioLoadOptions, useAudioPlayer } from "react-use-audio-player";
 import { useDeepCompareEffect } from "use-deep-compare";
 
 interface UsePlayNextAudioProps extends PlayNextAudioSliceProps {

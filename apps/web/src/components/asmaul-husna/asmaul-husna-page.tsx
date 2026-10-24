@@ -8,7 +8,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 import { useAscending } from "@/hooks/use-ascending";
-import { AsmaulHusnaProps } from "@/interfaces";
+import type { AsmaulHusnaProps } from "@/interfaces";
 import { SearchX } from "lucide-react";
 import { AsmaulHusnaRow } from "./asmaul-husna-row";
 import { useQueryState } from "nuqs";

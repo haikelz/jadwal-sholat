@@ -1,5 +1,5 @@
-import { PlayNextAudioSliceProps } from "@/interfaces";
-import { StateCreator } from "zustand";
+import type { PlayNextAudioSliceProps } from "@/interfaces";
+import type { StateCreator } from "zustand";
 
 const playNextAudioSlice: StateCreator<
   PlayNextAudioSliceProps,

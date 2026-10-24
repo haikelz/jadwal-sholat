@@ -7,10 +7,10 @@ import {
 } from "@/components/reui/data-grid/data-grid";
 import { DataGridScrollArea } from "@/components/reui/data-grid/data-grid-scroll-area";
 import { DataGridTable } from "@/components/reui/data-grid/data-grid-table";
-import { PuasaSunnahScheduleDate } from "@/interfaces";
+import type { PuasaSunnahScheduleDate } from "@/interfaces";
 import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { cn } from "@/lib/utils/cn";
-import { ColumnDef, useTable } from "@tanstack/react-table";
+import { type ColumnDef, useTable } from "@tanstack/react-table";
 import { useMemo } from "react";
 
 export function TablePuasaSunnah({

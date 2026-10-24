@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useDeferredValue, useState } from "react";
+import { type Dispatch, type SetStateAction, useDeferredValue, useState } from "react";
 
 interface UseAscendingProps {
   isAscending: boolean;

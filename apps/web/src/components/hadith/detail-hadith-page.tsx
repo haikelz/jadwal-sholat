@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { HadithDetailResponse } from "@/interfaces";
+import type { HadithDetailResponse } from "@/interfaces";
 import { FetchError, getData } from "@/lib/utils/get-data";
 import {
   breadcrumbJsonLd,

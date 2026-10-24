@@ -1,5 +1,5 @@
-import { DateSliceProps } from "@/interfaces";
-import { StateCreator } from "zustand";
+import type { DateSliceProps } from "@/interfaces";
+import type { StateCreator } from "zustand";
 
 const dateSlice: StateCreator<DateSliceProps, [], [], DateSliceProps> = (
   set,

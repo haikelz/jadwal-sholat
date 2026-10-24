@@ -1,7 +1,7 @@
 "use client";
 
 import { env } from "@/lib/utils/public-env";
-import { UserLocationProps } from "@/interfaces";
+import type { UserLocationProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getData } from "@/lib/utils/get-data";

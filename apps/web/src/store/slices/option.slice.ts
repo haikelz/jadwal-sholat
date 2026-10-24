@@ -1,6 +1,6 @@
 import { DEFAULT_QORI } from "@/lib/utils/qori-options";
-import { OptionSliceProps } from "@/interfaces";
-import { StateCreator } from "zustand";
+import type { OptionSliceProps } from "@/interfaces";
+import type { StateCreator } from "zustand";
 
 const optionSlice: StateCreator<OptionSliceProps, [], [], OptionSliceProps> = (
   set,

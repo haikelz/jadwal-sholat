@@ -1,5 +1,5 @@
-import { LastReadSliceProps } from "@/interfaces";
-import { StateCreator } from "zustand";
+import type { LastReadSliceProps } from "@/interfaces";
+import type { StateCreator } from "zustand";
 
 const lastReadSlice: StateCreator<
   LastReadSliceProps,
