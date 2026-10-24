@@ -117,7 +117,7 @@ export default function HomeScreen() {
     <ScrollView
       contentContainerClassName="gap-8 px-4 pb-10 pt-4"
       refreshControl={
-        <RefreshControl refreshing={isRefetching} onRefresh={() => refetch()} />
+        <RefreshControl refreshing={isRefetching} onRefresh={() => void refetch()} />
       }
     >
       <View className="gap-3">

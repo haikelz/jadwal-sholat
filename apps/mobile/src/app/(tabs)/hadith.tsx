@@ -149,7 +149,7 @@ export default function HadithScreen() {
         keyExtractor={(hadith) => `${book}-${hadith.number}`}
         keyboardShouldPersistTaps="handled"
         contentContainerClassName="px-4 pb-10"
-        ListHeaderComponent={hadiths.length ? <View className="border-b border-border" /> : null}
+        ListHeaderComponent={hadiths.length ? <View className="border-b border-border" /> : undefined}
         ListEmptyComponent={renderEmpty()}
         renderItem={({ item }) => (
           <HadithRow book={book} bookName={bookName} hadith={item} />
@@ -164,7 +164,7 @@ export default function HadithScreen() {
               <ActivityIndicator size="small" />
               <Text variant="muted">Memuat hadith berikutnya…</Text>
             </View>
-          ) : null
+          ) : undefined
         }
       />
     </View>

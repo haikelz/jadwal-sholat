@@ -125,10 +125,10 @@ export default function PuasaSunnahScreen() {
         keyExtractor={(puasa) => puasa.date}
         contentContainerClassName="px-4 pb-10"
         refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={() => refetch()} />
+          <RefreshControl refreshing={isRefetching} onRefresh={() => void refetch()} />
         }
         ListHeaderComponent={
-          puasaList.length ? <View className="border-b border-border" /> : null
+          puasaList.length ? <View className="border-b border-border" /> : undefined
         }
         ListEmptyComponent={renderEmpty()}
         renderItem={({ item }) => <PuasaRow puasa={item} todayIso={today.isoDate} />}
