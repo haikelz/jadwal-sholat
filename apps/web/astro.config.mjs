@@ -8,7 +8,7 @@ import { defineConfig, envField } from "astro/config";
 const publicUrl = envField.string({ context: "client", access: "public", url: true });
 
 // Static output for Cloudflare Pages: no adapter. Pages serve /quran/1 from
-// quran/1.html, so URLs keep the Next site's no-trailing-slash form.
+// quran/1.html, so URLs have no trailing slash.
 export default defineConfig({
   site: "https://jdwshlt.ekel.dev",
   trailingSlash: "never",

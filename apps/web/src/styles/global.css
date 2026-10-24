@@ -3,8 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* next/font defined these on the web app; here Geist comes from Google Fonts
-   (BaseLayout) and LPMQ from public/fonts. */
+/* Geist comes from Google Fonts (BaseLayout), LPMQ from public/fonts. */
 @font-face {
   font-family: "LPMQ Isep Misbah";
   src: url("/fonts/lpmq-isepmisbah/lpmq-isepmisbah.woff2") format("woff2");

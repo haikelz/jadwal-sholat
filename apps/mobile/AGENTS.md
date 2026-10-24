@@ -6,7 +6,7 @@ Expo SDK 58 app with the same sections as the web: Jadwal, Qur'an, Hadith, Asma'
 
 - Shared logic lives in `packages/core` (schemas, API client, prayer times, adzan schedule, dates, share links, bundled data). Add framework-free code there, not here; core must never import React, React Query or zustand.
 - UI: NativeWind v4 (Tailwind CSS v3 config in `tailwind.config.js`) with React Native Reusables in `src/components/ui`. Add components with `bunx @react-native-reusables/cli@latest add <name>` from this folder. Don't restyle them (radius, height, padding, shadow); use their `variant` and `size` props.
-- Theme tokens in `src/global.css` and `src/lib/theme.ts` mirror the web's `apps/jadwal-sholat/src/app/globals.css` in HSL/hex, because React Native can't parse oklch. Change all three together.
+- Theme tokens in `src/global.css` and `src/lib/theme.ts` mirror the web's `apps/web/src/styles/global.css` in HSL/hex, because React Native can't parse oklch. Change all three together.
 - Persisted state uses zustand `persist` with AsyncStorage (`src/store/*`). The splash screen stays up until every store hydrates (`src/store/hydration.ts`).
 - Fetch through `api` from `src/lib/api.ts` with React Query and the shared `queryKeys` from core.
 - Every data region has a skeleton, an empty state with one action and an inline error with retry (`src/components/common/state-views.tsx`).

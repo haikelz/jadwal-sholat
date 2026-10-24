@@ -2,70 +2,62 @@
 
 ## Project structure
 
-- `apps/jadwal-sholat` is the Next.js App Router application, live on Vercel until `apps/web` replaces it.
-- `apps/web` is the Astro 7 + React rewrite of the website, built as static files for Cloudflare Pages. See `apps/web/AGENTS.md`.
+- `apps/web` is the website: Astro 7 with React islands, built as static files for Cloudflare Pages. See `apps/web/AGENTS.md`.
 - `apps/mobile` is the Android app (Expo SDK 58, Expo Router, NativeWind v4 + React Native Reusables). See `apps/mobile/AGENTS.md`.
-- `packages/core` holds framework-free domain code shared by the web and the Android app: API schemas and URL builders, prayer logic, the adzan schedule, dates, share links, Qur'an and puasa helpers, and bundled static data. It must never import React, React Query or zustand.
-- Both apps pin the same `react`, `react-dom`, `@types/react` and `@types/react-dom`: the versions the Expo SDK in `apps/mobile` requires. A fresh install (Vercel, EAS) hoists one copy per package for the whole workspace, so two versions mix type definitions and can load two Reacts. Bump them together.
-- `packages/eslint-config` and `packages/typescript-config` contain shared tooling.
+- `packages/core` holds framework-free domain code shared by the website and the Android app: API schemas and URL builders, prayer logic, the adzan schedule, dates, share links, Qur'an and puasa helpers, and bundled static data. It must never import React, React Query or zustand.
+- Both apps pin the same `react`, `react-dom`, `@types/react` and `@types/react-dom`: the versions the Expo SDK in `apps/mobile` requires. A fresh install (Cloudflare Pages, EAS) hoists one copy per package for the whole workspace, so two versions mix type definitions and can load two Reacts. Bump them together.
+- `packages/typescript-config` contains the shared TypeScript configs.
 - `static/docs` contains README screenshots.
 - Run workspace commands from the repository root unless a command says otherwise.
 
 ## Commands
 
 - Install dependencies: `bun install`
-- Start the web app: `bun run dev:web`
-- Type-check: `cd apps/jadwal-sholat && bunx tsc --noEmit`
-- Production build: `bun run build:web`
-- Lint: `cd apps/jadwal-sholat && bun run lint` (ESLint flat config in `eslint.config.mjs`)
-- Cypress E2E tests: `bun run test:web`
+- Website: `bun run dev:web` (http://localhost:4321), `bun run build:web` (static output in `apps/web/dist`), `bun run test:web` (Cypress against `bun run preview` running in `apps/web`), type-check with `cd apps/web && bun run check`.
 - Core tests and types: `bun run test:core`, `bun run typecheck:core`
-- Astro website: `bun run dev:astro`, `bun run build:astro` (static output in `apps/web/dist`).
 - Android app: `bun run dev:mobile` (Metro for Expo Go or a development build), `bun run typecheck:mobile`, `bun run build:android` (preview APK on EAS). Native code compiles on EAS only; don't run Gradle or `expo run:android` locally.
 
-The production build prerenders API-backed routes and therefore requires valid values from `apps/jadwal-sholat/.env` plus network access to those APIs.
+The website build fetches the 114 surahs and the hadith book list from the public APIs, so it needs network access. Builds are memory-heavy: stop dev servers before building, and run one build at a time.
 
-Builds are memory-heavy. Stop `bun run dev:web` and any other `next build` or `next start` before building, and run one build at a time.
+## Implementation conventions (website)
 
-## Implementation conventions
-
-- Use TypeScript, React Server/Client Components, Tailwind CSS v4, shadcn/ui (`radix-nova` style), and ReUI.
+- Use TypeScript, Astro pages with React islands, Tailwind CSS v4, shadcn/ui (`radix-nova` style), and ReUI.
 - Prefer shared components in `src/components/ui` (shadcn) and `src/components/reui` (ReUI) over custom interactive elements. Tables use the ReUI data grid, modals use `Dialog`, toasts use `sonner`.
-- Install components from `apps/jadwal-sholat` with `bunx --bun shadcn@latest add <name> --yes` (ReUI items as `@reui/<name>`). The CLI writes `import { cn } from "cn"` and adds a `cn` package: change the imports to `@/lib/utils/cn` and run `bun remove cn`.
-- Do not restyle installed components (radius, height, padding, shadow); use their `size` and `variant` props, and change the look through the theme tokens in `globals.css`.
-- Build pages with `PageShell` and `PageHeader` from `src/components/common/page-shell.tsx`. The site is a companion app, not a dashboard, so it uses two layouts:
+- Install components from `apps/web` with `bunx --bun shadcn@latest add <name> --yes` (ReUI items as `@reui/<name>`). The CLI writes `import { cn } from "cn"` and adds a `cn` package: change the imports to `@/lib/utils/cn` and run `bun remove cn`.
+- Do not restyle installed components (radius, height, padding, shadow); use their `size` and `variant` props, and change the look through the theme tokens in `src/styles/global.css`.
+- Every page renders `BaseLayout` (`src/layouts/BaseLayout.astro`); its content uses `PageShell` and `PageHeader` from `src/components/common/page-shell.tsx`. The site is a companion app, not a dashboard, so it uses two layouts:
   - Glance pages (homepage schedule, Puasa Sunnah): `<PageShell>`. The homepage leads with the next prayer as plain type and keeps a `Frame` only around the month data grid; Puasa Sunnah keeps its `Frame` and data grid.
   - Reading pages (Qur'an, hadith, Asma'ul Husna): no frames around content; separate items with plain bordered rows and generous spacing. List pages use the default site width and flow their rows into columns from `md` up (`grid md:grid-cols-2`, `lg:grid-cols-3` for short rows like surahs); in a grid give each row `border-b` and the list `border-t`, because `divide-y` breaks across columns; detail pages (a surah, a hadith) use `<PageShell width="reading">`, a centered 768px column with a centered header (`PageHeader align="center"` or the surah's mushaf-style header).
 - Widths: the top bar and every `PageShell` share one site width (`max-w-5xl`), so page edges line up; only detail pages narrow to the reading column. Don't add page-level `max-w-*` elsewhere.
-- Navigation is a top bar with the five sections from `md` up and a bottom tab bar below `md`; there is no sidebar and there are no breadcrumbs. On phones, detail pages show a back link in the top bar. `PageShell` reserves `pb-24` for the bar on mobile.
+- Navigation is a top bar with the five sections from `md` up and a bottom tab bar below `md` (`src/components/layout`); there is no sidebar and there are no breadcrumbs. On phones, detail pages show a back link in the top bar. `PageShell` reserves `pb-24` for the bar on mobile.
 - Design for desktop as well as phones: use the width for columns or a richer view (the Puasa Sunnah month calendar) instead of stretching phone rows. `SearchBar` focuses on `/` and shows the hint from `md` up.
 - Share detail content with `ShareButton` from `src/components/common/share-button.tsx` (links built by `getShareLinks` in `src/lib/helpers/share-links.ts`, absolute URLs from `SITE_URL`). Ayah links use the `#ayat-N` anchors.
 - Give every data region a `Skeleton` loading state, an `Empty` state with one action, and an inline `Alert` error with a retry.
-- Fetch with `getData` from `src/lib/utils/get-data.ts` (native `fetch`); in client components use `useFetch`, which accepts server `initialData` and skips the request while its URL is `""`.
-- Read the current time with the `useNow()` hook and format it with `getDateParts()` from `src/lib/utils/date-parts.ts`. Never compute dates at module level: prerendered pages would bake in the build date, and open tabs go stale after midnight.
-- Read API URLs from `src/lib/utils/public-env.ts` in application code. Only `next.config.mjs` imports `src/env.mjs`, so zod stays out of the browser bundle.
-- Pass only the fields a client component renders, and keep `generateStaticParams` light: surah pages render on first visit (`revalidate`) instead of all 114 at build time.
+- Fetch with `getData` from `src/lib/utils/get-data.ts` (native `fetch`); in islands use `useFetch`, which accepts build-time `initialData` and skips the request while its URL is `""`.
+- Read the current time with the `useNow()` hook and format it with `getDateParts()` from `src/lib/utils/date-parts.ts`. Never compute dates at module level or during the build: static pages would bake in the build date, and open tabs go stale after midnight.
+- Read API URLs from `src/lib/utils/public-env.ts`. The browser calls the APIs directly, except puasa, which goes through the `/api/sunnah-fasting` Pages Function.
+- Pass only the fields an island renders: island props are serialized into the page's HTML (the surah page trims the API response).
 - Keep mobile styles as the default; add larger-screen behavior with responsive variants.
 - Preserve one `<main>` landmark, a logical heading hierarchy, visible focus states, keyboard behavior, and accessible names for every control.
 - Keep mobile form text at `text-base`; use `sm:text-sm` only above the mobile breakpoint.
-- Use `arabic-font` and `lang="ar"` for Arabic source text. The font is defined centrally in `src/lib/utils/fonts.ts` and `globals.css`. Size it with `[--arabic-size:<rem>]`, never a `text-*` class, so the reader's Arabic size setting applies.
-- Follow the all-ages profile in `apps/jadwal-sholat/DESIGN.md`: the root text scale (body `text-sm` renders at about 16px), a visible word beside every icon in a button, default-size actions, and plain words beside jargon.
+- Use `arabic-font` and `lang="ar"` for Arabic source text. The LPMQ font is defined in `src/styles/global.css` and served from `public/fonts`. Size Arabic text with `[--arabic-size:<rem>]`, never a `text-*` class, so the reader's Arabic size setting applies.
+- Follow the all-ages profile in `apps/web/DESIGN.md`: the root text scale (body `text-sm` renders at about 16px), a visible word beside every icon in a button, default-size actions, and plain words beside jargon.
 - Respect `prefers-reduced-motion`; do not add unconditional motion or smooth scrolling. Use CSS (`tw-animate-css` utilities) for motion rather than an animation library.
 - Write interface copy in clear Indonesian and use sentence case.
 
 ## SEO
 
-- Build page metadata with `createPageMetadata` from `src/lib/utils/metadata.ts`. Write titles and descriptions in Indonesian around what people search for ("Surat Al-Kahf (الكهف): Arab, Latin dan Artinya"); cut API text with `toDescription`, which stops at a word boundary. The homepage passes `absoluteTitle`; other titles get the " | Jadwal Sholat" suffix, including on social cards.
-- Give every indexable page a `BreadcrumbList` with `<JsonLd data={breadcrumbJsonLd([...])} />`. The root layout carries the `WebSite` schema.
-- Detail routes call `notFound()` for malformed params and for a 404 from the API (`FetchError` from `get-data.ts`), so missing surahs and hadith are real 404s, not soft ones.
+- Pass every page's `title`, `description` and `path` to `BaseLayout`, which writes the title, canonical, Open Graph and Twitter tags through `pageMeta` in `src/lib/utils/metadata.ts`. Write titles and descriptions in Indonesian around what people search for ("Surat Al-Kahf (الكهف): Arab, Latin dan Artinya"); cut API text with `toDescription`, which stops at a word boundary. The homepage passes `absoluteTitle`; other titles get the " | Jadwal Sholat" suffix, including on social cards.
+- Give every indexable page a `BreadcrumbList` through `BaseLayout`'s `jsonLd={[breadcrumbJsonLd([...])]}`. The layout always adds the `WebSite` schema.
+- The site is static: only built routes exist, and anything else gets `src/pages/404.astro`. Hadith pages are one shell (`/hadith-detail`) that sets its own title, description and canonical once the hadith loads and shows the not-found state for missing ones.
 - Every indexable route needs a unique title, description, canonical path, Open Graph URL, and Twitter card data.
-- Keep `robots.ts` and the sitemaps aligned with public routes: `sitemap.ts` (static pages and the 114 surahs) and `(pages)/hadith/sitemap.ts` (every hadith, because the hadith list renders in the browser). `robots.ts` lists both and disallows `/api/`.
+- Keep `robots.txt.ts` and the sitemaps aligned with public routes: `sitemap.xml.ts` (static pages and the 114 surahs) and `sitemap-hadith.xml.ts` (every hadith, because hadith pages render in the browser). `robots.txt.ts` lists both and disallows `/api/` and `/hadith-detail`.
 - Reuse the shared social image unless a route has a deliberate, production-ready replacement.
 
 ## Documentation screenshots
 
 - Capture both desktop (`1440×900`) and mobile (`390×844`) states.
-- Use a production server when possible so Next.js development indicators do not appear.
+- Use the built site (`bun run preview` in `apps/web`) so the Astro dev toolbar doesn't appear.
 - Update the screenshot links in `README.md` whenever files under `static/docs` change.
 
 ## Verification
@@ -73,13 +65,13 @@ Builds are memory-heavy. Stop `bun run dev:web` and any other `next build` or `n
 Run the narrowest relevant check first. For shared UI, metadata, or routing changes, run:
 
 ```bash
-cd apps/jadwal-sholat
-bunx tsc --noEmit
+cd apps/web
+bun run check
 bun run build
-bunx cypress run
+bun run preview   # then, in another terminal: bun run test
 ```
 
-Also inspect the changed flow at `390px` and `1440px`, including keyboard focus, dialogs, dark mode, and horizontal overflow.
+Hadith detail pages and the puasa proxy need Cloudflare's `_redirects` and Functions: check them with `bunx wrangler pages dev dist`. Also inspect the changed flow at `390px` and `1440px`, including keyboard focus, dialogs, dark mode, and horizontal overflow.
 
 <!-- graft:start -->
 ## Graft — repo context graph
@@ -141,12 +133,9 @@ Read `.agents/general.md` and `.agents/preferences.md` for every task. Then sele
 
 Match the changed path first, then use only that workspace's applicable profile.
 
-- `graft/apps/jadwal-sholat/**`: javascript-typescript, nextjs, docker.
 - `.moon/cache/schemas/**`: javascript-typescript.
 - `packages/core/**`: javascript-typescript.
-- `packages/eslint-config/**`: javascript-typescript.
 - `packages/typescript-config/**`: javascript-typescript.
-- `apps/jadwal-sholat/**`: javascript-typescript, nextjs, design-system, docker.
 - `apps/mobile/**`: javascript-typescript, design-system.
 - `apps/web/**`: javascript-typescript, design-system.
 <!-- AI-GUIDELINES:END -->

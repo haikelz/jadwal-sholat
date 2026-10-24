@@ -1,10 +1,10 @@
 # Design
 
-Design system: React Native Reusables on NativeWind v4, with the web's ReUI neutral tokens. The all-ages profile in `apps/jadwal-sholat/DESIGN.md` applies here too; this file records only what differs on Android.
+Design system: React Native Reusables on NativeWind v4, with the web's ReUI neutral tokens. The all-ages profile in `apps/web/DESIGN.md` applies here too; this file records only what differs on Android.
 
 ## Token source
 
-`src/global.css` (classes) and `src/lib/theme.ts` (navigation, icons, status bar), in HSL and hex because React Native can't parse oklch. They mirror `apps/jadwal-sholat/src/app/globals.css`; change all three together.
+`src/global.css` (classes) and `src/lib/theme.ts` (navigation, icons, status bar), in HSL and hex because React Native can't parse oklch. They mirror `apps/web/src/styles/global.css`; change all three together.
 
 ## Android specifics
 

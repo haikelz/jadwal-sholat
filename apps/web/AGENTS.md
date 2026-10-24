@@ -1,6 +1,6 @@
 # Website (`apps/web`)
 
-Astro 7 with React islands, built as static files for Cloudflare Pages. It replaces the Next app in `apps/jadwal-sholat`; until the switch, keep both in step.
+Astro 7 with React islands, built as static files for Cloudflare Pages.
 
 ## Project rules
 
@@ -11,6 +11,6 @@ Astro 7 with React islands, built as static files for Cloudflare Pages. It repla
 - **Static only** (no adapter): there is no request-time rendering. Surah pages are built at build time from the API; hadith detail pages are one shell (`src/pages/hadith-detail.astro`) that `public/_redirects` serves for every `/hadith/<book>/<n>` URL and that loads the hadith in the browser.
 - **Local testing of Cloudflare behavior:** `astro dev` doesn't read `_redirects` or `functions/`, so hadith detail pages and the puasa proxy 404 there. Build, then run `bunx wrangler pages dev dist` from this folder to serve the output the way Pages does.
 - **Cloudflare files:** `public/_redirects` (redirects and the hadith rewrite), `public/_headers` (cache headers), `functions/api/sunnah-fasting.ts` (proxy for the puasa API, which sends no CORS header), `public/sw.js` (offline cache).
-- **API URLs** live in `src/lib/utils/public-env.ts`; the browser calls the APIs directly, except puasa, which goes through `/api/sunnah-fasting`.
+- **API URLs** come from `.env` through `astro:env` (schema in `astro.config.mjs`, names in `.env.example`) and are read from `src/lib/utils/public-env.ts`; the browser calls the APIs directly, except puasa, which goes through `/api/sunnah-fasting`.
 - **UI:** shadcn/ui (`radix-nova`) and ReUI in `src/components/ui` and `src/components/reui`; add components from this folder with `bunx --bun shadcn@latest add <name>`, then change `from "cn"` to `@/lib/utils/cn` and remove the `cn` package. Follow `DESIGN.md` (the all-ages profile).
 - **SEO** follows the root AGENTS.md rules: `BaseLayout` writes the title, description, canonical, Open Graph, Twitter and JSON-LD tags; `src/pages/sitemap.xml.ts`, `sitemap-hadith.xml.ts` and `robots.txt.ts` build the crawler files.
