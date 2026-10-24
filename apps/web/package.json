@@ -44,6 +44,7 @@
     "zustand": "^5.0.12"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
     "@jadwal-sholat/typescript-config": "workspace:*",
     "@types/leaflet": "^1.9.21",
     "@types/react": "19.3.0",
