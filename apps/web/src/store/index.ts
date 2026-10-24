@@ -1,4 +1,4 @@
-import {
+import type {
   AdzanSliceProps,
   DateSliceProps,
   IsOpenMapProps,
@@ -9,7 +9,7 @@ import {
   ScrollSliceProps,
   WidthSliceProps,
 } from "@/interfaces";
-import { PuasaSunnahTypesSliceProps } from "@/interfaces/puasa-sunnah.interface";
+import type { PuasaSunnahTypesSliceProps } from "@/interfaces/puasa-sunnah.interface";
 import { devtools } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { createWithEqualityFn } from "zustand/traditional";

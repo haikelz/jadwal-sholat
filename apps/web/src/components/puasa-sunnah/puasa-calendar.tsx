@@ -1,5 +1,5 @@
 import { Badge } from "@/components/reui/badge";
-import { PuasaSunnahScheduleDate } from "@/interfaces";
+import type { PuasaSunnahScheduleDate } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import {
   eachDayOfInterval,

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/empty";
 import { Toggle } from "@/components/ui/toggle";
 import { useAscending } from "@/hooks";
-import { ListSuratProps } from "@/interfaces";
+import type { ListSuratProps } from "@/interfaces";
 import { removeSelectedSurat } from "@/lib/helpers";
 import useGlobalStore from "@/store";
 import { BookMarked, BookOpenText, SearchX } from "lucide-react";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useFetch } from "@/hooks";
-import { PuasaSunnahScheduleResponse } from "@/interfaces";
+import type { PuasaSunnahScheduleResponse } from "@/interfaces";
 import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";

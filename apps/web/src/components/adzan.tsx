@@ -1,6 +1,6 @@
 "use client";
 
-import { JadwalSholatProps } from "@/interfaces";
+import type { JadwalSholatProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { add, format, parse } from "date-fns";
 import { id } from "date-fns/locale";

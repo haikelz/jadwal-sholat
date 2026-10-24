@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export * from "./asmaul-husna.interface";
 export * from "./doa-harian.interface";

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils/cn";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export function PageShell({
   children,

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { AsmaulHusnaProps } from "@/interfaces";
+import type { AsmaulHusnaProps } from "@/interfaces";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
 import reactStringReplace from "react-string-replace";

@@ -1,4 +1,4 @@
-import { LocationPositionProps } from "@/interfaces";
+import type { LocationPositionProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { useEffect, useState } from "react";
 

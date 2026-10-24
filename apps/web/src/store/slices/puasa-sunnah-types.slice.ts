@@ -1,5 +1,5 @@
-import { PuasaSunnahTypesSliceProps } from "@/interfaces/puasa-sunnah.interface";
-import { StateCreator } from "zustand";
+import type { PuasaSunnahTypesSliceProps } from "@/interfaces/puasa-sunnah.interface";
+import type { StateCreator } from "zustand";
 
 const puasaSunnahTypesSlice: StateCreator<
   PuasaSunnahTypesSliceProps,

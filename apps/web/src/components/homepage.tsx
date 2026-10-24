@@ -39,13 +39,13 @@ import { Spinner } from "@/components/ui/spinner";
 import { env } from "@/lib/utils/public-env";
 import { useFetch, useGeolocation, useNow } from "@/hooks";
 import { useStoredCopy } from "@/hooks/use-stored-copy";
-import { JadwalSholatProps, TimingsProps } from "@/interfaces";
+import type { JadwalSholatProps, TimingsProps } from "@/interfaces";
 import {
   formatCountdown,
   formatSholatTime,
   getNextPrayer,
 } from "@/lib/helpers";
-import { getCurrentPrayer, PrayerKey } from "@/lib/helpers/next-prayer";
+import { getCurrentPrayer, type PrayerKey } from "@/lib/helpers/next-prayer";
 import { cn } from "@/lib/utils/cn";
 import { getDateParts } from "@/lib/utils/date-parts";
 import useGlobalStore from "@/store";

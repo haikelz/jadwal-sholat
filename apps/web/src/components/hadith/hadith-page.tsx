@@ -25,7 +25,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { env } from "@/lib/utils/public-env";
 import { useFetch } from "@/hooks/use-fetch";
-import {
+import type {
   HadithBook,
   HadithProps,
   HadithDetailResponse,

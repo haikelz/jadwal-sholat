@@ -6,7 +6,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Search } from "lucide-react";
-import { Options } from "nuqs";
+import type { Options } from "nuqs";
 import { useEffect, useId } from "react";
 
 interface SearchBarProps {

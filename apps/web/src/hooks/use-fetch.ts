@@ -1,5 +1,5 @@
 import {
-  UseQueryResult,
+  type UseQueryResult,
   keepPreviousData,
   useQuery,
 } from "@tanstack/react-query";

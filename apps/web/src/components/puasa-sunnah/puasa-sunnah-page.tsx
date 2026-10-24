@@ -24,7 +24,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { useFetch } from "@/hooks/use-fetch";
 import { useNow } from "@/hooks/use-now";
-import { PuasaSunnahScheduleResponse, PuasaSunnahTypeKey } from "@/interfaces";
+import type { PuasaSunnahScheduleResponse, PuasaSunnahTypeKey } from "@/interfaces";
 import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { getDateParts } from "@/lib/utils/date-parts";
 import { format } from "date-fns";

@@ -16,12 +16,12 @@ import {
 } from "@/components/ui/select";
 import { Toggle } from "@/components/ui/toggle";
 import { useFetch } from "@/hooks";
-import { SuratProps } from "@/interfaces";
+import type { SuratProps } from "@/interfaces";
 import { env } from "@/lib/utils/public-env";
 import { DEFAULT_QORI, qoriOptions } from "@/lib/utils/qori-options";
 import useGlobalStore from "@/store";
 import { ChevronLeft, Languages, Volume2 } from "lucide-react";
-import { FormEvent, useId, useState } from "react";
+import { type SubmitEvent, useId, useState } from "react";
 
 const { QURAN_API } = env;
 
@@ -62,7 +62,7 @@ export function DetailSuratPage({
 
   const surat = data.data;
 
-  function handleJump(event: FormEvent<HTMLFormElement>) {
+  function handleJump(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const ayat = Number(jumpTo);
     if (!Number.isInteger(ayat) || ayat < 1 || ayat > surat.ayahCount) return;

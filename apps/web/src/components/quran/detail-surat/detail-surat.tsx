@@ -2,7 +2,7 @@ import { DialogNotification } from "@/components/common/dialog-notification";
 import { ShareButton } from "@/components/common/share-button";
 import { Button } from "@/components/ui/button";
 import { usePlayNextAudio, useScrollAyat } from "@/hooks";
-import { SuratProps } from "@/interfaces";
+import type { SuratProps } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
 import {

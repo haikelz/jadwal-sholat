@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { SuratProps } from "@/interfaces";
+import type { SuratProps } from "@/interfaces";
 import { Check, Copy, MessageSquare } from "lucide-react";
 import { useCallback } from "react";
 import { useClipboard } from "use-clipboard-copy";

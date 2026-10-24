@@ -9,10 +9,10 @@ import {
 } from "@/components/reui/data-grid/data-grid";
 import { DataGridScrollArea } from "@/components/reui/data-grid/data-grid-scroll-area";
 import { DataGridTable } from "@/components/reui/data-grid/data-grid-table";
-import { JadwalSholatProps } from "@/interfaces";
+import type { JadwalSholatProps } from "@/interfaces";
 import { formatSholatTime } from "@/lib/helpers";
 import { cn } from "@/lib/utils/cn";
-import { ColumnDef, useTable } from "@tanstack/react-table";
+import { type ColumnDef, useTable } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import { useEffect, useMemo, useRef } from "react";
