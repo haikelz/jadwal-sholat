@@ -86,7 +86,7 @@ Cloudflare Pages project settings (Git integration):
 | Root directory | `apps/web` |
 | Build command | `cd ../.. && bun install --frozen-lockfile && cd apps/web && bun run build` |
 | Build output directory | `dist` |
-| Environment variables | `SKIP_DEPENDENCY_INSTALL=1` (the build command installs the Bun workspace), `BUN_VERSION=1.3.11`, `NODE_VERSION=24` (Astro 7 needs Node 22.23.4 or later) |
+| Environment variables | `SKIP_DEPENDENCY_INSTALL=1` (the build command installs the Bun workspace), `BUN_VERSION=1.4.4`, `NODE_VERSION=24` (Astro 7 needs Node 22.23.4 or later) |
 | Optional | `PUBLIC_SENTRY_DSN` to report browser errors; `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` to upload source maps |
 | Build watch paths | `apps/web/*`, `packages/core/*`, `bun.lock` |
 
