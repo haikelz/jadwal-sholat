@@ -78,7 +78,7 @@ bun run preview   # serve the build on http://localhost:4321
 bun run test      # cypress run, with the preview running
 ```
 
-`astro dev` and `astro preview` don't apply Cloudflare's `_redirects` or Functions, so hadith detail pages and the puasa schedule only work under `bunx wrangler pages dev dist` (after a build) or on Pages itself.
+`astro dev` and `astro preview` don't apply Cloudflare's `_redirects` or `_worker.js`, so hadith detail pages and the puasa schedule only work under `bunx wrangler pages dev dist` (after a build) or on Pages itself.
 
 Cloudflare Pages project settings (Git integration):
 
@@ -92,7 +92,7 @@ Cloudflare Pages project settings (Git integration):
 | Optional | `PUBLIC_SENTRY_DSN` to report browser errors; `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` to upload source maps |
 | Build watch paths | `apps/web/*`, `packages/core/*`, `bun.lock` |
 
-Pages picks up `apps/web/functions` (the puasa API proxy), `public/_redirects` and `public/_headers` automatically. Turn on Web Analytics under the project's Metrics tab; Cloudflare adds the script itself.
+Pages picks up `_worker.js` with `_routes.json` (the puasa API proxy), `_redirects` and `_headers` from the build output automatically. Turn on Web Analytics under the project's Metrics tab; Cloudflare adds the script itself.
 
 ### Android app (`apps/mobile`)
 
@@ -123,7 +123,7 @@ bunx eas-cli build --platform android --profile development
   - `src/components/islands` — the React roots each page hydrates
   - `src/components/ui` — shadcn/ui primitives installed with the shadcn CLI
   - `src/components/reui` — ReUI components (Frame, Badge, Alert, Data Grid)
-  - `functions` — the Cloudflare Pages Function that proxies the puasa API
+  - `public` — static files, plus the Cloudflare files: `_redirects`, `_headers`, and `_worker.js` with `_routes.json` (the puasa API proxy)
 - `apps/mobile` — Android app (Expo Router, NativeWind, React Native Reusables)
 - `packages/core` — framework-free code shared by both apps: API schemas and clients, prayer times, the adzan schedule, dates, share links, and the bundled surah list and Asma'ul Husna
 - `packages/typescript-config` — shared TypeScript configs

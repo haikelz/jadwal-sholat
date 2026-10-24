@@ -35,7 +35,7 @@ The website build fetches the 114 surahs and the hadith book list from the publi
 - Give every data region a `Skeleton` loading state, an `Empty` state with one action, and an inline `Alert` error with a retry.
 - Fetch with `getData` from `src/lib/utils/get-data.ts` (native `fetch`); in islands use `useFetch`, which accepts build-time `initialData` and skips the request while its URL is `""`.
 - Read the current time with the `useNow()` hook and format it with `getDateParts()` from `src/lib/utils/date-parts.ts`. Never compute dates at module level or during the build: static pages would bake in the build date, and open tabs go stale after midnight.
-- Read API URLs from `src/lib/utils/public-env.ts`. The browser calls the APIs directly, except puasa, which goes through the `/api/sunnah-fasting` Pages Function.
+- Read API URLs from `src/lib/utils/public-env.ts`. The browser calls the APIs directly, except puasa, which goes through the `/api/sunnah-fasting` proxy in `public/_worker.js`.
 - Pass only the fields an island renders: island props are serialized into the page's HTML (the surah page trims the API response).
 - Keep mobile styles as the default; add larger-screen behavior with responsive variants.
 - Preserve one `<main>` landmark, a logical heading hierarchy, visible focus states, keyboard behavior, and accessible names for every control.
@@ -71,7 +71,7 @@ bun run build
 bun run preview   # then, in another terminal: bun run test
 ```
 
-Hadith detail pages and the puasa proxy need Cloudflare's `_redirects` and Functions: check them with `bunx wrangler pages dev dist`. Also inspect the changed flow at `390px` and `1440px`, including keyboard focus, dialogs, dark mode, and horizontal overflow.
+Hadith detail pages and the puasa proxy need Cloudflare's `_redirects` and `_worker.js`: check them with `bunx wrangler pages dev dist`. Also inspect the changed flow at `390px` and `1440px`, including keyboard focus, dialogs, dark mode, and horizontal overflow.
 
 <!-- graft:start -->
 ## Graft — repo context graph
