@@ -12,3 +12,6 @@ tasks:
     script: "bun run build"
   check:
     script: "bun run check"
+  # Expects `bun run preview` running on port 4321.
+  test:
+    script: "bun run test"
