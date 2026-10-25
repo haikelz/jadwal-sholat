@@ -92,7 +92,7 @@ Cloudflare Pages project settings (Git integration):
 | Optional | `GOATCOUNTER_URL` (the GoatCounter `…/count` endpoint) to count page views; `PUBLIC_SENTRY_DSN` to report browser errors; `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` to upload source maps |
 | Build watch paths | `apps/web/*`, `packages/core/*`, `bun.lock` |
 
-Pages picks up `_worker.js` with `_routes.json` (the puasa API proxy), `_redirects` and `_headers` from the build output automatically. Turn on Web Analytics under the project's Metrics tab; Cloudflare adds the script itself.
+Pages picks up `_worker.js` with `_routes.json` (the puasa API proxy and the hadith page titles), `_redirects` and `_headers` from the build output automatically. Turn on Web Analytics under the project's Metrics tab; Cloudflare adds the script itself.
 
 ### Android app (`apps/mobile`)
 
