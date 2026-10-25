@@ -301,17 +301,21 @@ export function Homepage({ city }: { city?: CityView }) {
 
   const isLocationReady = useGeolocation(!city);
   const deviceNow = useNow();
-  // A city page counts down on the city's clock, wherever the reader is.
-  const now = deviceNow && city ? zonedNow(deviceNow, city.timeZone) : deviceNow;
-  const today = now ? getDateParts(now) : null;
+  // The month to fetch: by the city's date on a city page, else the device's.
+  const fetchNow = deviceNow && city ? zonedNow(deviceNow, city.timeZone) : deviceNow;
+  const fetchToday = fetchNow ? getDateParts(fetchNow) : null;
 
   const { data, isPending, isError, isRefetching, isPlaceholderData, refetch } =
     useFetch<{
       data: JadwalSholatProps[];
     }>(
       // Wait for the clock and the location so the month is fetched once.
-      today && isLocationReady
-        ? prayerMonthUrl(JADWAL_SHOLAT_API, { month: today.bulan, position, year: today.tahun })
+      fetchToday && isLocationReady
+        ? prayerMonthUrl(JADWAL_SHOLAT_API, {
+            month: fetchToday.bulan,
+            position,
+            year: fetchToday.tahun,
+          })
         : "",
     );
 
@@ -319,12 +323,22 @@ export function Homepage({ city }: { city?: CityView }) {
   // and instead of the error when the reader is offline.
   const stored = useStoredCopy(
     city ? `jadwal-sholat:schedule:${city.slug}` : "jadwal-sholat:schedule",
-    today ? `${today.tahun}-${today.bulan}` : "",
+    fetchToday ? `${fetchToday.tahun}-${fetchToday.bulan}` : "",
     // keepPreviousData briefly shows the old month; never store that.
     isPlaceholderData ? undefined : data,
   );
   const isShowingStored = !data && stored !== undefined;
   const waktu = data?.data ?? stored?.data ?? [];
+
+  // Read the schedule on the location's own clock: a city page knows its zone,
+  // and the API names it for a place picked on the map, so a location in
+  // another timezone gets the right day and countdown.
+  // ponytail: the month is fetched by the device's date, so around midnight
+  // on the last day of a month a location in another zone can show "belum
+  // tersedia" for up to two hours. Upgrade path: refetch by the zoned month.
+  const timeZone = city?.timeZone ?? waktu[0]?.meta?.timezone;
+  const now = deviceNow && timeZone ? zonedNow(deviceNow, timeZone) : deviceNow;
+  const today = now ? getDateParts(now) : null;
   const todayIndex = waktu.findIndex(
     (item) => item.date.gregorian.date === today?.matchDate,
   );

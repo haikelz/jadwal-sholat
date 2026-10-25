@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { zonedNow } from "@jadwal-sholat/core/dates";
 
 export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   const {
@@ -37,9 +38,12 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     setIsPlayingAudioAdzan: state.setIsPlayingAudioAdzan,
   }));
 
-  // Match against the live clock so the row follows midnight.
+  // The location's own clock, so a place picked in another timezone gets its
+  // reminder on time. Matching against it also follows midnight.
+  const timeZone = waktu[0]?.meta?.timezone;
+  const clock = timeZone ? zonedNow(date, timeZone) : date;
   const filteredWaktu = waktu
-    .filter((item) => item.date.gregorian.date === format(date, "dd-MM-yyyy"))
+    .filter((item) => item.date.gregorian.date === format(clock, "dd-MM-yyyy"))
     .map((item) => ({
       ...item,
       timings: {
@@ -53,7 +57,7 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
 
   const { load, play, stop } = useAudioPlayer();
 
-  const formattedTime: string = format(date, `kk.mm`, {
+  const formattedTime: string = format(clock, `kk.mm`, {
     locale: id,
   });
 
@@ -91,7 +95,7 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
               ? "Isya"
               : "";
 
-  const dayKey = format(date, "yyyy-MM-dd");
+  const dayKey = format(clock, "yyyy-MM-dd");
 
   // Open the prompt and load the adzan once per prayer per day. The audio
   // hook returns a new `stop` on every render, so this effect re-runs often;

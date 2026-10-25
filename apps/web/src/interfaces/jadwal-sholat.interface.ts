@@ -1,6 +1,8 @@
 export interface JadwalSholatProps {
   timings: TimingsProps;
   date: DateProps;
+  /** The location's timezone, e.g. "Asia/Makassar". */
+  meta?: { timezone: string };
 }
 
 export interface TimingsProps {
