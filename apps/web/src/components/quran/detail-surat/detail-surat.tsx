@@ -139,115 +139,120 @@ export function DetailSurat({ data }: SuratProps) {
               key={index + 1}
               aria-current={isCurrent ? "true" : undefined}
               className={cn(
-                "flex min-w-0 flex-col gap-4 py-6 transition-colors first:pt-0",
+                "py-6 transition-colors first:pt-0",
                 // Soft highlight on the ayah being recited; the negative
                 // margin keeps the text where it was.
                 isCurrent && "-mx-4 rounded-xl bg-muted/60 px-4 first:pt-6",
               )}
             >
-              <span
-                id={`ayat-${ayat.number.insurah}`}
-                aria-label={`Ayat ${ayat.number.insurah}`}
-                // Focus target for "Lompat ke ayat".
-                tabIndex={-1}
-                className={cn(
-                  // Clear the sticky bars: the app header on phones, the
-                  // header plus the reading toolbar from md.
-                  "flex size-8 scroll-mt-20 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-40",
-                  // An ayah opened from a shared link (#ayat-N) is marked.
-                  "target:border-foreground target:ring-2 target:ring-ring/50",
-                  isCurrent &&
-                    "border-primary bg-primary text-primary-foreground",
-                )}
-              >
-                {ayat.number.insurah}
-              </span>
-              <p
-                lang="ar"
-                dir="rtl"
-                className={cn(
-                  "arabic-font min-w-0 text-right font-medium wrap-anywhere [--arabic-leading:2.25] [--arabic-size:1.875rem] sm:[--arabic-size:2.25rem]",
-                )}
-              >
-                {ayat.text.ar}
-              </p>
-              <div className="flex min-w-0 flex-col gap-2">
-                {terjemahan ? (
-                  <p className="text-sm leading-[1.75] italic text-muted-foreground">
-                    {ayat.text.read}
-                  </p>
-                ) : null}
-                <p className="text-sm leading-[1.75]">{ayat.translation.id}</p>
-              </div>
-              {/* Words beside the icons: not every reader knows them. */}
-              <div className="-ml-2.5 flex flex-wrap items-center gap-1">
-                {audio ? (
+              {/* content-visibility skips laying out ayahs that are off screen
+                  (Al-Baqarah has 286). It also clips painting to this box, so
+                  -mx-3/px-3 leaves room for the actions' -ml-2.5 and focus rings. */}
+              <div className="-mx-3 flex min-w-0 flex-col gap-4 px-3 [contain-intrinsic-size:auto_18rem] [content-visibility:auto]">
+                <span
+                  id={`ayat-${ayat.number.insurah}`}
+                  aria-label={`Ayat ${ayat.number.insurah}`}
+                  // Focus target for "Lompat ke ayat".
+                  tabIndex={-1}
+                  className={cn(
+                    // Clear the sticky bars: the app header on phones, the
+                    // header plus the reading toolbar from md.
+                    "flex size-8 scroll-mt-20 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-40",
+                    // An ayah opened from a shared link (#ayat-N) is marked.
+                    "target:border-foreground target:ring-2 target:ring-ring/50",
+                    isCurrent &&
+                      "border-primary bg-primary text-primary-foreground",
+                  )}
+                >
+                  {ayat.number.insurah}
+                </span>
+                <p
+                  lang="ar"
+                  dir="rtl"
+                  className={cn(
+                    "arabic-font min-w-0 text-right font-medium wrap-anywhere [--arabic-leading:2.25] [--arabic-size:1.875rem] sm:[--arabic-size:2.25rem]",
+                  )}
+                >
+                  {ayat.text.ar}
+                </p>
+                <div className="flex min-w-0 flex-col gap-2">
+                  {terjemahan ? (
+                    <p className="text-sm leading-[1.75] italic text-muted-foreground">
+                      {ayat.text.read}
+                    </p>
+                  ) : null}
+                  <p className="text-sm leading-[1.75]">{ayat.translation.id}</p>
+                </div>
+                {/* Words beside the icons: not every reader knows them. */}
+                <div className="-ml-2.5 flex flex-wrap items-center gap-1">
+                  {audio ? (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      aria-label={`${isCurrent ? "Jeda" : "Putar"} ayat ${ayat.number.insurah}`}
+                      onClick={() =>
+                        isCurrent
+                          ? handlePauseAudio()
+                          : handlePlayAudio(index, ayat.number.insurah)
+                      }
+                    >
+                      {isCurrent ? (
+                        <Pause aria-hidden="true" data-icon="inline-start" />
+                      ) : (
+                        <Play aria-hidden="true" data-icon="inline-start" />
+                      )}
+                      {isCurrent ? "Jeda" : "Putar"}
+                    </Button>
+                  ) : null}
+                  <ShareButton
+                    variant="ghost"
+                    path={`/quran/${data.number}#ayat-${ayat.number.insurah}`}
+                    title={`QS. ${data.asma.id.short}: ${ayat.number.insurah}`}
+                    excerpt={ayat.translation.id}
+                  />
                   <Button
                     type="button"
                     variant="ghost"
-                    aria-label={`${isCurrent ? "Jeda" : "Putar"} ayat ${ayat.number.insurah}`}
+                    aria-label={`${clipboard.copied && ayat.number.insurah === ayatClick ? "Tersalin" : "Salin"} ayat ${ayat.number.insurah}`}
                     onClick={() =>
-                      isCurrent
-                        ? handlePauseAudio()
-                        : handlePlayAudio(index, ayat.number.insurah)
+                      copyToClipboard(
+                        data.asma.id.short,
+                        ayat.number.insurah,
+                        ayat.text.ar,
+                        ayat.translation.id,
+                      )
                     }
                   >
-                    {isCurrent ? (
-                      <Pause aria-hidden="true" data-icon="inline-start" />
+                    {clipboard.copied && ayat.number.insurah === ayatClick ? (
+                      <ClipboardCheck aria-hidden="true" data-icon="inline-start" />
                     ) : (
-                      <Play aria-hidden="true" data-icon="inline-start" />
+                      <ClipboardCopy aria-hidden="true" data-icon="inline-start" />
                     )}
-                    {isCurrent ? "Jeda" : "Putar"}
+                    {clipboard.copied && ayat.number.insurah === ayatClick
+                      ? "Tersalin"
+                      : "Salin"}
                   </Button>
-                ) : null}
-                <ShareButton
-                  variant="ghost"
-                  path={`/quran/${data.number}#ayat-${ayat.number.insurah}`}
-                  title={`QS. ${data.asma.id.short}: ${ayat.number.insurah}`}
-                  excerpt={ayat.translation.id}
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  aria-label={`${clipboard.copied && ayat.number.insurah === ayatClick ? "Tersalin" : "Salin"} ayat ${ayat.number.insurah}`}
-                  onClick={() =>
-                    copyToClipboard(
-                      data.asma.id.short,
-                      ayat.number.insurah,
-                      ayat.text.ar,
-                      ayat.translation.id,
-                    )
-                  }
-                >
-                  {clipboard.copied && ayat.number.insurah === ayatClick ? (
-                    <ClipboardCheck aria-hidden="true" data-icon="inline-start" />
-                  ) : (
-                    <ClipboardCopy aria-hidden="true" data-icon="inline-start" />
-                  )}
-                  {clipboard.copied && ayat.number.insurah === ayatClick
-                    ? "Tersalin"
-                    : "Salin"}
-                </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  aria-label={`${lastRead.ayat === ayat.number.insurah ? "Ditandai" : "Tandai"} ayat ${ayat.number.insurah} sebagai terakhir dibaca`}
-                  aria-pressed={lastRead.ayat === ayat.number.insurah}
-                  onClick={() =>
-                    handleClick(
-                      data.asma.id.short,
-                      ayat.number.insurah,
-                      data.number as number,
-                    )
-                  }
-                >
-                  {lastRead.ayat === ayat.number.insurah ? (
-                    <BookmarkCheck aria-hidden="true" data-icon="inline-start" />
-                  ) : (
-                    <Bookmark aria-hidden="true" data-icon="inline-start" />
-                  )}
-                  {lastRead.ayat === ayat.number.insurah ? "Ditandai" : "Tandai"}
-                </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    aria-label={`${lastRead.ayat === ayat.number.insurah ? "Ditandai" : "Tandai"} ayat ${ayat.number.insurah} sebagai terakhir dibaca`}
+                    aria-pressed={lastRead.ayat === ayat.number.insurah}
+                    onClick={() =>
+                      handleClick(
+                        data.asma.id.short,
+                        ayat.number.insurah,
+                        data.number as number,
+                      )
+                    }
+                  >
+                    {lastRead.ayat === ayat.number.insurah ? (
+                      <BookmarkCheck aria-hidden="true" data-icon="inline-start" />
+                    ) : (
+                      <Bookmark aria-hidden="true" data-icon="inline-start" />
+                    )}
+                    {lastRead.ayat === ayat.number.insurah ? "Ditandai" : "Tandai"}
+                  </Button>
+                </div>
               </div>
             </article>
           );
