@@ -65,15 +65,17 @@ export const AyahItem = memo(function AyahItem({
           </Text>
         </View>
 
-        <ArabicText selectable>{ayah.text.ar}</ArabicText>
+        <ArabicText selectable leading={2.25}>
+          {ayah.text.ar}
+        </ArabicText>
 
-        <View className="gap-1">
+        <View className="gap-2">
           {showLatin ? (
-            <Text selectable className="text-sm italic text-muted-foreground">
+            <Text selectable className="text-sm leading-[1.75] italic text-muted-foreground">
               {ayah.text.read}
             </Text>
           ) : null}
-          <Text selectable className="text-sm">
+          <Text selectable className="text-sm leading-[1.75]">
             {ayah.translation.id}
           </Text>
         </View>

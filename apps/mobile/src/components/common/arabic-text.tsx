@@ -4,16 +4,18 @@ import { usePreferences } from "@/store/preferences";
 import type { ComponentProps } from "react";
 
 /**
- * Arabic source text: right to left, large, with a fixed line height of twice
- * the font size so stacked harakat don't collide. The reader's Arabic size
- * setting scales `size`.
+ * Arabic source text: right to left, large, with a line height of `leading`
+ * times the font size (twice by default) so stacked harakat don't collide.
+ * Reading text (ayat, hadith) passes 2.25. The reader's Arabic size setting
+ * scales `size`.
  */
 export function ArabicText({
   className,
+  leading = 2,
   size = 28,
   style,
   ...props
-}: ComponentProps<typeof Text> & { size?: number }) {
+}: ComponentProps<typeof Text> & { leading?: number; size?: number }) {
   const scale = usePreferences((state) => state.arabicScale);
   const fontSize = size * scale;
 
@@ -21,7 +23,7 @@ export function ArabicText({
     <Text
       className={cn("text-right", className)}
       style={[
-        { fontSize, lineHeight: fontSize * 2, writingDirection: "rtl" },
+        { fontSize, lineHeight: fontSize * leading, writingDirection: "rtl" },
         style,
       ]}
       {...props}

@@ -52,7 +52,7 @@ export default function TafsirScreen() {
     return (
       <View className="gap-6">
         <Text variant="muted">Tafsir ringkas dalam bahasa Indonesia.</Text>
-        <Text selectable className="text-sm leading-relaxed">
+        <Text selectable className="text-sm leading-[1.75]">
           {tafsir}
         </Text>
         <Button

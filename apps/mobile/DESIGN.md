@@ -9,7 +9,7 @@ Design system: React Native Reusables on NativeWind v4, with the web's ReUI neut
 ## Android specifics
 
 - **Text size:** follows Android's own font size setting, since `Text` scales with it by default. Never set `allowFontScaling={false}`.
-- **Arabic size:** set in Settings ("Ukuran huruf Arab": 1×, 1.25×, 1.5×). `ArabicText` multiplies its `size` by it and keeps the line height at twice the result.
+- **Arabic size:** set in Settings ("Ukuran huruf Arab": 1×, 1.25×, 1.5×). `ArabicText` multiplies its `size` by it and keeps the line height at twice the result (`leading={2.25}` for ayat and hadith). Reading prose (translation, Latin, tafsir, hadith) uses `leading-[1.75]`.
 - **Touch targets:** buttons are at least 40dp (React Native Reusables' default size). The icon-only settings gear adds `hitSlop` to reach 48dp.
 - **Labels:** every action shows an icon plus a word, and its accessible name contains that word.
 - **Audio:** the surah screen pins one labeled audio bar under the list while an ayah is queued.
