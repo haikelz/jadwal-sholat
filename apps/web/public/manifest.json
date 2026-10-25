@@ -1,5 +1,5 @@
 {
-  "theme_color": "#030712",
+  "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone",
   "start_url": "/",
@@ -28,6 +28,12 @@
       "src": "/img/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/img/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
