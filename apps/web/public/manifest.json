@@ -5,8 +5,9 @@
   "start_url": "/",
   "orientation": "portrait",
   "name": "Jadwal Sholat",
-  "short_name": "jadwal-sholat",
-  "description": "Aplikasi Web untuk menampilkan jadwal sholat, Asma'ul Husna, dan baca Al-Qur'an",
+  "short_name": "Jadwal Sholat",
+  "lang": "id",
+  "description": "Jadwal sholat hari ini sesuai lokasi, Al-Qur'an dengan audio dan terjemahan, hadith, Asmaul Husna, dan jadwal puasa sunnah.",
   "icons": [
     {
       "src": "/img/icon-192x192.png",

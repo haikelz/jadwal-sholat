@@ -2,7 +2,8 @@ import { sitemapXml } from "@/lib/sitemap";
 import { SITE_URL } from "@/lib/utils/metadata";
 import type { APIRoute } from "astro";
 
-const ROUTES = ["", "/quran", "/hadith", "/asmaul-husna", "/sunnah-fasting"];
+// "/" matches the homepage canonical (https://jdwshlt.ekel.dev/).
+const ROUTES = ["/", "/quran", "/hadith", "/asmaul-husna", "/sunnah-fasting"];
 
 /** The static pages and the 114 surahs. */
 export const GET: APIRoute = () =>
