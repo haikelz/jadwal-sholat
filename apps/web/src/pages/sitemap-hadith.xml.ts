@@ -2,9 +2,9 @@ import { sitemapXml } from "@/lib/sitemap";
 import { getData } from "@/lib/utils/get-data";
 import { SITE_URL } from "@/lib/utils/metadata";
 import { env } from "@/lib/utils/public-env";
+import { hadithBooksUrl } from "@jadwal-sholat/core/api";
+import type { HadithBook } from "@jadwal-sholat/core/schemas";
 import type { APIRoute } from "astro";
-
-type BookList = { data: { id: string; available: number }[] };
 
 /**
  * Every hadith page (about 38,000, under the 50,000-URL limit), built from
@@ -13,7 +13,7 @@ type BookList = { data: { id: string; available: number }[] };
  */
 export const GET: APIRoute = async () => {
   try {
-    const { data: books } = await getData<BookList>(`${env.HADITH_API}/books`);
+    const { data: books } = await getData<{ data: HadithBook[] }>(hadithBooksUrl(env.HADITH_API));
     return sitemapXml(
       books.flatMap((book) =>
         Array.from(

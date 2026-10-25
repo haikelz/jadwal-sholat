@@ -33,27 +33,18 @@ import type {
   HadithRangeResponse,
 } from "@/interfaces";
 import { getData } from "@/lib/utils/get-data";
+import {
+  hadithBooksUrl,
+  hadithDetailUrl,
+  hadithRangeUrl,
+  nextHadithPage,
+} from "@jadwal-sholat/core/api";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CircleAlert, SearchX } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
 const { HADITH_API } = env;
-const PER_PAGE = 25;
-
-export function buildHadithApiUrl(bookId: string, page: number): string {
-  const from = (page - 1) * PER_PAGE + 1;
-  const to = page * PER_PAGE;
-  return `${HADITH_API}/books/${bookId}?range=${from}-${to}`;
-}
-
-function buildHadithSingleUrl(bookId: string, number: number): string {
-  return `${HADITH_API}/books/${bookId}/${number}`;
-}
-
-export function buildBooksUrl(): string {
-  return `${HADITH_API}/books`;
-}
 
 function HadithRowSkeleton() {
   return (
@@ -77,7 +68,7 @@ export function HadithPage({ initialData }: { initialData: HadithListInitialData
   const [book, setBook] = useQueryState("book", { defaultValue: "bukhari" });
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  const booksUrl = buildBooksUrl();
+  const booksUrl = hadithBooksUrl(HADITH_API);
   const { data: booksData } = useFetch(booksUrl, initialData.books);
 
   const books = useMemo((): HadithBook[] => {
@@ -108,24 +99,17 @@ export function HadithPage({ initialData }: { initialData: HadithListInitialData
   } = useInfiniteQuery({
     queryKey: ["hadiths", book],
     queryFn: async ({ pageParam }) => {
-      const res = await getData<HadithRangeResponse>(
-        buildHadithApiUrl(book!, pageParam),
-      );
-      return res;
+      return getData<HadithRangeResponse>(hadithRangeUrl(HADITH_API, book!, pageParam));
     },
     initialPageParam: 1,
     // Hadith text doesn't change, so the built first page stays.
     ...(book === "bukhari"
       ? { initialData: { pages: [initialData.firstPage], pageParams: [1] }, staleTime: Infinity }
       : {}),
-    getNextPageParam: (lastPage, allPages) => {
-      const data = lastPage?.data;
-      if (!data?.hadiths?.length) return undefined;
-      const avail = data.available ?? 0;
-      const totalPages = Math.ceil(avail / PER_PAGE);
-      const currentPage = allPages.length;
-      return currentPage < totalPages ? currentPage + 1 : undefined;
-    },
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage?.data?.hadiths?.length
+        ? nextHadithPage(lastPage.data.available, allPages.length)
+        : undefined,
     enabled: !!book && !isSearchByNumber,
   });
 
@@ -149,7 +133,7 @@ export function HadithPage({ initialData }: { initialData: HadithListInitialData
   const { data: singleHadithRes, isFetching: isFetchingSingle } = useQuery({
     queryKey: ["hadith-single", book, searchNum],
     queryFn: () =>
-      getData<HadithDetailResponse>(buildHadithSingleUrl(book!, searchNum!)),
+      getData<HadithDetailResponse>(hadithDetailUrl(HADITH_API, book!, searchNum!)),
     enabled: !!shouldFetchSingle,
   });
 

@@ -24,7 +24,13 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { useFetch } from "@/hooks/use-fetch";
 import { useNow } from "@/hooks/use-now";
-import type { PuasaSunnahScheduleResponse, PuasaSunnahTypeKey } from "@/interfaces";
+import type { PuasaSunnahScheduleResponse } from "@/interfaces";
+import {
+  filterPuasaDates,
+  findNextFast,
+  PUASA_TYPES,
+  type PuasaTypeFilter,
+} from "@jadwal-sholat/core/puasa";
 import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { getDateParts } from "@/lib/utils/date-parts";
 import { format } from "date-fns";
@@ -33,19 +39,6 @@ import { CalendarX, CircleAlert } from "lucide-react";
 import { useId } from "react";
 import { TablePuasaSunnah } from "../table-puasa-sunnah";
 import { PuasaCalendar } from "./puasa-calendar";
-
-const puasaTypesList = [
-  { key: "all", name: "Semua" },
-  { key: "monday_thursday", name: "Puasa Senin dan Kamis" },
-  { key: "white_days", name: "Puasa Ayyamul Bidh" },
-  { key: "six_shawwal_candidate", name: "Enam hari puasa Syawal" },
-  { key: "ashura", name: "Puasa Asyura dan hari pendamping" },
-  {
-    key: "first_nine_dhul_hijjah",
-    name: "Sembilan hari pertama Zulhijah",
-  },
-  { key: "arafah", name: "Puasa Arafah" },
-] as const;
 
 const listMonthInYear = [
   { id: "01", month: "Januari" },
@@ -113,7 +106,7 @@ export function PuasaSunnahPage() {
         value={selectedType}
         onValueChange={(value) =>
           setSelectedType({
-            selectedType: value as PuasaSunnahTypeKey | "all",
+            selectedType: value as PuasaTypeFilter,
           })
         }
       >
@@ -121,7 +114,7 @@ export function PuasaSunnahPage() {
           <SelectValue placeholder="Pilih jenis puasa" />
         </SelectTrigger>
         <SelectContent>
-          {puasaTypesList.map((type) => (
+          {PUASA_TYPES.map((type) => (
             <SelectItem key={type.key} value={type.key}>
               {type.name}
             </SelectItem>
@@ -131,28 +124,10 @@ export function PuasaSunnahPage() {
     </FrameHeader>
   );
 
-  const puasaList = (data?.data?.dates ?? [])
-    .filter(
-      (puasa) =>
-        selectedType === "all" ||
-        puasa.recommendations.some(
-          (recommendation) => recommendation.key === selectedType,
-        ),
-    )
-    .map((puasa) => ({
-      ...puasa,
-      recommendations:
-        selectedType === "all"
-          ? puasa.recommendations
-          : puasa.recommendations.filter(
-              (recommendation) => recommendation.key === selectedType,
-            ),
-    }));
+  const puasaList = filterPuasaDates(data?.data?.dates ?? [], selectedType);
 
   // The first fast from today on in the shown month and type, if any.
-  const nextFast = todayIso
-    ? puasaList.find((puasa) => puasa.date.slice(0, 10) >= todayIso)
-    : undefined;
+  const nextFast = todayIso ? findNextFast(puasaList, todayIso) : undefined;
 
   const isLoading = isPending || isRefetching;
 

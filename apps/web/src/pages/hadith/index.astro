@@ -1,18 +1,19 @@
 ---
 import { PageHeader, PageShell } from "@/components/common/page-shell";
-import { buildBooksUrl, buildHadithApiUrl } from "@/components/hadith/hadith-page";
 import { HadithListIsland } from "@/components/islands/hadith-list-island";
 import type { HadithBooksResponse, HadithRangeResponse } from "@/interfaces";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getData } from "@/lib/utils/get-data";
 import { breadcrumbJsonLd, toDescription } from "@/lib/utils/metadata";
+import { env } from "@/lib/utils/public-env";
+import { hadithBooksUrl, hadithRangeUrl } from "@jadwal-sholat/core/api";
 
 // Bukhari's first page is built into the HTML, so crawlers reach hadith pages
 // through links. Rows show two lines of the translation, so only a short
 // snippet reaches the island, and no Arabic.
 const [books, firstPage] = await Promise.all([
-  getData<HadithBooksResponse>(buildBooksUrl()),
-  getData<HadithRangeResponse>(buildHadithApiUrl("bukhari", 1)),
+  getData<HadithBooksResponse>(hadithBooksUrl(env.HADITH_API)),
+  getData<HadithRangeResponse>(hadithRangeUrl(env.HADITH_API, "bukhari", 1)),
 ]);
 const initialData = {
   books,

@@ -5,6 +5,7 @@ import type { UserLocationProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getData } from "@/lib/utils/get-data";
+import { nominatimReverseUrl } from "@jadwal-sholat/core/api";
 
 const { NOMINATIM_API } = env;
 
@@ -15,7 +16,7 @@ async function getUserCurrentLocation(
   try {
     return await getData<UserLocationProps>(
       // accept-language=id names places in Indonesian ("Kota Bandung").
-      `${NOMINATIM_API}/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=id`,
+      nominatimReverseUrl(NOMINATIM_API, { lat, lng }),
     );
   } catch {
     // The label falls back to "lokasi terpilih".

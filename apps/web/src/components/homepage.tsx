@@ -49,6 +49,7 @@ import { getCurrentPrayer, type PrayerKey } from "@/lib/helpers/next-prayer";
 import { cn } from "@/lib/utils/cn";
 import { getDateParts } from "@/lib/utils/date-parts";
 import useGlobalStore from "@/store";
+import { prayerMonthUrl } from "@jadwal-sholat/core/api";
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 import {
@@ -286,7 +287,7 @@ export function Homepage() {
     }>(
       // Wait for the clock and the location so the month is fetched once.
       today && isLocationReady
-        ? `${JADWAL_SHOLAT_API}/${today.tahun}/${today.bulan}?latitude=${position.lat}&longitude=${position.lng}&method=20`
+        ? prayerMonthUrl(JADWAL_SHOLAT_API, { month: today.bulan, position, year: today.tahun })
         : "",
     );
 

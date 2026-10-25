@@ -20,6 +20,7 @@ import type { SuratProps } from "@/interfaces";
 import { env } from "@/lib/utils/public-env";
 import { DEFAULT_QORI, qoriOptions } from "@/lib/utils/qori-options";
 import useGlobalStore from "@/store";
+import { surahUrl } from "@jadwal-sholat/core/api";
 import { ChevronLeft, Languages, Volume2 } from "lucide-react";
 import { type SubmitEvent, useId, useState } from "react";
 
@@ -51,7 +52,7 @@ export function DetailSuratPage({
   }
 
   const { data, isPending, isError, isRefetching } = useFetch(
-    number ? `${QURAN_API}/quran/${number}?imamId=${qori}` : "",
+    number ? surahUrl(QURAN_API, Number(number), qori) : "",
     // The server rendered the default reciter; other reciters fetch here.
     qori === DEFAULT_QORI ? initialData : undefined,
   );

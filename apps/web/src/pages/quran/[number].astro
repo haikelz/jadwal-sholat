@@ -8,6 +8,7 @@ import { getData } from "@/lib/utils/get-data";
 import { breadcrumbJsonLd, toDescription } from "@/lib/utils/metadata";
 import { env } from "@/lib/utils/public-env";
 import { DEFAULT_QORI } from "@/lib/utils/qori-options";
+import { surahUrl } from "@jadwal-sholat/core/api";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (() =>
@@ -17,7 +18,7 @@ export const getStaticPaths = (() =>
 
 const { number } = Astro.params as { number: string };
 const { data } = await getData<SuratProps>(
-  `${env.QURAN_API}/quran/${number}?imamId=${DEFAULT_QORI}`,
+  surahUrl(env.QURAN_API, Number(number), DEFAULT_QORI),
 );
 const { asma, ayahCount, type } = data;
 

@@ -1,49 +1,8 @@
-export interface HadithBook {
-  id: string;
-  name: string;
-  available: number;
-}
+// The hadith API's shapes, from packages/core (shared with the Android app).
+import type { Hadith, HadithBook, HadithDetail, HadithRange } from "@jadwal-sholat/core/schemas";
 
-export interface HadithContents {
-  number: number;
-  arab: string;
-  id: string;
-}
-
-export interface HadithProps {
-  number: number;
-  arab: string;
-  id: string;
-}
-
-export interface HadithBooksResponse {
-  code: number;
-  message: string;
-  data: HadithBook[];
-  error: boolean;
-}
-
-export interface HadithRangeResponse {
-  code: number;
-  message: string;
-  data: {
-    name: string;
-    id: string;
-    available: number;
-    requested: number;
-    hadiths: HadithProps[];
-  };
-  error: boolean;
-}
-
-export interface HadithDetailResponse {
-  code: number;
-  message: string;
-  data: {
-    name: string;
-    id: string;
-    available: number;
-    contents: HadithContents;
-  };
-  error: boolean;
-}
+export type { HadithBook };
+export type HadithProps = Hadith;
+export type HadithBooksResponse = { data: HadithBook[] };
+export type HadithRangeResponse = { data: HadithRange };
+export type HadithDetailResponse = { data: HadithDetail };

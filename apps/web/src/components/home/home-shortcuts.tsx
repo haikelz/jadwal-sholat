@@ -2,6 +2,7 @@
 
 import { useFetch } from "@/hooks";
 import type { PuasaSunnahScheduleResponse } from "@/interfaces";
+import { findNextFast } from "@jadwal-sholat/core/puasa";
 import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { cn } from "@/lib/utils/cn";
 import useGlobalStore from "@/store";
@@ -71,9 +72,8 @@ export function HomeShortcuts({
   const { data } = useFetch<PuasaSunnahScheduleResponse>(
     month ? `/api/sunnah-fasting?period=month&date=${month}-01` : "",
   );
-  const nextFast = todayIso
-    ? data?.data?.dates?.find((puasa) => puasa.date.slice(0, 10) >= todayIso)
-    : undefined;
+  const nextFast =
+    todayIso && data ? findNextFast(data.data.dates, todayIso) : undefined;
 
   const hasLastRead = lastRead.number !== null && lastRead.ayat !== null;
   if (!hasLastRead && !nextFast) return null;

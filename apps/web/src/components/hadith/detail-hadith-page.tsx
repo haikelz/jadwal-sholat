@@ -19,6 +19,7 @@ import {
   toDescription,
 } from "@/lib/utils/metadata";
 import { env } from "@/lib/utils/public-env";
+import { hadithDetailUrl } from "@jadwal-sholat/core/api";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight, CircleAlert } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -94,10 +95,6 @@ function describeHadith(title: string, translation: string, path: string) {
   script.textContent = breadcrumb;
 }
 
-function buildHadithDetailUrl(book: string, hadithNumber: string): string {
-  return `${HADITH_API}/books/${book}/${hadithNumber}`;
-}
-
 function DetailHadithSkeleton() {
   return (
     <div
@@ -141,7 +138,7 @@ export function HadithDetailRoute() {
 }
 
 function DetailHadithPage({ book, hadithNumber }: HadithRoute) {
-  const apiUrl = buildHadithDetailUrl(book, hadithNumber);
+  const apiUrl = hadithDetailUrl(HADITH_API, book, Number(hadithNumber));
   const { data, error, isPending, isError, isRefetching, refetch } = useQuery({
     queryKey: [apiUrl],
     queryFn: () => getData<HadithDetailResponse>(apiUrl),
