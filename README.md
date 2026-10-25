@@ -89,7 +89,7 @@ Cloudflare Pages project settings (Git integration):
 | Build output directory | `dist` |
 | Environment variables | `SKIP_DEPENDENCY_INSTALL=1` (the build command installs the Bun workspace), `BUN_VERSION=1.4.4`, `NODE_VERSION=24` (Astro 7 needs Node 22.23.4 or later) |
 | Required variables | The API base URLs from `apps/web/.env.example`: `ASMAUL_HUSNA_API`, `HADITH_API`, `JADWAL_SHOLAT_API`, `NOMINATIM_API`, `QURAN_API` (read during the build) and `PUASA_SUNNAH_API` (read by the puasa proxy) |
-| Optional | `PUBLIC_SENTRY_DSN` to report browser errors; `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` to upload source maps |
+| Optional | `GOATCOUNTER_URL` (the GoatCounter `…/count` endpoint) to count page views; `PUBLIC_SENTRY_DSN` to report browser errors; `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` to upload source maps |
 | Build watch paths | `apps/web/*`, `packages/core/*`, `bun.lock` |
 
 Pages picks up `_worker.js` with `_routes.json` (the puasa API proxy), `_redirects` and `_headers` from the build output automatically. Turn on Web Analytics under the project's Metrics tab; Cloudflare adds the script itself.

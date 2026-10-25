@@ -11,6 +11,7 @@ import {
   type PageMeta,
 } from "@/lib/utils/metadata";
 import { env } from "@/lib/utils/public-env";
+import { GOATCOUNTER_URL } from "astro:env/client";
 import { ClientRouter } from "astro:transitions";
 
 type Props = PageMeta & {
@@ -94,6 +95,28 @@ const serviceWorkerUrl = `/sw.js?prayer-api=${encodeURIComponent(new URL(env.JAD
           set:html={JSON.stringify(data).replace(/</g, "\\u003c")}
         />
       ))
+    }
+    {
+      import.meta.env.PROD && GOATCOUNTER_URL && (
+        <>
+          <script
+            is:inline
+            async
+            data-goatcounter={GOATCOUNTER_URL}
+            src={`${GOATCOUNTER_URL}.js`}
+          />
+          <script is:inline>
+            // ClientRouter swaps pages without a reload, so count.js only
+            // counts the first page; count each later navigation here.
+            document.addEventListener("astro:after-swap", function () {
+              window.goatcounter?.count?.({
+                path: location.pathname + location.search,
+                title: document.title,
+              });
+            });
+          </script>
+        </>
+      )
     }
     <ClientRouter />
   </head>

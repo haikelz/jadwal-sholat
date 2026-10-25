@@ -20,6 +20,13 @@ export default defineConfig({
       JADWAL_SHOLAT_API: publicUrl,
       NOMINATIM_API: publicUrl,
       QURAN_API: publicUrl,
+      // GoatCounter endpoint (…/count); analytics stays off when it's unset.
+      GOATCOUNTER_URL: envField.string({
+        context: "client",
+        access: "public",
+        url: true,
+        optional: true,
+      }),
     },
   },
   integrations: [
