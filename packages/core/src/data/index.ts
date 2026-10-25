@@ -8,3 +8,5 @@ import surahListJson from "./surah-list.json";
 export const SURAH_LIST = surahListSchema.parse(surahListJson);
 
 export const ASMAUL_HUSNA = asmaulHusnaListSchema.parse(asmaulHusnaJson);
+
+export * from "./cities";
