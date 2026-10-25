@@ -1,10 +1,10 @@
-import { HadithPage } from "@/components/hadith/hadith-page";
+import { HadithPage, type HadithListInitialData } from "@/components/hadith/hadith-page";
 import { Providers } from "@/components/providers";
 
-export function HadithListIsland() {
+export function HadithListIsland({ initialData }: { initialData: HadithListInitialData }) {
   return (
     <Providers>
-      <HadithPage />
+      <HadithPage initialData={initialData} />
     </Providers>
   );
 }

@@ -27,6 +27,7 @@ import { env } from "@/lib/utils/public-env";
 import { useFetch } from "@/hooks/use-fetch";
 import type {
   HadithBook,
+  HadithBooksResponse,
   HadithProps,
   HadithDetailResponse,
   HadithRangeResponse,
@@ -40,7 +41,7 @@ import { useCallback, useEffect, useMemo, useRef } from "react";
 const { HADITH_API } = env;
 const PER_PAGE = 25;
 
-function buildHadithApiUrl(bookId: string, page: number): string {
+export function buildHadithApiUrl(bookId: string, page: number): string {
   const from = (page - 1) * PER_PAGE + 1;
   const to = page * PER_PAGE;
   return `${HADITH_API}/books/${bookId}?range=${from}-${to}`;
@@ -50,7 +51,7 @@ function buildHadithSingleUrl(bookId: string, number: number): string {
   return `${HADITH_API}/books/${bookId}/${number}`;
 }
 
-function buildBooksUrl(): string {
+export function buildBooksUrl(): string {
   return `${HADITH_API}/books`;
 }
 
@@ -64,13 +65,20 @@ function HadithRowSkeleton() {
   );
 }
 
-export function HadithPage() {
+/** Built into /hadith, so crawlers reach hadith pages through links. */
+export type HadithListInitialData = {
+  books: HadithBooksResponse;
+  /** Bukhari, the default book, first page. */
+  firstPage: HadithRangeResponse;
+};
+
+export function HadithPage({ initialData }: { initialData: HadithListInitialData }) {
   const [search, setSearch] = useQueryState("search");
   const [book, setBook] = useQueryState("book", { defaultValue: "bukhari" });
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   const booksUrl = buildBooksUrl();
-  const { data: booksData } = useFetch(booksUrl);
+  const { data: booksData } = useFetch(booksUrl, initialData.books);
 
   const books = useMemo((): HadithBook[] => {
     if (!booksData?.data) return [];
@@ -106,6 +114,10 @@ export function HadithPage() {
       return res;
     },
     initialPageParam: 1,
+    // Hadith text doesn't change, so the built first page stays.
+    ...(book === "bukhari"
+      ? { initialData: { pages: [initialData.firstPage], pageParams: [1] }, staleTime: Infinity }
+      : {}),
     getNextPageParam: (lastPage, allPages) => {
       const data = lastPage?.data;
       if (!data?.hadiths?.length) return undefined;
