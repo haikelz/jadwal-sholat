@@ -13,7 +13,9 @@ import type { APIRoute } from "astro";
  */
 export const GET: APIRoute = async () => {
   try {
-    const { data: books } = await getData<{ data: HadithBook[] }>(hadithBooksUrl(env.HADITH_API));
+    const { data: books } = await getData<{ data: HadithBook[] }>(hadithBooksUrl(env.HADITH_API), {
+      signal: AbortSignal.timeout(15_000),
+    });
     return sitemapXml(
       books.flatMap((book) =>
         Array.from(

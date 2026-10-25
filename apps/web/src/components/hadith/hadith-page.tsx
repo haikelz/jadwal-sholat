@@ -63,13 +63,13 @@ export type HadithListInitialData = {
   firstPage: HadithRangeResponse;
 };
 
-export function HadithPage({ initialData }: { initialData: HadithListInitialData }) {
+export function HadithPage({ initialData }: { initialData?: HadithListInitialData }) {
   const [search, setSearch] = useQueryState("search");
   const [book, setBook] = useQueryState("book", { defaultValue: "bukhari" });
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   const booksUrl = hadithBooksUrl(HADITH_API);
-  const { data: booksData } = useFetch(booksUrl, initialData.books);
+  const { data: booksData } = useFetch(booksUrl, initialData?.books);
 
   const books = useMemo((): HadithBook[] => {
     if (!booksData?.data) return [];
@@ -103,7 +103,7 @@ export function HadithPage({ initialData }: { initialData: HadithListInitialData
     },
     initialPageParam: 1,
     // Hadith text doesn't change, so the built first page stays.
-    ...(book === "bukhari"
+    ...(initialData && book === "bukhari"
       ? { initialData: { pages: [initialData.firstPage], pageParams: [1] }, staleTime: Infinity }
       : {}),
     getNextPageParam: (lastPage, allPages) =>
