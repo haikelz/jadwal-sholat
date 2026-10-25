@@ -1,5 +1,5 @@
 import { queryKeys } from "@jadwal-sholat/core/api";
-import { getDateParts } from "@jadwal-sholat/core/dates";
+import { getDateParts, zonedNow } from "@jadwal-sholat/core/dates";
 import { getTomorrowTimings } from "@jadwal-sholat/core/prayer";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
@@ -34,8 +34,17 @@ export function usePrayerMonth(now: Date, enabled = true) {
 
   const storedDays = stored?.month === month ? stored.days : undefined;
   const days = query.data ?? storedDays ?? [];
+
+  // Read the month on the location's own clock: the API names its timezone,
+  // so a place picked in another zone gets the right day and countdown.
+  // ponytail: the month is fetched by the device's date, so around midnight
+  // on a month's last day a location in another zone can miss "today" for up
+  // to two hours. Upgrade path: refetch by the zoned month.
+  const timeZone = days[0]?.meta?.timezone;
+  const clock = timeZone ? zonedNow(now, timeZone) : now;
+  const localToday = getDateParts(clock);
   const todayIndex = days.findIndex(
-    (day) => day.date.gregorian.date === today.matchDate,
+    (day) => day.date.gregorian.date === localToday.matchDate,
   );
   const isLastDay = todayIndex >= 0 && todayIndex === days.length - 1;
 
@@ -49,8 +58,10 @@ export function usePrayerMonth(now: Date, enabled = true) {
 
   return {
     ...query,
+    /** `now` on the location's clock: use it for "next prayer" and countdowns. */
+    clock,
     days,
-    today,
+    today: localToday,
     todayIndex,
     todayTimings: days[todayIndex]?.timings,
     tomorrowTimings: getTomorrowTimings(days, todayIndex, nextMonth.data),

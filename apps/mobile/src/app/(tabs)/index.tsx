@@ -40,6 +40,7 @@ export default function HomeScreen() {
   const adzanEnabled = usePreferences((state) => state.adzanEnabled);
 
   const {
+    clock,
     days,
     today,
     todayIndex,
@@ -52,13 +53,13 @@ export default function HomeScreen() {
     refetch,
   } = usePrayerMonth(now, isLocationReady);
 
-  const currentPrayer = todayTimings ? getCurrentPrayer(todayTimings, now) : null;
+  const currentPrayer = todayTimings ? getCurrentPrayer(todayTimings, clock) : null;
   const nextPrayer = todayTimings
-    ? getNextPrayer(todayTimings, tomorrowTimings, now)
+    ? getNextPrayer(todayTimings, tomorrowTimings, clock)
     : null;
   const hijri = days[todayIndex]?.date.hijri;
   const nowTime = formatSholatTime(
-    `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`,
+    `${String(clock.getHours()).padStart(2, "0")}:${String(clock.getMinutes()).padStart(2, "0")}`,
   );
   const monthTitle = `${INDONESIAN_MONTHS[now.getMonth()].label} ${now.getFullYear()}`;
   const isLoadingFirst = (isPending || !isLocationReady) && days.length === 0;
@@ -157,7 +158,7 @@ export default function HomeScreen() {
             className="gap-2"
             accessible
             accessibilityLiveRegion="polite"
-            accessibilityLabel={`Sholat berikutnya ${nextPrayer.name} pukul ${formatSholatTime(nextPrayer.time)}, ${formatCountdown(now, nextPrayer.at)}`}
+            accessibilityLabel={`Sholat berikutnya ${nextPrayer.name} pukul ${formatSholatTime(nextPrayer.time)}, ${formatCountdown(clock, nextPrayer.at)}`}
           >
             <Text variant="muted">
               {currentPrayer ? `Sedang waktu ${currentPrayer.name} · b` : "B"}
@@ -174,7 +175,7 @@ export default function HomeScreen() {
                 {formatSholatTime(nextPrayer.time)}
               </Text>
             </View>
-            <Text className="tabular-nums">{formatCountdown(now, nextPrayer.at)}</Text>
+            <Text className="tabular-nums">{formatCountdown(clock, nextPrayer.at)}</Text>
           </View>
         ) : (
           <View className="gap-2">
