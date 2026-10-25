@@ -1,3 +1,4 @@
+import { fromZoned } from "../dates/zoned-now";
 import {
   PRAYERS,
   prayerTimeOn,
@@ -20,6 +21,8 @@ export type AdzanAlarm = {
 
 export type AdzanScheduleDay = {
   date: { gregorian: { date: string } };
+  /** The location's timezone, e.g. "Asia/Makassar". */
+  meta?: { timezone: string };
   timings: ObligatoryTimings;
 };
 
@@ -61,7 +64,10 @@ export function buildAdzanSchedule({
     for (const prayer of PRAYERS) {
       if (!enabled.has(prayer.key)) continue;
 
-      const at = prayerTimeOn(day.timings[prayer.key], date);
+      // The API's times are the location's wall clock; an alarm needs the
+      // instant, which differs when the device is in another timezone.
+      const wallClock = prayerTimeOn(day.timings[prayer.key], date);
+      const at = day.meta?.timezone ? fromZoned(wallClock, day.meta.timezone) : wallClock;
       if (at <= now) continue;
 
       alarms.push({

@@ -52,4 +52,20 @@ describe("buildAdzanSchedule", () => {
 
     expect(alarms.map((alarm) => alarm.key)).toEqual(["Fajr", "Maghrib"]);
   });
+
+  test("rings at the location's time when the device is in another zone", () => {
+    const [alarm] = buildAdzanSchedule({
+      days: [
+        {
+          date: { gregorian: { date: "25-10-2026" } },
+          meta: { timezone: "Asia/Jayapura" },
+          timings: { ...timings, Fajr: "04:00 (WIT)" },
+        },
+      ],
+      now: new Date("2026-10-24T12:00:00Z"),
+      prayers: ["Fajr"],
+    });
+    // 04:00 WIT is 19:00 UTC the day before, wherever the test runs.
+    expect(alarm?.at.toISOString()).toBe("2026-10-24T19:00:00.000Z");
+  });
 });

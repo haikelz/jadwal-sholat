@@ -13,9 +13,9 @@ export type PrayerKey = (typeof PRAYERS)[number]["key"];
 /** The five obligatory prayer times; any wider timings object also fits. */
 export type ObligatoryTimings = Pick<PrayerTimings, PrayerKey>;
 
-// ponytail: reads "HH:mm (TZ)" against the device clock, so a device in a
-// different timezone than the chosen location gets a shifted countdown.
-// Upgrade path: use the API's meta.timezone with Intl to build the instant.
+// Reads "HH:mm (TZ)" as a wall-clock time on `day`. For a location in another
+// timezone, callers pass zonedNow(now, meta.timezone) as `now`, so the
+// comparison and the countdown use the location's clock.
 export function prayerTimeOn(time: string, day: Date) {
   const [hours, minutes] = time.slice(0, 5).split(":").map(Number);
   const result = new Date(day);
