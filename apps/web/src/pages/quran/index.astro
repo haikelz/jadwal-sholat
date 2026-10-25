@@ -1,10 +1,12 @@
 ---
+import PassageLinks from "@/components/common/PassageLinks.astro";
 import { PageHeader, PageShell } from "@/components/common/page-shell";
 import { QuranListIsland } from "@/components/islands/quran-list-island";
 import type { ListSuratProps } from "@/interfaces";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { breadcrumbJsonLd } from "@/lib/utils/metadata";
 import { SURAH_LIST } from "@jadwal-sholat/core/data";
+import { NAMED_PASSAGES } from "@jadwal-sholat/core/quran";
 
 // The bundled list, so the page builds without the network; only the fields
 // a row renders reach the island.
@@ -33,5 +35,19 @@ const surat: ListSuratProps = {
       description="Berlomba-lombalah dalam berbuat kebaikan."
     />
     <QuranListIsland client:load surat={surat} />
+    <section aria-labelledby="named-passages" class="flex flex-col gap-3">
+      <div class="flex items-baseline justify-between gap-2">
+        <h2 id="named-passages" class="text-sm font-medium text-muted-foreground">
+          Ayat pilihan
+        </h2>
+        <a
+          href="/ayat"
+          class="rounded-sm text-sm font-medium underline-offset-4 transition-colors outline-none hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          Semua ayat pilihan
+        </a>
+      </div>
+      <PassageLinks passages={NAMED_PASSAGES} />
+    </section>
   </PageShell>
 </BaseLayout>

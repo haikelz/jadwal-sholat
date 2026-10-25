@@ -16,13 +16,14 @@ const section = navItems.find(
   (item) => item.url !== "/" && isNavItemActive(path, item.url),
 );
 // Detail routes get a back link on phones: /quran/<n>, hadith pages (which
-// all render from the /hadith-detail shell), and city schedules.
+// all render from the /hadith-detail shell), city schedules and named ayat,
+// which go back to their own lists.
 const isDetail =
   (segments[0] === "quran" && segments.length >= 2) ||
   path === "/hadith-detail";
 const backHref =
-  segments[0] === "jadwal-sholat" && segments.length >= 2
-    ? "/jadwal-sholat"
+  (segments[0] === "jadwal-sholat" || segments[0] === "ayat") && segments.length >= 2
+    ? `/${segments[0]}`
     : section && isDetail
       ? section.url
       : null;

@@ -1,0 +1,94 @@
+---
+import { PageHeader, PageShell } from "@/components/common/page-shell";
+import { ShareIsland } from "@/components/islands/share-island";
+import { buttonVariants } from "@/components/ui/button";
+import type { SuratProps } from "@/interfaces";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getData } from "@/lib/utils/get-data";
+import { breadcrumbJsonLd, toDescription } from "@/lib/utils/metadata";
+import { env } from "@/lib/utils/public-env";
+import { DEFAULT_QORI } from "@/lib/utils/qori-options";
+import { surahUrl } from "@jadwal-sholat/core/api";
+import { type NamedPassage, NAMED_PASSAGES, passageRange } from "@jadwal-sholat/core/quran";
+import type { GetStaticPaths } from "astro";
+import { Volume2 } from "lucide-react";
+
+export const getStaticPaths = (() =>
+  NAMED_PASSAGES.map((passage) => ({
+    params: { slug: passage.slug },
+    props: { passage },
+  }))) satisfies GetStaticPaths;
+
+const { passage } = Astro.props as { passage: NamedPassage };
+const { data } = await getData<SuratProps>(surahUrl(env.QURAN_API, passage.surah, DEFAULT_QORI));
+const ayahs = data.ayahs.filter(
+  (ayah) => ayah.number.insurah >= passage.from && ayah.number.insurah <= passage.to,
+);
+const surahName = data.asma.id.short;
+const range = passageRange(passage);
+const path = `/ayat/${passage.slug}`;
+---
+
+<BaseLayout
+  title={`${passage.name} (${surahName} ${range}): Arab, Latin dan Artinya`}
+  description={toDescription(
+    `${passage.name}, QS. ${surahName} ayat ${range}: teks Arab, latin, terjemahan Indonesia dan tafsir. ${ayahs[0]?.translation.id ?? ""}`,
+  )}
+  path={path}
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: "Al-Qur'an", path: "/quran" },
+      { name: "Ayat pilihan", path: "/ayat" },
+      { name: passage.name, path },
+    ]),
+  ]}
+>
+  <PageShell width="reading">
+    <PageHeader
+      align="center"
+      title={passage.name}
+      description={`QS. ${surahName} (${data.number}) ayat ${range}`}
+    />
+    <div class="flex flex-wrap justify-center gap-2">
+      <!-- Audio and the surrounding ayat live on the surah page. -->
+      <a href={`/quran/${passage.surah}#ayat-${passage.from}`} class={buttonVariants({ variant: "outline" })}>
+        <Volume2 aria-hidden="true" data-icon="inline-start" />
+        Dengarkan di Surat {surahName}
+      </a>
+      <ShareIsland
+        client:idle
+        path={path}
+        title={`${passage.name} (QS. ${surahName}: ${range})`}
+        excerpt={ayahs[0]?.translation.id}
+      />
+    </div>
+    <div class="flex flex-col divide-y">
+      {
+        ayahs.map((ayah) => (
+          <article class="flex flex-col gap-4 py-6 first:pt-0">
+            <h2 class="text-xs font-medium text-muted-foreground">
+              Ayat {ayah.number.insurah}
+            </h2>
+            <p
+              lang="ar"
+              dir="rtl"
+              class="arabic-font min-w-0 text-right font-medium wrap-anywhere [--arabic-leading:2.25] [--arabic-size:1.875rem] sm:[--arabic-size:2.25rem]"
+            >
+              {ayah.text.ar}
+            </p>
+            <div class="flex min-w-0 flex-col gap-2">
+              <p class="text-sm leading-[1.75] italic text-muted-foreground">{ayah.text.read}</p>
+              <p class="text-sm leading-[1.75]">{ayah.translation.id}</p>
+            </div>
+            {ayah.tafsir?.id ? (
+              <section class="flex flex-col gap-2">
+                <h3 class="text-xs font-medium text-muted-foreground">Penjelasan (tafsir)</h3>
+                <p class="text-sm leading-[1.75]">{ayah.tafsir.id}</p>
+              </section>
+            ) : null}
+          </article>
+        ))
+      }
+    </div>
+  </PageShell>
+</BaseLayout>

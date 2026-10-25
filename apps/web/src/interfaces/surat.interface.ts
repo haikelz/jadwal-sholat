@@ -101,6 +101,10 @@ export interface SuratProps {
       translation: {
         id: string;
       };
+      /** Kemenag's short tafsir; the surah page leaves it out. */
+      tafsir?: {
+        id: string | null;
+      };
     }>;
     type: {
       id: string;

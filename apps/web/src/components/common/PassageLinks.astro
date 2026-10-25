@@ -1,0 +1,26 @@
+---
+import { type NamedPassage, passageRange } from "@jadwal-sholat/core/quran";
+import { SURAH_LIST } from "@jadwal-sholat/core/data";
+
+/** Links to the named-passage pages, as plain rows that flow into columns. */
+const { passages } = Astro.props as { passages: readonly NamedPassage[] };
+---
+
+<!-- Each row has border-b and the list border-t: divide-y breaks across columns. -->
+<ul class="grid grid-cols-1 border-t md:grid-cols-2 md:gap-x-8 lg:grid-cols-3">
+  {
+    passages.map((passage) => (
+      <li class="border-b">
+        <a
+          href={`/ayat/${passage.slug}`}
+          class="flex flex-col gap-0.5 px-2 py-3 transition-colors outline-none hover:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+        >
+          <span class="text-sm font-medium">{passage.name}</span>
+          <span class="text-xs text-muted-foreground">
+            QS. {SURAH_LIST[passage.surah - 1]?.asma.id.short}: {passageRange(passage)}
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

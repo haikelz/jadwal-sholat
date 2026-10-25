@@ -1,0 +1,27 @@
+---
+import PassageLinks from "@/components/common/PassageLinks.astro";
+import { PageHeader, PageShell } from "@/components/common/page-shell";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
+import { NAMED_PASSAGES } from "@jadwal-sholat/core/quran";
+---
+
+<BaseLayout
+  title="Ayat Pilihan dan Doa dari Al-Qur'an"
+  description="Ayat dan doa dari Al-Qur'an yang sering dicari, seperti Ayat Kursi, Amanar Rasul dan Ayat Seribu Dinar, lengkap dengan teks Arab, latin, arti dan tafsir."
+  path="/ayat"
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: "Al-Qur'an", path: "/quran" },
+      { name: "Ayat pilihan", path: "/ayat" },
+    ]),
+  ]}
+>
+  <PageShell>
+    <PageHeader
+      title="Ayat pilihan"
+      description="Ayat dan doa dari Al-Qur'an yang sering dicari, dengan arti dan penjelasannya."
+    />
+    <PassageLinks passages={NAMED_PASSAGES} />
+  </PageShell>
+</BaseLayout>

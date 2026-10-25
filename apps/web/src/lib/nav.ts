@@ -23,9 +23,14 @@ export const navItems: NavItem[] = [
   { title: "Puasa Sunnah", shortTitle: "Puasa", icon: Calendar, url: "/sunnah-fasting" },
 ];
 
+// Pages that live under another section's tab: city schedules under the
+// schedule, named ayat under the Qur'an.
+const SECTION_ALIASES: Record<string, string[]> = {
+  "/": ["/jadwal-sholat"],
+  "/quran": ["/ayat"],
+};
+
 export function isNavItemActive(pathname: string, url: string) {
-  // City schedules (/jadwal-sholat/...) belong to the schedule section.
-  return url === "/"
-    ? pathname === "/" || pathname.startsWith("/jadwal-sholat")
-    : pathname.startsWith(url);
+  if (SECTION_ALIASES[url]?.some((prefix) => pathname.startsWith(prefix))) return true;
+  return url === "/" ? pathname === "/" : pathname.startsWith(url);
 }

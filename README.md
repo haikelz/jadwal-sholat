@@ -10,6 +10,7 @@
 - Optional adzan reminders through browser notifications, and the last loaded schedule when offline
 - Prayer schedules for 51 Indonesian cities (`/jadwal-sholat`), on each city's own clock in WIB, WITA or WIT
 - Al-Qur'an with reciter selection, audio, transliteration, translation, tafsir, a sticky reading toolbar, jump-to-ayah, Makkiyyah/Madaniyyah filtering, and a "continue reading" shortcut
+- Pages for ayat people search by name (Ayat Kursi, Amanar Rasul, Ayat Seribu Dinar and more) with Arabic, Latin, translation and tafsir
 - Share a surah, a single ayah or a hadith to WhatsApp, Telegram, X, Facebook, Threads, LinkedIn or email, or copy the link; phones open the system share sheet
 - Hadith browsing by book and number
 - The 99 names of Allah with Arabic text, meaning, and one-tap copy
