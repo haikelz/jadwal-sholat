@@ -28,15 +28,17 @@ function readSavedPosition(): Position | null {
 /**
  * Resolves the reader's position and reports when it is settled, so the
  * schedule fetches once instead of once for the default city and again for
- * the real location.
+ * the real location. City pages pass `enabled = false`: they never ask for
+ * the reader's location.
  */
-export function useGeolocation() {
+export function useGeolocation(enabled = true) {
   const { setPosition } = useGlobalStore((state) => ({
     setPosition: state.setPosition,
   }));
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    if (!enabled) return;
     const saved = readSavedPosition();
     if (saved) {
       setPosition(saved);
@@ -73,7 +75,7 @@ export function useGeolocation() {
     );
 
     return () => clearTimeout(timeout);
-  }, [setPosition]);
+  }, [enabled, setPosition]);
 
-  return isReady;
+  return enabled ? isReady : true;
 }

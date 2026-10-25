@@ -1,0 +1,24 @@
+---
+import CityLinks from "@/components/common/CityLinks.astro";
+import { PageHeader, PageShell } from "@/components/common/page-shell";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
+import { CITIES } from "@jadwal-sholat/core/data";
+
+const cities = [...CITIES].sort((a, b) => a.name.localeCompare(b.name, "id"));
+---
+
+<BaseLayout
+  title="Jadwal Sholat Kota di Indonesia"
+  description={`Jadwal sholat hari ini dan sebulan penuh untuk ${CITIES.length} kota di Indonesia, dari Banda Aceh sampai Merauke, dalam WIB, WITA dan WIT, metode Kemenag RI.`}
+  path="/jadwal-sholat"
+  jsonLd={[breadcrumbJsonLd([{ name: "Jadwal sholat per kota", path: "/jadwal-sholat" }])]}
+>
+  <PageShell>
+    <PageHeader
+      title="Jadwal sholat per kota"
+      description="Pilih kota untuk melihat jadwal sholat hari ini dan sebulan penuh, dalam jam setempat."
+    />
+    <CityLinks cities={cities} />
+  </PageShell>
+</BaseLayout>

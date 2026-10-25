@@ -15,12 +15,17 @@ const segments = path.slice(1).split("/").filter(Boolean);
 const section = navItems.find(
   (item) => item.url !== "/" && isNavItemActive(path, item.url),
 );
-// Detail routes get a back link on phones: /quran/<n>, and hadith pages,
-// which all render from the /hadith-detail shell.
+// Detail routes get a back link on phones: /quran/<n>, hadith pages (which
+// all render from the /hadith-detail shell), and city schedules.
 const isDetail =
   (segments[0] === "quran" && segments.length >= 2) ||
   path === "/hadith-detail";
-const backHref = section && isDetail ? section.url : null;
+const backHref =
+  segments[0] === "jadwal-sholat" && segments.length >= 2
+    ? "/jadwal-sholat"
+    : section && isDetail
+      ? section.url
+      : null;
 ---
 
 <header class="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">

@@ -1,0 +1,49 @@
+---
+import CityLinks from "@/components/common/CityLinks.astro";
+import { PageShell } from "@/components/common/page-shell";
+import { HomeIsland } from "@/components/islands/home-island";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd, toDescription } from "@/lib/utils/metadata";
+import { CITIES, type City, ZONE_LABELS } from "@jadwal-sholat/core/data";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() =>
+  CITIES.map((city) => ({ params: { city: city.slug }, props: { city } }))) satisfies GetStaticPaths;
+
+const { city } = Astro.props as { city: City };
+const zone = ZONE_LABELS[city.timeZone];
+const path = `/jadwal-sholat/${city.slug}`;
+---
+
+<BaseLayout
+  title={`Jadwal Sholat ${city.name} Hari Ini, ${zone}`}
+  description={toDescription(
+    `Jadwal sholat ${city.name}, ${city.province} hari ini dan sebulan penuh dalam ${zone}, metode Kemenag RI: Imsak, Subuh, Dzuhur, Ashar, Maghrib dan Isya.`,
+  )}
+  path={path}
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: "Jadwal sholat per kota", path: "/jadwal-sholat" },
+      { name: city.name, path },
+    ]),
+  ]}
+>
+  <PageShell>
+    <!-- The schedule renders in the browser on the city's clock; the build
+         ships the heading and the skeleton. -->
+    <HomeIsland
+      client:load
+      city={{ slug: city.slug, name: city.name, position: city.position, timeZone: city.timeZone, zone }}
+    />
+    <p class="text-sm text-muted-foreground">
+      Waktu sholat {city.name}, {city.province}, untuk hari ini dan sebulan penuh,
+      dihitung dengan metode Kemenag RI. Semua waktu dalam {zone}, jam setempat {city.name}.
+    </p>
+    <section aria-labelledby="other-cities" class="flex flex-col gap-3">
+      <h2 id="other-cities" class="text-sm font-medium text-muted-foreground">
+        Jadwal sholat kota lain
+      </h2>
+      <CityLinks cities={CITIES.filter((other) => other.slug !== city.slug)} />
+    </section>
+  </PageShell>
+</BaseLayout>

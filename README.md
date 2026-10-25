@@ -8,6 +8,7 @@
 
 - The current prayer period, the next prayer with a live countdown, today's times, the Hijri date, shortcuts to continue reading and the next sunnah fast, and the days around today with the full month one tap away, based on the reader's remembered location
 - Optional adzan reminders through browser notifications, and the last loaded schedule when offline
+- Prayer schedules for 51 Indonesian cities (`/jadwal-sholat`), on each city's own clock in WIB, WITA or WIT
 - Al-Qur'an with reciter selection, audio, transliteration, translation, tafsir, a sticky reading toolbar, jump-to-ayah, Makkiyyah/Madaniyyah filtering, and a "continue reading" shortcut
 - Share a surah, a single ayah or a hadith to WhatsApp, Telegram, X, Facebook, Threads, LinkedIn or email, or copy the link; phones open the system share sheet
 - Hadith browsing by book and number

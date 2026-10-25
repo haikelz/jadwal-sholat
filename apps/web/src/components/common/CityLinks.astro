@@ -1,0 +1,25 @@
+---
+import { type City, ZONE_LABELS } from "@jadwal-sholat/core/data";
+
+/** Links to city schedules, as plain rows that flow into columns. */
+const { cities } = Astro.props as { cities: readonly City[] };
+---
+
+<!-- Each row has border-b and the list border-t: divide-y breaks across columns. -->
+<ul class="grid grid-cols-1 border-t md:grid-cols-2 md:gap-x-8 lg:grid-cols-3">
+  {
+    cities.map((city) => (
+      <li class="border-b">
+        <a
+          href={`/jadwal-sholat/${city.slug}`}
+          class="flex flex-col gap-0.5 px-2 py-3 transition-colors outline-none hover:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+        >
+          <span class="text-sm font-medium">{city.name}</span>
+          <span class="text-xs text-muted-foreground">
+            {city.province} · {ZONE_LABELS[city.timeZone]}
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

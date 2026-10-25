@@ -1,7 +1,13 @@
 ---
+import CityLinks from "@/components/common/CityLinks.astro";
 import { PageShell } from "@/components/common/page-shell";
 import { HomeIsland } from "@/components/islands/home-island";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { CITIES } from "@jadwal-sholat/core/data";
+
+// Static links, so crawlers and readers find the city schedules.
+const POPULAR = ["jakarta", "bandung", "surabaya", "medan", "semarang", "yogyakarta", "palembang", "makassar", "denpasar"];
+const popularCities = CITIES.filter((city) => POPULAR.includes(city.slug));
 ---
 
 <BaseLayout
@@ -14,5 +20,19 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <!-- client:load, not client:only: the hero and today's skeleton ship as
          static HTML; browser-only parts mount inside the island. -->
     <HomeIsland client:load />
+    <section aria-labelledby="city-schedules" class="flex flex-col gap-3">
+      <div class="flex items-baseline justify-between gap-2">
+        <h2 id="city-schedules" class="text-sm font-medium text-muted-foreground">
+          Jadwal sholat kota lain
+        </h2>
+        <a
+          href="/jadwal-sholat"
+          class="rounded-sm text-sm font-medium underline-offset-4 transition-colors outline-none hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          Semua kota
+        </a>
+      </div>
+      <CityLinks cities={popularCities} />
+    </section>
   </PageShell>
 </BaseLayout>

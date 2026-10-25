@@ -24,5 +24,8 @@ export const navItems: NavItem[] = [
 ];
 
 export function isNavItemActive(pathname: string, url: string) {
-  return url === "/" ? pathname === "/" : pathname.startsWith(url);
+  // City schedules (/jadwal-sholat/...) belong to the schedule section.
+  return url === "/"
+    ? pathname === "/" || pathname.startsWith("/jadwal-sholat")
+    : pathname.startsWith(url);
 }

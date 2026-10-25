@@ -50,6 +50,8 @@ import { cn } from "@/lib/utils/cn";
 import { getDateParts } from "@/lib/utils/date-parts";
 import useGlobalStore from "@/store";
 import { prayerMonthUrl } from "@jadwal-sholat/core/api";
+import { zonedNow } from "@jadwal-sholat/core/dates";
+import type { Coordinates } from "@jadwal-sholat/core/prayer";
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 import {
@@ -267,18 +269,40 @@ function ScheduleSkeleton() {
   );
 }
 
-export function Homepage() {
-  const { position, isOpenMap, setIsOpenMap } = useGlobalStore((state) => ({
+/** A city page's fixed location (/jadwal-sholat/<kota>). */
+export type CityView = {
+  slug: string;
+  name: string;
+  position: Coordinates;
+  timeZone: string;
+  /** WIB, WITA or WIT. */
+  zone: string;
+};
+
+/**
+ * The prayer schedule. Without `city` it follows the reader's location. With
+ * `city` it shows that city on the city's own clock and leaves out the
+ * personal parts: location picker, adzan reminder and shortcuts.
+ */
+export function Homepage({ city }: { city?: CityView }) {
+  const {
+    position: readerPosition,
+    isOpenMap,
+    setIsOpenMap,
+  } = useGlobalStore((state) => ({
     position: state.position,
     isOpenMap: state.isOpenMap,
     setIsOpenMap: state.setIsOpenMap,
   }));
+  const position = city?.position ?? readerPosition;
   const [showFullMonth, setShowFullMonth] = useState(false);
   const monthPanelId = useId();
   const isMounted = useIsMounted();
 
-  const isLocationReady = useGeolocation();
-  const now = useNow();
+  const isLocationReady = useGeolocation(!city);
+  const deviceNow = useNow();
+  // A city page counts down on the city's clock, wherever the reader is.
+  const now = deviceNow && city ? zonedNow(deviceNow, city.timeZone) : deviceNow;
   const today = now ? getDateParts(now) : null;
 
   const { data, isPending, isError, isRefetching, isPlaceholderData, refetch } =
@@ -294,7 +318,7 @@ export function Homepage() {
   // The last schedule fetched for this month: shown while the network loads,
   // and instead of the error when the reader is offline.
   const stored = useStoredCopy(
-    "jadwal-sholat:schedule",
+    city ? `jadwal-sholat:schedule:${city.slug}` : "jadwal-sholat:schedule",
     today ? `${today.tahun}-${today.bulan}` : "",
     // keepPreviousData briefly shows the old month; never store that.
     isPlaceholderData ? undefined : data,
@@ -429,7 +453,7 @@ export function Homepage() {
 
   return (
     <>
-      {isMounted && waktu.length > 0 ? (
+      {!city && isMounted && waktu.length > 0 ? (
         <Suspense fallback={null}>
           <Adzan waktu={waktu} />
         </Suspense>
@@ -437,7 +461,7 @@ export function Homepage() {
       <div className="grid min-w-0 grid-cols-1 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:gap-x-16 md:gap-y-10">
         <section
           aria-labelledby="hero-title"
-          className={cn(HERO, "flex min-w-0 flex-col gap-3")}
+          className={cn(HERO, city && "md:col-span-2", "flex min-w-0 flex-col gap-3")}
         >
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
             {today ? (
@@ -454,23 +478,37 @@ export function Homepage() {
               </>
             ) : null}
             <Dot />
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setIsOpenMap(true)}
-            >
-              <MapPin aria-hidden="true" />
-              <span className="sr-only">Lokasi saat ini </span>
-              {isMounted ? (
-                <Suspense fallback={<span>lokasi terpilih</span>}>
-                  <UserLocation />
-                </Suspense>
-              ) : (
-                <span>lokasi terpilih</span>
-              )}
-              <span aria-hidden="true">·</span>
-              Ubah
-            </Button>
+            {city ? (
+              <>
+                <span>
+                  {city.name} ({city.zone})
+                </span>
+                <Button asChild variant="outline">
+                  <a href="/">
+                    <MapPin aria-hidden="true" />
+                    Pakai lokasi kamu
+                  </a>
+                </Button>
+              </>
+            ) : (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsOpenMap(true)}
+              >
+                <MapPin aria-hidden="true" />
+                <span className="sr-only">Lokasi saat ini </span>
+                {isMounted ? (
+                  <Suspense fallback={<span>lokasi terpilih</span>}>
+                    <UserLocation />
+                  </Suspense>
+                ) : (
+                  <span>lokasi terpilih</span>
+                )}
+                <span aria-hidden="true">·</span>
+                Ubah
+              </Button>
+            )}
             {isRefetching || (isPending && isShowingStored) ? (
               <Spinner aria-label="Memperbarui jadwal" />
             ) : null}
@@ -494,7 +532,9 @@ export function Homepage() {
                 id="hero-title"
                 className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-5xl leading-none font-semibold tracking-tight md:text-7xl"
               >
-                <span className="sr-only">Jadwal sholat, berikutnya </span>
+                <span className="sr-only">
+                  Jadwal sholat{city ? ` ${city.name}` : ""}, berikutnya{" "}
+                </span>
                 <span>{nextPrayer.name}</span>
                 <span className="text-muted-foreground tabular-nums">
                   {formatSholatTime(nextPrayer.time)}
@@ -510,7 +550,7 @@ export function Homepage() {
                 id="hero-title"
                 className="text-3xl font-semibold tracking-tight md:text-4xl"
               >
-                Jadwal Sholat
+                Jadwal Sholat{city ? ` ${city.name}` : ""}
               </h1>
               {isLoadingFirst ? (
                 <Skeleton className="h-12 w-64 max-w-full" />
@@ -526,42 +566,48 @@ export function Homepage() {
             </div>
           )}
 
-          <div className="flex flex-wrap gap-2 pt-1">
-            <ReminderButton />
-          </div>
+          {city ? null : (
+            <div className="flex flex-wrap gap-2 pt-1">
+              <ReminderButton />
+            </div>
+          )}
         </section>
 
-        <HomeShortcuts
-          className={SHORTCUTS}
-          month={today ? `${today.tahun}-${today.bulan}` : undefined}
-          todayIso={now ? format(now, "yyyy-MM-dd") : undefined}
-        />
+        {city ? null : (
+          <HomeShortcuts
+            className={SHORTCUTS}
+            month={today ? `${today.tahun}-${today.bulan}` : undefined}
+            todayIso={now ? format(now, "yyyy-MM-dd") : undefined}
+          />
+        )}
 
         {renderSchedule()}
       </div>
 
-      <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
-        <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto sm:max-w-4xl">
-          <DialogHeader>
-            <DialogTitle>Pilih lokasi</DialogTitle>
-            <DialogDescription>
-              Cari atau ketuk peta untuk memilih lokasi.
-            </DialogDescription>
-          </DialogHeader>
-          {/* The dialog only opens on the client, so the map never renders
-              at build time. */}
-          <Suspense fallback={<Skeleton className="h-75 w-full md:h-155" />}>
-            <Map />
-          </Suspense>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="button" variant="outline">
-                Tutup
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {city ? null : (
+        <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
+          <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto sm:max-w-4xl">
+            <DialogHeader>
+              <DialogTitle>Pilih lokasi</DialogTitle>
+              <DialogDescription>
+                Cari atau ketuk peta untuk memilih lokasi.
+              </DialogDescription>
+            </DialogHeader>
+            {/* The dialog only opens on the client, so the map never renders
+                at build time. */}
+            <Suspense fallback={<Skeleton className="h-75 w-full md:h-155" />}>
+              <Map />
+            </Suspense>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="button" variant="outline">
+                  Tutup
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </>
   );
 }
