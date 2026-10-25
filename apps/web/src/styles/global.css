@@ -204,8 +204,9 @@
 }
 
 /* Each Arabic element sets --arabic-size (e.g. [--arabic-size:1.875rem]);
-   the reader's Arabic size setting scales it. Unlayered, so it wins over
-   any text-* utility. */
+   the reader's Arabic size setting scales it. Reading text (ayat, hadith)
+   also sets [--arabic-leading:2.25] so wrapped lines with harakat get more
+   room. Unlayered, so it wins over any text-* or leading-* utility. */
 :root {
   --arabic-scale: 1;
 }
@@ -219,7 +220,7 @@ html[data-arabic-size="xlarge"] {
 .arabic-font {
   font-family: var(--font-lpmq), serif;
   font-size: calc(var(--arabic-size, 1em) * var(--arabic-scale));
-  line-height: 2;
+  line-height: var(--arabic-leading, 2);
 }
 
 @media (prefers-reduced-motion: reduce) {

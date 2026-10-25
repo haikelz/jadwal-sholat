@@ -32,7 +32,7 @@ The "Tampilan" button in the top bar opens a dialog with theme, text size and Ar
 
 ## Arabic text
 
-Use `arabic-font` with `lang="ar"` and `dir="rtl"`. Set the size with `[--arabic-size:<rem>]` (responsive variants work, e.g. `sm:[--arabic-size:2.25rem]`), never a `text-*` class: `.arabic-font` multiplies that size by the reader's Arabic size setting and sets the line height to 2.
+Use `arabic-font` with `lang="ar"` and `dir="rtl"`. Set the size with `[--arabic-size:<rem>]` (responsive variants work, e.g. `sm:[--arabic-size:2.25rem]`), never a `text-*` class: `.arabic-font` multiplies that size by the reader's Arabic size setting and sets the line height to 2. Reading text (ayat, hadith) raises it with `[--arabic-leading:2.25]`, and its translation, Latin and tafsir prose use `leading-[1.75]`.
 
 ## Writing
 

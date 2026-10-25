@@ -166,18 +166,18 @@ export function DetailSurat({ data }: SuratProps) {
                 lang="ar"
                 dir="rtl"
                 className={cn(
-                  "arabic-font min-w-0 text-right font-medium wrap-anywhere [--arabic-size:1.875rem] sm:[--arabic-size:2.25rem]",
+                  "arabic-font min-w-0 text-right font-medium wrap-anywhere [--arabic-leading:2.25] [--arabic-size:1.875rem] sm:[--arabic-size:2.25rem]",
                 )}
               >
                 {ayat.text.ar}
               </p>
-              <div className="flex min-w-0 flex-col gap-1">
+              <div className="flex min-w-0 flex-col gap-2">
                 {terjemahan ? (
-                  <p className="text-sm italic text-muted-foreground">
+                  <p className="text-sm leading-[1.75] italic text-muted-foreground">
                     {ayat.text.read}
                   </p>
                 ) : null}
-                <p className="text-sm">{ayat.translation.id}</p>
+                <p className="text-sm leading-[1.75]">{ayat.translation.id}</p>
               </div>
               {/* Words beside the icons: not every reader knows them. */}
               <div className="-ml-2.5 flex flex-wrap items-center gap-1">

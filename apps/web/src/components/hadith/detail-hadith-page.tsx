@@ -225,7 +225,7 @@ function DetailHadithPage({ book, hadithNumber }: HadithRoute) {
             <p
               lang="ar"
               dir="rtl"
-              className="arabic-font min-w-0 text-right wrap-anywhere [--arabic-size:1.5rem] sm:[--arabic-size:1.875rem]"
+              className="arabic-font min-w-0 text-right wrap-anywhere [--arabic-leading:2.25] [--arabic-size:1.5rem] sm:[--arabic-size:1.875rem]"
             >
               {contents.arab}
             </p>
@@ -237,7 +237,7 @@ function DetailHadithPage({ book, hadithNumber }: HadithRoute) {
             <h2 className="text-xs font-medium text-muted-foreground">
               Terjemahan
             </h2>
-            <p className="text-sm wrap-anywhere">
+            <p className="text-sm leading-[1.75] wrap-anywhere">
               {contents.id.slice(0, 1).toUpperCase() + contents.id.slice(1)}
             </p>
           </section>

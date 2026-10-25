@@ -39,7 +39,7 @@ export function DialogTafsir({ data }: SuratProps) {
             Tafsir ringkas dalam bahasa Indonesia.
           </DialogDescription>
         </DialogHeader>
-        <p className="max-h-[60dvh] overflow-y-auto text-left text-sm leading-relaxed">
+        <p className="max-h-[60dvh] overflow-y-auto text-left text-sm leading-[1.75]">
           {data.tafsir.id}
         </p>
         <DialogFooter>
