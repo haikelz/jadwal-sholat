@@ -1,6 +1,18 @@
 import { Badge } from "@/components/reui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import type { PuasaSunnahScheduleDate } from "@/interfaces";
 import { cn } from "@/lib/utils/cn";
+import { getPuasaShortName } from "@jadwal-sholat/core/puasa";
 import {
   eachDayOfInterval,
   endOfMonth,
@@ -12,13 +24,11 @@ import { id } from "date-fns/locale";
 import { useId } from "react";
 
 const WEEKDAYS = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
-// Day cells are ~140px wide on desktop; more badges than this would wrap
-// into a tall cell, so the rest collapse into "+N".
-const MAX_BADGES = 2;
 
 /**
- * The selected month as a Monday-first calendar for desktop widths. Fasting
- * days carry their types as badges; the phone layout keeps the list.
+ * The selected month as a Monday-first calendar for desktop widths. A fasting
+ * day shows every type as a short label and opens a dialog with the full
+ * names; the phone layout keeps the list.
  */
 export function PuasaCalendar({
   year,
@@ -76,58 +86,41 @@ export function PuasaCalendar({
           const fast = fastsByDate.get(iso);
           const isToday = iso === todayIso;
           const isPast = todayIso !== undefined && iso < todayIso;
-          const names = fast?.recommendations.map((item) => item.name) ?? [];
-          const shown = fast?.recommendations.slice(0, MAX_BADGES) ?? [];
-          const hidden = names.length - shown.length;
 
           return (
             <li
               key={iso}
               aria-current={isToday ? "date" : undefined}
               className={cn(
-                "flex min-h-24 min-w-0 flex-col gap-1.5 bg-card p-2",
+                "flex min-h-24 min-w-0 bg-card",
                 isToday && "ring-1 ring-foreground/30 ring-inset",
                 isPast && "text-muted-foreground",
               )}
             >
-              <span className="sr-only">
-                {format(day, "EEEE, d MMMM", { locale: id })}
-                {isToday ? " (hari ini)" : ""}
-                {names.length ? `: ${names.join(", ")}` : ""}
-              </span>
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "text-sm tabular-nums",
-                  (fast || isToday) && "font-medium",
-                  isToday && "font-semibold text-foreground",
-                )}
-              >
-                {format(day, "d")}
-              </span>
               {fast ? (
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    "flex min-w-0 flex-wrap gap-1",
-                    // Past fasts recede, as in the list view.
-                    isPast && "opacity-60",
-                  )}
-                >
-                  {shown.map((recommendation) => (
-                    <Badge
-                      key={recommendation.key}
-                      variant="outline"
-                      className="max-w-full"
-                    >
-                      <span className="truncate">{recommendation.name}</span>
-                    </Badge>
-                  ))}
-                  {hidden > 0 ? (
-                    <Badge variant="outline">+{hidden}</Badge>
-                  ) : null}
-                </span>
-              ) : null}
+                <PuasaDay
+                  day={day}
+                  isPast={isPast}
+                  isToday={isToday}
+                  puasa={fast}
+                />
+              ) : (
+                <div className="flex min-w-0 flex-1 flex-col p-2">
+                  <span className="sr-only">
+                    {format(day, "EEEE, d MMMM", { locale: id })}
+                    {isToday ? " (hari ini)" : ""}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "text-sm tabular-nums",
+                      isToday && "font-semibold text-foreground",
+                    )}
+                  >
+                    {format(day, "d")}
+                  </span>
+                </div>
+              )}
             </li>
           );
         })}
@@ -136,5 +129,89 @@ export function PuasaCalendar({
         ))}
       </ol>
     </div>
+  );
+}
+
+type PuasaDayProps = {
+  readonly day: Date;
+  readonly isPast: boolean;
+  readonly isToday: boolean;
+  readonly puasa: PuasaSunnahScheduleDate;
+};
+
+/**
+ * A fasting day as a button. The cell shows a short label for every type, and
+ * the dialog lists the full names, so no fast is cut off or hidden.
+ */
+function PuasaDay({ day, isPast, isToday, puasa }: PuasaDayProps) {
+  const names = puasa.recommendations.map(
+    (recommendation) => recommendation.name,
+  );
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <button
+          className="flex min-w-0 flex-1 flex-col gap-1.5 p-2 text-left transition-colors outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+          type="button"
+        >
+          <span className="sr-only">
+            {format(day, "EEEE, d MMMM", { locale: id })}
+            {isToday ? " (hari ini)" : ""}: {names.join(", ")}
+          </span>
+          <span
+            aria-hidden="true"
+            className={cn(
+              "text-sm font-medium tabular-nums",
+              isToday && "font-semibold text-foreground",
+            )}
+          >
+            {format(day, "d")}
+          </span>
+          <span
+            aria-hidden="true"
+            className={cn(
+              "flex min-w-0 flex-wrap gap-1",
+              // Past fasts recede, as in the list view.
+              isPast && "opacity-60",
+            )}
+          >
+            {puasa.recommendations.map((recommendation) => (
+              <Badge
+                key={recommendation.key}
+                className="max-w-full"
+                variant="outline"
+              >
+                {/* Only the largest text setting can still cut a label; the
+                    dialog always has the full name. */}
+                <span className="truncate">
+                  {getPuasaShortName(puasa, recommendation)}
+                </span>
+              </Badge>
+            ))}
+          </span>
+        </button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>
+            {format(day, "EEEE, d MMMM yyyy", { locale: id })}
+          </DialogTitle>
+          <DialogDescription>
+            Puasa sunnah yang dianjurkan pada tanggal ini.
+          </DialogDescription>
+        </DialogHeader>
+        <ul className="flex list-disc flex-col gap-2 pl-5 text-sm">
+          {names.map((name) => (
+            <li key={name}>{name}</li>
+          ))}
+        </ul>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Tutup</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
