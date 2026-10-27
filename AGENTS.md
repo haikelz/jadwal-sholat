@@ -55,7 +55,7 @@ The website build fetches the 114 surahs and the hadith book list from the publi
 - City schedules and the homepage read the schedule on the location's own clock: the city's zone, or the API's `meta.timezone` for a place picked on the map. Android does the same, and `buildAdzanSchedule` turns those wall-clock times into real instants with `fromZoned`.
 - Every indexable route needs a unique title, description, canonical path, Open Graph URL, and Twitter card data.
 - Keep `robots.txt.ts` and the sitemaps aligned with public routes: `sitemap.xml.ts` (static pages, the city schedules, the named ayat and the 114 surahs) and `sitemap-hadith.xml.ts` (every hadith, because hadith pages render in the browser). `robots.txt.ts` lists both and disallows `/api/` and `/hadith-detail`.
-- Reuse the shared social image unless a route has a deliberate, production-ready replacement.
+- Social images: every page in `OG_PAGES` (`src/lib/og-pages.ts`) gets its own 1200×630 image, rendered at build time by `src/pages/og/[...route].ts` with `astro-og-canvas` (Geist, the mosque icon, Latin text only: no Arabic font is loaded). `BaseLayout` picks it through `ogImageFor`; hadith pages share `/og/hadith.png`, and anything not listed keeps the shared image. Add a new page type's entries to `OG_PAGES`.
 
 ## Documentation screenshots
 

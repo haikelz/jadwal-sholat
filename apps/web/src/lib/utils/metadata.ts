@@ -16,6 +16,8 @@ export type PageMeta = {
   path: string;
   /** Use the title as is, without the " | Jadwal Sholat" suffix. */
   absoluteTitle?: boolean;
+  /** The page's own social image, e.g. "/og/quran/18.png"; the shared one otherwise. */
+  image?: string;
 };
 
 /** Collapses whitespace and cuts at a word boundary, so snippets never end mid-word. */
@@ -29,11 +31,17 @@ export function toDescription(text: string, limit = DESCRIPTION_LIMIT) {
 }
 
 /** The values BaseLayout writes into <head>: title, canonical and social tags. */
-export function pageMeta({ title, description, path, absoluteTitle = false }: PageMeta) {
+export function pageMeta({
+  title,
+  description,
+  path,
+  absoluteTitle = false,
+  image = DEFAULT_OG_IMAGE,
+}: PageMeta) {
   return {
     canonical: new URL(path, SITE_URL).toString(),
     description,
-    image: new URL(DEFAULT_OG_IMAGE, SITE_URL).toString(),
+    image: new URL(image, SITE_URL).toString(),
     title: absoluteTitle ? title : `${title} | ${SITE_NAME}`,
   };
 }

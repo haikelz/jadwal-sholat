@@ -10,6 +10,7 @@ import {
   WEBSITE_JSON_LD,
   type PageMeta,
 } from "@/lib/utils/metadata";
+import { ogImageFor } from "@/lib/og-pages";
 import { env } from "@/lib/utils/public-env";
 import { GOATCOUNTER_URL } from "astro:env/client";
 import { ClientRouter } from "astro:transitions";
@@ -27,7 +28,9 @@ type Props = PageMeta & {
 };
 
 const { jsonLd = [], noindex = false, noCanonical = false, ...page } = Astro.props;
-const meta = pageMeta(page);
+// Pages listed in OG_PAGES get their own social image from /og/<page>.png.
+const ogImage = ogImageFor(page.path);
+const meta = pageMeta({ ...page, image: ogImage?.src });
 const structuredData = [WEBSITE_JSON_LD, ...jsonLd];
 // sw.js caches the prayer-time API for offline use. It can't read astro:env,
 // so the API's origin rides along in its URL.
@@ -57,7 +60,7 @@ const serviceWorkerUrl = `/sw.js?prayer-api=${encodeURIComponent(new URL(env.JAD
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Jadwal Sholat — waktu ibadah dan bacaan Islami"
+      content={ogImage?.alt ?? "Jadwal Sholat — waktu ibadah dan bacaan Islami"}
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={meta.title} />
