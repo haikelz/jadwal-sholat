@@ -1,4 +1,5 @@
 import { ArabicText } from "@/components/common/arabic-text";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
@@ -46,23 +47,31 @@ export const AyahItem = memo(function AyahItem({
     // Soft highlight on the ayah being recited.
     <View className={cn("px-4", isPlaying && "bg-muted/60")}>
       <View className="gap-4 border-b border-border py-6">
-        <View
-          accessible
-          accessibilityLabel={`Ayat ${number}`}
-          className={cn(
-            "size-8 items-center justify-center rounded-full border border-border",
-            isLinked && "border-foreground",
-            isPlaying && "border-primary bg-primary",
-          )}
-        >
-          <Text
+        {/* A word, not only the filled number, says which ayah is playing. */}
+        <View className="flex-row items-center gap-2">
+          <View
+            accessible
+            accessibilityLabel={`Ayat ${number}`}
             className={cn(
-              "text-xs font-medium tabular-nums",
-              isPlaying && "text-primary-foreground",
+              "size-8 items-center justify-center rounded-full border border-border",
+              isLinked && "border-foreground",
+              isPlaying && "border-primary bg-primary",
             )}
           >
-            {number}
-          </Text>
+            <Text
+              className={cn(
+                "text-xs font-medium tabular-nums",
+                isPlaying && "text-primary-foreground",
+              )}
+            >
+              {number}
+            </Text>
+          </View>
+          {isPlaying ? (
+            <Badge>
+              <Text>Sedang diputar</Text>
+            </Badge>
+          ) : null}
         </View>
 
         <ArabicText selectable leading={2.25}>
