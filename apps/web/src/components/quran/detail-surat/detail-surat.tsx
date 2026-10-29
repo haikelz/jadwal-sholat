@@ -183,7 +183,7 @@ export function DetailSurat({ data }: SuratProps) {
                 </p>
                 <div className="flex min-w-0 flex-col gap-2">
                   {terjemahan ? (
-                    <p className="text-sm leading-[1.75] italic text-muted-foreground">
+                    <p className="text-sm leading-[1.75] text-muted-foreground">
                       {ayat.text.read}
                     </p>
                   ) : null}

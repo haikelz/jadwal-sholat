@@ -80,7 +80,7 @@ export const AyahItem = memo(function AyahItem({
 
         <View className="gap-2">
           {showLatin ? (
-            <Text selectable className="text-sm leading-[1.75] italic text-muted-foreground">
+            <Text selectable className="text-sm leading-[1.75] text-muted-foreground">
               {ayah.text.read}
             </Text>
           ) : null}
