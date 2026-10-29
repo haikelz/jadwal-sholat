@@ -19,10 +19,11 @@ These are deliberate deviations from the ReUI guideline (`.agents/guidelines/des
 | Icon buttons with a tooltip | An icon plus a word ("Putar", "Bagikan", "Salin", "Tandai") | Many older and younger readers can't tell what an icon does, and tooltips need a mouse. |
 | `size="sm"` for compact actions | Default size for every action | Bigger targets and type. |
 | Toasts at the sonner default (4 s) | 6 s | Slower readers can finish them. |
+| Muted text at AA (4.5:1) | `--muted-foreground` `oklch(0.464 0 0)` (#595959), 7:1 (AAA) in light; dark is 7.6:1 | Contrast sensitivity drops with age, and grey text carries dates, help and the Latin transliteration. |
+| Field outlines at the shadcn default | `--input` `oklch(0.669 0 0)` in light and white at 34% in dark, 3:1 on the background | Older readers must see where a text field or dropdown begins. Row and card borders (`--border`) stay subtle. |
 
 The rest follows the guideline as written:
 
-- `--muted-foreground` is `oklch(0.521 0 0)` (#696969, AA on small text).
 - `--ring` uses the primary values, so the 50% focus ring stays above 3:1.
 - On touch screens a zero-specificity `::after` gives buttons, toggles and select triggers a 44px hit area. It lives in `globals.css`, so no installed component is edited.
 
