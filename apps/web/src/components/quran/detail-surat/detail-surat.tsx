@@ -1,5 +1,6 @@
 import { DialogNotification } from "@/components/common/dialog-notification";
 import { ShareButton } from "@/components/common/share-button";
+import { Badge } from "@/components/reui/badge";
 import { Button } from "@/components/ui/button";
 import { usePlayNextAudio, useScrollAyat } from "@/hooks";
 import type { SuratProps } from "@/interfaces";
@@ -142,30 +143,35 @@ export function DetailSurat({ data }: SuratProps) {
                 "py-6 transition-colors first:pt-0",
                 // Soft highlight on the ayah being recited; the negative
                 // margin keeps the text where it was.
-                isCurrent && "-mx-4 rounded-xl bg-muted/60 px-4 first:pt-6",
+                isCurrent &&
+                  "-mx-4 rounded-xl bg-muted/60 px-4 ring-2 ring-primary/50 first:pt-6 dark:ring-primary/40",
               )}
             >
               {/* content-visibility skips laying out ayahs that are off screen
                   (Al-Baqarah has 286). It also clips painting to this box, so
                   -mx-3/px-3 leaves room for the actions' -ml-2.5 and focus rings. */}
               <div className="-mx-3 flex min-w-0 flex-col gap-4 px-3 [contain-intrinsic-size:auto_18rem] [content-visibility:auto]">
-                <span
-                  id={`ayat-${ayat.number.insurah}`}
-                  aria-label={`Ayat ${ayat.number.insurah}`}
-                  // Focus target for "Lompat ke ayat".
-                  tabIndex={-1}
-                  className={cn(
-                    // Clear the sticky bars: the app header on phones, the
-                    // header plus the reading toolbar from md.
-                    "flex size-8 scroll-mt-20 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-40",
-                    // An ayah opened from a shared link (#ayat-N) is marked.
-                    "target:border-foreground target:ring-2 target:ring-ring/50",
-                    isCurrent &&
-                      "border-primary bg-primary text-primary-foreground",
-                  )}
-                >
-                  {ayat.number.insurah}
-                </span>
+                {/* A word, not only the filled number, says which ayah is playing. */}
+                <div className="flex items-center gap-2">
+                  <span
+                    id={`ayat-${ayat.number.insurah}`}
+                    aria-label={`Ayat ${ayat.number.insurah}`}
+                    // Focus target for "Lompat ke ayat".
+                    tabIndex={-1}
+                    className={cn(
+                      // Clear the sticky bars: the app header on phones, the
+                      // header plus the reading toolbar from md.
+                      "flex size-8 scroll-mt-20 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-40",
+                      // An ayah opened from a shared link (#ayat-N) is marked.
+                      "target:border-foreground target:ring-2 target:ring-ring/50",
+                      isCurrent &&
+                        "border-primary bg-primary text-primary-foreground",
+                    )}
+                  >
+                    {ayat.number.insurah}
+                  </span>
+                  {isCurrent ? <Badge variant="primary-light">Sedang diputar</Badge> : null}
+                </div>
                 <p
                   lang="ar"
                   dir="rtl"

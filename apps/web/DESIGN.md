@@ -21,6 +21,7 @@ These are deliberate deviations from the ReUI guideline (`.agents/guidelines/des
 | Toasts at the sonner default (4 s) | 6 s | Slower readers can finish them. |
 | Muted text at AA (4.5:1) | `--muted-foreground` `oklch(0.464 0 0)` (#595959), 7:1 (AAA) in light; dark is 7.6:1 | Contrast sensitivity drops with age, and grey text carries dates, help and the Latin transliteration. |
 | Field outlines at the shadcn default | `--input` `oklch(0.669 0 0)` in light and white at 34% in dark, 3:1 on the background | Older readers must see where a text field or dropdown begins. Row and card borders (`--border`) stay subtle. |
+| A tinted row marks the ayah being recited | The tint plus a "Sedang diputar" badge beside the filled number and, on the website, a `ring-primary/50` outline (3:1) | The tint alone measured 1.05:1. |
 
 The rest follows the guideline as written:
 
