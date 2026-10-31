@@ -17,6 +17,8 @@
 - Core tests and types: `bun run test:core`, `bun run typecheck:core`
 - Android app: `bun run dev:mobile` (Metro for Expo Go or a development build), `bun run typecheck:mobile`, `bun run build:android` (preview APK on EAS). Native code compiles on EAS only; don't run Gradle or `expo run:android` locally.
 
+CI (`.github/workflows/main.yaml`) runs the core tests and the core, mobile and website type checks on every push to master and every pull request. The website check reads the API URLs from GitHub repository variables named like those in `apps/web/.env.example`. The build and the Cypress tests stay local and on Cloudflare.
+
 The website build fetches the 114 surahs and the hadith book list from the public APIs, so it needs network access. Builds are memory-heavy: stop dev servers before building, and run one build at a time.
 
 ## Implementation conventions (website)

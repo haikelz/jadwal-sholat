@@ -1,0 +1,33 @@
+name: CI
+
+# Core tests and the type checks on every push to master and every pull
+# request. The website build and the Cypress tests stay local and on
+# Cloudflare Pages: they need the public APIs and a running site.
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - run: bun install --frozen-lockfile
+      - run: bun run test:core
+      - run: bun run typecheck:core
+      - run: bun run typecheck:mobile
+      - name: Type-check the website
+        working-directory: apps/web
+        run: bun run check
+        # astro:env reads the API URLs: set them as repository variables
+        # (Settings → Secrets and variables → Actions → Variables).
+        env:
+          ASMAUL_HUSNA_API: ${{ vars.ASMAUL_HUSNA_API }}
+          HADITH_API: ${{ vars.HADITH_API }}
+          JADWAL_SHOLAT_API: ${{ vars.JADWAL_SHOLAT_API }}
+          NOMINATIM_API: ${{ vars.NOMINATIM_API }}
+          QURAN_API: ${{ vars.QURAN_API }}

@@ -69,6 +69,10 @@ Open [http://localhost:4321](http://localhost:4321). `apps/web/.env` holds the p
 | `bun run dev:mobile` | Metro for the Android app (Expo Go or a development build) |
 | `bun run build:android` | Preview APK on EAS |
 
+### CI
+
+`.github/workflows/main.yaml` runs the core tests and the core, Android and website type checks on every push to `master` and every pull request. The website check needs the public API URLs as repository variables (Settings → Secrets and variables → Actions → Variables): `ASMAUL_HUSNA_API`, `HADITH_API`, `JADWAL_SHOLAT_API`, `NOMINATIM_API` and `QURAN_API`, with the same values as `apps/web/.env`.
+
 ### Website (`apps/web`)
 
 ```bash
