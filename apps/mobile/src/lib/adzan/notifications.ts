@@ -91,12 +91,20 @@ async function cancelAdzanNotifications() {
   );
 }
 
-async function syncNow() {
-  await cancelAdzanNotifications();
-
+/**
+ * Rebuilds the adzan alarms. Returns false when there was nothing to build
+ * them from, in which case the alarms already scheduled stay.
+ */
+async function syncNow(): Promise<boolean> {
   const { adzanEnabled, adzanPrayers } = usePreferences.getState();
-  if (!adzanEnabled || adzanPrayers.length === 0) return;
-  if (!(await Notifications.getPermissionsAsync()).granted) return;
+  if (
+    !adzanEnabled ||
+    adzanPrayers.length === 0 ||
+    !(await Notifications.getPermissionsAsync()).granted
+  ) {
+    await cancelAdzanNotifications();
+    return true;
+  }
 
   await ensureAdzanChannels();
   const now = new Date();
@@ -106,6 +114,13 @@ async function syncNow() {
     prayers: adzanPrayers,
   });
 
+  // Offline without a stored month (the 1st of a month, say), collectDays
+  // finds no days. Clearing first would leave no alarm at all; the ones
+  // already scheduled, which reach into this month's first days, stay until
+  // a sync has a schedule to replace them with.
+  if (alarms.length === 0) return false;
+
+  await cancelAdzanNotifications();
   await Promise.all(
     alarms.map((alarm) =>
       Notifications.scheduleNotificationAsync({
@@ -131,6 +146,7 @@ async function syncNow() {
       }),
     ),
   );
+  return true;
 }
 
 let lastSyncAt = 0;
@@ -144,14 +160,16 @@ export function getLastAdzanSync() {
 
 /**
  * Replaces the scheduled adzan alarms with ones built from the current
- * settings, location and schedule. Runs one at a time; calls that arrive
- * while a sync waits share it, since it reads state only when it starts.
+ * settings, location and schedule, or keeps them when there is no schedule to
+ * build from. Runs one at a time; calls that arrive while a sync waits share
+ * it, since it reads state only when it starts.
  */
 export function syncAdzanNotifications() {
   waiting ??= tail.then(() => {
     waiting = null;
-    return syncNow().then(() => {
-      lastSyncAt = Date.now();
+    return syncNow().then((rescheduled) => {
+      // A sync that kept the old alarms isn't done: the next foreground retries.
+      if (rescheduled) lastSyncAt = Date.now();
     });
   });
   tail = waiting.catch(() => {});
