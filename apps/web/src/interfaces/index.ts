@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 
 export * from "./asmaul-husna.interface";
-export * from "./doa-harian.interface";
 export * from "./hadith.interface";
 export * from "./jadwal-sholat.interface";
 export * from "./puasa-sunnah.interface";
