@@ -1,3 +1,16 @@
 # Astro's bundles have content hashes in their names.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# The adzan audio (2.7 MB) and the icons don't change once published: give a
+# replaced file a new name. Cloudflare's default was 4 hours, so readers using
+# the adzan reminder downloaded the audio again several times a day.
+/audio/*
+  Cache-Control: public, max-age=2592000
+/img/*
+  Cache-Control: public, max-age=2592000
+
+# Social images are rebuilt on every deploy under the same names; a day keeps
+# a changed title from lingering.
+/og/*
+  Cache-Control: public, max-age=86400
