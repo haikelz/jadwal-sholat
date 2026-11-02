@@ -155,6 +155,15 @@
        rem-based control grows with it. Readers can go larger from the
        display settings (src/lib/utils/display-settings.ts). */
     font-size: 112.5%;
+    /* Keyboard focus and in-page jumps stop clear of the sticky top bar and,
+       on phones, the bottom tab bar (WCAG 2.4.11). In rem, so they grow with
+       the bars when the reader picks a larger text size. */
+    scroll-padding-top: 4.5rem;
+    scroll-padding-bottom: 5rem;
+    @variant md {
+      scroll-padding-top: 5rem;
+      scroll-padding-bottom: 1rem;
+    }
   }
   html[data-text-size="large"] {
     font-size: 125%;

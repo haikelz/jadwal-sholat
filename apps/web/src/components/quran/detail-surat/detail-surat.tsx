@@ -159,9 +159,9 @@ export function DetailSurat({ data }: SuratProps) {
                     // Focus target for "Lompat ke ayat".
                     tabIndex={-1}
                     className={cn(
-                      // Clear the sticky bars: the app header on phones, the
-                      // header plus the reading toolbar from md.
-                      "flex size-8 scroll-mt-20 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-40",
+                      // html's scroll-padding clears the app header; from md
+                      // the sticky reading toolbar needs room too.
+                      "flex size-8 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors md:scroll-mt-20",
                       // An ayah opened from a shared link (#ayat-N) is marked.
                       "target:border-foreground target:ring-2 target:ring-ring/50",
                       isCurrent &&
