@@ -33,9 +33,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     package: isDev ? "dev.ekel.jdwshlt.dev" : "dev.ekel.jdwshlt",
     adaptiveIcon: {
-      backgroundColor: "#ffffff",
+      backgroundColor: "#171717",
       foregroundImage: "./assets/android-icon-foreground.png",
-      backgroundImage: "./assets/android-icon-background.png",
       monochromeImage: "./assets/android-icon-monochrome.png",
     },
     predictiveBackGestureEnabled: false,
@@ -74,7 +73,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       {
         color: "#171717",
         // Status bar icons must be white on transparent; the launcher icon
-        // would show as a solid square. Placeholder until the real app icon.
+        // would show as a solid square.
         icon: "./assets/android-icon-monochrome.png",
         // Android raw resource names can't contain hyphens.
         sounds: ["./assets/sounds/adzan.mp3", "./assets/sounds/adzan_subuh.mp3"],
@@ -84,7 +83,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       "expo-splash-screen",
       {
         backgroundColor: "#ffffff",
-        dark: { backgroundColor: "#0a0a0a" },
+        dark: { backgroundColor: "#0a0a0a", image: "./assets/splash-icon-dark.png" },
         image: "./assets/splash-icon.png",
         imageWidth: 160,
       },
