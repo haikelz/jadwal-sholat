@@ -31,17 +31,21 @@ export function useScrollAyat({
 
     // A shared link to one ayah (#ayat-N) wins over the last-read position.
     const hasAyatLink = window.location.hash.startsWith("#ayat-");
+    // An explicit scrollIntoView ignores the CSS reduced-motion rule.
+    const behavior: ScrollBehavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth";
 
     if (
       !hasAyatLink &&
       lastReadId &&
       lastRead.number === Number(localStorage.getItem("selected-surat"))
     ) {
-      lastReadId.scrollIntoView({ behavior: "smooth" });
+      lastReadId.scrollIntoView({ behavior });
     }
 
     if (isAudioEnded) {
-      ayatId?.scrollIntoView({ behavior: "smooth" });
+      ayatId?.scrollIntoView({ behavior });
     }
 
     setIsAudioEnded(false);
