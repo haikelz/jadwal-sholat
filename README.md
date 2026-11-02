@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="apps/web/public/favicon.svg" width="72" height="72" alt="" />
   <h1>Jadwal Sholat</h1>
   <p>A mobile-friendly Islamic companion for prayer times, Al-Qur'an, hadith, Asmaul Husna, and sunnah fasting schedules.</p>
   <p><a href="https://jdwshlt.ekel.dev">Open the website</a></p>
@@ -17,8 +18,8 @@
 - Sunnah fasting schedules by month and fasting type, with the next fast highlighted and a month calendar on desktop, powered by the [Puasa Sunnah API](https://puasasunnah.ekel.dev/swagger/index.html)
 - Light and dark themes with responsive desktop and mobile navigation
 - Desktop layouts that use the width: surah, hadith and Asma'ul Husna lists flow into columns, and `/` jumps to search
-- Keyboard-friendly controls, accessible dialogs, reduced-motion support, and zoom-safe layouts
-- Canonical metadata, Open Graph and Twitter cards, `robots.txt`, and XML sitemap
+- Keyboard-friendly controls with visible focus, accessible dialogs, reduced-motion and high-contrast support, and layouts that reflow down to 320px
+- Canonical metadata, a social image for each page, Open Graph and Twitter cards, `robots.txt`, and XML sitemaps
 
 ## Technology
 
@@ -142,19 +143,19 @@ bunx eas-cli build --platform android --profile development
 
 | Prayer schedule | Sunnah fasting | Al-Qur'an library |
 | :---: | :---: | :---: |
-| ![Prayer schedule on desktop](/static/docs/docs-screenshots.cy.ts/desktop-prayer-schedule.png) | ![Sunnah fasting schedule on desktop](/static/docs/docs-screenshots.cy.ts/desktop-sunnah-fasting.png) | ![Al-Qur'an library on desktop](/static/docs/docs-screenshots.cy.ts/desktop-quran-library.png) |
+| ![Prayer schedule on desktop](/static/docs/desktop-prayer-schedule.png) | ![Sunnah fasting schedule on desktop](/static/docs/desktop-sunnah-fasting.png) | ![Al-Qur'an library on desktop](/static/docs/desktop-quran-library.png) |
 
 ### Mobile
 
 | Prayer schedule | Sunnah fasting | Al-Qur'an reading |
 | :---: | :---: | :---: |
-| ![Prayer schedule on mobile](/static/docs/docs-screenshots.cy.ts/mobile-prayer-schedule.png) | ![Sunnah fasting schedule on mobile](/static/docs/docs-screenshots.cy.ts/mobile-sunnah-fasting.png) | ![Al-Qur'an reading on mobile](/static/docs/docs-screenshots.cy.ts/mobile-quran-reading.png) |
+| ![Prayer schedule on mobile](/static/docs/mobile-prayer-schedule.png) | ![Sunnah fasting schedule on mobile](/static/docs/mobile-sunnah-fasting.png) | ![Al-Qur'an reading on mobile](/static/docs/mobile-quran-reading.png) |
 
-The screenshots were captured from a production build at `1440×900` for desktop and `390×844` for mobile.
+The screenshots were captured from a production build at `1440×900` for desktop and `390×844` for mobile, in dark mode, with the location set to Bandung.
 
 ## Design system
 
-The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell`; list pages use a left-aligned `PageHeader`, and surah pages use a centered, mushaf-style header. The homepage leads with the next prayer in plain type and keeps a ReUI `Frame` only around the month data grid; the sunnah fasting page uses a `Frame` and the data grid. Reading pages (Al-Qur'an, hadith, Asma'ul Husna) use a centered reading column with plain divided rows instead of panels. Desktop navigation is a top bar; on phones it is a bottom tab bar. Colors come from semantic theme tokens (shadcn neutral plus ReUI's success, info, and warning tokens) and work in light and dark mode. Every data region has its own loading skeleton, empty state, and error state with a retry action.
+The interface follows ReUI on top of shadcn/ui. Pages use a shared `PageShell`; list pages use a left-aligned `PageHeader`, and surah pages use a centered, mushaf-style header. The homepage leads with the next prayer in plain type and keeps a ReUI `Frame` only around the month data grid; the sunnah fasting page uses a `Frame` and the data grid. Reading pages (Al-Qur'an, hadith, Asma'ul Husna) use plain bordered rows instead of panels: lists flow into columns from tablet width up, and a surah or a hadith narrows to a centered 768px reading column. Desktop navigation is a top bar; on phones it is a bottom tab bar. Colors come from semantic theme tokens (shadcn neutral plus ReUI's success, info, and warning tokens) and work in light and dark mode. Every data region has its own loading skeleton, empty state, and error state with a retry action. The logo is a mihrab, the prayer niche, with a crescent cut out of it; `apps/web/public/favicon.svg` holds the vector.
 
 The interface is tuned for readers of every age (`apps/web/DESIGN.md`): body text renders at about 16px, the "Tampilan" dialog in the top bar sets the theme, text size and Arabic size, every action shows a word next to its icon, and touch targets reach 44px. The surah page keeps one audio bar with large controls while recitation plays.
 
@@ -170,9 +171,9 @@ The interface is tuned for readers of every age (`apps/web/DESIGN.md`): body tex
 
 ## Accessibility and SEO
 
-The shared interface uses one main landmark, a skip link, visible focus indicators, labeled search fields, focus-managed Radix dialogs, responsive typography, and reduced-motion fallbacks. Arabic text uses the local LPMQ font in WOFF2 format.
+The interface targets WCAG 2.2 AA: one main landmark, a skip link, a visible focus indicator on every control (a system outline in Windows High Contrast mode), focus that stays clear of the sticky bars, labeled search fields, focus-managed Radix dialogs, reduced-motion fallbacks, firmer borders and text for readers who ask their system for more contrast, and layouts that reflow at 320px. An axe-core audit of the main pages in light and dark mode reports no violations. Arabic text uses the local LPMQ font in WOFF2 format.
 
-`BaseLayout` writes each page's title, description, canonical URL, Open Graph and Twitter tags, and JSON-LD (`WebSite` plus a breadcrumb). `robots.txt`, `sitemap.xml` (static pages and the 114 surahs) and `sitemap-hadith.xml` (every hadith) are built from `src/pages`.
+`BaseLayout` writes each page's title, description, canonical URL, Open Graph and Twitter tags, and JSON-LD (`WebSite` plus a breadcrumb). `robots.txt`, `sitemap.xml` (static pages, the city schedules, the named ayat and the 114 surahs) and `sitemap-hadith.xml` (every hadith) are built from `src/pages`. Each page listed in `src/lib/og-pages.ts` gets its own 1200×630 social image with the logo, rendered at build time.
 
 ## Activity
 
