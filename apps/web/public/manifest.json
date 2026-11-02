@@ -10,27 +10,17 @@
   "description": "Jadwal sholat hari ini sesuai lokasi, Al-Qur'an dengan audio dan terjemahan, hadith, Asmaul Husna, dan jadwal puasa sunnah.",
   "icons": [
     {
-      "src": "/img/icon-192x192.png",
+      "src": "/img/logo-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/img/icon-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "/img/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png"
-    },
-    {
-      "src": "/img/icon-512x512.png",
+      "src": "/img/logo-512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "/img/icon-maskable-512x512.png",
+      "src": "/img/logo-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
