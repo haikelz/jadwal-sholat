@@ -235,3 +235,27 @@ html[data-arabic-size="xlarge"] {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Readers who ask their system for more contrast get firmer borders and
+   darker secondary text; everyone else keeps the calm defaults. */
+@media (prefers-contrast: more) {
+  :root {
+    --muted-foreground: oklch(0.38 0 0);
+    --border: oklch(0.6 0 0);
+    --input: oklch(0.45 0 0);
+  }
+  .dark {
+    --muted-foreground: oklch(0.85 0 0);
+    --border: oklch(1 0 0 / 40%);
+    --input: oklch(1 0 0 / 60%);
+  }
+}
+
+/* Forced colors (Windows High Contrast) don't paint box-shadow, which the
+   shadcn focus rings use: give every focused control a system outline. */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}
