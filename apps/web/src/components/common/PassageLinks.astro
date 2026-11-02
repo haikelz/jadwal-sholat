@@ -13,7 +13,7 @@ const { passages } = Astro.props as { passages: readonly NamedPassage[] };
       <li class="border-b">
         <a
           href={`/ayat/${passage.slug}`}
-          class="flex flex-col gap-0.5 px-2 py-3 transition-colors outline-none hover:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+          class="flex flex-col gap-0.5 px-2 py-3 transition-colors hover:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
         >
           <span class="text-sm font-medium">{passage.name}</span>
           <span class="text-xs text-muted-foreground">

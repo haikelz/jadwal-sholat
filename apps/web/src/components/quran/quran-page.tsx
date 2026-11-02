@@ -134,7 +134,7 @@ export function QuranPage({ surat }: { surat: ListSuratProps }) {
               <a
                 href={`/quran/${surat.number}`}
                 onClick={removeSelectedSurat}
-                className="flex items-center gap-3 px-2 py-3 transition-colors outline-none hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring dark:hover:bg-muted/30"
+                className="flex items-center gap-3 px-2 py-3 transition-colors hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring dark:hover:bg-muted/30"
               >
                 <span className="w-8 shrink-0 text-sm text-muted-foreground tabular-nums">
                   {surat.number}

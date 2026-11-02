@@ -230,7 +230,7 @@ export function HadithPage({ initialData }: { initialData?: HadithListInitialDat
               <li key={`${book}-${h.number}`} data-cy="card" className="border-b">
                 <a
                   href={`/hadith/${book}/${h.number}`}
-                  className="flex flex-col gap-1 px-2 py-3 transition-colors outline-none hover:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+                  className="flex flex-col gap-1 px-2 py-3 transition-colors hover:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
                 >
                   <span className="text-sm font-medium wrap-break-word">
                     {bookName} no. {h.number}
