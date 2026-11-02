@@ -33,7 +33,7 @@ export function AsmaulHusnaRow({
   return (
     <li
       data-cy="card"
-      className="flex items-center justify-between gap-4 border-b px-2 py-3"
+      className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b px-2 py-3"
     >
       <div className="flex min-w-0 flex-col gap-0.5">
         <p className="text-sm font-medium">
@@ -55,7 +55,7 @@ export function AsmaulHusnaRow({
         </p>
         <p className="text-sm text-muted-foreground">{dataAsmaulHusna.arti}</p>
       </div>
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="ms-auto flex shrink-0 items-center gap-2">
         <p lang="ar" dir="rtl" className="arabic-font [--arabic-size:1.5rem]">
           {dataAsmaulHusna.arab}
         </p>
