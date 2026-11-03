@@ -269,7 +269,7 @@ export function DetailSurat({ data }: SuratProps) {
       {isPlayerOpen ? (
         <section
           aria-label="Pemutar audio"
-          className="sticky bottom-[calc(3.5rem+env(safe-area-inset-bottom))] z-10 flex flex-wrap items-center justify-between gap-2 border-t bg-background/95 py-3 backdrop-blur md:bottom-0"
+          className="sticky bottom-[calc(4rem+env(safe-area-inset-bottom))] z-10 flex flex-wrap items-center justify-between gap-2 border-t bg-background/95 py-3 backdrop-blur md:bottom-0"
         >
           <p className="text-sm font-medium" aria-live="polite">
             {isPlaying ? "Diputar" : "Dijeda"} · Ayat {audioIndex + 1}

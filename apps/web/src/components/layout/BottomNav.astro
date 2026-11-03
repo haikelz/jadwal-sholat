@@ -2,7 +2,11 @@
 import { isNavItemActive, navItems } from "@/lib/nav";
 import { cn } from "@/lib/utils/cn";
 
-/** Thumb-reachable section tabs for phones; md and up use the top bar. */
+/**
+ * Thumb-reachable section tabs for phones; md and up use the top bar. Icons
+ * align at the top and min-h-16 fits a two-line label ("Asmaul Husna"); the
+ * surah audio bar sits 4rem up to clear it.
+ */
 const { path } = Astro.props as { path: string };
 ---
 
@@ -21,14 +25,14 @@ const { path } = Astro.props as { path: string };
               href={item.url}
               aria-current={isActive ? "page" : undefined}
               class={cn(
-                "flex min-h-14 w-full min-w-0 flex-col items-center justify-center gap-1 px-1 text-xs transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset",
+                "flex min-h-16 w-full min-w-0 flex-col items-center justify-start gap-1 px-1 pt-2 text-xs transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset",
                 isActive
                   ? "font-medium text-foreground"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
               <Icon aria-hidden="true" className="size-5 shrink-0" />
-              <span class="max-w-full truncate">{item.shortTitle}</span>
+              <span class="max-w-full text-center leading-tight">{item.shortTitle}</span>
             </a>
           </li>
         );
