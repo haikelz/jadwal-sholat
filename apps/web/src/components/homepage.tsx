@@ -477,58 +477,61 @@ export function Homepage({ city }: { city?: CityView }) {
           aria-labelledby="hero-title"
           className={cn(HERO, city && "md:col-span-2", "flex min-w-0 flex-col gap-3")}
         >
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
-            {today ? (
-              <span>{today.currentDate}</span>
-            ) : (
-              <Skeleton className="h-4 w-32" />
-            )}
-            {hijri ? (
-              <>
-                <Dot />
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              {today ? (
+                <span className="inline-flex items-center gap-2">
+                  {today.currentDate}
+                  {hijri ? <Dot /> : null}
+                </span>
+              ) : (
+                <Skeleton className="h-4 w-32" />
+              )}
+              {hijri ? (
                 <span>
                   {Number(hijri.day)} {hijri.month.en} {hijri.year} H
                 </span>
-              </>
-            ) : null}
-            <Dot />
-            {city ? (
-              <>
-                <span>
-                  {city.name} ({city.zone})
-                </span>
-                <Button asChild variant="outline">
-                  <a href="/">
-                    <MapPin aria-hidden="true" />
-                    Pakai lokasi kamu
-                  </a>
+              ) : null}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {city ? (
+                <>
+                  <span>
+                    {city.name} ({city.zone})
+                  </span>
+                  <Button asChild variant="outline">
+                    <a href="/">
+                      <MapPin aria-hidden="true" />
+                      Pakai lokasi kamu
+                    </a>
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsOpenMap(true)}
+                >
+                  <MapPin aria-hidden="true" />
+                  <span className="sr-only">Lokasi saat ini </span>
+                  {isMounted ? (
+                    <Suspense fallback={<span>lokasi terpilih</span>}>
+                      <UserLocation />
+                    </Suspense>
+                  ) : (
+                    <span>lokasi terpilih</span>
+                  )}
+                  <span aria-hidden="true">·</span>
+                  Ubah
                 </Button>
-              </>
-            ) : (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setIsOpenMap(true)}
-              >
-                <MapPin aria-hidden="true" />
-                <span className="sr-only">Lokasi saat ini </span>
-                {isMounted ? (
-                  <Suspense fallback={<span>lokasi terpilih</span>}>
-                    <UserLocation />
-                  </Suspense>
-                ) : (
-                  <span>lokasi terpilih</span>
-                )}
-                <span aria-hidden="true">·</span>
-                Ubah
-              </Button>
-            )}
-            {isRefetching || (isPending && isShowingStored) ? (
-              <Spinner aria-label="Memperbarui jadwal" />
-            ) : null}
-            {isError && isShowingStored ? (
-              <Badge variant="warning-light">Jadwal tersimpan</Badge>
-            ) : null}
+              )}
+              {isRefetching || (isPending && isShowingStored) ? (
+                <Spinner aria-label="Memperbarui jadwal" />
+              ) : null}
+              {isError && isShowingStored ? (
+                <Badge variant="warning-light">Jadwal tersimpan</Badge>
+              ) : null}
+            </div>
           </div>
 
           {/* Announces only when the next prayer changes, not every
