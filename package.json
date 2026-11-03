@@ -12,14 +12,7 @@
     "typecheck:mobile": "moon run mobile:typecheck"
   },
   "devDependencies": {
-    "@moonrepo/cli": "^2.1.1",
-    "commitizen": "^4.3.1",
-    "cz-conventional-changelog": "^3.3.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+    "@moonrepo/cli": "^2.1.1"
   },
   "workspaces": [
     "apps/*",
