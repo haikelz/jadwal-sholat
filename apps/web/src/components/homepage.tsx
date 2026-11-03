@@ -603,7 +603,9 @@ export function Homepage({ city }: { city?: CityView }) {
 
       {city ? null : (
         <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
-          <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto sm:max-w-4xl">
+          {/* From md up the picker fills the screen: title, map, close button
+              as three rows, the map taking all the height between them. */}
+          <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto sm:max-w-4xl md:h-[calc(100dvh-2rem)] md:max-w-[calc(100%-2rem)] md:grid-rows-[auto_minmax(0,1fr)_auto]">
             <DialogHeader>
               <DialogTitle>Pilih lokasi</DialogTitle>
               <DialogDescription>
@@ -612,7 +614,7 @@ export function Homepage({ city }: { city?: CityView }) {
             </DialogHeader>
             {/* The dialog only opens on the client, so the map never renders
                 at build time. */}
-            <Suspense fallback={<Skeleton className="h-75 w-full md:h-155" />}>
+            <Suspense fallback={<Skeleton className="h-75 w-full md:h-full" />}>
               <Map />
             </Suspense>
             <DialogFooter>
