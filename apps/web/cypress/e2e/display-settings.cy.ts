@@ -2,6 +2,11 @@ describe("display settings", () => {
   it("enlarges the text and keeps it after navigating", () => {
     cy.visit("/");
 
+    // A click before React hydrates the island does nothing; Astro drops the
+    // island's ssr attribute once it has.
+    cy.contains("button", "Tampilan")
+      .closest("astro-island")
+      .should("not.have.attr", "ssr");
     cy.contains("button", "Tampilan").click();
     cy.contains("Ukuran teks").should("be.visible");
     cy.contains("button", "Besar").first().click();
