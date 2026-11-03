@@ -45,6 +45,7 @@ const backHref =
           </a>
         ) : null
       }
+      {section ? null : <svg viewBox="0 0 100 100" aria-hidden="true" class="size-5 shrink-0"><path fill="currentColor" fill-rule="evenodd" d="M28 80V50C28 34 40 25 50 14C60 25 72 34 72 50V80Q72 86 66 86H34Q28 86 28 80ZM61.47 59.52A12 12 0 1 1 48.82 44.06A10 10 0 0 0 61.47 59.52Z" /></svg>}
       <span class="truncate text-sm font-semibold">
         {section?.title ?? "Jadwal Sholat"}
       </span>
@@ -53,8 +54,9 @@ const backHref =
     <div class="hidden min-w-0 items-center gap-6 md:flex">
       <a
         href="/"
-        class="shrink-0 rounded-md text-sm font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+        class="inline-flex shrink-0 items-center gap-2 rounded-md text-sm font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
       >
+        <svg viewBox="0 0 100 100" aria-hidden="true" class="size-5 shrink-0"><path fill="currentColor" fill-rule="evenodd" d="M28 80V50C28 34 40 25 50 14C60 25 72 34 72 50V80Q72 86 66 86H34Q28 86 28 80ZM61.47 59.52A12 12 0 1 1 48.82 44.06A10 10 0 0 0 61.47 59.52Z" /></svg>
         Jadwal Sholat
       </a>
       <nav aria-label="Navigasi utama">
