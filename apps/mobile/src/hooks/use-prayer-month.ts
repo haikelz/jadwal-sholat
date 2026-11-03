@@ -32,7 +32,8 @@ export function usePrayerMonth(now: Date, enabled = true) {
     if (query.data) setSchedule({ days: query.data, month, place });
   }, [month, place, query.data, setSchedule]);
 
-  const storedDays = stored?.month === month ? stored.days : undefined;
+  const storedDays =
+    stored?.month === month && stored.place === place ? stored.days : undefined;
   const days = query.data ?? storedDays ?? [];
 
   // Read the month on the location's own clock: the API names its timezone,
