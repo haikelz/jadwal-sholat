@@ -1,0 +1,46 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { RotateCw, WifiOff } from "lucide-react";
+
+// public/sw.js caches this page at install and serves it, under the URL the
+// reader asked for, when that page isn't saved and the network is down.
+---
+
+<BaseLayout
+  title="Sedang offline"
+  description="Halaman ini belum tersimpan di perangkatmu."
+  path="/offline"
+  noindex
+  noCanonical
+>
+  <Empty className="min-h-[70vh]">
+    <EmptyHeader>
+      <EmptyMedia variant="icon">
+        <WifiOff aria-hidden="true" />
+      </EmptyMedia>
+      <EmptyTitle>
+        <h1>Kamu sedang offline</h1>
+      </EmptyTitle>
+      <EmptyDescription>
+        Halaman ini belum tersimpan di perangkatmu. Sambungkan ke internet lalu
+        coba lagi. Halaman yang pernah kamu buka, termasuk jadwal sholat
+        terakhir, tetap bisa dibuka tanpa internet.
+      </EmptyDescription>
+    </EmptyHeader>
+    <EmptyContent>
+      <button type="button" class={buttonVariants()} onclick="location.reload()">
+        <RotateCw aria-hidden="true" data-icon="inline-start" />
+        Coba lagi
+      </button>
+    </EmptyContent>
+  </Empty>
+</BaseLayout>

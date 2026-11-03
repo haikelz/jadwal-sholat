@@ -3,8 +3,27 @@
 const CACHE = "jadwal-sholat-v1";
 // The prayer-time API's origin, which BaseLayout passes as ?prayer-api=.
 const PRAYER_API = new URL(self.location.href).searchParams.get("prayer-api");
+// Shown, under the URL the reader asked for, when that page isn't saved.
+const OFFLINE = "/offline";
 
-self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener("install", (event) => {
+  // Cache the offline page with the hashed CSS and scripts it loads, so it
+  // renders styled before the reader has opened it.
+  event.waitUntil(
+    caches
+      .open(CACHE)
+      .then(async (cache) => {
+        const response = await fetch(OFFLINE);
+        if (!response.ok) return;
+        const html = await response.clone().text();
+        await cache.put(OFFLINE, response);
+        const assets = new Set(html.match(/\/_astro\/[^"'\s)]+/g) ?? []);
+        await Promise.all([...assets].map((asset) => cache.add(asset).catch(() => {})));
+      })
+      .catch(() => {})
+      .then(() => self.skipWaiting()),
+  );
+});
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
@@ -35,7 +54,17 @@ function networkFirst(request) {
       }
       return response;
     })
-    .catch(() => caches.match(request).then((cached) => cached || Response.error()));
+    .catch(
+      async () =>
+        (await caches.match(request)) ||
+        // Full page loads and the client router's HTML fetches.
+        (isPage(request) && (await caches.match(OFFLINE))) ||
+        Response.error(),
+    );
+}
+
+function isPage(request) {
+  return request.mode === "navigate" || request.headers.get("accept")?.includes("text/html");
 }
 
 self.addEventListener("fetch", (event) => {
