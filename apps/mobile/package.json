@@ -13,10 +13,8 @@
   "dependencies": {
     "@jadwal-sholat/core": "workspace:*",
     "@react-native-async-storage/async-storage": "2.2.0",
-    "@rn-primitives/dialog": "^1.5.2",
     "@rn-primitives/label": "^1.5.2",
     "@rn-primitives/portal": "^1.5.3",
-    "@rn-primitives/progress": "^1.5.2",
     "@rn-primitives/radio-group": "^1.5.2",
     "@rn-primitives/select": "^1.5.2",
     "@rn-primitives/separator": "^1.5.2",
