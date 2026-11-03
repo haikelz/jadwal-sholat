@@ -150,7 +150,7 @@ export function DetailSuratPage({
           >
             <SelectTrigger
               aria-label="Pilih qori"
-              className="min-w-0 flex-1 sm:w-48 sm:flex-none"
+              className="w-full min-w-0 sm:w-48"
             >
               <SelectValue placeholder="Pilih qori" />
             </SelectTrigger>
