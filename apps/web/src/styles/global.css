@@ -173,6 +173,9 @@
   }
   body {
     @apply min-w-0 overflow-x-hidden bg-background text-foreground antialiased;
+    /* viewport-fit=cover lets the page reach the screen edges; keep content
+       clear of the iPhone notch in landscape (zero everywhere else). */
+    padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   }
   h1,
   h2,
