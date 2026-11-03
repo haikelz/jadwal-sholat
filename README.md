@@ -47,6 +47,7 @@ bun run dev:web                          # http://localhost:4321
 | `bun run test:web` | Cypress tests, with `bun run preview` running in `apps/web` |
 | `bun run test:core` | Unit tests for `packages/core` |
 | `bun run dev:mobile` | Android app dev server for Expo Go or a development build |
+| `bun run lint:mobile` | Lint the Android app |
 | `bun run build:android` | Preview APK on EAS |
 
 Hadith detail pages and the sunnah fasting schedule need Cloudflare's `_redirects` and `_worker.js`, which `astro dev` and `astro preview` skip. To try them locally, build the site and run `bunx wrangler pages dev dist` in `apps/web`.
@@ -65,7 +66,7 @@ Hadith detail pages and the sunnah fasting schedule need Cloudflare's `_redirect
 | Optional | `GOATCOUNTER_URL` (the GoatCounter `…/count` endpoint), `PUBLIC_SENTRY_DSN`, and `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` to upload source maps |
 | Build watch paths | `apps/web/*`, `packages/core/*`, `bun.lock` |
 
-CI (`.github/workflows/main.yaml`) runs the core tests and the type checks on every push to `master` and every pull request. It reads `ASMAUL_HUSNA_API`, `HADITH_API`, `JADWAL_SHOLAT_API`, `NOMINATIM_API` and `QURAN_API` from the repository variables (Settings → Secrets and variables → Actions → Variables).
+CI (`.github/workflows/main.yaml`) runs the core tests, the type checks and the Android lint on every push to `master` and every pull request. It reads `ASMAUL_HUSNA_API`, `HADITH_API`, `JADWAL_SHOLAT_API`, `NOMINATIM_API` and `QURAN_API` from the repository variables (Settings → Secrets and variables → Actions → Variables).
 
 ### Android app
 

@@ -1,7 +1,7 @@
 name: CI
 
-# Core tests and the type checks on every push to master and every pull
-# request. The website build and the Cypress tests stay local and on
+# Core tests, the type checks and the Android lint on every push to master
+# and every pull request. The website build and the Cypress tests stay local and on
 # Cloudflare Pages: they need the public APIs and a running site.
 on:
   push:
@@ -20,6 +20,7 @@ jobs:
       - run: bun run test:core
       - run: bun run typecheck:core
       - run: bun run typecheck:mobile
+      - run: bun run lint:mobile
       - name: Type-check the website
         working-directory: apps/web
         run: bun run check

@@ -6,6 +6,7 @@
     "build:web": "moon run web:build",
     "dev:mobile": "moon run mobile:dev",
     "dev:web": "moon run web:dev",
+    "lint:mobile": "moon run mobile:lint",
     "test:core": "moon run core:test",
     "test:web": "moon run web:test",
     "typecheck:core": "moon run core:typecheck",

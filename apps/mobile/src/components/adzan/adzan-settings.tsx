@@ -40,6 +40,8 @@ function useAccess() {
   }, []);
 
   useEffect(() => {
+    // refresh sets state only after awaiting the permission APIs.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     refresh();
     const subscription = AppState.addEventListener("change", (status) => {
       if (status === "active") refresh();
