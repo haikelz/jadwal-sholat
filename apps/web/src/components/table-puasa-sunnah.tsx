@@ -11,6 +11,8 @@ import type { PuasaSunnahScheduleDate } from "@/interfaces";
 import { formatToIndonesianDate } from "@/lib/helpers/format-to-indonesian-date";
 import { cn } from "@/lib/utils/cn";
 import { type ColumnDef, useTable } from "@tanstack/react-table";
+import { format, parseISO } from "date-fns";
+import { id } from "date-fns/locale";
 import { useMemo } from "react";
 
 export function TablePuasaSunnah({
@@ -41,7 +43,17 @@ export function TablePuasaSunnah({
               <span
                 className={cn("font-medium", isPast && "text-muted-foreground")}
               >
-                {date}
+                {/* Phones stack "2 Nov" over the weekday, so the long fast
+                    names keep their room; the month filter names the month. */}
+                <span className="flex flex-col sm:hidden">
+                  <span className="whitespace-nowrap">
+                    {format(parseISO(row.original.date), "d MMM", { locale: id })}
+                  </span>
+                  <span className="text-xs font-normal text-muted-foreground">
+                    {format(parseISO(row.original.date), "EEEE", { locale: id })}
+                  </span>
+                </span>
+                <span className="hidden sm:inline">{date}</span>
               </span>
               {date === today ? (
                 <Badge variant="primary-light">Hari ini</Badge>
