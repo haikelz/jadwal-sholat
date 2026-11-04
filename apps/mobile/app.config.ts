@@ -63,6 +63,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           // (Go edition) phones. Skipping the x86 emulator and Chromebook
           // builds halves the APK.
           buildArchs: ["arm64-v8a", "armeabi-v7a"],
+          // R8 strips unused Java and Kotlin code from release builds. Resource
+          // shrinking stays off: expo-notifications finds the adzan sounds by a
+          // name only the JS bundle holds, so the shrinker would drop them.
+          enableMinifyInReleaseBuilds: true,
         },
       },
     ],
