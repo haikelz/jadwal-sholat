@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Link } from "expo-router";
-import { Settings } from "lucide-react-native";
+import Settings from "lucide-react-native/icons/settings";
 
 export function SettingsButton() {
   return (

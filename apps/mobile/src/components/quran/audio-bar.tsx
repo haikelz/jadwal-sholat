@@ -9,7 +9,11 @@ import {
   useAyahPlayer,
 } from "@/lib/audio/ayah-player";
 import type { SurahDetail } from "@jadwal-sholat/core/schemas";
-import { Pause, Play, SkipBack, SkipForward, Square } from "lucide-react-native";
+import Pause from "lucide-react-native/icons/pause";
+import Play from "lucide-react-native/icons/play";
+import SkipBack from "lucide-react-native/icons/skip-back";
+import SkipForward from "lucide-react-native/icons/skip-forward";
+import Square from "lucide-react-native/icons/square";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 

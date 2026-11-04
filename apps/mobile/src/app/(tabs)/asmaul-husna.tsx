@@ -5,7 +5,9 @@ import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
 import { ASMAUL_HUSNA } from "@jadwal-sholat/core/data";
-import { ArrowDown, ArrowUp, SearchX } from "lucide-react-native";
+import ArrowDown from "lucide-react-native/icons/arrow-down";
+import ArrowUp from "lucide-react-native/icons/arrow-up";
+import SearchX from "lucide-react-native/icons/search-x";
 import { useDeferredValue, useMemo, useState } from "react";
 import { FlatList, View } from "react-native";
 

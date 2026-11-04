@@ -20,7 +20,9 @@ import {
   getNextPrayer,
 } from "@jadwal-sholat/core/prayer";
 import { Link, useRouter } from "expo-router";
-import { Bell, CalendarX2, MapPin } from "lucide-react-native";
+import Bell from "lucide-react-native/icons/bell";
+import CalendarX2 from "lucide-react-native/icons/calendar-x-2";
+import MapPin from "lucide-react-native/icons/map-pin";
 import {
   ActivityIndicator,
   RefreshControl,

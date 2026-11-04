@@ -1,14 +1,12 @@
 import { SettingsButton } from "@/components/common/settings-button";
 import { THEME } from "@/lib/theme";
 import { Tabs } from "expo-router";
-import {
-  BookMarked,
-  BookOpen,
-  Calendar,
-  Clock4,
-  List,
-  type LucideIcon,
-} from "lucide-react-native";
+import BookMarked from "lucide-react-native/icons/book-bookmark";
+import BookOpen from "lucide-react-native/icons/book-open";
+import Calendar from "lucide-react-native/icons/calendar";
+import Clock4 from "lucide-react-native/icons/clock-4";
+import List from "lucide-react-native/icons/list";
+import type { LucideIcon } from "lucide-react-native";
 import { useColorScheme } from "nativewind";
 
 // Same sections, order and short labels as the web's bottom bar.

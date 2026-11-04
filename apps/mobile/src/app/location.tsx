@@ -12,7 +12,9 @@ import { roundCoordinates } from "@jadwal-sholat/core/prayer";
 import type { NominatimPlace } from "@jadwal-sholat/core/schemas";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
-import { LocateFixed, MapPin, Search } from "lucide-react-native";
+import LocateFixed from "lucide-react-native/icons/locate-fixed";
+import MapPin from "lucide-react-native/icons/map-pin";
+import Search from "lucide-react-native/icons/search";
 import { useState } from "react";
 import { FlatList, Pressable, View } from "react-native";
 

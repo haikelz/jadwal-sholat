@@ -3,7 +3,8 @@ import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import { SURAH_LIST } from "@jadwal-sholat/core/data";
 import { LAST_SURAH } from "@jadwal-sholat/core/quran";
-import { ArrowLeft, ArrowRight } from "lucide-react-native";
+import ArrowLeft from "lucide-react-native/icons/arrow-left";
+import ArrowRight from "lucide-react-native/icons/arrow-right";
 import { Pressable, View } from "react-native";
 
 function surahName(number: number) {

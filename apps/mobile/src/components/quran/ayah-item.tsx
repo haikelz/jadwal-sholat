@@ -5,14 +5,12 @@ import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import type { Ayah } from "@jadwal-sholat/core/schemas";
-import {
-  Bookmark,
-  BookmarkCheck,
-  ClipboardCopy,
-  Pause,
-  Play,
-  Share2,
-} from "lucide-react-native";
+import Bookmark from "lucide-react-native/icons/bookmark";
+import BookmarkCheck from "lucide-react-native/icons/bookmark-check";
+import ClipboardCopy from "lucide-react-native/icons/clipboard-copy";
+import Pause from "lucide-react-native/icons/pause";
+import Play from "lucide-react-native/icons/play";
+import Share2 from "lucide-react-native/icons/share-2";
 import { memo } from "react";
 import { View } from "react-native";
 

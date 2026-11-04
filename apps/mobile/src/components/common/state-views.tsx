@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Text } from "@/components/ui/text";
-import { CircleAlert, RefreshCw, type LucideIcon } from "lucide-react-native";
+import CircleAlert from "lucide-react-native/icons/circle-alert";
+import RefreshCw from "lucide-react-native/icons/refresh-cw";
+import type { LucideIcon } from "lucide-react-native";
 import type { ReactNode } from "react";
 import { View } from "react-native";
 

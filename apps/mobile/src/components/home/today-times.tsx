@@ -8,7 +8,7 @@ import {
   type PrayerKey,
 } from "@jadwal-sholat/core/prayer";
 import type { PrayerTimings } from "@jadwal-sholat/core/schemas";
-import { Check } from "lucide-react-native";
+import Check from "lucide-react-native/icons/check";
 import { View } from "react-native";
 
 /**

@@ -13,13 +13,11 @@ import {
   type SurahTypeFilter,
 } from "@jadwal-sholat/core/quran";
 import { Link } from "expo-router";
-import {
-  ArrowDown,
-  ArrowUp,
-  BookOpenText,
-  ChevronRight,
-  SearchX,
-} from "lucide-react-native";
+import ArrowDown from "lucide-react-native/icons/arrow-down";
+import ArrowUp from "lucide-react-native/icons/arrow-up";
+import BookOpenText from "lucide-react-native/icons/book-open-text";
+import ChevronRight from "lucide-react-native/icons/chevron-right";
+import SearchX from "lucide-react-native/icons/search-x";
 import { useDeferredValue, useMemo, useState } from "react";
 import { FlatList, Pressable, View } from "react-native";
 

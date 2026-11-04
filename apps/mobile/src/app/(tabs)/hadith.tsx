@@ -13,7 +13,8 @@ import { api } from "@/lib/api";
 import { nextHadithPage, queryKeys } from "@jadwal-sholat/core/api";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
-import { BookOpen, Search } from "lucide-react-native";
+import BookOpen from "lucide-react-native/icons/book-open";
+import Search from "lucide-react-native/icons/search";
 import { useState } from "react";
 import { ActivityIndicator, FlatList, View } from "react-native";
 

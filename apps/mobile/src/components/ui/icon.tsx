@@ -31,7 +31,7 @@ cssInterop(IconImpl, {
  * @component
  * @example
  * ```tsx
- * import { ArrowRight } from 'lucide-react-native';
+ * import ArrowRight from 'lucide-react-native/icons/arrow-right';
  * import { Icon } from '@/registry/components/ui/icon';
  *
  * <Icon as={ArrowRight} className="text-red-500" size={16} />

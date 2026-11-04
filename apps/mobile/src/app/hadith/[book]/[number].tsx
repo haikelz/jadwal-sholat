@@ -11,13 +11,11 @@ import { queryKeys } from "@jadwal-sholat/core/api";
 import { hadithPath } from "@jadwal-sholat/core/share";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Stack, useLocalSearchParams, useRouter } from "expo-router";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Copy,
-  SearchX,
-  Share2,
-} from "lucide-react-native";
+import ChevronLeft from "lucide-react-native/icons/chevron-left";
+import ChevronRight from "lucide-react-native/icons/chevron-right";
+import Copy from "lucide-react-native/icons/copy";
+import SearchX from "lucide-react-native/icons/search-x";
+import Share2 from "lucide-react-native/icons/share-2";
 import { ScrollView, View } from "react-native";
 
 function DetailSkeleton() {

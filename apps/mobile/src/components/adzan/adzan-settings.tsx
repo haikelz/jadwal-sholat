@@ -14,7 +14,10 @@ import { usePreferences } from "@/store/preferences";
 import { PRAYERS, type PrayerKey } from "@jadwal-sholat/core/prayer";
 import * as IntentLauncher from "expo-intent-launcher";
 import * as Notifications from "expo-notifications";
-import { AlarmClock, BatteryWarning, BellOff, BellRing } from "lucide-react-native";
+import AlarmClock from "lucide-react-native/icons/alarm-clock";
+import BatteryWarning from "lucide-react-native/icons/battery-warning";
+import BellOff from "lucide-react-native/icons/bell-off";
+import BellRing from "lucide-react-native/icons/bell-ring";
 import { useCallback, useEffect, useState } from "react";
 import { AppState, Linking, ToastAndroid, View } from "react-native";
 

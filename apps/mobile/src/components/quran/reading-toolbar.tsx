@@ -12,7 +12,9 @@ import {
 import { Text } from "@/components/ui/text";
 import { Toggle } from "@/components/ui/toggle";
 import { qoriOptions } from "@jadwal-sholat/core/quran";
-import { Languages, MessageSquare, Volume2 } from "lucide-react-native";
+import Languages from "lucide-react-native/icons/languages";
+import MessageSquare from "lucide-react-native/icons/message-square";
+import Volume2 from "lucide-react-native/icons/volume-2";
 import { useState } from "react";
 import { ScrollView, ToastAndroid, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

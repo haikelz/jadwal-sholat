@@ -7,7 +7,7 @@ import { formatToIndonesianDate } from "@jadwal-sholat/core/dates";
 import { findNextFast } from "@jadwal-sholat/core/puasa";
 import { useQuery } from "@tanstack/react-query";
 import { Link, type Href } from "expo-router";
-import { ChevronRight } from "lucide-react-native";
+import ChevronRight from "lucide-react-native/icons/chevron-right";
 import { Pressable, View } from "react-native";
 
 function ShortcutRow({

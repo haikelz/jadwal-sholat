@@ -5,7 +5,7 @@ import { Text } from "@/components/ui/text";
 import { copyText } from "@/lib/share";
 import { splitHighlight } from "@jadwal-sholat/core/quran";
 import type { AsmaulHusna } from "@jadwal-sholat/core/schemas";
-import { Copy } from "lucide-react-native";
+import Copy from "lucide-react-native/icons/copy";
 import { View } from "react-native";
 
 export function AsmaulHusnaRow({

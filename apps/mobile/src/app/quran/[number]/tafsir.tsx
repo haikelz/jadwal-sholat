@@ -12,7 +12,8 @@ import { usePreferences } from "@/store/preferences";
 import { queryKeys } from "@jadwal-sholat/core/api";
 import { useQuery } from "@tanstack/react-query";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { Copy, MessageSquareOff } from "lucide-react-native";
+import Copy from "lucide-react-native/icons/copy";
+import MessageSquareOff from "lucide-react-native/icons/message-square-off";
 import { ScrollView, View } from "react-native";
 
 export default function TafsirScreen() {

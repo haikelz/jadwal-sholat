@@ -35,7 +35,8 @@ import {
   useLocalSearchParams,
   useRouter,
 } from "expo-router";
-import { BookX, Share2 } from "lucide-react-native";
+import BookX from "lucide-react-native/icons/book-x";
+import Share2 from "lucide-react-native/icons/share-2";
 import { useCallback, useEffect, useRef } from "react";
 import { ToastAndroid, View } from "react-native";
 

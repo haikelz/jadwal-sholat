@@ -22,7 +22,7 @@ import {
   type PuasaTypeFilter,
 } from "@jadwal-sholat/core/puasa";
 import { useQuery } from "@tanstack/react-query";
-import { CalendarX } from "lucide-react-native";
+import CalendarX from "lucide-react-native/icons/calendar-x";
 import { useState } from "react";
 import { FlatList, RefreshControl, View } from "react-native";
 
