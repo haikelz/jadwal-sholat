@@ -15,7 +15,7 @@ Expo SDK 58 app with the same sections as the web: Jadwal, Qur'an, Hadith, Asma'
 - Copy is Indonesian, in sentence case. Every control has an accessible name.
 - Native code compiles on EAS only (`bun run build:android`, or `bunx eas-cli build --profile development`). Don't run Gradle or `expo run:android` locally: the laptop runs out of memory.
 - `eas.json` pins EAS to the Bun version that wrote `bun.lock` (`base` profile); bump it with your local Bun.
-- Bun's isolated install only links a package where its declarer can see it. Anything Babel or Metro must find from other packages' files has to be a direct dependency here (that's why `react-native-css-interop` is listed), and `babel.config.js` loads NativeWind's plugin by absolute require instead of `nativewind/babel`.
+- Bun's isolated install only links a package where its declarer can see it. Anything Babel or Metro must find from other packages' files has to be a direct dependency here (that's why `react-native-css-interop` is listed), and `babel.config.js` loads NativeWind's plugin by absolute require instead of `nativewind/babel`. The same install makes `expo-doctor`'s duplicate-dependency check fail on same-version copies of `expo`, `expo-asset`, `expo-constants`, `expo-linking` and `expo-status-bar`; autolinking and Metro each use one copy (`bunx expo-modules-autolinking resolve --platform android`), so keep `node_modules` and `bun.lock` as they are.
 - Expo Go previews the app, but it can't use the bundled adzan sounds or background tasks; test alarms on a development build.
 
 This is an Expo/React Native mobile application. Prioritize mobile-first patterns, performance, and cross-platform compatibility.
