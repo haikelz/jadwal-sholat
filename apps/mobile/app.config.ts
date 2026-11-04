@@ -38,8 +38,16 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       monochromeImage: "./assets/android-icon-monochrome.png",
     },
     predictiveBackGestureEnabled: false,
-    // Prayer times don't change within a few km, so approximate location is enough.
-    blockedPermissions: ["android.permission.ACCESS_FINE_LOCATION"],
+    blockedPermissions: [
+      // Prayer times don't change within a few km, so approximate location is enough.
+      "android.permission.ACCESS_FINE_LOCATION",
+      // Expo's template adds these; the app stores no files and draws no
+      // overlays. Development builds keep the overlay for React Native's
+      // performance monitor.
+      "android.permission.READ_EXTERNAL_STORAGE",
+      "android.permission.WRITE_EXTERNAL_STORAGE",
+      ...(isDev ? [] : ["android.permission.SYSTEM_ALERT_WINDOW"]),
+    ],
     // Adzan alarms ring at the exact prayer time (Android 12+ asks the user).
     permissions: ["android.permission.SCHEDULE_EXACT_ALARM"],
   },
