@@ -42,8 +42,18 @@ export function pageMeta({
     canonical: new URL(path, SITE_URL).toString(),
     description,
     image: new URL(image, SITE_URL).toString(),
-    title: absoluteTitle ? title : `${title} | ${SITE_NAME}`,
+    title: absoluteTitle ? title : withSiteName(title),
   };
+}
+
+/**
+ * " | Jadwal Sholat" only while the whole title fits in the ~60 characters
+ * search results show, so a long title keeps its keywords instead. Mirrored in
+ * public/_worker.js for hadith pages.
+ */
+export function withSiteName(title: string) {
+  const full = `${title} | ${SITE_NAME}`;
+  return full.length <= 60 ? full : title;
 }
 
 /** schema.org BreadcrumbList; Google shows it as the result's path. */

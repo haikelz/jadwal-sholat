@@ -72,7 +72,10 @@ async function serveHadith(url, book, number, env) {
   if (!hadith?.name || !hadith.contents?.id) return shell;
 
   const title = `${hadith.name} No. ${number}`;
-  const fullTitle = `${title}: Arab dan Terjemahan | ${SITE_NAME}`;
+  // Same rule as withSiteName() in src/lib/utils/metadata.ts.
+  const pageTitle = `${title}: Arab dan Terjemahan`;
+  const fullTitle =
+    `${pageTitle} | ${SITE_NAME}`.length <= 60 ? `${pageTitle} | ${SITE_NAME}` : pageTitle;
   const description = toDescription(hadith.contents.id);
   const canonical = `${url.origin}${url.pathname}`;
   const breadcrumb = JSON.stringify({
