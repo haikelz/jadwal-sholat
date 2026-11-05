@@ -7,6 +7,7 @@ import { DISPLAY_SETTINGS_SCRIPT } from "@/lib/utils/display-settings";
 import {
   pageMeta,
   SITE_NAME,
+  ORGANIZATION_JSON_LD,
   WEBSITE_JSON_LD,
   type PageMeta,
 } from "@/lib/utils/metadata";
@@ -31,7 +32,7 @@ const { jsonLd = [], noindex = false, noCanonical = false, ...page } = Astro.pro
 // Pages listed in OG_PAGES get their own social image from /og/<page>.png.
 const ogImage = ogImageFor(page.path);
 const meta = pageMeta({ ...page, image: ogImage?.src });
-const structuredData = [WEBSITE_JSON_LD, ...jsonLd];
+const structuredData = [WEBSITE_JSON_LD, ORGANIZATION_JSON_LD, ...jsonLd];
 // sw.js caches the prayer-time API for offline use. It can't read astro:env,
 // so the API's origin rides along in its URL.
 const serviceWorkerUrl = `/sw.js?prayer-api=${encodeURIComponent(new URL(env.JADWAL_SHOLAT_API).origin)}`;

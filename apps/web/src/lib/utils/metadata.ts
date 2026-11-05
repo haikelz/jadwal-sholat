@@ -72,6 +72,15 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
+/** schema.org Organization: the logo search results can show beside the site. */
+export const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: new URL("/img/logo-512.png", SITE_URL).toString(),
+};
+
 /** schema.org WebSite for the site name shown in search results. */
 export const WEBSITE_JSON_LD = {
   "@context": "https://schema.org",
