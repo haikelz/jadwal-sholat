@@ -13,7 +13,6 @@ export const GET: APIRoute = () =>
       "Disallow: /hadith-detail",
       "Disallow: /offline",
       "",
-      `Host: ${SITE_URL}`,
       `Sitemap: ${SITE_URL}/sitemap.xml`,
       `Sitemap: ${SITE_URL}/sitemap-hadith.xml`,
       "",
