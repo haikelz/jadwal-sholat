@@ -5,6 +5,7 @@ import {
   nominatimSearchUrl,
   prayerMonthUrl,
   puasaScheduleUrl,
+  ramadanUrl,
   surahUrl,
 } from "./urls";
 
@@ -52,5 +53,13 @@ describe("nextHadithPage", () => {
     expect(nextHadithPage(60, 1)).toBe(2);
     expect(nextHadithPage(60, 3)).toBeUndefined();
     expect(nextHadithPage(50, 2)).toBeUndefined();
+  });
+});
+
+describe("ramadanUrl", () => {
+  test("uses the Hijri calendar beside the monthly endpoint", () => {
+    expect(
+      ramadanUrl("https://api.aladhan.com/v1/calendar", { hijriYear: 1448, position: { lat: -6.2, lng: 106.8 } }),
+    ).toBe("https://api.aladhan.com/v1/hijriCalendar/1448/9?latitude=-6.2&longitude=106.8&method=20");
   });
 });
