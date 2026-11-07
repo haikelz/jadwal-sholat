@@ -27,10 +27,14 @@ const ayahs = data.ayahs.filter(
 const surahName = data.asma.id.short;
 const range = passageRange(passage);
 const path = `/ayat/${passage.slug}`;
+// Search results show about 60 characters; a long name drops the surah and
+// ayat reference, which the description and the page still carry.
+const fullTitle = `${passage.name} (${surahName} ${range}): Arab, Latin dan Artinya`;
+const title = fullTitle.length <= 60 ? fullTitle : `${passage.name}: Arab, Latin dan Artinya`;
 ---
 
 <BaseLayout
-  title={`${passage.name} (${surahName} ${range}): Arab, Latin dan Artinya`}
+  title={title}
   description={toDescription(
     `${passage.name}, QS. ${surahName} ayat ${range}: teks Arab, latin, terjemahan Indonesia dan tafsir. ${ayahs[0]?.translation.id ?? ""}`,
   )}
