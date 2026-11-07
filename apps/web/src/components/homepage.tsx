@@ -37,7 +37,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { env } from "@/lib/utils/public-env";
-import { useFetch, useGeolocation, useNow } from "@/hooks";
+import { useFetch, useGeolocation, useIsMounted, useNow } from "@/hooks";
 import { useStoredCopy } from "@/hooks/use-stored-copy";
 import type { JadwalSholatProps, TimingsProps } from "@/interfaces";
 import {
@@ -85,13 +85,6 @@ const UserLocation = lazy(() =>
 const Adzan = lazy(() =>
   import("@/components/adzan").then((mod) => ({ default: mod.Adzan })),
 );
-
-/** False in the build-time render and the first client render. */
-function useIsMounted() {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => setIsMounted(true), []);
-  return isMounted;
-}
 
 function MonthGridSkeleton() {
   return (
