@@ -19,7 +19,7 @@ import BatteryWarning from "lucide-react-native/icons/battery-warning";
 import BellOff from "lucide-react-native/icons/bell-off";
 import BellRing from "lucide-react-native/icons/bell-ring";
 import { useCallback, useEffect, useState } from "react";
-import { AppState, Linking, View } from "react-native";
+import { AppState, Linking, Platform, View } from "react-native";
 import { showToast } from "@/store/toast";
 
 type Access = { notifications: boolean; exactAlarm: boolean };
@@ -192,39 +192,43 @@ export function AdzanSettings() {
             ))}
           </View>
 
-          <Separator />
+          {Platform.OS === "android" ? (
+            <>
+              <Separator />
 
-          <View className="gap-2">
-            <View className="flex-row items-center gap-2">
-              <Icon as={AlarmClock} size={16} />
-              <Text className="text-sm font-medium">Ketepatan waktu</Text>
-            </View>
-            <Text variant="muted">
-              {access?.exactAlarm === false
-                ? "Bisa terlambat beberapa menit. Izinkan alarm tepat waktu agar adzan berbunyi pas."
-                : "Tepat waktu."}
-            </Text>
-            {access?.exactAlarm === false ? (
-              <Button variant="outline" className="self-start" onPress={allowExactAlarm}>
-                <Text>Izinkan alarm tepat waktu</Text>
-              </Button>
-            ) : null}
-          </View>
+              <View className="gap-2">
+                <View className="flex-row items-center gap-2">
+                  <Icon as={AlarmClock} size={16} />
+                  <Text className="text-sm font-medium">Ketepatan waktu</Text>
+                </View>
+                <Text variant="muted">
+                  {access?.exactAlarm === false
+                    ? "Bisa terlambat beberapa menit. Izinkan alarm tepat waktu agar adzan berbunyi pas."
+                    : "Tepat waktu."}
+                </Text>
+                {access?.exactAlarm === false ? (
+                  <Button variant="outline" className="self-start" onPress={allowExactAlarm}>
+                    <Text>Izinkan alarm tepat waktu</Text>
+                  </Button>
+                ) : null}
+              </View>
 
-          <Alert icon={BatteryWarning}>
-            <AlertTitle>Adzan tidak berbunyi?</AlertTitle>
-            <AlertDescription>
-              Di HP Xiaomi, Oppo, atau Vivo, keluarkan Jadwal Sholat dari
-              penghematan baterai agar adzan tidak tertahan.
-            </AlertDescription>
-            <Button
-              variant="outline"
-              className="mb-1.5 ml-6 self-start"
-              onPress={openBatterySettings}
-            >
-              <Text>Buka pengaturan baterai</Text>
-            </Button>
-          </Alert>
+              <Alert icon={BatteryWarning}>
+                <AlertTitle>Adzan tidak berbunyi?</AlertTitle>
+                <AlertDescription>
+                  Di HP Xiaomi, Oppo, atau Vivo, keluarkan Jadwal Sholat dari
+                  penghematan baterai agar adzan tidak tertahan.
+                </AlertDescription>
+                <Button
+                  variant="outline"
+                  className="mb-1.5 ml-6 self-start"
+                  onPress={openBatterySettings}
+                >
+                  <Text>Buka pengaturan baterai</Text>
+                </Button>
+              </Alert>
+            </>
+          ) : null}
 
           {__DEV__ ? (
             <Button variant="secondary" className="self-start" onPress={testAdzan}>

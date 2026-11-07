@@ -14,6 +14,7 @@ import {
 import type { PrayerDay } from "@jadwal-sholat/core/schemas";
 import Constants, { ExecutionEnvironment } from "expo-constants";
 import * as Notifications from "expo-notifications";
+import { Platform } from "react-native";
 
 /** Expo Go has no bundled adzan sounds and no background tasks. */
 export const isExpoGo =
@@ -21,13 +22,29 @@ export const isExpoGo =
 
 // Android fixes a channel's sound once it exists, so a new sound needs a new
 // channel id (adzan-v2), not an edit.
+// iOS plays at most 30 seconds of a notification sound, so it gets the
+// opening of each adzan instead (iosSound).
 const CHANNELS: Record<
   AdzanChannel,
-  { id: string; name: string; sound: string }
+  { id: string; name: string; sound: string; iosSound: string }
 > = {
-  adzan: { id: "adzan-v1", name: "Adzan", sound: "adzan.mp3" },
-  "adzan-subuh": { id: "adzan-subuh-v1", name: "Adzan Subuh", sound: "adzan_subuh.mp3" },
+  adzan: { id: "adzan-v1", name: "Adzan", sound: "adzan.mp3", iosSound: "adzan_ios.caf" },
+  "adzan-subuh": {
+    id: "adzan-subuh-v1",
+    name: "Adzan Subuh",
+    sound: "adzan_subuh.mp3",
+    iosSound: "adzan_subuh_ios.caf",
+  },
 };
+
+// iOS keeps only the 64 soonest pending notifications; leave room for the test.
+const IOS_PENDING_LIMIT = 60;
+
+function soundFor(channel: AdzanChannel) {
+  // Expo Go doesn't ship the app's sounds; `true` is the default sound.
+  if (isExpoGo) return true;
+  return Platform.OS === "ios" ? CHANNELS[channel].iosSound : CHANNELS[channel].sound;
+}
 
 const ID_PREFIX = "adzan:";
 const TEST_ID = "adzan-test";
@@ -112,6 +129,7 @@ async function syncNow(): Promise<boolean> {
     days: await collectDays(now),
     now,
     prayers: adzanPrayers,
+    limit: Platform.OS === "ios" ? IOS_PENDING_LIMIT : undefined,
   });
 
   // Offline without a stored month (the 1st of a month, say), collectDays
@@ -128,9 +146,11 @@ async function syncNow(): Promise<boolean> {
         content: {
           body: `Sudah masuk waktu ${alarm.name} · ${formatSholatTime(alarm.time)}`,
           data: { prayer: alarm.key },
-          // Android below 8 reads the sound here instead of the channel.
-          sound: isExpoGo ? true : CHANNELS[alarm.channel].sound,
+          // Android below 8 and iOS read the sound here; newer Android, from the channel.
+          sound: soundFor(alarm.channel),
           title: `Waktu sholat ${alarm.name}`,
+          // Through iOS Focus modes, with the time-sensitive entitlement.
+          interruptionLevel: "timeSensitive",
         },
         trigger: {
           channelId: CHANNELS[alarm.channel].id,
@@ -183,8 +203,9 @@ export async function scheduleTestAdzan() {
     identifier: TEST_ID,
     content: {
       body: "Ini contoh notifikasi adzan.",
-      sound: isExpoGo ? true : CHANNELS.adzan.sound,
+      sound: soundFor("adzan"),
       title: "Tes adzan",
+      interruptionLevel: "timeSensitive",
     },
     trigger: {
       channelId: CHANNELS.adzan.id,

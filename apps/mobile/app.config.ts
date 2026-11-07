@@ -30,6 +30,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   orientation: "portrait",
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
+  ios: {
+    bundleIdentifier: isDev ? "dev.ekel.jdwshlt.dev" : "dev.ekel.jdwshlt",
+    // Lets adzan alerts through Focus modes ("Time Sensitive Notifications").
+    entitlements: { "com.apple.developer.usernotifications.time-sensitive": true },
+  },
   android: {
     package: isDev ? "dev.ekel.jdwshlt.dev" : "dev.ekel.jdwshlt",
     adaptiveIcon: {
@@ -70,7 +75,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         },
       },
     ],
-    "expo-location",
+    [
+      "expo-location",
+      {
+        locationWhenInUsePermission:
+          "Jadwal Sholat memakai perkiraan lokasimu untuk menghitung waktu sholat di tempatmu.",
+      },
+    ],
     "expo-background-task",
     [
       "expo-audio",
@@ -88,7 +99,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         // would show as a solid square.
         icon: "./assets/android-icon-monochrome.png",
         // Android raw resource names can't contain hyphens.
-        sounds: ["./assets/sounds/adzan.mp3", "./assets/sounds/adzan_subuh.mp3"],
+        // iOS plays at most 30 seconds of a notification sound, so it gets
+        // the opening of each adzan (*_ios.caf); Android plays the whole one.
+        sounds: [
+          "./assets/sounds/adzan.mp3",
+          "./assets/sounds/adzan_subuh.mp3",
+          "./assets/sounds/adzan_ios.caf",
+          "./assets/sounds/adzan_subuh_ios.caf",
+        ],
       },
     ],
     [
