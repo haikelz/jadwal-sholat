@@ -1,0 +1,50 @@
+---
+import CityLinks from "@/components/common/CityLinks.astro";
+import { PageShell } from "@/components/common/page-shell";
+import { ImsakiyahIsland } from "@/components/islands/imsakiyah-island";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd, toDescription } from "@/lib/utils/metadata";
+import { CITIES, type City, ZONE_LABELS } from "@jadwal-sholat/core/data";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() =>
+  CITIES.map((city) => ({ params: { city: city.slug }, props: { city } }))) satisfies GetStaticPaths;
+
+const { city } = Astro.props as { city: City };
+const zone = ZONE_LABELS[city.timeZone];
+const path = `/imsakiyah/${city.slug}`;
+---
+
+<BaseLayout
+  title={`Jadwal Imsakiyah ${city.name}: Imsak dan Buka Puasa`}
+  description={toDescription(
+    `Jadwal imsakiyah Ramadan ${city.name}, ${city.province}, sebulan penuh dalam ${zone}, metode Kemenag RI: waktu Imsak untuk mulai puasa dan Maghrib untuk berbuka.`,
+  )}
+  path={path}
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: "Jadwal imsakiyah", path: "/imsakiyah" },
+      { name: city.name, path },
+    ]),
+  ]}
+>
+  <PageShell>
+    <ImsakiyahIsland
+      client:load
+      city={{ slug: city.slug, name: city.name, position: city.position, timeZone: city.timeZone, zone }}
+    />
+    <p class="text-sm text-muted-foreground">
+      Imsakiyah {city.name}, {city.province}, untuk seluruh bulan Ramadan, dalam {zone},
+      jam setempat {city.name}. Lihat juga
+      <a href={`/jadwal-sholat/${city.slug}`} class="font-medium text-foreground underline underline-offset-4"
+        >jadwal sholat {city.name} hari ini</a
+      >.
+    </p>
+    <section aria-labelledby="other-cities" class="flex flex-col gap-3">
+      <h2 id="other-cities" class="text-sm font-medium text-muted-foreground">
+        Jadwal imsakiyah kota lain
+      </h2>
+      <CityLinks cities={CITIES.filter((other) => other.slug !== city.slug)} base="/imsakiyah" />
+    </section>
+  </PageShell>
+</BaseLayout>

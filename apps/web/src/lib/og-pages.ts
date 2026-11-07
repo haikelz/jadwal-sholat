@@ -16,6 +16,7 @@ export const OG_PAGES: Record<string, OgPage> = {
   "asmaul-husna": { title: "Asmaul Husna", description: "99 nama Allah, Arab, latin dan artinya" },
   "sunnah-fasting": { title: "Jadwal Puasa Sunnah", description: "Senin Kamis, Ayyamul Bidh, Arafah dan lainnya" },
   "jadwal-sholat": { title: "Jadwal Sholat per Kota", description: `${CITIES.length} kota di Indonesia, WIB, WITA dan WIT` },
+  imsakiyah: { title: "Jadwal Imsakiyah Ramadan", description: "Imsak dan buka puasa sebulan penuh, metode Kemenag RI" },
   ...Object.fromEntries(
     SURAH_LIST.map((surah) => [
       `quran/${surah.number}`,
@@ -29,6 +30,12 @@ export const OG_PAGES: Record<string, OgPage> = {
     CITIES.map((city) => [
       `jadwal-sholat/${city.slug}`,
       { title: `Jadwal Sholat ${city.name}`, description: `${city.province} · ${ZONE_LABELS[city.timeZone]}` },
+    ]),
+  ),
+  ...Object.fromEntries(
+    CITIES.map((city) => [
+      `imsakiyah/${city.slug}`,
+      { title: `Imsakiyah ${city.name}`, description: `Imsak dan buka puasa · ${ZONE_LABELS[city.timeZone]}` },
     ]),
   ),
   ...Object.fromEntries(

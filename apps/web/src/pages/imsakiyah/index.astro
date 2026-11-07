@@ -1,0 +1,29 @@
+---
+import CityLinks from "@/components/common/CityLinks.astro";
+import { PageShell } from "@/components/common/page-shell";
+import { ImsakiyahIsland } from "@/components/islands/imsakiyah-island";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
+import { CITIES } from "@jadwal-sholat/core/data";
+
+const cities = [...CITIES].sort((a, b) => a.name.localeCompare(b.name, "id"));
+---
+
+<BaseLayout
+  title="Jadwal Imsakiyah Ramadan: Imsak dan Buka Puasa"
+  description="Jadwal imsakiyah Ramadan sesuai lokasi kamu, sebulan penuh: waktu Imsak untuk mulai puasa, Maghrib untuk berbuka, dan sholat lainnya, metode Kemenag RI."
+  path="/imsakiyah"
+  jsonLd={[breadcrumbJsonLd([{ name: "Jadwal imsakiyah", path: "/imsakiyah" }])]}
+>
+  <PageShell>
+    <!-- The month renders in the browser for the reader's location and the
+         coming Ramadan; the build ships the heading and the skeleton. -->
+    <ImsakiyahIsland client:load />
+    <section aria-labelledby="imsakiyah-cities" class="flex flex-col gap-3">
+      <h2 id="imsakiyah-cities" class="text-sm font-medium text-muted-foreground">
+        Jadwal imsakiyah per kota
+      </h2>
+      <CityLinks cities={cities} base="/imsakiyah" />
+    </section>
+  </PageShell>
+</BaseLayout>

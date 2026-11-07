@@ -7,7 +7,7 @@
 
 ## Features
 
-- Today's prayer times for your location, a countdown to the next prayer, the Hijri date and the full month, plus schedules for 51 Indonesian cities
+- Today's prayer times for your location, a countdown to the next prayer, the Hijri date and the full month, plus schedules and the Ramadan imsakiyah for 51 Indonesian cities
 - Adzan reminders: browser notifications on the web, alarms that ring with the app closed on Android
 - Al-Qur'an with audio from several reciters, transliteration, translation and tafsir, plus pages for well-known ayat such as Ayat Kursi
 - Hadith by book and number, the 99 names of Allah, and sunnah fasting days from the [Puasa Sunnah API](https://puasasunnah.ekel.dev/swagger/index.html)

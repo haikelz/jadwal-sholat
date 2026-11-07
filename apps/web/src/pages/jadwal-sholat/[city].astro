@@ -38,6 +38,10 @@ const path = `/jadwal-sholat/${city.slug}`;
     <p class="text-sm text-muted-foreground">
       Waktu sholat {city.name}, {city.province}, untuk hari ini dan sebulan penuh,
       dihitung dengan metode Kemenag RI. Semua waktu dalam {zone}, jam setempat {city.name}.
+      Untuk bulan puasa, buka
+      <a href={`/imsakiyah/${city.slug}`} class="font-medium text-foreground underline underline-offset-4"
+        >jadwal imsakiyah {city.name}</a
+      >.
     </p>
     <section aria-labelledby="other-cities" class="flex flex-col gap-3">
       <h2 id="other-cities" class="text-sm font-medium text-muted-foreground">
