@@ -14,7 +14,8 @@
 
 :root {
   --font-geist-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-geist-mono: "Geist Mono", ui-monospace, monospace;
+  /* Only the search box's "/" hint is monospace; the system font is enough. */
+  --font-geist-mono: ui-monospace, monospace;
   --font-lpmq: "LPMQ Isep Misbah";
 }
 
