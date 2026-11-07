@@ -30,3 +30,10 @@ tasks/*
 
 # graft's local graph cache — regenerable, not committed (run `graft build`).
 /graft/
+
+# Agent configs graft regenerates at every session for tools this project
+# doesn't use; Claude Code reads .claude/ and .mcp.json.
+.cursor/
+.gemini/
+GEMINI.md
+opencode.json
