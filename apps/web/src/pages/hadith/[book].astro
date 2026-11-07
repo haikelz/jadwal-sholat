@@ -1,0 +1,45 @@
+---
+import { PageHeader, PageShell } from "@/components/common/page-shell";
+import { HadithListIsland } from "@/components/islands/hadith-list-island";
+import type { HadithBooksResponse } from "@/interfaces";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getHadithBooks, loadHadithList } from "@/lib/hadith-list";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
+import type { HadithBook } from "@jadwal-sholat/core/schemas";
+import type { GetStaticPaths } from "astro";
+
+// One page per book: it ranks for searches like "hadits Muslim" and links the
+// book's first hadiths, whose previous and next links reach the rest. Without
+// the API at build time there are no book pages, and /hadith still works.
+export const getStaticPaths = (async () => {
+  try {
+    const books = await getHadithBooks();
+    return books.data.map((book) => ({ params: { book: book.id }, props: { book, books } }));
+  } catch {
+    return [];
+  }
+}) satisfies GetStaticPaths;
+
+const { book, books } = Astro.props as { book: HadithBook; books: HadithBooksResponse };
+const name = book.name.replace(/^HR\.\s*/, "");
+const count = book.available.toLocaleString("id-ID");
+const path = `/hadith/${book.id}`;
+const initialData = await loadHadithList(book.id, books);
+---
+
+<BaseLayout
+  title={`Hadith ${name}: Arab dan Terjemahan`}
+  description={`Baca ${count} hadith riwayat ${name} (hadits ${name}) dengan teks Arab dan terjemahan Indonesia, dari nomor 1, lengkap dengan pencarian nomor hadith.`}
+  path={path}
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: "Hadith", path: "/hadith" },
+      { name, path },
+    ]),
+  ]}
+>
+  <PageShell>
+    <PageHeader title={`Hadith ${name}`} description={`${count} hadith riwayat ${name}, berdasarkan nomor.`} />
+    <HadithListIsland client:load initialData={initialData} book={book.id} />
+  </PageShell>
+</BaseLayout>

@@ -1,42 +1,12 @@
 ---
 import { PageHeader, PageShell } from "@/components/common/page-shell";
-import type { HadithListInitialData } from "@/components/hadith/hadith-page";
 import { HadithListIsland } from "@/components/islands/hadith-list-island";
-import type { HadithBooksResponse, HadithRangeResponse } from "@/interfaces";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getData } from "@/lib/utils/get-data";
-import { breadcrumbJsonLd, toDescription } from "@/lib/utils/metadata";
-import { env } from "@/lib/utils/public-env";
-import { hadithBooksUrl, hadithRangeUrl } from "@jadwal-sholat/core/api";
+import { loadHadithList } from "@/lib/hadith-list";
+import { breadcrumbJsonLd } from "@/lib/utils/metadata";
 
-// Bukhari's first page is built into the HTML, so crawlers reach hadith pages
-// through links. Rows show two lines of the translation, so only a short
-// snippet reaches the island, and no Arabic. A slow or failing API must not
-// fail the build: the list then loads in the browser instead.
-let initialData: HadithListInitialData | undefined;
-try {
-  const signal = AbortSignal.timeout(15_000);
-  const [books, firstPage] = await Promise.all([
-    getData<HadithBooksResponse>(hadithBooksUrl(env.HADITH_API), { signal }),
-    getData<HadithRangeResponse>(hadithRangeUrl(env.HADITH_API, "bukhari", 1), { signal }),
-  ]);
-  initialData = {
-    books,
-    firstPage: {
-      ...firstPage,
-      data: {
-        ...firstPage.data,
-        hadiths: firstPage.data.hadiths.map(({ number, id }) => ({
-          number,
-          arab: "",
-          id: toDescription(id, 200),
-        })),
-      },
-    },
-  };
-} catch {
-  initialData = undefined;
-}
+// Bukhari's first page is built into the HTML; each book has its own page too.
+const initialData = await loadHadithList("bukhari");
 ---
 
 <BaseLayout

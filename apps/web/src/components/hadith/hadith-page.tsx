@@ -41,6 +41,7 @@ import {
 } from "@jadwal-sholat/core/api";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CircleAlert, SearchX } from "lucide-react";
+import { navigate } from "astro:transitions/client";
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
@@ -56,16 +57,26 @@ function HadithRowSkeleton() {
   );
 }
 
-/** Built into /hadith, so crawlers reach hadith pages through links. */
+/** Built into /hadith and each book's page, so crawlers reach hadith pages through links. */
 export type HadithListInitialData = {
   books: HadithBooksResponse;
-  /** Bukhari, the default book, first page. */
+  /** The book the first page belongs to. */
+  book: string;
   firstPage: HadithRangeResponse;
 };
 
-export function HadithPage({ initialData }: { initialData?: HadithListInitialData }) {
+export function HadithPage({
+  initialData,
+  book: pageBook,
+}: {
+  initialData?: HadithListInitialData;
+  /** Set on a book's own page (/hadith/<book>). */
+  book?: string;
+}) {
   const [search, setSearch] = useQueryState("search");
-  const [book, setBook] = useQueryState("book", { defaultValue: "bukhari" });
+  // /hadith still reads ?book= from links shared before books had pages.
+  const [queryBook] = useQueryState("book", { defaultValue: "bukhari" });
+  const book = pageBook ?? queryBook;
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   const booksUrl = hadithBooksUrl(HADITH_API);
@@ -103,7 +114,7 @@ export function HadithPage({ initialData }: { initialData?: HadithListInitialDat
     },
     initialPageParam: 1,
     // Hadith text doesn't change, so the built first page stays.
-    ...(initialData && book === "bukhari"
+    ...(initialData && book === initialData.book
       ? { initialData: { pages: [initialData.firstPage], pageParams: [1] }, staleTime: Infinity }
       : {}),
     getNextPageParam: (lastPage, allPages) =>
@@ -186,7 +197,7 @@ export function HadithPage({ initialData }: { initialData?: HadithListInitialDat
           name="search"
           placeholder="Cari nomor hadith"
         />
-        <Select value={book ?? "bukhari"} onValueChange={setBook}>
+        <Select value={book ?? "bukhari"} onValueChange={(value) => navigate(`/hadith/${value}`)}>
           <SelectTrigger aria-label="Pilih kitab" className="w-full sm:w-60">
             <SelectValue placeholder="Pilih kitab" />
           </SelectTrigger>
