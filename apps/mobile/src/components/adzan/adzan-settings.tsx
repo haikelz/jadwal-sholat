@@ -19,7 +19,8 @@ import BatteryWarning from "lucide-react-native/icons/battery-warning";
 import BellOff from "lucide-react-native/icons/bell-off";
 import BellRing from "lucide-react-native/icons/bell-ring";
 import { useCallback, useEffect, useState } from "react";
-import { AppState, Linking, ToastAndroid, View } from "react-native";
+import { AppState, Linking, View } from "react-native";
+import { showToast } from "@/store/toast";
 
 type Access = { notifications: boolean; exactAlarm: boolean };
 
@@ -134,7 +135,7 @@ export function AdzanSettings() {
 
   async function testAdzan() {
     await scheduleTestAdzan();
-    ToastAndroid.show("Adzan berbunyi dalam 1 menit", ToastAndroid.LONG);
+    showToast("Adzan berbunyi dalam 1 menit");
   }
 
   // Shown after a denied request, or when access was revoked in Android's

@@ -1,6 +1,7 @@
 import { absoluteUrl, shareText } from "@jadwal-sholat/core/share";
 import * as Clipboard from "expo-clipboard";
-import { Share, ToastAndroid } from "react-native";
+import { showToast } from "@/store/toast";
+import { Share } from "react-native";
 
 /**
  * Opens the system share sheet with the text and a link to the website, so
@@ -27,5 +28,5 @@ export async function shareLink({
 
 export async function copyText(text: string, message = "Disalin") {
   await Clipboard.setStringAsync(text);
-  ToastAndroid.show(message, ToastAndroid.LONG);
+  showToast(message);
 }

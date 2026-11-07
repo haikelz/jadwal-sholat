@@ -38,7 +38,8 @@ import {
 import BookX from "lucide-react-native/icons/book-x";
 import Share2 from "lucide-react-native/icons/share-2";
 import { useCallback, useEffect, useRef } from "react";
-import { ToastAndroid, View } from "react-native";
+import { View } from "react-native";
+import { showToast } from "@/store/toast";
 
 export default function SurahScreen() {
   const router = useRouter();
@@ -154,7 +155,7 @@ export default function SurahScreen() {
         name: surah.asma.id.short,
         surah: surah.number,
       });
-      ToastAndroid.show("Ayat ditandai sebagai bacaan terakhir", ToastAndroid.LONG);
+      showToast("Ayat ditandai sebagai bacaan terakhir");
     },
     [setLastRead, surah],
   );

@@ -5,6 +5,7 @@ import { queryClient } from "@/lib/query-client";
 import { NAV_THEME } from "@/lib/theme";
 import { useStoresHydrated } from "@/store/hydration";
 import { usePreferences } from "@/store/preferences";
+import { ToastHost } from "@/components/common/toast-host";
 import { PortalHost } from "@rn-primitives/portal";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Stack, ThemeProvider } from "expo-router";
@@ -51,6 +52,7 @@ export default function RootLayout() {
           />
         </Stack>
         <AdzanSync />
+        <ToastHost />
         <PortalHost />
       </ThemeProvider>
     </QueryClientProvider>

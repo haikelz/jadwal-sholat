@@ -16,7 +16,8 @@ import Languages from "lucide-react-native/icons/languages";
 import MessageSquare from "lucide-react-native/icons/message-square";
 import Volume2 from "lucide-react-native/icons/volume-2";
 import { useState } from "react";
-import { ScrollView, ToastAndroid, View } from "react-native";
+import { ScrollView, View } from "react-native";
+import { showToast } from "@/store/toast";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const QORI_ITEMS = qoriOptions.map((qori) => ({
@@ -54,10 +55,7 @@ export function ReadingToolbar({
   function jump() {
     const ayah = Number(jumpTo);
     if (!Number.isInteger(ayah) || ayah < 1 || ayah > ayahCount) {
-      ToastAndroid.show(
-        `Masukkan nomor ayat 1–${ayahCount}`,
-        ToastAndroid.LONG,
-      );
+      showToast(`Masukkan nomor ayat 1–${ayahCount}`);
       return;
     }
     onJump(ayah - 1);
