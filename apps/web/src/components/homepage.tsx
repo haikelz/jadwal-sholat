@@ -1,5 +1,6 @@
 "use client";
 
+import { LocationButton, LocationDialog } from "@/components/common/location-picker";
 import { HomeShortcuts } from "@/components/home/home-shortcuts";
 import {
   Alert,
@@ -17,15 +18,6 @@ import {
   FrameTitle,
 } from "@/components/reui/frame";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import {
   Empty,
   EmptyContent,
@@ -67,19 +59,11 @@ import { lazy, Suspense, useEffect, useId, useState } from "react";
 const { JADWAL_SHOLAT_API } = env;
 
 // The island renders to HTML at build time. These parts touch the browser
-// (leaflet, Notification, audio) or are heavy (the month grid pulls in
+// (Notification, audio) or are heavy (the month grid pulls in
 // TanStack Table, ~46KB gzip), so they load on the client after mount.
-const Map = lazy(() =>
-  import("@/components/map").then((mod) => ({ default: mod.Map })),
-);
 const Jadwal = lazy(() =>
   import("@/components/table-jadwal-sholat").then((mod) => ({
     default: mod.Jadwal,
-  })),
-);
-const UserLocation = lazy(() =>
-  import("@/components/user-location").then((mod) => ({
-    default: mod.UserLocation,
   })),
 );
 const Adzan = lazy(() =>
@@ -278,13 +262,8 @@ export type CityView = {
  * personal parts: location picker, adzan reminder and shortcuts.
  */
 export function Homepage({ city }: { city?: CityView }) {
-  const {
-    position: readerPosition,
-    isOpenMap,
-    setIsOpenMap,
-  } = useGlobalStore((state) => ({
+  const { position: readerPosition, setIsOpenMap } = useGlobalStore((state) => ({
     position: state.position,
-    isOpenMap: state.isOpenMap,
     setIsOpenMap: state.setIsOpenMap,
   }));
   const position = city?.position ?? readerPosition;
@@ -500,23 +479,7 @@ export function Homepage({ city }: { city?: CityView }) {
                   </Button>
                 </>
               ) : (
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setIsOpenMap(true)}
-                >
-                  <MapPin aria-hidden="true" />
-                  <span className="sr-only">Lokasi saat ini </span>
-                  {isMounted ? (
-                    <Suspense fallback={<span>lokasi terpilih</span>}>
-                      <UserLocation />
-                    </Suspense>
-                  ) : (
-                    <span>lokasi terpilih</span>
-                  )}
-                  <span aria-hidden="true">·</span>
-                  Ubah
-                </Button>
+                <LocationButton />
               )}
               {isRefetching || (isPending && isShowingStored) ? (
                 <Spinner aria-label="Memperbarui jadwal" />
@@ -594,32 +557,7 @@ export function Homepage({ city }: { city?: CityView }) {
         {renderSchedule()}
       </div>
 
-      {city ? null : (
-        <Dialog open={isOpenMap} onOpenChange={setIsOpenMap}>
-          {/* From md up the picker fills the screen: title, map, close button
-              as three rows, the map taking all the height between them. */}
-          <DialogContent className="max-h-[calc(100dvh-2rem)] overflow-y-auto sm:max-w-4xl md:h-[calc(100dvh-2rem)] md:max-w-[calc(100%-2rem)] md:grid-rows-[auto_minmax(0,1fr)_auto]">
-            <DialogHeader>
-              <DialogTitle>Pilih lokasi</DialogTitle>
-              <DialogDescription>
-                Cari atau ketuk peta untuk memilih lokasi.
-              </DialogDescription>
-            </DialogHeader>
-            {/* The dialog only opens on the client, so the map never renders
-                at build time. */}
-            <Suspense fallback={<Skeleton className="h-75 w-full md:h-full" />}>
-              <Map />
-            </Suspense>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="outline">
-                  Tutup
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      )}
+      {city ? null : <LocationDialog />}
     </>
   );
 }
