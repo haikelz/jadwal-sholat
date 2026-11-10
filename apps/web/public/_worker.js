@@ -4,6 +4,7 @@
 // /api/* and /hadith/* only; every other request is a static asset, so
 // _redirects and _headers keep working.
 const HADITH_PATH = /^\/hadith\/([a-z-]+)\/([1-9]\d*)$/;
+const FASTING_DAY_PATH = /^\/api\/fasting-day\/(\d{4}-\d{2}-\d{2})$/;
 // Mirrors SITE_NAME and toDescription in src/lib/utils/metadata.ts.
 const SITE_NAME = "Jadwal Sholat";
 const DESCRIPTION_LIMIT = 155;
@@ -22,17 +23,17 @@ export default {
 
       const upstream = new URL("/api/id/fasting/schedules", env.PUASA_SUNNAH_API);
       upstream.search = url.search;
-      const response = await fetch(upstream, { headers: { Accept: "application/json" } });
+      return proxyJson(upstream);
+    }
 
-      return new Response(response.body, {
-        status: response.status,
-        headers: {
-          // The API caches a dated month for an hour and sends no-store on
-          // errors, so a failed request isn't reused.
-          "Cache-Control": response.headers.get("Cache-Control") ?? "no-store",
-          "Content-Type": "application/json",
-        },
-      });
+    // One date on Kemenag's Hijri calendar, which the imsakiyah uses to find
+    // the first and last day of Ramadan.
+    const fastingDay = url.pathname.match(FASTING_DAY_PATH);
+    if (fastingDay && request.method === "GET") {
+      if (!env.PUASA_SUNNAH_API) {
+        return Response.json({ error: "PUASA_SUNNAH_API is not set" }, { status: 500 });
+      }
+      return proxyJson(new URL(`/api/id/fasting/days/${fastingDay[1]}`, env.PUASA_SUNNAH_API));
     }
 
     const hadith = url.pathname.match(HADITH_PATH);
@@ -41,6 +42,19 @@ export default {
     return env.ASSETS.fetch(request);
   },
 };
+
+async function proxyJson(upstream) {
+  const response = await fetch(upstream, { headers: { Accept: "application/json" } });
+  return new Response(response.body, {
+    status: response.status,
+    headers: {
+      // The API caches dated answers and sends no-store on errors, so a
+      // failed request isn't reused.
+      "Cache-Control": response.headers.get("Cache-Control") ?? "no-store",
+      "Content-Type": "application/json",
+    },
+  });
+}
 
 /**
  * Every /hadith/<book>/<n> URL serves the /hadith-detail shell, which loads
