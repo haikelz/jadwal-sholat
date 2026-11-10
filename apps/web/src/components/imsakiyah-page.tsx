@@ -1,3 +1,4 @@
+import { LocationButton, LocationDialog } from "@/components/common/location-picker";
 import { PageHeader } from "@/components/common/page-shell";
 import type { CityView } from "@/components/homepage";
 import {
@@ -37,9 +38,6 @@ import { lazy, Suspense } from "react";
 // The month grid pulls in TanStack Table; it loads on the client after mount.
 const Jadwal = lazy(() =>
   import("@/components/table-jadwal-sholat").then((mod) => ({ default: mod.Jadwal })),
-);
-const UserLocation = lazy(() =>
-  import("@/components/user-location").then((mod) => ({ default: mod.UserLocation })),
 );
 
 const { JADWAL_SHOLAT_API } = env;
@@ -90,21 +88,10 @@ export function ImsakiyahPage({ city }: { city?: CityView }) {
         description={first && last ? `${ramadan}, ${longDate(first)} sampai ${longDate(last)}` : ramadan}
       />
       {city ? null : (
-        <p className="text-sm text-muted-foreground">
-          Lokasi:{" "}
-          {isMounted ? (
-            <Suspense fallback={<span>lokasi terpilih</span>}>
-              <UserLocation />
-            </Suspense>
-          ) : (
-            <span>lokasi terpilih</span>
-          )}
-          . Ubah lokasi di{" "}
-          <a href="/" className="font-medium text-foreground underline underline-offset-4">
-            halaman jadwal
-          </a>
-          .
-        </p>
+        <div className="flex flex-wrap items-center gap-2">
+          <LocationButton />
+          <LocationDialog />
+        </div>
       )}
       <Frame>
         <FrameHeader className="flex-row items-baseline justify-between gap-2">
