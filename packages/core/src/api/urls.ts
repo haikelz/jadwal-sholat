@@ -20,16 +20,6 @@ export function prayerMonthUrl(
   return `${base}/${year}/${month}?latitude=${position.lat}&longitude=${position.lng}&method=20`;
 }
 
-/**
- * aladhan's Hijri-month calendar for Ramadan (month 9), method 20 (Kemenag
- * RI). `base` is the monthly calendar endpoint (".../calendar"), so the Hijri
- * one sits beside it.
- */
-export function ramadanUrl(base: string, { hijriYear, position }: { hijriYear: number; position: Coordinates }) {
-  const hijriBase = base.replace(/\/calendar\/?$/, "/hijriCalendar");
-  return `${hijriBase}/${hijriYear}/9?latitude=${position.lat}&longitude=${position.lng}&method=20`;
-}
-
 export function surahListUrl(base: string) {
   return `${base}/quran`;
 }
