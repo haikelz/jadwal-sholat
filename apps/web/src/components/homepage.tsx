@@ -47,19 +47,18 @@ import type { Coordinates } from "@jadwal-sholat/core/prayer";
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 import {
-  Bell,
   CalendarX2,
   Check,
   CircleAlert,
   MapPin,
   RefreshCw,
 } from "lucide-react";
-import { lazy, Suspense, useEffect, useId, useState } from "react";
+import { lazy, Suspense, useId, useState } from "react";
 
 const { JADWAL_SHOLAT_API } = env;
 
 // The island renders to HTML at build time. These parts touch the browser
-// (Notification, audio) or are heavy (the month grid pulls in
+// (audio) or are heavy (the month grid pulls in
 // TanStack Table, ~46KB gzip), so they load on the client after mount.
 const Jadwal = lazy(() =>
   import("@/components/table-jadwal-sholat").then((mod) => ({
@@ -98,40 +97,6 @@ const HERO = "order-1 md:col-start-1 md:row-start-1";
 const SHORTCUTS = "order-3 md:col-start-2 md:row-start-1 md:self-end";
 const STRIP = "order-2 md:col-span-2 md:row-start-2";
 const MONTH = "order-4 md:col-span-2 md:row-start-3";
-
-/** Asks for notification permission so the adzan prompt can reach a hidden tab. */
-function ReminderButton() {
-  const [permission, setPermission] = useState<NotificationPermission | null>(
-    null,
-  );
-
-  useEffect(() => {
-    if ("Notification" in window) setPermission(Notification.permission);
-  }, []);
-
-  // Hidden once the reader has answered, or where notifications don't exist.
-  if (permission !== "default") return null;
-
-  // Say what the reminder does before the browser asks for permission.
-  return (
-    <div className="flex flex-col items-start gap-1.5">
-      <Button
-        type="button"
-        variant="outline"
-        onClick={async () =>
-          setPermission(await Notification.requestPermission())
-        }
-      >
-        <Bell aria-hidden="true" />
-        Aktifkan pengingat adzan
-      </Button>
-      <p className="text-sm text-muted-foreground">
-        Pengingat muncul saat masuk waktu sholat. Browser akan meminta izin
-        notifikasi.
-      </p>
-    </div>
-  );
-}
 
 function Dot() {
   return (
@@ -540,9 +505,10 @@ export function Homepage({ city }: { city?: CityView }) {
           )}
 
           {city ? null : (
-            <div className="flex flex-wrap gap-2 pt-1">
-              <ReminderButton />
-            </div>
+            <p className="text-sm text-muted-foreground">
+              Adzan berbunyi otomatis saat masuk waktu sholat, selama halaman ini
+              terbuka.
+            </p>
           )}
         </section>
 

@@ -4,8 +4,7 @@ import type { JadwalSholatProps } from "@/interfaces";
 import useGlobalStore from "@/store";
 import { add, format, parse } from "date-fns";
 import { id } from "date-fns/locale";
-import { useEffect, useRef } from "react";
-import { useAudioPlayer } from "react-use-audio-player";
+import { useEffect, useRef, useState } from "react";
 
 import { formatSholatTime } from "@/lib/helpers";
 import { Button } from "@/components/ui/button";
@@ -21,22 +20,15 @@ import {
 import { zonedNow } from "@jadwal-sholat/core/dates";
 
 export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
-  const {
-    date,
-    setDate,
-    setIsOpenConfirmModal,
-    setIsPlayingAudioAdzan,
-    isPlayingAudioAdzan,
-    isOpenConfirmModal,
-  } = useGlobalStore((state) => ({
-    position: state.position,
+  const { date, setDate } = useGlobalStore((state) => ({
     date: state.date,
     setDate: state.setDate,
-    isOpenConfirmModal: state.isOpenConfirmModal,
-    setIsOpenConfirmModal: state.setIsOpenConfirmModal,
-    isPlayingAudioAdzan: state.isPlayingAudioAdzan,
-    setIsPlayingAudioAdzan: state.setIsPlayingAudioAdzan,
   }));
+  // The prayer stays set after closing, so the title holds during the fade.
+  const [prayer, setPrayer] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // The location's own clock, so a place picked in another timezone gets its
   // reminder on time. Matching against it also follows midnight.
@@ -54,8 +46,6 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
         Isha: formatSholatTime(item.timings.Isha),
       },
     }))[0];
-
-  const { load, play, stop } = useAudioPlayer();
 
   const formattedTime: string = format(clock, `kk.mm`, {
     locale: id,
@@ -97,97 +87,73 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
 
   const dayKey = format(clock, "yyyy-MM-dd");
 
-  // Open the prompt and load the adzan once per prayer per day. The audio
-  // hook returns a new `stop` on every render, so this effect re-runs often;
-  // the ref makes those runs no-ops. Without it, each run called load(), which
-  // re-rendered and re-ran the effect: an endless update loop (React #185).
-  const promptedRef = useRef<string | null>(null);
-  useEffect(() => {
-    if (!prayerName || isPlayingAudioAdzan) return;
-    const key = `${dayKey}-${prayerName}`;
-    if (promptedRef.current === key) return;
-    promptedRef.current = key;
+  // Browsers play sound without a tap once the reader has clicked or tapped
+  // the page (Safari can still refuse); otherwise play() rejects and the
+  // dialog offers a play button.
+  const playAdzan = () => {
+    setIsOpen(true);
+    setIsBlocked(false);
+    audioRef.current?.play().catch(() => setIsBlocked(true));
+  };
 
-    setIsOpenConfirmModal(true);
-    load(
+  const stopAdzan = () => {
+    audioRef.current?.pause();
+    setIsOpen(false);
+  };
+
+  // Once per prayer per day. The ref keeps a re-render inside the 10-minute
+  // window from starting it again.
+  const playedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!prayerName) return;
+    const key = `${dayKey}-${prayerName}`;
+    if (playedRef.current === key) return;
+    playedRef.current = key;
+
+    audioRef.current?.pause();
+    const audio = new Audio(
       prayerName === "Subuh" ? "/audio/adzan-shubuh.mp3" : "/audio/adzan.mp3",
-      {
-        onend: () => {
-          setIsPlayingAudioAdzan(false);
-          stop();
-        },
-      },
     );
-  }, [
-    prayerName,
-    dayKey,
-    isPlayingAudioAdzan,
-    setIsOpenConfirmModal,
-    setIsPlayingAudioAdzan,
-    load,
-    stop,
-  ]);
-
-  // Opt-in reminder for a hidden tab: once per prayer time, only after the
-  // reader granted permission from the homepage.
-  const notifiedRef = useRef<string | null>(null);
-  useEffect(() => {
-    if (!prayerName || !("Notification" in window)) return;
-    if (Notification.permission !== "granted") return;
-    if (document.visibilityState !== "hidden") return;
-    const key = `${dayKey}-${prayerName}`;
-    if (notifiedRef.current === key) return;
-    notifiedRef.current = key;
-
-    const title = `Sudah masuk waktu ${prayerName}`;
-    const options = {
-      body: "Buka Jadwal Sholat untuk memutar adzan.",
-      tag: key,
-    };
-    try {
-      new Notification(title, options);
-    } catch {
-      // Android Chrome only allows notifications through the service worker.
-      navigator.serviceWorker?.ready
-        .then((registration) => registration.showNotification(title, options))
-        .catch(() => undefined);
-    }
+    audio.addEventListener("ended", () => setIsOpen(false));
+    audioRef.current = audio;
+    setPrayer(prayerName);
+    playAdzan();
   }, [prayerName, dayKey]);
 
+  // Leaving the homepage (ClientRouter keeps the tab) stops the adzan.
+  useEffect(() => () => audioRef.current?.pause(), []);
+
   return (
-    <Dialog open={isOpenConfirmModal} onOpenChange={setIsOpenConfirmModal}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) stopAdzan();
+      }}
+    >
       <DialogContent showCloseButton={false} className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Sudah masuk waktu {prayerName}</DialogTitle>
+          <DialogTitle>Sudah masuk waktu {prayer}</DialogTitle>
           <DialogDescription>
-            Apakah kamu ingin memutar suara adzan?
+            {isBlocked
+              ? "Browser belum mengizinkan suara otomatis. Ketuk Putar adzan untuk mendengarkan."
+              : "Adzan sedang diputar."}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          {!isPlayingAudioAdzan ? (
+          {isBlocked ? (
             <>
               <DialogClose asChild>
                 <Button type="button" variant="outline">
-                  Tidak
+                  Tutup
                 </Button>
               </DialogClose>
-              <DialogClose asChild>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    play();
-                    setIsPlayingAudioAdzan(true);
-                  }}
-                >
-                  Putar adzan
-                </Button>
-              </DialogClose>
+              <Button type="button" onClick={playAdzan}>
+                Putar adzan
+              </Button>
             </>
           ) : (
             <DialogClose asChild>
-              <Button type="button" variant="outline">
-                Tutup
-              </Button>
+              <Button type="button">Hentikan adzan</Button>
             </DialogClose>
           )}
         </DialogFooter>

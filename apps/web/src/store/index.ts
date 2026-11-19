@@ -1,5 +1,4 @@
 import type {
-  AdzanSliceProps,
   DateSliceProps,
   IsOpenMapProps,
   LastReadSliceProps,
@@ -13,7 +12,6 @@ import type { PuasaSunnahTypesSliceProps } from "@/interfaces/puasa-sunnah.inter
 import { devtools } from "zustand/middleware";
 import { shallow } from "zustand/shallow";
 import { createWithEqualityFn } from "zustand/traditional";
-import adzanSlice from "./slices/adzan.slice";
 import dateSlice from "./slices/date.slice";
 import isOpenMapSlice from "./slices/is-open-map.slice";
 import lastReadSlice from "./slices/last-read.slice";
@@ -33,7 +31,6 @@ const useGlobalStore = createWithEqualityFn<
     ScrollSliceProps &
     LocationPositionProps &
     IsOpenMapProps &
-    AdzanSliceProps &
     PuasaSunnahTypesSliceProps
 >()(
   devtools((...set) => ({
@@ -45,7 +42,6 @@ const useGlobalStore = createWithEqualityFn<
     ...scrollSlice(...set),
     ...locationPositionSlice(...set),
     ...isOpenMapSlice(...set),
-    ...adzanSlice(...set),
     ...puasaSunnahTypesSlice(...set),
   })),
   shallow,
