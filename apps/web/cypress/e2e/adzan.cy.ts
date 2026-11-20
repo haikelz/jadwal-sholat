@@ -48,6 +48,13 @@ function visitHome(play: "starts" | "blocked") {
   });
 }
 
+// A click before React hydrates the island does nothing.
+function waitForHydration() {
+  cy.contains("button", "Adzan otomatis")
+    .closest("astro-island")
+    .should("not.have.attr", "ssr");
+}
+
 describe("adzan", () => {
   it("plays at prayer time without asking, and stops on request", () => {
     schedulePrayer(true);
@@ -55,7 +62,7 @@ describe("adzan", () => {
 
     cy.contains("Sudah masuk waktu Dzuhur", { timeout: 15000 }).should("be.visible");
     cy.contains("Adzan sedang diputar.").should("be.visible");
-    cy.get("@play").should("have.been.calledOnce");
+    cy.get("@play").its("lastCall.thisValue.src").should("include", "/audio/adzan.mp3");
 
     cy.contains("button", "Hentikan adzan").click();
     cy.get("@pause").should("have.been.called");
@@ -72,14 +79,21 @@ describe("adzan", () => {
     cy.contains("button", "Putar adzan").should("be.visible");
   });
 
+  it("allows sound on the reader's first tap", () => {
+    schedulePrayer(false);
+    visitHome("starts");
+    waitForHydration();
+
+    cy.get("h1").click();
+    // The silent clip Safari needs before it plays the adzan without a tap.
+    cy.get("@play").its("lastCall.thisValue.src").should("match", /^data:audio\/wav/);
+  });
+
   it("stays off after the reader switches it off", () => {
     schedulePrayer(false);
     visitHome("starts");
+    waitForHydration();
 
-    // A click before React hydrates the island does nothing.
-    cy.contains("button", "Adzan otomatis")
-      .closest("astro-island")
-      .should("not.have.attr", "ssr");
     cy.contains("button", "Adzan otomatis")
       .should("have.attr", "aria-pressed", "true")
       .click()
