@@ -1,6 +1,7 @@
 "use client";
 
 import { LocationButton, LocationDialog } from "@/components/common/location-picker";
+import { AdzanReminder } from "@/components/home/adzan-reminder";
 import { HomeShortcuts } from "@/components/home/home-shortcuts";
 import {
   Alert,
@@ -28,7 +29,6 @@ import {
 } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
-import { Toggle } from "@/components/ui/toggle";
 import { env } from "@/lib/utils/public-env";
 import { useFetch, useGeolocation, useIsMounted, useNow } from "@/hooks";
 import { useStoredCopy } from "@/hooks/use-stored-copy";
@@ -48,28 +48,22 @@ import type { Coordinates } from "@jadwal-sholat/core/prayer";
 import { format } from "date-fns";
 import { id as localeId } from "date-fns/locale";
 import {
-  Bell,
-  BellOff,
   CalendarX2,
   Check,
   CircleAlert,
   MapPin,
   RefreshCw,
 } from "lucide-react";
-import { lazy, Suspense, useEffect, useId, useState } from "react";
+import { lazy, Suspense, useId, useState } from "react";
 
 const { JADWAL_SHOLAT_API } = env;
 
-// The island renders to HTML at build time. These parts touch the browser
-// (audio) or are heavy (the month grid pulls in
-// TanStack Table, ~46KB gzip), so they load on the client after mount.
+// The island renders to HTML at build time. The month grid pulls in
+// TanStack Table (~46KB gzip), so it loads on the client after mount.
 const Jadwal = lazy(() =>
   import("@/components/table-jadwal-sholat").then((mod) => ({
     default: mod.Jadwal,
   })),
-);
-const Adzan = lazy(() =>
-  import("@/components/adzan").then((mod) => ({ default: mod.Adzan })),
 );
 
 function MonthGridSkeleton() {
@@ -100,57 +94,6 @@ const HERO = "order-1 md:col-start-1 md:row-start-1";
 const SHORTCUTS = "order-3 md:col-start-2 md:row-start-1 md:self-end";
 const STRIP = "order-2 md:col-span-2 md:row-start-2";
 const MONTH = "order-4 md:col-span-2 md:row-start-3";
-
-/**
- * The switch for the adzan, and the player itself. On by default; switching
- * it off is saved on this device and unmounts the player, which stops an
- * adzan already playing.
- */
-function AdzanReminder({ waktu }: { waktu: JadwalSholatProps[] }) {
-  // null until the saved choice is read after mount, so the adzan never
-  // starts before an "off" is known.
-  const [isOn, setIsOn] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    try {
-      setIsOn(localStorage.getItem("adzan") !== "off");
-    } catch {
-      setIsOn(true);
-    }
-  }, []);
-
-  const toggle = (on: boolean) => {
-    setIsOn(on);
-    try {
-      localStorage.setItem("adzan", on ? "on" : "off");
-    } catch {
-      // Blocked storage: the choice holds until the page closes.
-    }
-  };
-
-  return (
-    <div className="flex flex-col items-start gap-1.5 pt-1">
-      <Toggle variant="outline" pressed={isOn !== false} onPressedChange={toggle}>
-        {isOn === false ? (
-          <BellOff aria-hidden="true" data-icon="inline-start" />
-        ) : (
-          <Bell aria-hidden="true" data-icon="inline-start" />
-        )}
-        Adzan otomatis
-      </Toggle>
-      <p className="text-sm text-muted-foreground">
-        {isOn === false
-          ? "Adzan tidak diputar saat masuk waktu sholat."
-          : "Adzan berbunyi saat masuk waktu sholat, selama halaman ini terbuka."}
-      </p>
-      {isOn && waktu.length > 0 ? (
-        <Suspense fallback={null}>
-          <Adzan waktu={waktu} />
-        </Suspense>
-      ) : null}
-    </div>
-  );
-}
 
 function Dot() {
   return (
