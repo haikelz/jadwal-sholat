@@ -19,7 +19,17 @@ import {
 } from "@/components/ui/dialog";
 import { zonedNow } from "@jadwal-sholat/core/dates";
 
-export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
+/**
+ * Plays the adzan at each prayer time on `audio`, which AdzanReminder
+ * unlocked with the reader's first tap on the page.
+ */
+export function Adzan({
+  waktu,
+  audio,
+}: {
+  waktu: JadwalSholatProps[];
+  audio: HTMLAudioElement;
+}) {
   const { date, setDate } = useGlobalStore((state) => ({
     date: state.date,
     setDate: state.setDate,
@@ -28,7 +38,6 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
   const [prayer, setPrayer] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // The location's own clock, so a place picked in another timezone gets its
   // reminder on time. Matching against it also follows midnight.
@@ -87,17 +96,16 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
 
   const dayKey = format(clock, "yyyy-MM-dd");
 
-  // Browsers play sound without a tap once the reader has clicked or tapped
-  // the page (Safari can still refuse); otherwise play() rejects and the
-  // dialog offers a play button.
+  // A tap on the page since it loaded lets play() start. Without one it
+  // rejects and the dialog offers a play button.
   const playAdzan = () => {
     setIsOpen(true);
     setIsBlocked(false);
-    audioRef.current?.play().catch(() => setIsBlocked(true));
+    audio.play().catch(() => setIsBlocked(true));
   };
 
   const stopAdzan = () => {
-    audioRef.current?.pause();
+    audio.pause();
     setIsOpen(false);
   };
 
@@ -110,18 +118,16 @@ export function Adzan({ waktu }: { waktu: JadwalSholatProps[] }) {
     if (playedRef.current === key) return;
     playedRef.current = key;
 
-    audioRef.current?.pause();
-    const audio = new Audio(
-      prayerName === "Subuh" ? "/audio/adzan-shubuh.mp3" : "/audio/adzan.mp3",
-    );
-    audio.addEventListener("ended", () => setIsOpen(false));
-    audioRef.current = audio;
+    audio.src =
+      prayerName === "Subuh" ? "/audio/adzan-shubuh.mp3" : "/audio/adzan.mp3";
+    audio.onended = () => setIsOpen(false);
     setPrayer(prayerName);
     playAdzan();
-  }, [prayerName, dayKey]);
+  }, [prayerName, dayKey, audio]);
 
-  // Leaving the homepage (ClientRouter keeps the tab) stops the adzan.
-  useEffect(() => () => audioRef.current?.pause(), []);
+  // Switching the adzan off or leaving the homepage (ClientRouter keeps the
+  // tab) stops it.
+  useEffect(() => () => audio.pause(), [audio]);
 
   return (
     <Dialog
