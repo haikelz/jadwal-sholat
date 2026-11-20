@@ -1,6 +1,11 @@
 describe("display settings", () => {
   it("enlarges the text and keeps it after navigating", () => {
-    cy.visit("/");
+    // Adzan off, so its dialog can't cover the page at a prayer time.
+    cy.visit("/", {
+      onBeforeLoad(win) {
+        win.localStorage.setItem("adzan", "off");
+      },
+    });
 
     // A click before React hydrates the island does nothing; Astro drops the
     // island's ssr attribute once it has.
